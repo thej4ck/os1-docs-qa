@@ -154,6 +154,11 @@ const limitBanner = document.getElementById('limit-banner');
 
 marked.setOptions({ breaks: true, gfm: true });
 
+function convertScreenshotMarkers(text) {
+    // Convert [Screenshot: desc | url] to ![desc](url) before markdown parsing
+    return text.replace(/\[Screenshot:\s*([^|]+?)\s*\|\s*([^\]]+?)\s*\]/g, '![$1]($2)');
+}
+
 // ── SVGs ──
 const SVG_USER = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
 const SVG_ASSISTANT = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>`;
@@ -283,7 +288,7 @@ function handleSubmit(e) {
     questionEl.disabled = true; sendBtn.disabled = true;
 
     questionEl.dataset.lastQuestion = question;
-    let fullText = '', sources = [], firstToken = true, renderTimer = null;
+    let fullText = '', sources = [], firstToken = true, renderTimer = null, pendingScreenshots = [];
     const formData = new FormData();
     formData.append('question', question);
     if (conversationId) formData.append('conversation_id', conversationId);
@@ -300,7 +305,7 @@ function handleSubmit(e) {
 
             function processStream() {
                 reader.read().then(({ done, value }) => {
-                    if (done) { renderFinal(assistantMsg, fullText, sources, null); return; }
+                    if (done) { renderFinal(assistantMsg, fullText, sources, null, pendingScreenshots); return; }
                     buffer += decoder.decode(value, { stream: true });
                     const lines = buffer.split('\n'); buffer = lines.pop();
                     for (const line of lines) {
@@ -318,6 +323,10 @@ function handleSubmit(e) {
                                 scheduleRender(assistantMsg.content, fullText);
                             }
                             if (data.sources && data.sources.length > 0) { sources = data.sources; updateDocsPanel(sources); }
+                            if (data.screenshots && data.screenshots.length > 0) {
+                                // Store screenshots for renderFinal to inject
+                                pendingScreenshots = data.screenshots;
+                            }
                             if (data.done) {
                                 if (data.conversation_id && !conversationId) {
                                     conversationId = data.conversation_id;
@@ -325,7 +334,7 @@ function handleSubmit(e) {
                                     addToSidebar(conversationId, question.slice(0, 60));
                                 }
                                 if (data.msg_count !== undefined) { msgCount = data.msg_count; maxMessages = data.max_messages || maxMessages; updateCounter(); }
-                                renderFinal(assistantMsg, fullText, sources, data.message_id || null);
+                                renderFinal(assistantMsg, fullText, sources, data.message_id || null, pendingScreenshots);
                                 return;
                             }
                         } catch (e) {}
@@ -339,13 +348,13 @@ function handleSubmit(e) {
 
     function scheduleRender(el, text) {
         if (renderTimer) return;
-        renderTimer = setTimeout(() => { el.innerHTML = marked.parse(text); scrollToBottom(); renderTimer = null; }, 60);
+        renderTimer = setTimeout(() => { el.innerHTML = marked.parse(convertScreenshotMarkers(text)); scrollToBottom(); renderTimer = null; }, 60);
     }
     return false;
 }
 
-function renderFinal(msgParts, text, sources, messageId) {
-    if (text) msgParts.content.innerHTML = marked.parse(text);
+function renderFinal(msgParts, text, sources, messageId, screenshots) {
+    if (text) msgParts.content.innerHTML = marked.parse(convertScreenshotMarkers(text));
 
     // Extract suggestions from LLM response (if "Per saperne di più" section exists)
     const suggestions = [];
@@ -371,6 +380,36 @@ function renderFinal(msgParts, text, sources, messageId) {
             h3.remove();
             break;
         }
+    }
+
+    // Inject screenshots as separate panel to the right of the message
+    if (screenshots && screenshots.length > 0) {
+        const panel = document.createElement('div');
+        panel.className = 'msg-screenshots';
+        screenshots.forEach(s => {
+            const wrap = document.createElement('div');
+            wrap.className = 'screenshot-thumb';
+            wrap.title = s.desc;
+            const img = document.createElement('img');
+            img.src = s.url;
+            img.alt = s.desc;
+            img.onclick = () => {
+                const lb = document.createElement('div');
+                lb.className = 'img-lightbox';
+                lb.innerHTML = `<img src="${s.url}" alt="${s.desc}"><div class="img-lightbox-caption">${s.desc}</div>`;
+                lb.onclick = () => lb.remove();
+                document.body.appendChild(lb);
+            };
+            const label = document.createElement('span');
+            label.className = 'screenshot-label';
+            label.textContent = s.desc;
+            wrap.appendChild(img);
+            wrap.appendChild(label);
+            panel.appendChild(wrap);
+        });
+        // Append to the .msg element (parent of .msg-body)
+        msgParts.msg.classList.add('has-screenshots-msg');
+        msgParts.msg.appendChild(panel);
     }
 
     // Always show action chips (Approfondisci + suggestions)
@@ -439,8 +478,12 @@ function openDocOverlay(sourceFile, title) {
         else {
             document.getElementById('doc-overlay-title').textContent = data.title || sourceFile;
             if (data.is_html) {
-                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-                document.getElementById('doc-overlay-body').innerHTML = (isDark ? '<div class="doc-dark">' : '<div>') + data.html + '</div>';
+                document.getElementById('doc-overlay-body').innerHTML = data.html;
+                // Apply dark mode class directly to canvas
+                const canvas = document.getElementById('doc-overlay-body').querySelector('.doc-canvas');
+                if (canvas && document.documentElement.getAttribute('data-theme') === 'dark') {
+                    canvas.classList.add('doc-dark');
+                }
             } else {
                 // Markdown/text — render with marked.js
                 document.getElementById('doc-overlay-body').innerHTML = marked.parse(data.content || '');
@@ -458,7 +501,12 @@ fetch('/api/announcement').then(r => { if (r.ok && r.status !== 204) return r.js
 }).catch(() => {});
 
 // ── Render markdown in history ──
-document.querySelectorAll('.msg-assistant .msg-content').forEach(el => { el.innerHTML = marked.parse(el.textContent); });
+document.querySelectorAll('.msg-assistant .msg-content').forEach(el => { el.innerHTML = marked.parse(convertScreenshotMarkers(el.textContent)); });
+
+// ── Load sources from saved conversation ──
+{% if last_sources %}
+updateDocsPanel({{ last_sources | tojson }});
+{% endif %}
 
 {% if messages %}scrollToBottom();{% endif %}
 </script>

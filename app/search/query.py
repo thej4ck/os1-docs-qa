@@ -113,6 +113,17 @@ E infine la fonte:
 Base & Anagrafiche, Magazzino, Vendite, Acquisti, Contabilità, Cespiti, \
 e la struttura completa del database OS1 (958 tabelle).
 
+## Screenshot nelle risposte (IMPORTANTE)
+Nel contesto troverai riferimenti a screenshot nel formato:
+`[Screenshot: descrizione | url]`
+
+**REGOLA OBBLIGATORIA:** Quando uno screenshot mostra la finestra, maschera o configurazione di cui stai parlando, DEVI includerlo nella risposta usando questa sintassi markdown:
+`![descrizione](url)`
+
+Inserisci lo screenshot SUBITO DOPO il paragrafo che descrive quella schermata.
+Se il contesto contiene screenshot pertinenti e non li includi, la risposta è incompleta.
+Massimo 2-3 screenshot per risposta. Non includere screenshot generici o non pertinenti.
+
 Se non trovi la risposta nel contesto, dillo e suggerisci termini alternativi da cercare.
 
 ## Suggerimenti di follow-up
@@ -178,13 +189,22 @@ def retrieve_with_budget(question: str, deep: bool = False) -> list[dict]:
 
 def build_context(docs: list[dict]) -> str:
     """Build a context string from retrieved documents."""
+    import re
     parts = []
+    screenshots = []
     for i, doc in enumerate(docs, 1):
         source = doc["source_file"]
         title = doc["title"] or "Senza titolo"
         content = doc["content"]
         parts.append(f"--- Documento {i}: {title} (file: {source}) ---\n{content}")
-    return "\n\n".join(parts)
+        # Collect screenshots
+        for m in re.finditer(r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]', content):
+            screenshots.append(f"- ![{m.group(1)}]({m.group(2)}) (da Documento {i})")
+    ctx = "\n\n".join(parts)
+    if screenshots:
+        ctx += "\n\n--- SCREENSHOT DISPONIBILI (usa la sintassi markdown esatta per includerli) ---\n"
+        ctx += "\n".join(screenshots[:6])
+    return ctx
 
 
 def _get_model(deep: bool = False) -> str:

@@ -8,7 +8,7 @@ Servizio web Q&A per documentazione OS1 (gestionale ERP di OSItalia). Chat BM25 
 ## Comandi sviluppo
 ```bash
 pip install -r requirements.txt
-python scripts/build_index.py --repo "../os1-documentation/Claude Code Playground"
+python scripts/build_index.py --repo "../os1-documentation/Claude Code Playground"  # → searchdata/search.db
 uvicorn app.main:app --reload --port 8000
 ```
 
@@ -18,7 +18,7 @@ uvicorn app.main:app --reload --port 8000
 python scripts/build_index.py --repo "../os1-documentation/Claude Code Playground"
 
 # 2. Commit e push — Railway fa auto-deploy da main
-git add data/search.db && git commit -m "Update search index" && git push
+git add searchdata/search.db && git commit -m "Update search index" && git push
 ```
 
 Railway config:
@@ -30,7 +30,7 @@ Railway config:
 ## Architettura
 
 ### Database
-- `data/search.db` — FTS5 + HTML preprocessato. Committato nel repo. Rigenerabile con `build_index.py`.
+- `searchdata/search.db` — FTS5 + HTML preprocessato. Committato nel repo. Rigenerabile con `build_index.py`.
 - `data/app.db` — Utenti, conversazioni, usage, feedback, settings. **MAI cancellare.** Su volume persistente in prod. Schema `IF NOT EXISTS` (aggiornamenti additivi sicuri).
 
 ### Pipeline offline (`scripts/build_index.py`)
@@ -45,11 +45,14 @@ Flusso: `POST /api/ask` → rate limit → daily/monthly limit check → BM25 (t
 
 Strati:
 - `app/main.py` — Lifespan: search.db + app.db + static files + help-files
+- `app/config.py` — Settings con pydantic-settings, carica `.env`
+- `app/version.py` — VERSION/BUILD/BUILD_DATE (incrementare BUILD ad ogni deploy)
 - `app/routes/chat_routes.py` — Chat, conversazioni API, feedback, doc viewer, announcements
 - `app/routes/auth_routes.py` — Login OTP, creazione utente in DB
 - `app/routes/admin_routes.py` — Dashboard, utenti, usage (per-utente + per-dominio), domini, settings
 - `app/auth/otp.py` — OTP in-memory, sender e allowed_domains da DB
 - `app/auth/session.py` — Cookie firmato itsdangerous (24h, Secure in prod)
+- `app/search/fts.py` — SearchIndex: wrapper SQLite FTS5, BM25 ranking, schema creation
 - `app/search/query.py` — Retrieval + Groq streaming, modello da DB settings
 - `app/db.py` — Singleton app database con schema completo
 - `app/models/` — user.py, conversation.py, usage.py, domain.py
@@ -82,9 +85,14 @@ Strati:
 | `PRODUCTION` | No | `false` | Abilita cookie Secure |
 | `DOCS_REPO_PATH` | No | `../os1-documentation/...` | Path repo docs (solo dev locale) |
 | `APP_DB_PATH` | No | `data/app.db` | Path app database |
-| `DB_PATH` | No | `data/search.db` | Path search index |
+| `DB_PATH` | No | `searchdata/search.db` | Path search index |
 | `DEFAULT_MONTHLY_TOKEN_LIMIT` | No | `500000` | Limite token/mese default |
 | `DEFAULT_MAX_MESSAGES_PER_CONVERSATION` | No | `20` | Limite domande/chat default |
+| `BASE_URL` | No | — | URL pubblico (es. `https://os1docs.ai.scao.it`) per CORS/redirects |
+| `GROQ_INPUT_PRICE` | No | `0.05` | $/M token input (modello standard) |
+| `GROQ_OUTPUT_PRICE` | No | `0.08` | $/M token output (modello standard) |
+| `GROQ_DEEP_INPUT_PRICE` | No | `0.59` | $/M token input (modello deep, es. 70b) |
+| `GROQ_DEEP_OUTPUT_PRICE` | No | `0.79` | $/M token output (modello deep) |
 
 ## Admin (/admin)
 - **Dashboard**: KPI (utenti, domande, costo, attivi) + domande recenti
@@ -96,7 +104,8 @@ Strati:
 ## Convenzioni
 - Codice in inglese, UI in italiano
 - Groq via client `openai` (AsyncOpenAI) → `api.groq.com/openai/v1`
-- `search.db` committato nel repo (rigenerabile), `app.db` MAI committato (volume)
+- `searchdata/search.db` committato nel repo (rigenerabile), `data/app.db` MAI committato (volume)
+- Incrementare `BUILD` in `app/version.py` ad ogni deploy
 
 ## Chunking
 I chunk devono essere GRANDI (file interi). Ogni file HTML del help OS1 è già un concetto coerente.

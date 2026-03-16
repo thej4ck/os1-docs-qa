@@ -74,12 +74,21 @@ async def chat_page(request: Request, c: str | None = None):
     conversation_id = None
     msg_count = 0
     max_messages = get_max_messages_setting()
+    last_sources = []
     if c:
         conv = get_conversation(c, user["id"])
         if conv:
             conversation_id = c
             messages = get_messages(c)
             msg_count = count_user_messages(c)
+            # Get sources from last assistant message for docs panel
+            for m in reversed(messages):
+                if m["role"] == "assistant" and m.get("sources"):
+                    try:
+                        last_sources = json.loads(m["sources"]) if isinstance(m["sources"], str) else m["sources"]
+                    except (json.JSONDecodeError, TypeError):
+                        pass
+                    break
 
     conversations = list_conversations(user["id"])
 
@@ -92,6 +101,7 @@ async def chat_page(request: Request, c: str | None = None):
         "conversations": conversations,
         "msg_count": msg_count,
         "max_messages": max_messages,
+        "last_sources": last_sources,
         "app_version": f"v{VERSION} build {BUILD} ({BUILD_DATE})",
     })
 
@@ -192,9 +202,22 @@ async def ask(
                 full_response.append(token)
                 yield {"data": json.dumps({"token": token})}
 
-        # Send sources
+        # Send sources + screenshots
         if sources:
-            yield {"data": json.dumps({"sources": sources})}
+            # Extract screenshot URLs from retrieved documents for frontend rendering
+            import re as _re
+            screenshots = []
+            for doc in query_module.retrieve_with_budget(question, deep=is_deep)[:5]:
+                for m in _re.finditer(r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]', doc["content"]):
+                    screenshots.append({"desc": m.group(1), "url": m.group(2)})
+                    if len(screenshots) >= 3:
+                        break
+                if len(screenshots) >= 3:
+                    break
+            src_data = {"sources": sources}
+            if screenshots:
+                src_data["screenshots"] = screenshots
+            yield {"data": json.dumps(src_data)}
 
         # Save assistant message with usage
         assistant_text = "".join(full_response)

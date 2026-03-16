@@ -5,7 +5,25 @@
       "Bash(python -c \":*)",
       "Bash(python scripts/build_index.py --repo \"../os1-documentation/Claude Code Playground\" --db data/search.db)",
       "Bash(mkdir -p d:/dev/os1-docs-qa/searchdata)",
-      "Bash(python scripts/build_index.py --repo \"../os1-documentation/Claude Code Playground\")"
+      "Bash(python scripts/build_index.py --repo \"../os1-documentation/Claude Code Playground\")",
+      "Bash(find 'd:/dev/os1-documentation/Claude Code Playground' -iname *.pdf)",
+      "Bash(python scripts/build_index.py --repo \"d:/dev/os1-documentation/Claude Code Playground\")",
+      "Bash(find 'd:/dev/os1-documentation/Claude Code Playground/docs/schede-operative' -iname *.pdf)",
+      "Read(//d/dev/os1-docs-qa/{print $1\"\"\"\"\"\"\"\"/**)",
+      "Bash(pip list:*)",
+      "Bash(shuf)",
+      "Bash(python3 -c \":*)",
+      "Bash(find \"d:/dev/os1-documentation/Claude Code Playground/docs/schede-operative\" -name \"*.pdf\" -type f -exec ls -lh {})",
+      "Read(//d/dev/os1-docs-qa/{print $5 \"\"\"\"\"\"\"\"/**)",
+      "Read(//d/dev/os1-docs-qa/{printf \"\"\"\"\"\"\"\"%s/t%s/**)",
+      "Bash(python3:*)",
+      "Bash(find d:/dev/os1-docs-qa/help-files -type f \\\\\\(-iname *.png -o -iname *.jpg -o -iname *.gif -o -iname *.bmp \\\\\\))",
+      "Bash(find d:/dev/os1-docs-qa/help-files -type f \\\\\\(-iname *.png -o -iname *.jpg -o -iname *.gif -o -iname *.bmp \\\\\\) -exec du -b {} +)",
+      "Read(//d/dev/os1-docs-qa/{sum+=$1} END {printf \"\"\"\"\"\"\"\"%.1f MB/n\"\"\"\"\"\"\"\", sum/1024/**)",
+      "Bash(sed 's/.*\\\\.//')",
+      "Bash(find d:/dev/os1-docs-qa/help-files/OS1Config/ -name *.webp)",
+      "Bash(find d:/dev/os1-docs-qa/help-files/OS1Config/ -name *.png)",
+      "Bash(pkill -f 'uvicorn app.main')"
     ]
   }
 }
