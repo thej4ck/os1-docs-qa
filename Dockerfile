@@ -10,7 +10,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Ensure directories exist
-RUN mkdir -p data static
+RUN mkdir -p data searchdata static
 
 # search.db and help-files/ should be prepared before build:
 #   ./scripts/prepare_deploy.sh

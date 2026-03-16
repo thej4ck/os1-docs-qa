@@ -3,7 +3,9 @@
     "allow": [
       "Bash(find 'd:/dev/os1-documentation/Claude Code Playground/sources/help' -type f \\\\\\(-name *.png -o -name *.gif -o -name *.jpg -o -name *.PNG -o -name *.GIF -o -name *.JPG \\\\\\))",
       "Bash(python -c \":*)",
-      "Bash(python scripts/build_index.py --repo \"../os1-documentation/Claude Code Playground\" --db data/search.db)"
+      "Bash(python scripts/build_index.py --repo \"../os1-documentation/Claude Code Playground\" --db data/search.db)",
+      "Bash(mkdir -p d:/dev/os1-docs-qa/searchdata)",
+      "Bash(python scripts/build_index.py --repo \"../os1-documentation/Claude Code Playground\")"
     ]
   }
 }

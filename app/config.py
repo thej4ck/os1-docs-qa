@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     resend_api_key: str = ""
     allowed_emails: str = "*@scao.it"
     admin_emails: str = ""
-    db_path: str = "data/search.db"
+    db_path: str = "searchdata/search.db"
     app_db_path: str = "data/app.db"
     secret_key: str = "change-me"
     default_monthly_token_limit: int = 500_000

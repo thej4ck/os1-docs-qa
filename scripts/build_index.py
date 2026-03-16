@@ -493,7 +493,7 @@ def main():
     )
     parser.add_argument(
         "--db",
-        default=str(Path(__file__).resolve().parent.parent / "data" / "search.db"),
+        default=str(Path(__file__).resolve().parent.parent / "searchdata" / "search.db"),
         help="Path to the output SQLite database",
     )
     args = parser.parse_args()
