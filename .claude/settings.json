@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find 'd:/dev/os1-documentation/Claude Code Playground/sources/help' -type f \\\\\\(-name *.png -o -name *.gif -o -name *.jpg -o -name *.PNG -o -name *.GIF -o -name *.JPG \\\\\\))",
+      "Bash(python -c \":*)"
+    ]
+  }
+}

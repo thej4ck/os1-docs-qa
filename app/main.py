@@ -41,8 +41,10 @@ static_dir = Path(__file__).parent.parent / "static"
 if static_dir.is_dir():
     app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
 
-# Help files (images from docs repo)
-help_dir = Path(settings.docs_repo_path).resolve() / "sources" / "help"
+# Help files (images) — try bundled help-files/ first, then docs repo
+help_dir_bundled = Path(__file__).parent.parent / "help-files"
+help_dir_repo = Path(settings.docs_repo_path).resolve() / "sources" / "help"
+help_dir = help_dir_bundled if help_dir_bundled.is_dir() else help_dir_repo
 if help_dir.is_dir():
     app.mount("/help-files", StaticFiles(directory=str(help_dir)), name="help-files")
     print(f"Help files mounted: {help_dir}")
