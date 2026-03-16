@@ -249,17 +249,36 @@ function addToSidebar(convId, title) {
     list.prepend(a);
 }
 
-// Mobile sidebars
+// Sidebar toggles (desktop: collapse, mobile: slide)
+const sidebarEl = document.getElementById('sidebar');
+const docsEl = document.getElementById('docs-panel');
+const isMobile = () => window.innerWidth <= 768;
+const isTablet = () => window.innerWidth <= 1024;
+
+// Restore collapsed state from localStorage
+if (localStorage.getItem('sidebar-collapsed') === '1' && !isMobile()) sidebarEl.classList.add('collapsed');
+if (localStorage.getItem('docs-collapsed') === '1' && !isTablet()) docsEl.classList.add('collapsed');
+
 document.getElementById('sidebar-toggle').addEventListener('click', () => {
-    document.getElementById('sidebar').classList.toggle('open');
-    document.getElementById('sidebar-backdrop').classList.toggle('active');
+    if (isMobile()) {
+        sidebarEl.classList.toggle('open');
+        document.getElementById('sidebar-backdrop').classList.toggle('active');
+    } else {
+        sidebarEl.classList.toggle('collapsed');
+        localStorage.setItem('sidebar-collapsed', sidebarEl.classList.contains('collapsed') ? '1' : '0');
+    }
 });
 function closeSidebar() {
-    document.getElementById('sidebar').classList.remove('open');
+    sidebarEl.classList.remove('open');
     document.getElementById('sidebar-backdrop').classList.remove('active');
 }
 document.getElementById('docs-toggle').addEventListener('click', () => {
-    document.getElementById('docs-panel').classList.toggle('open');
+    if (isTablet()) {
+        docsEl.classList.toggle('open');
+    } else {
+        docsEl.classList.toggle('collapsed');
+        localStorage.setItem('docs-collapsed', docsEl.classList.contains('collapsed') ? '1' : '0');
+    }
 });
 
 // ── Suggestions ──

@@ -488,17 +488,13 @@ def split_by_headings(full_text: str, full_html: str, max_section_chars: int = 1
     If a section exceeds max_section_chars, sub-split at ### headings.
     Returns list of {title, text, html} dicts.
     """
-    # Split text at ## headings
-    text_sections = re.split(r"(?=\n## )", full_text)
-    # Split HTML at h2 tags
-    html_sections = re.split(r'(?=<h2 class="doc-title">)', full_html)
+    # Split text at ## headings and filter empties
+    text_sections = [s.strip() for s in re.split(r"(?=\n## )", full_text) if s.strip()]
+    # Split HTML at h2 tags and filter empties
+    html_sections = [s.strip() for s in re.split(r'(?=<h2 class="doc-title">)', full_html) if s.strip()]
 
     sections = []
     for i, text_sec in enumerate(text_sections):
-        text_sec = text_sec.strip()
-        if not text_sec:
-            continue
-
         title = ""
         first_line = text_sec.split("\n")[0]
         if first_line.startswith("## "):
@@ -511,13 +507,10 @@ def split_by_headings(full_text: str, full_html: str, max_section_chars: int = 1
         if len(text_sec) <= max_section_chars:
             sections.append({"title": title, "text": text_sec, "html": html_sec})
         else:
-            # Sub-split at ### headings
-            sub_texts = re.split(r"(?=\n### )", text_sec)
-            sub_htmls = re.split(r'(?=<h3 class="doc-subtitle">)', html_sec)
+            # Sub-split at ### headings, filter empties
+            sub_texts = [s.strip() for s in re.split(r"(?=\n### )", text_sec) if s.strip()]
+            sub_htmls = [s.strip() for s in re.split(r'(?=<h3 class="doc-subtitle">)', html_sec) if s.strip()]
             for j, sub_text in enumerate(sub_texts):
-                sub_text = sub_text.strip()
-                if not sub_text:
-                    continue
                 sub_title = title
                 fl = sub_text.split("\n")[0]
                 if fl.startswith("### "):
