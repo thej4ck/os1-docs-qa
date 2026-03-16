@@ -347,51 +347,59 @@ function handleSubmit(e) {
 function renderFinal(msgParts, text, sources, messageId) {
     if (text) msgParts.content.innerHTML = marked.parse(text);
 
-    // Extract "Per saperne di più" suggestions and convert to chips
+    // Extract suggestions from LLM response (if "Per saperne di più" section exists)
+    const suggestions = [];
     const h3s = msgParts.content.querySelectorAll('h3');
-    let lastQuestion = questionEl.dataset.lastQuestion || '';
     for (const h3 of h3s) {
-        if (h3.textContent.toLowerCase().includes('per saperne di più') || h3.textContent.toLowerCase().includes('approfondisci')) {
-            const suggestions = [];
+        const txt = h3.textContent.toLowerCase();
+        if (txt.includes('per saperne di più') || txt.includes('approfond') || txt.includes('correlat')) {
             let el = h3.nextElementSibling;
-            while (el && (el.tagName === 'UL' || el.tagName === 'OL')) {
-                el.querySelectorAll('li').forEach(li => {
-                    const t = li.textContent.trim();
-                    if (t) suggestions.push(t);
-                });
+            while (el && (el.tagName === 'UL' || el.tagName === 'OL' || el.tagName === 'P')) {
+                if (el.tagName === 'P') {
+                    const t = el.textContent.trim();
+                    if (t && t.length > 5) suggestions.push(t);
+                } else {
+                    el.querySelectorAll('li').forEach(li => {
+                        const t = li.textContent.trim();
+                        if (t && t.length > 5) suggestions.push(t);
+                    });
+                }
                 const next = el.nextElementSibling;
                 el.remove();
                 el = next;
             }
             h3.remove();
-
-            if (suggestions.length > 0 || lastQuestion) {
-                const chipsDiv = document.createElement('div');
-                chipsDiv.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;';
-
-                // "Approfondisci" button — deep mode
-                if (lastQuestion) {
-                    const deepBtn = document.createElement('button');
-                    deepBtn.className = 'suggestion-chip';
-                    deepBtn.style.cssText = 'border-color:var(--c-brand);color:var(--c-brand);font-weight:600;';
-                    deepBtn.textContent = '🔍 Approfondisci';
-                    deepBtn.onclick = () => { questionEl.value = lastQuestion; questionEl.dataset.deep = 'true'; handleSubmit(new Event('submit')); };
-                    chipsDiv.appendChild(deepBtn);
-                }
-
-                // Suggestion chips
-                suggestions.forEach(s => {
-                    const chip = document.createElement('button');
-                    chip.className = 'suggestion-chip';
-                    chip.textContent = s;
-                    chip.onclick = () => { questionEl.value = s; handleSubmit(new Event('submit')); };
-                    chipsDiv.appendChild(chip);
-                });
-
-                msgParts.body.appendChild(chipsDiv);
-            }
             break;
         }
+    }
+
+    // Always show action chips (Approfondisci + suggestions)
+    const lastQuestion = questionEl.dataset.lastQuestion || '';
+    if (lastQuestion || suggestions.length > 0) {
+        const chipsDiv = document.createElement('div');
+        chipsDiv.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;';
+
+        // "Approfondisci" — always shown
+        if (lastQuestion) {
+            const deepBtn = document.createElement('button');
+            deepBtn.className = 'suggestion-chip';
+            deepBtn.style.cssText = 'border-color:var(--c-brand);color:var(--c-brand);font-weight:600;';
+            deepBtn.textContent = '🔍 Approfondisci';
+            deepBtn.onclick = () => { questionEl.value = lastQuestion; questionEl.dataset.deep = 'true'; handleSubmit(new Event('submit')); };
+            chipsDiv.appendChild(deepBtn);
+        }
+
+        // Suggestion chips from LLM
+        suggestions.slice(0, 3).forEach(s => {
+            const chip = document.createElement('button');
+            chip.className = 'suggestion-chip';
+            chip.style.cssText = 'font-size:0.75rem;';
+            chip.textContent = s;
+            chip.onclick = () => { questionEl.value = s; handleSubmit(new Event('submit')); };
+            chipsDiv.appendChild(chip);
+        });
+
+        msgParts.body.appendChild(chipsDiv);
     }
 
     // Feedback buttons

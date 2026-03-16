@@ -279,6 +279,7 @@ def _get_all_settings() -> dict:
     from app.config import settings as app_settings
     return {
         "groq_model": _get_setting("groq_model", "llama-3.1-8b-instant"),
+        "groq_deep_model": _get_setting("groq_deep_model", "llama-3.3-70b-versatile"),
         "otp_sender_name": _get_setting("otp_sender_name", "OS1 Docs"),
         "otp_sender_email": _get_setting("otp_sender_email", "noreply@ai.scao.it"),
         "allowed_emails": _get_setting("allowed_emails", app_settings.allowed_emails),
@@ -318,6 +319,7 @@ async def save_settings(request: Request):
 
     settings_map = {
         "groq_model": str(form.get("groq_model", "")).strip(),
+        "groq_deep_model": str(form.get("groq_deep_model", "")).strip(),
         "otp_sender_name": str(form.get("otp_sender_name", "")).strip(),
         "otp_sender_email": str(form.get("otp_sender_email", "")).strip(),
         "allowed_emails": str(form.get("allowed_emails", "")).strip(),

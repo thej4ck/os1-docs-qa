@@ -187,10 +187,14 @@ def build_context(docs: list[dict]) -> str:
     return "\n\n".join(parts)
 
 
-def _get_model() -> str:
-    """Get model name from app_settings or default."""
+def _get_model(deep: bool = False) -> str:
+    """Get model name from app_settings. Uses deep_model for Approfondisci."""
     try:
         from app.db import get_conn
+        if deep:
+            row = get_conn().execute("SELECT value FROM app_settings WHERE key = 'groq_deep_model'").fetchone()
+            if row and row["value"]:
+                return row["value"]
         row = get_conn().execute("SELECT value FROM app_settings WHERE key = 'groq_model'").fetchone()
         if row and row["value"]:
             return row["value"]
@@ -199,7 +203,10 @@ def _get_model() -> str:
     return "llama-3.1-8b-instant"
 
 
-def _calculate_cost(prompt_tokens: int, completion_tokens: int) -> float:
+def _calculate_cost(prompt_tokens: int, completion_tokens: int, deep: bool = False) -> float:
+    if deep:
+        return (prompt_tokens * settings.groq_deep_input_price / 1_000_000) + \
+               (completion_tokens * settings.groq_deep_output_price / 1_000_000)
     return (prompt_tokens * settings.groq_input_price / 1_000_000) + \
            (completion_tokens * settings.groq_output_price / 1_000_000)
 
@@ -223,7 +230,17 @@ async def ask_stream(
     sources = [{"title": d["title"], "source_file": d["source_file"]} for d in docs]
     context = build_context(docs)
 
-    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
+    prompt = SYSTEM_PROMPT
+    if deep:
+        prompt += "\n\n## MODALITÀ APPROFONDIMENTO\n" \
+            "Stai rispondendo in modalità approfondita. Hai a disposizione più contesto documentale.\n" \
+            "- Sii ESAUSTIVO: elenca TUTTI gli elementi, campi, tabelle pertinenti, non solo i principali.\n" \
+            "- Fornisci dettagli tecnici completi: nomi esatti di tabelle DB, campi, relazioni.\n" \
+            "- Usa tabelle Markdown per strutturare elenchi lunghi.\n" \
+            "- Se il contesto include molti documenti, sintetizzali tutti, non solo i primi.\n" \
+            "- Non tralasciare informazioni: l'utente ha chiesto esplicitamente di approfondire."
+
+    messages = [{"role": "system", "content": prompt}]
     if history:
         for msg in history:
             messages.append(msg)
@@ -231,13 +248,15 @@ async def ask_stream(
     user_message = (
         f"Contesto documentale:\n\n{context}\n\n---\n\nDomanda dell'utente: {question}"
     )
+    if deep:
+        user_message += "\n\n(Modalità approfondimento: rispondi nel modo più completo possibile)"
     messages.append({"role": "user", "content": user_message})
 
     usage_data = None
 
     try:
         stream = await _client.chat.completions.create(
-            model=_get_model(),
+            model=_get_model(deep=deep),
             messages=messages,
             stream=True,
             stream_options={"include_usage": True},
@@ -255,6 +274,7 @@ async def ask_stream(
                     "cost_usd": _calculate_cost(
                         chunk.usage.prompt_tokens,
                         chunk.usage.completion_tokens,
+                        deep=deep,
                     ),
                 }
 

@@ -50,10 +50,17 @@
         <p class="section-desc">Configurazione del modello di intelligenza artificiale usato per le risposte.</p>
         <div class="settings-card">
             <div class="setting-row">
-                <label class="setting-label" for="groq_model">Modello Groq</label>
+                <label class="setting-label" for="groq_model">Modello standard</label>
                 <div style="flex:1;">
                     <input type="text" id="groq_model" name="groq_model" class="setting-input" value="{{ settings.groq_model }}">
-                    <div class="setting-hint">Es: llama-3.1-8b-instant, llama-3.3-70b-versatile, deepseek-r1-distill-llama-70b</div>
+                    <div class="setting-hint">Usato per le risposte normali. Es: llama-3.1-8b-instant ($0.05/M input)</div>
+                </div>
+            </div>
+            <div class="setting-row">
+                <label class="setting-label" for="groq_deep_model">Modello Approfondisci</label>
+                <div style="flex:1;">
+                    <input type="text" id="groq_deep_model" name="groq_deep_model" class="setting-input" value="{{ settings.groq_deep_model }}">
+                    <div class="setting-hint">Usato per "Approfondisci" (più costoso). Es: llama-3.3-70b-versatile ($0.59/M input)</div>
                 </div>
             </div>
         </div>
