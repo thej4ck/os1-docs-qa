@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Conversazione — Admin OS1 Docs{% endblock %}
+
+{% block nav_right %}
+<span class="header-email">{{ email }}</span>
+<a href="/chat" class="btn-logout">Chat</a>
+<a href="/logout" class="btn-logout">Esci</a>
+{% endblock %}
+
+{% block head %}
+<style>
+    .admin-wrap { padding: var(--sp-6) 0; max-width: 740px; margin: 0 auto; }
+    .conv-header { margin-bottom: var(--sp-6); }
+    .conv-header h1 { font-size: 1.125rem; margin-bottom: var(--sp-1); }
+    .conv-header p { color: var(--c-text-secondary); font-size: 0.8125rem; }
+    .conv-msg {
+        display: flex; gap: var(--sp-3); margin-bottom: var(--sp-5);
+    }
+    .conv-msg-user { flex-direction: row-reverse; }
+    .conv-msg .msg-avatar {
+        width: 28px; height: 28px; border-radius: var(--r-full);
+        display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .conv-msg .msg-avatar svg { width: 14px; height: 14px; }
+    .conv-msg-user .msg-avatar { background: var(--c-brand-light); color: var(--c-brand); }
+    .conv-msg-assistant .msg-avatar { background: var(--c-brand); color: white; }
+    .conv-msg-body { max-width: 600px; }
+    .conv-msg-content {
+        padding: var(--sp-3) var(--sp-4); border-radius: var(--r-md);
+        font-size: 0.9375rem; line-height: 1.6;
+    }
+    .conv-msg-user .conv-msg-content {
+        background: var(--c-brand); color: white; border-bottom-right-radius: var(--sp-1);
+    }
+    .conv-msg-assistant .conv-msg-content {
+        background: var(--c-surface); border: 1px solid var(--c-border); border-bottom-left-radius: var(--sp-1);
+    }
+    .conv-msg-meta {
+        font-size: 0.6875rem; color: var(--c-text-tertiary); margin-top: var(--sp-1);
+        padding: 0 var(--sp-1);
+    }
+    .conv-msg-assistant .conv-msg-content p { margin: 0.4em 0; }
+    .conv-msg-assistant .conv-msg-content p:first-child { margin-top: 0; }
+    .conv-msg-assistant .conv-msg-content p:last-child { margin-bottom: 0; }
+    .conv-msg-assistant .conv-msg-content ul, .conv-msg-assistant .conv-msg-content ol { list-style: revert; padding-left: 1.4em; margin: 0.5em 0; }
+    .conv-msg-assistant .conv-msg-content code { background: var(--c-surface-alt); padding: 1px 5px; border-radius: 4px; font-size: 0.85em; font-family: 'JetBrains Mono', monospace; }
+    .conv-msg-assistant .conv-msg-content strong { font-weight: 600; }
+    .back-link { font-size: 0.8125rem; font-weight: 500; display: inline-flex; align-items: center; gap: 4px; margin-bottom: var(--sp-4); }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container admin-wrap">
+    <a href="javascript:history.back()" class="back-link">&larr; Indietro</a>
+
+    <div class="conv-header">
+        <h1>{{ conv.title or 'Senza titolo' }}</h1>
+        <p>Utente: {{ conv.email }} &middot; Creata: {{ conv.created_at[:16] }}</p>
+    </div>
+
+    {% for msg in messages %}
+    <div class="conv-msg conv-msg-{{ msg.role }}">
+        <div class="msg-avatar" aria-hidden="true">
+            {% if msg.role == 'user' %}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            {% else %}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+            {% endif %}
+        </div>
+        <div class="conv-msg-body">
+            <div class="conv-msg-content" {% if msg.role == 'assistant' %}data-md="true"{% endif %}>{{ msg.content }}</div>
+            <div class="conv-msg-meta">
+                {{ msg.created_at[:16] }}
+                {% if msg.prompt_tokens %} &middot; {{ msg.prompt_tokens }}+{{ msg.completion_tokens }} token &middot; ${{ "%.4f" | format(msg.cost_usd or 0) }}{% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+document.querySelectorAll('[data-md="true"]').forEach(el => {
+    el.innerHTML = marked.parse(el.textContent);
+});
+</script>
+{% endblock %}

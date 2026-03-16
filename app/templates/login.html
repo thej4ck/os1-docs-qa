@@ -2,18 +2,31 @@
 {% block title %}Accedi — OS1 Docs{% endblock %}
 
 {% block content %}
-<article style="max-width: 400px; margin: 4rem auto;">
-    <header>
-        <h2>Accedi a OS1 Docs</h2>
-        <p>Inserisci la tua email per ricevere il codice di accesso.</p>
-    </header>
-    {% if error %}
-    <p style="color: var(--pico-del-color);">{{ error }}</p>
-    {% endif %}
-    <form method="post" action="/login">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="nome@azienda.it" required autofocus>
-        <button type="submit">Invia codice</button>
-    </form>
-</article>
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="auth-header">
+            <img src="/static/img/logo-lg.png" alt="SCAO" class="auth-logo">
+            <h1>Accedi a OS1 Docs</h1>
+            <p>Inserisci la tua email per ricevere il codice di accesso.</p>
+        </div>
+
+        {% if error %}
+        <div class="alert-error" role="alert">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form method="post" action="/login">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-input"
+                       placeholder="nome@azienda.it" required autofocus>
+            </div>
+            <button type="submit" class="btn-primary btn-full">Continua</button>
+        </form>
+    </div>
+</div>
 {% endblock %}

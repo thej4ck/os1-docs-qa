@@ -1,0 +1,8 @@
+.git
+.env
+__pycache__
+*.pyc
+data/search.db
+data/app.db
+.venv
+SCAO_allAdv_original.png

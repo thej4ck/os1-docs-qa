@@ -2,189 +2,403 @@
 {% block title %}Chat — OS1 Docs{% endblock %}
 
 {% block nav_right %}
-<li><small>{{ email }}</small></li>
-<li><a href="/logout" role="button" class="outline secondary" style="padding: 0.3rem 0.8rem; font-size: 0.85rem;">Esci</a></li>
+<button class="sidebar-toggle" id="sidebar-toggle" aria-label="Menu conversazioni">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">
+        <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+</button>
+<button class="docs-toggle-btn" id="docs-toggle" aria-label="Documenti">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+    </svg>
+    <span class="docs-badge" id="docs-badge">0</span>
+</button>
+<span class="header-email">{{ email }}</span>
+{% if is_admin %}<a href="/admin" class="btn-logout" style="border-color: var(--c-brand); color: var(--c-brand);">Admin</a>{% endif %}
+<a href="/logout" class="btn-logout">Esci</a>
 {% endblock %}
 
 {% block content %}
-<div class="chat-container">
-    <div class="chat-messages" id="messages">
-        {% if not history %}
-        <div class="suggestions" id="welcome">
-            <h4>Benvenuto! Chiedi qualsiasi cosa su OS1.</h4>
-            <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Esempi:</p>
-            <ul>
-                <li><span class="suggestion-link" onclick="askSuggestion(this)">Come si inserisce la prima nota contabile?</span></li>
-                <li><span class="suggestion-link" onclick="askSuggestion(this)">Quali tabelle gestiscono il magazzino?</span></li>
-                <li><span class="suggestion-link" onclick="askSuggestion(this)">Come funzionano le causali contabili?</span></li>
-                <li><span class="suggestion-link" onclick="askSuggestion(this)">Cosa contiene la tabella Articoli?</span></li>
-            </ul>
-        </div>
-        {% endif %}
+<div class="announcement-banner" id="announcement"></div>
 
-        {% for msg in history %}
-        <div class="msg msg-{{ msg.role }}">
-            {{ msg.content }}
+<div class="chat-layout">
+    <!-- Left sidebar: conversations -->
+    <aside class="chat-sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <button class="btn-new-chat" onclick="newChat()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                Nuova chat
+            </button>
         </div>
-        {% endfor %}
+        <div class="sidebar-list" id="sidebar-list">
+            {% for conv in conversations %}
+            <a class="sidebar-item {% if conv.id == conversation_id %}active{% endif %}" href="/chat?c={{ conv.id }}" data-id="{{ conv.id }}">
+                <span class="sidebar-item-title">{{ conv.title or 'Nuova conversazione' }}</span>
+                <button class="sidebar-item-delete" onclick="event.preventDefault();event.stopPropagation();deleteConv('{{ conv.id }}',this)" aria-label="Elimina">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </a>
+            {% endfor %}
+            {% if not conversations %}
+            <div class="sidebar-empty">Nessuna conversazione</div>
+            {% endif %}
+        </div>
+    </aside>
+    <div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
+
+    <!-- Center: chat -->
+    <div class="chat-panel">
+        <div class="chat-wrap">
+            <div class="chat-messages" id="messages">
+                {% if not messages %}
+                <div class="welcome" id="welcome">
+                    <img src="/static/img/logo-lg.png" alt="SCAO" class="welcome-logo">
+                    <h2>Ciao! Come posso aiutarti?</h2>
+                    <p>Chiedi qualsiasi cosa sulla documentazione del gestionale OS1.</p>
+                    <div class="suggestion-chips">
+                        <button class="suggestion-chip" type="button" onclick="askSuggestion(this)">Come si inserisce la prima nota contabile?</button>
+                        <button class="suggestion-chip" type="button" onclick="askSuggestion(this)">Quali tabelle gestiscono il magazzino?</button>
+                        <button class="suggestion-chip" type="button" onclick="askSuggestion(this)">Come funzionano le causali contabili?</button>
+                        <button class="suggestion-chip" type="button" onclick="askSuggestion(this)">Cosa contiene la tabella Articoli?</button>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% for msg in messages %}
+                <div class="msg msg-{{ msg.role }}">
+                    <div class="msg-avatar" aria-hidden="true">
+                        {% if msg.role == 'user' %}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        {% else %}
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+                        {% endif %}
+                    </div>
+                    <div class="msg-body">
+                        <div class="msg-content">{{ msg.content }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <div id="scroll-anchor"></div>
+            </div>
+
+            <div class="chat-input-wrap">
+                <div class="limit-banner" id="limit-banner">
+                    Hai raggiunto il limite di domande per questa conversazione.
+                    <a href="/chat">Apri una nuova chat</a>
+                </div>
+                <form id="ask-form" onsubmit="return handleSubmit(event)">
+                    <div class="chat-input-bar">
+                        <textarea id="question" name="question" rows="1"
+                                  placeholder="Fai una domanda su OS1..."
+                                  aria-label="Scrivi una domanda"
+                                  autocomplete="off" required></textarea>
+                        <button type="submit" id="send-btn" class="btn-send" aria-label="Invia">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+                <div class="chat-input-footer">
+                    <span class="chat-input-hint">OS1 Docs usa l'IA per rispondere. Verifica sempre le informazioni.</span>
+                    <span class="msg-counter" id="msg-counter"></span>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="chat-input">
-        <form id="ask-form" onsubmit="return handleSubmit(event)">
-            <input type="text" id="question" name="question"
-                   placeholder="Fai una domanda su OS1..."
-                   autocomplete="off" required>
-            <button type="submit" id="send-btn">Invia</button>
-        </form>
+    <!-- Right sidebar: documents -->
+    <aside class="docs-panel" id="docs-panel">
+        <div class="docs-panel-header">
+            📄 Documenti <span id="docs-count"></span>
+        </div>
+        <div class="docs-panel-list" id="docs-list">
+            <div class="docs-empty" id="docs-empty">Fai una domanda per vedere i documenti correlati.</div>
+        </div>
+    </aside>
+</div>
+
+<!-- Document overlay -->
+<div class="doc-overlay" id="doc-overlay">
+    <div class="doc-overlay-backdrop" onclick="closeDocOverlay()"></div>
+    <div class="doc-overlay-card">
+        <div class="doc-overlay-header">
+            <span class="doc-overlay-title" id="doc-overlay-title"></span>
+            <button class="doc-overlay-close" onclick="closeDocOverlay()" aria-label="Chiudi">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <div class="doc-overlay-body" id="doc-overlay-body"></div>
+        <div class="doc-overlay-source" id="doc-overlay-source"></div>
     </div>
 </div>
 
 <script>
+// ── State ──
+let conversationId = {{ conversation_id | tojson }};
+let msgCount = {{ msg_count }};
+let maxMessages = {{ max_messages }};
+
 const messagesEl = document.getElementById('messages');
 const questionEl = document.getElementById('question');
 const sendBtn = document.getElementById('send-btn');
 const welcomeEl = document.getElementById('welcome');
+const scrollAnchor = document.getElementById('scroll-anchor');
+const counterEl = document.getElementById('msg-counter');
+const limitBanner = document.getElementById('limit-banner');
 
-function askSuggestion(el) {
-    questionEl.value = el.textContent;
-    document.getElementById('ask-form').dispatchEvent(new Event('submit'));
+marked.setOptions({ breaks: true, gfm: true });
+
+// ── SVGs ──
+const SVG_USER = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
+const SVG_ASSISTANT = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>`;
+const SVG_THUMB_UP = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"/></svg>`;
+const SVG_THUMB_DOWN = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22h0a3.13 3.13 0 0 1-3-3.88Z"/></svg>`;
+
+// ── Counter ──
+function updateCounter() {
+    if (maxMessages > 0) {
+        counterEl.textContent = `${msgCount}/${maxMessages} domande`;
+        const pct = msgCount / maxMessages;
+        counterEl.className = 'msg-counter' + (pct >= 1 ? ' danger' : pct >= 0.8 ? ' warn' : '');
+        if (msgCount >= maxMessages) {
+            questionEl.disabled = true;
+            sendBtn.disabled = true;
+            limitBanner.classList.add('visible');
+        }
+    }
+}
+updateCounter();
+
+// ── Helpers ──
+function scrollToBottom() { scrollAnchor.scrollIntoView({ behavior: 'smooth', block: 'end' }); }
+function escapeHtml(str) { const d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
+
+function createMsg(role) {
+    const msg = document.createElement('div');
+    msg.className = `msg msg-${role}`;
+    const avatar = document.createElement('div');
+    avatar.className = 'msg-avatar';
+    avatar.setAttribute('aria-hidden', 'true');
+    avatar.innerHTML = role === 'user' ? SVG_USER : SVG_ASSISTANT;
+    const body = document.createElement('div');
+    body.className = 'msg-body';
+    const content = document.createElement('div');
+    content.className = 'msg-content';
+    body.appendChild(content);
+    msg.appendChild(avatar);
+    msg.appendChild(body);
+    messagesEl.insertBefore(msg, scrollAnchor);
+    return { msg, body, content };
 }
 
-function scrollToBottom() {
-    messagesEl.scrollTop = messagesEl.scrollHeight;
+// ── Docs panel ──
+function updateDocsPanel(sources) {
+    const list = document.getElementById('docs-list');
+    const empty = document.getElementById('docs-empty');
+    const countEl = document.getElementById('docs-count');
+    const badge = document.getElementById('docs-badge');
+
+    if (!sources || sources.length === 0) return;
+
+    if (empty) empty.style.display = 'none';
+    list.innerHTML = '';
+    countEl.textContent = `(${sources.length})`;
+    badge.textContent = sources.length;
+    badge.style.display = 'flex';
+
+    sources.forEach(s => {
+        const card = document.createElement('div');
+        card.className = 'doc-card';
+        card.onclick = () => openDocOverlay(s.source_file, s.title);
+        card.innerHTML = `<div class="doc-card-title">${escapeHtml(s.title || 'Senza titolo')}</div>
+            <div class="doc-card-file">${escapeHtml(s.source_file)}</div>`;
+        list.appendChild(card);
+    });
 }
 
+// ── Sidebar ──
+function newChat() { window.location.href = '/chat'; }
+function deleteConv(convId, btn) {
+    if (!confirm('Eliminare questa conversazione?')) return;
+    fetch(`/api/conversations/${convId}`, { method: 'DELETE' }).then(r => {
+        if (r.ok) { btn.closest('.sidebar-item').remove(); if (conversationId === convId) window.location.href = '/chat'; }
+    });
+}
+function addToSidebar(convId, title) {
+    const list = document.getElementById('sidebar-list');
+    const empty = list.querySelector('.sidebar-empty');
+    if (empty) empty.remove();
+    const a = document.createElement('a');
+    a.className = 'sidebar-item active';
+    a.href = `/chat?c=${convId}`;
+    a.innerHTML = `<span class="sidebar-item-title">${escapeHtml(title)}</span>
+        <button class="sidebar-item-delete" onclick="event.preventDefault();event.stopPropagation();deleteConv('${convId}',this)" aria-label="Elimina">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>`;
+    list.querySelectorAll('.sidebar-item.active').forEach(el => el.classList.remove('active'));
+    list.prepend(a);
+}
+
+// Mobile sidebars
+document.getElementById('sidebar-toggle').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebar-backdrop').classList.toggle('active');
+});
+function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebar-backdrop').classList.remove('active');
+}
+document.getElementById('docs-toggle').addEventListener('click', () => {
+    document.getElementById('docs-panel').classList.toggle('open');
+});
+
+// ── Suggestions ──
+function askSuggestion(el) { questionEl.value = el.textContent; handleSubmit(new Event('submit')); }
+
+// ── Textarea auto-resize ──
+questionEl.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = Math.min(this.scrollHeight, 120) + 'px'; });
+questionEl.addEventListener('keydown', function(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); document.getElementById('ask-form').dispatchEvent(new Event('submit')); } });
+
+// ── Submit ──
 function handleSubmit(e) {
     e.preventDefault();
     const question = questionEl.value.trim();
-    if (!question) return false;
+    if (!question || msgCount >= maxMessages) return false;
 
-    // Hide welcome
-    if (welcomeEl) welcomeEl.style.display = 'none';
+    if (welcomeEl) { welcomeEl.classList.add('hiding'); setTimeout(() => welcomeEl.remove(), 300); }
+    closeSidebar();
 
-    // Add user message
-    const userDiv = document.createElement('div');
-    userDiv.className = 'msg msg-user';
-    userDiv.textContent = question;
-    messagesEl.appendChild(userDiv);
-
-    // Add assistant placeholder
-    const assistantDiv = document.createElement('div');
-    assistantDiv.className = 'msg msg-assistant streaming-cursor';
-    assistantDiv.id = 'current-response';
-    messagesEl.appendChild(assistantDiv);
+    const userMsg = createMsg('user');
+    userMsg.content.textContent = question;
+    const assistantMsg = createMsg('assistant');
+    assistantMsg.content.innerHTML = '<div class="thinking-dots"><span></span><span></span><span></span></div>';
     scrollToBottom();
 
-    // Disable input
-    questionEl.value = '';
-    questionEl.disabled = true;
-    sendBtn.disabled = true;
-    sendBtn.textContent = '...';
+    questionEl.value = ''; questionEl.style.height = 'auto';
+    questionEl.disabled = true; sendBtn.disabled = true;
 
-    // SSE request via fetch + EventSource
+    let fullText = '', sources = [], firstToken = true, renderTimer = null;
     const formData = new FormData();
     formData.append('question', question);
+    if (conversationId) formData.append('conversation_id', conversationId);
 
-    fetch('/api/ask', {
-        method: 'POST',
-        body: formData,
-    }).then(response => {
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let buffer = '';
+    fetch('/api/ask', { method: 'POST', body: formData })
+        .then(response => {
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let buffer = '';
 
-        function processStream() {
-            reader.read().then(({done, value}) => {
-                if (done) {
-                    finishResponse(assistantDiv);
-                    return;
-                }
-
-                buffer += decoder.decode(value, {stream: true});
-                const lines = buffer.split('\n');
-                buffer = lines.pop(); // Keep incomplete line
-
-                for (const line of lines) {
-                    if (line.startsWith('data: ')) {
+            function processStream() {
+                reader.read().then(({ done, value }) => {
+                    if (done) { renderFinal(assistantMsg, fullText, sources, null); return; }
+                    buffer += decoder.decode(value, { stream: true });
+                    const lines = buffer.split('\n'); buffer = lines.pop();
+                    for (const line of lines) {
+                        if (!line.startsWith('data: ')) continue;
                         try {
                             const data = JSON.parse(line.slice(6));
+                            if (data.error) {
+                                assistantMsg.content.innerHTML = `<p>${escapeHtml(data.error)}</p>`;
+                                if (data.limit_reached) { msgCount = maxMessages; updateCounter(); }
+                                enableInput(); return;
+                            }
                             if (data.token) {
-                                assistantDiv.textContent += data.token;
-                                scrollToBottom();
+                                if (firstToken) { assistantMsg.content.innerHTML = ''; firstToken = false; }
+                                fullText += data.token;
+                                scheduleRender(assistantMsg.content, fullText);
                             }
-                            if (data.sources && data.sources.length > 0) {
-                                // Store sources for later display
-                                assistantDiv.dataset.sources = JSON.stringify(data.sources);
-                            }
+                            if (data.sources && data.sources.length > 0) { sources = data.sources; updateDocsPanel(sources); }
                             if (data.done) {
-                                finishResponse(assistantDiv);
+                                if (data.conversation_id && !conversationId) {
+                                    conversationId = data.conversation_id;
+                                    history.replaceState(null, '', `/chat?c=${conversationId}`);
+                                    addToSidebar(conversationId, question.slice(0, 60));
+                                }
+                                if (data.msg_count !== undefined) { msgCount = data.msg_count; maxMessages = data.max_messages || maxMessages; updateCounter(); }
+                                renderFinal(assistantMsg, fullText, sources, data.message_id || null);
                                 return;
                             }
-                        } catch(e) {}
+                        } catch (e) {}
                     }
-                }
-                processStream();
-            });
-        }
-        processStream();
-    }).catch(err => {
-        assistantDiv.textContent = 'Errore di connessione. Riprova.';
-        finishResponse(assistantDiv);
-    });
+                    processStream();
+                });
+            }
+            processStream();
+        })
+        .catch(() => { assistantMsg.content.innerHTML = '<p>Errore di connessione. Riprova.</p>'; enableInput(); });
 
+    function scheduleRender(el, text) {
+        if (renderTimer) return;
+        renderTimer = setTimeout(() => { el.innerHTML = marked.parse(text); scrollToBottom(); renderTimer = null; }, 60);
+    }
     return false;
 }
 
-function finishResponse(el) {
-    el.classList.remove('streaming-cursor');
-    el.removeAttribute('id');
+function renderFinal(msgParts, text, sources, messageId) {
+    if (text) msgParts.content.innerHTML = marked.parse(text);
 
-    // Show sources if available
-    const sourcesData = el.dataset.sources;
-    if (sourcesData) {
-        try {
-            const sources = JSON.parse(sourcesData);
-            if (sources.length > 0) {
-                const details = document.createElement('details');
-                details.className = 'sources';
-                const summary = document.createElement('summary');
-                summary.textContent = `Fonti (${sources.length} documenti)`;
-                details.appendChild(summary);
-                const ul = document.createElement('ul');
-                for (const s of sources.slice(0, 5)) {
-                    const li = document.createElement('li');
-                    li.textContent = `${s.title} (${s.source_file})`;
-                    ul.appendChild(li);
-                }
-                details.appendChild(ul);
-                el.appendChild(details);
-            }
-        } catch(e) {}
+    if (messageId) {
+        const fb = document.createElement('div'); fb.className = 'msg-feedback';
+        fb.innerHTML = `<button class="feedback-btn" onclick="sendFeedback(${messageId},1,this)">${SVG_THUMB_UP}</button>
+            <button class="feedback-btn" onclick="sendFeedback(${messageId},-1,this)">${SVG_THUMB_DOWN}</button>`;
+        msgParts.body.appendChild(fb);
     }
-
-    // Check if response seems empty or unhelpful — suggest topics
-    const text = el.textContent.trim();
-    if (text.length < 50 || text.includes('non trovo') || text.includes('non ho trovato') || text.includes('non sono disponibili')) {
-        const suggestDiv = document.createElement('div');
-        suggestDiv.className = 'suggestions';
-        suggestDiv.innerHTML = `
-            <h4>Non ho trovato risultati pertinenti. Prova con termini diversi:</h4>
-            <ul>
-                <li>Usa nomi specifici di tabelle o moduli (es. "Articoli", "BCGE", "MovMagazzino")</li>
-                <li>Prova sinonimi: "fattura" invece di "documento fiscale", "prima nota" invece di "registrazione"</li>
-                <li><span class="suggestion-link" onclick="askSuggestion(this)">Quali aree del gestionale sono documentate?</span></li>
-                <li><span class="suggestion-link" onclick="askSuggestion(this)">Elenca i moduli OS1 disponibili</span></li>
-            </ul>
-        `;
-        el.appendChild(suggestDiv);
-    }
-
-    // Re-enable input
-    questionEl.disabled = false;
-    sendBtn.disabled = false;
-    sendBtn.textContent = 'Invia';
-    questionEl.focus();
-    scrollToBottom();
+    enableInput(); scrollToBottom();
 }
+
+function enableInput() {
+    if (msgCount < maxMessages) { questionEl.disabled = false; sendBtn.disabled = false; questionEl.focus(); }
+}
+
+// ── Feedback ──
+function sendFeedback(messageId, rating, btn) {
+    const fd = new FormData(); fd.append('rating', rating);
+    fetch(`/api/feedback/${messageId}`, { method: 'POST', body: fd }).then(r => {
+        if (r.ok) {
+            btn.parentElement.querySelectorAll('.feedback-btn').forEach(b => { b.classList.remove('active-up','active-down'); b.style.pointerEvents = 'none'; });
+            btn.classList.add(rating === 1 ? 'active-up' : 'active-down');
+        }
+    });
+}
+
+// ── Document Overlay ──
+function openDocOverlay(sourceFile, title) {
+    const overlay = document.getElementById('doc-overlay');
+    document.getElementById('doc-overlay-title').textContent = title || sourceFile;
+    document.getElementById('doc-overlay-body').innerHTML = '<div class="thinking-dots"><span></span><span></span><span></span></div>';
+    document.getElementById('doc-overlay-source').textContent = '';
+    overlay.classList.add('active'); document.body.style.overflow = 'hidden';
+    fetch(`/api/doc?file=${encodeURIComponent(sourceFile)}`).then(r => r.json()).then(data => {
+        if (data.error) { document.getElementById('doc-overlay-body').innerHTML = `<p style="color:var(--c-text-secondary);">${escapeHtml(data.error)}</p>`; }
+        else {
+            document.getElementById('doc-overlay-title').textContent = data.title || sourceFile;
+            if (data.is_html) {
+                // HTML help file — render as-is (already sanitized server-side)
+                document.getElementById('doc-overlay-body').innerHTML = data.html;
+            } else {
+                // Markdown/text — render with marked.js
+                document.getElementById('doc-overlay-body').innerHTML = marked.parse(data.content || '');
+            }
+            document.getElementById('doc-overlay-source').textContent = `Sorgente: ${data.source_file}`;
+        }
+    }).catch(() => { document.getElementById('doc-overlay-body').innerHTML = '<p style="color:var(--c-text-secondary);">Errore nel caricamento.</p>'; });
+}
+function closeDocOverlay() { document.getElementById('doc-overlay').classList.remove('active'); document.body.style.overflow = ''; }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDocOverlay(); });
+
+// ── Announcement ──
+fetch('/api/announcement').then(r => { if (r.ok && r.status !== 204) return r.json(); }).then(data => {
+    if (data && data.text) { const b = document.getElementById('announcement'); b.textContent = data.text; b.classList.add('visible'); }
+}).catch(() => {});
+
+// ── Render markdown in history ──
+document.querySelectorAll('.msg-assistant .msg-content').forEach(el => { el.innerHTML = marked.parse(el.textContent); });
+
+{% if messages %}scrollToBottom();{% endif %}
 </script>
 {% endblock %}

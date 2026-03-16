@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block title %}Impostazioni — Admin OS1 Docs{% endblock %}
+
+{% block nav_right %}
+<span class="header-email">{{ email }}</span>
+<a href="/chat" class="btn-logout">Chat</a>
+<a href="/logout" class="btn-logout">Esci</a>
+{% endblock %}
+
+{% block head %}
+<style>
+    .admin-nav { display: flex; gap: var(--sp-2); margin-bottom: var(--sp-6); flex-wrap: wrap; }
+    .admin-nav a { font-size: 0.8125rem; font-weight: 500; padding: 6px 14px; border-radius: var(--r-full); color: var(--c-text-secondary); border: 1px solid var(--c-border); transition: all 150ms ease; text-decoration: none; }
+    .admin-nav a:hover { background: var(--c-surface-alt); color: var(--c-text); text-decoration: none; }
+    .admin-nav a.active { background: var(--c-brand); color: white; border-color: var(--c-brand); }
+    .admin-wrap { padding: var(--sp-6) 0; max-width: 600px; }
+    .section-title { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: var(--sp-3); margin-top: var(--sp-8); color: var(--c-text); }
+    .section-title:first-of-type { margin-top: 0; }
+    .section-desc { font-size: 0.8125rem; color: var(--c-text-secondary); margin-bottom: var(--sp-4); }
+    .settings-card {
+        background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md);
+        padding: var(--sp-5); box-shadow: var(--c-shadow-sm); margin-bottom: var(--sp-4);
+    }
+    .setting-row {
+        display: flex; align-items: center; gap: var(--sp-3); margin-bottom: var(--sp-4);
+    }
+    .setting-row:last-child { margin-bottom: 0; }
+    .setting-label { font-size: 0.8125rem; font-weight: 500; min-width: 180px; flex-shrink: 0; }
+    .setting-input { flex: 1; padding: 8px 10px; font-size: 0.875rem; border: 1.5px solid var(--c-border-input); border-radius: var(--r-sm); background: var(--c-surface); }
+    .setting-input:focus { border-color: var(--c-brand); box-shadow: 0 0 0 3px rgba(226,35,26,0.1); outline: none; }
+    .setting-hint { font-size: 0.6875rem; color: var(--c-text-tertiary); margin-top: 2px; }
+    .settings-actions { margin-top: var(--sp-4); }
+    textarea.setting-input { min-height: 70px; resize: vertical; font-family: inherit; }
+    @media (max-width: 640px) { .setting-row { flex-direction: column; align-items: stretch; } .setting-label { min-width: auto; } }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container admin-wrap">
+    <nav class="admin-nav">
+        <a href="/admin">Dashboard</a>
+        <a href="/admin/users">Utenti</a>
+        <a href="/admin/usage">Consumi</a>
+        <a href="/admin/domains">Domini</a>
+        <a href="/admin/announcement" class="active">Impostazioni</a>
+    </nav>
+
+    <form method="post" action="/admin/settings">
+        <h3 class="section-title">Modello LLM</h3>
+        <p class="section-desc">Configurazione del modello di intelligenza artificiale usato per le risposte.</p>
+        <div class="settings-card">
+            <div class="setting-row">
+                <label class="setting-label" for="groq_model">Modello Groq</label>
+                <div style="flex:1;">
+                    <input type="text" id="groq_model" name="groq_model" class="setting-input" value="{{ settings.groq_model }}">
+                    <div class="setting-hint">Es: llama-3.1-8b-instant, llama-3.3-70b-versatile, deepseek-r1-distill-llama-70b</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="section-title">Email OTP</h3>
+        <p class="section-desc">Configurazione del mittente per le email di verifica OTP.</p>
+        <div class="settings-card">
+            <div class="setting-row">
+                <label class="setting-label" for="otp_sender_name">Nome mittente</label>
+                <input type="text" id="otp_sender_name" name="otp_sender_name" class="setting-input" value="{{ settings.otp_sender_name }}">
+            </div>
+            <div class="setting-row">
+                <label class="setting-label" for="otp_sender_email">Email mittente</label>
+                <div style="flex:1;">
+                    <input type="text" id="otp_sender_email" name="otp_sender_email" class="setting-input" value="{{ settings.otp_sender_email }}">
+                    <div class="setting-hint">Deve essere configurato nel provider Resend (dominio {{ settings.otp_sender_email.split('@')[1] if '@' in settings.otp_sender_email else 'N/A' }})</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="section-title">Limiti</h3>
+        <p class="section-desc">Limiti di utilizzo per conversazione.</p>
+        <div class="settings-card">
+            <div class="setting-row">
+                <label class="setting-label" for="max_messages">Max domande per chat</label>
+                <div style="flex:1;">
+                    <input type="number" id="max_messages" name="max_messages_per_conversation" class="setting-input" value="{{ settings.max_messages }}" min="1" max="200" style="width:120px;">
+                    <div class="setting-hint">Raggiunto il limite, l'utente deve aprire una nuova conversazione.</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="section-title">Annuncio</h3>
+        <p class="section-desc">Banner visibile a tutti gli utenti in cima alla chat. Lascia vuoto per nascondere.</p>
+        <div class="settings-card">
+            <div class="setting-row">
+                <textarea name="announcement" class="setting-input" placeholder="Es: Documentazione aggiornata al 15 marzo 2026.">{{ settings.announcement }}</textarea>
+            </div>
+        </div>
+
+        <div class="settings-actions">
+            <button type="submit" class="btn-primary">Salva impostazioni</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -5,6 +5,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 
 from app.auth.otp import generate_otp, verify_otp, is_email_allowed, send_otp_email
 from app.auth.session import create_session, clear_session, get_session_email
+from app.models.user import get_or_create_user, update_last_login
 
 router = APIRouter()
 
@@ -48,6 +49,8 @@ async def verify_submit(request: Request, email: str = Form(...), code: str = Fo
     code = code.strip()
 
     if verify_otp(email, code):
+        get_or_create_user(email)
+        update_last_login(email)
         response = RedirectResponse(url="/chat", status_code=302)
         create_session(response, email)
         return response

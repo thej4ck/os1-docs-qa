@@ -25,6 +25,7 @@ def create_session(response: Response, email: str):
         max_age=MAX_AGE,
         httponly=True,
         samesite="lax",
+        secure=settings.production,
     )
 
 

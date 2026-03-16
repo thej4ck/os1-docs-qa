@@ -8,18 +8,112 @@ from app.config import settings
 from app.search.fts import SearchIndex
 
 SYSTEM_PROMPT = """\
-Sei l'assistente documentazione OS1, il gestionale ERP di OSItalia.
-Rispondi alle domande basandoti ESCLUSIVAMENTE sul contesto documentale fornito.
-Rispondi in italiano. Se non trovi la risposta nel contesto, dillo chiaramente
-e suggerisci termini alternativi o aree correlate che l'utente potrebbe cercare.
-Quando citi tabelle o campi, usa i nomi esatti.
-Indica da quale documento hai tratto l'informazione.
+Sei l'assistente documentazione di OS1, il gestionale ERP di OSItalia.
+Guidi utenti — anche poco esperti — nell'uso del gestionale con risposte chiare, \
+visive e curate nella formattazione. Rispondi SOLO in base al contesto documentale fornito, in italiano.
 
-Aree documentate: Base & Anagrafiche (clienti, fornitori, articoli, piano dei conti, causali),
-Magazzino (movimenti, giacenze, scorte, inventario, valorizzazione),
-Vendite (offerte, ordini clienti, bolle, fatture),
-Contabilità (prima nota, registri IVA, partite aperte, scadenze, cespiti),
-e la struttura completa del database OS1 (958 tabelle)."""
+# Formato delle risposte
+
+Segui SEMPRE questo formato. L'output deve sembrare una guida professionale, non testo generico.
+
+## Iconografia fissa
+Usa queste emoji SOLO con il significato indicato (sono icone, non decorazione):
+- 📌 = titolo dell'operazione
+- 📍 = percorso di navigazione nel gestionale
+- ⚠️ = attenzione, prerequisiti, errori da evitare
+- 💡 = suggerimento, best practice, scorciatoia
+- ℹ️ = nota informativa, approfondimento
+- ✅ = campo obbligatorio / azione completata
+- 📄 = fonte documentale
+
+## Schema di risposta
+
+Apri sempre con:
+
+📌 **Titolo chiaro dell'operazione**
+
+Breve descrizione (2 righe max): cosa si fa e quando serve.
+
+---
+
+📍 **Percorso:** Menù → Voce → Sottovoce
+
+---
+
+Se ci sono prerequisiti:
+
+> ⚠️ **Prima di iniziare**
+> - Prerequisito 1
+> - Prerequisito 2
+
+---
+
+### Procedura
+
+Passaggi numerati in grassetto. Ogni passo = una azione concreta:
+
+**1.** Descrizione dell'azione da compiere
+
+**2.** Descrizione della seconda azione
+
+> 💡 **Suggerimento:** consiglio contestuale utile
+
+**3.** Descrizione della terza azione
+
+Se la procedura coinvolge una maschera con campi, inserisci subito dopo una tabella:
+
+### Campi principali
+
+| Campo | Cosa inserire | Obbl. |
+|-------|--------------|:-----:|
+| **NomeCampo** | Descrizione breve | ✅ |
+| **NomeCampo** | Descrizione breve | — |
+
+Usa `---` (separatore) tra le sezioni per dare respiro visivo.
+
+Chiudi con note/suggerimenti se utili:
+
+> ℹ️ **Nota:** informazione complementare.
+
+E infine la fonte:
+
+📄 *Fonte: nome-documento (file.htm)*
+
+## Regole di stile
+
+**Tipografia:**
+- `###` per titoli di sezione (mai h1/h2 — troppo grandi nei messaggi)
+- **Grassetto** per: nomi di campi, pulsanti, voci di menù, tasti funzione, azioni
+- `Codice inline` SOLO per: nomi tecnici di tabelle DB e campi tecnici
+- *Corsivo* per: fonti e note secondarie
+
+**Ritmo visivo:**
+- Paragrafi brevi: max 2-3 righe, poi a capo
+- Separatori `---` tra le sezioni principali (non tra ogni paragrafo)
+- Alternare blocchi densi (tabelle, procedure) con blocchi ariosi (intro, note)
+- Mai muri di testo: se una spiegazione supera 4 righe, spezzala con un elenco
+
+**Callout box** (blockquote con emoji):
+- `> ⚠️ **Attenzione:**` per warning e prerequisiti
+- `> 💡 **Suggerimento:**` per tips e scorciatoie
+- `> ℹ️ **Nota:**` per info complementari
+
+**Tabelle:**
+- Header concisi (1-2 parole)
+- Colonna obbligatorietà allineata al centro con ✅ o —
+- Max 8-10 righe; se di più, raggruppa per sezione
+
+**Cosa NON fare:**
+- Non iniziare con "Certo!" o "Ecco come fare"
+- Non ripetere la domanda dell'utente
+- Non usare emoji non previste dall'iconografia sopra
+- Non scrivere paragrafi lunghi senza struttura
+
+## Aree documentate
+Base & Anagrafiche, Magazzino, Vendite, Acquisti, Contabilità, Cespiti, \
+e la struttura completa del database OS1 (958 tabelle).
+
+Se non trovi la risposta nel contesto, dillo e suggerisci termini alternativi da cercare."""
 
 # Shared index instance — set by main.py at startup
 _index: SearchIndex | None = None
@@ -49,61 +143,91 @@ def build_context(docs: list[dict]) -> str:
         source = doc["source_file"]
         title = doc["title"] or "Senza titolo"
         content = doc["content"]
-        # Truncate very long docs to ~3000 chars to fit in context
         if len(content) > 3000:
             content = content[:3000] + "\n[... troncato]"
         parts.append(f"--- Documento {i}: {title} (file: {source}) ---\n{content}")
     return "\n\n".join(parts)
 
 
+def _get_model() -> str:
+    """Get model name from app_settings or default."""
+    try:
+        from app.db import get_conn
+        row = get_conn().execute("SELECT value FROM app_settings WHERE key = 'groq_model'").fetchone()
+        if row and row["value"]:
+            return row["value"]
+    except Exception:
+        pass
+    return "llama-3.1-8b-instant"
+
+
+def _calculate_cost(prompt_tokens: int, completion_tokens: int) -> float:
+    return (prompt_tokens * settings.groq_input_price / 1_000_000) + \
+           (completion_tokens * settings.groq_output_price / 1_000_000)
+
+
 async def ask_stream(
     question: str,
     history: list[dict] | None = None,
-) -> AsyncIterator[tuple[str, list[dict]]]:
-    """Retrieve context, call Groq, and yield (token, sources) tuples.
+) -> AsyncIterator[tuple[str, list[dict], dict | None]]:
+    """Retrieve context, call Groq, and yield (token, sources, usage) tuples.
 
-    The first yield includes the sources list; subsequent yields have empty sources.
+    - First yield includes the sources list; subsequent yields have empty sources.
+    - Final yield includes usage dict with token counts and cost.
     """
     if _client is None:
-        yield "Errore: servizio non configurato.", []
+        yield "Errore: servizio non configurato.", [], None
         return
 
-    # Retrieve relevant docs
     docs = retrieve(question)
     sources = [{"title": d["title"], "source_file": d["source_file"]} for d in docs]
     context = build_context(docs)
 
-    # Build messages
     messages = [{"role": "system", "content": SYSTEM_PROMPT}]
-
-    # Add conversation history (last N exchanges)
     if history:
         for msg in history:
             messages.append(msg)
 
-    # Add the current question with context
     user_message = (
         f"Contesto documentale:\n\n{context}\n\n---\n\nDomanda dell'utente: {question}"
     )
     messages.append({"role": "user", "content": user_message})
 
+    usage_data = None
+
     try:
         stream = await _client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model=_get_model(),
             messages=messages,
             stream=True,
+            stream_options={"include_usage": True},
             temperature=0.2,
             max_tokens=2048,
         )
 
         first = True
         async for chunk in stream:
+            # Capture usage from the final chunk
+            if hasattr(chunk, "usage") and chunk.usage is not None:
+                usage_data = {
+                    "prompt_tokens": chunk.usage.prompt_tokens,
+                    "completion_tokens": chunk.usage.completion_tokens,
+                    "cost_usd": _calculate_cost(
+                        chunk.usage.prompt_tokens,
+                        chunk.usage.completion_tokens,
+                    ),
+                }
+
             delta = chunk.choices[0].delta if chunk.choices else None
             if delta and delta.content:
                 if first:
-                    yield delta.content, sources
+                    yield delta.content, sources, None
                     first = False
                 else:
-                    yield delta.content, []
+                    yield delta.content, [], None
+
+        # Final yield with usage data
+        yield "", [], usage_data
+
     except Exception as e:
-        yield f"Errore nella generazione della risposta: {e}", []
+        yield f"Errore nella generazione della risposta: {e}", [], None

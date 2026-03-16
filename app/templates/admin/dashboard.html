@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Admin — OS1 Docs{% endblock %}
+
+{% block nav_right %}
+<span class="header-email">{{ email }}</span>
+<a href="/chat" class="btn-logout">Chat</a>
+<a href="/logout" class="btn-logout">Esci</a>
+{% endblock %}
+
+{% block head %}
+<style>
+    .admin-nav { display: flex; gap: var(--sp-2); margin-bottom: var(--sp-6); flex-wrap: wrap; }
+    .admin-nav a {
+        font-size: 0.8125rem; font-weight: 500; padding: 6px 14px;
+        border-radius: var(--r-full); color: var(--c-text-secondary);
+        border: 1px solid var(--c-border); transition: all 150ms ease; text-decoration: none;
+    }
+    .admin-nav a:hover { background: var(--c-surface-alt); color: var(--c-text); text-decoration: none; }
+    .admin-nav a.active { background: var(--c-brand); color: white; border-color: var(--c-brand); }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--sp-4); margin-bottom: var(--sp-8); }
+    .kpi-card {
+        background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md);
+        padding: var(--sp-5); box-shadow: var(--c-shadow-sm);
+    }
+    .kpi-label { font-size: 0.75rem; font-weight: 600; color: var(--c-text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--sp-1); }
+    .kpi-value { font-family: 'DM Sans', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--c-text); }
+    .kpi-sub { font-size: 0.75rem; color: var(--c-text-tertiary); margin-top: 2px; }
+    .admin-table {
+        width: 100%; border-collapse: collapse; font-size: 0.875rem;
+        background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md);
+        overflow: hidden;
+    }
+    .admin-table th {
+        text-align: left; padding: var(--sp-3) var(--sp-4); font-size: 0.75rem; font-weight: 600;
+        color: var(--c-text-secondary); background: var(--c-surface-alt); border-bottom: 1px solid var(--c-border);
+        text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .admin-table td { padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--c-border); color: var(--c-text); }
+    .admin-table tr:last-child td { border-bottom: none; }
+    .admin-table tr:hover td { background: var(--c-surface-alt); }
+    .section-title { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: var(--sp-4); color: var(--c-text); }
+    .admin-wrap { padding: var(--sp-6) 0; }
+    .truncate { max-width: 400px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container admin-wrap">
+    <nav class="admin-nav">
+        <a href="/admin" class="active">Dashboard</a>
+        <a href="/admin/users">Utenti</a>
+        <a href="/admin/usage">Consumi</a>
+        <a href="/admin/domains">Domini</a>
+        <a href="/admin/announcement">Impostazioni</a>
+    </nav>
+
+    <div class="kpi-grid">
+        <div class="kpi-card">
+            <div class="kpi-label">Utenti totali</div>
+            <div class="kpi-value">{{ total_users }}</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Domande {{ month }}</div>
+            <div class="kpi-value">{{ summary.total_questions }}</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Costo {{ month }}</div>
+            <div class="kpi-value">${{ "%.2f" | format(summary.total_cost) }}</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Utenti attivi {{ month }}</div>
+            <div class="kpi-value">{{ summary.active_users }}</div>
+        </div>
+    </div>
+
+    <h3 class="section-title">Domande recenti</h3>
+    <table class="admin-table">
+        <thead>
+            <tr><th>Utente</th><th>Domanda</th><th>Data</th></tr>
+        </thead>
+        <tbody>
+            {% for q in recent_questions %}
+            <tr>
+                <td><a href="/admin/users/{{ q.email }}">{{ q.email }}</a></td>
+                <td class="truncate"><a href="/admin/conversations/{{ q.conversation_id }}">{{ q.content[:80] }}</a></td>
+                <td style="white-space:nowrap;color:var(--c-text-secondary);font-size:0.8125rem;">{{ q.created_at[:16] }}</td>
+            </tr>
+            {% endfor %}
+            {% if not recent_questions %}
+            <tr><td colspan="3" style="text-align:center;color:var(--c-text-tertiary);padding:var(--sp-8);">Nessuna domanda ancora.</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

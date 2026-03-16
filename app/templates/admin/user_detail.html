@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block title %}{{ user.email }} — Admin OS1 Docs{% endblock %}
+
+{% block nav_right %}
+<span class="header-email">{{ email }}</span>
+<a href="/chat" class="btn-logout">Chat</a>
+<a href="/logout" class="btn-logout">Esci</a>
+{% endblock %}
+
+{% block head %}
+<style>
+    .admin-nav { display: flex; gap: var(--sp-2); margin-bottom: var(--sp-6); flex-wrap: wrap; }
+    .admin-nav a {
+        font-size: 0.8125rem; font-weight: 500; padding: 6px 14px;
+        border-radius: var(--r-full); color: var(--c-text-secondary);
+        border: 1px solid var(--c-border); transition: all 150ms ease; text-decoration: none;
+    }
+    .admin-nav a:hover { background: var(--c-surface-alt); color: var(--c-text); text-decoration: none; }
+    .admin-nav a.active { background: var(--c-brand); color: white; border-color: var(--c-brand); }
+    .admin-wrap { padding: var(--sp-6) 0; }
+    .user-header { margin-bottom: var(--sp-6); }
+    .user-header h1 { font-size: 1.25rem; margin-bottom: var(--sp-1); }
+    .user-header p { color: var(--c-text-secondary); font-size: 0.875rem; }
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--sp-4); margin-bottom: var(--sp-8); }
+    .info-card {
+        background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md);
+        padding: var(--sp-4); box-shadow: var(--c-shadow-sm);
+    }
+    .info-label { font-size: 0.75rem; font-weight: 600; color: var(--c-text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--sp-1); }
+    .info-value { font-family: 'DM Sans', sans-serif; font-size: 1.125rem; font-weight: 600; }
+    .progress-bar { height: 6px; background: var(--c-surface-alt); border-radius: 3px; margin-top: var(--sp-2); overflow: hidden; }
+    .progress-fill { height: 100%; border-radius: 3px; background: var(--c-brand); transition: width 0.3s ease; }
+    .progress-fill.warn { background: #F59E0B; }
+    .progress-fill.danger { background: var(--c-error); }
+    .limit-form { display: flex; gap: var(--sp-2); align-items: center; margin-top: var(--sp-3); }
+    .limit-form input { width: 140px; padding: 6px 10px; font-size: 0.8125rem; }
+    .limit-form button { font-size: 0.8125rem; padding: 6px 12px; }
+    .admin-table {
+        width: 100%; border-collapse: collapse; font-size: 0.875rem;
+        background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md); overflow: hidden;
+    }
+    .admin-table th {
+        text-align: left; padding: var(--sp-3) var(--sp-4); font-size: 0.75rem; font-weight: 600;
+        color: var(--c-text-secondary); background: var(--c-surface-alt); border-bottom: 1px solid var(--c-border);
+        text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .admin-table td { padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--c-border); }
+    .admin-table tr:last-child td { border-bottom: none; }
+    .admin-table tr:hover td { background: var(--c-surface-alt); }
+    .section-title { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: var(--sp-4); }
+    .truncate { max-width: 350px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container admin-wrap">
+    <nav class="admin-nav">
+        <a href="/admin">Dashboard</a>
+        <a href="/admin/users" class="active">Utenti</a>
+        <a href="/admin/usage">Consumi</a>
+        <a href="/admin/domains">Domini</a>
+        <a href="/admin/announcement">Impostazioni</a>
+    </nav>
+
+    <div class="user-header">
+        <h1>{{ user.email }}</h1>
+        <p>Registrato: {{ user.created_at[:10] }} &middot; Ultimo accesso: {{ (user.last_login or '-')[:16] }}</p>
+    </div>
+
+    {% set total_tokens = usage.total_prompt_tokens + usage.total_completion_tokens %}
+    {% set pct = (total_tokens / limit * 100) if limit > 0 else 0 %}
+
+    <div class="info-grid">
+        <div class="info-card">
+            <div class="info-label">Domande {{ month }}</div>
+            <div class="info-value">{{ usage.total_questions }}</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Token {{ month }}</div>
+            <div class="info-value">{{ "{:,}".format(total_tokens) }}</div>
+            <div class="progress-bar">
+                <div class="progress-fill {% if pct > 90 %}danger{% elif pct > 70 %}warn{% endif %}" style="width: {{ [pct, 100] | min }}%"></div>
+            </div>
+            <div style="font-size:0.75rem;color:var(--c-text-tertiary);margin-top:2px;">{{ "%.0f" | format(pct) }}% del limite ({{ "{:,}".format(limit) }})</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Costo {{ month }}</div>
+            <div class="info-value">${{ "%.4f" | format(usage.total_cost_usd) }}</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Limite mensile</div>
+            <div class="info-value">{{ "{:,}".format(limit) }} token</div>
+            <form class="limit-form" method="post" action="/admin/users/{{ user.email }}/limit">
+                <input type="number" name="limit" class="form-input" value="{{ user.monthly_token_limit or '' }}" placeholder="Default: {{ "{:,}".format(limit) }}">
+                <button type="submit" class="btn-primary" style="padding:6px 12px;font-size:0.8125rem;">Salva</button>
+            </form>
+        </div>
+    </div>
+
+    <h3 class="section-title">Conversazioni</h3>
+    <table class="admin-table">
+        <thead>
+            <tr><th>Titolo</th><th>Creata</th><th>Aggiornata</th></tr>
+        </thead>
+        <tbody>
+            {% for c in conversations %}
+            <tr>
+                <td class="truncate"><a href="/admin/conversations/{{ c.id }}">{{ c.title or 'Senza titolo' }}</a></td>
+                <td style="color:var(--c-text-secondary);font-size:0.8125rem;">{{ c.created_at[:16] }}</td>
+                <td style="color:var(--c-text-secondary);font-size:0.8125rem;">{{ c.updated_at[:16] }}</td>
+            </tr>
+            {% endfor %}
+            {% if not conversations %}
+            <tr><td colspan="3" style="text-align:center;color:var(--c-text-tertiary);padding:var(--sp-8);">Nessuna conversazione.</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
