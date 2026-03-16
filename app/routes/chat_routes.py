@@ -303,101 +303,6 @@ async def api_feedback(request: Request, message_id: int, rating: int = Form(...
 
 # ── Document viewer ──
 
-HELP_CSS = """<style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap');
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-    font-family: 'Source Sans 3', -apple-system, sans-serif;
-    font-size: 14px; line-height: 1.75; color: #2D2D2D;
-    background: #FAFBFC; padding: 24px;
-}
-
-/* Document canvas */
-.doc-canvas {
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
-    border-radius: 10px;
-    padding: 32px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
-    max-width: 680px;
-    margin: 0 auto;
-}
-
-/* Headings */
-.doc-title {
-    font-family: 'DM Sans', sans-serif; font-size: 1.3em; font-weight: 700;
-    color: #1E293B; padding-bottom: 0.5em; margin: 0 0 0.8em;
-    border-bottom: 2px solid #E2231A;
-}
-.doc-subtitle {
-    font-family: 'DM Sans', sans-serif; font-size: 1.05em; font-weight: 600;
-    color: #1E293B; margin: 1.5em 0 0.6em;
-    padding: 8px 0 6px; border-bottom: 1px solid #E8EAED;
-}
-
-/* Field definitions */
-.field-def {
-    padding: 12px 16px; margin: 8px 0;
-    background: linear-gradient(135deg, #FAFBFC 0%, #F5F6F8 100%);
-    border-left: 3px solid #E2231A;
-    border-radius: 0 8px 8px 0;
-    font-size: 13.5px; line-height: 1.65;
-    border: 1px solid #EDEEF0; border-left: 3px solid #E2231A;
-}
-.field-name {
-    font-weight: 700; color: #1E293B; font-size: 0.88em;
-    letter-spacing: 0.02em; display: inline;
-}
-.field-sep { color: #CBD5E1; margin: 0 6px; font-weight: 300; }
-
-/* Body text */
-p { margin: 0.6em 0; line-height: 1.75; }
-
-/* Images */
-.doc-screenshot { margin: 1.2em 0; text-align: center; }
-.doc-screenshot img {
-    display: inline-block; border: 1px solid #E5E7EB;
-    border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-}
-.doc-icon { display: inline; vertical-align: middle; margin: 0 4px; }
-
-/* Tables */
-table {
-    border-collapse: collapse; width: 100%; margin: 1em 0;
-    border-radius: 8px; overflow: hidden;
-    border: 1px solid #E5E7EB;
-}
-th, td { border: 1px solid #E5E7EB; padding: 10px 14px; text-align: left; font-size: 13px; }
-th { background: #F3F4F6; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.03em; color: #6B7280; }
-tr:nth-child(even) td { background: #FAFBFC; }
-
-/* Lists */
-ul, ol { padding-left: 1.6em; margin: 0.6em 0; }
-li { margin-bottom: 0.35em; line-height: 1.65; }
-li::marker { color: #E2231A; }
-
-/* Misc */
-strong, b { font-weight: 600; color: #1E293B; }
-
-/* ── Dark mode ── */
-.doc-dark body, .doc-dark { color: #E4E6EB; background: #0F1117; }
-.doc-dark .doc-canvas { background: #1A1D27; border-color: #2E3140; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
-.doc-dark .doc-title { color: #E4E6EB; border-bottom-color: #EF4444; }
-.doc-dark .doc-subtitle { color: #E4E6EB; border-bottom-color: #2E3140; }
-.doc-dark .field-def { background: linear-gradient(135deg, #1A1D27 0%, #22252F 100%); border-color: #2E3140; border-left-color: #EF4444; }
-.doc-dark .field-name { color: #E4E6EB; }
-.doc-dark p, .doc-dark li { color: #C8CCD4; }
-.doc-dark table { border-color: #2E3140; }
-.doc-dark th, .doc-dark td { border-color: #2E3140; color: #C8CCD4; }
-.doc-dark th { background: #22252F; color: #9CA3B4; }
-.doc-dark tr:nth-child(even) td { background: #1A1D27; }
-.doc-dark .doc-screenshot img { border-color: #2E3140; box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
-.doc-dark strong, .doc-dark b { color: #E4E6EB; }
-.doc-dark li::marker { color: #EF4444; }
-</style>"""
-
-
 @router.get("/api/doc")
 async def get_doc(request: Request, file: str = Query(...)):
     """Return a document chunk by source_file for the overlay viewer."""
@@ -408,242 +313,30 @@ async def get_doc(request: Request, file: str = Query(...)):
         return JSONResponse({"error": "Indice non disponibile."}, status_code=503)
 
     row = query_module._index.conn.execute(
-        "SELECT title, content, source_file, doc_type FROM documents WHERE source_file = ? LIMIT 1",
+        "SELECT title, content, source_file, doc_type, html_content FROM documents WHERE source_file = ? LIMIT 1",
         (file,),
     ).fetchone()
 
     if not row:
         return JSONResponse({"error": "Documento non trovato."})
 
-    # For HTML help files, serve original HTML with images
-    sf = row["source_file"].replace("\\", "/")
-    if row["doc_type"] == "help" and sf.endswith((".htm", ".html")):
-        html = _load_help_html(sf, row["title"])
-        if html:
-            from fastapi.responses import Response
-            payload = json.dumps({
-                "title": row["title"] or file,
-                "html": html,
-                "source_file": row["source_file"],
-                "is_html": True,
-            }, ensure_ascii=False)
-            return Response(content=payload, media_type="application/json")
+    # If preprocessed HTML is available (built during indexing), serve it
+    if row["html_content"]:
+        from fastapi.responses import Response
+        payload = json.dumps({
+            "title": row["title"] or file,
+            "html": row["html_content"],
+            "source_file": row["source_file"],
+            "is_html": True,
+        }, ensure_ascii=False)
+        return Response(content=payload, media_type="application/json")
 
+    # Fallback: plain text rendered as markdown by frontend
     return JSONResponse({
         "title": row["title"] or file,
         "content": row["content"],
         "source_file": row["source_file"],
     })
-
-
-def _load_help_html(source_file: str, title: str) -> str | None:
-    """Load HTML help file, preprocess with BeautifulSoup into clean semantic HTML."""
-    import re
-    from pathlib import Path, PurePosixPath
-    from bs4 import BeautifulSoup, NavigableString
-    from app.config import settings
-
-    repo = Path(settings.docs_repo_path).resolve()
-    file_path = repo / source_file
-
-    try:
-        file_path.resolve().relative_to(repo)
-    except ValueError:
-        return None
-    if not file_path.is_file():
-        return None
-    try:
-        raw = file_path.read_text(encoding="utf-8", errors="replace")
-    except Exception:
-        return None
-
-    # Image base URL
-    parent = str(PurePosixPath(source_file).parent)
-    prefix = "sources/help/"
-    help_base = "/help-files/" + parent[len(prefix):] if parent.startswith(prefix) else "/help-files"
-
-    soup = BeautifulSoup(raw, "html.parser")
-
-    # ── 1. Strip unwanted elements ──
-    for tag in soup.find_all(["script", "style", "link", "meta"]):
-        tag.decompose()
-
-    # Remove inline event handlers
-    for tag in soup.find_all(True):
-        for attr in list(tag.attrs):
-            if attr.lower().startswith("on"):
-                del tag[attr]
-
-    # ── 2. Rewrite image paths ──
-    for img in soup.find_all("img"):
-        src = img.get("src", "")
-        if src and not src.startswith(("http", "/")):
-            img["src"] = f"{help_base}/{src}"
-
-    # ── 3. Strip dead links (keep text content) ──
-    for a in soup.find_all("a"):
-        href = a.get("href", "")
-        if href and not href.startswith("http"):
-            a.replace_with(a.get_text())
-
-    # ── 4. Remove empty paragraphs and &nbsp; spacers ──
-    for p in soup.find_all("p"):
-        text = p.get_text(strip=True).replace("\xa0", "")
-        if not text and not p.find("img"):
-            p.decompose()
-
-    # Remove <hr> tags
-    for hr in soup.find_all("hr"):
-        hr.decompose()
-
-    # ── 5. Transform headings ──
-    # <h5> → doc-title
-    for h5 in soup.find_all("h5"):
-        h5.name = "h2"
-        h5["class"] = ["doc-title"]
-        _strip_style(h5)
-
-    # Bold paragraphs with large font → doc-title
-    # Bold paragraphs without large font → doc-subtitle
-    for p in soup.find_all("p"):
-        style = p.get("style", "")
-        if "font-weight" in style and "bold" in style:
-            text = p.get_text(strip=True)
-            if not text:
-                continue
-            if "font-size" in style and ("12pt" in style or "14pt" in style):
-                new_tag = soup.new_tag("h2")
-                new_tag["class"] = ["doc-title"]
-                new_tag.string = text
-                p.replace_with(new_tag)
-            else:
-                new_tag = soup.new_tag("h3")
-                new_tag["class"] = ["doc-subtitle"]
-                new_tag.string = text
-                p.replace_with(new_tag)
-
-    # ── 6. Transform field definitions ──
-    # Pattern: paragraph with text-indent or margin-left:30pt containing ALLCAPS + colon
-    for p in soup.find_all("p"):
-        style = p.get("style", "")
-        has_indent = "text-indent" in style or "margin-left" in style.replace(" ", "")
-        text = p.get_text(strip=True)
-
-        # Also detect ALLCAPS label: at least 3 uppercase words followed by colon
-        if has_indent and ":" in text:
-            _convert_to_field_def(soup, p)
-        elif re.match(r'^[A-Z\s\.\'/]{4,}:', text):
-            _convert_to_field_def(soup, p)
-
-    # ── 7. Transform images ──
-    for img in soup.find_all("img"):
-        style = img.get("style", "")
-        # Extract max-width value
-        mw_match = re.search(r'max-width:\s*(\d+)', style)
-        max_w = int(mw_match.group(1)) if mw_match else 0
-
-        _strip_style(img)
-
-        if max_w > 100:
-            # Large image → screenshot with original max-width preserved
-            img["style"] = f"max-width: {max_w}px; width: 100%; height: auto;"
-            fig = soup.new_tag("div")
-            fig["class"] = ["doc-screenshot"]
-            img.replace_with(fig)
-            fig.append(img)
-        elif max_w > 0:
-            # Small image → icon
-            img["class"] = ["doc-icon"]
-            img["style"] = f"max-width: {max_w}px; height: auto;"
-        else:
-            img["style"] = "max-width: 100%; height: auto;"
-
-    # ── 8. Convert single-column tables to lists ──
-    for table in soup.find_all("table"):
-        cols = table.find_all("col")
-        cells = table.find_all("td")
-        # Single-column layout table (navigation lists)
-        if len(cols) <= 1 or all(not c.find("td") for c in table.find_all("tr") if len(c.find_all("td")) <= 1):
-            texts = []
-            for td in cells:
-                text = td.get_text(strip=True)
-                if text:
-                    texts.append(text)
-            if texts:
-                ul = soup.new_tag("ul")
-                for t in texts:
-                    li = soup.new_tag("li")
-                    li.string = t
-                    ul.append(li)
-                table.replace_with(ul)
-
-    # ── 9. Flatten nested list hacks ──
-    # <ol><li style="display:inline"><ul>... → just <ul>
-    for li in soup.find_all("li"):
-        style = li.get("style", "")
-        if "display" in style and "inline" in style:
-            inner_ul = li.find("ul")
-            if inner_ul:
-                parent_ol = li.parent
-                if parent_ol:
-                    parent_ol.replace_with(inner_ul)
-
-    # ── 10. Strip ALL remaining inline styles from text elements ──
-    for tag in soup.find_all(["p", "span", "div", "td", "th", "li", "ul", "ol", "tr", "table"]):
-        _strip_style(tag)
-
-    # Also strip align attributes
-    for tag in soup.find_all(True, attrs={"align": True}):
-        del tag["align"]
-
-    # ── 10. Remove empty wrappers ──
-    for tag in soup.find_all(["span"]):
-        if not tag.attrs:
-            tag.unwrap()
-
-    # ── 11. Extract body content only ──
-    body = soup.find("body")
-    if body:
-        content_html = body.decode_contents()
-    else:
-        content_html = soup.decode_contents()
-
-    return HELP_CSS + f'<div class="doc-canvas">{content_html}</div>'
-
-
-def _strip_style(tag):
-    """Remove style attribute from a tag."""
-    if tag.has_attr("style"):
-        del tag["style"]
-    if tag.has_attr("class") and not tag["class"]:
-        del tag["class"]
-
-
-def _convert_to_field_def(soup, p):
-    """Convert a paragraph to a field-def card."""
-    import re
-    text = p.get_text(strip=True)
-    # Split on first colon
-    idx = text.index(":")
-    name = text[:idx].strip()
-    desc = text[idx + 1:].strip()
-
-    div = soup.new_tag("div")
-    div["class"] = ["field-def"]
-
-    name_span = soup.new_tag("span")
-    name_span["class"] = ["field-name"]
-    name_span.string = name
-
-    sep = soup.new_tag("span")
-    sep["class"] = ["field-sep"]
-    sep.string = ":"
-
-    div.append(name_span)
-    div.append(sep)
-    div.append(" " + desc)
-
-    p.replace_with(div)
 
 
 # ── Announcements ──

@@ -245,14 +245,198 @@ def ingest_schema_census(index: SearchIndex, schema_file: Path, repo: Path):
     return count
 
 
+def preprocess_help_html(raw: str, source_file: str, help_base: str) -> str:
+    """Transform RoboHelp HTML into clean, professional semantic HTML."""
+    from bs4 import BeautifulSoup
+
+    HELP_CSS = """<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap');
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Source Sans 3', -apple-system, sans-serif; font-size: 14px; line-height: 1.75; color: #2D2D2D; background: #FAFBFC; padding: 24px; }
+.doc-canvas { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 10px; padding: 32px; box-shadow: 0 1px 4px rgba(0,0,0,0.03); max-width: 680px; margin: 0 auto; }
+.doc-title { font-family: 'DM Sans', sans-serif; font-size: 1.3em; font-weight: 700; color: #1E293B; padding-bottom: 0.5em; margin: 0 0 0.8em; border-bottom: 2px solid #E2231A; }
+.doc-subtitle { font-family: 'DM Sans', sans-serif; font-size: 1.05em; font-weight: 600; color: #1E293B; margin: 1.5em 0 0.6em; padding: 8px 0 6px; border-bottom: 1px solid #E8EAED; }
+.field-def { padding: 12px 16px; margin: 8px 0; background: linear-gradient(135deg, #FAFBFC 0%, #F5F6F8 100%); border-left: 3px solid #E2231A; border-radius: 0 8px 8px 0; font-size: 13.5px; line-height: 1.65; border: 1px solid #EDEEF0; border-left: 3px solid #E2231A; }
+.field-name { font-weight: 700; color: #1E293B; font-size: 0.88em; letter-spacing: 0.02em; display: inline; }
+.field-sep { color: #CBD5E1; margin: 0 6px; font-weight: 300; }
+p { margin: 0.6em 0; line-height: 1.75; }
+.doc-screenshot { margin: 1.2em 0; text-align: center; }
+.doc-screenshot img { display: inline-block; border: 1px solid #E5E7EB; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+.doc-icon { display: inline; vertical-align: middle; margin: 0 4px; }
+table { border-collapse: collapse; width: 100%; margin: 1em 0; border-radius: 8px; overflow: hidden; border: 1px solid #E5E7EB; }
+th, td { border: 1px solid #E5E7EB; padding: 10px 14px; text-align: left; font-size: 13px; }
+th { background: #F3F4F6; font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.03em; color: #6B7280; }
+tr:nth-child(even) td { background: #FAFBFC; }
+ul, ol { padding-left: 1.6em; margin: 0.6em 0; }
+li { margin-bottom: 0.35em; line-height: 1.65; }
+li::marker { color: #E2231A; }
+strong, b { font-weight: 600; color: #1E293B; }
+.doc-dark body, .doc-dark { color: #E4E6EB; background: #0F1117; }
+.doc-dark .doc-canvas { background: #1A1D27; border-color: #2E3140; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+.doc-dark .doc-title { color: #E4E6EB; border-bottom-color: #EF4444; }
+.doc-dark .doc-subtitle { color: #E4E6EB; border-bottom-color: #2E3140; }
+.doc-dark .field-def { background: linear-gradient(135deg, #1A1D27 0%, #22252F 100%); border-color: #2E3140; border-left-color: #EF4444; }
+.doc-dark .field-name { color: #E4E6EB; }
+.doc-dark p, .doc-dark li { color: #C8CCD4; }
+.doc-dark table { border-color: #2E3140; }
+.doc-dark th, .doc-dark td { border-color: #2E3140; color: #C8CCD4; }
+.doc-dark th { background: #22252F; color: #9CA3B4; }
+.doc-dark tr:nth-child(even) td { background: #1A1D27; }
+.doc-dark .doc-screenshot img { border-color: #2E3140; box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+.doc-dark strong, .doc-dark b { color: #E4E6EB; }
+.doc-dark li::marker { color: #EF4444; }
+</style>"""
+
+    soup = BeautifulSoup(raw, "html.parser")
+
+    # Strip unwanted elements
+    for tag in soup.find_all(["script", "style", "link", "meta"]):
+        tag.decompose()
+    for tag in soup.find_all(True):
+        for attr in list(tag.attrs):
+            if attr.lower().startswith("on"):
+                del tag[attr]
+
+    # Rewrite image paths
+    for img in soup.find_all("img"):
+        src = img.get("src", "")
+        if src and not src.startswith(("http", "/")):
+            img["src"] = f"{help_base}/{src}"
+
+    # Strip dead links
+    for a in soup.find_all("a"):
+        href = a.get("href", "")
+        if href and not href.startswith("http"):
+            a.replace_with(a.get_text())
+
+    # Remove empty paragraphs and hrs
+    for p in soup.find_all("p"):
+        text = p.get_text(strip=True).replace("\xa0", "")
+        if not text and not p.find("img"):
+            p.decompose()
+    for hr in soup.find_all("hr"):
+        hr.decompose()
+
+    # Transform headings
+    for h5 in soup.find_all("h5"):
+        h5.name = "h2"
+        h5["class"] = ["doc-title"]
+        if h5.has_attr("style"): del h5["style"]
+
+    for p in list(soup.find_all("p")):
+        style = p.get("style", "")
+        if "font-weight" in style and "bold" in style:
+            text = p.get_text(strip=True)
+            if not text:
+                continue
+            if "font-size" in style and ("12pt" in style or "14pt" in style):
+                new_tag = soup.new_tag("h2")
+                new_tag["class"] = ["doc-title"]
+                new_tag.string = text
+                p.replace_with(new_tag)
+            else:
+                new_tag = soup.new_tag("h3")
+                new_tag["class"] = ["doc-subtitle"]
+                new_tag.string = text
+                p.replace_with(new_tag)
+
+    # Transform field definitions
+    for p in list(soup.find_all("p")):
+        style = p.get("style", "")
+        has_indent = "text-indent" in style or "margin-left" in style.replace(" ", "")
+        text = p.get_text(strip=True)
+        if has_indent and ":" in text:
+            _build_field_def(soup, p, text)
+        elif re.match(r'^[A-Z\s\.\'/]{4,}:', text):
+            _build_field_def(soup, p, text)
+
+    # Transform images
+    for img in list(soup.find_all("img")):
+        style = img.get("style", "")
+        mw_match = re.search(r'max-width:\s*(\d+)', style)
+        max_w = int(mw_match.group(1)) if mw_match else 0
+        if img.has_attr("style"): del img["style"]
+        if max_w > 100:
+            img["style"] = f"max-width: {max_w}px; width: 100%; height: auto;"
+            fig = soup.new_tag("div")
+            fig["class"] = ["doc-screenshot"]
+            img.replace_with(fig)
+            fig.append(img)
+        elif max_w > 0:
+            img["class"] = ["doc-icon"]
+            img["style"] = f"max-width: {max_w}px; height: auto;"
+        else:
+            img["style"] = "max-width: 100%; height: auto;"
+
+    # Convert single-column tables to lists
+    for table in list(soup.find_all("table")):
+        cells = table.find_all("td")
+        cols = table.find_all("col")
+        if len(cols) <= 1:
+            texts = [td.get_text(strip=True) for td in cells if td.get_text(strip=True)]
+            if texts:
+                ul = soup.new_tag("ul")
+                for t in texts:
+                    li = soup.new_tag("li")
+                    li.string = t
+                    ul.append(li)
+                table.replace_with(ul)
+
+    # Flatten nested list hacks
+    for li in list(soup.find_all("li")):
+        style = li.get("style", "")
+        if "display" in style and "inline" in style:
+            inner_ul = li.find("ul")
+            if inner_ul and li.parent and li.parent.parent:
+                try:
+                    li.parent.replace_with(inner_ul)
+                except ValueError:
+                    pass
+
+    # Strip all remaining inline styles
+    for tag in soup.find_all(["p", "span", "div", "td", "th", "li", "ul", "ol", "tr", "table"]):
+        if tag.has_attr("style"): del tag["style"]
+    for tag in soup.find_all(True, attrs={"align": True}):
+        del tag["align"]
+
+    # Unwrap empty spans
+    for tag in soup.find_all("span"):
+        if not tag.attrs:
+            tag.unwrap()
+
+    # Extract body
+    body = soup.find("body")
+    content_html = body.decode_contents() if body else soup.decode_contents()
+
+    return HELP_CSS + f'<div class="doc-canvas">{content_html}</div>'
+
+
+def _build_field_def(soup, p, text):
+    """Convert a paragraph to a field-def card."""
+    idx = text.index(":")
+    name = text[:idx].strip()
+    desc = text[idx + 1:].strip()
+    div = soup.new_tag("div")
+    div["class"] = ["field-def"]
+    name_span = soup.new_tag("span")
+    name_span["class"] = ["field-name"]
+    name_span.string = name
+    sep = soup.new_tag("span")
+    sep["class"] = ["field-sep"]
+    sep.string = ":"
+    div.append(name_span)
+    div.append(sep)
+    div.append(" " + desc)
+    p.replace_with(div)
+
+
 def ingest_html_help(index: SearchIndex, help_dir: Path, repo: Path):
     """Ingest HTML help files. Each file = 1 chunk after HTML stripping.
-    Scans sources/help/OS1/html/, sources/help/OS1Config/, sources/help/SStp/.
+    Also preprocesses and stores professional HTML for the overlay viewer.
     """
     count = 0
     skipped = 0
 
-    # Walk all .htm files under the help directory
     for htm_file in sorted(help_dir.rglob("*.htm")):
         try:
             raw = htm_file.read_text(encoding="utf-8", errors="replace")
@@ -261,14 +445,13 @@ def ingest_html_help(index: SearchIndex, help_dir: Path, repo: Path):
 
         title, breadcrumbs, text = strip_html(raw)
 
-        # Skip files with too little content
         if len(text.strip()) < 50:
             skipped += 1
             continue
 
         module = module_from_path(htm_file, repo)
 
-        # Build a rich chunk: breadcrumbs + title + body
+        # Plain text for FTS search
         parts = []
         if breadcrumbs:
             parts.append(f"Percorso: {breadcrumbs}")
@@ -277,12 +460,20 @@ def ingest_html_help(index: SearchIndex, help_dir: Path, repo: Path):
         parts.append(text)
         chunk_content = "\n\n".join(parts)
 
+        # Preprocessed HTML for overlay viewer
+        rel_path = str(htm_file.relative_to(repo)).replace("\\", "/")
+        parent_dir = str(Path(rel_path).parent)
+        prefix = "sources/help/"
+        help_base = "/help-files/" + parent_dir[len(prefix):] if parent_dir.startswith(prefix) else "/help-files"
+        html_content = preprocess_help_html(raw, rel_path, help_base)
+
         index.index_document(
             content=chunk_content,
             source_file=str(htm_file.relative_to(repo)),
             title=title or htm_file.stem,
             module=module,
             doc_type="help",
+            html_content=html_content,
         )
         count += 1
 

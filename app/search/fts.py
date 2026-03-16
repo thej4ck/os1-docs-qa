@@ -31,6 +31,7 @@ class SearchIndex:
                 doc_type TEXT,
                 title TEXT,
                 content TEXT NOT NULL,
+                html_content TEXT,
                 indexed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
 
@@ -61,11 +62,12 @@ class SearchIndex:
         title: str = "",
         module: str = "",
         doc_type: str = "",
+        html_content: str = "",
     ):
         self.conn.execute(
-            "INSERT INTO documents (source_file, module, doc_type, title, content) "
-            "VALUES (?, ?, ?, ?, ?)",
-            (source_file, module, doc_type, title, content),
+            "INSERT INTO documents (source_file, module, doc_type, title, content, html_content) "
+            "VALUES (?, ?, ?, ?, ?, ?)",
+            (source_file, module, doc_type, title, content, html_content or None),
         )
 
     def commit(self):

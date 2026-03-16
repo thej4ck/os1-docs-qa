@@ -3,6 +3,8 @@ __pycache__/
 *.pyc
 *.pyo
 data/app.db
+data/*.db-shm
+data/*.db-wal
 help-files/
 .venv/
 SCAO_allAdv_original.png
