@@ -462,7 +462,8 @@ def ingest_html_help(index: SearchIndex, help_dir: Path, repo: Path):
 
         # Preprocessed HTML for overlay viewer
         rel_path = str(htm_file.relative_to(repo)).replace("\\", "/")
-        parent_dir = str(Path(rel_path).parent)
+        # Use string split instead of Path (Path converts / to \ on Windows)
+        parent_dir = rel_path.rsplit("/", 1)[0] if "/" in rel_path else ""
         prefix = "sources/help/"
         help_base = "/help-files/" + parent_dir[len(prefix):] if parent_dir.startswith(prefix) else "/help-files"
         html_content = preprocess_help_html(raw, rel_path, help_base)
