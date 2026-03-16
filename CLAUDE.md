@@ -3,62 +3,100 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Progetto
-Servizio web Q&A per documentazione OS1 (gestionale ERP). Chat BM25 + LLM (Groq) con auth OTP, backoffice admin, tracking costi.
+Servizio web Q&A per documentazione OS1 (gestionale ERP di OSItalia). Chat BM25 + LLM (Groq) con auth OTP, backoffice admin, tracking costi, dark/light theme.
 
-## Comandi
+## Comandi sviluppo
 ```bash
 pip install -r requirements.txt
 python scripts/build_index.py --repo "../os1-documentation/Claude Code Playground"
 uvicorn app.main:app --reload --port 8000
 ```
 
+## Deploy (Railway)
+```bash
+# 1. Rebuild search.db (include HTML preprocessato)
+python scripts/build_index.py --repo "../os1-documentation/Claude Code Playground"
+
+# 2. Commit e push — Railway fa auto-deploy da main
+git add data/search.db && git commit -m "Update search index" && git push
+```
+
+Railway config:
+- **Volume**: `/app/data` (preserva `app.db` tra i deploy)
+- **Variabili**: vedi sezione "Variabili d'ambiente"
+- **Auto-deploy**: ON su push a `main`
+- SSL automatico via Railway (no Caddy necessario)
+
 ## Architettura
 
 ### Database
-- `data/search.db` — FTS5 read-only, rigenerabile con `build_index.py`. Sovrascrivibile.
-- `data/app.db` — Dati utente, conversazioni, usage, settings. **MAI cancellare.** Schema con `IF NOT EXISTS`.
+- `data/search.db` — FTS5 + HTML preprocessato. Committato nel repo. Rigenerabile con `build_index.py`.
+- `data/app.db` — Utenti, conversazioni, usage, feedback, settings. **MAI cancellare.** Su volume persistente in prod. Schema `IF NOT EXISTS` (aggiornamenti additivi sicuri).
 
 ### Pipeline offline (`scripts/build_index.py`)
-Legge repo docs → produce `data/search.db`. 4 ingestor: table-def, functional, schema, help.
+Legge repo docs → produce `data/search.db` con 4 ingestor:
+- **table-def**: markdown tabelle DB (1 file = 1 chunk)
+- **functional**: docs funzionali (splittati per `##`)
+- **schema**: censimento tabelle per modulo
+- **help**: file .htm con preprocessing BeautifulSoup → HTML professionale salvato in `html_content`
 
 ### Servizio web (FastAPI)
-Flusso: `POST /api/ask` → BM25 (top 10) → contesto → streaming Groq → SSE.
+Flusso: `POST /api/ask` → rate limit → daily/monthly limit check → BM25 (top 10) → contesto → streaming Groq → SSE → salva in DB.
 
 Strati:
-- `app/main.py` — Lifespan: apre search.db read-only + app.db, monta static files
-- `app/routes/chat_routes.py` — Chat + API conversazioni + feedback + doc viewer
-- `app/routes/auth_routes.py` — Login OTP + creazione utente in DB
-- `app/routes/admin_routes.py` — Backoffice admin: dashboard, utenti, usage, settings
-- `app/auth/otp.py` — OTP in-memory, sender configurabile da admin
-- `app/auth/session.py` — Cookie firmato itsdangerous (24h)
-- `app/search/query.py` — Retrieval + Groq streaming, modello configurabile da admin
-- `app/db.py` — Singleton app database (users, conversations, messages, feedback, settings)
-- `app/models/` — CRUD: user.py, conversation.py, usage.py
+- `app/main.py` — Lifespan: search.db + app.db + static files + help-files
+- `app/routes/chat_routes.py` — Chat, conversazioni API, feedback, doc viewer, announcements
+- `app/routes/auth_routes.py` — Login OTP, creazione utente in DB
+- `app/routes/admin_routes.py` — Dashboard, utenti, usage (per-utente + per-dominio), domini, settings
+- `app/auth/otp.py` — OTP in-memory, sender e allowed_domains da DB
+- `app/auth/session.py` — Cookie firmato itsdangerous (24h, Secure in prod)
+- `app/search/query.py` — Retrieval + Groq streaming, modello da DB settings
+- `app/db.py` — Singleton app database con schema completo
+- `app/models/` — user.py, conversation.py, usage.py, domain.py
 
 ### Frontend (Jinja2 + vanilla JS)
 - Layout 3 pannelli: sidebar conversazioni (sx) + chat (centro) + documenti (dx)
 - Markdown rendering via marked.js CDN
-- Design system SCAO: rosso `#E2231A`, DM Sans + Source Sans 3
-- Logo: `static/logo.png`
+- Design system SCAO: rosso `#E2231A`, DM Sans + Source Sans 3 + JetBrains Mono
+- Dark/light theme toggle con localStorage
+- Logo: `static/img/logo.png` (header), `static/img/logo-lg.png` (login/welcome)
+- Document overlay: HTML preprocessato con canvas bianco, field-def cards, screenshot con ombra
+
+### Sicurezza
+- Tutti gli endpoint API richiedono sessione autenticata (401)
+- Rate limiting: max 10 req/min per utente su `/api/ask`
+- Daily limit per dominio (configurabile da admin)
+- Monthly token limit per utente/dominio
+- Cookie: HTTPOnly, SameSite=lax, Secure in produzione
+- SQL parametrizzato ovunque (no injection)
+- Static files: directory traversal protetto da FastAPI
 
 ## Variabili d'ambiente (.env)
-- `GROQ_API_KEY` — obbligatoria
-- `RESEND_API_KEY` — per OTP email (senza, stampa in console)
-- `ALLOWED_EMAILS` — pattern allowlist (es. `*@scao.it`)
-- `ADMIN_EMAILS` — pattern admin (es. `admin@scao.it`)
-- `DB_PATH` — search.db (default: `data/search.db`)
-- `APP_DB_PATH` — app.db (default: `data/app.db`)
-- `SECRET_KEY` — firma cookie sessione
-- `DEFAULT_MONTHLY_TOKEN_LIMIT` — limite token/mese (default: 500000)
-- `DEFAULT_MAX_MESSAGES_PER_CONVERSATION` — limite domande/chat (default: 20)
+| Variabile | Obbligatoria | Default | Descrizione |
+|-----------|:---:|---------|-------------|
+| `GROQ_API_KEY` | Si | — | API key Groq per LLM |
+| `RESEND_API_KEY` | No | — | Per OTP email (senza: console) |
+| `ALLOWED_EMAILS` | No | `*@scao.it` | Fallback se nessun dominio in DB |
+| `ADMIN_EMAILS` | No | — | Pattern per flag admin al primo login |
+| `SECRET_KEY` | Si | `change-me` | Firma cookie sessione |
+| `PRODUCTION` | No | `false` | Abilita cookie Secure |
+| `DOCS_REPO_PATH` | No | `../os1-documentation/...` | Path repo docs (solo dev locale) |
+| `APP_DB_PATH` | No | `data/app.db` | Path app database |
+| `DB_PATH` | No | `data/search.db` | Path search index |
+| `DEFAULT_MONTHLY_TOKEN_LIMIT` | No | `500000` | Limite token/mese default |
+| `DEFAULT_MAX_MESSAGES_PER_CONVERSATION` | No | `20` | Limite domande/chat default |
 
-## Settings configurabili da admin (/admin/announcement)
-Modello Groq, email mittente OTP, max domande/chat, annuncio banner. Salvati in `app_settings` table.
+## Admin (/admin)
+- **Dashboard**: KPI (utenti, domande, costo, attivi) + domande recenti
+- **Utenti**: lista con usage mensile, dettaglio con barra progresso limite
+- **Consumi**: breakdown per utente e per dominio, export CSV
+- **Domini**: gestione accessi con limite giornaliero e mensile per dominio
+- **Impostazioni**: modello Groq, email mittente OTP, max domande/chat, banner annunci
 
 ## Convenzioni
 - Codice in inglese, UI in italiano
 - Groq via client `openai` (AsyncOpenAI) → `api.groq.com/openai/v1`
-- `data/` in `.gitignore` — search.db rigenerabile, **app.db da preservare nei deploy**
+- `search.db` committato nel repo (rigenerabile), `app.db` MAI committato (volume)
 
 ## Chunking
 I chunk devono essere GRANDI (file interi). Ogni file HTML del help OS1 è già un concetto coerente.
