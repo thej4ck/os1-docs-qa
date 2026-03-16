@@ -282,6 +282,7 @@ def _get_all_settings() -> dict:
         "otp_sender_name": _get_setting("otp_sender_name", "OS1 Docs"),
         "otp_sender_email": _get_setting("otp_sender_email", "noreply@ai.scao.it"),
         "allowed_emails": _get_setting("allowed_emails", app_settings.allowed_emails),
+        "context_preset": _get_setting("context_preset", "normal"),
         "max_messages": get_max_messages_setting(),
         "announcement": _get_setting("announcement", ""),
     }
@@ -311,11 +312,16 @@ async def save_settings(request: Request):
     from app.db import get_conn
     conn = get_conn()
 
+    preset = str(form.get("context_preset", "normal")).strip()
+    if preset not in ("conservative", "normal", "aggressive"):
+        preset = "normal"
+
     settings_map = {
         "groq_model": str(form.get("groq_model", "")).strip(),
         "otp_sender_name": str(form.get("otp_sender_name", "")).strip(),
         "otp_sender_email": str(form.get("otp_sender_email", "")).strip(),
         "allowed_emails": str(form.get("allowed_emails", "")).strip(),
+        "context_preset": preset,
         "max_messages_per_conversation": str(max(1, min(int(form.get("max_messages_per_conversation", 20)), 200))),
         "announcement": str(form.get("announcement", "")).strip(),
     }

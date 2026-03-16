@@ -113,7 +113,16 @@ E infine la fonte:
 Base & Anagrafiche, Magazzino, Vendite, Acquisti, Contabilità, Cespiti, \
 e la struttura completa del database OS1 (958 tabelle).
 
-Se non trovi la risposta nel contesto, dillo e suggerisci termini alternativi da cercare."""
+Se non trovi la risposta nel contesto, dillo e suggerisci termini alternativi da cercare.
+
+## Suggerimenti di follow-up
+Alla fine di ogni risposta, aggiungi una sezione:
+### Per saperne di più
+- Domanda suggerita 1
+- Domanda suggerita 2
+- Domanda suggerita 3
+
+Le domande devono essere specifiche, correlate al tema, e utili per approfondire."""
 
 # Shared index instance — set by main.py at startup
 _index: SearchIndex | None = None
@@ -129,11 +138,42 @@ def init(index: SearchIndex):
     )
 
 
-def retrieve(question: str, limit: int = 10) -> list[dict]:
-    """Search the FTS5 index and return matching documents."""
+CONTEXT_PRESETS = {
+    "conservative": 5_000,
+    "normal": 15_000,
+    "aggressive": 40_000,
+}
+
+
+def _get_context_budget(deep: bool = False) -> int:
+    """Get max context words from admin preset."""
+    preset = "normal"
+    try:
+        from app.db import get_conn
+        row = get_conn().execute("SELECT value FROM app_settings WHERE key = 'context_preset'").fetchone()
+        if row and row["value"] in CONTEXT_PRESETS:
+            preset = row["value"]
+    except Exception:
+        pass
+    budget = CONTEXT_PRESETS[preset]
+    return budget * 2 if deep else budget
+
+
+def retrieve_with_budget(question: str, deep: bool = False) -> list[dict]:
+    """Search FTS5 and return docs up to the word budget."""
     if _index is None:
         return []
-    return _index.search(question, limit=limit)
+    max_words = _get_context_budget(deep)
+    candidates = _index.search(question, limit=50)
+    selected = []
+    word_count = 0
+    for doc in candidates:
+        doc_words = len(doc["content"].split())
+        if word_count + doc_words > max_words and selected:
+            break
+        selected.append(doc)
+        word_count += doc_words
+    return selected
 
 
 def build_context(docs: list[dict]) -> str:
@@ -143,8 +183,6 @@ def build_context(docs: list[dict]) -> str:
         source = doc["source_file"]
         title = doc["title"] or "Senza titolo"
         content = doc["content"]
-        if len(content) > 3000:
-            content = content[:3000] + "\n[... troncato]"
         parts.append(f"--- Documento {i}: {title} (file: {source}) ---\n{content}")
     return "\n\n".join(parts)
 
@@ -169,17 +207,19 @@ def _calculate_cost(prompt_tokens: int, completion_tokens: int) -> float:
 async def ask_stream(
     question: str,
     history: list[dict] | None = None,
+    deep: bool = False,
 ) -> AsyncIterator[tuple[str, list[dict], dict | None]]:
     """Retrieve context, call Groq, and yield (token, sources, usage) tuples.
 
     - First yield includes the sources list; subsequent yields have empty sources.
     - Final yield includes usage dict with token counts and cost.
+    - deep=True doubles the context budget for more thorough answers.
     """
     if _client is None:
         yield "Errore: servizio non configurato.", [], None
         return
 
-    docs = retrieve(question)
+    docs = retrieve_with_budget(question, deep=deep)
     sources = [{"title": d["title"], "source_file": d["source_file"]} for d in docs]
     context = build_context(docs)
 

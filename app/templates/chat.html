@@ -103,7 +103,7 @@
                     </div>
                 </form>
                 <div class="chat-input-footer">
-                    <span class="chat-input-hint">OS1 Docs usa l'IA per rispondere. Verifica sempre le informazioni.</span>
+                    <span class="chat-input-hint">OS1 Docs usa l'IA per rispondere. Verifica sempre le informazioni. · {{ app_version }}</span>
                     <span class="msg-counter" id="msg-counter"></span>
                 </div>
             </div>
@@ -282,10 +282,15 @@ function handleSubmit(e) {
     questionEl.value = ''; questionEl.style.height = 'auto';
     questionEl.disabled = true; sendBtn.disabled = true;
 
+    questionEl.dataset.lastQuestion = question;
     let fullText = '', sources = [], firstToken = true, renderTimer = null;
     const formData = new FormData();
     formData.append('question', question);
     if (conversationId) formData.append('conversation_id', conversationId);
+    if (questionEl.dataset.deep === 'true') {
+        formData.append('deep', 'true');
+        questionEl.dataset.deep = '';
+    }
 
     fetch('/api/ask', { method: 'POST', body: formData })
         .then(response => {
@@ -342,6 +347,54 @@ function handleSubmit(e) {
 function renderFinal(msgParts, text, sources, messageId) {
     if (text) msgParts.content.innerHTML = marked.parse(text);
 
+    // Extract "Per saperne di più" suggestions and convert to chips
+    const h3s = msgParts.content.querySelectorAll('h3');
+    let lastQuestion = questionEl.dataset.lastQuestion || '';
+    for (const h3 of h3s) {
+        if (h3.textContent.toLowerCase().includes('per saperne di più') || h3.textContent.toLowerCase().includes('approfondisci')) {
+            const suggestions = [];
+            let el = h3.nextElementSibling;
+            while (el && (el.tagName === 'UL' || el.tagName === 'OL')) {
+                el.querySelectorAll('li').forEach(li => {
+                    const t = li.textContent.trim();
+                    if (t) suggestions.push(t);
+                });
+                const next = el.nextElementSibling;
+                el.remove();
+                el = next;
+            }
+            h3.remove();
+
+            if (suggestions.length > 0 || lastQuestion) {
+                const chipsDiv = document.createElement('div');
+                chipsDiv.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;';
+
+                // "Approfondisci" button — deep mode
+                if (lastQuestion) {
+                    const deepBtn = document.createElement('button');
+                    deepBtn.className = 'suggestion-chip';
+                    deepBtn.style.cssText = 'border-color:var(--c-brand);color:var(--c-brand);font-weight:600;';
+                    deepBtn.textContent = '🔍 Approfondisci';
+                    deepBtn.onclick = () => { questionEl.value = lastQuestion; questionEl.dataset.deep = 'true'; handleSubmit(new Event('submit')); };
+                    chipsDiv.appendChild(deepBtn);
+                }
+
+                // Suggestion chips
+                suggestions.forEach(s => {
+                    const chip = document.createElement('button');
+                    chip.className = 'suggestion-chip';
+                    chip.textContent = s;
+                    chip.onclick = () => { questionEl.value = s; handleSubmit(new Event('submit')); };
+                    chipsDiv.appendChild(chip);
+                });
+
+                msgParts.body.appendChild(chipsDiv);
+            }
+            break;
+        }
+    }
+
+    // Feedback buttons
     if (messageId) {
         const fb = document.createElement('div'); fb.className = 'msg-feedback';
         fb.innerHTML = `<button class="feedback-btn" onclick="sendFeedback(${messageId},1,this)">${SVG_THUMB_UP}</button>

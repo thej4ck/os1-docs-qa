@@ -86,6 +86,22 @@
             </div>
         </div>
 
+        <h3 class="section-title">Contesto retrieval</h3>
+        <p class="section-desc">Quanti documenti inviare al modello per rispondere. Più contesto = risposte più complete ma più costose.</p>
+        <div class="settings-card">
+            <div class="setting-row">
+                <label class="setting-label" for="context_preset">Preset contesto</label>
+                <div style="flex:1;">
+                    <select id="context_preset" name="context_preset" class="setting-input" style="width:auto;">
+                        <option value="conservative" {% if settings.context_preset == 'conservative' %}selected{% endif %}>Conservativo — 5.000 parole (~7K token)</option>
+                        <option value="normal" {% if settings.context_preset == 'normal' or not settings.context_preset %}selected{% endif %}>Normale — 15.000 parole (~20K token)</option>
+                        <option value="aggressive" {% if settings.context_preset == 'aggressive' %}selected{% endif %}>Aggressivo — 40.000 parole (~55K token)</option>
+                    </select>
+                    <div class="setting-hint">Con "Approfondisci" il budget raddoppia. Il modello ha 128K token di context window.</div>
+                </div>
+            </div>
+        </div>
+
         <h3 class="section-title">Annuncio</h3>
         <p class="section-desc">Banner visibile a tutti gli utenti in cima alla chat. Lascia vuoto per nascondere.</p>
         <div class="settings-card">

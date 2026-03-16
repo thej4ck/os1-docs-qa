@@ -17,6 +17,7 @@ from app.models.conversation import (
 )
 from app.models.usage import check_limit
 from app.search import query as query_module
+from app.version import VERSION, BUILD, BUILD_DATE
 
 router = APIRouter()
 
@@ -91,6 +92,7 @@ async def chat_page(request: Request, c: str | None = None):
         "conversations": conversations,
         "msg_count": msg_count,
         "max_messages": max_messages,
+        "app_version": f"v{VERSION} build {BUILD} ({BUILD_DATE})",
     })
 
 
@@ -101,6 +103,7 @@ async def ask(
     request: Request,
     question: str = Form(...),
     conversation_id: str = Form(default=""),
+    deep: str = Form(default=""),
 ):
     user = _get_user(request)
     if not user:
@@ -177,8 +180,9 @@ async def ask(
         sources = []
         usage_data = None
 
+        is_deep = deep == "true"
         async for token, token_sources, token_usage in query_module.ask_stream(
-            question, history=llm_history
+            question, history=llm_history, deep=is_deep
         ):
             if token_sources:
                 sources = token_sources
