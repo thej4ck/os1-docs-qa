@@ -379,6 +379,22 @@ li::marker { color: #E2231A; }
 
 /* Misc */
 strong, b { font-weight: 600; color: #1E293B; }
+
+/* ── Dark mode ── */
+.doc-dark body, .doc-dark { color: #E4E6EB; background: #0F1117; }
+.doc-dark .doc-canvas { background: #1A1D27; border-color: #2E3140; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+.doc-dark .doc-title { color: #E4E6EB; border-bottom-color: #EF4444; }
+.doc-dark .doc-subtitle { color: #E4E6EB; border-bottom-color: #2E3140; }
+.doc-dark .field-def { background: linear-gradient(135deg, #1A1D27 0%, #22252F 100%); border-color: #2E3140; border-left-color: #EF4444; }
+.doc-dark .field-name { color: #E4E6EB; }
+.doc-dark p, .doc-dark li { color: #C8CCD4; }
+.doc-dark table { border-color: #2E3140; }
+.doc-dark th, .doc-dark td { border-color: #2E3140; color: #C8CCD4; }
+.doc-dark th { background: #22252F; color: #9CA3B4; }
+.doc-dark tr:nth-child(even) td { background: #1A1D27; }
+.doc-dark .doc-screenshot img { border-color: #2E3140; box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+.doc-dark strong, .doc-dark b { color: #E4E6EB; }
+.doc-dark li::marker { color: #EF4444; }
 </style>"""
 
 

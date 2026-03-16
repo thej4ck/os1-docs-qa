@@ -378,8 +378,8 @@ function openDocOverlay(sourceFile, title) {
         else {
             document.getElementById('doc-overlay-title').textContent = data.title || sourceFile;
             if (data.is_html) {
-                // HTML help file — render as-is (already sanitized server-side)
-                document.getElementById('doc-overlay-body').innerHTML = data.html;
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                document.getElementById('doc-overlay-body').innerHTML = (isDark ? '<div class="doc-dark">' : '<div>') + data.html + '</div>';
             } else {
                 // Markdown/text — render with marked.js
                 document.getElementById('doc-overlay-body').innerHTML = marked.parse(data.content || '');

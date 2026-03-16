@@ -73,6 +73,56 @@
             --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-xl: 20px; --r-full: 9999px;
         }
 
+        /* ═══════════════ Dark Theme ═══════════════ */
+        [data-theme="dark"] {
+            --c-bg:             #0F1117;
+            --c-surface:        #1A1D27;
+            --c-surface-alt:    #22252F;
+            --c-surface-raised: #252830;
+            --c-border:         #2E3140;
+            --c-border-input:   #3A3E4C;
+            --c-text:           #E4E6EB;
+            --c-text-secondary: #9CA3B4;
+            --c-text-tertiary:  #6B7280;
+            --c-brand:          #EF4444;
+            --c-brand-hover:    #F87171;
+            --c-brand-light:    rgba(239,68,68,0.12);
+            --c-brand-surface:  rgba(239,68,68,0.08);
+            --c-link:           #EF4444;
+            --c-error:          #F87171;
+            --c-error-bg:       rgba(239,68,68,0.1);
+            --c-error-border:   rgba(239,68,68,0.2);
+            --c-accent-dark:    #E4E6EB;
+            --c-shadow-sm:      0 1px 2px rgba(0,0,0,0.2);
+            --c-shadow:         0 1px 3px rgba(0,0,0,0.2), 0 4px 16px rgba(0,0,0,0.15);
+            --c-shadow-lg:      0 4px 24px rgba(0,0,0,0.25), 0 1px 4px rgba(0,0,0,0.15);
+            --c-shadow-up:      0 -2px 16px rgba(0,0,0,0.2);
+        }
+        [data-theme="dark"] .brand-logo { filter: brightness(1.3) saturate(1.2); }
+        [data-theme="dark"] .auth-logo { filter: brightness(1.3) saturate(1.2); }
+        [data-theme="dark"] .welcome-logo { filter: brightness(1.3) saturate(1.2); }
+        [data-theme="dark"] .doc-overlay-backdrop { background: rgba(0,0,0,0.6); }
+        [data-theme="dark"] .doc-overlay-card { background: #1A1D27; }
+        [data-theme="dark"] .doc-overlay-header { background: #22252F; }
+        [data-theme="dark"] .doc-overlay-body { background: #0F1117; }
+        [data-theme="dark"] .msg-assistant .msg-content code { color: #EF4444; background: #22252F; }
+        [data-theme="dark"] .msg-assistant .msg-content pre { background: #0D0F14; }
+        [data-theme="dark"] .msg-user .msg-avatar { background: rgba(239,68,68,0.15); }
+        [data-theme="dark"] .msg-assistant .msg-avatar { background: #E4E6EB; color: #1A1D27; }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            background: none; border: none; color: var(--c-text-secondary);
+            padding: 4px; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; border-radius: var(--r-full); transition: color 150ms ease;
+        }
+        .theme-toggle:hover { color: var(--c-text); }
+        .theme-toggle svg { width: 18px; height: 18px; }
+        .theme-toggle .icon-sun { display: none; }
+        .theme-toggle .icon-moon { display: block; }
+        [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+        [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+
         /* ═══════════════ Layout ═══════════════ */
         .container { max-width: 880px; margin: 0 auto; padding: 0 var(--sp-4); width: 100%; }
         main { flex: 1; }
@@ -80,7 +130,7 @@
         /* ═══════════════ Header ═══════════════ */
         .app-header {
             height: 56px;
-            background: rgba(255,255,255,0.95);
+            background: var(--c-surface);
             border-bottom: 1px solid var(--c-border);
             position: sticky; top: 0; z-index: 100;
             backdrop-filter: blur(8px);
@@ -561,11 +611,37 @@
             </a>
             <div class="header-right">
                 {% block nav_right %}{% endblock %}
+                <button class="theme-toggle" id="theme-toggle" aria-label="Cambia tema">
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                </button>
             </div>
         </div>
     </header>
     <main>
         {% block content %}{% endblock %}
     </main>
+    <script>
+    (function() {
+        const toggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        const saved = localStorage.getItem('theme');
+        if (saved) {
+            html.setAttribute('data-theme', saved);
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            html.setAttribute('data-theme', 'dark');
+        }
+        toggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        });
+    })();
+    </script>
 </body>
 </html>
