@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Accedi — OS1 Docs{% endblock %}
+
+{% block content %}
+<article style="max-width: 400px; margin: 4rem auto;">
+    <header>
+        <h2>Accedi a OS1 Docs</h2>
+        <p>Inserisci la tua email per ricevere il codice di accesso.</p>
+    </header>
+    {% if error %}
+    <p style="color: var(--pico-del-color);">{{ error }}</p>
+    {% endif %}
+    <form method="post" action="/login">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="nome@azienda.it" required autofocus>
+        <button type="submit">Invia codice</button>
+    </form>
+</article>
+{% endblock %}

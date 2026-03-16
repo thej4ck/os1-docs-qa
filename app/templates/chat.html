@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+{% block title %}Chat — OS1 Docs{% endblock %}
+
+{% block nav_right %}
+<li><small>{{ email }}</small></li>
+<li><a href="/logout" role="button" class="outline secondary" style="padding: 0.3rem 0.8rem; font-size: 0.85rem;">Esci</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="chat-container">
+    <div class="chat-messages" id="messages">
+        {% if not history %}
+        <div class="suggestions" id="welcome">
+            <h4>Benvenuto! Chiedi qualsiasi cosa su OS1.</h4>
+            <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">Esempi:</p>
+            <ul>
+                <li><span class="suggestion-link" onclick="askSuggestion(this)">Come si inserisce la prima nota contabile?</span></li>
+                <li><span class="suggestion-link" onclick="askSuggestion(this)">Quali tabelle gestiscono il magazzino?</span></li>
+                <li><span class="suggestion-link" onclick="askSuggestion(this)">Come funzionano le causali contabili?</span></li>
+                <li><span class="suggestion-link" onclick="askSuggestion(this)">Cosa contiene la tabella Articoli?</span></li>
+            </ul>
+        </div>
+        {% endif %}
+
+        {% for msg in history %}
+        <div class="msg msg-{{ msg.role }}">
+            {{ msg.content }}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="chat-input">
+        <form id="ask-form" onsubmit="return handleSubmit(event)">
+            <input type="text" id="question" name="question"
+                   placeholder="Fai una domanda su OS1..."
+                   autocomplete="off" required>
+            <button type="submit" id="send-btn">Invia</button>
+        </form>
+    </div>
+</div>
+
+<script>
+const messagesEl = document.getElementById('messages');
+const questionEl = document.getElementById('question');
+const sendBtn = document.getElementById('send-btn');
+const welcomeEl = document.getElementById('welcome');
+
+function askSuggestion(el) {
+    questionEl.value = el.textContent;
+    document.getElementById('ask-form').dispatchEvent(new Event('submit'));
+}
+
+function scrollToBottom() {
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function handleSubmit(e) {
+    e.preventDefault();
+    const question = questionEl.value.trim();
+    if (!question) return false;
+
+    // Hide welcome
+    if (welcomeEl) welcomeEl.style.display = 'none';
+
+    // Add user message
+    const userDiv = document.createElement('div');
+    userDiv.className = 'msg msg-user';
+    userDiv.textContent = question;
+    messagesEl.appendChild(userDiv);
+
+    // Add assistant placeholder
+    const assistantDiv = document.createElement('div');
+    assistantDiv.className = 'msg msg-assistant streaming-cursor';
+    assistantDiv.id = 'current-response';
+    messagesEl.appendChild(assistantDiv);
+    scrollToBottom();
+
+    // Disable input
+    questionEl.value = '';
+    questionEl.disabled = true;
+    sendBtn.disabled = true;
+    sendBtn.textContent = '...';
+
+    // SSE request via fetch + EventSource
+    const formData = new FormData();
+    formData.append('question', question);
+
+    fetch('/api/ask', {
+        method: 'POST',
+        body: formData,
+    }).then(response => {
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+
+        function processStream() {
+            reader.read().then(({done, value}) => {
+                if (done) {
+                    finishResponse(assistantDiv);
+                    return;
+                }
+
+                buffer += decoder.decode(value, {stream: true});
+                const lines = buffer.split('\n');
+                buffer = lines.pop(); // Keep incomplete line
+
+                for (const line of lines) {
+                    if (line.startsWith('data: ')) {
+                        try {
+                            const data = JSON.parse(line.slice(6));
+                            if (data.token) {
+                                assistantDiv.textContent += data.token;
+                                scrollToBottom();
+                            }
+                            if (data.sources && data.sources.length > 0) {
+                                // Store sources for later display
+                                assistantDiv.dataset.sources = JSON.stringify(data.sources);
+                            }
+                            if (data.done) {
+                                finishResponse(assistantDiv);
+                                return;
+                            }
+                        } catch(e) {}
+                    }
+                }
+                processStream();
+            });
+        }
+        processStream();
+    }).catch(err => {
+        assistantDiv.textContent = 'Errore di connessione. Riprova.';
+        finishResponse(assistantDiv);
+    });
+
+    return false;
+}
+
+function finishResponse(el) {
+    el.classList.remove('streaming-cursor');
+    el.removeAttribute('id');
+
+    // Show sources if available
+    const sourcesData = el.dataset.sources;
+    if (sourcesData) {
+        try {
+            const sources = JSON.parse(sourcesData);
+            if (sources.length > 0) {
+                const details = document.createElement('details');
+                details.className = 'sources';
+                const summary = document.createElement('summary');
+                summary.textContent = `Fonti (${sources.length} documenti)`;
+                details.appendChild(summary);
+                const ul = document.createElement('ul');
+                for (const s of sources.slice(0, 5)) {
+                    const li = document.createElement('li');
+                    li.textContent = `${s.title} (${s.source_file})`;
+                    ul.appendChild(li);
+                }
+                details.appendChild(ul);
+                el.appendChild(details);
+            }
+        } catch(e) {}
+    }
+
+    // Check if response seems empty or unhelpful — suggest topics
+    const text = el.textContent.trim();
+    if (text.length < 50 || text.includes('non trovo') || text.includes('non ho trovato') || text.includes('non sono disponibili')) {
+        const suggestDiv = document.createElement('div');
+        suggestDiv.className = 'suggestions';
+        suggestDiv.innerHTML = `
+            <h4>Non ho trovato risultati pertinenti. Prova con termini diversi:</h4>
+            <ul>
+                <li>Usa nomi specifici di tabelle o moduli (es. "Articoli", "BCGE", "MovMagazzino")</li>
+                <li>Prova sinonimi: "fattura" invece di "documento fiscale", "prima nota" invece di "registrazione"</li>
+                <li><span class="suggestion-link" onclick="askSuggestion(this)">Quali aree del gestionale sono documentate?</span></li>
+                <li><span class="suggestion-link" onclick="askSuggestion(this)">Elenca i moduli OS1 disponibili</span></li>
+            </ul>
+        `;
+        el.appendChild(suggestDiv);
+    }
+
+    // Re-enable input
+    questionEl.disabled = false;
+    sendBtn.disabled = false;
+    sendBtn.textContent = 'Invia';
+    questionEl.focus();
+    scrollToBottom();
+}
+</script>
+{% endblock %}
