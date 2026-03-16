@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_5565.htm"},{"type":"item","name":"Assegnazione manuale costi ODL","url":"html/sprc/sprc0001f.htm"},{"type":"item","name":"Aggiornamento valori magazzino","url":"html/sprc/sprc0002f.htm"},{"type":"item","name":"Raffronto economico","url":"html/sprc/sprc0004f.htm"},{"type":"item","name":"Analisi andamento costi","url":"html/sprc/sprc0005f.htm"},{"type":"item","name":"Analisi eventi","url":"html/sprc/sprc0006f.htm"},{"type":"item","name":"Raffronto tempi di produzione","url":"html/sprc/sprc0007f.htm"},{"type":"item","name":"Raffronto costi progetti","url":"html/sprc/sprc0008f.htm"},{"type":"item","name":"Analisi fermi macchina/scarti","url":"html/sprc/sprc0009f.htm"},{"type":"item","name":"Analisi efficienza","url":"html/sprc/sprc0010f.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

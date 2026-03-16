@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 31, 2016 6:47:48 PM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Configurazione selezione prezzo/sconti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.1.1_3";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazione OS1 Enterprise > Generali" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h4>Configurazione selezione prezzo/sconti</h4>
+<p>La procedura consente di specificare l'iter di ricerca ed applicazione 
+ di prezzo e sconti nei documenti/movimenti dell'applicazione; l'iter di 
+ ricerca può essere diversificato per classi di documenti: ciclo attivo, 
+ ciclo passivo, magazzino, eCommerce, vendita al dettaglio, oppure comune 
+ a tutte le classi di documenti. In fase di ricerca del prezzo, per la 
+ tipologia Vendita al dettaglio, se non presente o non gestita sarà effettuato 
+ in controllo sull'esistenza della configurazione Ciclo attivo, che se 
+ presente sarà utilizzata, prima di passare alla tipologia Tutti.</p>
+<p>Nel pannello di definizione dell'iter sono presenti dei pulsanti freccia 
+ gialli che consentono in modo immediato di modificare l'ordine di selezione 
+ dei prezzi/sconti. Il pulsante Salva consente il salvataggio delle eventuali 
+ modifiche apportate, il pulsante Annulla consente di annullare le modifiche 
+ eventualmente apportate, il pulsante Elimina consente di cancellare tutto 
+ l'iter di ricerca relativo alla classe documento selezionata.</p>
+<p>&#160;</p>
+<p style="text-align: center;"><img src="images/slis0102f_01.png" alt="" style=" border:none; width:100%; max-width:634px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CLASSE DOCUMENTI: 
+ determina a quale tipologia di documenti/movimenti viene applicato l'iter 
+ di ricerca definito nella sezione sottostante; valori possibili: tutti, 
+ ciclo attivo, ciclo passivo, magazzino (movimenti con classe diversa da 
+ cliente o fornitore per le quali si applicano le relative classi documenti 
+ attivo e passivo), eCommerce, vendita al dettaglio.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-bottom: 0pt;">TIPO 
+ PREZZO: definisce se e da dove deve essere letto il prezzo per la posizione 
+ che occupa all'interno dell'iter di ricerca, valori possibili:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+		<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+			<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0in;">Nessuno</p></li>
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0in;">Da offerta speciale</p></li>
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0in;">Da contratto</p></li>
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0in;">Da listino cliente/fornitore</p></li>
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0in;">Da listino prodotti</p></li>
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0in;">Da anagrafica articoli</p></li>
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0in;">Da ultimo acquisto/vendita</p></li>
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0in;">Da ultimo ordine/conferma</p></li>
+			</ul></li>
+		</ol></li>
+	</ol></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SCONTI DA TIPO SELEZIONATO: 
+ definisce il criterio di applicazione degli eventuali sconti presenti 
+ in relazione al tipo di prezzo selezionato; ad esempio se tipo prezzo 
+ è da listino definisce come applicare gli sconti presenti sul listino. 
+ Valori possibili:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+		<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+			<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0in;">Applica solo se valorizzati</p></li>
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0in;">Applica anche se zero</p></li>
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0in;">Non applicare</p></li>
+			</ul></li>
+		</ol></li>
+	</ol></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SCONTI PER CATEGORIA: 
+ (opzione non valida per classe eCommerce) definisce il criterio di applicazione 
+ degli eventuali sconti per categoria di vendita per la posizione che occupa 
+ all'interno dell'iter di ricerca, valori possibili:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+		<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+			<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0px;">Applica solo se valorizzati</p></li>
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0px;">Applica anche se zero</p></li>
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0px;">Non applicare</p></li>
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0px;">Applica solo se non 
+				 valorizzati da tipo selezione (questa selezione consente 
+				 l'applicazione di eventuali sconti per categoria solo 
+				 se non sono presenti altri sconti derivanti dal tipo prezzo 
+				 selezionato )</p></li>
+			</ul></li>
+		</ol></li>
+	</ol></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SCONTI PER CLIENTE/FORNITORE: 
+ (opzione non valida per classe eCommerce) definisce il criterio di applicazione 
+ degli eventuali sconti relativi al cliente/fornitore per la posizione 
+ che occupa all'interno dell'iter di ricerca, valori possibili:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+		<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+			<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0px;">Applica solo se valorizzati</p></li>
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0px;">Applica anche se zero</p></li>
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0px;">Non applicare</p></li>
+				<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt; 
+								 margin-left: 0px;">Applica solo se non 
+				 valorizzati da tipo selezione (questa selezione consente 
+				 l'applicazione di eventuali sconti relativi al cliente/fornitore 
+				 solo se non sono presenti altri sconti derivanti dal tipo 
+				 prezzo selezionato )</p></li>
+			</ul></li>
+		</ol></li>
+	</ol></li>
+</ol>
+</body>
+</html>

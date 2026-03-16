@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="11 19, 2005 12:58:06 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Generazione storno mancati incassi/pagamenti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.14.0_10";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Operazioni fine esercizio" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;">Generazione 
+ storno mancati incassi/pagamenti</p>
+<p class="MsoNormal">La procedura permette di effettuare la generazione 
+ del giroconto contabile di storno dei conto di ricavo o di costo movimentati 
+ nell’anno a fronte di fatture non ancora incassate/pagate a fine anno.</p>
+<p style="font-family: Verdana, sans-serif; text-align: justify; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 10.0pt; mso-bidi-font-size: 12.0pt;"><span 
+	 style="mso-fareast-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; 
+	 mso-ansi-language: IT; mso-fareast-language: IT; mso-bidi-language: AR-SA;">L'accesso 
+ alla procedura è consentito solo se selezionata in configurazione contabilità 
+ speciali l'opzione &quot;Gestione semplificata per cassa&quot; con modalità 
+ sintetica.</span></p>
+<p class="MsoNormal" style="text-align: left;"><span style="font-size: 10.0pt; 
+													 mso-bidi-font-size: 12.0pt; 
+													 mso-fareast-font-family: 'Times New Roman'; 
+													 mso-bidi-font-family: 'Times New Roman'; 
+													 mso-ansi-language: IT; 
+													 mso-fareast-language: IT; 
+													 mso-bidi-language: AR-SA;">N</span>el 
+ campo esercizio viene proposto l’esercizio in corso, non può essere indicato 
+ un esercizio precedente a quello impostato in configurazione. Nel campo 
+ causale viene proposta la causale indicata in configurazione, che deve 
+ essere una normale causale di giroconto, senza nessun movimento sulle 
+ partite. Nella data di registrazione viene impostata fissa la data di 
+ fine esercizio.</p>
+<span style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; font-family: Verdana, sans-serif; 
+		 mso-fareast-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; 
+		 mso-ansi-language: IT; mso-fareast-language: IT; mso-bidi-language: AR-SA;">E’ 
+ prevista anche una elaborazione di prova che produce una stampa dei movimenti 
+ che saranno generati, mentre l’elaborazione definitiva produce la stampa 
+ dei movimenti generati.</span>
+<p class="MsoNormal">Nell’elaborazione sono inclusi i documenti aperti 
+ a fine anno che risultano da incassare/pagare e i documenti con effetti 
+ attivi che risultano da esitare a fine anno o che risultano insoluti, 
+ anche nell’anno successivo. Il movimento viene generato per i clienti 
+ girocontando i conti di ricavo presenti sulle registrazioni dei documenti 
+ di vendita al conto ricavi sospesi indicato in configurazione, in proporzione 
+ per l’importo da incassare. Mentre per i fornitori vengono girocontati 
+ i conti di costo presenti sulle registrazioni dei documenti di acquisto 
+ al conto costi sospesi indicato in configurazione, in proporzione per 
+ l’importo da pagare.</p>
+<p class="MsoNormal">La generazione può essere effettuata una sola volta 
+ per esercizio ed aggiorna il flag sui <a href="../bbas/bbas0125f_03.htm">protocolli 
+ contabili</a>.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; 
+	 margin-bottom: 6pt; text-align: center;"><img src="Images/BCsp0011d_01.png" alt="" style=" border:none; width:100%; max-width:411px;" border="0" /></p>
+</body>
+</html>

@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_5033.htm"},{"type":"item","name":"Assegnazione matricole","url":"html/smat/smat0001f.htm"},{"type":"item","name":"Tracciabilità matricole","url":"html/smat/smat0002f.htm"},{"type":"item","name":"Analisi movimenti matricole","url":"html/smat/smat0003f.htm"},{"type":"item","name":"Analisi giacenze matricole","url":"html/smat/smat0004f.htm"},{"type":"item","name":"Inventario matricole","url":"html/smat/smat0005f.htm"},{"type":"item","name":"Gestione matricole singola riga","url":"html/smat/DlgMATDocMatricole.htm"},{"type":"item","name":"Gestione matricole massiva","url":"html/smat/DlgMATAssegnazioneDoc.htm"},{"type":"book","name":"Tabelle","key":"toc160"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

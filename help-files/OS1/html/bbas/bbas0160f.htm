@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 28, 2010 12:33:04 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Gestione schede di trasporto</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.15.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > Scheda di trasporto" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left;"><span 
+	 style="font-weight: bold;">Gestione schede di trasporto</span></p>
+<p>Il programma gestione schede permette la manutenzione delle schede esistenti, 
+ l’inserimento di nuove schede di trasporto a fronte di Ddt che hanno già 
+ generato scheda, l’inserimento di nuove schede a fronte di documenti che 
+ prevedono tale gestione; sul primo campo del riferimento al documento 
+ è presente lo zoom (F9) per la ricerca delle schede presenti in archivio. 
+ Attraverso il bottone Documenti è possibile, in fase di inserimento, visualizzare 
+ i documenti per cui ancora non sono state inserite schede di trasporto 
+ e selezionandolo acquisirne i dati direttamente nella scheda che si sta 
+ inserendo</p>
+<p>La scheda di trasporto viene richiamata automaticamente dalle seguenti 
+ procedure:</p>
+<ul style="list-style: disc;">
+	<li class="p" style="margin-left: -20px;"><p style="margin-left: 40px; 
+												 margin-top: 2pt; margin-bottom: 2pt;">Emissione 
+	 e manutenzione Ddt clienti;</p></li>
+	<li class="p" style="margin-left: -20px;"><p style="margin-left: 40px; 
+												 margin-top: 2pt; margin-bottom: 2pt;">Emissione 
+	 e manutenzione Ddt fornitori (modulo vendite);</p></li>
+	<li class="p" style="margin-left: -20px;"><p style="margin-left: 40px; 
+												 margin-top: 2pt; margin-bottom: 2pt;">Emissione 
+	 e manutenzione fatture accompagnatorie;</p></li>
+	<li class="p" style="margin-left: -20px;"><p style="margin-left: 40px; 
+												 margin-top: 2pt; margin-bottom: 2pt;">Emissione 
+	 e manutenzione Ddt terzisti (modulo del conto lavoro);</p></li>
+	<li class="p" style="margin-left: -20px;"><p style="margin-left: 40px; 
+												 margin-top: 2pt; margin-bottom: 2pt;">Generazione 
+	 documenti di spedizione;</p></li>
+	<li class="p" style="margin-left: -20px;"><p style="margin-left: 40px; 
+												 margin-top: 2pt; margin-bottom: 2pt;">Generazione 
+	 documenti da liste di prelievo;</p></li>
+	<li class="p" style="margin-left: -20px;"><p style="margin-left: 40px; 
+												 margin-top: 2pt; margin-bottom: 2pt;">Generazione 
+	 Ddt terzisti.</p></li>
+</ul>
+<p>Le schede vengono generate per i documenti emessi con causali che prevedono 
+ il caricamento dei dati, presenti nella tabella configurazioni causali, 
+ o in base a quello che è configurato per il tipo documento specifico o 
+ per tutti i tipi documento.</p>
+<p>Un ulteriore controllo viene effettuato sui dati di spedizione, le schede 
+ saranno generate per i documenti che prevedono la spedizione tramite vettore 
+ e in cui sia presente il primo spedizioniere.</p>
+<p>Alcuni dati vengono proposti in base a quanto inserito nell’apposita 
+ configurazione, altri dati vengono letti direttamente dal documento, come 
+ ad esempio il peso, i colli, lo spedizioniere, etc; tutti i dati sono 
+ memorizzati sulla scheda di trasporto e sono quindi modificabili.</p>
+<p><span style="text-transform: uppercase;">è</span> possibile inserire 
+ più di una scheda per documento; per fare questo dopo aver scelto l’inserimento 
+ di una nuova scheda deve essere selezionato il tipo documento desiderato, 
+ inserito manualmente un valore maggiore di 1 sul campo “Nr. spedizioniere” 
+ e il riferimento al documento. Se viene inserito il valore 2 nel campo 
+ “Nr. Spedizioniere”, la scheda viene generata per il secondo spedizioniere, 
+ con i dati compilati come visto per la generazione da documento.</p>
+<p>Nella linguetta “Dati vettore” vengono riportati i dati dello spedizioniere; 
+ è possibile variare il codice spedizioniere riportando i dati del nuovo 
+ codice o modificare i singoli campi, quali la ragione sociale, i dati 
+ aggiuntivi, l’indirizzo, etc.</p>
+<p style="text-align: center;"><img src="Images/bbas0160f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p>Nella linguetta “Dati committente” vengono impostati i dati in base 
+ al valore di configurazione “Tipo committente default” che può essere 
+ “azienda” o “altro”, nella scheda è possibile inserire anche il valore 
+ cliente, riportando i dati del cliente di fatturazione o intestatario 
+ del documento.</p>
+<p style="text-align: center;"><img src="Images/bbas0160f_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p>Nella linguetta “Dati del caricatore” vengono impostati i dati del codice 
+ del caricatore presente in configurazione; è possibile modificare il codice 
+ del caricatore riportando i dati del nuovo codice o variare i singoli 
+ campi.</p>
+<p style="text-align: center;"><img src="Images/bbas0160f_03.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p>Nella linguetta “Dati del proprietario della merce” vengono impostati 
+ i campi in base a quanto definito sul porto presente sul documento, nel 
+ caso di Ddt del conto lavoro i dati impostati sono sempre quelli dell’azienda.</p>
+<p style="text-align: center;"><img src="Images/bbas0160f_04.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p>Nell’ultima linguetta sono presenti i dati della merce, vediamo come 
+ vengono proposti i vari campi:</p>
+<p style="text-align: center;"><img src="Images/bbas0160f_05.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Codice 
+ tipologia</span>: viene proposto il valore impostato in configurazione;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Numero 
+ colli e Peso lordo</span>: valori presenti nel riepilogo totali del documento;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Luogo 
+ di carico</span>: città del luogo di partenza impostato sulla causale 
+ del documento, se presente, altrimenti viene riportata la città dell’azienda;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Luogo 
+ di scarico</span>: città del magazzino di arrivo, se presente, oppure 
+ città del destinatario di consegna merce del documento, se presente, altrimenti 
+ viene riportata la città del cliente;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Osservazioni 
+ varie ed Eventuali istruzioni</span>: campi memo a cura dell'utente;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Luogo 
+ e data compilazione</span>: città dell’azienda e data di emissione della 
+ scheda di trasporto;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Compilatore</span>: 
+ utente di OS1.</p>
+</body>
+</html>

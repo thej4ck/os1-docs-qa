@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="10 8, 2004 4:39:42 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Causali ordini terzisti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.6.8.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Conto lavoro > Tabelle" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt;"><strong style="font-weight: bold;">Causali 
+ ordini terzisti</strong></p>
+<p>Le causali ordini vengono utilizzate al momento dell’inserimento di 
+ un ordine terzista e determinano il tipo di documento da emettere.</p>
+<p>E’ possibile gestire più causali di ordini, e più numerazioni progressive 
+ (serie). In funzione dei flags e dei parametri indicati, una causale di 
+ ordine può attivare o meno l’aggiornamento dell’ordinato e dell'impegnato 
+ per produzione e così via.</p>
+<p style="text-align: center;"><img src="images/sclv0100f_01.png" alt="" style=" border:none; width:100%; max-width:631px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CODICE: Codice alfanumerico 
+ di 3 caratteri, a libera scelta dell'utente, per individuare la causale 
+ attiva. Sul campo sono attive le funzioni di ricerca (F9) &#160;sulla 
+ tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; font-family: Verdana, sans-serif;"><span 
+	 style="font-family: Verdana, sans-serif;">OBSOLETO: flag attivabile 
+ dall’utente per inibire il possibile utilizzo dell’elemento di tabella 
+ in esame nelle successive transazioni.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE: Campo 
+ alfanumerico di 30 caratteri per inserire la descrizione della causale 
+ attiva. Questa descrizione &#160;viene stampata sui documenti se il programma 
+ di stampa lo prevede.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LINGUE: bottone che 
+ attiva la tabella di memorizzazione della descrizione in esame nelle varie 
+ lingue utilizzate dall’utente.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE ESTESA: 
+ Campo alfanumerico di 60 caratteri per inserire la descrizione estera 
+ della causale attiva ad uso interno dell’utente. Questa descrizione &#160;non 
+ viene stampata sui documenti ma viene visualizzata nelle viste.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SERIE: Campo numerico 
+ per inserire il numero di serie del documento. Ciascuna serie attiva una 
+ propria numerazione di documenti. E’ necessario, &#160;in &#160;fase &#160;di 
+ immissione del documento, per proporre automaticamente &#160;e correttamente 
+ il numero progressivo del documento acquisito dalla tabella protocolli.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NUMERO COPIE: Indicare 
+ il numero di copie da stampare, se zero saranno stampate le copie previste 
+ sull'anagrafica del cliente.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ORDINATO A PRODUZIONE: 
+ Flag per abilitare la gestione dell’ordinato a produzione. La presenza 
+ della spunta determina l’aggiornamento dell’ordinato a produzione da parte 
+ della causale attiva. In caso contrario, l’aggiornamento non viene effettuato.&#160;Il 
+ campo è visibile se non è presente il modulo di produzione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">IMPEGNATO DA PRODUZIONE: 
+ Flag per abilitare la gestione dell’impegnato da produzione. La presenza 
+ della spunta determina l’aggiornamento dell’impegnato da produzione da 
+ parte della causale attiva. In caso contrario, l’aggiornamento non viene 
+ effettuato.&#160;Il campo è visibile se non è presente il modulo di produzione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="font-family: Verdana, sans-serif;">V</span>ARIAZIONE 
+ PREZZI LISTINO: definisce se dai documenti emessi con questa causale è 
+ consentito modificare i prezzi di listino in base a quanto definito sull'anagrafica 
+ dell'intestatario (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Escludi 
+ da calcolo del rischio</span>: Se presente la spunta i documenti emessi 
+ con la causale non saranno considerati nel calcolo del rischio (esclusi 
+ dal monte ordini). Se il parametro di configurazione &quot;Gestione saldi 
+ clienti/fornitori&quot; è impostato su &quot;Gestione automatica&quot;, 
+ la variazione del flag sulla causale causerà, al momento del salvataggio, 
+ un immediato aggiornamento dei valore del monte ordine di tutti i documenti 
+ aperti; s<span style="text-indent: -0.417in;">e il parametro di configurazione 
+ &quot;Gestione saldi clienti/fornitori&quot; è impostato a &quot;Nessuna 
+ gestione&quot;, il campo è disabilitato e se si modifica la causale, al 
+ salvataggio, viene azzerato.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt; font-family: Verdana, sans-serif;">TIPO 
+ REPORT: consente di specificare un tipo di report specifico per i documenti 
+ che saranno emessi utilizzando questa causale. Sul campo sono attive le 
+ funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO RIGO PREFERENZIALE: 
+ Indica il tipo rigo da proporre in fase di emissione dell'ordine.&#160;Sul 
+ campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CONTO DI COSTO: eventuale 
+ codice alfanumerico di 8 caratteri, presente in piano dei conti, per definire 
+ il sottoconto contabile di costo a cui verrà associato il rigo del documento. 
+ Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) 
+ sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CENTRO DI COSTO: campo 
+ significativo solo in presenza del modulo Contabilità analitica opportunamente 
+ configurato. Può contenere un codice alfanumerico di 15 caratteri, per 
+ definire il centro di costo a cui verrà associato il rigo del documento. 
+ Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) 
+ sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">VOCE DI COSTO: campo 
+ significativo solo in presenza del modulo Contabilità analitica opportunamente 
+ configurato. Può contenere un codice alfanumerico di 15 caratteri, per 
+ definire la voce di costo a cui verrà associato il rigo del documento. 
+ Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) 
+ sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">COMMESSA: campo significativo 
+ solo in presenza del modulo Contabilità analitica opportunamente configurato. 
+ Può contenere un codice alfanumerico di 15 caratteri, per definire la 
+ commessa a cui verrà associato il rigo del documento. Sul campo sono attive 
+ le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+</body>
+</html>

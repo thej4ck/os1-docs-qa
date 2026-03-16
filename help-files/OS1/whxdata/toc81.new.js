@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_2088.htm"},{"type":"item","name":"Riallineamento concentratore","url":"html/sfvb/sfvb0001d.htm"},{"type":"item","name":"Manutenzione rapida clienti","url":"html/sfvb/sfvb0114f.htm"},{"type":"item","name":"Manutenzione schemi","url":"html/sfvb/sfvb0110f.htm"},{"type":"item","name":"Gestione sostituzioni","url":"html/sfvb/sfvb0112f.htm"},{"type":"item","name":"Gestione messaggi","url":"html/sfvb/sfvb0111f.htm"},{"type":"item","name":"Generazione immagini","url":"html/sfvb/sfvb0108f.htm"},{"type":"item","name":"Giri visita agenti","url":"html/sfvb/sfvb0106f.htm"},{"type":"book","name":"Tabelle generali","key":"toc82"},{"type":"book","name":"Tentata vendita","key":"toc83"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

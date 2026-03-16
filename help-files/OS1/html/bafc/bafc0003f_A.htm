@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="06 10, 2016 9:49:02 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Accensione anticipo</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.13.0_4";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Anticipi fatture clienti" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; font-weight: bold;">Accensione 
+ anticipo</p>
+<p>Il programma di accensione permette di generare la scrittura contabile 
+ di accredito del conto corrente ordinario con contestuale addebito del 
+ conto anticipi.</p>
+<p>Una volta selezionata la distinta di anticipazione stampata in definitivo 
+ è possibile filtrare i risultati indicando un intervallo di clienti, di 
+ data e la tipologia movimento scadenza. La data di elaborazione è la data 
+ con cui sarà generato il movimento contabile con la causale di giroconto 
+ sotto indicata; tale codice causale proposto è quella inserito in configurazione 
+ del modulo. Il cambio, campo attivo se la distinta selezionata è stata 
+ creata con una valuta diversa rispetto a quella di gestione, riporta il 
+ tasso di cambio alla data di elaborazione. È possibile impostare manualmente 
+ un tasso diverso da quello proposto oltre che selezionare i tassi di cambio 
+ presenti in archivio tramite lo zoom (F9) sul campo stesso. L'ultimo campo 
+ che compone la finestra dei parametri è lo “Stato accettazione”, tale 
+ elenco valori permette di scegliere le rate della distinta che risultano:</p>
+<ul style="list-style: disc;">
+	<li class="p"><p style="margin-top: 0px; margin-bottom: 0px;">Da accettare</p></li>
+	<li class="p"><p style="margin-top: 0px; margin-bottom: 0px;">Accettate</p></li>
+	<li class="p"><p style="margin-top: 0px; margin-bottom: 0px;">Respinte</p></li>
+	<li class="p"><p style="margin-top: 0px; margin-bottom: 0px;">Tutte</p></li>
+</ul>
+<p style="font-family: Verdana, sans-serif; text-align: center;"><img src="images/bafc0003f_A_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p><img src="images/bafc0003f_A_03.gif" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:147px;" align="right" border="0" />Una volta confermata la 
+ selezione viene mostrata la finestra dei risultati dove è possibile modificare, 
+ tramite il doppio click sulla riga selezionata, o tramite il menù contestuale 
+ del tasto destro del mouse, lo stato della singola rata. Sulla colonna 
+ dell’importo concesso potremo indicare, cliccando sulla cella interessata, 
+ l’importo che la banca ha deciso di concedere nell’ipotesi che questo 
+ sia diverso da quello richiesto. In alto a destra della finestra è presente 
+ un pulsante che mostra la legenda dei possibili colori che saranno attribuiti 
+ alle righe della griglia.</p>
+<p>Per quanto concerne il comportamento della procedura occorre indicare 
+ che se una rata risulta già concessa quando si accede alla finestra dei 
+ risultati indipendentemente dalla data di elaborazione indicata nei parametri 
+ sarà variato il movimento contabile precedentemente generato. Inoltre 
+ quando una rata passa dallo stato “Da accettare” a “Concessa” sarà creato 
+ sempre un nuovo movimento contabile e quindi a parità di distinta e data 
+ di elaborazione, se sono state eseguite due accensioni in due momenti 
+ diversi saranno creati due movimenti contabili.</p>
+<p>Nel caso in cui sia stato variato l’importo concesso di una rata che 
+ in precedenza ha generato il movimento contabile oppure una rata da concessa 
+ torna ad essere “Da accettare” o diventa “Respinta” sarà mostrata una 
+ finestra che riporta l’esito dell’operazione con gli estremi dell’esercizio 
+ / protocollo contabile modificato o eliminato.</p>
+<p>Al termine del salvataggio verrà richiesto se stampare la lista di prima 
+ nota dei movimenti contabili generati.</p>
+<p>&#160;</p>
+<p style="text-align: center;"><img src="images/bafc0003f_A_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+</body>
+</html>

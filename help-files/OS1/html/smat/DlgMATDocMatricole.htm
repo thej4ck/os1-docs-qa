@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 25, 2016 10:57:57 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Gestione matricole singola riga</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.7.7.0_7";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Magazzino > Gestione matricole" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt; 
+	 text-align: left;">Gestione matricole singola riga</p>
+<p><img src="Images/b_MatRigo.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:25px;" align="left" border="0" />Sulle righe di documenti 
+ e movimenti è presente il pulsante Matricole che consente l’inserimento 
+ dei codici matricola per i singoli prodotti; il pulsante è attivo sulle 
+ righe già salvate, per i prodotti che gestiscono le matricole se la data 
+ del documento non è antecedente alla data di inizio gestione specificata 
+ in configurazione; laddove è presente il tipo rigo, perché il pulsante 
+ Matricole sia attivo, è necessario che siano gestiti il prodotto e la 
+ quantità, che la classe del rigo non sia di tipo annotazione e che non 
+ si tratti di un rigo di tipo recupero spese. Se il prodotto gestisce un 
+ dettaglio (variante, ubicazione o lotto) il pulsante presente sul rigo 
+ non ha effetto anche se abilitato, sarà necessario accedere alla finestra 
+ di dettaglio dove è presente lo stesso pulsante in corrispondenza del 
+ singolo dettaglio; in caso di scomposizione di un dettaglio base il pulsante 
+ Matricole è presente direttamente nella finestra di scomposizione in modo 
+ da poter assegnare direttamente le matricole sui dettagli appena assegnati.</p>
+<p style="text-align: center;"><img src="Images/DlgMATDocMatricole_01.png" alt="" style=" border:none; width:100%; max-width:617px;" border="0" /></p>
+<p>&#160;</p>
+<p>La finestra di assegnazione matricole presenta nella parte alta il riepilogo 
+ dei dati del rigo, i pulsanti di scorrimento e gestione ed una griglia 
+ dove vengono mostrate le matricole eventualmente già assegnate, con il 
+ doppio click del mouse sulla riga si accede alla <a href="smat0101f.htm">manutenzione</a> 
+ della matricola.</p>
+<p>I pulsanti consentono di scorrere le matricole presenti, aggiungere 
+ nuove matricole e cancellare una o tutte le matricole presenti; nel dettaglio:</p>
+<p><img src="Images/b_CancTutteMat.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:24px;" align="left" border="0" />Il pulsante consente l'eliminazione dall'elenco di 
+ tutte le matricole presenti; l’eliminazione delle matricole è subordinata 
+ al fatto che l’assegnazione della matricola non derivi da un’evasione 
+ di un altro documento come ad esempio un Ddt da Packing o da Lista di 
+ prelievo.</p>
+<p><img src="Images/DlgMATDocMatricole_02.png" alt="" style=" border:none; margin-left:5px; margin-bottom:5px; width:100%; max-width:368px;" align="right" border="0" /><img src="Images/b_genera.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:24px;" align="left" border="0" />Il pulsante Genera è attivo solo per i documenti/movimenti 
+ di carico oppure è sempre attivo se in configurazione è spuntato il parametro 
+ per consentire di scaricare anche le matricole non cariche. Effettua la 
+ generazione di codici matricola nuovi necessari a coprire la quantità 
+ del rigo (ad esempio se ho già 3 matricole assegnate a fronte di una quantità 
+ di 10 saranno generati solo 7 codici matricole); la generazione è immediata 
+ per i prodotti collegati a classi matricole automatiche, per classi miste 
+ viene effettuata una richiesta per inserire manualmente i codici altrimenti 
+ vengono generati automaticamente; per le classi manuali sarà necessario 
+ inserire sempre manualmente i nuovi codici. L'inserimento delle matricole 
+ manuale, per le classi manuali e miste, consente di specificare la matricola 
+ o, solo per le classi miste, anche farla generare in automatico col tasto 
+ F11 attivo sul campo Matricola; in basso viene indicato il numero di matricole 
+ presenti e necessarie; il pulsante Salva riporta le matricole inserite 
+ nella finestra precedente.</p>
+<p>&#160;</p>
+<p style="text-align: center;"><img src="Images/DlgMATDocMatricole_03.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; width:100%; max-width:532px;" border="0" /></p>
+<p>Oltre l'inserimento di matricole nuove è possibile ricercare matricole 
+ già create o già caricate mediante il pulsante Nuovo. Il pulsante Nuovo 
+ farà accedere alla finestra di selezione matricole; in questa finestra 
+ saranno mostrate le matricole disponibili, non prenotate, in relazione 
+ al tipo di movimento che si sta inserendo secondo il seguente schema:</p>
+<p style="font-weight: bold; margin-left: 40px;">Carichi</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+		<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+			<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt;">Tutte 
+			 le matricole create (dalla manutenzione o tramite la procedura 
+			 di servizio di creazione codici) e non movimentate; identificate 
+			 da un cerchietto bianco a sinistra del codice.</p></li>
+			<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt;">Le 
+			 matricole il cui ultimo movimento è uno scarico; il movimento 
+			 si intende relativo a prodotto, variante, ubicazione, lotto, 
+			 fase, magazzino; identificate da un cerchietto bordeaux a 
+			 sinistra del codice.</p></li>
+			<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt;">Le 
+			 eventuali matricole prenotate a fronte di operazioni precedenti 
+			 (ad esempio, in fase di versamento ODL quelle prenotate in 
+			 RDP); identificate dal testo della riga scritto in blu.</p></li>
+		</ul></li>
+	</ol></li>
+</ol>
+<p style="font-weight: bold; margin-left: 40px;">Scarichi</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+		<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+			<li class="p"><p style="margin-top: 0px; margin-bottom: 0px;">Solo 
+			 le matricole il cui ultimo movimento è un carico; il movimento 
+			 si intende relativo a prodotto, variante, ubicazione, lotto, 
+			 fase, magazzino; identificate da un cerchietto verde a sinistra 
+			 del codice.</p></li>
+			<li class="p"><p style="margin-top: 0px; margin-bottom: 0px;">Le 
+			 eventuali matricole prenotate a fronte di operazioni precedenti 
+			 (ad esempio, in fase di scarico componenti ODL quelle prenotate 
+			 in fase di lancio); identificate dal testo della riga scritto 
+			 in blu.</p></li>
+		</ul></li>
+	</ol></li>
+</ol>
+<p style="font-weight: bold; margin-left: 40px;">Prenotazioni</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+		<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+			<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt;">Tutte 
+			 le matricole create (dalla manutenzione o tramite la procedura 
+			 di servizio di creazione codici) e non movimentate; identificate 
+			 da un cerchietto bianco a sinistra del codice.</p></li>
+			<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt;">Le 
+			 matricole il cui ultimo movimento è un carico; il movimento 
+			 si intende relativo a prodotto, variante, ubicazione, lotto, 
+			 fase, magazzino; identificate da un cerchietto verde a sinistra 
+			 del codice.</p></li>
+		</ul></li>
+	</ol></li>
+</ol>
+<p style="font-style: italic;">Nota: lo schema è relativo ad una configurazione 
+ dove il parametro “Consenti scarico matricole non caricate” non è attivo.</p>
+<p>Le eventuali matricole scadute vengono evidenziate in rosso e non saranno 
+ selezionabili.</p>
+<p>&#160;</p>
+<p><img src="Images/DlgMATDocMatricole_04.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:350px;" align="left" border="0" />Nella parte alta della finestra sono 
+ presenti dei campi filtro per limitare i codici matricola visualizzati 
+ e selezionabili; è possibile filtrare per codice o parte di codice matricola, 
+ per data creazione e per data scadenza; la pressione del pulsante Filtra 
+ modificherà l’elenco dei codici matricola visualizzati e di conseguenza 
+ selezionabili.</p>
+<p>&#160;</p>
+<p>&#160;</p>
+<p><img src="Images/DlgMATDocMatricole_05.png" alt="" style=" border:none; margin-top:0px; margin-bottom:5px; margin-left:0px; margin-right:5px; width:100%; max-width:192px;" align="left" border="0" />La selezione delle matricole può avvenire 
+ singolarmente tramite il doppio click del mouse sul codice matricola, 
+ oppure tramite barcode posizionandosi sul campo Barcode ed effettuando 
+ le letture dei codici a barre, per ogni codice letto sarà selezionata 
+ la relativa matricola.</p>
+<p>&#160;</p>
+<p>&#160;</p>
+<p><img src="Images/b_Assegna.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:24px;" align="left" border="0" /><img src="Images/DlgMATDocMatricole_06.png" alt="" style=" border:none; margin-bottom:5px; margin-left:5px; margin-right:0px; margin-top:0px; width:100%; max-width:264px;" align="right" border="0" />Tramite il pulsante Assegna è 
+ possibile selezionare il numero di codici matricola necessari a coprire 
+ la quantità del rigo (ad esempio a fronte di una quantità di 10 saranno 
+ selezionati 10 codici matricole a partire da quello dove si è posizionati 
+ esclusi eventuali codici scaduti); la selezione dei codici è attuabile 
+ anche tramite le voci del menù contestuale richiamabile col tasto destro 
+ del mouse.</p>
+<p>Sarà possibile uscire dalla finestra di selezione matricole solo con 
+ nessun codice selezionato oppure dopo aver selezionato i codici necessari 
+ a coprire la quantità del rigo.</p>
+<p>Sarà possibile uscire dalla finestra di assegnazione matricole solo 
+ con nessun codice presente oppure con i codici matricola necessari a coprire 
+ la quantità del rigo; l’informazione sulle matricole presenti viene visualizzata 
+ in basso a sinistra nella finestra di assegnazione.</p>
+</body>
+</html>

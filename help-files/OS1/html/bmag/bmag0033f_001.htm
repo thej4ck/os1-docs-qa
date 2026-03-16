@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="11 15, 2005 12:23:51 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Generazione automatica trasferimento ubicazioni</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.7.6.0_5";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Magazzino > Gestione ubicazioni" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt; 
+	 text-align: left;">Generazione automatica trasferimento ubicazioni</p>
+<p>Da questa finestra è possibile specificare da quali magazzini effettuare 
+ il trasferimento e verso quali magazzini indirizzare i prodotti. Dopo 
+ aver inserito i criteri di selezione e premuto il pulsante Esegui, i prodotti 
+ giacenti vengono visualizzati nella finestra di selezione.</p>
+<p style="text-align: center;"><img src="Images/bmag0033f_02.png" alt="" style=" border:none; width:100%; max-width:702px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO DI SCARICO: 
+ codice del magazzino da cui saranno prelevati i prodotti da scaricare. 
+ <span style="font-family: Verdana, Arial;">Sul campo sono attive</span> 
+ le funzioni di ricerca (F9)<span style="font-family: Verdana, Arial;">. 
+ Nel caso si lasciato il valore zero saranno analizzati tutti i magazzini.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO DI CARICO: 
+ campo obbligatorio: codice del magazzino in cui saranno spostati i prodotti. 
+ <span style="font-family: Verdana, Arial;">Sul campo sono attive</span> 
+ le funzioni di ricerca (F9)<span style="font-family: Verdana, Arial;">.</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -.417in; margin-left: 0.417in;"><span 
+	 style="font-family: Verdana, sans-serif;">DA PRODOTTO: eventuale codice 
+ dell'articolo, presente in anagrafica Prodotti, da cui si desidera iniziare 
+ la selezione. Confermando a vuoto, la selezione inizia con il primo prodotto 
+ valido. Sul campo è attiva la ricerca (F9) sull’anagrafica prodotti.</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -.417in; margin-left: 0.417in;">A 
+ PRODOTTO: eventuale codice dell'articolo, presente in anagrafica Prodotti, 
+ a cui si desidera terminare la selezione. Confermando a vuoto, la selezione 
+ termina con l’ultimo valido. Sul campo è attiva la ricerca (F9) sull’anagrafica 
+ prodotti.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -.417in; margin-left: 0.417in;">UBICAZIONE 
+ SCARICO: consente di specificare l'ubicazione da scaricare.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -.417in; margin-left: 0.417in;">UBICAZIONE 
+ CARICO: consente di specificare l'ubicazione da caricare; sarà utilizzata 
+ come ubicazione di destinazione nella pagina dei risultati.</p>
+<p>&#160;</p>
+<p>La pressione del pulsante Esegui effettua l'elaborazione ed accede alla 
+ finestra di selezione.</p>
+<p style="text-align: center;"><img src="Images/bmag0033f_03.png" alt="" style=" border:none; width:100%; max-width:702px;" border="0" /></p>
+<p>La finestra è suddivisa in tre sezioni.</p>
+<ul style="list-style: disc;">
+	<li class="p"><p>Nella griglia superiore sono presenti i prodotti giacenti 
+	 nel magazzino selezionato per lo scarico; se non è stato specificato 
+	 il magazzino di appartenenza sarà visualizzato sulla griglia. Per 
+	 selezionare oppure annullare la selezione di un rigo è sufficiente 
+	 fare doppio clic con il mouse sul rigo interessato (se selezionato 
+	 verrà annullata la<img src="Images/bmag0033f_06.gif" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:5px; margin-bottom:0px; width:100%; max-width:148px;" align="right" border="0" /> selezione altrimenti 
+	 il contrario). È anche possibile utilizzare il menù indicato a lato 
+	 (attivato tramite la pressione del tasto destro del mouse) oppure 
+	 utilizzare gli appositi tasti funzione. È possibile modificare l'ordinamento 
+	 con cui vengono visualizzati i prodotti selezionando l'ordinamento 
+	 preferito. E' anche possibile spostare letteralmente un prodotto trascinandolo 
+	 nella griglia sottostante. Se un rigo viene trasferito completamente 
+	 lo sfondo appare di colore giallo, se viene trasferito parzialmente 
+	 lo sfondo assume un colore giallo molto più chiaro, altrimenti lo 
+	 sfondo rimane bianco.</p></li>
+	<li class="p"><p>Nella sezione intermedia sono visualizzati i prodotti 
+	 che vengono spostati sul magazzino selezionato come destinazione. 
+	 Per annullare la selezione di un rigo è sufficiente fare doppio clic 
+	 con il mouse sul rigo interessato.<img src="Images/bmag0033f_07.gif" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:5px; margin-bottom:0px; width:100%; max-width:160px;" align="right" border="0" /> È anche possibile 
+	 utilizzare il menù indicato a lato (attivato tramite la pressione 
+	 del tasto destro del mouse) oppure utilizzare l'apposito tasto.</p></li>
+	<li class="p"><p>Nella sezione inferiore è visualizzato il pannello 
+	 di input relativo ai prodotti spostati sul magazzino selezionato come 
+	 destinazione, dal quale è possibile intervenire manualmente sulla 
+	 quantità ed eventualmente anche sul codice del magazzino di destinazione.</p></li>
+</ul>
+<p>&#160;</p>
+<p>La pressione sul pulsante Salva determina l'inserimento dei dati selezionati 
+ nel movimento di trasferimento.</p>
+</body>
+</html>

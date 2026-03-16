@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="ProgId" content="FrontPage.Editor.Document" />
+<meta name="date" content="12 9, 2003 4:19:30 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Importazione ordini</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.4.4.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Ordini clienti > Importazione" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; 
+	 font-weight: bold;">Importazione ordini</p>
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 text-align: justify; font-weight: normal; font-size: 10pt;">La procedura 
+ necessita del modulo di Importazione dati di cui utilizza <a href="../bipn/bipn0003f.htm">Modelli</a> 
+ ed <a href="../bipn/bipn0004f.htm">Associazione codici</a>; consente di 
+ importare i dati relativi ad ordini clienti, comprensivi di dettaglio 
+ varianti, ubicazioni e lotti, provenienti da altre applicazioni. In questa 
+ fase è possibile effettuare l'importazione anche di clienti, destinazioni 
+ ed articoli, se presenti i modelli di importazione relativi e se indicato 
+ nelle relative caselle a discesa di effettuare l'importazione dei soli 
+ codici nuovi o di tutti i codici; nel caso in cui i modelli di importazione 
+ di clienti/destinazioni e/o prodotti non fossero presenti le relative 
+ caselle sarebbero disabilitate. Il modello di importazione viene selezionato 
+ in automatico e se non è presente non sarà possibile effettuare l'importazione; 
+ il nome del file viene proposto dal modello ed possibile modificarlo, 
+ in questo caso viene sempre dato un avviso per ricordare all'operatore 
+ che il file selezionato deve essere congruente con quanto definito nel 
+ modello di importazione.</p>
+<p style="text-align: center;"><img src="Images/sorc0021d_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p>La pressione del pulsante Esegui, seguita da una richiesta di conferma, 
+ dà inizio all'operazione di import e nella pagina risultati saranno visualizzati 
+ eventuali errori nel riquadro Errori e le segnalazioni dell'avanzamento 
+ della procedura nel riquadro Risultato.</p>
+<p>La procedura di importazione completa di anagrafiche è suddivisa in 
+ tre fasi distinte:</p>
+<ul style="list-style: disc;">
+	<ul style="list-style: disc;">
+		<ul style="list-style: disc;">
+			<li><span style="font-family: Verdana, sans-serif; font-size: 10pt;">Importazione 
+			 clienti/destinazioni</span></li>
+			<li><span style="font-family: Verdana, sans-serif; font-size: 10pt;">Importazione 
+			 articoli</span></li>
+			<li><span style="font-family: Verdana, sans-serif; font-size: 10pt;">Importazione 
+			 ordini</span></li>
+		</ul>
+	</ul>
+</ul>
+<p>Le prime due fasi possono non essere effettuate, eventuali errori interrompono 
+ la procedura, ma se ad esempio la fase di importazione clienti è terminata 
+ e si verifica un errore in fase di importazione ordini, le anagrafiche 
+ clienti saranno comunque importate. <span style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; 
+											 mso-fareast-font-family: 'Times New Roman'; 
+											 mso-bidi-font-family: 'Times New Roman'; 
+											 mso-ansi-language: IT; mso-fareast-language: IT; 
+											 mso-bidi-language: AR-SA;">Tramite 
+ i bottoni presenti nella toolbar o tramite gli appositi tasti funzione, 
+ è possibile stampare la pagina dei risultati; se l'importazione è andata 
+ a buon fine e si cerca di uscire viene richiesta una conferma per evitare 
+ di perdere il contenuto dei risultati prima di averlo consultato o stampato.</span></p>
+<p style="text-align: center;"><img src="Images/sorc0021d_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p>&#160;</p>
+<p style="margin-left: 0in;"><span style="font-size: 10.0pt; mso-fareast-font-family: 'Times New Roman'; 
+									 mso-bidi-font-family: 'Times New Roman'; 
+									 mso-ansi-language: IT; mso-fareast-language: IT; 
+									 mso-bidi-language: AR-SA;"><img src="../images/b_Pianifica.png" alt="" style=" border:none; margin-bottom:0px; margin-left:0px; margin-right:7px; margin-top:0px; width:100%; max-width:73px;" align="left" border="0" /></span>Se 
+ <span style="font-size: 10.0pt; mso-fareast-font-family: 'Times New Roman'; 
+		 mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: IT; 
+		 mso-fareast-language: IT; mso-bidi-language: AR-SA;">abilitata 
+ la <a href="../Ambiente/Ambiente_13.htm">pianificazione batch</a></span> 
+ sarà visibile il pulsante Pianifica.</p>
+</body>
+</html>

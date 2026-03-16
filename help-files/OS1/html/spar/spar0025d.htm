@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="02 11, 2013 5:30:18 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Generazione parcelle definitive</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.4.1_5";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > Parcelle pro forma" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; font-weight: bold; 
+	 text-align: left;">Generazione parcelle definitive</p>
+<p>Il programma consente di creare in maniera massiva le parcelle definitive 
+ a partire dalle proforma. Le parcelle generate vengono raggruppate sulla 
+ base del parametro “Raggruppamento fatture” presente in anagrafica cliente; 
+ il raggruppamento viene effettuato solo a livello di condizioni di testa 
+ mentre le righe comunque non vengono raggruppate (una riga di proforma 
+ diventa una riga di parcella). La funzione aggiorna la parcella proforma 
+ considerandola evasa e al termine della generazione è possibile procedere 
+ alla stampa dei documenti generati (e all’invio delle email se attivo 
+ il modulo dell’invio massivo documenti).</p>
+<p style="text-align: center;"><img src="images/spar0025d_01.png" alt="" style=" border:none; width:100%; max-width:561px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO GENERAZIONE: 
+ definisce il tipo di operazione da compiere: provvisoria oppure definitiva. 
+ La generazione provvisoria può essere effettuata più volte e non aggiorna 
+ nessuna tabella, ma genera soltanto la stampa di un brogliaccio; la generazione 
+ definitiva aggiorna le tabelle e per annullarla è necessario seguire una 
+ specifica procedura ed è consigliabile contattare il servizio Assistenza.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CLIENTE: codice 
+ del cliente, presente in anagrafica clienti, da cui si vuole iniziare 
+ la selezione. Confermando a vuoto, la selezione inizia dal primo cliente 
+ valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CLIENTE: codice 
+ del cliente, presente in anagrafica clienti, con cui si vuole terminare 
+ la selezione. Confermando a vuoto, la selezione termina con l'ultimo cliente 
+ valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MASTRO: codice del 
+ mastro, presente nella tabella mastri, per cui si vuole effettuare la 
+ selezione. Confermando a vuoto vengono considerati validi tutti i mastri. 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE PROFORMA: 
+ codice della causale, presente nella tabella causali parcelle proforma, 
+ con cui si vuole effettuare la selezione delle parcelle proforma. Sul 
+ campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale 
+ data del movimento da cui deve iniziare l'elaborazione relativamente ai 
+ precedenti parametri inseriti. Confermando a vuoto, la selezione inizia 
+ con il primo movimento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale 
+ data del movimento con cui si desidera terminare l’elaborazione relativamente 
+ ai precedenti parametri inseriti. Confermando a vuoto, la selezione si 
+ conclude con l'ultimo movimento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO PAGAMENTO: codice 
+ del tipo di pagamento, presente nella tabella tipi pagamento, per cui 
+ si vuole effettuare la selezione. Confermando a vuoto vengono considerati 
+ validi tutti i tipi di pagamento. Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SELEZIONE PER NUMERO 
+ PROFORMA: check box che abilita i campi sottostanti per effettuare la 
+ selezione dei documenti per numero, casella con segno di spunta.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ANNO/SERIE/DA NUMERO/A 
+ NUMERO: campi abilitati solo se la casella precedente è spuntata; consentono 
+ di specificare i limiti di selezione per anno, serie e numero delle proforma 
+ da considerare per la generazione delle parcelle.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-indent: -0.417in; 
+															 margin-left: 30pt;">SPECIFICA 
+ PRIMO NUMERO PARCELLA</span>: check box che abilita il campo successivo 
+ per specificare il numero con cui dovrà iniziare la generazione delle 
+ parcelle, casella con segno di spunta.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NUMERO PARCELLA: campo 
+ abilitato solo se la casella precedente è spuntata; consente di inserire 
+ il numero con cui iniziare la generazione delle parcelle.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-indent: -0.417in; 
+															 margin-left: 30pt;">SPECIFICA 
+ DATA INIZIO PAGAMENTO</span>: check box che abilita il campo successivo 
+ per specificare la data da cui iniziare a conteggiare le scadenze, casella 
+ con segno di spunta.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA INIZIO PAGAMENTO: 
+ campo abilitato solo se la casella precedente è spuntata; consente di 
+ specificare la data di partenza per il calcolo del piano di pagamento.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-indent: -0.417in; 
+															 margin-left: 30pt;">SPECIFICA 
+ SEZIONALE IVA</span>: check box che abilita il campo successivo per specificare 
+ il numero di registro Iva su cui effettuare la fatturazione, casella con 
+ segno di spunta.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NUMERO REGISTRO: campo 
+ abilitato solo se la casella precedente è spuntata; consente di selezionare 
+ il numero di sezionale Iva di cui si intende generare le parcelle; vengono 
+ selezionate solo le causali di fatturazione che fanno riferimento a tale 
+ sezionale Iva.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE PARCELLE: 
+ codice della causale, presente nella tabella causali parcelle, con cui 
+ si vuole effettuare la generazione delle parcelle. Sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO GENERAZIONE: 
+ definisce la tipologia di generazione in relazione a quanto specificato 
+ sulla tabella clienti: normale, quindicinale o mensile.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA PARCELLA: indica 
+ la data con cui deve essere effettuata la generazione. Nel caso in cui 
+ questa data sia precedente a quella indicata nel campo &#160;&quot;a data&quot; 
+ saranno considerati solo i movimenti fino alla data di generazione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ELABORA PROFORMA SENZA 
+ PREZZO: definisce se riportare sulle parcelle anche le proforma sulle 
+ quali non è specificato nessun prezzo (casella con segno di spunta).</p>
+<p>&#160;</p>
+<p>La pressione sul pulsante Esegui determina l'inizio dell'elaborazione 
+ delle proforma. Il risultato viene visualizzato nella pagina 'Risultati'.</p>
+<p style="margin-left: 0in; text-align: center;"><img src="images/spar0025d_02.png" alt="" style=" border:none; width:100%; max-width:561px;" border="0" /></p>
+<p style="margin-left: 0in;">Nella pagina vengono visualizzati i risultati 
+ dell'elaborazione; qui vengono indicati in due riquadri separati i messaggi 
+ di informazione relativi per esempio i documenti elaborati, oppure gli 
+ errori che si sono eventualmente verificati ed i documenti generati. La 
+ pagina dei risultati può essere stampata utilizzando l'apposito pulsante 
+ Risultato.</p>
+<p style="margin-left: 0in;">Con il pulsante Parcelle può essere eseguita 
+ direttamente la stampa dei documenti generati, se non ci sono stati errori; 
+ se la generazione è provvisoria, la stampa sarà annullata dalla dicitura 
+ &quot;Parcella provvisoria&quot;.</p>
+<p style="margin-left: 0in;">Se viene effettuata la generazione definitiva 
+ ed è presente il modulo di invio documenti tramite eMail/Fax sarà visibile 
+ il pulsante che consentirà l'invio della copia dei documenti configurata; 
+ se presente il modulo anche il pulsante di stampa effettuerà la stampa 
+ delle sole copie relative al cartaceo.</p>
+</body>
+</html>

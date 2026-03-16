@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc274.js\"  name=\"Conferme d'ordine\"><item name=\"Introduzione\" url=\"html/index/index_903010.htm\" /><item name=\"Eliminazione ordini evasi\" url=\"html/sbas/sbas0015d_c.htm\" /><item name=\"Annullamento contabilizzazione acconti\" url=\"html/sorc/sorc0017d.htm\" /></data>";

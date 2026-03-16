@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="11 8, 2005 5:38:57 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Causali liste di prelievo</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.7.10.2.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Magazzino > Liste di prelievo > Tabelle" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt;"><strong style="font-weight: bold;">Causali liste di prelievo</strong></p>
+<p>Le causali liste di prelievo vengono utilizzate al momento dell’inserimento di una lista di prelievo e determinano il tipo di documento da emettere.</p>
+<p>E’ possibile gestire più causali di liste, e più numerazioni progressive (serie). In funzione dei flags e dei parametri indicati, una causale di ordine può gestire o meno l’aggiornamento della quantità prenotata, può gestire o meno l'attribuzione automatica di lotti/ubicazioni e così via.</p>
+<p style="text-align: center;"><img src="images/slpr0100f_01.png" alt="" style=" border:none; width:100%; max-width:570px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CODICE: Codice alfanumerico di 3 caratteri, a libera scelta dell'utente, per individuare la causale attiva. Sul campo sono attive le funzioni di ricerca (F9) &#160;sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE: Campo alfanumerico di 30 caratteri per inserire la descrizione della causale attiva. Questa descrizione &#160;viene stampata sui documenti se il programma di stampa lo prevede.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LINGUE: bottone che attiva la tabella di memorizzazione della descrizione in esame nelle varie lingue utilizzate dall’utente.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE ESTESA: Campo alfanumerico di 60 caratteri per inserire la descrizione estera della causale attiva ad uso interno dell’utente. Questa descrizione &#160;non viene stampata sui documenti ma viene visualizzata nelle ricerche.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SERIE: Campo numerico per inserire il numero di serie del documento. Ciascuna serie attiva una propria numerazione di documenti. E’ necessario, &#160;in &#160;fase &#160;di immissione del documento, per proporre automaticamente &#160;e correttamente il numero progressivo del documento acquisito dalla tabella protocolli.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NOTE: campo note per descrizioni relative al documento attivo.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LINGUE: bottone che attiva la tabella di memorizzazione della note in esame nelle varie lingue utilizzate dall’utente.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA DESCRIZIONE ESTESA ARTICOLO: Indica se sul documento deve essere riportata e stampata la descrizione estesa dell'articolo (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">GESTIONE QUANTITÀ PRENOTATA: indica se abilitare la gestione della quantità prenotata. La presenza della spunta determina l’aggiornamento della quantità prenotata sugli ordini da parte della causale attiva. In caso contrario, l’aggiornamento non viene effettuato.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">GESTIONE ATTRIBUZIONE LOTTI/UBICAZIONI: indica al programma di <a href="slpr0005f.htm">generazione liste di prelievo</a> se in presenza di un ordine con lotto o ubicazione base deve essere effettuata l'attribuzione automatica in base alla giacenza fino a eventuale copertura completa del lotto o ubicazione base (casella con segno di spunta). In caso contrario l'attribuzione non viene effettuata.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO RIGO PREFERENZIALE: Indica il tipo rigo da proporre in fase di emissione della lista di prelievo.&#160;Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; font-family: Verdana, sans-serif;"><span><span style="font-family: Verdana, sans-serif;">TIPO REPORT: consente di specificare un tipo di report specifico per i documenti che saranno emessi utilizzando questa causale. Sul campo sono attive le funzioni di ricerca (F9).</span></span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt; font-family: Verdana, sans-serif;">OBSOLETO: flag attivabile dall’utente per inibire il possibile utilizzo dell’elemento di tabella in esame nelle successive transazioni.</p>
+</body>
+</html>

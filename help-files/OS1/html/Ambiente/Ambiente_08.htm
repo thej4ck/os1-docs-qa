@@ -1,0 +1,216 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="02 24, 2012 4:56:02 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>File Store e Archiviazione documenti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.1.1_10";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Ambiente di lavoro" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; margin-top: 12pt; 
+	 margin-bottom: 12pt; font-size: 12pt;">File Store e Archiviazione 
+ documenti</p>
+<p style="font-family: Verdana, sans-serif; text-align: justify; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 10pt;">La gestione di OS1 FileStore 
+ consente <span style="text-align: justify; margin-top: 6pt; margin-bottom: 6pt; 
+				 font-family: Verdana, sans-serif; font-size: 10pt;">una 
+ duplice funzionalità:</span></p>
+<ul style="list-style: disc;">
+	<li class="p"><p style="font-family: Verdana, sans-serif; text-align: justify; 
+					 margin-top: 6pt; margin-bottom: 6pt; font-size: 10pt;">gestione 
+	 di allegati multipli collegabili direttamente a<span style="font-family: Verdana, sans-serif; 
+															 text-align: justify; 
+															 margin-top: 6pt; 
+															 margin-bottom: 6pt; 
+															 font-size: 10pt;">:</span></p></li>
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Prima 
+		 nota contabile</p></li>
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Gestione 
+		 documenti (DDT e fatture di vendita, DDT e fatture di acquisto, 
+		 ordini clienti e fornitori, richieste di offerta a fornitori, 
+		 offerte a clienti, packing list, liste di prelievo, autofatture, 
+		 richieste di acquisto, ordini, fatture e rientri del conto lavoro)</p></li>
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Analisi 
+		 DDT e fatture (vendite e acquisti)</p></li>
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Clienti</p></li>
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Fornitori</p></li>
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Sottoconti</p></li>
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Recapiti</p></li>
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Agenti</p></li>
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Articoli</p></li>
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Distinte 
+		 basi</p></li>
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Lotti</p></li>
+	</ul></li>
+</ul>
+<ul style="list-style: disc;">
+	<li class="p"><p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+					 text-align: justify; font-size: 10pt;">strumento di 
+	 archiviazione documenti semplice (senza la gestione dei successivi 
+	 passaggi relativi a firma digitale, conservazione legale, ed altro 
+	 per i quali già esistono moduli d’integrazione con i prodotti ArchiviOK 
+	 e Arxivar) attivo su:</p></li>
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Prima 
+		 nota contabile</p></li>
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Gestione 
+		 documenti (DDT e fatture di vendita, DDT e fatture di acquisto, 
+		 ordini clienti e fornitori, richieste di offerta a fornitori, 
+		 offerte a clienti, packing list, liste di prelievo, autofatture, 
+		 richieste di acquisto, ordini, fatture e rientri del conto lavoro)</p></li>
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Analisi 
+		 DDT e fatture (vendite e acquisti)</p></li>
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Analisi 
+		 sottoconti</p></li>
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Analisi 
+		 estratto conto clienti/fornitori</p></li>
+	</ul></li>
+</ul>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 text-align: justify; font-size: 10pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; text-align: justify; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 10pt; font-weight: bold;"><span>Gestione 
+ allegati multipli</span></p>
+<p style="font-family: Verdana, sans-serif; text-align: justify; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 10pt;">Il bottone <img src="Images/b_Allegati.png" alt="" style=" border:none; width:100%; max-width:24px;" border="0" />, 
+ presente sulla toolbar, consente di accedere alla finestra di gestione 
+ allegati.</p>
+<p style="text-align: center;"><img src="Images/ambiente_08_08.png" alt="" style=" border:none; width:100%; max-width:754px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; text-align: justify; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 10pt;">Nel campo &quot;Filtra per categoria 
+ documento&quot; è possibile impostare la categoria dei documenti che si 
+ vuole filtrare, vengono visualizzate tutte le categorie presenti nell'apposita 
+ tabella.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; 
+	 font-size: 10pt;">Tramite i bottoni presenti è possibile:</p>
+<p style="font-family: Verdana, sans-serif; text-align: justify; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 10pt;"><img src="Images/Ambiente_08_02.png" alt="" style=" border:none; width:100%; max-width:24px;" border="0" /> Allegare 
+ un nuovo documento</p>
+<p style="font-family: Verdana, sans-serif; text-align: justify; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 10pt;"><img src="Images/Ambiente_08_03.png" alt="" style=" border:none; width:100%; max-width:24px;" border="0" /> Visualizzare 
+ l'allegato su cui si è posizionati</p>
+<p style="font-family: Verdana, sans-serif; text-align: justify; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 10pt;"><img src="Images/Ambiente_08_04.png" alt="" style=" border:none; width:100%; max-width:24px;" border="0" /> Modificare 
+ l'allegato su cui si è posizionati</p>
+<p style="font-family: Verdana, sans-serif; text-align: justify; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 10pt;"><img src="Images/Ambiente_08_05.png" alt="" style=" border:none; width:100%; max-width:24px;" border="0" /> Eliminare 
+ l'allegato su cui si è posizionati</p>
+<p style="font-family: Verdana, sans-serif; text-align: justify; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 10pt;"><img src="Images/Ambiente_08_09.png" alt="" style=" border:none; width:100%; max-width:24px;" border="0" /> 
+ Salvare su disco, con scelta del nome, l'allegato su cui si è posizionati</p>
+<p style="font-family: Verdana, sans-serif; text-align: justify; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 10pt;"><img src="Images/Ambiente_08_06.png" alt="" style=" border:none; width:100%; max-width:24px;" border="0" /> Chiudere 
+ la maschera di gestione</p>
+<p style="font-family: Verdana, sans-serif; text-align: justify; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 10pt;">In fase di inserimento e di 
+ modifica viene aperta la seguente maschera:</p>
+<p style="text-align: center;"><img src="Images/ambiente_08_12.png" alt="" style=" border:none; width:100%; max-width:513px;" border="0" /></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 text-align: justify; font-size: 10pt;">Per ogni allegato deve essere 
+ assegnato un titolo (di default viene assegnato il nome del file che viene 
+ allegato), la categoria di appartenenza, la data di riferimento (utilizzata 
+ per l'ordinamento degli allegati nella griglia di visualizzazione), l'attribuzione 
+ di documento privato (l'allegato viene visualizzato solo per l'utente 
+ che l'ha inserito) ed eventuali note.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 text-align: justify; font-size: 10pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; text-align: justify; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 10pt; font-weight: bold;">Archiviazione 
+ documenti</p>
+<p style="font-family: Verdana, sans-serif; text-align: justify; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 10pt; font-weight: normal;">Il modulo 
+ può essere utilizzato anche per gestire l’archiviazione dei documenti 
+ in alternativa agli altri strumenti di archiviazione (es. Arxivar) nel 
+ caso in cui non debba essere gestita oltre all’archiviazione anche la 
+ firma digitale e la conservazione legale; ma può anche coesistere con 
+ i suddetti moduli mantenendo comunque la funzionalità di memorizzazione 
+ degli allegati.</p>
+<p style="text-align: center;"><img src="Images/Ambiente_08_07.png" alt="" style=" border:none; width:100%; max-width:761px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; text-align: justify; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 10pt;">Sulle procedure in cui è attiva 
+ l'archiviazione dei documenti è presente il bottone <img src="Images/Ambiente_08_01.png" alt="" style=" border:none; width:100%; max-width:24px;" border="0" />, 
+ in cui è possibile:</p>
+<ul style="list-style: disc;">
+	<li class="p"><p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+					 text-align: justify; font-size: 10pt;">visualizzare 
+	 il documento, se archiviato</p></li>
+	<li class="p"><p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+					 text-align: justify; font-size: 10pt;">archiviare 
+	 il documento</p></li>
+	<li class="p"><p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+					 text-align: justify; font-size: 10pt;">visualizzare 
+	 lo stato dell'archiviazione del documento</p></li>
+	<li class="p"><p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+					 text-align: justify; font-size: 10pt;">accedere agli 
+	 allegati del documento</p></li>
+</ul>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 text-align: justify; font-size: 10pt;">Sui documenti e sulla prima 
+ nota contabile selezionando l'archiviazione del documento viene effettuata 
+ e archiviata la stampa in formato PDF.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 text-align: justify; font-size: 10pt;">Sull'analisi sottoconti e sull'estratto 
+ conto clienti/fornitori selezionando l'archiviazione del documento è possibile 
+ assegnare un file PDF presente su disco oppure acquisire i documenti direttamente 
+ da scanner, tramite la seguente maschera.</p>
+<p style="text-align: center;"><img src="Images/ambiente_08_11.png" alt="" style=" border:none; width:100%; max-width:544px;" border="0" /></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 text-align: justify; font-size: 10pt;">Selezionando l'acquisizione 
+ da scanner viene aperta la maschera di scansione documento.</p>
+<p style="text-align: center;"><img src="Images/Scanner_2.JPG" alt="" style=" border:none; width:100%; max-width:706px;" border="0" /></p>
+</body>
+</html>

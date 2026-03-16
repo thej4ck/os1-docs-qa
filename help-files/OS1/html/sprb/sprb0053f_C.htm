@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="07 1, 2014 5:32:12 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Analisi avanzamento (commerciale)</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.5.0_8";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Versamenti" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-weight: bold; font-size: 12pt;">Analisi avanzamento (commerciale)</p>
+<p>Attraverso questa analisi è possibile per gli operatori del reparto 
+ commerciale ottenere informazioni sullo stato di avanzamento degli ordini 
+ clienti aperti.</p>
+<p>Nei parametri viene richiesta l'unità produttiva con proposta l'unità 
+ produttiva di default valida per l'utente connesso ad OS1; è possibile 
+ solo scegliere l'unità produttiva, se gestite in configurazione le unità 
+ produttive multiple; sono presenti vari criteri di selezione che consentono 
+ di selezionare un singolo ordine, un singolo ODP, un periodo di consegne, 
+ un cliente, un prodotto, un magazzino, un progetto se gestito e la possibilità 
+ di selezionare lo stato degli ODP tra Tutti, Pianificati, Lanciati, In 
+ corso, Evasi e Da evadere che comprende gli stati prima di Evaso; spuntando 
+ la casella &quot;Considera eventi&quot; si indica se devono essere considerati 
+ gli ODP/ODL in stato &quot;Lanciato&quot; come stato &quot;In corso&quot; 
+ se sono presenti eventi associati. <span style="text-transform: uppercase;">è</span> 
+ possibile specificare l'opzione &quot;ODP/ODL in ritardo&quot; per filtrare 
+ gli ODP/ODL in ritardo (cioè ancora aperti e la cui data di prevista fine 
+ lavorazione è ormai trascorsa); è possibile impostare il parametro come 
+ filtro (solo ODP/ODL in ritardo) oppure come avviso (evidenzia ODP/ODL 
+ in ritardo).</p>
+<p style="text-align: center;"><img src="images/sprb0053f_C_01.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p>La pressione del pulsante Esegui avvia l'elaborazione e porta alla pagina 
+ Risultati.</p>
+<p style="text-align: center;"><img src="images/sprb0053f_C_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p>In questa pagina vengono mostrati i dati elaborati in base ai criteri 
+ di selezione suddivisi in due sezioni: la sezione a sinistra in formato 
+ grafico riporta per ogni rigo di ordine gli ODP e gli ODL collegati,questa 
+ sezione è &quot;navigabile&quot;, nel senso che spostandosi tra gli elementi 
+ la parte di destra visualizza gli stessi dati in formato esteso. Nella 
+ griglia in alto sono presenti i riferimenti ordine, ad ogni riferimento 
+ ordine corrispondono nella griglia centrale uno o più ODP su cui compaiono 
+ le quantità da produrre e versate, inoltre viene riportata anche l'indicazione 
+ dello stato accompagnata da un indicatore colorato: grigio per i pianificati, 
+ bianco per i lanciati, giallo per quelli in corso e verde per quelli evasi. 
+ Per ogni ODP vengono visualizzati nella griglia in basso i relativi ODL 
+ su cui compaiono le quantità da produrre e versate, inoltre viene riportata 
+ anche l'indicazione dello stato accompagnata da un indicatore colorato 
+ con stesso significato di quello presente sugli ODP, in più le fasi esterne 
+ vengono colorate in blu.</p>
+<table style="vertical-align: top; left: 0px; top: 1106px;" cellspacing="0" 
+		 width="100%" align="center">
+	<col style="width: 48.496%;" />
+	<col style="width: 51.504%;" />
+	<tr style="vertical-align: top;">
+		<td style="width: 48.496%; padding-right: 10px; padding-left: 10px;"><p 
+			 style="text-align: center;"><img src="images/sprb0053f_C_04.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; width:100%; max-width:766px;" border="0" /></p></td>
+		<td style="width: 51.504%; padding-right: 10px; padding-left: 10px;"><p>Se 
+		 attiva la gestione progetti ed è stato spuntato il parametro &quot;Mostra 
+		 semilavorati collegati&quot;, è possibile visualizzare gli ODP 
+		 e gli ODL dei semilavorati collegati tramite il progetto, facendo 
+		 doppio clic sulla colonna progetto sul codice progetto che interessa 
+		 analizzare; compare la finestra mostrata a lato dove vengono visualizzate 
+		 le informazioni. Se si effettua la stampa viene stampato, al termine 
+		 della stampa, un prospetto riepilogativo che elenca ODP e ODL 
+		 dei semilavorati raggruppati per progetto.</p></td>
+	</tr>
+	<tr style="vertical-align: top;">
+		<td style="width: 48.496%; padding-right: 10px; padding-left: 10px;"><p 
+			 style="text-align: center;"><img src="images/sprb0053f_C_03.png" alt="" style=" border:none; margin-top:0px; margin-left:0px; margin-right:0px; margin-bottom:0px; width:100%; max-width:717px;" border="0" /></p></td>
+		<td style="width: 51.504%; padding-right: 10px; padding-left: 10px;"><p>Se 
+		 attiva l'opzione &quot;ODP/ODL in ritardo&quot; sarà presente 
+		 la colonna Data prevista fine produzione, per gli ODP e fine fase 
+		 per gli ODL con un indicatore visivo per capire se il rigo risulta 
+		 nei tempi (clessidra con pallino verde), alla scadenza (clessidra 
+		 con triangolo giallo) oppure in ritardo (clessidra con pallino 
+		 rosso).</p></td>
+	</tr>
+</table>
+<p>Utilizzando i bottoni Anteprima o Stampa presenti nella <a href="../Ambiente/Ambiente_02.htm">toolbar</a> 
+ è possibile effettuare la stampa dei dati elaborati.</p>
+</body>
+</html>

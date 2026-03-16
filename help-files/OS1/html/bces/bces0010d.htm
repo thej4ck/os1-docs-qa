@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="12 1, 2005 4:25:01 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Contabilizzazione ammortamenti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.12.2.0_5";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Cespiti > Ammortamenti" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;">Contabilizzazione ammortamenti</p>
+<p>Il programma effettua la contabilizzazione degli ammortamenti precedentemente generati dall'apposita procedura, producendo un report di controllo. Vengono generati movimenti contabili caratterizzati dalle causali contabili inserite dall’utente. A tale proposito, si ricorda che queste causali devono contenere la spunta sulla casella "Esercizio precedente" se le scritture contabili vengono generate con una data di registrazione dell’esercizio successivo a quello di competenza.</p>
+<p>Tali movimenti contabili contengono i codici dei sottoconti contabili memorizzati in ciascuna categoria fiscale.</p>
+<p>Per i cespiti nella cui anagrafica è indicata una percentuale di indetraibilità (come ad esempio i telefoni cellulari), la scrittura contabile attribuisce al conto Fondo ammortamento in avere l'intero ammontare della quota, che invece viene ripartita tra i conti Quota ammortamento e Quota ammortamento indeducibile in dare.</p>
+<p style="text-align: center;"><img src="Images/bces0010d_01.png" alt="" style=" border:none; width:100%; max-width:573px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA MOVIMENTI AMMORTAMENTO: inserire la data di generazione dei movimenti di ammortamento inserita quale parametro nel programma di generazione ammortamento. Generalmente è l’ultimo giorno dell’esercizio per il quale vengono generati gli ammortamenti.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE AMMORTAMENTO ORDINARIO: indicare il codice della causale contabile utilizzato per la contabilizzazione degli ammortamenti ordinari. Sul campo sono attive le funzioni di ricerca (F9)<span style="mso-bidi-font-family: Arial; line-height: Normal;">.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE AMMORTAMENTO ANTICIPATO: indicare il codice della causale contabile utilizzato per la contabilizzazione degli ammortamenti anticipati. Sul campo sono attive le funzioni di ricerca (F9)<span style="mso-bidi-font-family: Arial; line-height: Normal;">.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE AMMORTAMENTO RIDOTTO: indicare il codice della causale contabile utilizzato per la contabilizzazione degli ammortamenti ridotti. Sul campo sono attive le funzioni di ricerca (F9)<span style="mso-bidi-font-family: Arial; line-height: Normal;">.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA DI REGISTRAZIONE: inserire la data di registrazione dei movimenti contabili di ammortamento. Può essere una data del nuovo esercizio, ma in tal caso occorre che le causali contabili relative alle quote di ammortamento contengano la spunta nella casella "Esercizio precedente".</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ELABORAZIONE DEFINITIVA: definisce se stampare solo il report di controllo, oppure stampare il report e generare i movimenti contabili (casella con segno di spunta).</p>
+</body>
+</html>

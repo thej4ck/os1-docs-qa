@@ -1,0 +1,198 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 4, 2016 10:33:17 AM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Configurazione conto lavoro attivo</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.1.1.6.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazione OS1 Enterprise > Generali > Configurazione moduli > Produzione" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h5>Configurazione conto lavoro attivo</h5>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 0.417in;">GESTIONE 
+ LISTINI A QUANTITÀ: Definisce se i listini di lavorazione dei clienti 
+ devono essere gestiti a fasce di quantità.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Tipo 
+ evasione ddt ingresso</span>: consente di attivare, in fase di emissione 
+ del Ddt di uscita del prodotto finito, l'eventuale evasione dei materiali 
+ forniti dal cliente tramite il Ddt di ingresso, può assumere i seguenti 
+ valori:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">Nessuna: 
+		 non viene fatta alcuna evasione del Ddt d’ingresso.</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">Automatica: 
+		 i Ddt di ingresso vengono evasi automaticamente in base ai parametri 
+		 specificati nei campi successivi.</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">Selettiva: 
+		 vengono prima selezionati i Ddt di ingresso da trattare, secondo 
+		 i criteri specificati nei campi successivi, dopodiché vengono 
+		 evasi solo quelli selezionati dall'operatore.</p></li>
+	</ul></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Ricerca 
+ ddt ingresso</span> PRIORITÀ 1: Definisce il primo campo che può essere 
+ utilizzato per l’evasione automatica delle righe dei Ddt di ingresso (sia 
+ nel caso di evasione automatica che nel caso di evasione selettiva). I 
+ valori ammessi sono:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Nessuno</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Data Ddt</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Riferimento 
+		 (Anno/serie/numero)</p></li>
+	</ul></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ORDINAMENTO <span 
+	 style="text-transform: uppercase;">ddt ingresso</span> PRIORITÀ 1: 
+ Definisce se il campo precedente deve essere utilizzato in forma crescente 
+ oppure decrescente.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Ricerca 
+ ddt ingresso</span> PRIORITÀ 2: Definisce il secondo campo che può essere 
+ utilizzato per l’evasione automatica delle righe dei Ddt di ingresso (sia 
+ nel caso di evasione automatica che nel caso di evasione selettiva). I 
+ valori ammessi sono:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Nessuno</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Data Ddt</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Riferimento 
+		 (Anno/serie/numero)</p></li>
+	</ul></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">ORDINAMENTO <span 
+	 style="text-transform: uppercase;">ddt ingresso</span> PRIORITÀ 2: 
+ Definisce se il campo precedente deve essere utilizzato in forma crescente 
+ oppure decrescente.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;"><span style="text-transform: uppercase;">Tipo 
+ rigo scarico ddt ingresso:</span> indica, il tipo di rigo che sarà utilizzato 
+ in fase di emissione Ddt di uscita per includere le righe derivanti dal 
+ ddt di ingresso e relative ai materiali componenti il prodotto finito 
+ da scaricare dal magazzino; sul campo viene proposto il valore di default 
+ 40 che corrisponde al tipo rigo standard.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;"><span style="text-transform: uppercase;">Tipo 
+ rigo evasione ddt ingresso</span>: indica, il tipo di rigo che sarà utilizzato 
+ in fase di evasione Ddt di ingresso da Ddt di uscita; il tipo rigo deve 
+ avere la caratteristica di non essere esportabile in fattura.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;"><span style="text-transform: uppercase;">Causale 
+ ordine abituale</span>: utilizzato per indicare la causale abituale da 
+ proporre in automatico per l’inserimento degli ordini di conto lavoro 
+ attivo.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;"><span style="text-transform: uppercase;">Causale 
+ Ddt ingresso abituale</span>: utilizzato per indicare la causale abituale 
+ da proporre in automatico per l’inserimento dei Ddt di ingresso del lavoro 
+ attivo.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;"><span style="text-transform: uppercase;">Causale 
+ Ddt uscita abituale</span>: utilizzato per indicare la causale abituale 
+ da proporre in automatico per l’inserimento dei Ddt di uscita del lavoro 
+ attivo.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;"><span style="text-transform: uppercase;">Tipo 
+ controllo giacenza componenti</span>: Consente di attivare un controllo 
+ in fase di evasione dei Ddt di ingresso relativo alla generazione automatica 
+ dello scarico dei componenti; in caso di controllo non vincolante saranno 
+ visualizzati dei messaggi; i valori possibili sono:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Nessun controllo</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Controllo 
+		 non vincolante su singolo magazzino</p></li>
+	</ul></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 0.417in;"><span style="text-transform: uppercase;">Controllo 
+ quadratura carichi</span>: Attiva il controllo dei Ddt di ingresso in 
+ fase di evasione verificando che questi siano sufficienti a coprire le 
+ necessità di scarico del prodotto principale; in caso di controllo non 
+ vincolante saranno visualizzati dei messaggi, in caso di controllo vincolante 
+ l'operazione sarà interrotta ed il Ddt annullato; i valori possibili sono:</p>
+<ul style="list-style: disc;">
+	<ul style="list-style: disc;">
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Nessun controllo</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Controllo 
+		 non vincolante</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Controllo 
+		 vincolante</p></li>
+	</ul>
+</ul>
+<p style="text-indent: -0.417in; margin-left: 0.417in; margin-top: 0pt; 
+	 margin-bottom: 0pt;"><span style="text-transform: uppercase;">Genera 
+ riferimenti Ddt di carico</span>: Definisce, in fase di generazione righe 
+ dei materiali di carico se e come riportare il riferimento al Ddt di carico 
+ preceduto dalla dicitura presente nel campo successivo; valori possibili:</p>
+<ol style="list-style: decimal;">
+	<ul style="list-style: disc;">
+		<li><p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0in;">Nessun 
+		 riferimento</p></li>
+		<li><p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0in;">Riferimento 
+		 interno</p></li>
+		<li><p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0in;">Riferimento 
+		 esterno</p></li>
+	</ul>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 0.417in; margin-top: 0pt; 
+	 margin-bottom: 0pt;"><span style="text-transform: uppercase;">Descrizione 
+ per Ddt di carico</span>: E' la descrizione che precede il riferimento 
+ al Ddt di carico.</p>
+</body>
+</html>

@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc50.js\"  name=\"Ddt non fatturabili\"><item name=\"Introduzione\" url=\"html/index/index_202016.htm\" /><item name=\"Analisi Ddt\" url=\"html/sven/sven0026f.htm\" /><item name=\"Analisi evasione Ddt\" url=\"html/sven/sven0028f.htm\" /><item name=\"Saldo Ddt\" url=\"html/sven/sven0027f.htm\" /></data>";

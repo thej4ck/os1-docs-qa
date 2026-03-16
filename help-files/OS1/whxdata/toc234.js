@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc223.js\"  name=\"Partite aperte\"><item name=\"Introduzione\" url=\"html/index/index_8035.htm\" /><item name=\"Tassi di interesse di mora\" url=\"html/bpcf/bpcf0101f.htm\" /></data>";

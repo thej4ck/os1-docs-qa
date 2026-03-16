@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_4065.htm"},{"type":"item","name":"Manutenzione dichiarazioni fornitori","url":"html/bbas/bbas0148f_F.htm"},{"type":"item","name":"Generazione dichiarazioni fornitori","url":"html/bbas/bbas0066d.htm"},{"type":"item","name":"Stampa registro","url":"html/bbas/bbas0067d.htm#bc-1"},{"type":"item","name":"Stampa lettere di revoca","url":"html/bbas/bbas0068d.htm"},{"type":"item","name":"Controllo dichiarazioni/documenti","url":"html/bbas/bbas0088f_F.htm"},{"type":"item","name":"Controllo copertura fatture","url":"html/bbas/bbas0091f_F.htm"},{"type":"item","name":"Gestione su documenti","url":"html/bbas/DlgSelLettIntento.htm#bc-1"},{"type":"book","name":"Tabelle","key":"toc140"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

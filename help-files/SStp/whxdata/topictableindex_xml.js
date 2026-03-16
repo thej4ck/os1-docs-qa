@@ -1,0 +1,1 @@
+gXMLBuffer="<?xml version=\"1.0\" encoding=\"UTF-8\"?><cki><ck fm=\"Statistiche+ - Informazioni\" to=\"Richiesta tipo esecuzione\" num=\"19\"/></cki>";

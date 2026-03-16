@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="01 28, 2013 4:33:22 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Parcelle pro forma</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.4.0_1";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > Parcelle pro forma" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;">Introduzione</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Il modulo Parcellazione gestisce la modalità di fatturazione specifica delle prestazioni per aziende che non producono o vendono merci. In taluni casi, correlatamente al regime contabile della “Ditta”, nelle Parcelle (o Fatture, o Notule) le prestazioni sono assoggettate a ritenuta d’acconto (e talvolta a contributo cassa di previdenza); in altri casi, quando l’attività è svolta da società di persone o di società di capitali, si tratta di una normale fatturazione.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">E’ tipico il caso di molti professionisti (commercialisti; consulenti del lavoro, ma anche ingegneri ed architetti) che dispongono sia di una partita Iva come professionista che comporta la gestione della ritenuta d’acconto, sia di società di elaborazione dati o di progettazione che invece, in quanto società di persone o di capitali, non devono assoggettare le proprie prestazioni a ritenuta d’acconto pur emettendo “Parcelle” e non “Fatture di vendita”.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">La procedura gestisce:</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Le <a href="index_2035.htm">prestazioni ricorrenti</a>, ovvero addebiti periodici forfettizzati per prestazioni ricorrenti (es: assistenza contabile, ecc) per i quali non è necessaria la quotidiana rilevazione delle attività svolte. Tali prestazioni ricorrenti vengono memorizzate nell’apposita tabella “Prestazioni ricorrenti” visualizzata in anagrafica clienti. Periodicamente tale tabella viene esaminata dal programma “Generazione movimenti da prestazioni ricorrenti” e, per ciascun elemento coerente con i criteri di generazione, viene generato un rigo di “Movimenti prestazioni”.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: justify;">Le <a href="index_2035.htm">prestazioni occasionali</a> o estemporanee effettuate per i vari clienti, quando non comprese negli accordi per “prestazioni ricorrenti”, possono essere inserite quotidianamente o periodicamente nell’apposito file “Movimenti prestazioni”, acquisendo il prezzo previsto dall’anagrafica prestazione, oppure quello presente listino “prestazioni” se esistente, oppure quello presente nel listino cliente se presente, secondo l’abituale modalità operativa di OS1. Nel caso in cui la “Ditta” intenda comunque monitorare le tutte le attività eseguite anche per i clienti con cui esistono accordi per prestazioni ricorrenti, è comunque possibile registrare le singole prestazioni qualificandole come non fatturabili. <span style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">I movimenti prestazioni sono quindi righe di prestazioni occasionali o generati da “Prestazioni ricorrenti” che danno origine, con la periodicità preferita dall’utente, alle Fatture (Parcelle) pro forma o definitive. A seconda delle esigenze della Ditta, può essere definito in configurazione che i movimenti prestazioni evolvano prima in Pro forma, e da lì in Definitive, oppure direttamente in Fatture (Parcelle) definitive.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Le Fatture (Parcelle) pro forma pertanto sono documenti redatti interattivamente oppure generati automaticamente da Movimenti prestazioni, che vengono inviati ai clienti e sono documenti validi ai fini del contenzioso. Pertanto possono essere sollecitati, contengono tutti gli elementi numerari significativi ma non hanno valore fiscale. Possono evolvere (generalmente ma non necessariamente dopo l’incasso) in Fatture (Parcelle) definitive.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Le <a href="index_2036.htm">Fatture (Parcelle) definitive</a> sono i documenti rilevanti ai fini fiscali. Abitualmente vengono generate conseguentemente all’incasso di una Fattura (Parcella) pro forma, ma possono essere redatte interattivamente.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">La scelta di menù raggruppa le procedure relative alla gestione delle parcelle pro forma.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: center;">&#160;</p>
+<table style=" vertical-align:Center; border-left-style:Solid; border-left-width:2px; border-right-style:Solid; border-right-width:2px; border-top-style:Solid; border-top-width:2px; border-bottom-style:Solid; border-bottom-width:2px; margin-left:2px; margin-right:2px; left:196px; top:722px; width:100%; max-width:265px;" cellspacing="0" align="center">
+<col width="250" />
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="250">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../spar/spar0001f.htm">Gestione pro forma</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="250">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../spar/spar0003d.htm">Stampa pro forma</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="250">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../spar/spar0007d.htm">Analisi pro forma</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="250">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../spar/spar0008d.htm">Lista pro forma</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-width: 1px; border-bottom-style: Solid;" width="250">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../spar/spar0011d.htm">Solleciti pagamenti pro forma</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="250">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../spar/spar0025d.htm">Generazione parcelle definitive</a></p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+</body>
+</html>

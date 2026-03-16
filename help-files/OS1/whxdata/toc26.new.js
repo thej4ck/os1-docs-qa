@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_1067.htm"},{"type":"book","name":"Schede cespiti","key":"toc27"},{"type":"item","name":"Manutenzione schede cespiti","url":"html/bces/bces0019d.htm"},{"type":"item","name":"Manutenzione movimenti","url":"html/bces/bces0001f.htm"},{"type":"item","name":"Lista movimenti","url":"html/bces/bces0002d.htm"},{"type":"item","name":"Analisi schede","url":"html/bces/bces0003d.htm"},{"type":"book","name":"Ammortamenti","key":"toc28"},{"type":"book","name":"Stampe periodiche","key":"toc29"},{"type":"book","name":"Tabelle","key":"toc30"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

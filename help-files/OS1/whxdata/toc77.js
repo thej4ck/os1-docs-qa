@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc72.js\"  name=\"Dispositivo on line\"><item name=\"Introduzione\" url=\"html/index/index_208595.htm\" /><item name=\"Invio anagrafiche\" url=\"html/sved/sved0013d.htm\" /><item name=\"Ricezione movimenti\" url=\"html/sved/sved0014d.htm\" /></data>";

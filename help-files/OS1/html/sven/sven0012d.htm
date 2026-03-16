@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 5, 2003 12:47:44 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Contabilizzazione fatture clienti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.3.2_7";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > Fatturazione" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; 
+	 font-weight: bold;"><strong style="font-weight: bold;"><span style="font-weight: bold;">Contabilizzazione</span> 
+ <span>fatture</span></strong></p>
+<p>Il programma effettua la generazione dei movimenti contabili, provvisoria 
+ o definitiva, utilizzando i dati delle fatture esistenti in archivio in 
+ base ai parametri inseriti dall’utente.</p>
+<p style="text-align: center;"><img src="Images/sven0012d_01.png" alt="" style=" border:none; width:100%; max-width:541px;" border="0" /></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DOCUMENTO: tre 
+ campi per contenere rispettivamente anno, serie sezionale e numero del 
+ documento da cui si vuole iniziare la selezione. Confermando a vuoto, 
+ la selezione inizia dal primo documento compatibile con i successivi parametri.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DOCUMENTO: tre campi 
+ per contenere rispettivamente anno, serie sezionale e numero del documento 
+ con cui si vuole concludere la selezione. Confermando a vuoto, la selezione 
+ termina con l’ultimo documento compatibile con i successivi parametri.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: data documento 
+ da cui si vuole iniziare la selezione. Confermando a vuoto, la selezione 
+ inizia dalla prima data valida.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: data documento 
+ con cui si vuole concludere la selezione. Confermando a vuoto, la selezione 
+ inizia dalla prima data valida.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CAUSALE: codice 
+ della causale documento da cui si vuole iniziare la selezione. Confermando 
+ a vuoto, la selezione inizia dalla prima causale valida. Sul campo sono 
+ attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CAUSALE: codice 
+ della causale documento con cui si vuole iniziare la selezione. Confermando 
+ a vuoto, la selezione termina all’ultima causale valida. Sul campo sono 
+ attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO PAGAMENTO: codice 
+ del tipo di pagamento, presente nella tabella tipi pagamento, per cui 
+ si vuole effettuare la selezione. Confermando a vuoto vengono considerati 
+ validi tutti i tipi di pagamento. Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CLIENTE: eventuale 
+ codice del cliente, presente in anagrafica, da cui si vuole iniziare la 
+ selezione di contabilizzazione fatture. Confermando a vuoto, la selezione 
+ inizia dal primo cliente valido. Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CLIENTE: eventuale 
+ codice del cliente, presente in anagrafica, con cui si vuole terminare 
+ la selezione di contabilizzazione fatture. Confermando a vuoto, la selezione 
+ termina con l'ultimo cliente valido. Sul campo sono attive le funzioni 
+ di ricerca (F9).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 0.417in; 
+	 font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">TIPO DOCUMENTI: 
+ determina il tipo di documento oggetto dell'operazione: tutti, fatture, 
+ ricevute fiscali.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ELABORAZIONE DEFINITIVA: 
+ definisce il tipo di elaborazione: provvisoria (casella vuota) oppure 
+ definitiva (casella con segno di spunta). L'elaborazione provvisoria può 
+ essere effettuata più volte e non aggiorna nessuna tabella; l'elaborazione 
+ definitiva aggiorna le tabelle e per annullarla è necessario seguire una 
+ specifica procedura ed è consigliabile contattare il servizio Assistenza.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p>La pressione sul pulsante Esegui determina l'inizio dell'elaborazione 
+ dei documenti. Il risultato viene visualizzato nella pagina 'Risultati'.</p>
+<p style="margin-left: 0in; text-align: center;"><img src="Images/sven0012d_02.png" alt="" style=" border:none; width:100%; max-width:541px;" border="0" /></p>
+<p style="margin-left: 0in;"><img src="Images/sven0012d_04.png" alt="" style=" border:none; margin-bottom:0px; margin-left:0px; margin-right:7px; margin-top:0px; width:100%; max-width:83px;" align="left" border="0" />Nella 
+ pagina vengono visualizzati gli errori eventualmente occorsi durante la 
+ fase di elaborazione dei documenti o se ci sono dati non corretti nei 
+ documenti elaborati. La pagina dei risultati può essere stampata utilizzando 
+ l'apposito pulsante Controllo.</p>
+<p style="margin-left: 0in;"><img src="Images/sven0012d_03.png" alt="" style=" border:none; margin-left:0px; margin-top:5px; margin-bottom:0px; margin-right:7px; width:100%; max-width:83px;" align="left" border="0" />Con 
+ il pulsante Prima nota può essere eseguita direttamente la stampa dei 
+ movimenti generati.</p>
+<p style="margin-left: 0in;">&#160;</p>
+<p style="margin-left: 0in;"><span style="font-size: 10.0pt; mso-fareast-font-family: 'Times New Roman'; 
+									 mso-bidi-font-family: 'Times New Roman'; 
+									 mso-ansi-language: IT; mso-fareast-language: IT; 
+									 mso-bidi-language: AR-SA;"><img src="../images/b_Pianifica.png" alt="" style=" border:none; margin-bottom:0px; margin-left:0px; margin-right:7px; margin-top:0px; width:100%; max-width:73px;" align="left" border="0" /></span>Se 
+ <span style="font-size: 10.0pt; mso-fareast-font-family: 'Times New Roman'; 
+		 mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: IT; 
+		 mso-fareast-language: IT; mso-bidi-language: AR-SA;">abilitata 
+ la <a href="../Ambiente/Ambiente_13.htm">pianificazione batch</a></span> 
+ sarà visibile il pulsante Pianifica ed una pagina aggiuntiva di opzioni; 
+ per poter impostare la pianificazione sarà necessario impostare le opzioni 
+ con valore diverso da manuale.</p>
+<p style="margin-left: 0in; text-align: center;"><img src="Images/sven0012d_05.png" alt="" style=" border:none; width:100%; max-width:549px;" border="0" /></p>
+</body>
+</html>

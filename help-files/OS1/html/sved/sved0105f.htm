@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="date" content="10 29, 2004 6:38:50 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Dispositivi on line</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.10.18.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Configurazioni > Vendite al dettaglio" />
+</head>
+<body>
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-size: 12pt;">Dispositivi on line</p>
+<p>La procedura consente di codificare i dispositivi remoti a cui collegare la gestione dei movimenti di vendita e dei prodotti.</p>
+<p>Nella parte finale della finestra sono visibili le date relative all'ultima esportazione dei prodotti ed all'ultima importazione dei movimenti relativi al dispositivo attivo.</p>
+<p style="text-align: center;"><img src="Images/sved0105f_01.png" alt="" style=" border:none; width:100%; max-width:629px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CODICE: codice identificativo del dispositivo, a libera scelta dell'utente. Sul campo sono presenti le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE: descrizione del dispositivo.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO COLLEGAMENTO: campo che definisce il tipo di dispositivo utilizzato; valori possibili:</p>
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="margin-left: 0in;">indiretto se ci si deve collegare con la procedura CLIC2000 attraverso lo scambio di informazioni trasmesse tramite l'ausilio di file ASCII;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in;">diretto se ci si deve collegare ad un registratore di cassa Olivetti Explora tramite una connessione database diretta.</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in;">integrato se si deve effettuare la ricezione dei movimenti da un applicativo esterno che riversa i dati su apposite tabelle di OS1.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ESPORTAZIONE ARTICOLI/DATABASE DATI: il campo viene interpretato in relazione al tipo di collegamento: per il collegamento indiretto è il percorso su cui sarà generato il file di esportazione dei prodotti da OS1; per il collegamento diretto è il nome del database di Explora, completo di percorso. In quest'ultimo caso sarà presente un pulsante per verificare la correttezza della connessione. Per il collegamento di tipo integrato non è prevista l'esportazione dei prodotti.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LISTINO PRODOTTI: eventuale codice del listino prodotti da proporre in fase di esportazione articoli. &#160;Sul campo sono presenti le funzioni di ricerca (F9). Per il collegamento di tipo integrato non è prevista l'esportazione dei prodotti.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO BARCODE ART. PESO: eventuale codice del tipo di barcode per l'interpretazione dei codici a barre degli articoli gestiti a peso. &#160;Sul campo sono presenti le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO BARCODE ART. PREZZO: eventuale codice del tipo di barcode per l'interpretazione dei codici a barre degli articoli gestiti a prezzo. &#160;Sul campo sono presenti le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">IMPORTAZIONE MOVIMENTI: valido solo per la tipologia indiretta; indicare il file, completo di percorso, che contiene i movimenti esportati dalla procedura CLIC2000.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">IMPORTAZIONE TOTALI: valido solo per la tipologia indiretta; indicare il file, completo di percorso, che contiene i totali dei movimenti esportati dalla procedura CLIC2000.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CLIENTE IMPORT MOVIMENTI: eventuale codice del cliente da proporre in fase di ricezione movimenti. &#160;Sul campo sono presenti le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE IMPORT MOVIMENTI: eventuale codice della causale di vendita da proporre in fase di ricezione movimenti. &#160;Sul campo sono presenti le funzioni di ricerca (F9).</p>
+</body>
+</html>

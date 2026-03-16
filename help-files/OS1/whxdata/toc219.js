@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc218.js\"  name=\"Firma remota\"><item name=\"Introduzione\" url=\"html/index/index_604090.htm\" /><item name=\"Firmatari\" url=\"html/bfir/bfir0001f.htm\" /><item name=\"Recapiti firma\" url=\"html/bfir/bfir0002f.htm\" /></data>";

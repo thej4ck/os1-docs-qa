@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 11, 2016 9:48:32 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Raffronto costi progetti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.8.0_8";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Consuntivazione" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt;">Raffronto 
+ costi progetti</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">La 
+ funzione consente l’analisi preventiva e consuntiva di uno specifico progetto 
+ nella sua globalità (tenendo conto anche dei semilavorati collegati al 
+ progetto); consente un’analisi puntuale dei costi preventivi e consuntivi 
+ distinti fra materiali, costi di lavorazione e costi di produzione.</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">Nella 
+ pagina dei parametri è possibile scegliere l'unità produttiva, se gestite 
+ in configurazione le unità produttive multiple; sono presenti i criteri 
+ di selezione data ODP per inizio elaborazione, progetto e prodotto; è 
+ possibile includere nell'analisi gli ODP provvisori spuntando l'apposita 
+ casella; è possibile impostare un limite di data relativo alla lettura 
+ dei movimenti di magazzino; spuntando la casella &quot;Includi eventi 
+ sospesi&quot; è possibile includere anche gli eventi che non hanno ancora 
+ generato un versamento di quantità per avere un’effettiva consuntivazione 
+ dei costi anche in assenza di versamento del composto.</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;"><span 
+	 style="text-transform: uppercase;">è</span> possibile definire il 
+ metodo di calcolo del prezzo per i semilavorati, questo parametro non 
+ ha effetto nel caso in cui sia già stato eseguito l'aggiornamento valori 
+ progetto in quanto in tal caso i prezzi preventivi (materiali, lavorazioni, 
+ costi di produzione) vengono recuperati dalla valorizzazione scheda tecnica 
+ memorizzata a livello di progetto:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; 
+						 margin-bottom: 0px;">Standard: utilizza il tipo 
+		 di calcolo definito sulla scheda tecnica</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; 
+						 margin-bottom: 0px;">Al valore delle materie prime: 
+		 utilizza come prezzo il valore derivante dalla somma dei costi 
+		 dei componenti</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; 
+						 margin-bottom: 0px;">Al valore dei costi di lavorazione: 
+		 utilizza come prezzo il valore dalla somma dei costi dei componenti 
+		 aumentato dei costi di lavorazione</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; 
+						 margin-bottom: 0px;">Al valore dei costi di produzione: 
+		 utilizza come prezzo il valore dalla somma dei costi dei componenti 
+		 aumentato dei costi di lavorazione e dei costi di produzione</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; 
+						 margin-bottom: 0px;">Come su scheda tecnica: non 
+		 effettua la valorizzazione della scheda tecnica, ma valorizza 
+		 il semilavorato come specificato sulla scheda tecnica del relativo 
+		 composto</p></li>
+	</ul></li>
+</ol>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">Premendo 
+ il pulsante Esegui si avvia l'elaborazione che porterà alla pagina dei 
+ risultati.</span></p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: center; font-size: 10pt;"><img src="Images/sprc0008f_01.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">La 
+ pagina dei Risultati presenta una sezione superiore con una griglia che 
+ riporta i progetti ed una griglia che, per ogni progetto, riporta i riferimenti 
+ ordine con le quantità ordinate, utilizzate, da produrre e prodotte; l<span 
+	 style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">a 
+ sezione inferiore contiene i valori suddivisi per Materiali, Lavorazioni 
+ e costi di produzione</span></p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: center; font-size: 10pt;"><img src="Images/sprc0008f_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">La 
+ pagina dei Materiali riporta i materiali derivanti dagli ODL con la relativa 
+ valorizzazione preventiva, e consuntiva in relazione ai versamenti effettuati; 
+ in colore differente vengono mostrati i semilavorati. Nel caso in cui 
+ sia già stato eseguito l'aggiornamento valori progetto i prezzi preventivi 
+ vengono recuperati dalla valorizzazione scheda tecnica memorizzata a livello 
+ di progetto.</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: center; font-size: 10pt;"><img src="Images/sprc0008f_03.png" alt="" style=" border:none; width:100%; max-width:957px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">La 
+ pagina delle Lavorazioni riporta tutte le fasi di lavorazione con sotto 
+ il dettaglio dei singoli ODL; per le fasi esterne la valorizzazione preventiva 
+ proviene dall'ordine terzista, per le fasi interne dalla valorizzazione 
+ del ciclo. Nel caso in cui sia già stato eseguito l'aggiornamento valori 
+ progetto i prezzi preventivi vengono recuperati dalla valorizzazione scheda 
+ tecnica memorizzata a livello di progetto.</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: center; font-size: 10pt;"><img src="Images/sprc0008f_04.png" alt="" style=" border:none; width:100%; max-width:956px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">La 
+ pagina Costi produzione presenta il valore dei costi di lavorazione derivanti 
+ dai versamenti e dai rientri, per le fasi esterne. Nel caso in cui non 
+ sia già stato eseguito l'aggiornamento valori progetto i prezzi preventivi 
+ non saranno valorizzati, altrimenti vengono recuperati dalla valorizzazione 
+ scheda tecnica memorizzata a livello di progetto.</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: center; font-size: 10pt;"><img src="Images/sprc0008f_05.png" alt="" style=" border:none; width:100%; max-width:953px;" border="0" /></p>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="date" content="06 8, 2009 4:27:31 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Dispositivi</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.10.15.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Configurazioni > OS1Mobile" />
+</head>
+
+<body>
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-size: 12pt;">Dispositivi</p>
+<p>La procedura consente di codificare i dispositivi remoti su cui è installata 
+ la procedura OS1Mobile per il successivo scambio dati.</p>
+<p style="text-align: center;"><img src="images/sfvb0100f.png" alt="" style=" border:none; width:100%; max-width:497px;" border="0" /></p>
+<p>&#160;</p>
+<p style="margin-left: 0in;">Deve essere inserito un codice dispositivo 
+ univoco per ogni dispositivo utilizzato, una descrizione ed una matricola.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">AGENTE: indicare 
+ il codice agente, presente in anagrafica agenti, che sarà associato al 
+ dispositivo; l'associazione è essenziale, perchè tramite tutta la movimentazione 
+ che sarà importata dal dispositivo sarà imputata all'agente.</p>
+<p style="margin-left: 0in;">Attivando il parametro ASSEGNAZIONE AUTOMATICA 
+ LOTTO, se attiva la gestione dei lotti, si indica alle procedure documentali 
+ presenti sul dispositivo che per gli articoli gestiti a lotti deve essere 
+ effettuata una selezione automatica del lotto, in base a quanto espresso 
+ sull'anagrafica dell'articolo stesso. Se il parametro non è attivo la 
+ selezione sarà manuale.</p>
+<p style="margin-left: 0in;"><span style="margin-left: 0in;">Attivando 
+ il parametro VISUALIZZAZIONE SOLO ARTICOLI CON GIACENZA, come lascia intendere 
+ la stessa opzione, si indica alla procedura presente sul dispositivo di 
+ visualizzare negli zoom dei prodotti solo quelli con giacenza positiva.</span></p>
+<p style="margin-left: 0in;">Attivando il parametro <span style="text-transform: uppercase;">Gestione 
+ articoli frequenti</span> sarà inviato al dispositivo l’elenco degli articoli 
+ venduti (per ciascun cliente e per ogni articolo vengono inviati i dati 
+ dell’ultima vendita). Tale meccanismo consente all’interno di OS1Mobile 
+ l’inserimento rapido di nuovi documenti</p>
+<p style="margin-left: 0in;">Attivando il parametro <span style="text-transform: uppercase;">Gestione 
+ storico articoli</span> sarà inviato al dispositivo il dettaglio dei documenti 
+ di vendita. Tale meccanismo consentirà all’agente di effettuare, in autonomia, 
+ l’analisi delle vendite. Attenzione: la mole di dati inviati in questo 
+ caso potrebbe essere significativa e dare luogo quindi a rallentamenti 
+ nella fase di ricezione dati da parte del dispositivo.</p>
+<p style="margin-left: 0in;">E' possibile indicare il numero di copie di 
+ default del documento da stampare, il prefisso da utilizzare per l'inserimento 
+ dei nuovi clienti (se è configurata tale prestazione) ed il tipo immagine 
+ in base alla tabella <a href="sfvb0107f.htm">Tipi immagini</a>, che indica 
+ la tipologia e la dimensione dell'immagine; l<span style="margin-left: 0in;">’utente 
+ e la password qui inserite sono quelle che saranno utilizzate come credenziali 
+ di accesso al programma OS1Mobile presente sul dispositivo; inoltre è 
+ possibile specificare la dimensione massima, in Kb, di ciascun file che 
+ sarà inviato al dispositivo; nel caso questo valore sia zero sarà inviato 
+ un unico file.</span></p>
+</body>
+</html>

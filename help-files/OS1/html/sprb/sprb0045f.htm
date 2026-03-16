@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="02 16, 2013 12:15:27 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Gestione operazioni bordo macchina</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.5.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Versamenti" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-weight: bold; font-size: 12pt;">Gestione operazioni bordo macchina</p>
+<p>La funzione consente sia di verificare ed eventualmente modificare i 
+ movimenti inseriti in reparto, tramite un'applicazione specifica installata 
+ su di un PC direttamente in reparto (OS1BMJob o OS1BordoMacchina), sia 
+ di inserire manualmente nuovi movimenti (con modalità operative simili 
+ a quelle della procedura utilizzata in reparto); da questi movimenti saranno 
+ generati automaticamente i veri e propri movimenti di versamento analitici. 
+ E’ tuttavia possibile far proseguire la fase di generazione versamenti 
+ solo dopo l’effettiva autorizzazione effettuata manualmente da parte del 
+ responsabile di produzione; questo tipo di controllo viene attivato dal 
+ parametro “Verifica versamenti” presente nella configurazione “Produzione 
+ – Impostazioni generali”. Se il parametro è attivo nella funzione è attiva 
+ una casella combo (Tipo movimenti) per filtrare i movimenti da manutenere; 
+ con il click destro del mouse sulla griglia dei risultati si accede ad 
+ un menù di funzioni che consentono di autorizzare il movimento (o di togliere 
+ l’autorizzazione); la stessa funzione è attiva con il doppio click che 
+ accetta/nega la verifica.</p>
+<p>La funzione, utilizzata tipicamente dal responsabile di produzione, 
+ consente anche di registrare eventuali avanzamenti forzati di fase (ad 
+ esempio nel caso in cui, per una volta, una fase non venga eseguita) che 
+ non danno luogo ad addebito di tempi (e quindi di costi) attraverso il 
+ bottone “Salta fase”.</p>
+<p>Nei parametri viene richiesta l'unità produttiva con proposta l'unità 
+ produttiva di default valida per l'utente connesso ad OS1; è possibile 
+ solo scegliere l'unità produttiva, se gestite in configurazione le unità 
+ produttive multiple; è richiesto di inserire l'operatore o la risorsa 
+ in modo da poter filtrare i movimenti presenti, inoltre è possibile specificare 
+ un numero specifico di ODL oppure un periodo specifico ed includere i 
+ movimenti che hanno già generato versamenti definitivi e magazzino, spuntando 
+ la casella &quot;Includi movimenti elaborati&quot;.</p>
+<p>Premendo il pulsante Seleziona si avvia l'elaborazione ed il risultato 
+ viene visualizzato nella parte sottostante; per eseguire nuovamente una 
+ selezione è necessario salvare eventuali modifiche o premere ESC oppure 
+ il pulsante Annulla presente nella <a href="../Ambiente/Ambiente_02.htm">Toolbar</a>.</p>
+<p style="text-align: center;"><img src="images/sprb0045f_01.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p>I movimenti vengono riportati in colori differenti in modo da facilitarne 
+ l'identificazione anche se nella parte bassa a sinistra è presente sempre 
+ la descrizione dell'origine; se lo sfondo è grigio significa che il movimento 
+ è già stato elaborato, cioè ha generato versamento effettivo e movimenti 
+ di magazzino:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Blu: 
+		 movimenti derivanti dalla procedura bordo macchina presente in 
+		 reparto;</p></li>
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Nero: 
+		 movimenti inseriti manualmente dalla procedura stessa;</p></li>
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Marrone: 
+		 movimenti inseriti manualmente dalla procedura di <a href="sprb0051f.htm">Manutenzione 
+		 versamenti</a>;</p></li>
+	</ul></li>
+</ol>
+<p><span style="text-transform: uppercase;">è</span> inoltre presente, 
+ in alto, una barra contenete delle caselle di spunta che consento di visualizzare 
+ i movimenti di una o più tipologia semplicemente apponendo la spunta sulle 
+ tipologie che si desidera visualizzare.</p>
+<p style="text-align: center;"><img src="images/sprb0045f_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p>Dal pannello in basso si effettua l'effettiva gestione dei dati quale 
+ inserimento di un nuovo movimento, variazione o cancellazione di un movimento 
+ esistente; i dati presenti sono fondamentalmente quelli dell'ODL con in 
+ più l'operatore, la risorsa obbligatoria, le possibili quantità (versato, 
+ reso, scarti) di cui almeno una è richiesta obbligatoriamente e l'indicazione 
+ dei tempi di lavorazione e setup.</p>
+<p>In fase di inserimento di un movimento manuale è necessario indicare 
+ l'operatore e la risorsa obbligatoriamente, viene proposto in automatico 
+ il campo che è stato utilizzato come filtro (operatore o risorsa); successivamente 
+ è necessario indicare il numero di ODL su cui deve essere effettuato versamento; 
+ tramite il tasto <img src="images/b_Zoom.png" alt="" style=" border:none; width:100%; max-width:24px;" border="0" /> posto di fianco è possibile richiamare 
+ una finestra di <a href="DlgRicercaODL.htm">ricerca ODL</a>. Specificato 
+ l'ODL è necessario indicare almeno una delle quantità presenti, ogni quantità 
+ inserita darà luogo ad un <img src="images/DlgCalcTempi.png" alt="" style=" border:none; margin-right:0px; margin-top:0px; margin-left:5px; margin-bottom:5px; width:100%; max-width:308px;" align="right" border="0" />singolo 
+ versamento. Per l'inserimento dei tempi di lavorazione e setup sono presenti 
+ i campi che è possibile inserire manualmente o tramite il pulsante <img src="images/b_tempi.png" alt="" style=" border:none; width:100%; max-width:20px;" border="0" /> 
+ che accede alla finestra di calcolo dei tempi da cui è possibile effettuata 
+ il calcolo dei tempi inserendo un periodo iniziale ed un periodo finale 
+ e premendo Calcola; il calcolo viene rapportato tutto in ore, minuti e 
+ secondi e riportato nei relativi campi sul movimento.</p>
+<p><img src="images/b_VarMovBM.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:24px;" align="left" border="0" />Il movimento fino a che non genera versamento effettivo 
+ e movimenti di magazzino può essere richiamato e modificato; altrimenti 
+ l'unico modo per intervenire è tramite il pulsante presente a lato, quello 
+ più a destra, che di fatto elimina i versamenti generati ed i relativi 
+ movimenti di magazzino, &quot;riaprendo&quot; il movimento e rendendolo 
+ modificabile. <span style="font-weight: bold;">Attenzione</span> <span 
+	 style="font-weight: bold;">questa operazione è direttamente definitiva 
+ e non è sottoposta al salvataggio generale</span>.</p>
+<p>E’ possibile in questa fase gestire anche la modalità di comportamento 
+ da adottare nel caso in cui dalla fase rientri una quantità scartata o 
+ resa non lavorata (attraverso il flag Aggiorna ODL). Al verificarsi di 
+ questo evento la fase successiva avrebbe in ingresso una quantità inferiore 
+ a quella prevista quindi se si intende lasciare non aggiornato l’ODL per 
+ un successivo versamento che vada a coprire la quantità mancante è sufficiente 
+ deselezionare la casella Aggiorna ODL.</p>
+<p><img src="images/b_SaltaFase.png" alt="" style=" border:none; margin-left:0px; margin-right:6px; margin-top:0px; margin-bottom:0px; width:100%; max-width:115px;" align="left" border="0" /><img src="images/b_AnnSaltaFase.png" alt="" style=" border:none; margin-left:0px; margin-right:6px; margin-top:0px; margin-bottom:0px; width:100%; max-width:115px;" align="left" border="0" />La 
+ funzione, utilizzata tipicamente dal responsabile di produzione, consente 
+ anche di registrare eventuali avanzamenti forzati di fase (ad esempio 
+ nel caso in cui, per una volta, una fase non venga eseguita) che non danno 
+ luogo ad addebito di tempi (e quindi di costi) attraverso il bottone “Salta 
+ fase”; premendo questo pulsante di fatto si rende interamente versato 
+ con i tempi azzerati e non modificabile il movimento. Il pulsante è utilizzabile 
+ solo se per la fase non è mai stato effettuato nessun versamento. <span 
+	 style="text-transform: uppercase;">è</span> possibile sbloccare il 
+ movimento premendo lo stesso pulsante che diventa Fase saltata tornando 
+ alle condizioni di inserimento.</p>
+<p style="text-align: center;"><img src="images/sprb0045f_03.png" alt="" style=" border:none; margin-left:0px; margin-right:0px; margin-top:0px; margin-bottom:0px; width:100%; max-width:962px;" border="0" /></p>
+<p>&#160;</p>
+<p><img src="images/b_DetVer.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:20px;" align="left" border="0" /><img src="images/sprb0045f_04.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:900px;" align="right" border="0" />Tramite 
+ questo pulsante è possibile analizzare il dettaglio del movimento, se 
+ presente, derivato dalla <a href="sprb0050f_G.htm">generazione dei movimenti 
+ bordo macchina</a> provenienti dal consolidamento degli eventi inseriti 
+ tramite l'applicazione OS1BMJob presente in reparto;gli eventi consolidati 
+ generano i movimenti bordo macchina se è presente almeno una quantità 
+ versata.</p>
+<p>&#160;</p>
+<p><img src="images/sprb0045f_05.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:809px;" align="right" border="0" /><img src="images/b_Eventi.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:20px;" align="left" border="0" />Tramite 
+ questo pulsante è possibile assegnare al movimento corrente eventi provenienti 
+ dal <a href="sprb0050f_G.htm">consolidamento degli eventi</a> inseriti 
+ tramite l'applicazione OS1BMJob presente in reparto; eventuali eventi 
+ chiusi dopo che è stato generato il movimento di bordo macchina possono 
+ essere abbinati all’ODL di riferimento; è sufficiente selezionare gli 
+ eventi da associare e premere il pulsante Salva.</p>
+<p>&#160;</p>
+<p>Al momento del salvataggio, premendo il pulsante Salva presente nella 
+ <a href="../Ambiente/Ambiente_02.htm">Toolbar</a> o il tasto funzione 
+ F10, saranno registrati i nuovi movimenti inseriti e le eventuali variazioni 
+ apportate; se previsto in configurazione sarà richiesto se effettuare 
+ direttamente la <a href="sprb0050f_G.htm">generazione dei versamenti</a>.</p>
+</body>
+</html>

@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_1080.htm"},{"type":"item","name":"Generazione valori","url":"html/babi/babi0001d.htm"},{"type":"item","name":"Gestione budget preventivo","url":"html/babi/babi0015f.htm"},{"type":"item","name":"Generazione rettifiche","url":"html/bcge/bcge0016d.htm#bc-1"},{"type":"item","name":"Gestione rettifiche","url":"html/babi/babi0003f.htm"},{"type":"item","name":"Generazione voci di bilancio","url":"html/babi/babi0012d.htm"},{"type":"item","name":"Manutenzione valori voci di bilancio","url":"html/babi/babi0013f.htm"},{"type":"item","name":"Stampa bilanci","url":"html/babi/babi0005d.htm"},{"type":"book","name":"Indici di bilancio","key":"toc36"},{"type":"book","name":"Dettaglio valori","key":"toc37"},{"type":"book","name":"Tabelle","key":"toc38"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

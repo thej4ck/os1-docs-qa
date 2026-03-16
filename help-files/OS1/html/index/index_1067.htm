@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="12 1, 2005 3:56:16 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Cespiti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.12.0_1";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Cespiti" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt; margin-left: 0px;"><span style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt; margin-left: 0px;">Introduzione</span></p>
+<p>Il modulo Gestione Cespiti provvede alla gestione integrale della problematica attinente al trattamento dei beni ammortizzabili.</p>
+<p>Consente la memorizzazione delle anagrafiche dei beni ammortizzabili, la creazione dei movimenti di acquisto in sede di registrazione della fattura di acquisto; la gestione delle variazioni intercorrenti nell'esercizio, la simulazione di ammortamenti infrannuali pro quota, la gestione degli ammortamenti definitivi con contestuali scritture contabili e la stampa del libro cespiti.</p>
+<p>L'elemento fondamentale della gestione è costituito dalla <a href="#Operazioni contabili sui cespiti">registrazione di un movimento contabile</a>, di acquisto o vendita, che avviene contestualmente all'immissione della prima nota contabile, tramite apposita causale.</p>
+<p>I movimenti contabili relativi agli ammortamenti vengono invece generati nell'ambito della procedura di gestione cespiti. Da ciò scaturisce il calcolo simulato delle quote di ammortamento da imputare all'esercizio, anche in frazione di anno, oppure la generazione automatica delle scritture contabili relative agli ammortamenti, con contestuale aggiornamento della scheda cespite.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Ammortamenti civilistici</p>
+<p>A seguito dell’abrogazione del quarto comma dell’articolo 106 del TUIR, non è più possibile inserire in bilancio voci che abbiano una mera giustificazione fiscale.</p>
+<p>Le poste che fino al 2004 venivano iscritte in bilancio solo perché previste da norme fiscali erano diverse (accantonamenti per svalutazione crediti, ammortamenti anticipati), ma sicuramente quella che comporta maggiori problematiche da gestire è proprio l’ammortamento anticipato.</p>
+<p>Da qui è nata l’esigenza di gestire un doppio binario fiscale-civilistico: in pratica dal momento in cui la scheda viene inserita nell’anagrafica del cespite vengono tenuti distinti e separati gli importi ai fini fiscali e gli importi ai fini civilistici, tanto che le stampe chiedono di volta in volta il valore da trattare. Sulle schede cespiti sono presenti doppi totalizzatori e sia su schede che su movimenti sono presenti i dati relativi all'ammortamento civilistico.</p>
+<p>Tutte le operazioni che vanno ad incidere sul bilancio (contabilizzazione ammortamenti, simulazione ammortamenti con generazione movimenti di rettifica) trattano gli importi civilistici.</p>
+<p>Alla fine dell’esercizio per la corretta compilazione del quadro EC del modello Unico è necessario estrarre le informazioni relative agli ammortamenti fiscali applicate, considerando le eccedenze rispetto agli ammortamenti civilistici.</p>
+<p>&#160;</p>
+<table style=" vertical-align:Center; border-left-style:Solid; border-left-width:2px; border-right-style:Solid; border-right-width:2px; border-top-style:Solid; border-top-width:2px; border-bottom-style:Solid; border-bottom-width:2px; margin-left:2px; margin-right:2px; left:149px; top:322px; width:100%; max-width:265px;" cellspacing="0" align="center">
+<col width="311" />
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="311">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bces/bces0102f.htm">Schede cespiti</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="311">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bces/bces0019d.htm">Manutenzione schede cespiti</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="311">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bces/bces0001f.htm">Manutenzione movimenti</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="311">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bces/bces0002d.htm">Lista movimenti</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-width: 1px; border-bottom-style: Solid;" width="311">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bces/bces0003d.htm">Analisi schede</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="311">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="index_106720.htm">Ammortamenti</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-width: 1px; border-bottom-style: Solid;" width="311">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="index_106730.htm">Stampe periodiche</a></p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<p style="font-family: Verdana, sans-serif;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-weight: bold;">Avviamento</p>
+<p>Per attivare la procedura di Gestione cespiti, l'utente dovrà controllare e predisporre una serie di tabelle secondo una precisa sequenza operativa. La corretta esecuzione di tali operazioni è condizione imprescindibile per non incontrare difficoltà durante l'uso dei programmi della procedura. La sequenza prevede:</p>
+<ul style="list-style: disc;">
+<li class="p">
+<p>Controllo e completamento della tabella <a href="../bbas/bbas0101f_08.htm">Configurazione cespiti</a></p>
+</li>
+<li class="p">
+<p>Controllo e completamento della tabella <a href="../bces/bces0104f.htm">Causali cespiti</a></p>
+</li>
+<li class="p">
+<p>Controllo e completamento della tabella <a href="../bces/bces0105f.htm">Totalizzatori cespiti</a></p>
+</li>
+<li class="p">
+<p>Controllo e completamento della tabella <a href="../bbas/bbas0101f_03.htm">Configurazione codici fissi</a></p>
+</li>
+<li class="p">
+<p>Controllo e completamento della tabella <a href="../bbas/bbas0036f.htm">Causali contabili</a></p>
+</li>
+<li class="p">
+<p>Caricamento della tabella <a href="../bces/bces0100f.htm">Categorie fiscali cespiti</a></p>
+</li>
+<li class="p">
+<p>Eventuale caricamento della tabella <a href="../bces/bces0101f.htm">Categorie gestionali</a></p>
+</li>
+</ul>
+<p>&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-weight: bold;"><span>Caricamento dati cespiti pregressi</span></p>
+<p style="margin-left: 0px;">Quando una azienda già attiva inizia ad utilizzare l'applicazione, dispone certamente di un parco cespiti ammortizzabili, acquistati nei vari anni precedenti, ciascuno dei quali presenta una propria situazione di ammortamento. Risulta evidente la necessità di procedere quindi al caricamento di tali cespiti pregressi, allo scopo di poter gestire complessivamente il parco cespiti e di gestire correttamente gli ammortamenti per gli anni successivi. L’utente dovrà quindi procedere all’inserimento di tutte le <a href="../bces/bces0102f.htm">anagrafiche cespiti</a>. E’ presente una <a href="../bces/bces0022d.htm">procedura di servizio</a> che permette di inserire manualmente (oppure importare attraverso un file di testo) le informazioni necessarie per la ripresa saldi delle schede cespiti, indicando i dati anagrafici della scheda ed i totali della scheda all’esercizio di apertura dei cespiti, vengono generati i corrispondenti movimenti.</p>
+<p style="margin-left: 0px;"><span style="margin-left: 40px;">I</span>l semplice caricamento delle anagrafiche cespiti non è sufficiente per proseguire con la gestione. Ciascun cespite caricato ha un valore d’origine e dispone di un fondo ammortamento di una certa consistenza. Potrebbe essere parzialmente deducibili, e quindi disporre anche di una quota non ammortizzabile. Tutte queste informazioni che, se presenti, vengono riepilogate nella linguetta Totali scheda di ciascuna Scheda Cespiti, devono essere inserite mediante il programma <a href="../bces/bces0001f.htm">Movimenti cespiti</a>. Naturalmente l’utente inserirà direttamente i totali pregressi per ciascuna causale relativi ad un singolo cespite, evitando di ripetere singolarmente i vecchi movimenti di ciascun anno precedente.</p>
+<p style="margin-left: 0px;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-weight: bold;"><a name="Operazioni contabili sui cespiti">Operazioni contabili sui cespiti</a></p>
+<p>Come si è già più volte ricordato, le registrazioni inerenti i cespiti sono contestuali alle correlative registrazioni contabili. In tale occasione, la causale contabile attiva il richiamo della procedura cespiti tramite l'apposito flag Libro cespiti; se necessario, si dovrà creare interattivamente una nuova anagrafica cespiti e infine una appropriata causale cespiti attiverà l'accesso ai campi.</p>
+<p>Vediamo un esempio di registrazione di un acquisto di cespite, utilizzando una apposita causale.</p>
+<p style="text-align: center;"><img src="Images/Index_1067_01.png" alt="" style=" border:none; width:100%; max-width:765px;" border="0" /></p>
+<p>Non appena completata la sezione video Iva acquisti, si apre automaticamente la finestra video Registrazione cespiti che richiede l’indicazione del numero di scheda cespite su cui si vuole operare. E’ naturalmente possibile effettuare la ricerca di un cespite esistente tramite la funzione F9, nel caso di debba registrare un incremento o un adeguamento del cespite in questione.</p>
+<p>E’ invece probabile, in caso di fattura di acquisto, che il cespite non esista ancora e debba essere creato interattivamente utilizzando la funzione CTRL+W che accede all’anagrafica cespiti dove è possibile procedere al caricamento del nuovo cespite. Nel caso in cui la fattura contenga più cespiti, è possibile memorizzarli tutti.</p>
+<p>In entrambi i casi, una volta indicato il cespite il cursore passa al campo causale del pannello di input. La finestra video risulta infatti ripartita in tre sezioni: la sezione superiore visualizza l’anagrafica del cespite attivo; la sezione centrale visualizza la griglia delle operazioni sui cespiti e la sezione inferiore contiene il pannello di input. La finestra video è sempre la stessa qualsiasi sia l’operazione contabile che la richiama.</p>
+<p style="text-align: center;"><img src="Images/Index_1067_02.png" alt="" style=" border:none; width:100%; max-width:765px;" border="0" /> &#160;&#160;</p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE: indicare il codice della causale cespiti relativa il movimento che si vuole trattare. Sul campo è attiva la ricerca F9 sulla tabella causali cespiti. A conferma, viene visualizzata la prima descrizione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE AGGIUNTIVA: inserire una eventuale ulteriore descrizione del rigo del movimento a completamento della descrizione fissa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">IMPORTO: Inserire l'importo del movimento.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CODICE CLIENTE/FORNITORE: inserire il codice del cliente/fornitore a cui fa riferimento il movimento cespite in esame, nel caso in cui la casuale renda attivo questo campo. Sul campo è attiva la ricerca F9 sulla relativa anagrafica.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PERCENTUALE DI AMMORTAMENTO: inserire la percentuale di ammortamento applicata nel caso si tratti di un movimento di ammortamento.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">VALORE DI CESSIONE: inserire l'importo del valore di cessione nel caso in cui la causale utilizzata renda attivo questo campo.</p>
+<p>A conferma del movimento o dei movimenti, premendo pagina giù il programma ritorna alla finestra video prima nota. All’atto della conferma della registrazione contabile, il programma registra anche il movimento nella tabella movimenti Cespiti e aggiorna i totalizzatori dei cespiti trattati.</p>
+<p style="text-align: center;"><img src="Images/Index_1067_03.png" alt="" style=" border:none; width:100%; max-width:765px;" border="0" /></p>
+</body>
+</html>

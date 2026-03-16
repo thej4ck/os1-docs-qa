@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc256.js\"  name=\"Contabilità analitica\"><item name=\"Introduzione\" url=\"html/index/index_901066.htm\" /><item name=\"Ricalcolo progressivi centri di costo/ricavo\" url=\"html/bcan/bcan0007d.htm\" /><item name=\"Controllo quadratura contabilità analitica\" url=\"html/bcan/bcan0011d.htm\" /></data>";

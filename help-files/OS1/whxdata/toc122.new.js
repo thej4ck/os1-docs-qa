@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_353091.htm"},{"type":"item","name":"Causali richieste","url":"html/bbas/bbas0049f.htm"},{"type":"book","name":"Fornitori provvisori","key":"toc123"},{"type":"book","name":"Articoli provvisori","key":"toc124"},{"type":"item","name":"Listini articoli provvisori","url":"html/sbas/sbas0104f.htm#bc-1"},{"type":"item","name":"Definizione fornitori provvisori","url":"html/soff/soff0101f.htm"},{"type":"item","name":"Definizione articoli provvisori","url":"html/sbas/sbas0103f.htm#bc-1"},{"type":"item","name":"Testi note per richieste","url":"html/soff/soff0102f.htm"},{"type":"item","name":"Cause annullamento/respinta richieste","url":"html/soff/soff0103f.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

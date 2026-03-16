@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Avviamento","url":"html/index/index_5010.htm"},{"type":"book","name":"Gestione prima nota","key":"toc147"},{"type":"item","name":"Lista prima nota","url":"html/bmag/bmag0002d.htm"},{"type":"item","name":"Analisi movimenti","url":"html/bmag/bmag0003f.htm"},{"type":"item","name":"Analisi giacenze","url":"html/bmag/bmag0005f.htm"},{"type":"item","name":"Analisi partite","url":"html/bmag/bmag0007f.htm"},{"type":"item","name":"Analisi giacenze avanzata","url":"html/bmag/bmag0037f.htm"},{"type":"item","name":"Analisi giacenze per unità di misura","url":"html/bmag/bmag0041f.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

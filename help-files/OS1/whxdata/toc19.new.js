@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_1063.htm"},{"type":"item","name":"Elaborazione pagamenti","url":"html/bpgf/bpgf0001f.htm"},{"type":"item","name":"Stampa situazione pagamenti","url":"html/bpgf/bpgf0002d.htm"},{"type":"item","name":"Stampa documenti","url":"html/bpgf/bpgf0003d.htm"},{"type":"item","name":"Manutenzione distinte","url":"html/bpgf/bpgf0004f.htm"},{"type":"item","name":"Stampa distinte di pagamento","url":"html/bpgf/bpgf0005d.htm"},{"type":"item","name":"Bonifici / Ritiro effetti - Home banking","url":"html/bpgf/bpgf0006d.htm"},{"type":"item","name":"Contabilizzazione distinte","url":"html/bpgf/bpgf0005d_C.htm"},{"type":"item","name":"Importazione avvisi RiBa","url":"html/bpgf/bpgf0007d.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

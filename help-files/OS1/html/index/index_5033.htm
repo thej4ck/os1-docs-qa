@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 25, 2016 11:32:39 AM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Gestione matricole</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+ <meta http-equiv="Content-Language" content="it-IT" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.7.7.0_1";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Magazzino > Gestione matricole" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt; margin-left: 0px;"><span style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt; margin-left: 0px;">Introduzione</span></p>
+<p>Il modulo consente la gestione delle matricole degli articoli sia per aziende di tipo commerciale che per aziende di produzione. Il modulo Matricole è un modulo trasversale che si collega alla gestione del magazzino, al ciclo attivo, al ciclo passivo e alla gestione della produzione.</p>
+<p>La matricola è un elemento di dettaglio unitario che identifica uno specifico elemento quindi può, a determinate condizioni, essere utilizzato anche come elemento di ricerca. L’attribuzione della caratteristica è fatta a livello di specifico articolo; per ogni articolo è possibile definire quindi se è gestito a matricola e la classe della matricola (cioè la definizione delle modalità di creazione della matricola). Dato che la matricola risulta essere l’ultimo dettaglio del prodotto, in presenza di altri elementi di dettaglio del prodotto (Varianti/Ubicazioni/Lotti) è necessario specificare i codici matricola per singolo elemento di dettaglio con l’eccezione dei codici base (variante base, lotto base ed ubicazione base presenti nelle relative configurazioni) per i quali non sarà possibile l’inserimento della matricola.</p>
+<p>La matricola può essere univoca a livello globale di azienda, a livello di classe matricola, a livello di prodotto.</p>
+<p>A livello di gestione documenti la matricola è gestita:</p>
+<ul style="list-style: disc;">
+<li style="list-style:none;display: inline">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">nei documenti di carico del ciclo passivo (Ddt, fattura accompagnatoria, autofattura): in questo caso viene effettuato il carico a magazzino della matricola stessa;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">nei documenti di scarico del ciclo attivo (Ddt, fattura accompagnatoria, movimenti di vendita al dettaglio): in questo caso vengono scaricate le matricole precedentemente caricate (su opzione è possibile scaricare anche matricole non caricate);</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">nei documenti preparatori del ciclo attivo (lista di prelievo e packing list): le matricole inserite in questi documenti vengono considerate prenotate quindi non disponibili per lo scarico se non dai documenti che li evaderanno;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">in prima nota di magazzino: in base al tipo di causale (carico o scarico) le matricole verranno caricate oppure scaricate (se giacenti);</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>A livello di produzione la matricola è gestita:</p>
+<ul style="list-style: disc;">
+<li style="list-style:none;display: inline">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">in fase di gestione richiesta di produzione (RDP): è possibile creare e prenotare matricole per il composto direttamente sulla RDP, l’ODP derivante ed i carichi da produzione utilizzeranno le matricole indicate sulla RDP. Tali matricole fino al termine della produzione risultano prenotate e quindi non utilizzabili da altri ODP;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">in fase di lancio in produzione: è possibile specificare le matricole dei componenti che si intendono utilizzare nella successiva fase di avanzamento produzione; tali matricole vengono considerate come prenotate ai fini della fase di avanzamento;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">in fase di generazione buoni di prelievo: se assegnate in fase di lancio vengono utilizzate tali matricole, altrimenti sarà necessario assegnare le matricole selezionando fra quelle giacenti in magazzino;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">nei Ddt di invio materiali del conto lavoro: per i componenti gestiti a matricole devono essere assegnate le matricole;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">in fase di versamento fase interna/rientro fase esterna: il carico del composto utilizza le matricole dichiarate sulla RDP oppure viene richiesto l’inserimento manuale (l’assegnazione della matricola può essere fatta alla prima o all’ultima fase del ciclo in base ad un apposito parametro di configurazione);</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">in fase di assegnazione lotto versamenti prodotti;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">in fase di trasferimento prodotti su magazzini di spedizione.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>La scelta di menù raggruppa i programmi di interrogazione e manutenzione relativi alla gestione:</p>
+<table style=" vertical-align:Center; border-left-style:Solid; border-left-width:2px; border-right-style:Solid; border-right-width:2px; border-top-style:Solid; border-top-width:2px; border-bottom-style:Solid; border-bottom-width:2px; margin-left:2px; margin-right:2px; left:592px; top:74px; width:100%; max-width:276px;" cellspacing="0" align="center">
+<col width="311" />
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="311">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../smat/smat0001f.htm">Assegnazione matricole</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="311">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../smat/smat0002f.htm">Tracciabilità matricole</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="311">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../smat/smat0003f.htm">Analisi movimenti matricole</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="311">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../smat/smat0004f.htm">Analisi giacenze matricole</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-width: 1px; border-bottom-style: Solid;" width="311">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../smat/smat0005f.htm">Inventario matricole</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="311">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="index_503390.htm">Tabelle</a></p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<p>&#160;</p>
+</body>
+</html>

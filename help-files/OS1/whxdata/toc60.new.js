@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_2036.htm"},{"type":"book","name":"Gestione parcelle","key":"toc61"},{"type":"item","name":"Stampa parcelle","url":"html/spar/spar0019d.htm"},{"type":"item","name":"Analisi parcelle","url":"html/spar/spar0020f.htm"},{"type":"item","name":"Lista parcelle","url":"html/spar/spar0021d.htm"},{"type":"item","name":"Contabilizzazione parcelle","url":"html/spar/spar0022d.htm"},{"type":"item","name":"Situazione parcelle","url":"html/spar/spar0023d.htm"},{"type":"item","name":"Evasione parcelle pro forma","url":"html/spar/spar0018f_001.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="06 6, 2011 2:17:44 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Analisi vendite/acquisti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.7.2.0_6";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Magazzino > Interrogazioni" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt;">Analisi vendite/acquisti</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;">Il programma produce prospetti di analisi del venduto o dell’acquistato relativi a uno o più parametri di selezione forniti dall’utente, consentendo l’output sia su carta che in formato Excel.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt;">&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: center;"><img src="Images/bmag0014d_01.png" alt="" style=" border:none; width:100%; max-width:587px;" border="0" /></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt;">&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">TIPO ANALISI: combo box per definire il tipo di anagrafica da selezionare. Valori ammessi: Clienti; Fornitori.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">DA PRODOTTO: eventuale codice dell'articolo, presente in anagrafica Prodotti, da cui si desidera iniziare la selezione dei &#160;movimenti di magazzino. Confermando a vuoto, la selezione inizia con il primo prodotto valido. Sul campo è attiva la ricerca (F9) sull’anagrafica prodotti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">A PRODOTTO: eventuale codice dell'articolo, presente in anagrafica Prodotti, a cui si desidera terminare la selezione dei &#160;movimenti di magazzino. Confermando a vuoto, la selezione termina con l’ultimo valido. Sul campo è attiva la ricerca (F9) sull’anagrafica prodotti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">DA CLI/FOR: eventuale codice del cliente o fornitore, presente nella rispettiva anagrafica, da cui si desidera iniziare la selezione dei &#160;movimenti di magazzino. Confermando a vuoto, la selezione inizia con il primo valido. Sul campo è attiva la ricerca (F9) sull'anagrafica selezionata.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">A CLI/FOR: eventuale codice del cliente o fornitore, presente nella rispettiva anagrafica, a cui si desidera concludere la selezione dei &#160;movimenti di magazzino. Confermando a vuoto, la selezione inizia con l’ultimo valido. Sul campo è attiva la ricerca (F9) sull'anagrafica selezionata.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale data da cui deve iniziare l’analisi dei movimenti di magazzino per gli articoli precedentemente selezionati. Confermando a vuoto, l’analisi inizia con il primo movimento valido.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale data con cui si desidera terminare l’analisi dei movimenti di magazzino per gli articoli precedentemente selezionati. Confermando a vuoto, l’analisi si conclude con l'ultimo movimento valido.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">CAUSALE: eventuale codice della causale di magazzino, a cui si desidera limitare l’analisi dei movimenti di magazzino. Sul campo è attiva la ricerca (F9) sulla tabella stessa.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">AGENTE: eventuale codice dell’agente, presente in anagrafica dei clienti o fornitori selezionati, a cui si desidera limitare l’analisi dei movimenti di magazzino. Sul campo è attiva la ricerca (F9) sull’anagrafica agenti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">NAZIONE: eventuale codice della nazione, presente in anagrafica dei clienti o fornitori selezionati, a cui si desidera limitare l’analisi dei movimenti di magazzino. Sul campo è attiva la ricerca (F9) F9 sulla Tabella nazioni.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">ZONA: eventuale codice della zona, presente in anagrafica dei clienti o fornitori selezionati, a cui si desidera limitare l’analisi dei movimenti di magazzino. Sul campo è attiva la ricerca (F9) sulla Tabella zone.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">ATTIVITÀ: eventuale codice della attività, presente in anagrafica dei clienti o fornitori selezionati, a cui si desidera limitare l’analisi dei movimenti di magazzino. Sul campo è attiva la ricerca (F9) F9 sulla Tabella attività.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">DA MAGAZZINO: eventuale codice del magazzino da cui si vuole iniziare la selezione di analisi. Confermando a vuoto, l’analisi inizia dal primo magazzino valido. Sul campo è attiva la ricerca (F9) F9 sulla tabella Magazzini.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">A MAGAZZINO: eventuale codice del magazzino con cui si vuole concludere la selezione di analisi. Confermando a vuoto, l’analisi termina con l’ultimo magazzino valido. Sul campo è attiva la ricerca (F9) sulla tabella Magazzini.</p>
+<p>&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">La seconda pagina contiene ulteriori opzioni di selezione</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: center;"><img src="Images/bmag0014d_02.png" alt="" style=" border:none; width:100%; max-width:587px;" border="0" /></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">CATEGORIA PRODOTTI: eventuale codice della categoria merceologica presente in anagrafica Prodotti, a cui si desidera limitare la selezione di analisi. Sul campo è attiva la ricerca (F9) sulla tabella Categorie merceologiche.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">CATEGORIA VENDITA: eventuale codice della categoria di vendita presente in anagrafica Prodotti, a cui si desidera limitare la selezione di analisi. Sul campo è attiva la ricerca (F9) sulla tabella Categorie di vendita.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">GRUPPO VENDITE: eventuale codice della gruppo vendite presente in anagrafica Prodotti, a cui si desidera limitare la selezione di analisi. Sul campo è attiva la ricerca (F9) sulla tabella Gruppi vendita.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">GRUPPO ACQUISTI: eventuale codice della gruppo acquisti presente in anagrafica Prodotti, a cui si desidera limitare la selezione di analisi. Sul campo è attiva la ricerca (F9) sulla tabella Gruppi acquisti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">FORNITORE ABITUALE: eventuale codice del fornitore abituale dei prodotti con cui si desidera effettuare la selezione dei prodotti. Sul campo è attiva la ricerca (F9) sull’anagrafica fornitori.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">ORDINAMENTO PER: combo box per definire i criteri di ordinamento. Valori ammessi: Codice cli/for; Ragione sociale; Codice prodotto; Descrizione prodotto.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">VALORI ESPRESSI IN: definisce la moneta di conto in cui verranno stampati i controvalori.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">TRATTA OBSOLETI: definisce come se includere nell'analisi anche gli articoli obsoleti: Si, No, Solo obsoleti.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">MOVIMENTO SOLO A VALORE: indica se considerare i movimenti solo a valore (casella con segno di spunta).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">DETTAGLIO QUANTITÀ: indica se stampare il dettaglio delle quantità o solo i totali (casella con segno di spunta).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">STAMPA SINTETICA: definisce se effettuare la stampa del report in formato sintetico (casella con segno di spunta).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;">ORDINA PER VALORE: indica se ordinare la stampa in base al valore, casella con segno di spunta.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; margin-left: 30pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">DETTAGLIO MAGAZZINO:</span> <span style="margin-top: 6pt; margin-bottom: 6pt; margin-left: 30pt; text-align: justify; text-indent: -0.417in; font-family: Verdana, sans-serif; font-size: 10pt;">check box per definire i criteri di visualizzazione in caso di presenza in più magazzini dello stesso prodotto. Valori ammessi: vuoto = visualizza il totale dei magazzini; spunta = visualizza analiticamente i singoli magazzini.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; margin-left: 30pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in;">STAMPA INTESTAZIONE: indica se stampare una pagina con i criteri di selezione della stampa, l’operatore che l’ ha eseguita, la data e l’ora (casella con segno di spunta).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; margin-left: 30pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in;">SALTO PAGINA: definisce se effettuare il salto pagina al termine di ogni gruppo di stampa relativo all'ordinamento selezionato (casella con segno di spunta).</p>
+</body>
+</html>

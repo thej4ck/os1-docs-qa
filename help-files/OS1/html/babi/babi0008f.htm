@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="12 2, 2003 7:24:13 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Manutenzione valori - piano dei conti di aziendale</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.15.3.1.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Analisi di bilancio > Tabelle > Piano dei conti aziendale" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-size: 12pt;">Manutenzione valori</p>
+<p>La procedura consente di manutenere i valori nel caso si utilizzi un piano dei conti aziendale.</p>
+<p>La pagina dei parametri consente di specificare i criteri relativi alla selezione dei dati da manutenere ed eventualmente all'importazione da un file esterno.</p>
+<p style="text-align: center;"><img src="images/babi0008f_01.png" alt="" style=" border:none; width:100%; max-width:732px;" border="0" /></p>
+<p>&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;"><span><span style="font-family: Verdana, sans-serif; font-size: 10pt;">PERIODO: inserire il periodo per cui si desidera effettuare la manutenzione dei valori. L'inserimento del periodo determina la valorizzazione delle date di elaborazione. Sul campo sono attive le funzioni di ricerca (F9) sulla tabella stessa.</span></span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt; mso-bidi-font-family: Arial; line-height: Normal;">VALORI: indicare quali valori si desidera modificare: i valori effettivi, quelli rettificati &#160;oppure quelli Preventivi.</p>
+<p>&#160;</p>
+<p style="mso-bidi-font-family: Arial; line-height: Normal; margin-left: 0in;">La pressione del pulsante Importa consente di indicare un file in formato ASCII da cui è possibile effettuare direttamente la generazione dei valori e dei relativi conti. Nel caso in cui esistano già dei valori per il periodo richiesto nella selezione principale, all'utente sarà richiesto se desidera sovrascrivere i dati oppure annullare l'operazione.</p>
+<p style="mso-bidi-font-family: Arial; line-height: Normal; margin-left: 0in;">Il formato del file deve essere il seguente:</p>
+<p style="mso-bidi-font-family: Arial; line-height: Normal; margin-left: 0in;"><span>Prima riga di intestazione e successive righe con i dati nelle seguenti colonne.</span></p>
+<p style="font-weight: bold;">FlTipoConto|IdContoTp|IdConto|DsConto|DareMov|AvereMov</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="font-weight: bold;">FlTipoConto</span>: <span style="font-family: Verdana, Arial; margin-left: 0in;">1 = attività, 2 = passività, 3 = costi, 4 = ricavi,</span> <span style="margin-left: 0in; font-family: Verdana, Arial;">5 = conti di servizio,</span> <span style="font-family: Verdana, Arial; margin-left: 0in;">6 = conti d'ordine attivi, 7 = conti d’ordine passivi.</span></p>
+<p><span style="font-weight: bold;">IdContoTp</span>: SC = sottoconto, CL = cliente, FO = fornitore.</p>
+<p><span style="font-weight: bold;">IdConto</span>: codice del conto max lunghezza 8 caratteri.</p>
+<p><span style="font-weight: bold;">DsConto</span>: descrizione del conto max lunghezza 50 caratteri.</p>
+<p><span style="font-weight: bold;">DareMov</span>: saldo DARE del conto, formato nnnn,ddd ( 1500,25)</p>
+<p><span style="font-weight: bold;">AvereMov</span>: saldo AVERE del conto, formato nnnn,ddd ( 1500,25)</p>
+<p>&#160;</p>
+<p>La pressione del pulsante Esegui visualizza nella pagina Risultati i dati selezionati.</p>
+<p style="text-align: center;"><img src="images/babi0008f_02.png" alt="" style=" border:none; width:100%; max-width:732px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">CONTO: indica il conto del piano dei conti aziendale al quale sono associati i valori. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DARE: Importo DARE &#160;relativo al tipo di valore selezionato associato al conto.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">AVERE: Importo AVERE relativo al tipo di valore selezionato associato al conto.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">Il Saldo ed il relativo segno vengono calcolati automaticamente.</p>
+<p style="margin-left: 0in;">La pressione del tasto Salva sulla toolbar principale (F10) &#160;effettuerà il salvataggio dei dati modificati, dopo richiesta di conferma; analogamente la pressione del tasto Annulla sulla toolbar principale (ESC) annullerà ogni modifica apportata, sempre dopo una richiesta di conferma.</p>
+</body>
+</html>

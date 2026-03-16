@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc256.js\"  name=\"Contabilità semplificata\"><item name=\"Introduzione\" url=\"html/index/index_901030.htm\" /><item name=\"Annullamento storno mancati incassi/pagamenti\" url=\"html/bcsp/bcsp0012d.htm\" /><item name=\"Annullamento giroconti incassi/pagamenti\" url=\"html/bcsp/bcsp0014d.htm\" /></data>";

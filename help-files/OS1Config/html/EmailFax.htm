@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="06 30, 2011 10:23:10 AM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Configurazione esterna invio massivo eMail/Fax</title>
+<link rel="StyleSheet" href="../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "..";
+gCommonRootRelPath = "..";
+gTopicId = "2.1_4";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazioni esterne" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../ehlpdhtm.js"></script>
+
+<h2>Configurazione esterna invio massivo eMail/Fax</h2>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">&#160;</p>
+<p>Allo stato attuale i documenti che dispongono del servizio di invio 
+ massivo sono:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p>Fatture clienti (tipo documento 1)</p></li>
+		<li class="p"><p>Ddt clienti (tipo documento 0)</p></li>
+		<li class="p"><p>Ordini clienti (tipo documento 2)</p></li>
+		<li class="p"><p>Offerte clienti (tipo documento 4)</p></li>
+		<li class="p"><p>Packing list (tipo documento 3)</p></li>
+		<li class="p"><p>Ordini fornitori (tipo documento 12)</p></li>
+		<li class="p"><p>Ordini terzisti (c/lavoro) (tipo documento 22)</p></li>
+		<li class="p"><p>Ddt terzisti (c/lavoro) (tipo documento 20)</p></li>
+		<li class="p"><p>Parcelle proforma (tipo documento 101)</p></li>
+		<li class="p"><p>Solleciti clienti (tipo documento 300)</p></li>
+		<li class="p"><p>Estratto conto clienti/fornitori (tipo documento 
+		 301)</p></li>
+	</ul></li>
+</ol>
+<p>&#160;</p>
+<p>Il tipo documento, indicato tra parentesi, è importante poiché per questo 
+ modulo il file di configurazione eventualmente da parametrizzare per l’invio 
+ è denominato <span style="font-weight: bold;">TipoDoc=x.cfg</span> dove 
+ x è il tipo documento. La scelta è stata fatta al fine di rendere più 
+ agevole l’eventuale implementazione di altri documenti evitando di aggiungere 
+ ulteriori tabelle di configurazione. I files di configurazione relativi 
+ alle tipologie di documento gestite sono presenti nella cartella <span 
+	 style="font-weight: bold;">Modelli\EMailFax</span>.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;">TipoDoc=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;"><span 
+	 style="font-style: italic;">; Fattura di vendita</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">[Dati]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">Select=SELECT 
+ F.IdCliente, C.RagioneSociale, F.Anno, F.Serie, F.Numero, F.IdCausale, 
+ F.DataDocumento, P.DsSerie, F.IdDestinazione, F.IdDestinazioneAmm FROM 
+ FattureCliTeste F INNER JOIN Clienti C ON C.IdConto = F.IdCliente INNER 
+ JOIN ProtIva P ON P.Anno = F.Anno AND P.Serie = F.Serie WHERE F.KFattCliT 
+ = :Chiave</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">NomeFile=FTV[Anno]-[Serie]-[Numero].pdf</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">[MailMerge]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">; 
+ Per valori costanti far precedere il valore dal carattere %</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">FlTipoDocumento=%1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">TipoAnag=%CL</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">CodiceAnag=IdCliente</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">IdDestinazione=IdDestinazione</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">IdDestinazioneAmm=IdDestinazioneAmm</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">RagioneSociale=RagioneSociale</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">Anno=Anno</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">Serie=Serie</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">Numero=Numero</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">Data=DataDocumento</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">Causale=IdCausale</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">DsSerie=DsSerie</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Il file 
+ è diviso in sezioni il cui nome è racchiuso tra parentesi quadre.</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Il primo 
+ gruppo <span style="font-weight: bold;">[Dati]</span> contiene la sintassi 
+ SQL (<span style="font-weight: bold;">Select</span>) per l'estrazione 
+ dei dati, la struttura del nome del file (<span style="font-weight: bold;">NomeFile</span>) 
+ con cui saranno salvati i documenti inviati. I nomi dei campi riportati 
+ tra parentesi quadre fanno riferimento ai campi presenti nell'istruzione 
+ SQL e riporteranno dove inseriti il valore.</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Il gruppo 
+ [<span style="font-weight: bold;">MailMerge</span>] contiene l'indicazione 
+ dei campi del documento con il relativo campo o valore costante (preceduto 
+ dal carattere <span style="font-weight: bold;">%</span>); dette voci è 
+ possibile riportarle all'interno della procedura OS1, ad esempio inserendo 
+ il nome del campo tra parentesi quadre ([RagioneSociale] nel testo del 
+ messaggio da allegare alla eMail. E' possibile aggiungere anche altri 
+ campi purché presenti nella sintassi SQL.</p>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="02 2, 2013 12:20:25 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Aliquote ritenute di acconto</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.10.6.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Configurazioni > Vendite" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt;">Aliquote 
+ ritenute di acconto</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">La tabella consente di gestire 
+ le variazioni di percentuale, relative alle ritenute emesse tramite le 
+ funzionalità della fattura di vendita, nel corso del tempo.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">&#160;</p>
+<p style="text-align: center;"><img src="Images/bbas0173f_01.png" alt="" style=" border:none; width:100%; max-width:403px;" border="0" /></p>
+<p style="margin-left: 0in; text-align: left;">&#160;</p>
+<p>Nel campo “Livello di applicazione” deve essere indicata la tipologia 
+ di aliquota a cui si riferiscono le percentuali, se Principale o Aggiuntiva, 
+ se gestite queste ultime a livello di configurazione; per data di inizio 
+ validità possono essere specificate le percentuali di assoggettamento 
+ e l’aliquota da applicare.</p>
+<p>Nel caso in cui si attivi una delle due ritenute in una data successiva 
+ alla data di inizio gestione è necessario impostare le percentuali in 
+ configurazione, per poter attivare una od entrambe le gestioni, e due 
+ record su questa tabella per ogni tipologia attivata, una con una data 
+ di inizio validità uguale alla data di inizio gestione e le percentuali 
+ a zero (in modo che se viene variata una fattura precedente alla data 
+ di inizio gestione non venga calcolato erroneamente l’importo della ritenuta) 
+ e uno con data di<span style="mso-spacerun: yes;">&#160;</span>&#160;inizio 
+ validità e le percentuali effettive da gestire.</p>
+<p>Nel caso in cui sia stato attivato il flag “Utilizza tipi ritenuta configurabili”, 
+ presente nella configurazione Standard – Ciclo attivo, nel campo “Livello 
+ di applicazione” vengono visualizzate le diciture delle etichette configurate 
+ e per ognuna è necessario specificare le percentuali di assoggettamento 
+ e l’aliquota da applicare.</p>
+<p><span style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; mso-fareast-font-family: 'Times New Roman'; 
+		 mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: IT; 
+		 mso-fareast-language: IT; mso-bidi-language: AR-SA;">Nel campo 
+ “Massimale RdA” deve essere inserito il valore del massimale superato 
+ il quale non deve essere calcolata la ritenuta, questo in particolar modo 
+ per gestire il massimale relativo al contributo previdenziale Enasarco, 
+ indicando tale massimale deve essere indicato se il calcolo è globale 
+ (come ad esempio per gli agenti monomandatari) o per cliente (come ad 
+ esempio per gli agenti plurimandatari). Il massimale viene utilizzato 
+ nel calcolo dell’imponibile RdA sulle fatture, mentre il massimale non 
+ viene utilizzato per calcolare l’imponibile RdA sulle note di credito, 
+ su queste viene calcolata la ritenuta non tenendo conto del massimale 
+ ma concorrono al calcolo del residuo del massimale per le successive fatture. 
+ Nel caso in cui sia stato attivato il flag “Utilizza tipi ritenuta configurabili” 
+ il calcolo del massimale viene effettuato in base al tipo ritenuta impostato 
+ sulle fatture, quindi le fatture con tipo ritenuta diverso non concorrono 
+ al calcolo dell’importo dello stesso massimale</span>.</p>
+</body>
+</html>

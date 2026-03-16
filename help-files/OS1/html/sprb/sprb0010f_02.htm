@@ -1,0 +1,269 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 17, 2016 12:35:27 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Gestione MPS - Richieste (RDP)</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.3.1.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Piano di produzione > Gestione MPS" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-weight: bold; font-size: 12pt;">Richieste (RDP)</p>
+<p><img src="images/sprb0010f_2_01.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-bottom:5px; margin-right:5px; width:100%; max-width:78px;" align="left" border="0" />Il piano di produzione viene elaborato a fronte di 
+ richiesta di produzione (RDP) che contengono al loro interno le informazioni 
+ di ciò che deve essere prodotto; le &#160;RDP possono avere diverse origini:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;">Da 
+		 ordine cliente: la RDP viene generata da ordine cliente, al momento 
+		 in cui si preme il pulsante Esegui elaborando tutti gli ordini 
+		 aperti dalla data di inizio produzione presente in configurazione 
+		 fino alla data di consegna presente nei limiti video, per essere 
+		 elaborati gli ordini devono essere assegnati al'unità produttiva 
+		 su cui si sta operando; questa assegnazione viene effettuata in 
+		 automatico al salvataggio dell'ordine cliente utilizzando le <a 
+		 href="sprb0117f.htm">regole di instradamento</a>. La RDP contiene 
+		 i dati necessari per la produzione. La RDP è generata sul magazzino 
+		 di spedizione indicato sull’ordine cliente e la data di produzione 
+		 è uguale alla data di consegna a cliente diminuita degli eventuali 
+		 giorni di consegna gestiti tramite la tabella <a href="sprb0113f.htm">Tempi 
+		 di consegna</a> (basati sul cliente o sulla zona di consegna del 
+		 cliente); i calcoli sulla data tengono conto del calendario aziendale 
+		 attivo. La RDP da ordine cliente viene nettificata in fase di 
+		 <a href="sprb0010f_03.htm">generazione piano</a> considerando 
+		 le eventuali disponibilità di magazzino, a meno che sulla RDP 
+		 non sia stata spuntata la casella “Forza produzione” per cui l’ODP 
+		 viene creato per la quantità richiesta anche in presenza di disponibilità 
+		 utilizzabili.</p></li>
+		<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;">Da 
+		 reintegro scorta: la RDP viene generata dalla funzione <a href="sprb0010f_01.htm">Reintegri</a>.</p></li>
+		<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;">Manuale: 
+		 la RDP viene inserita manualmente indicando i dati necessari per 
+		 la produzione; l'inserimento, variazione o cancellazione di una 
+		 RDP manuale invalida il piano di produzione attuale che dovrà 
+		 essere rigenerato; si può entrare direttamente in stato di inserimento 
+		 utilizzando l'apposito bottone &quot;Inserisci&quot;.</p></li>
+		<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;">Da 
+		 correttivi: la RDP da correttivi possono essere generate al termine 
+		 della fase di <a href="sprb0010f_04.htm">verifica piano</a> quando 
+		 si verificano situazioni di disponibilità non soddisfatta.</p></li>
+		<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;">Da 
+		 altra unità produttiva: nel caso di gestione di più unità produttive 
+		 in cui una unità produttiva produce semilavorati utilizzati da 
+		 un’altra unità produttiva. Per attivare la funzionalità è necessario 
+		 impostare “Unità produttive collegate”; nella funzione di generazione 
+		 RDA/RLE si aggiunge una nuova funzione di generazione RDP che 
+		 provvede a creare la RDP per i componenti di tipo materia prima 
+		 che sono instradati da tabella su un’unità produttiva diversa 
+		 rispetto a quella del composto. Le RDP vengono eliminate e rigenerate 
+		 fino a che l’unità produttiva assegnataria non ha generato il 
+		 piano.</p></li>
+	</ul></li>
+</ol>
+<p>Oltre al limite di data per l'elaborazione degli ordini è possibile, 
+ agendo sulle relative caselle, riattivare le RDP sospese, visualizzare 
+ le RDP sospese ed escluse; per accedere alla modifica, analisi delle RDP 
+ è necessario premere il tasto Esegui; le RDP saranno visibili fino all'avvenuta 
+ pianificazione del relativo ODP, dopodiché non saranno più visualizzate 
+ a meno che il relativo ODP non sia sottoposto ad un annullamento di pianificazione.</p>
+<p>Se presente la gestione progetti sarà possibile specificare il progetto, 
+ che sarà utilizzato come filtro per la generazione.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_2_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>La finestra di gestione riporta in griglia le RDP presenti rappresentandole 
+ in colori diversi in relazione all'origine; l'origine viene comunque mostrata 
+ in basso a destra di fianco al livello di priorità: in blu le RDP da ordini, 
+ se scadute rispetto alla data di sistema vengono evidenziate in grassetto, 
+ in nero le RDP manuali, in marrone le RDP da reintegri ed in rosso le 
+ RDP da correttivi.</p>
+<p><img src="images/sprb0010f_2_11.png" alt="" style=" border:none; margin-top:0px; margin-left:0px; margin-right:6px; margin-bottom:0px; width:100%; max-width:319px;" align="left" border="0" /><img src="images/b_aneve.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; width:100%; max-width:20px;" border="0" />Il pulsante 
+ indicato, presente in alto, consente di mostrare o nascondere la legenda 
+ relativa ai significati dello stato di esclusione e delle origini delle 
+ RDP.</p>
+<p>Tramite i tre pulsanti colorati <img src="images/sprb0010f_2_07.png" alt="" style=" border:none; width:100%; max-width:69px;" border="0" /> 
+ è possibile modificare lo stato di esclusione della richiesta, cioè se 
+ la richiesta deve essere presa in esame in fase di generazione del piano 
+ di produzione; la richiesta può essere inclusa, sospesa o esclusa; le 
+ richieste escluse non saranno visualizzate mai a meno che non si spunti 
+ la casella &quot;Visualizza anche richieste escluse&quot; prima di premere 
+ Esegui e potranno essere incluse di nuovo solo manualmente; le richieste 
+ sospese vengono incluse nuovamente alla prossima elaborazione a meno che 
+ non si tolga la spunta alla casella &quot;Riattiva tutte le richieste 
+ sospese&quot;. Il cambio di stato di una RDP invalida il piano di produzione 
+ attuale che dovrà essere rigenerato.</p>
+<p><img src="images/b_Alter.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; width:100%; max-width:24px;" border="0" /><img src="images/dlgAlter.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:699px;" align="right" border="0" />Se prevista la gestione delle alternative sarà presente 
+ anche il pulsante mostrato a lato; premendolo si apre la finestra a destra 
+ dove viene indicata in giallo l'alternativa attualmente utilizzata, di 
+ default è la 0 (zero); in questa fase è possibile selezionare con il doppio 
+ click del mouse la nuova scheda tecnica alternativa che sarà utilizzata 
+ dalla generazione del piano di produzione. Premendo il tasto Salva la 
+ modifica diventa definitiva. Il cambio di alternativa di una RDP invalida 
+ il piano di produzione attuale che dovrà essere rigenerato.</p>
+<p><img src="images/b_MPS.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:20px;" align="left" border="0" />Se prevista la gestione dei progetti ed è attivo 
+ il parametro “Generazione MPS da RDP” presente nella configurazione “Piano 
+ di produzione”, sarà presente il pulsante a lato che consente lanciare 
+ la generazione del piano direttamente dalla gestione RDP per una singola 
+ RDP o meglio per il progetto della RDP stessa; nel caso in cui si tratti 
+ una RDP manuale senza progetto viene creato un nuovo progetto e assegnato 
+ alla RDP stessa.</p>
+<p>La casella Forza produzione se spuntata, esclude la richiesta dalla 
+ nettificazione in fase di generazione del piano ed indica che il composto 
+ deve essere prodotto anche se fosse già presente e disponibile a magazzino. 
+ La modifica a questa casella invalida il piano di produzione attuale che 
+ dovrà essere rigenerato.</p>
+<p>La priorità è modificabile (attraverso i pulsanti accanto al campo); 
+ questo determina che a parità di data richiesta produzione saranno trattate 
+ prima le RDP con priorità più alta.</p>
+<p>Nella parte bassa è presente il riferimento all'ordine del cliente, 
+ presente solo per le richieste che provengono da ordini.</p>
+<p>Sopra la griglia è presente la barra dei filtri da cui è possibile impostare 
+ quali RDP visualizzare in relazione all'origine spuntando o meno le caselle 
+ presenti.</p>
+<p>&#160;</p>
+<p><img src="images/sprb0010f_2_04.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:88px;" align="left" border="0" /><img src="images/sprb0010f_2_05.png" alt="" style=" border:none; margin-top:0px; margin-bottom:5px; margin-left:5px; margin-right:0px; width:100%; max-width:592px;" align="right" border="0" /><img src="images/sprb0010f_2_06.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:88px;" align="left" border="0" />Utilizzando il pulsante &quot;Filtri&quot; è possibile 
+ applicare un filtro aggiuntivo alla visualizzazione, per cliente, per 
+ prodotto e se presenti i moduli anche per Variante e Progetto; premendo 
+ il pulsante comparirà la finestra in cui specificare i filtri da applicare; 
+ con il filtro applicato il pulsante cambia immagine e dicitura e consentendo 
+ l'annullamento del filtro appena impostato. Il filtro agisce comunque 
+ tenendo conto delle caselle relative all'origine.</p>
+<p>&#160;</p>
+<p><span style="text-align: center;"><img src="images/sprb0010f_2_03.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:83px;" align="left" border="0" /></span>Se 
+ si selezionano solo RDP da reintegri e/o da correttivi si attiva il pulsante 
+ &quot;Cancella&quot; che se premuto e risposto affermativamente alla richiesta 
+ di conferma elimina definitivamente le RDP visualizzate.</p>
+<p>&#160;</p>
+<p>&#160;</p>
+<p><img src="images/b_Inclusioni.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:96px;" align="left" border="0" />Utilizzando il pulsante &quot;Inclusioni&quot; si 
+ accede alla finestra da cui è possibile selezionare le richieste visualizzate 
+ nella finestra principale e definire, per gruppi, se includere escludere 
+ o sospendere le richieste;; è necessario selezionare, con il doppio clic 
+ del mouse o tramite il menù contestuale le righe su cui operare, premendo 
+ i pulsanti in basso le righe selezionate assumeranno lo stato indicato 
+ dal pulsante premuto&#160;solo premendo il pulsante Salva le modifiche 
+ saranno rese effettive.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_2_20.png" alt="" style=" border:none; margin-top:0px; margin-right:0px; margin-left:0px; margin-bottom:0px; width:100%; max-width:720px;" border="0" /></p>
+<p>&#160;</p>
+<p><img src="images/sprb0010f_2_12.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:83px;" align="left" border="0" />Utilizzando il pulsante &quot;Raggruppa&quot; è possibile 
+ effettuare il raggruppamento delle richieste di produzione; questa operazione 
+ consente di assegnare a tutte le RDP che vengono selezionate la stessa 
+ data di richiesta produzione in modo che la successiva generazione del 
+ piano generi un solo ODP per il totale della quantità richiesta in tale 
+ data. Nella finestra vengono riportate, nella prima griglia, le RDP attive 
+ raggruppate per prodotto, variante e progetto (in relazione alla gestione 
+ attiva) e selezionando un elemento compaiono, nella griglia inferiore 
+ le RDP analitiche; in basso è presente un casella di spunta per mostrare 
+ solo le RDP che non hanno ancora generato ODP.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_2_13.png" alt="" style=" border:none; margin-top:0px; margin-right:0px; margin-left:0px; margin-bottom:0px; width:100%; max-width:750px;" border="0" /></p>
+<p><img src="images/sprb0010f_2_14.gif" alt="" style=" border:none; margin-top:0px; margin-bottom:5px; margin-left:5px; margin-right:0px; width:100%; max-width:147px;" align="right" border="0" />Da questa griglia è possibile 
+ selezionare le RDP da raggruppare con il doppio clic del mouse oppure 
+ utilizzando il menù associato al tasto destro del mouse tramite cui è 
+ possibile anche annullare la selezione a tutte le richieste, selezionare 
+ tutte le richieste oppure annullare un raggruppamento già effettuato; 
+ nella parte bassa, sotto la griglia, è presente la nuova data di produzione 
+ che può essere &#160;anche inserita manualmente (di base viene proposta 
+ la data minore fra tutte le RDP selezionate) ed il pulsante Raggruppa. 
+ Con le richieste selezionate se si preme il pulsante Raggruppa, viene 
+ effettuato il raggruppamento e le richieste appaiono come nell'esempio:</p>
+<p style="text-align: center;"><img src="images/sprb0010f_2_15.png" alt="" style=" border:none; margin-top:0px; margin-right:0px; margin-left:0px; margin-bottom:0px; width:100%; max-width:751px;" border="0" /></p>
+<p>Tutte le operazioni effettuate all'interno di questa finestra saranno 
+ salvate solo se si preme il pulsante Salva in basso, se si esce dalla 
+ finestra premendo Annulla tutte le modifiche effettuate andranno perse; 
+ analogamente se si esce premendo Salva sarà effettuato il raggruppamento 
+ delle richieste come previsto. <span style="font-weight: bold;">Una volta 
+ effettuato, il raggruppamento, non potrà essere annullato</span>.</p>
+<p>&#160;</p>
+<p><img src="images/sprb0010f_2_08.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:83px;" align="left" border="0" />Il pulsante &quot;Analisi&quot; presente sul navigatore 
+ consente di effettuare una veloce analisi delle RDP attive che ancora 
+ non hanno dato origine a nessun ODP, se poi si spunta la casella in basso 
+ a sinistra saranno incluse anche le richieste che hanno generato ODP; 
+ la finestra di analisi è suddivisa in tre zone: la parte in alto a sinistra 
+ riporta l'elenco delle date di richiesta produzione relative alle richieste 
+ in esame, a destra le richieste raggruppate per prodotto (e variante se 
+ gestita), la parte in basso riporta le richieste raggruppate per prodotto 
+ (eventuale variante) e data richiesta produzione. Selezionando una data 
+ le altre griglie cambiano di conseguenza, nella parte bassa le righe in 
+ grigio sono relative ad altre date e non a quella selezionata.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_2_09.png" alt="" style=" border:none; margin-right:0px; margin-top:0px; margin-left:0px; margin-bottom:0px; width:100%; max-width:754px;" border="0" /></p>
+<p>&#160;</p>
+<p><img src="images/sprb0010f_2_16.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:83px;" align="left" border="0" /><img src="images/sprb0010f_2_18.png" alt="" style=" border:none; margin-top:0px; margin-bottom:0px; margin-left:6px; margin-right:0px; width:100%; max-width:275px;" align="right" border="0" />Il 
+ pulsante &quot;Check SL&quot; presente sul navigatore consente di trasferire 
+ eventuali giacenze di semilavorati già presenti a magazzino per coprire 
+ eventuali richieste di produzione di semilavorati. La funzione controlla 
+ se ci sono richieste di semilavorati per i quali esiste una giacenza e 
+ permette di generare un movimento di trasferimento del semilavorato sul 
+ magazzino di produzione in modo da evitare la produzione del semilavorato 
+ stesso. Nella parte superiore della finestra vengono mostrate le RDP relative 
+ ai semilavorati, è possibile visualizzare solo le RDP che non hanno già 
+ generato ODP spuntando la relativa casella. Nella parte inferiore le giacenze 
+ dei prodotti nei magazzini semilavorati; è possibile considerare tutti 
+ i magazzini semilavorati mettendo la spunta sulla relativa casella, se 
+ si toglie la spunta è possibile selezionare i magazzini in cui cercare 
+ le giacenze tramite un'apposita finestra. <img src="images/sprb0010f_2_19.png" alt="" style=" border:none; margin-left:0px; margin-right:6px; margin-top:0px; margin-bottom:0px; width:100%; max-width:237px;" align="left" border="0" />Con 
+ il doppio clic del mouse o tramite il menù contestuale del tasto destro 
+ del mouse nella griglia superiore è possibile selezionare/deselezionare 
+ le richieste; in caso di selezione la quantità della RDP selezionata andrà 
+ a decrementare l'esistenza del prodotto nella parte inferiore, se si deseleziona 
+ l'esistenza sarà risommata; le RDP completamente coperte vengono evidenziate 
+ in colore differente rispetto a quelle parzialmente coperte. Prima di 
+ poter effettuare la generazione è necessario inserire la causale di magazzino 
+ di trasferimento.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_2_17.png" alt="" style=" border:none; margin-right:0px; margin-top:0px; margin-left:0px; margin-bottom:0px; width:100%; max-width:940px;" border="0" /></p>
+<p>&#160;</p>
+<p><img src="../smat/Images/b_MatRigo.png" alt="" style=" border:none; margin-top:0px; margin-left:0px; margin-right:5px; margin-bottom:5px; width:100%; max-width:25px;" align="left" border="0" />Se attiva la 
+ gestione matricole sarà possibile accedere dalla singola RDP alla <a href="../smat/DlgMATDocMatricole.htm">finestra 
+ delle matricole</a> tramite il pulsante sul rigo.</p>
+</body>
+</html>

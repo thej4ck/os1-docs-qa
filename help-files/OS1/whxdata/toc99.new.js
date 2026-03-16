@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Avviamento","url":"html/index/index_3030.htm"},{"type":"book","name":"Gestione offerte","key":"toc100"},{"type":"item","name":"Stampa offerte","url":"html/sofc/sofc0002d.htm"},{"type":"item","name":"Analisi offerte","url":"html/sofc/sofc0003f.htm"},{"type":"item","name":"Situazione offerte","url":"html/sofc/sofc0007d.htm"},{"type":"item","name":"Esito offerte","url":"html/sofc/sofc0008f.htm"},{"type":"item","name":"Saldo offerte","url":"html/sofc/sofc0004f.htm"},{"type":"item","name":"Verifica esito","url":"html/sofc/sofc0006d.htm"},{"type":"book","name":"Listini","key":"toc101"},{"type":"book","name":"Tabelle","key":"toc103"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

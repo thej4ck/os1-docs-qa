@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/sprb/sprb0010f.htm"},{"type":"item","name":"Reintegri","url":"html/sprb/sprb0010f_01.htm"},{"type":"item","name":"Richieste","url":"html/sprb/sprb0010f_02.htm"},{"type":"item","name":"Generazione piano","url":"html/sprb/sprb0010f_03.htm"},{"type":"item","name":"Verifica piano","url":"html/sprb/sprb0010f_04.htm"},{"type":"item","name":"Manutenzione ODP/ODL","url":"html/sprb/sprb0010f_05.htm"},{"type":"item","name":"Analisi MPS","url":"html/sprb/sprb0010f_06.htm"},{"type":"item","name":"Pianificazione","url":"html/sprb/sprb0010f_07.htm"},{"type":"item","name":"Generazione RDA/RLE/RDP","url":"html/sprb/sprb0010f_08.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

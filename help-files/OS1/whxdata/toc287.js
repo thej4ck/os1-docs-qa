@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc284.js\"  name=\"Distinta base\"><item name=\"Introduzione\" url=\"html/index/index_905025.htm\" /><item name=\"Sostituzione componente\" url=\"html/sdba/sdba0015d.htm\" /><item name=\"Controllo distinte base\" url=\"html/sdba/sdba0019d.htm\" /></data>";

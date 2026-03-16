@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc190.js\"  name=\"Gestione rientri\"><item name=\"Introduzione\" url=\"html/sclv/sclv0020f.htm\" /><item name=\"Dati rientro\" url=\"html/sclv/sclv0020f_01.htm\" /><item name=\"Evasione ordini\" url=\"html/sclv/sclv0020f_02.htm\" /><item name=\"Righe rientro\" url=\"html/sclv/sclv0020f_03.htm\" /></data>";

@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_1030.htm"},{"type":"item","name":"Stampa bilancio corrente","url":"html/bcge/bcge0015d.htm"},{"type":"item","name":"Gestione movimenti rettifica","url":"html/bcge/bcge0018f.htm"},{"type":"item","name":"Lista movimenti rettifica","url":"html/bcge/bcge0019d.htm"},{"type":"item","name":"Eliminazione movimenti di rettifica","url":"html/bcge/bcge0020d.htm"},{"type":"item","name":"Contabilizzazione movimenti di rettifica","url":"html/bcge/bcge0021d.htm"},{"type":"item","name":"Generazione movimenti di rettifica","url":"html/bcge/bcge0016d.htm"},{"type":"item","name":"Fatture da ricevere/emettere","url":"html/bcge/bcge0053d.htm"},{"type":"item","name":"Stampa prospetto reddito","url":"html/bcsp/bcsp0007d.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

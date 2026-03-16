@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 15, 2014 11:57:17 AM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Configurazione magazzino remoto</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.1.1.1.0_20";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazione OS1 Enterprise > Generali > Configurazione moduli > Generale" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h5>Configurazione magazzino remoto</h5>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CODICE SEDE OPERATIVA: 
+ Indica il codice sede corrente utilizzata per il modulo “Gestione sedi 
+ periferiche/filiali”; il valore 0 è riservato per la sede centrale. Tutte 
+ le sedi periferiche devono indicare un valore maggiore di zero ed ovviamente 
+ diverso l'uno dall'altro.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SOVRASCRIVI ANAGRAFICHE 
+ ESISTENTI: Definisce se in fase di storno progressivi articolo (a seguito 
+ di cancellazione di un movimento) devono essere ricalcolati automaticamente 
+ i dati relativi agli ultimi carichi (data e prezzo ultimo, data e prezzo 
+ penultimo) e/o i dati relativi agli ultimi scarichi (data e prezzo ultimo). 
+ Il meccanismo è opzionale in quanto l'attivazione potrebbe rallentare 
+ l'operatività normale, quindi attivarlo solo se le informazioni relative 
+ ai costi ultimi presenti in anagrafica articolo vengono consultate continuamente 
+ e quindi devono essere assolutamente in linea (altrimenti il dato può 
+ essere ricalcolato utilizzando la funzione &quot;Controllo saldi prodotti&quot; 
+ presente nel menù Magazzino, Operazioni di fine esercizio).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Ignora 
+ anagrafiche non esistenti in cancellazione</span>: Se spuntato il parametro 
+ in fase di importazione anagrafiche se si tenta di cancellare un anagrafica 
+ che non esiste segnala l'evento senza però bloccare la fase di importazione 
+ dati.</p>
+</body>
+</html>

@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc1.js\"  name=\"Business Intelligence\"><item name=\"Introduzione\" url=\"html/index/index_8047.htm\" /><item name=\"Configurazione\" url=\"html/bbas/bbas0206f.htm\" /><item name=\"Credenziali accesso\" url=\"html/bbas/bbas0204f.htm\" /><item name=\"Utenti\" url=\"html/bbas/bbas0205f.htm\" /></data>";

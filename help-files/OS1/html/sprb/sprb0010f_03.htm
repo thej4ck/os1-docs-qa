@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 25, 2015 11:56:03 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Gestione MPS - Generazione piano</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.3.1.0_4";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Piano di produzione > Gestione MPS" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-weight: bold; font-size: 12pt;">Generazione piano</p>
+<p><img src="images/sprb0010f_3_01.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-bottom:5px; margin-right:5px; width:100%; max-width:78px;" align="left" border="0" />La generazione del piano di produzione si basa sul 
+ concetto della capacità finita sui materiali e della capacità infinita 
+ sulle risorse.</p>
+<p>Scopi della generazione del piano sono:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;">coprire 
+		 tutti i fabbisogni di componenti; per le materie prime attraverso 
+		 l’emissione di RDA e dei successivi ordini a fornitori, per i 
+		 composti attraverso la generazione degli ODP (e dei relativi ODL)</p></li>
+		<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;">determinare 
+		 a partire dalla data di consegna richiesta ed in base ai tempi 
+		 di produzione:</p></li>
+		<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+			<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">le 
+			 date teoriche di inizio e fine produzione dell’ODP</p></li>
+			<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">le 
+			 date teoriche di inizio e fine produzione di ogni singolo 
+			 ODL</p></li>
+			<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">le 
+			 date teoriche di approvvigionamento (per materie prime acquistate 
+			 e semilavorati &#160;prodotti) tenendo conto che il componente 
+			 utilizzato in una determinata fase deve essere disponibile 
+			 alla data di inizio produzione dell’ODL in cui viene utilizzato. 
+			 Nel caso di semilavorati prodotti viene considerato il tempo 
+			 di produzione legato al ciclo, mentre per le materie prime 
+			 viene considerato il tempo di approvvigionamento indicato 
+			 in anagrafica articoli.</p></li>
+		</ul></li>
+	</ul></li>
+</ol>
+<p>&#160;</p>
+<p>Viene proposta la data di fine elaborazione basandosi sui giorni presenti 
+ in configurazione e si può selezionare la casella per effettuare automaticamente, 
+ al termine della generazione, la fase di <a href="sprb0010f_04.htm">verifica 
+ piano</a>. Durante la fase di elaborazione è possibile interrompere in 
+ qualsiasi momento con l'apposito pulsante che si abilita automaticamente, 
+ l'interruzione è sottoposta a richiesta di conferma.</p>
+<p>Se presente la gestione progetti sarà possibile specificare il progetto, 
+ che sarà utilizzato come filtro per la generazione.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_3_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p>Le RDP vengono raggruppate secondo le regole previste a livello di unità 
+ produttiva, anagrafica prodotto e anagrafica cliente generando gli ODP 
+ da produrre.</p>
+<p>Gli ODP vengono comunque generati sul magazzino di default prodotti 
+ finiti o semilavorati (in base al tipo di ODP che si sta creando) indicati 
+ sull’unità produttiva.</p>
+<p>Gli ODP generati vengono nettificati (solo per la parte derivate da 
+ ordini); è possibile che un ODP quindi non venga comunque prodotto in 
+ quanto la disponibilità di magazzino è sufficiente a coprire l’ODP. In 
+ questo caso comunque l’ODP risulta automaticamente evaso pur non dando 
+ origine a nessun ODL.</p>
+<p>Se è stata attivata l’opzione “Reintegro scorte PF in generazione piano” 
+ per i prodotti finiti la quantità da produrre del primo ODP del prodotto 
+ viene aumentata della quantità necessaria per reintegrare la scorta. Se 
+ è stata attivata l’opzione “Reintegro scorte SL in generazione piano” 
+ per i semilavorati derivanti dai prodotti finiti la quantità da produrre 
+ del primo ODP del prodotto viene aumentata della quantità necessaria per 
+ reintegrare la scorta. La quantità così determinata dell’ODP è infine 
+ modificata in funzione della quantità minima di produzione e del lotto 
+ di produzione; la quantità dell’ODP non sarà quindi inferiore alla quantità 
+ minima e sarà un multiplo del lotto di produzione.</p>
+<p>Gli ODP generati vengono esplosi sulla base del ciclo di produzione 
+ previsto sulla scheda tecnica e per ogni fase viene generato un ODL; collegato 
+ al singolo ODL viene generato l’elenco dei componenti che dovranno essere 
+ utilizzati. L’impegno dei componenti è alla data di previsto utilizzo 
+ (quindi alla data di inizio fase); la data di consegna richiesta al fornitore 
+ tiene conto della data di previsto utilizzo e dei tempi di riordino. Per 
+ i semilavorati presenti all’interno dell’elenco componenti viene effettuata 
+ la generazione degli ODP, tenendo conto dei raggruppamenti previsti.</p>
+<p>Gli ODP relativi ai semilavorati vengono nettificati (ad eccezione di 
+ quelli derivanti da reintegro o correttivo).</p>
+<p>Lo stato degli ODP e degli ODL generati viene impostato a “Provvisorio”; 
+ fino a che l’ODP non viene pianificato (attraverso l’apposita funzione) 
+ ogni volta che viene lanciata la generazione del piano tutti gli ODP (e 
+ gli ODL collegati) provvisori &#160;vengono eliminati per essere rigenerati. 
+ Anche i movimenti di ordinato a produzione dei composti e di impegnato 
+ da produzione dei componenti derivanti da ODP/ODL provvisori sono considerati 
+ provvisori e non sono visibili al resto dell’applicazione.</p>
+</body>
+</html>

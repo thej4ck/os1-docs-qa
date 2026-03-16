@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data ><book name=\"Configurazione OS1 Enterprise\" url=\"html/index.htm\" src=\"toc1.js\" /><book name=\"Configurazioni esterne\" src=\"toc24.js\" /></data>";

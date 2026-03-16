@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="12 2, 2005 9:10:32 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Esito effetti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.6.0_9";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Effetti attivi" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;">Esito effetti</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Il programma provvede a chiudere definitivamente le partite “esposte”, ovvero le scadenze a mezzo RB già presentate su distinta bancaria definitiva. Tali scadenze, non essendo ancora state accreditate dalla banca, risultano in esposizione cambiaria fino al momento in cui, ricevendo la contabile di accredito, si esegue questo programma. È opportuno eseguire questo programma nella seconda decade di ogni mese, indicando come data di fine scadenza l’ultimo giorno del mese precedente. Nel caso in cui sia previsto, dalla configurazione, l'utilizzo di un conto di transito è attiva la causale contabile per effettuare automaticamente il movimento di storno. La selezione delle scadenze da esitare è modificabile dall'operatore.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: center;"><img src="Images/befc0010d_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">Fra i parametri che vengono richiesti compaiono anche l'anno ed il numero della distinta, che è possibile utilizzare, per richiamare una distinta, solo dopo avere effettuato la stampa definitivi della distinta stessa.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;"><span>CONTO DI PRESENTAZIONE: codice alfanumerico di 8 caratteri, presente nella tabella Conti correnti, per indicare la banca di presentazione della distinta. Sul campo è attiva la viste F9 sulla tabella stessa.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DA DATA: indicare la data di scadenza da cui si intende iniziare la selezione degli effetti. Confermando a vuoto la stampa inizia dal primo effetto valido per l'esercizio corrente. &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">A DATA: indicare la data scadenza con cui si intende terminare la selezione degli effetti. Confermando a vuoto la stampa termina con l'ultimo effetto valido.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">DA CLIENTE: &#160;indicare il codice cliente dal quale si vuole far iniziare l'esito delle partite.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">A CLIENTE: indicare il codice cliente al quale si vuole far terminare l'esito delle partite.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DIVISA: codice alfanumerico di 3 caratteri, presente nella tabella Divise, per indicare la divisa degli effetti che si vogliono selezionare. Sul campo è attiva la ricerca (F9) sulla tabella stessa.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">TIPO EFFETTO: definisce il tipo di effetto da selezionare. Sul campo è attiva la funzione di ricerca (F9).</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">ELABORAZIONE DEFINITIVA: check box per definire il tipo di stampa. Valori possibili:</p>
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="margin-left: 0in; margin-top: 1pt; margin-bottom: 1pt;">vuoto = Elaborazione di prova (nella pagina risultati non sarà possibile selezionare gli effetti)</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-top: 1pt; margin-bottom: 1pt;">spunta = Elaborazione definitiva</p>
+</li>
+</ul>
+</li>
+</ol>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DATA ESITO: &#160;data obbligatoria che viene registrata, in caso di elaborazione definitiva, sulle singole scadenze come data di chiusura. Viene proposta la data del giorno, modificabile dall’utente.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">CAUSALE CONTABILIZZAZIONE: codice della causale contabile, necessario per la contabilizzazione dell'esito, se gestito il conto di transito. Sul campo è attiva la funzione di ricerca (F9) sulla tabella stessa.</p>
+<p>&#160;</p>
+<p>La pagina dei risultati riporta gli effetti da esitare in relazione ai criteri di selezione inseriti; se è stata scelta l'elaborazione definitiva gli effetti saranno già tutti selezionati. Agendo sui pulsanti Stampa o Anteprima sarà possibile effettuare la stampa dei dati con evidenziati gli effetti selezionati per l'esito.</p>
+<p style="text-align: center;"><img src="Images/befc0010d_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p><img src="Images/befc0010d_03.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:5px; margin-bottom:0px; width:100%; max-width:288px;" align="right" border="0" />La selezione e l'annullamento degli effetti può avvenire in diversi modi. Per selezionare oppure annullare la selezione di un effetto è sufficiente fare doppio clic con il mouse sul rigo interessato (se selezionato verrà annullata la selezione altrimenti il contrario). È anche possibile utilizzare il menù indicato a lato (attivato tramite la pressione del tasto destro del mouse) oppure utilizzare gli appositi tasti funzione. È consentito selezionare o deselezionare un solo effetto oppure tutti gli effetti.</p>
+<p>La pressione del pulsante Salva sulla toolbar o del tasto F10 esegue l'operazione.</p>
+<p>&#160;</p>
+</body>
+</html>

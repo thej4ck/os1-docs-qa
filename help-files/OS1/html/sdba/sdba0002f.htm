@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="02 14, 2013 6:23:48 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Gestione distinta base</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.7.3.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Magazzino > Distinta base" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold; font-size: 12pt;"><strong><span style="font-weight: bold;">Gestione distinta base</span></strong></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: normal;">La procedura consente l'inserimento e la manutenzione della distinta base, nella quale viene specificata la composizione di un determinato prodotto. È possibile inserire singole distinte ed utilizzarle come punto di riferimento per la creazione di altre distinte, che siano uguali o per cui solo alcuni componenti o singole quantità siano diverse.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: normal;">In base alla versione installata è possibile attivare specifiche configurazioni, che determinano l'utilizzo di particolari campi o la presenza di alcuni vincoli in fase di manutenzione.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: normal;">Se attivata la gestione delle varianti sarà richiesto e visualizzato, nelle varie sezioni della finestra e sia per i composti che per i componenti, il codice della variante.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: normal;">Se attivata la gestione delle date di competenza (solo OS1 Enterprise) sarà visualizzato a destra nella finestra, un pannello di stato colorato:</p>
+<ul style="list-style: disc;">
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: normal;"><img src="Images/sdba0002f_03.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-bottom:0px; margin-top:5px; width:100%; max-width:285px;" align="right" border="0" />stato <span style="color: #d8dd1e;">giallo</span>: la distinta è in fase di costruzione, sarà possibile modificarla, cancellarla oppure attivarla tramite l'apposito bottone Attiva; compare la finestra presente a lato nella quale è richiesta la data di attivazione che deve essere, obbligatoriamente, almeno il giorno successivo all'attuale data di sistema.</p>
+</li>
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: normal;"><img src="Images/sdba0002f_04.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-bottom:0px; margin-top:5px; width:100%; max-width:285px;" align="right" border="0" />stato <span style="color: #008000;">verde</span>: la distinta è stata attivata, a video è presente la data di inizio validità; non sarà possibile modificarla; in questo particolare stato non sarà consentita la cancellazione, ma solo la disattivazione. Se viene premuto il tasto Cancella compare la finestra presente a lato nella quale è richiesta la data di disattivazione che deve essere, obbligatoriamente, almeno il giorno successivo all'attuale data di sistema.</p>
+</li>
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: normal;">stato <span style="color: #ff0000;">rosso</span>: la distinta è stata disattivata, a video è presente la data di fine validità; non sarà possibile effettuare modifiche o cancellazioni.</p>
+</li>
+</ul>
+<p><img src="Images/sdba0002f_06.png" alt="" style=" border:none; margin-right:0px; margin-top:0px; margin-bottom:0px; margin-left:42px; width:100%; max-width:570px;" border="0" /></p>
+<p>&#160;</p>
+<p><img src="Images/sdba0002f_02.png" alt="" style=" border:none; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:6px; width:100%; max-width:382px;" align="left" border="0" />Se viene premuto il pulsante Nuovo, sulla toolbar, prima di accedere all'inserimento dei dati compare la finestra a lato, dalla quale è possibile indicare se si vuole inserire una nuova distinta, oppure copiare i dati da una distinta già inserita. In quest'ultimo caso sarà richiesto il codice del composto da cui copiare i dati, la data di riferimento, se attiva la gestione date di validità, &#160;ed il nome del nuovo composto su cui copiare i dati. La pressione del pulsante Esegui riporterà alla finestra di manutenzione, con i dati già riportati ed in stato di inserimento.</p>
+<p>La finestra di inserimento dati presenta, sulla sinistra, una sezione dove viene riportata in forma grafica la composizione della distinta; i composti ed i componenti appaiono con immagini diverse e sui composti è possibile visualizzare i relativi componenti e così via. Con il doppio clic del mouse, sui vari composti è possibile visualizzare i relativi componenti.</p>
+<p><img src="Images/sdba0002f_07.png" alt="" style=" border:none; margin-top:0px; margin-left:6px; margin-right:0px; margin-bottom:0px; width:100%; max-width:162px;" align="right" border="0" />Sopra la struttura grafica è presente una barra di pulsanti che sono utilizzati per funzioni di utilità esposte più avanti e per spostarsi tra le distinte base che sono state richiamate, tramite l'apposito pulsante, in sequenza. Le funzioni dei pulsanti sono anche attivabili tramite il bottone destro del mouse, che richiama il menù a lato<img src="Images/sdba0002f_08.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:320px;" align="right" border="0" />; da questo menù è possibile visualizzare, nella parte destra, le distinte base eventualmente già richiamate. Le funzioni dei pulsanti, e di conseguenza del menù, sono tutte associate ad una specifica combinazione di tasti per l'utilizzo da tastiera se selezionata la struttura grafica, e sono le seguenti (da sinistra a destra):</p>
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="margin-top: 3pt; margin-bottom: 3pt;">consente di accedere alla manutenzione del prodotto selezionato nella struttura grafica (CTRL+W);</p>
+</li>
+<li class="p">
+<p style="margin-top: 3pt; margin-bottom: 3pt;">consente di accedere alla manutenzione della distinta base del prodotto selezionato nella struttura grafica, nel caso di componente senza distinta viene richiesto se inserirne una nuova (CTRL+F11);</p>
+</li>
+<li class="p">
+<p style="margin-top: 3pt; margin-bottom: 3pt;">espansione completa, nella struttura grafica, dei componenti semilavorati presenti nella distinta corrente (F11);</p>
+</li>
+<li class="p">
+<p style="margin-top: 3pt; margin-bottom: 3pt;">aggiornamento della struttura grafica (F12);</p>
+</li>
+<li class="p">
+<p style="margin-top: 3pt; margin-bottom: 3pt;">vai alla distinta precedente (CTRL+FRECCIA SINISTRA);</p>
+</li>
+<li class="p">
+<p style="margin-top: 3pt; margin-bottom: 3pt;">vai alla distinta successiva (CTRL+FRECCIA DESTRA).</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>La parte destra è riservata all'inserimento dei dati.</p>
+<p style="text-align: center;"><img src="Images/sdba0002f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: normal;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold;">Dati generali</p>
+<p style="margin-left: 0.417in; text-indent: -0.417in;"><img src="Images/b_dett.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:0px; width:100%; max-width:24px;" align="right" border="0" />COMPOSTO: codice del prodotto intestatario della distinta base. Sul campo sono disponibili le funzioni di ricerca (F9) ed accesso (CTRL+W) alla tabella prodotti. In stato di visualizzazione la ricerca consente di selezionare una distinta base. Nel caso che la distinta base sia di una distinta di riferimento, è possibile con l'apposito bottone, visualizzare le distinte riferite alla corrente. In questo <img src="Images/sdba0002f_05.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:5px; margin-bottom:0px; width:100%; max-width:368px;" align="right" border="0" />caso, qualsiasi operazione di cancellazione potrebbe interessare le distinte riferite; nel caso venga compiuta questa operazione compare la finestra a lato che consente di decidere se effettuare l'aggiornamento sulle distinte collegate. L'esempio è relativo alla cancellazione o disattivazione di una distinta con gestione delle date di validità.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">RIFERIMENTO: codice del prodotto, la cui distinta base è di riferimento, per l'attuale. In questo caso le righe dei componenti saranno evidenziate se non modificate rispetto alla distinta di riferimento. Sul campo sono attive le funzioni di ricerca (F9) sulle distinte base non riferite.</p>
+<p style="margin-left: 30pt; text-indent: -0.417in;">DESCRIZIONE: descrizione della distinta base.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NOTE: campo note esteso per eventuali commenti o annotazioni relative alla distinta richiamabile tramite l'apposito pulsante.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SCHEDA LAVORAZIONE: eventuale codice della scheda di lavorazione da associare alla distinta corrente. Sul campo sono attive le funzioni di ricerca (F9) ed accesso (CTRL+W) alla tabella omonima.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">GRUPPO COSTI: indica il gruppo dei costi di produzione a cui fa riferimento il composto, presente nella tabella Gruppi costi di produzione. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: normal;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold;"><span style="font-family: Verdana, sans-serif; font-size: 10pt; font-weight: bold;">Dati dei componenti</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">COMPONENTE: codice del prodotto componente della distinta in esame.&#160;&#160;&#160;Sul campo sono disponibili le funzioni di ricerca (F9) ed accesso (CTRL+W) alla tabella prodotti. Nel caso che la distinta sia riferita ad un'altra nella sezione in basso compaiono il codice e la descrizione del componente originale.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE: descrizione interna del componente.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NOTE: campo note esteso per eventuali commenti o annotazioni relative al componente.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">VARIABILE: definisce se il componente è da considerarsi variabile (casella con segno di spunta) o fisso (casella vuota). Questa prestazione è disponibile solo per la versione Enterprise e deve essere attivata tramite la configurazione distinta base.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">UM.: unità di misura del componente all'interno della distinta base. Sul campo sono disponibili le funzioni di ricerca (F9) ed accesso (CTRL+W) alla tabella omonima.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">QUANTITÀ: definisce la quantità necessaria del componente per la composizione del prodotto.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">%VALORE: definisce la percentuale, del componente, sul valore del composto.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO VALORIZZAZIONE: indica l'eventuale tipo di valorizzazione da applicare al componente corrente. Valori possibili:</p>
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 0pt; margin-bottom: 0pt;">Nessuna</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 0pt; margin-bottom: 0pt;">Prezzo medio di carico</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 0pt; margin-bottom: 0pt;">Costo ultimo carico</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 0pt; margin-bottom: 0pt;">Costo di mercato</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 0pt; margin-bottom: 0pt;">Prezzo di vendita</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 0pt; margin-bottom: 0pt;">Prezzo di listino</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LISTINO: eventuale codice del listino prezzi da utilizzare per ricercare il costo del componente. Sul campo sono attive le funzioni di ricerca (F9) ed accesso (CTRL+W) alla tabella listini.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">%RICARICO: eventuale percentuale di maggiorazione da applicare al costo del componente.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SFRIDO: attivo solo se gestito da configurazione; consente di specificare che il prodotto non è un componente, ma l'eventuale residuo della lavorazione del composto (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p style="margin-left: 0in;">Nel caso si utilizzi una versione Enterprise con attivo il modulo del conto lavoro sarà presente, per ogni componente il codice della fase di lavorazione, presente nel ciclo di produzione del prodotto, nella quale il componente deve essere utilizzato.</p>
+<p style="margin-left: 0in;">&#160;</p>
+<p><span style="text-transform: uppercase;"><img src="Images/sdba0002f_10.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:20px;" align="left" border="0" />è</span> possibile, tramite questo pulsante, applicare al fabbisogno base un eventuale maggior consumo percentuale del componente. La percentuale viene applicata al fabbisogno complessivo ed il valore calcolato può essere arrotondato (per eccesso, per difetto, matematicamente) al numero di decimali indicati sul componente stesso. Il pulsante cambia colore se è presente la percentuale sul componente passando dal bianco al blu.</p>
+<p style="text-align: center;"><img src="Images/sdba0002f_09.png" alt="" style=" border:none; width:100%; max-width:388px;" border="0" /></p>
+</body>
+</html>

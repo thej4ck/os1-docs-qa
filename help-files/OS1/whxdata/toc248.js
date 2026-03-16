@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc223.js\"  name=\"Barcode GS1-EAN128\"><item name=\"Introduzione\" url=\"html/index/index_8080.htm\" /><item name=\"Definizione etichette\" url=\"html/bean/bean0100f.htm\" /><item name=\"Associazione etichette documenti\" url=\"html/bean/bean0101f.htm\" /></data>";

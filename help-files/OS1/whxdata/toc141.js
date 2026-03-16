@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc126.js\"  name=\"OS1BoxFatture\"><item name=\"Box Fatture\" url=\"html/index/index_4070.htm\" /><item name=\"Acquisizione fatture da Box\" url=\"html/bbas/DlgAcquisizioneFatDaBoxF.htm\" /></data>";

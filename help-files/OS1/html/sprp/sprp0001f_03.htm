@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 25, 2015 11:19:23 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Schedulazione attività - Gantt risorse</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.9.1.0_4";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Schedulazione > Schedulazione" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-weight: bold; font-size: 12pt;">Gantt risorse</p>
+<p><img src="images/sprp0001f_3_01.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-bottom:5px; margin-right:5px; width:100%; max-width:78px;" align="left" border="0" />Questa funzionalità rappresenta lo strumento di manutenzione 
+ della schedulazione automatica. La rappresentazione (in forma di Gantt) 
+ è impostata per reparto/risorsa e riporta le attività legate agli ODL 
+ sugli orizzonti temporali, di schedulazione e successivo visualizzati 
+ in colori differenti. Attraverso tale funzione è possibile:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+		<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+			<li class="p"><p style="margin-left: 0in; margin-right: 0in; 
+							 margin-top: 0pt; margin-bottom: 0pt;">visualizzare 
+			 l’attuale piano di schedulazione e per ciascuna attività il 
+			 dettaglio delle attività collegate</p></li>
+			<li class="p"><p style="margin-left: 0in; margin-right: 0in; 
+							 margin-top: 0pt; margin-bottom: 0pt;">spostare 
+			 le attività in avanti o indietro sull'orizzonte temporale 
+			 o su risorse alternative compatibili con il ciclo di produzione</p></li>
+			<li class="p"><p style="margin-left: 0in; margin-right: 0in; 
+							 margin-top: 0pt; margin-bottom: 0pt;">frazionare 
+			 un attività in più parti ad esempio nel caso in cui si intenda 
+			 abbinarla a risorse diverse</p></li>
+			<li class="p"><p style="margin-left: 0in; margin-right: 0in; 
+							 margin-top: 0pt; margin-bottom: 0pt;">vincolare 
+			 le attività in modo che tali attività non possano essere rielaborata 
+			 automaticamente (a meno che non venga effettuata una rielaborazione 
+			 totale)</p></li>
+		</ul></li>
+	</ol></li>
+</ol>
+<p>&#160;</p>
+<p>La visualizzazione del gantt è completamente personalizzabile nei colori, 
+ nelle dimensioni di default compreso quanto deve essere visualizzato sopra 
+ i singoli ODL, tramite la specifica <a href="sprp0900f.htm">Configurazione 
+ gantt</a>.</p>
+<p style="text-align: center;"><img src="images/sprp0001f_3_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>La sezione di sinistra riporta i reparti con all'interno le relative 
+ risorse e tramite i pulsanti <img src="images/sprp0001f_3_03.png" alt="" style=" border:none; width:100%; max-width:42px;" border="0" /> 
+ è possibile aprire o chiudere tutti i gruppi contemporaneamente; agendo 
+ sul +/- di fianco al reparto è possibile aprire/chiudere il singolo reparto 
+ in modo da analizzarlo singolarmente.</p>
+<p>La sezione di destra contiene le attività riportate sugli orizzonti 
+ temporali; selezionando una singola attività vengono evidenziate sul gantt 
+ le attività collegate (le barre si alzano ed il colore del bordo cambia) 
+ e compaiono, nel pannello inferiore, i dati relativi all'attività stessa 
+ con l'indicazione dello stato dell'attività (quadrato in basso a destra) 
+ che compare anche sulla barra del gantt; inoltre se l'attività risulta 
+ versata compare, sul gantt, una barra di completamento all'interno della 
+ barra dell'attività in basso.</p>
+<p>Sopra la sezione di destra è presente la barra dello zoom ed una barra 
+ di pulsanti; le stesse funzionalità della barra dei pulsanti sono richiamabili 
+ dal menù del tasto destro del mouse cliccando sopra un'attività all'interno 
+ del gantt.</p>
+<table style="vertical-align: top;" cellspacing="0" align="center">
+	<col />
+	<col />
+	<tr style="vertical-align: top;">
+		<td style="padding-right: 10px; padding-left: 10px;"><p><img src="images/sprp0001f_3_04.png" alt="" style=" border:none; width:100%; max-width:402px;" border="0" /></p></td>
+		<td style="padding-right: 10px; padding-left: 10px;"><p><img src="images/sprp0001f_3_05.png" alt="" style=" border:none; width:100%; max-width:174px;" border="0" /></p></td>
+	</tr>
+</table>
+<p>La barra dello zoom consente di aumentare o ridurre il livello di zoom 
+ delle colonne del calendario; i pulsanti consentono un aumento/diminuzione 
+ del 10%, tramite la barra si può andare dal 10% di riduzione fino al 800% 
+ di ingrandimento.</p>
+
+<table style=" vertical-align:top; left:0px; top:855px; width:100%; max-width:1185px;" cellspacing="0">
+	<col width="52" />
+	<col width="1089" />
+	<tr style="vertical-align: top;">
+		<td style="padding-right: 10px; padding-left: 10px;" width="52"><p><img src="images/sprp0001f_3_06.png" alt="" style=" border:none; width:100%; max-width:51px;" border="0" /></p></td>
+		<td style="padding-right: 10px; padding-left: 10px;" width="1089"><p>I 
+		 pulsanti consentono di vincolare/annullare il vincolo ad una attività: 
+		 se l’attività risulta vincolata non può essere rielaborata automaticamente 
+		 da schedulazioni successive a meno che non venga utilizzata l'opzione 
+		 di rielaborazione totale.</p></td>
+	</tr>
+	<tr style="vertical-align: top;">
+		<td style="padding-right: 10px; padding-left: 10px;" width="52"><p><img src="images/sprp0001f_3_07.png" alt="" style=" border:none; width:100%; max-width:48px;" border="0" /></p></td>
+		<td style="padding-right: 10px; padding-left: 10px;" width="1089"><p>I 
+		 pulsanti consentono di anticipare o posticipare un attività; se 
+		 anticipata, l’attività viene spostata indietro nell’orizzonte 
+		 temporale (compatibilmente con i vincoli di fase); se posticipata, 
+		 l’attività viene spostata avanti nell’orizzonte temporale (compatibilmente 
+		 con i vincoli di fase) e può finire nell'orizzonte successivo, 
+		 in questo caso al salvataggio sarà tolto il flag di schedulazione. 
+		 Lo spostamento di una attività può essere effettuato anche trascinando 
+		 la stessa sul gantt in avanti o indietro; è possibile spostare 
+		 con lo stesso metodo anche un'attività da una risorsa ad un'altra 
+		 compatibile; in entrambi i casi se non sarà possibile lo spostamento 
+		 verrà dato un messaggio ed annullato lo spostamento stesso.</p></td>
+	</tr>
+	<tr style="vertical-align: top;">
+		<td style="padding-right: 10px; padding-left: 10px;" width="52"><p><img src="images/sprp0001f_3_08.png" alt="" style=" border:none; width:100%; max-width:20px;" border="0" /></p></td>
+		<td style="padding-right: 10px; padding-left: 10px;" width="1089"><p><img src="images/sprp0001f_3_10.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:759px;" align="right" border="0" />Il pulsante mostra il dettaglio dell'attività; la 
+		 stessa funzionalità è data anche dal doppio clic del mouse sull'attività. 
+		 La finestra mostra partendo dall'ODP tutti gli ODL collegati e 
+		 relativi riferimenti ordini/RDP collegati all'attività su si era 
+		 posizionati; nel dettaglio delle fasi compaiono anche le fasi 
+		 esterne (evidenziate in blu) e la fase relativa all'attività corrente 
+		 appare selezionata.</p></td>
+	</tr>
+	<tr style="vertical-align: top;">
+		<td style="padding-right: 10px; padding-left: 10px;" width="52"><p><img src="images/sprp0001f_3_09.png" alt="" style=" border:none; width:100%; max-width:20px;" border="0" /></p></td>
+		<td style="padding-right: 10px; padding-left: 10px;" width="1089"><p 
+			 style="font-size: 10.0pt; mso-fareast-font-family: 'Times New Roman'; 
+			 mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: IT; 
+			 mso-fareast-language: IT;"><span style="mso-bidi-language: AR-SA;"><img src="images/sprp0001f_3_11.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:629px;" align="right" border="0" />Il pulsante è abilitato per le attività mai suddivise 
+		 a livello di ODP.</span></p>
+		<p>Il pulsante consente di suddividere un’attività: è possibile 
+		 frazionare un attività in due parti ad esempio nel caso in cui 
+		 si intenda abbinarla a risorse diverse, in questo caso deve essere 
+		 suddivisa e poi spostata la parte suddivisa su di una risorsa 
+		 compatibile.</p>
+		<p><span style="font-size: 10.0pt; mso-fareast-font-family: 'Times New Roman'; 
+				 mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: IT; 
+				 mso-fareast-language: IT; mso-bidi-language: AR-SA;">Se 
+		 in <a href="../sprb/sprb0115f.htm">configurazione unità produttive</a> 
+		 il parametro </span>&quot;Non suddividere ODL con eventi aperti&quot; 
+		 è spuntato, saranno suddivisibili solo gli ODL per cui non esistono 
+		 eventi di produzione aperti<span style="font-size: 10.0pt; mso-fareast-font-family: 'Times New Roman'; 
+											 mso-bidi-font-family: 'Times New Roman'; 
+											 mso-ansi-language: IT; mso-fareast-language: IT; 
+											 mso-bidi-language: AR-SA;">.</span></p>
+		<p>La finestra di suddivisione mostra i dati dell'attività e richiede 
+		 una quantità che dovrà essere minore del residuo; se si desidera 
+		 possono essere ignorati i tempi di setup, spuntando la relativa 
+		 casella; questa opzione è valida se l'attività prevede dei tempi 
+		 di setup che possono rimanere tutti sull'attività base e non essere 
+		 contemplati dall'attività suddivisa.</p></td>
+	</tr>
+	<tr style="vertical-align: top;">
+		<td style="padding-right: 10px; padding-left: 10px;" width="52"><p><img src="images/sprp0001f_3_12.png" alt="" style=" border:none; width:100%; max-width:24px;" border="0" /></p></td>
+		<td style="padding-right: 10px; padding-left: 10px;" width="1089"><p>Il 
+		 pulsante consente di stampare l'ODL relativo all'attività selezionata. 
+		 <span style="text-transform: uppercase;">è</span> possibile effettuare 
+		 la stampa includendo o meno le note tecniche eventualmente derivanti 
+		 dalla scheda tecnica. Nella stampa dell'ODL viene stampato il 
+		 contatore dell’attività come codice a barre dell’attività stessa 
+		 (come accade per ODP e ODL); tale barcode può essere utilizzato 
+		 per ricercare gli ODL all’interno di OS1BMJob.</p></td>
+	</tr>
+</table>
+
+</body>
+</html>

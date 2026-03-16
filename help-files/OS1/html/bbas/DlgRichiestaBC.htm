@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 17, 2016 11:52:55 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Dati barcode nei documenti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.9.2.1_9";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Tabelle > Anagrafiche gestionali" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; 
+	 font-weight: bold;">Dati barcode nei documenti</p>
+<p style="font-family: Verdana, sans-serif;">E’ possibile inserire nei 
+ documenti dati provenienti da lettori ottici tramite il pulsante “Barcode” 
+ presente sulle righe del documento se attivo il relativo modulo e se gestito 
+ il codice a barre per il documento.</p>
+<p style="font-family: Verdana, sans-serif;">Alla pressione del pulsante 
+ viene aperta una finestra diversa in base a quanto configurato sul flag 
+ “Utilizza ricerca con tipi barcode”, nel caso in cui il flag sia disattivo 
+ viene aperta &#160;la finestra dove indicare se effettuare la lettura 
+ dei dati oppure annullare l'operazione..</p>
+<p style="text-align: center;"><img src="../images/win_barcode.png" alt="" style=" border:none; margin-right:0px; margin-top:0px; margin-bottom:0px; margin-left:0px; width:100%; max-width:271px;" border="0" /></p>
+<p>L'operazione è annullabile anche se è già stata richiesta la lettura. 
+ I dati letti, daranno origine alle righe del documento.</p>
+<p>&#160;</p>
+<p>Nel caso in cui il flag sia attivo viene aperta la finestra:</p>
+<p style="text-align: center;"><img src="Images/DlgRichiestaBC_01.png" alt="" style=" border:none; width:100%; max-width:639px;" border="0" /></p>
+<p>In questa finestra è possibile leggere con un lettore barcode in emulazione 
+ tastiera oppure utilizzare il bottone Barcode (che viene attivato in stato 
+ di visualizzazione e non in stato di inserimento rigo) per leggere i dati 
+ da un lettore come descritto nel caso precedente. Da questa finestra è 
+ possibile utilizzare sia i barcode degli articoli che i barcode composti.</p>
+<p style="font-family: Verdana, Arial, sans-serif;">Se attivo in configurazione 
+ Gestione POS il campo &quot;Gestione barcode per unità di misura&quot; 
+ sarà presente anche il campo unità di misura, in questo caso l'unità di 
+ misura associata al barcode è criterio di raggruppamento anche quando 
+ i dati della finestra vengono riportati sul documento.</p>
+<p style="text-align: center;"><img src="Images/DlgRichiestaBC_02.png" alt="" style=" border:none; width:100%; max-width:639px;" border="0" /></p>
+<p>Se successivamente vengono letti altri barcode, per esempio con un lettore 
+ tramite il bottone Barcode, vengono generate altre righe.</p>
+<p style="text-align: center;"><img src="Images/DlgRichiestaBC_03.png" alt="" style=" border:none; width:100%; max-width:639px;" border="0" /></p>
+<p>Se attiva la gestione matricole sarà presente come primo dato il codice 
+ matricola che sarà visualizzato anche in griglia; se viene letto un barcode 
+ di una matricola o digitata una matricola valida riferita ad un singolo 
+ prodotto automaticamente vengono recuperati tutti i dati associati alla 
+ matricola stessa (articolo, variante, ubicazione, lotto), i dati vengono 
+ riportati sulla riga come se fosse stato letto un barcode di un prodotto.</p>
+<table style="vertical-align: top;" cellspacing="0" align="center">
+	<col />
+	<col />
+	<tr style="vertical-align: top;">
+		<td style="padding-right: 10px; padding-left: 10px;"><p><img src="../smat/Images/BarcodeMat_01.png" alt="" style=" border:none; width:100%; max-width:456px;" border="0" /></p></td>
+		<td style="padding-right: 10px; padding-left: 10px;"><p><img src="../smat/Images/BarcodeMat_02.png" alt="" style=" border:none; width:100%; max-width:631px;" border="0" /></p></td>
+	</tr>
+</table>
+<p>Se il codice matricola fosse riferito a prodotti differenti viene aperta 
+ una finestra di selezione che consente di scegliere quali dati utilizzare.</p>
+<p style="text-align: center;"><img src="../smat/Images/BarcodeMat_03.png" alt="" style=" border:none; width:100%; max-width:548px;" border="0" /></p>
+<p>Nel caso di barcode con prezzo se per l’articolo è presente un prezzo 
+ di listino valido, il prezzo presente sul barcode viene assunto come importo 
+ e viene calcolata la quantità come rapporto fra importo e prezzo (Quantità 
+ = Importo/Prezzo); i barcode con prezzo non sono gestiti sul documento 
+ Packing List.</p>
+<p>Premendo sul bottone Riepilogo viene visualizzato un riepilogo degli 
+ articoli, in cui i prodotti senza prezzo vengono raggruppati, a parità 
+ di dettaglio e magazzino.</p>
+<p style="text-align: center;"><img src="Images/DlgRichiestaBC_04.png" alt="" style=" border:none; width:100%; max-width:508px;" border="0" /></p>
+<p>Salvando vengono generate le righe con lo stesso raggruppamento visualizzato 
+ sul riepilogo; se presenti dettagli per lo stesso prodotto/magazzino questi 
+ vengono convogliati sullo stesso rigo.</p>
+<table style="vertical-align: top; height: 224px; left: 229px; top: 2475px;" 
+		 cellspacing="0" align="center">
+	<col />
+	<col />
+	<tr style="vertical-align: top;">
+		<td style="padding-right: 10px; padding-left: 10px;"><p style="text-align: center;"><img src="Images/DlgRichiestaBC_05.png" alt="" style=" border:none; width:100%; max-width:682px;" border="0" /></p></td>
+		<td style="padding-right: 10px; padding-left: 10px;"><p style="text-align: center;"><img src="Images/DlgRichiestaBC_06.png" alt="" style=" border:none; width:100%; max-width:224px;" border="0" /></p></td>
+	</tr>
+</table>
+<p>&#160;</p>
+<p>Nel caso sia configurata l'evasione degli ordini tramite barcode, per 
+ quei documenti che lo prevedono, saranno ricercati gli ordini aperti disponibili 
+ per l'evasione; se l'evasione è di tipo '<span style="font-style: italic;">Selettivo</span>' 
+ al termine della ricerca verrà visualizzata la finestra di selezione delle 
+ teste ordini, dalla quale sarà possibile decidere quali ordini evadere. 
+ L'evasione delle righe avviene in modo automatico in base a come configurato.</p>
+<p style="text-align: center;"><img src="../sven/Images/sven_selord.png" alt="" style=" border:none; width:100%; max-width:697px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif;">&#160;</p>
+</body>
+</html>

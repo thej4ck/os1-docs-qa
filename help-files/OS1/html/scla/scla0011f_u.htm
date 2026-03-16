@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 13, 2015 9:58:47 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Gestione Ddt di uscita</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.18.2.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > Conto lavoro attivo > Gestione Ddt" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-weight: bold; font-size: 12pt;">Gestione Ddt di uscita</p>
+<p>La procedura consente l’inserimento dei Ddt di uscita dei prodotti lavorati 
+ per il cliente, l’evasione dell’ordine del cliente e l’eventuale restituzione 
+ dei materiali forniti; le modalità di inserimento sono del tutto simili 
+ a quelle previste per l’inserimento dei normali <a href="../sven/sven0001f_c.htm">Ddt 
+ di vendita</a>.</p>
+<p>In fase di inserimento è proposta la causale preferenziale inserita 
+ in OS1Config, per questo tipo di documento sono accettate solo <a href="../bbas/bbas0038f.htm">causali 
+ Ddt</a> previste per l’inserimento di Ddt di tipo “Ddt di uscita conto 
+ lavoro attivo” le sole visualizzate tramite lo zoom sul campo Causale.</p>
+<p style="text-align: center;"><img src="images/scla0011f_04.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p>Tramite il pulsante “Evasione” si può accede alla finestra di evasione 
+ diretta dei Ddt di carico, ad esempio per un reso, nella quale selezionare 
+ i materiali oggetto dell’invio.</p>
+<p style="text-align: center;"><img src="images/scla0011f_08.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p>Tramite il pulsante “Evasione” si può accede alla finestra di evasione 
+ ordini nella quale selezionare gli ordini oggetto dell’invio.</p>
+<p style="text-align: center;"><img src="images/scla0011f_05.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p>Dopo aver confermato l’ordine nel caso in cui in configurazione sia 
+ stato indicato il tipo di evasione Ddt di ingresso selettiva sarà visualizzata 
+ un’ulteriore finestra in cui indicare i Ddt da utilizzare per l’evasione 
+ dei materiali componenti.</p>
+<p style="text-align: center; margin-left: 40px;"><img src="images/scla0011f_06.png" alt="" style=" border:none; width:100%; max-width:664px;" border="0" /></p>
+<p style="margin-left: 40px;">&#160;</p>
+<p>In caso di evasione Ddt di tipo automatico non sarà visualizzata alcuna 
+ finestra e la selezione dei Ddt da utilizzare per l’evasione sarà effettuata 
+ secondo le priorità indicate in Os1Config.</p>
+<p>In questa fase per ogni rigo di composto evaso vengono cercati nella 
+ scheda tecnica i componenti forniti dal cliente e per ciascun componente 
+ vengono ricercati i Ddt di ingresso e vengono scaricati (nell’ordine stabilito 
+ dai parametri della configurazione “Conto lavoro attivo”) per avere una 
+ situazione dei residui dei Ddt di ingresso materiali; le righe di “evasione” 
+ dei Ddt di ingresso sono utilizzate solo ai fini predetti, non dovranno 
+ essere né fatturate né stampate nel documento di scarico a tale scopo 
+ vengono generate con il tipo rigo specificato nella configurazione conto 
+ lavoro attivo.</p>
+<p style="font-weight: bold;"><span style="font-weight: bold;"><span style="font-weight: bold;">Attenzione: 
+ sullo stesso documento se viene inserito un rigo da Ddt non sarà possibile 
+ evadere gli ordini; se vengono prima evasi gli ordini sarà poi possibile 
+ inserire delle righe derivanti da Ddt.</span></span></p>
+<p>&#160;</p>
+<p style="text-align: center;"><img src="images/scla0011f_07.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p>In questa fase è anche possibile effettuare l’invio del materiale non 
+ lavorato tramite l’utilizzo di un tipo rigo specifico da non riportare 
+ in fattura collegato tramite la causale Ddt ad una causale di magazzino 
+ per lo scarico.</p>
+<p>Al momento del salvataggio del documento viene aggiornata la quantità 
+ evasa dell’ordine e la quantità evasa del Ddt di ingresso. Il Ddt generato 
+ può essere utilizzato dalle normali procedure per la generazione della 
+ fattura.</p>
+<p>Tutti i Ddt del conto lavoro attivo sono visibili nelle analisi presenti 
+ nella gestione dei Documenti di trasporto indicando la tipologia di Ddt 
+ da visualizzare, con la possibilità di indicare se includere o escludere 
+ tali Ddt.</p>
+</body>
+</html>

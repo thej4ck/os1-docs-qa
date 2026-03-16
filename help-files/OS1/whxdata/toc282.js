@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc280.js\"  name=\"Autofatture\"><item name=\"Introduzione\" url=\"html/index/index_904035.htm\" /><item name=\"Annullamento contabilizzazione autofatture\" url=\"html/saft/saft0006d.htm\" /></data>";

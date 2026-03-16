@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="11 10, 2006 10:10:37 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Registrazione costi</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.6.3.1_6";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Acquisti > Fatturazione" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-size: 12pt; font-weight: bold; text-align: left;"><strong><span style="font-weight: bold;">Re</span></strong><span><font style="font-family: Verdana, Arial;" face="Verdana"><strong style="font-weight: bold;">gistrazione costi da fatture</strong></font></span></p>
+<p>Con la versione Enterprise è possibile effettuare la registrazione di costi aggiuntivi al normale costo di acquisto della merce, ad esempio le spese di trasporto, imputandoli al documento o ai documenti a cui si riferiscono e ripartendoli in modo proporzionale al valore oppure alla quantità delle singole righe, in modo da arrivare alla determinazione esatta del costo di acquisto comprensivo della rispettiva quotaparte di spese ed oneri.</p>
+<p>La procedura di Registrazione costi, tramite l'utilizzo delle voci di costo, permette questa prestazione. Il programma si sviluppa su due sezione distinte; la prima relativa ai <a href="#Parametri">Parametri</a> di selezione dei <a href="#Documenti">Documenti</a> da trattare e la seconda riguardante l'imputazione dei costi stessi sui documenti selezionati.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;"><a name="Parametri" id="Parametri"></a>Parametri</p>
+<p style="text-align: center;"><img src="Images/sbas0007f_ff_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA FORNITORE: eventuale codice del fornitore, presente in anagrafica, da cui si vuole iniziare la selezione. Confermando a vuoto, la selezione inizia dal primo fornitore valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A FORNITORE: eventuale codice del fornitore, presente in anagrafica, con cui si vuole terminare la selezione. Confermando a vuoto, la selezione termina con l'ultimo fornitore valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale data del documento da cui deve iniziare la selezione relativamente ai precedenti parametri inseriti. Confermando a vuoto, la selezione inizia con il primo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale data del documento con cui si desidera terminare la selezione relativamente ai precedenti parametri inseriti. Confermando a vuoto, la selezione si conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ANNO: eventuale anno del documento da selezionare. Questo parametro è considerato insieme ai due che lo seguono (causale e numero) per l'individuazione del singolo documento.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE: eventuale causale del documento da selezionare. Questo parametro è considerato insieme al precedente ed al successivo (anno e numero) per l'individuazione del singolo documento. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NUMERO: eventuale numero del documento da selezionare. Questo parametro è considerato insieme ai due che lo precedono (anno e causale) per l'individuazione del singolo documento.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO CALCOLO: indica il metodo che deve essere utilizzato per la ripartizione degli eventuali costi globali che saranno registrati sui documenti. Valori possibili: valore merce documento, quantità documento.</p>
+<p>Dopo avere inserito i parametri di selezione, la pressione sul pulsante Esegui, dà inizio all'elaborazione ed i documenti trovati saranno resi disponibile per la registrazione nella sezione Documenti.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;"><a name="Documenti" id="Documenti"></a>Documenti</p>
+<p>La finestra è suddivisa in tre zone distinte: una griglia che contiene i documenti selezionati in base ai parametri specificati, una seconda griglia che contiene i costi imputati al documento selezionato nella parte superiore ed il relativo pannello per la manutenzione dei suddetti dati. L'assegnazione dei costi può avvenire per singolo documento o per più documenti selezionati.</p>
+<p>I documenti che hanno già dei costi imputati compaiono su fondo giallo e tramite il pannello è possibile modificare i valori oppure cancellare quelle esistenti.</p>
+<p style="text-align: center;"><img src="Images/sbas0007f_ff_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">COSTO: definisce la voce di costo, in relazione ai prodotti inseriti sul documento, da utilizzare. Il campo non è modificabile in quanto collegato a quanto presente sul documento.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FORNITORE: eventuale codice del fornitore del servizio, se il campo è attivo sono presenti le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DIVISA, DATA CAMBIO, CAMBIO: dati non modificabili inerenti il documento selezionato.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">IMPORTO: indica l'importo in divisa relativo alla voce di costo inserita, da ripartire sulle righe del documento in relazione a quanto definito nella sezione Parametri.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CONTROVALORE: controvalore dell'importo espresso nella divisa di gestione.</p>
+<p>&#160;</p>
+<p style="text-align: center;"><img src="Images/sbas0007f_ff_06.png" alt="" style=" border:none; width:100%; max-width:331px;" border="0" /></p>
+<p>Tramite la barra dei pulsanti è possibile effettuare le operazioni di assegnazione del singolo documento o la selezione di più documenti per poi effettuare l'assegnazione dei costi globali; è possibile anche esaminare e modificare il dettaglio dei costi delle righe del singolo documento.</p>
+<p>&#160;</p>
+<p><img src="Images/sbas_b_imp.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:0px; width:100%; max-width:78px;" align="left" border="0" />Il pulsante Imposta consente di registrare i costi relativamente al singolo documento selezionato nella griglia in alto (identificabile dalla freccia sul lato sinistro della griglia stessa); la pressione del pulsante determina la comparsa nella griglia sottostante delle voci di costo relative al documento e consente l'inserimento di voci ed importi.</p>
+<p>&#160;</p>
+<p><img src="Images/sbas_b_sel.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:0px; width:100%; max-width:77px;" align="left" border="0" />Il pulsante Seleziona consente di selezionare più documenti dalla griglia superiore per effettuare una successiva imputazione di costi globali. Le righe selezionate saranno riconoscibili in quanto appariranno su di uno sfondo giallo chiaro.</p>
+<p style="text-align: center;"><img src="Images/sbas0007f_ff_03.png" alt="" style=" border:none; width:100%; max-width:749px;" border="0" /></p>
+<p>&#160;</p>
+<p><img src="Images/sbas_b_cos.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:0px; width:100%; max-width:78px;" align="left" border="0" />Il pulsante Costi globali consente, dopo la selezione dei documenti di inserire le voci ed i relativi importi, imputandoli in modo proporzionale ai documenti selezionati. I dati vengono inseriti tramite la seguente finestra.</p>
+<p style="text-align: center;"><img src="Images/sbas0007f_ff_04.png" alt="" style=" border:none; width:100%; max-width:518px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO CALCOLO: indica il metodo che deve essere utilizzato per la ripartizione di costi che saranno imputati ai documenti selezionati. Valori possibili: valore documento, quantità documento. Viene proposto lo stesso tipo selezionato nella sezione Parametri.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">COSTO: definisce la voce di costo, presente nella tabella omonima, da inserire, sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">IMPORTO: indica l'importo in divisa relativo alla voce di costo inserita, da ripartire sulle righe dei documenti in relazione al valore del campo "tipo calcolo".</p>
+<p>&#160;</p>
+<p><img src="Images/sbas_b_det.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:0px; width:100%; max-width:78px;" align="left" border="0" />Il pulsante Dettaglio consente di visualizzare le singole righe del documento per esaminare la ripartizione dei costi effettuata. In questa finestra è possibile modificare l'importo del costo ed assegnare l'eventuale fornitore di competenza.</p>
+<p style="text-align: center;"><img src="Images/sbas0007f_ff_05.png" alt="" style=" border:none; width:100%; max-width:549px;" border="0" /></p>
+<p>&#160;</p>
+<p>Al termine delle operazioni di registrazione, premendo il tasto F10 o il corrispondente pulsante Salva sulla toolbar viene richiesto se salvare i dati ed effettuare le registrazioni. I dati qui inseriti andranno ad aggiornare i movimenti di magazzino relativi ai documenti nella <a href="../bmag/bmag0001f_02.htm">sezione dettaglio</a> delle righe.</p>
+</body>
+</html>

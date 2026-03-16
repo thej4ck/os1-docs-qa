@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_208510.htm"},{"type":"item","name":"Analisi venduto","url":"html/sved/sved0010d.htm"},{"type":"item","name":"Stampa ricarichi per listino","url":"html/sved/sved0011d.htm"},{"type":"item","name":"Stampa riepilogativa fine giornata","url":"html/sved/sved0012d.htm"},{"type":"item","name":"Controllo movimenti per cassa/addetto","url":"html/sved/sved0015f.htm"},{"type":"item","name":"Analisi provvigioni addetti","url":"html/sved/sved0018f.htm"},{"type":"item","name":"Analisi voucher","url":"html/sved/sved0022f.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

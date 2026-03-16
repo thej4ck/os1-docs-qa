@@ -1,0 +1,619 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 11, 2016 4:59:13 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Generazione ordini fornitori</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function ehlp_showtip(current,e,text)
+{
+  if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape'))
+  {
+    document.tooltip.document.write("<layer bgColor='yellow' style='border:1px solid black;font-size:12px;'>"+ text + "</layer>");
+    document.tooltip.document.close();
+    document.tooltip.left=e.pageX+5;
+    document.tooltip.top=e.pageY+5;
+    document.tooltip.visibility="show";
+  }
+}
+function ehlp_hidetip()
+{
+  document.tooltip.visibility="hidden";
+}
+//]]>
+</script>
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.5.1.1_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Ordini fornitori > Ordini a fornitori" /><script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function ehlp_showtip(current,e,text)
+{
+  if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape'))
+  {
+    document.tooltip.document.write("<layer bgColor='yellow' style='border:1px solid black;font-size:12px;'>"+ text + "</layer>");
+    document.tooltip.document.close();
+    document.tooltip.left=e.pageX+5;
+    document.tooltip.top=e.pageY+5;
+    document.tooltip.visibility="show";
+  }
+}
+function ehlp_hidetip()
+{
+  document.tooltip.visibility="hidden";
+}
+//]]>
+</script>
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, sans-serif; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 12pt;">Generazione ordini fornitori</p>
+<p style="font-size: 10pt;">La procedura consente di generare gli ordini 
+ fornitori utilizzando gli ordini clienti, il sottoscorta, le richieste 
+ di acquisto oppure i dati di produzione, sempre che i moduli relativi 
+ siano installati.</p>
+<p>La finestra principale si articola su due pagine: una per i parametri 
+ di selezione dei documenti con cui effettuare la generazione e l'altra 
+ con il risultato dell'elaborazione, ovvero gli ordini fornitori che dovranno 
+ essere generati. In questa sezione sarà possibile apportare anche delle 
+ modifiche prima di effettuare la generazione definitiva.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Selezione documenti</p>
+<p>La richiesta parametri si diversifica a seconda che si utilizzi la <a 
+	 href="#Generazione da ordini clienti">generazione da ordini clienti</a> 
+ oppure la <a href="#Generazione da fabbisogni su disposizioni">generazione 
+ da fabbisogni su disposizioni</a>, la <a href="#Generazione da richieste di acquisto">generazione 
+ da richieste di acquisto</a> oppure la <a href="#Generazione da sottoscorta">generazione 
+ da sottoscorta</a>; il campo tipo selezione determina il tipo di selezione 
+ dei dati per la generazione degli ordini fornitori. Se non sono presenti 
+ i moduli necessari al funzionamento della procedura, questo sarà segnalato 
+ e non sarà possibile utilizzarla. Se è presente un solo modulo la scelta 
+ del tipo selezione sarà limitata al solo modulo presente (ordini o produzione).</p>
+<p>&#160;</p>
+<p style="font-weight: bold;"><a name="Generazione da ordini clienti"></a>Generazione 
+ da ordini clienti</p>
+<p style="font-weight: normal;">Se attivata da configurazione la gestione 
+ del codice fornitore sull'ordine cliente, se la riga di ordine cliente 
+ è già stata attribuita manualmente ad un fornitore, il rigo di ordine 
+ generato viene attribuito direttamente a tale fornitore. Se presente il 
+ modulo di produzione sarà presente la casella Escludi prodotti con scheda 
+ tecnica, spuntata, per escludere le righe ordini di detti articoli dalla 
+ generazione.</p>
+<p style="text-align: center;"><img src="Images/sorf0011f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CLIENTE: eventuale 
+ codice del cliente, presente in anagrafica clienti, da cui si vuole iniziare 
+ la selezione. Confermando a vuoto, la selezione inizia dal primo cliente 
+ valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CLIENTE: eventuale 
+ codice del cliente, presente in anagrafica clienti, con cui si vuole terminare 
+ la selezione. Confermando a vuoto, la selezione termina con l’ultimo cliente 
+ valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale 
+ data da cui deve iniziare l’analisi dei documenti relativamente ai precedenti 
+ parametri di selezione. Confermando a vuoto, l’analisi inizia con il primo 
+ documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale 
+ data con cui si desidera terminare l’analisi dei documenti relativamente 
+ ai precedenti parametri di selezione. Confermando a vuoto, l’analisi si 
+ conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA CONSEGNA: 
+ data di consegna da cui deve iniziare l’analisi degli ordini. Confermando 
+ a vuoto, l’analisi inizia con il primo ordine valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA CONSEGNA: data 
+ di consegna con cui si desidera terminare l’analisi degli ordini. Confermando 
+ a vuoto, l’analisi si conclude con l'ultimo ordine valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ANNO: indica l'anno 
+ degli ordini a cui si vuole limitare la selezione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE: eventuale 
+ codice della Causale ordini a cui si vuole limitare la selezione. Sul 
+ campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NUMERO: indica il 
+ numero dell'ordine a cui si vuole limitare la selezione, in combinazione 
+ con anno e/o causale.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO CONTROLLO QUANTITÀ: 
+ definisce il tipo di controllo da utilizzare sulla quantità di generazione: 
+ nessun controllo, controllo con esistenza oppure con disponibilità.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ESCLUDI PRODOTTI CON 
+ SCHEDA TECNICA: il parametro è presente se attivo il modulo di produzione; 
+ se spuntato esclude dalla generazione i prodotti che alla data dell'ordine 
+ cliente hanno una scheda tecnica attiva.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">AGGIUNGI RIGHE DESCRITTIVE: 
+ se la casella è spuntata, in fase di salvataggio finale, saranno inserite 
+ le righe descrittive con i riferimenti agli ordini clienti di origine.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">INCLUDI ORDINI APERTI: 
+ se spuntato considera nell'elaborazione degli ordini clienti anche gli 
+ ordini aperti, altrimenti li esclude.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO FORNITORE: definisce 
+ il metodo di assegnazione del fornitore: valori possibili: manuale, ultimo 
+ fornitore movimentato dal prodotto, fornitore abituale del prodotto; il 
+ prodotto è riferito a quello presente sulle righe che saranno selezionate.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">UTILIZZA DATA CONSEGNA 
+ DOCUMENTO ORIGINE: se spuntata questa casella, la generazione delle righe 
+ riporterà come data di consegna la data presente sul rigo ordine di origine.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">RAGGRUPPA ORDINI CLIENTI: 
+ genera gli ordini fornitori raggruppando gli ordini clienti (casella con 
+ segno di spunta); se la casella è vuota consente di generare per ogni 
+ ordini cliente un singolo ordine fornitore.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FORNITORE: nel caso 
+ di tipo fornitore manuale, è il codice del fornitore per cui deve essere 
+ generato l'ordine; negli altri casi viene utilizzato come filtro aggiuntivo 
+ sulla selezione. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PAGAMENTO: codice 
+ del pagamento da impostare sugli ordini che saranno generati; se viene 
+ lasciato vuoto sarà assegnato quello indicato sull'anagrafica del fornitore. 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE: codice della 
+ causale con cui sarà generato l'ordine, viene proposta quella definita 
+ in configurazione. Se viene lasciata vuota sarà assegnata quella indicata 
+ sull'anagrafica del fornitore. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LOTTO DI RIORDINO: 
+ definisce come gestire la quantità in relazione al lotto di riordino del 
+ prodotto:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">utilizzato 
+		 come minimo: la quantità non sarà mai inferiore al lotto di riordino 
+		 se diverso da zero;</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">utilizzato 
+		 come multiplo: la quantità sarà calcolata sempre come multiplo 
+		 (arrotondata per eccesso) del lotto di riordino se diverso da 
+		 zero;</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">non 
+		 utilizzato: non sarà mai utilizzato il lotto di riordino, né come 
+		 minimo né come multiplo.</p></li>
+	</ul></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TRATTA OBSOLETI: se 
+ spuntata considera anche gli articoli obsoleti, altrimenti saranno scartati.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Utilizza 
+ minimo acquistabile</span>: se presente la spunta, la causale ordine ha 
+ attivo il controllo sul minimo acquistabile e sul prodotto è presente 
+ una quantità minima acquistabile superiore alla quantità del rigo in fase 
+ di generazione sarà assegnata come quantità del rigo la quantità minima 
+ acquistabile del prodotto.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;"><a name="Generazione da fabbisogni su disposizioni"></a>Generazione 
+ da fabbisogni su disposizioni</p>
+<p style="text-align: center;"><img src="Images/sorf0011f_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DISPOSIZIONE: tre 
+ campi per contenere rispettivamente anno, causale e numero della disposizione 
+ da cui si vuole iniziare la selezione. Confermando a vuoto, la selezione 
+ inizia dalla prima disposizione compatibile con i successivi parametri.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DISPOSIZIONE: tre 
+ campi per contenere rispettivamente anno, causale e numero della disposizione 
+ con cui si vuole concludere la selezione. Confermando a vuoto, la selezione 
+ termina con l’ultima disposizione compatibile con i successivi parametri.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: data disposizione 
+ da cui si vuole iniziare la selezione. Confermando a vuoto, la selezione 
+ inizia dalla prima data valida.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: data disposizione 
+ con cui si vuole concludere la selezione. Confermando a vuoto, la selezione 
+ inizia dalla prima data valida.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">INCLUDI DISPOSIZIONI 
+ IMPEGNATE: definisce se considerare anche le disposizioni che sono già 
+ impegnate (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">INCLUDI DISPOSIZIONI 
+ RIENTRATE: definisce se considerare anche le disposizioni che sono già 
+ rientrate (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DISPONIBILITÀ ORDINI 
+ CLIENTI: determina l'aggiunta al calcolo della disponibilità di magazzino 
+ dell'impegno derivante dagli ordini clienti (casella con segno di spunta). 
+ Viene proposto quanto come indicato nella <a href="../bbas/bbas0101f_23.htm">configurazione 
+ produzione</a>.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DISPONIBILITÀ ORDINI 
+ FORNITORI: determina l'aggiunta al calcolo della disponibilità di magazzino 
+ dell'ordinato derivante dagli ordini fornitori (casella con segno di spunta). 
+ Viene proposto quanto come indicato nella <a href="../bbas/bbas0101f_23.htm">configurazione 
+ produzione</a>.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DISPONIBILITÀ ORDINI 
+ PRODUZIONE: determina l'aggiunta al calcolo della disponibilità di magazzino 
+ dell'ordinato derivante dalla produzione (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DISPONIBILITÀ IMPEGNI 
+ DA PRODUZIONE: determina l'aggiunta al calcolo della disponibilità di 
+ magazzino dell'impegno derivante dalla produzione (casella con segno di 
+ spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CATEGORIA MERCEOLOGICA: 
+ eventuale codice della categoria merceologica, riferita ai prodotti, per 
+ cui effettuare la selezione.&#160;Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CATEGORIA DI VENDITA: 
+ eventuale codice della categoria di vendita, riferita ai prodotti, per 
+ cui effettuare la selezione.&#160;Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CODICE INVENTARIO: 
+ eventuale codice inventario, riferito ai prodotti, per cui effettuare 
+ la selezione.&#160;Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">GRUPPO VENDITA: eventuale 
+ codice del gruppo vendita, riferito ai prodotti, per cui effettuare la 
+ selezione.&#160;Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">MAGAZZINO COMPONENTI: 
+ codice del magazzino da utilizzare per i progressivi delle materie prime. 
+ Sul campo sono attive le funzioni di ricerca (F9) sulla tabella magazzini. 
+ Viene proposto quello riportato in <a href="../bbas/bbas0101f_23.htm">configurazione 
+ produzione</a>.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">MAGAZZINO SEMILAVORATI: 
+ codice del magazzino da utilizzare per i progressivi dei semilavorati. 
+ Sul campo sono attive le funzioni di ricerca (F9) sulla tabella magazzini. 
+ Viene proposto, se attiva la gestione, quello riportato in <a href="../bbas/bbas0101f_23.htm">configurazione 
+ produzione</a>.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO FORNITORE: definisce 
+ il metodo di assegnazione del fornitore: valori possibili: manuale, ultimo 
+ fornitore movimentato dal prodotto, fornitore abituale del prodotto; il 
+ prodotto è riferito a quello presente sulle righe che saranno selezionate.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">UTILIZZA DATA CONSEGNA 
+ DOCUMENTO ORIGINE: se spuntata questa casella, la generazione delle righe 
+ riporterà come data di consegna la data presente sul rigo ordine di origine 
+ eventualmente collegato alla disposizione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FORNITORE: nel caso 
+ di tipo fornitore manuale, è il codice del fornitore per cui deve essere 
+ generato l'ordine; negli altri casi viene utilizzato come filtro aggiuntivo 
+ sulla selezione. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PAGAMENTO: codice 
+ del pagamento da impostare sugli ordini che saranno generati; se viene 
+ lasciato vuoto sarà assegnato quello indicato sull'anagrafica del fornitore. 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="margin-left: 30pt; text-indent: -0.417in;">CAUSALE: codice della 
+ causale con cui sarà generato l'ordine, viene proposta quella definita 
+ in configurazione. Se viene lasciata vuota sarà assegnata quella indicata 
+ sull'anagrafica del fornitore. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LOTTO DI RIORDINO: 
+ definisce come gestire la quantità in relazione al lotto di riordino del 
+ prodotto:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">utilizzato 
+		 come minimo: la quantità non sarà mai inferiore al lotto di riordino 
+		 se diverso da zero;</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">utilizzato 
+		 come multiplo: la quantità sarà calcolata sempre come multiplo 
+		 (arrotondata per eccesso) del lotto di riordino se diverso da 
+		 zero;</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">non 
+		 utilizzato: non sarà mai utilizzato il lotto di riordino, né come 
+		 minimo né come multiplo.</p></li>
+	</ul></li>
+</ol>
+<p>TRATTA OBSOLETI: se spuntata considera anche gli articoli obsoleti, 
+ altrimenti saranno scartati.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Utilizza 
+ minimo acquistabile</span>: se presente la spunta, la causale ordine ha 
+ attivo il controllo sul minimo acquistabile e sul prodotto è presente 
+ una quantità minima acquistabile superiore alla quantità del rigo in fase 
+ di generazione sarà assegnata come quantità del rigo la quantità minima 
+ acquistabile del prodotto.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;"><a name="Generazione da richieste di acquisto"></a>Generazione 
+ da richieste di acquisto</p>
+<p style="font-weight: bold;"><span style="font-weight: normal;">E' necessario 
+ spiegare che la generazione degli ordini fornitori non è utilizzabile 
+ da tutti gli utenti, ma solo da quelli per cui sono state impostate le 
+ condizioni nelle tabelle della gestione richieste di acquisto.</span></p>
+<p style="text-align: center;"><img src="Images/sorf0011f_03.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ANNO: indica l'anno 
+ delle richieste a cui si vuole limitare la selezione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE: eventuale 
+ codice della Causale richieste a cui si vuole limitare la selezione. Sul 
+ campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NUMERO: indica il 
+ numero della richiesta a cui si vuole limitare la selezione, in combinazione 
+ con anno e/o causale.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale 
+ data da cui deve iniziare l’analisi dei documenti relativamente ai precedenti 
+ parametri di selezione. Confermando a vuoto, l’analisi inizia con il primo 
+ documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale 
+ data con cui si desidera terminare l’analisi dei documenti relativamente 
+ ai precedenti parametri di selezione. Confermando a vuoto, l’analisi si 
+ conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PRODOTTO: eventuale 
+ codice del prodotto, a cui si vuole limitare la selezione.&#160;Sul campo 
+ sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CATEGORIA MERCEOLOGICA: 
+ eventuale codice della categoria merceologica, a cui si vuole limitare 
+ la selezione.&#160;Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO: eventuale 
+ codice del magazzino, a cui si vuole limitare la selezione.&#160;Sul campo 
+ sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">RICHIEDENTE: eventuale 
+ codice dell'utente che ha effettuato la richiesta di acquisto, a cui si 
+ vuole limitare la selezione.&#160;Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CONSEGNA: eventuale 
+ data di consegna da cui deve iniziare l’analisi dei documenti relativamente 
+ ai precedenti parametri di selezione. Confermando a vuoto, l’analisi inizia 
+ con il primo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CONSEGNA: eventuale 
+ data di consegna con cui si desidera terminare l’analisi dei documenti 
+ relativamente ai precedenti parametri di selezione. Confermando a vuoto, 
+ l’analisi si conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO FORNITORE: definisce 
+ il metodo di assegnazione del fornitore: valori possibili: manuale, ultimo 
+ fornitore movimentato dal prodotto, fornitore abituale del prodotto; il 
+ prodotto è riferito a quello presente sulle righe che saranno selezionate.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FORNITORE: nel caso 
+ di tipo fornitore manuale, è il codice del fornitore per cui deve essere 
+ generato l'ordine; negli altri casi viene utilizzato come filtro aggiuntivo 
+ sulla selezione. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PAGAMENTO: codice 
+ del pagamento da impostare sugli ordini che saranno generati; se viene 
+ lasciato vuoto sarà assegnato quello indicato sull'anagrafica del fornitore. 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE: codice della 
+ causale con cui sarà generato l'ordine, viene proposta quella definita 
+ in configurazione. Se viene lasciata vuota sarà assegnata quella indicata 
+ sull'anagrafica del fornitore. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p>TRATTA OBSOLETI: se spuntata considera anche gli articoli obsoleti, 
+ altrimenti saranno scartati.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;"><span 
+	 style="text-transform: uppercase;">U</span>tilizza minimo acquistabile</span>: 
+ se presente la spunta, la causale ordine ha attivo il controllo sul minimo 
+ acquistabile e sul prodotto è presente una quantità minima acquistabile 
+ superiore alla quantità del rigo in fase di generazione sarà assegnata 
+ come quantità del rigo la quantità minima acquistabile del prodotto.</p>
+<p><span style="text-transform: uppercase;">Consenti modifiche quantità 
+ ordine</span>: se spuntata la casella, sulle righe generate sarà possibile 
+ modificare la quantità proposta.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;"><a name="Generazione da sottoscorta"></a>Generazione 
+ da sottoscorta</p>
+<p style="text-align: center;"><img src="Images/sorf0011f_04.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">DA CATEGORIA: 
+ eventuale codice della categoria merceologica da cui si vuole iniziare 
+ la selezione di analisi. Sul campo è attiva la ricerca (F9) sulla tabella 
+ Categorie merceologiche.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">A 
+ CATEGORIA: eventuale codice della categoria merceologica con cui si vuole 
+ concludere la selezione di analisi. Sul campo è attiva la ricerca (F9) 
+ sulla tabella Categorie merceologiche.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">DA 
+ INVENTARIO: eventuale codice Inventario da cui si vuole iniziare la selezione 
+ di analisi. Sul campo è attiva la ricerca (F9) sulla tabella Codici inventario.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">A 
+ INVENTARIO: eventuale codice Inventario con cui vi vuole concludere la 
+ selezione di analisi. Sul campo è attiva la ricerca (F9) sulla tabella 
+ Codici inventario.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">DA 
+ MAGAZZINO: eventuale codice del magazzino da cui si vuole iniziare la 
+ selezione di analisi. Confermando a vuoto, l’analisi inizia dal primo 
+ magazzino valido. Sul campo è attiva la ricerca (F9) F9 sulla tabella 
+ Magazzini.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">A 
+ MAGAZZINO: eventuale codice del magazzino con cui si vuole concludere 
+ la selezione di analisi. Confermando a vuoto, l’analisi termina con l’ultimo 
+ magazzino valido. Sul campo è attiva la ricerca (F9) sulla tabella Magazzini.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">DA 
+ PRODOTTO: eventuale codice dell'articolo, presente in anagrafica Prodotti, 
+ da cui si desidera iniziare la selezione dei &#160;movimenti di magazzino. 
+ Confermando a vuoto, la selezione inizia con il primo prodotto valido. 
+ Sul campo è attiva la ricerca (F9) sull’anagrafica prodotti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">A 
+ PRODOTTO: eventuale codice dell'articolo, presente in anagrafica Prodotti, 
+ a cui si desidera terminare la selezione dei &#160;movimenti di magazzino. 
+ Confermando a vuoto, la selezione termina con l’ultimo valido. Sul campo 
+ è attiva la ricerca (F9) sull’anagrafica prodotti.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">TIPO GIACENZA: 
+ specifica su quale valore effettuare il controllo del sottoscorta: esistenza 
+ o disponibilità.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">INCLUDI PRODOTTI 
+ SENZA SCORTA: definisce se includere nella selezione anche i prodotti 
+ che non hanno nessuna scorta definita (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">SCORTA PER MAGAZZINO: 
+ definisce se considerare la scorta minima di ogni singolo magazzino, se 
+ presente, (casella con segno di spunta) altrimenti viene considerata la 
+ scorta minima del prodotto.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">INCLUDI NON MOVIMENTATI: 
+ definisce se includere nella selezione anche i prodotti che non hanno 
+ movimenti di magazzino (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">TIPO FORNITORE: 
+ definisce il metodo di assegnazione del fornitore: valori possibili: manuale, 
+ ultimo fornitore movimentato dal prodotto, fornitore abituale del prodotto; 
+ il prodotto è riferito a quello presente sulle righe che saranno selezionate.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">INCLUDI ORDINI 
+ SENZA FORNITORE: attivo solo se il tipo fornitore non è manuale; consente 
+ di includere le righe che non hanno fornitore permettendone successivamente 
+ l'assegnazione con l'apposita funzione (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FORNITORE: nel caso 
+ di tipo fornitore manuale, è il codice del fornitore per cui deve essere 
+ generato l'ordine; negli altri casi viene utilizzato come filtro aggiuntivo 
+ sulla selezione. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PAGAMENTO: codice 
+ del pagamento da impostare sugli ordini che saranno generati; se viene 
+ lasciato vuoto sarà assegnato quello indicato sull'anagrafica del fornitore. 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE: codice della 
+ causale con cui sarà generato l'ordine, viene proposta quella definita 
+ in configurazione. Se viene lasciata vuota sarà assegnata quella indicata 
+ sull'anagrafica del fornitore. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LOTTO DI RIORDINO: 
+ definisce come gestire la quantità in relazione al lotto di riordino del 
+ prodotto:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">utilizzato 
+		 come minimo: la quantità non sarà mai inferiore al lotto di riordino 
+		 se diverso da zero;</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">utilizzato 
+		 come multiplo: la quantità sarà calcolata sempre come multiplo 
+		 (arrotondata per eccesso) del lotto di riordino se diverso da 
+		 zero;</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">non 
+		 utilizzato: non sarà mai utilizzato il lotto di riordino, né come 
+		 minimo né come multiplo.</p></li>
+	</ul></li>
+</ol>
+<p>TRATTA OBSOLETI: se spuntata considera anche gli articoli obsoleti, 
+ altrimenti saranno scartati.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Utilizza 
+ minimo acquistabile</span>: se presente la spunta, la causale ordine ha 
+ attivo il controllo sul minimo acquistabile e sul prodotto è presente 
+ una quantità minima acquistabile superiore alla quantità del rigo in fase 
+ di generazione sarà assegnata come quantità del rigo la quantità minima 
+ acquistabile del prodotto.</p>
+<p>&#160;</p>
+<p>La pressione sul pulsante Seleziona determina l'avvio dell'elaborazione; 
+ se saranno trovati dati validi verranno generati, in modo provvisorio 
+ gli ordini fornitori e saranno resi disponibili per la modifica nella 
+ sezione Ordini da generare.</p>
+<p>Questa sezione appare divisa in due parti: la parte superiore che contiene 
+ le teste degli ordini da generare, alle quali fanno riferimento le righe 
+ nella parte inferiore.</p>
+<p style="text-align: center;"><img src="Images/sorf0011f_05.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p>Da questa sezione è possibile modificare il codice del fornitore, il 
+ pagamento, gli sconti e la data di consegna; la modifica al codice del 
+ fornitore interessa anche il codice della divisa, che viene letto dall'anagrafica 
+ del fornitore stesso.</p>
+<p><span style="text-transform: uppercase;"><img src="../sprb/images/b_misure.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:20px;" align="left" border="0" /></span>Se 
+ attiva la gestione misure prodotti, tramite questo pulsante, è possibile 
+ accedere alla finestra di <a href="../sprb/DlgMisureDocumenti.htm">Gestione 
+ misure</a> in modo da utilizzare i dati per il calcolo della quantità. 
+ Il pulsante consente anche di verificare visivamente se sono presenti 
+ dei dati relativi alle misure in quanto appare in un colore diverso quando 
+ questi sono presenti.</p>
+<p>&#160;</p>
+<p><span style="font-weight: bold;">La variazione del codice divisa, per 
+ modifica del fornitore, non ha alcun effetto sui prezzi presenti nelle 
+ righe sottostanti, che rimarranno nella divisa originale</span>.</p>
+<p>Nella sezione delle righe è possibile modificare la quantità, il prezzo, 
+ gli sconti e la data di consegna. Se attiva la gestione del dettaglio 
+ quantità è presente il bottone dettaglio, a destra del campo, tramite 
+ il quale sarà visualizzata la relativa finestra di <a href="../bbas/bbas0904f_ord.htm" title="Dettaglio lotti su ordini" onmouseover="if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape')) ehlp_showtip(this,event,'Dettaglio lotti su ordini');" onmouseout="if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape')) ehlp_hidetip();">dettaglio 
+ quantità</a>; l'attivazione della finestra avviene comunque in automatico 
+ al momento dell'accesso al campo quantità. Sul campo unità di misura, 
+ tramite il tasto funzione F11 si può accedere alla finestra relativa al 
+ <a href="../bbas/DlgFattConv.htm">fattore di conversione</a>.</p>
+<p>&#160;</p>
+<p><img src="Images/sorf_b_RagData.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:54px;" align="left" border="0" />Utilizzando il pulsante Assegnazione date è possibile 
+ effettuare l'assegnazione della stessa data per prodotto; questa operazione 
+ consente di selezionare più righe dello stesso prodotto ed assegnare la 
+ stessa data di consegna. Nella finestra vengono riportati, nella prima 
+ griglia, i prodotti attivi e selezionando un elemento compaiono, nella 
+ griglia inferiore le righe analitiche.</p>
+<p style="text-align: center;"><img src="Images/sorf0011f_09.png" alt="" style=" border:none; margin-top:0px; margin-right:0px; margin-left:0px; margin-bottom:0px; width:100%; max-width:540px;" border="0" /></p>
+<p><img src="Images/sorf0011f_08.gif" alt="" style=" border:none; margin-top:0px; margin-bottom:5px; margin-left:5px; margin-right:0px; width:100%; max-width:147px;" align="right" border="0" />Da questa griglia è possibile 
+ selezionare le singole righe con il doppio clic del mouse oppure utilizzando 
+ il menù associato al tasto destro del mouse tramite cui è possibile anche 
+ annullare completamente la selezione, selezionare tutte le righe oppure 
+ annullare un raggruppamento già effettuato; nella parte bassa, sotto la 
+ griglia, è presente la nuova data di consegna che può essere anche inserita 
+ manualmente (di base viene proposta la data minore fra tutte le righe 
+ selezionate) ed il pulsante Assegna. Con le righe selezionate se si preme 
+ il pulsante Assegna, viene effettuata l'assegnazione e le righe appaiono 
+ come nell'esempio:</p>
+<p style="text-align: center;"><img src="Images/sorf0011f_10.png" alt="" style=" border:none; margin-top:0px; margin-right:0px; margin-left:0px; margin-bottom:0px; width:100%; max-width:303px;" border="0" /></p>
+<p>Tutte le operazioni effettuate all'interno di questa finestra saranno 
+ salvate solo se si preme il pulsante Salva in basso, se si esce dalla 
+ finestra premendo Annulla tutte le modifiche effettuate andranno perse; 
+ analogamente se si esce premendo Salva sarà effettuata l'assegnazione 
+ delle date come previsto.</p>
+<p>&#160;</p>
+<p><img src="Images/sorf_b_assforn.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:0px; width:100%; max-width:54px;" align="left" border="0" /><img src="Images/sorf0011f_06.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:0px; width:100%; max-width:413px;" align="right" border="0" />Il 
+ pulsante <span style="font-style: italic;">Associa a fornitore</span> 
+ può essere utilizzato per assegnare righe di ordine ad un altro fornitore, 
+ tra quelli presenti nella sezione superiore della finestra. Dopo aver 
+ selezionato uno o più righe premendo il pulsante compare la finestra a 
+ lato, dalla quale è possibile selezionare uno dei fornitori presenti. 
+ La pressione sul pulsante Esegui sposterà le righe precedentemente selezionate 
+ assegnandole al nuovo fornitore selezionato.</p>
+<p>&#160;</p>
+<p>&#160;</p>
+<p>&#160;</p>
+<p><img src="Images/sorf_b_asspre.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:0px; width:100%; max-width:54px;" align="left" border="0" />Il pulsante <span style="font-style: italic;">Assegnazione 
+ prezzi</span> può essere utilizzato per modificare il prezzo di uno o 
+ più prodotti e per assegnare i prodotti ad altri fornitori, in relazione 
+ agli ultimi acquisti fatti. Dopo aver selezionato uno o più righe premendo 
+ il pulsante compare la finestra seguente, dalla quale è possibile selezionare 
+ uno dei prezzi presenti da associare alle singole righe selezionate oppure 
+ a tutti i prodotti uguali a quello selezionato; togliendo la spunta da 
+ Copia prezzi/sconti sarà possibile spostare un prodotto da un fornitore 
+ ad un altro, mantenendo le condizioni economiche esistenti. La pressione 
+ sul pulsante Esegui effettuerà l'operazione. Il pulsante Ricerca, consente 
+ di specificare direttamente un fornitore, se dalla ricerca degli ultimi 
+ acquisti, non sarà trovato nessun dato.</p>
+<p style="text-align: center;"><img src="Images/sorf0011f_07.png" alt="" style=" border:none; margin-right:0px; margin-top:0px; margin-bottom:0px; margin-left:0px; width:100%; max-width:709px;" border="0" /></p>
+<p>&#160;</p>
+<p>Al termine delle modifiche, con la pressione sul bottone Salva della 
+ toolbar o del tasto F10, verrà richiesto se effettuare la generazione 
+ degli ordini. La risposta affermativa darà il via alle operazioni di registrazione.</p>
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+ if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape'))
+  document.write("<div id='tooltip' class='WebHelpPopupMenu'></div>");
+//]]>
+</script><script type="text/javascript" language="JavaScript">
+//<![CDATA[
+ if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape'))
+  document.write("<div id='tooltip' class='WebHelpPopupMenu'></div>");
+//]]>
+</script>
+</body>
+</html>

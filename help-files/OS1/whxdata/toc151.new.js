@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_5027.htm"},{"type":"item","name":"Analisi movimenti","url":"html/svva/svva0002d.htm"},{"type":"item","name":"Analisi giacenze","url":"html/svva/svva0003f.htm"},{"type":"item","name":"Stampa inventario","url":"html/svva/svva0004d.htm"},{"type":"item","name":"Dettaglio quantità su documenti","url":"html/bbas/bbas0904f.htm"},{"type":"item","name":"Dettaglio quantità su ordini/offerte","url":"html/bbas/bbas0904f_ord.htm"},{"type":"item","name":"Dettaglio quantità in evasione ordini/offerte","url":"html/bbas/bbas0904f_eva.htm"},{"type":"book","name":"Tabelle","key":"toc152"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

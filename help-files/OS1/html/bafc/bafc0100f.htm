@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 18, 2016 6:41:51 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Condizioni anticipazione</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.13.1.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Anticipi fatture clienti > Tabelle" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; font-weight: bold;">Condizioni 
+ anticipazione</p>
+<p>La tabella consente di definire una serie di condizioni indispensabili 
+ per la creazione e gestione della distinta di anticipazione; le condizioni 
+ possono essere inserite per conto corrente anticipi e data validità.</p>
+<p style="font-family: Verdana, sans-serif; text-align: center;"><img src="images/bafc0100f_01.png" alt="" style=" border:none; width:100%; max-width:539px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif;">&#160;</p>
+<p style="font-family: Verdana, Arial; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">conto corrente anticipi</span>: 
+ campo obbligatori, indica il conto corrente anticipi, che deve essere 
+ presente nella tabella <a href="../bbas/bbas0007f.htm">Conti correnti</a>.</p>
+<p style="font-family: Verdana, Arial; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">data validità</span>: indica la 
+ data di inizio validità delle condizioni per il conto corrente anticipi.</p>
+<p style="font-family: Verdana, Arial; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">percentuale anticipazione</span>: 
+ indicare la percentuale che la banca concede sul totale di ogni rata presentata 
+ per l'anticipazione.</p>
+<p style="font-family: Verdana, Arial; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">tasso da applicare</span>: indicare 
+ il tasso da applicare in base alle condizioni bancarie.</p>
+<p style="font-family: Verdana, Arial; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">giorni scadenza</span>: numero 
+ di giorni da incrementare alla data di elaborazione della distinta di 
+ presentazione anticipi e sarà filtro di selezione delle rate di scadenza 
+ future</p>
+<p style="font-family: Verdana, Arial; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">importo massimo</span>: indicare 
+ l'importo massimo concesso dalla banca per la presentazione in distinta.</p>
+<p style="font-family: Verdana, Arial; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">divisa</span>: il codice divisa 
+ del conto di anticipazione. Indicando una divisa specifica viene stabilito 
+ che la distinte che saranno preparate dovranno contenere scadenze della 
+ stessa divisa. Questa casistica si rivela utile ad esempio in presenza 
+ di conti valutari con cui si intende gestire in modo esclusivo la divisa 
+ utilizzata. La presenza di questo campo compilato esclude la possibilità 
+ di trattare il controvalore.</p>
+<p style="font-family: Verdana, Arial; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">tratta controvalore</span>: se 
+ spuntato indica che per il conto di anticipazione è possibile creare delle 
+ distinte di anticipazione in diverse divise. Questo determina che in fase 
+ di calcolo dell'importo massimo gestito verrà considerato il controvalore 
+ in moneta di conto anzichè il valore in divisa. La spunta su questa casella 
+ esclude la possibilità di avere una divisa specifica.</p>
+<p style="font-family: Verdana, Arial; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">conto corrente ordinario</span>: 
+ campo necessario e si desidera effettuate le movimentazioni contabili 
+ in fase di accensione/rimborso dell’anticipo; deve essere presente nella 
+ tabella <a href="../bbas/bbas0007f.htm">Conti correnti</a>.</p>
+<p><span style="text-transform: uppercase;">Genera movimento rimborso da 
+ prima nota</span>: se la casella è spuntata è possibile utilizzare la 
+ prima nota contabile per registrare il movimento di rimborso, altrimenti 
+ sarà possibile utilizzare solo l'apposita procedura.</p>
+</body>
+</html>

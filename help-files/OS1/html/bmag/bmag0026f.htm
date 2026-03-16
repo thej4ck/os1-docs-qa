@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 17, 2016 12:33:21 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Gestione inventario</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.7.14.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Magazzino > Inventario fisico" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt;">Gestione inventario</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;">Il programma consente di inserire le esistenze effettive riscontrate per ogni prodotto o associazione di prodotto con elementi del dettaglio come variante, ubicazione o lotto (in base a come configurata la procedura).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;">Il programma permette di codificare l'inventario e le informazioni impostate vengono memorizzate e visualizzate ogni volta.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;">Per ogni inventario viene richiesta la data di registrazione, il magazzino e il tipo inventario che può essere impostato a:</p>
+<ul style="list-style: disc;">
+<li class="p">
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;">Parziale: in fase di rilevazione rettifiche vengono movimentati solo gli articoli presenti nell'inventario;</p>
+</li>
+<li class="p">
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;">Completo per il magazzino: in fase di rilevazione rettifiche <span style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;">vengono trattati tutti gli articoli, di conseguenza gli articoli per cui non è stata inserita la giacenza sono considerati con giacenza a zero e quindi stornati;</span></p>
+</li>
+<li class="p">
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;">Completo per il prodotto: in fase di rilevazione rettifiche vengono trattati tutti i dettagli degli articoli presenti nell'inventario, questa gestione è utile per gli articoli gestiti a varianti, lotti, ubicazioni, gli articoli che hanno almeno un rigo nell’inventario fisico vengono considerati inventariati e tutte le giacenze non presenti vengono portate a zero, mentre gli articoli che non hanno nessun rigo in inventario fisico non vengono trattati.</p>
+</li>
+</ul>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;"><span>Per ogni inventario è presente il check box "Inventario chiuso" che permette di chiudere l'inventario e poter effettuare la rilevazione delle rettifiche, una volta effettuata la rilevazione definitiva delle rettifiche vengono visualizzate la data e l'ora di registrazione delle rettifiche.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: center;"><img src="Images/bmag0026f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">PRODOTTO: codice del prodotto per cui registrare l'esistenza. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">VARIANTE: eventuale codice della variante, se prevista, relativa al prodotto inserito. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">UBICAZIONE: eventuale codice dell'ubicazione, se prevista, relativa al prodotto inserito.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">LOTTO: eventuale codice del lotto, se previsto, relativo al prodotto inserito. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO: codice del magazzino relativo al prodotto; viene proposto quello inserito per la selezione. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">ESISTENZA: esistenza effettiva relativa ai dati sopra inseriti. Di fianco al campo viene mostrata l'esistenza attuale.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span>ESISTENZA SECONDARIA: se attivato in configurazione del modulo di Magazzino l'utilizzo della quantità secondaria in inventario fisico viene richiesta anche la quantità in unità di misura secondaria dell'articolo.</span></p>
+<p style="font-family: Verdana, sans-serif;">&#160;</p>
+<p><img src="Images/bmag_b_barcode.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:0px; width:100%; max-width:24px;" align="left" border="0" />Tramite il pulsante Barcode, se presente ad attivo il relativo modulo e se gestito il codice a barre del prodotto, è possibile inserire dati provenienti da lettori ottici.</p>
+<p><img src="Images/bmag_win_barcode.PNG" alt="" style=" border:none; margin-right:0px; margin-top:0px; margin-bottom:0px; margin-left:5px; width:100%; max-width:271px;" align="right" border="0" />La pressione del pulsante visualizza la finestra a lato dove indicare se effettuare la lettura dei dati oppure annullare l'operazione. L'operazione è annullabile anche se è già stata richiesta la lettura. I dati letti, daranno origine alle righe del documento.</p>
+<p>&#160;</p>
+<p style="font-family: Verdana, sans-serif;">&#160;</p>
+<p style="font-family: Verdana, sans-serif;">&#160;</p>
+<p style="margin-left: 0in;">&#160;</p>
+<p style="margin-left: 0in;"><img src="Images/b_Invmag.png" alt="" style=" border:none; margin-top:0px; margin-bottom:5px; margin-left:0px; margin-right:5px; width:100%; max-width:24px;" align="left" border="0" />Utilizzando il pulsante inserimento prodotti compare la seguente finestra:</p>
+<p style="margin-left: 0in; text-align: Center;"><img src="Images/bmag0026f_03.png" alt="" style=" border:none; width:100%; max-width:722px;" border="0" /></p>
+<p style="margin-left: 0in;">Da questa finestra è possibile utilizzando i criteri di selezione visualizzare, tramite il pulsante Selezione, un elenco di prodotto che è possibile inserire. Per ogni prodotto visualizzato è possibile impostare una quantità o lasciare zero, i prodotti saranno comunque inseriti.</p>
+<p style="margin-left: 0in;">&#160;</p>
+<p style="font-family: Verdana, sans-serif;">La pressione sul pulsante Salva posto sulla toolbar determina l'effettivo salvataggio dei dati inseriti.</p>
+<p style="font-family: Verdana, sans-serif;">Se al momento dell'inserimento dei prodotti o del salvataggio vengono rilevate duplicazioni di dati inseriti compare una finestra di avviso che propone le soluzioni attuabili: sommare il dato in inserimento a quello presente (Somma), non utilizzare il dato corrente (Ignora), utilizzare il dato corrente (Applica) oppure interrompere l'operazione (Termina).</p>
+<p style="text-align: center;"><img src="Images/bmag0026f_04.png" alt="" style=" border:none; width:100%; max-width:372px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif;">&#160;</p>
+<p style="font-family: Verdana, sans-serif;">È possibile attivare la stampa, prima di selezionare i dati, utilizzando il bottone Stampa o Anteprima della tool bar; compare la finestra di richiesta parametri dove è possibile specificare il codice inventario, il magazzino, il prodotto di inizio e fine analisi e l'indicazione di stampare o meno la giacenza tramite l'apposita casella di spunta..</p>
+<p style="font-family: Verdana, sans-serif; text-align: center;"><img src="Images/bmag0026f_02.png" alt="" style=" border:none; width:100%; max-width:556px;" border="0" /></p>
+<p>&#160;</p>
+<table style="vertical-align: top;" cellspacing="0">
+<col />
+<col />
+<tr style="vertical-align: top;">
+<td style="padding-right: 10px; padding-left: 10px; vertical-align: center;">
+<p style="text-align: center;"><img src="../smat/Images/b_MatRigo.png" alt="" style=" border:none; margin-top:0px; margin-right:0px; margin-left:0px; margin-bottom:0px; width:100%; max-width:24px;" border="0" /></p>
+<p style="text-align: center;"><img src="../smat/Images/b_MatMassivo.png" alt="" style=" border:none; margin-left:0px; margin-right:0px; margin-top:0px; margin-bottom:0px; width:100%; max-width:77px;" border="0" /></p>
+</td>
+<td style="padding-right: 10px; padding-left: 10px;">
+<p>Se attiva la gestione matricole sarà possibile accedere dal singolo rigo/dettaglio alla <a href="../smat/DlgMATDocMatricole.htm">finestra delle matricole</a> tramite il pulsante sul rigo o tramite il pulsante Matricole in alto con cui si accede alla finestra di <a href="../smat/DlgMATAssegnazioneDoc.htm">gestione massiva</a>. Al momento della registrazione delle rettifiche se è stata rettificata la giacenza di un prodotto gestito a matricole, fornendo le effettive matricole giacenti, quelle eventualmente presenti e non corrispondenti saranno stornate.</p>
+</td>
+</tr>
+</table>
+<p>&#160;</p>
+</body>
+</html>

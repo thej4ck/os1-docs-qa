@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc284.js\"  name=\"Liste di prelievo\"><item name=\"Introduzione\" url=\"html/index/index_905038.htm\" /><item name=\"Ricalcolo progressivi prenotazioni\" url=\"html/slpr/slpr0006d.htm\" /></data>";

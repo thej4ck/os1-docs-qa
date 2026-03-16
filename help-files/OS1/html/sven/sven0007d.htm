@@ -1,0 +1,247 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="03 5, 2007 12:02:58 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Generazione fatture</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.2.2_7";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > Documenti di trasporto" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; font-weight: bold; 
+	 text-align: left;"><strong><span style="font-weight: bold;">Generazione 
+ fatture</span></strong></p>
+<p>Il programma effettua la generazione delle fatture di vendita, provvisoria 
+ o definitiva, utilizzando i dati dei Ddt esistenti in archivio in base 
+ ai parametri inseriti dall’utente. La sezione progetti implementa la gestione 
+ dei progetti alla generazione automatica delle fattura da DDT e da interventi; 
+ è visibile solo se è presente il modulo gestione progetti/commesse.</p>
+<p style="text-align: center;"><img src="Images/sven0007d_01.png" alt="" style=" border:none; width:100%; max-width:561px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO GENERAZIONE: 
+ definisce il tipo di operazione da compiere: provvisoria oppure definitiva. 
+ La generazione provvisoria può essere effettuata più volte e non aggiorna 
+ nessuna tabella, ma genera soltanto la stampa di un brogliaccio di fatturazione; 
+ la generazione definitiva aggiorna le tabelle e per annullarla è necessario 
+ seguire una specifica procedura ed è consigliabile contattare il servizio 
+ Assistenza.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CLIENTE: codice 
+ del cliente, presente in anagrafica clienti, da cui si vuole iniziare 
+ la selezione. Confermando a vuoto, la selezione inizia dal primo cliente 
+ valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CLIENTE: codice 
+ del cliente, presente in anagrafica clienti, con cui si vuole terminare 
+ la selezione. Confermando a vuoto, la selezione termina con l'ultimo cliente 
+ valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MASTRO: codice del 
+ mastro, presente nella tabella mastri, per cui si vuole effettuare la 
+ selezione. Confermando a vuoto vengono considerati validi tutti i mastri. 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE DDT: codice 
+ della causale Ddt, presente nella tabella causali Ddt, per cui si vuole 
+ effettuare la selezione. Confermando a vuoto vengono considerate valide 
+ tutte le causali. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale 
+ data del documento da cui deve iniziare l'elaborazione dei documenti relativamente 
+ ai precedenti parametri inseriti. Confermando a vuoto, la selezione inizia 
+ con il primo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale 
+ data del documento con cui si desidera terminare l’elaborazione dei documenti 
+ relativamente ai precedenti parametri inseriti. Confermando a vuoto, la 
+ selezione si conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO PAGAMENTO: codice 
+ del tipo di pagamento, presente nella tabella tipi pagamento, per cui 
+ si vuole effettuare la selezione. Confermando a vuoto vengono considerati 
+ validi tutti i tipi di pagamento. Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SELEZIONE PER NUMERO 
+ DDT: check box che abilita i campi sottostanti per effettuare la selezione 
+ dei documenti per numero, casella con segno di spunta.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><img src="Images/sven0007d_001_01.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:5px; margin-bottom:0px; width:100%; max-width:728px;" align="right" border="0" />ANNO/SERIE/DA 
+ NUMERO/A NUMERO: campi abilitati solo se la casella precedente è spuntata; 
+ consentono di specificare i limiti di selezione per anno, serie e numero 
+ dei Ddt da considerare per la generazione delle fatture. Se abilitata 
+ la casella precedente si attiva il pulsante a fianco; premendolo si accede 
+ ad una finestra che riporterà i ddt da fatturare elaborati in base ai 
+ limiti inseriti in precedenza; da questa finestra è possibile selezionare 
+ i ddt che si vogliono fatturare; la pressione del pulsante Esegui conferma 
+ la scelta effettuata e saranno fatturati solo i Ddt selezionati.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-indent: -0.417in; 
+															 margin-left: 30pt;">SPECIFICA 
+ PRIMO NUMERO FATTURA</span>: check box che abilita il campo successivo 
+ per specificare il numero con cui dovrà iniziare la fatturazione, casella 
+ con segno di spunta.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NUMERO FATTURA: campo 
+ abilitato solo se la casella precedente è spuntata; consente di inserire 
+ il numero con cui iniziare la fatturazione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-indent: -0.417in; 
+															 margin-left: 30pt;">SPECIFICA 
+ DATA INIZIO PAGAMENTO</span>: check box che abilita il campo successivo 
+ per specificare la data da cui iniziare a conteggiare le scadenze, casella 
+ con segno di spunta.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA INIZIO PAGAMENTO: 
+ campo abilitato solo se la casella precedente è spuntata; consente di 
+ specificare la data di partenza per il calcolo del piano di pagamento.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-indent: -0.417in; 
+															 margin-left: 30pt;">SPECIFICA 
+ SEZIONALE IVA</span>: check box che abilita il campo successivo per specificare 
+ il numero di registro Iva su cui effettuare la fatturazione, casella con 
+ segno di spunta.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NUMERO REGISTRO: campo 
+ abilitato solo se la casella precedente è spuntata; consente di selezionare 
+ il numero di sezionale Iva di cui si intende generare le fatture; vengono 
+ selezionate solo le causali di fatturazione che fanno riferimento a tale 
+ sezionale Iva.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE FATTURE: codice 
+ della causale, presente nella tabella causali fatture, riferita alla causale 
+ del Ddt, con cui si vuole effettuare la generazione delle fatture. Confermando 
+ a vuoto non sarà effettuato nessun controllo sulle causali fatture presenti 
+ nelle causali Ddt. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO FATTURAZIONE: 
+ definisce la tipologia di fatturazione in relazione a quanto specificato 
+ sulla tabella clienti: normale, quindicinale o mensile.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA FATTURAZIONE: 
+ indica la data con cui deve essere effettuata la fatturazione. Nel caso 
+ in cui questa data sia precedente a quella indicata nel campo &#160;&quot;a 
+ data&quot; saranno considerati solo i documenti fino alla data fatturazione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FATTURA DDT SENZA 
+ PREZZO: definisce se riportare in fattura anche i DDT sui quali non è 
+ specificato nessun prezzo (casella con segno di spunta).</p>
+<p>&#160;</p>
+<p style="font-weight: bold;"><span>Avanzate</span></p>
+<p style="font-weight: normal;">Se non sono gestiti gli agenti di rigo 
+ è presente la pagina avanzate in cui è possibile inserire un filtro per 
+ agente (da codice agente, a codice agente);i filtri eventualmente inseriti 
+ ed il tipo di ordinamento (configurabile nelle vendite &quot;Tipo ordinamento 
+ fatturazione&quot; per agente), considerano entrambi i campi agente presenti 
+ sulla testa del Ddt.</p>
+<p style="text-align: center;"><img src="Images/sven0007d_03.png" alt="" style=" border:none; width:100%; max-width:561px;" border="0" /></p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Progetti</p>
+<p style="font-weight: normal;">Se attivo il modulo di gestione progetti/commesse 
+ viene visualizzata una ulteriore pagina di criteri di selezione specifici 
+ per la generazione delle fatture per progetto, contenenti sia normali 
+ documenti di vendita che registrazioni di interventi effettuati attraverso 
+ la procedura di registrazione manodopera.</p>
+<p style="text-align: center;"><img src="Images/sven0007d_05.png" alt="" style=" border:none; width:100%; max-width:561px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO FATTURAZIONE: 
+ combo box che definisce se la fatturazione dovrà riguardare i progetti 
+ oppure no: fatturazione normale è la normale fatturazione dei Ddt, fatturazione 
+ progetti definisce che si intende effettuare la fatturazione di uno o 
+ più progetti. Utilizzando quest'ultima opzione si attiva la sezione contenente 
+ i dati riguardanti il progetto.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA PROGETTO: codice 
+ del progetto, presente in anagrafica progetti, da cui si vuole iniziare 
+ la selezione. Confermando a vuoto, la selezione inizia dal primo progetto 
+ valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A PROGETTO: codice 
+ del progetto, presente in anagrafica progetti, con cui si vuole terminare 
+ la selezione. Confermando a vuoto, la selezione termina con l'ultimo progetto 
+ valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO FATTURA: combo 
+ box che stabilisce che tipo di fattura si desidera emettere. Valori ammessi: 
+ In conto, A saldo. Se la fattura è a saldo chiude il relativo progetto.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUS. 
+ FATT. INTERVENTI: campo alfanumerico di 3 caratteri dove viene indicato 
+ il codice della causale da utilizzare per fatturare eventuali interventi.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">RAGGRUPPAMENTO INTERVENTI: 
+ Abilita il raggruppamento degli interventi tramite il codice manodopera 
+ (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">RAGGRUPPA INTERVENTI 
+ SU FATTURE: Abilita il raggruppamento di interventi e DDT anche in caso 
+ di disparità di condizioni tra il DDT ed il default del cliente (pagamento, 
+ agenti, divisa); utilizzando comunque le condizioni espresse sul DDT e 
+ non considerando le differenze con lo standard del cliente (casella con 
+ segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA RIEPILOGO PER 
+ PROGETTO: Abilita la stampa di un riepilogo finale per progetto nella 
+ stampa fatture, qualora sia gestito il progetto di rigo (casella con segno 
+ i spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MAGGIORAZIONE PREZZI: 
+ campi contenenti valori significativi nel caso in cui sia stata selezionata 
+ la fatturazione provvisoria. Questi campi simulano un ricarico sui prezzi 
+ dei prodotti della fattura in relazione alla categoria di appartenenza.</p>
+<p>&#160;</p>
+<p>La pressione sul pulsante Esegui determina l'inizio dell'elaborazione 
+ dei documenti.</p>
+<p style="margin-left: 0in; text-align: center;"><img src="Images/sven0007d_02.png" alt="" style=" border:none; width:100%; max-width:561px;" border="0" /></p>
+<p style="margin-left: 0in;">Nella pagina vengono visualizzati i risultati 
+ dell'elaborazione; qui vengono indicati in due riquadri separati i messaggi 
+ di informazione relativi per esempio a Ddt sospesi, oppure gli errori 
+ che si sono eventualmente verificati ed i documenti generati. La pagina 
+ dei risultati può essere stampata utilizzando l'apposito pulsante Risultato.</p>
+<p style="margin-left: 0in;">Con il pulsante Fatture può essere eseguita 
+ direttamente la stampa dei documenti generati, se non ci sono stati errori; 
+ se la generazione è provvisoria, la stampa sarà annullata dalla dicitura 
+ &quot;Fatturazione provvisoria&quot;.</p>
+<p style="margin-left: 0in;">Se viene effettuata la generazione definitiva 
+ ed è presente il modulo di invio documenti tramite eMail/Fax sarà visibile 
+ il pulsante che consentirà l'invio della copia dei documenti configurata; 
+ se presente il modulo anche il pulsante di stampa effettuerà la stampa 
+ delle sole copie relative al cartaceo.</p>
+<p style="margin-left: 0in;">&#160;</p>
+<p style="margin-left: 0in;"><span style="font-size: 10.0pt; mso-fareast-font-family: 'Times New Roman'; 
+									 mso-bidi-font-family: 'Times New Roman'; 
+									 mso-ansi-language: IT; mso-fareast-language: IT; 
+									 mso-bidi-language: AR-SA;"><img src="../images/b_Pianifica.png" alt="" style=" border:none; margin-bottom:0px; margin-left:0px; margin-right:7px; margin-top:0px; width:100%; max-width:73px;" align="left" border="0" /></span>Se 
+ <span style="font-size: 10.0pt; mso-fareast-font-family: 'Times New Roman'; 
+		 mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: IT; 
+		 mso-fareast-language: IT; mso-bidi-language: AR-SA;">abilitata 
+ la <a href="../Ambiente/Ambiente_13.htm">pianificazione batch</a></span> 
+ sarà visibile il pulsante Pianifica.</p>
+</body>
+</html>

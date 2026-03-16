@@ -1,0 +1,286 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 27, 2010 4:29:12 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Causali di vendita</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.14.3.1_8";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > Vendita al dettaglio > Tabelle" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left;"><strong 
+	 style="font-weight: bold;">Causali di vendita</strong></p>
+<p><strong style="font-weight: normal;">L</strong>e causali vengono utilizzate 
+ al momento dell’inserimento di un movimento di vendita e determinano il 
+ tipo di movimento.</p>
+<p>Grazie alle diverse causali possono essere inseriti movimenti che generano 
+ ricevute fiscali/fatture fiscali, Ddt o fatture di vendita, scontrini 
+ o semplici distinte (brogliacci).</p>
+<p>Se è presente la procedura di Gestione Magazzino, nella causale può 
+ essere inserita la relativa causale di magazzino affinché la movimentazione 
+ determini, senza ulteriori interventi da parte dell’operatore, o con fasi 
+ successive, una scrittura di prima nota di magazzino.</p>
+<p>La finestra video di manutenzione Causali di vendita <span style="font-family: Verdana, sans-serif;">si 
+ articola su tre pagine video (linguette).</span></p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Linguetta dati generali</p>
+<p style="text-align: center;"><img src="Images/sved0104f_01.png" alt="" style=" border:none; width:100%; max-width:661px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CODICE: codice alfanumerico 
+ di 3 caratteri, a libera scelta dell'utente, per individuare la causale 
+ attiva. Sul campo sono attive le funzioni di ricerca (F9) &#160;sulla 
+ tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE: campo 
+ alfanumerico di 30 caratteri per inserire la descrizione della causale 
+ attiva. Questa descrizione &#160;viene stampata sui documenti se il programma 
+ di stampa lo prevede.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; font-family: Verdana, sans-serif;">OBSOLETO: 
+ flag attivabile dall’utente per inibire il possibile utilizzo dell’elemento 
+ di tabella in esame nelle successive transazioni.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE ESTESA: 
+ campo alfanumerico di 60 caratteri per inserire la descrizione estesa 
+ della causale attiva ad uso interno dell’utente. Questa descrizione &#160;non 
+ viene stampata sui documenti ma viene visualizzata nelle viste.</p>
+<p style="text-indent: -.417in; margin-left: 30pt;">TIPO OPERAZIONE: il 
+ parametro è presente se attiva la gestione del documento commerciale ed 
+ è abilitato solo se non è presente nessun movimento con la causale. Il 
+ campo può assumere i valori:</p>
+<ul style="list-style: disc;">
+	<ul style="list-style: disc;">
+		<li><p style="text-indent: -.417in; margin-left: 30pt; margin-top: 1.5pt; 
+				 margin-bottom: 1.5pt;"><span style="color: #000000;">Vendita, 
+		 utilizzato per l’emissione del documento commerciale di vendita</span></p></li>
+		<li><p style="text-indent: -.417in; margin-left: 30pt; margin-top: 1.5pt; 
+				 margin-bottom: 1.5pt;"><span style="color: #000000;">Reso, 
+		 utilizzato per l’emissione del documento commerciale di reso</span></p></li>
+		<li><p style="text-indent: -.417in; margin-left: 30pt; margin-top: 1.5pt; 
+				 margin-bottom: 1.5pt;">Annullamento, utilizzato per l’emissione 
+		 del documento commerciale di annullamento.</p></li>
+	</ul>
+</ul>
+<p style="text-indent: -.417in; margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">In 
+ caso di Reso o Annullamento <span style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; 
+									 mso-fareast-font-family: 'Times New Roman'; 
+									 mso-bidi-font-family: 'Times New Roman'; 
+									 mso-ansi-language: IT; mso-fareast-language: IT; 
+									 mso-bidi-language: AR-SA;">non vengono 
+ utilizzati, dalla causale, i conti Contropartita e i conti relativi al 
+ Centro di ricavo e Voce di ricavo perché sono riproposti quelli presenti 
+ sul documento di cui si emette il reso o l’annullamento.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SERIE: campo numerico 
+ per inserire il numero di serie del documento. Ciascuna serie attiva una 
+ propria numerazione di documenti. E’ necessario, &#160;in &#160;fase &#160;di 
+ immissione del documento, per proporre automaticamente &#160;e correttamente 
+ il numero progressivo del documento acquisito dalla tabella protocolli.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SCORPORO: Definisce 
+ se il documento è soggetto a scorporo dell'Iva dal totale del documento 
+ in fase di registrazione (casella con segno di spunta). In questo caso 
+ i prezzi inseriti nel documenti saranno al lordo di Iva.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO CHIUSURA VENDITA: 
+ definisce l'operazione preferenziale da proporre al termine della registrazione 
+ del movimento: nessuna operazione, stampa brogliaccio, emissione ricevuta 
+ fiscale, emissione fattura fiscale; <span style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; 
+											 mso-fareast-font-family: 'Times New Roman'; 
+											 mso-bidi-font-family: 'Times New Roman'; 
+											 mso-ansi-language: IT; mso-fareast-language: IT; 
+											 mso-bidi-language: AR-SA;">per 
+ i tipi operazione Reso o Annullamento sono accettati solo i valori “Nessuna” 
+ e “Stampa brogliaccio”.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA SCONTRINO: 
+ indica se al termine della registrazione deve essere abilitata la stampa 
+ dello scontrino (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">GENERAZIONE PARTITE: 
+ se spuntato attiva la generazione delle partite e del relativo movimento 
+ provvigioni se presente il modulo delle provvigioni e se sono presenti 
+ i dati relativi agli agenti; se il campo non è spuntato tutti i movimenti 
+ fatti con la causale non interesseranno le partite e di conseguenza le 
+ provvigioni.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO AGGIORNAMENTO 
+ MAGAZZINO: definisce il metodo di aggiornamento del magazzino:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 30pt; 
+						 margin-top: 2pt; margin-bottom: 2pt;">nessun aggiornamento: 
+		 non è gestito il magazzino;</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 30pt; 
+						 margin-top: 2pt; margin-bottom: 2pt;">immediato 
+		 completo: vengono generati i movimenti di magazzino al momento 
+		 del salvataggio del movimento e vengono aggiornati i saldi dei 
+		 prodotti;</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 30pt; 
+						 margin-top: 2pt; margin-bottom: 2pt;">differito 
+		 completo: al momento del salvataggio non viene effettuata nessuna 
+		 operazione sul magazzino o sui saldi, è necessario successivamente 
+		 utilizzare la procedura di generazione magazzino;</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 30pt; 
+						 margin-top: 2pt; margin-bottom: 2pt;">immediato 
+		 saldi: al momento del salvataggio vengono aggiornati solo i saldi 
+		 dei prodotti; è necessario successivamente utilizzare la procedura 
+		 di generazione magazzino per la creazione dei soli movimenti;</p></li>
+	</ul></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE MAGAZZINO: 
+ codice alfanumerico di 3 caratteri, presente nella tabella Causali di 
+ magazzino, che individua i parametri del movimento di magazzino generato 
+ automaticamente dal documento attivo. L’informazione può essere omessa 
+ in caso di assenza della procedura Gestione magazzino oppure se non si 
+ intendono generare i movimenti di magazzino. Sul campo sono attive le 
+ funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE RICEVUTA FISCALE: 
+ eventuale codice alfanumerico di 3 caratteri, presente nella tabella Causali 
+ di fatturazione, che sarà utilizzata per la generazione della ricevuta 
+ fiscale in fase di chiusura del movimento o successivamente dal programma 
+ di generazione fatture. Sul campo sono attive le funzioni di ricerca (F9) 
+ e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE FATTURA FISCALE 
+ IMMEDIATA: eventuale codice alfanumerico di 3 caratteri, presente nella 
+ tabella Causali di fatturazione, che sarà utilizzata per la generazione 
+ della fattura fiscale in fase di chiusura del movimento o successivamente 
+ dal programma di generazione fatture. Sul campo sono attive le funzioni 
+ di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE FATTURA FISCALE 
+ DIFFERITA: eventuale codice alfanumerico di 3 caratteri, presente nella 
+ tabella Causali di fatturazione, che sarà utilizzata per la generazione 
+ della fattura fiscale dal programma di generazione fatture. Sul campo 
+ sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla 
+ tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE DDT: eventuale 
+ codice alfanumerico di 3 caratteri, presente nella tabella Causali dd, 
+ che sarà utilizzata per la generazione del DDT in fase di chiusura del 
+ movimento. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione 
+ (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE FATTURA DI 
+ VENDITA: eventuale codice alfanumerico di 3 caratteri, presente nella 
+ tabella Causali di fatturazione, che sarà utilizzata per la generazione 
+ della fattura di vendita in fase di chiusura del movimento. Sul campo 
+ sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla 
+ tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE CONTABILE: 
+ codice alfanumerico di 3 caratteri, presente nella tabella Causali contabili, 
+ che definisce i parametri del movimento contabile generato dal documento 
+ attivo all’atto della contabilizzazione incassi. L’informazione può essere 
+ omessa in caso di assenza della procedura Contabilità. Sul campo sono 
+ attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella 
+ stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO REPORT: consente 
+ di specificare un tipo di report specifico per i documenti che saranno 
+ emessi utilizzando questa causale. Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CONTO DI RICAVO: eventuale 
+ codice alfanumerico di 8 caratteri, presente nel piano dei conti, per 
+ definire il sottoconto contabile di ricavo a cui verrà accreditato il 
+ movimento attivo. Sul campo sono attive le funzioni di ricerca (F9) e 
+ manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CENTRO DI RICAVO: 
+ campo significativo solo in presenza del modulo Contabilità analitica 
+ opportunamente configurato. Può contenere un codice alfanumerico di 15 
+ caratteri, per definire il centro di ricavo a cui verrà accreditato il 
+ movimento attivo. Sul campo sono attive le funzioni di ricerca (F9) e 
+ manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">VOCE DI RICAVO: campo 
+ significativo solo in presenza del modulo Contabilità analitica opportunamente 
+ configurato. Può contenere un codice alfanumerico di 15 caratteri, per 
+ definire la voce di ricavo a cui verrà accreditato il movimento attivo. 
+ Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) 
+ sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">COMMESSA: campo significativo 
+ solo in presenza del modulo Contabilità analitica opportunamente configurato. 
+ Può contenere un codice alfanumerico di 15 caratteri, per definire la 
+ commessa a cui verrà accreditato il movimento attivo. Sul campo sono attive 
+ le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Linguetta dati preferenziali</p>
+<p>La linguetta contiene le informazioni relative ai dati da proporre in 
+ automatico in fase di movimentazione.</p>
+<p style="text-align: center;"><img src="Images/sved0104f_02.png" alt="" style=" border:none; width:100%; max-width:661px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CLIENTE: indicare 
+ il tipo, normale, privato o tutti e/o il codice del cliente da proporre 
+ in fase di movimentazione; nel caso si inserisca il valore Tutti, in fase 
+ di movimentazione saranno selezionabili sia clienti privati che normali, 
+ altrimenti sarà selezionabile un cliente del tipo impostato sulla causale. 
+ &#160;Sul campo sono attive le funzioni di ricerca (F9) e manutenzione 
+ (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LISTINO: codice alfanumerico, 
+ presente nella tabella listini, che individua il codice listino da proporre. 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO: codice 
+ numerico, presente nella tabella Magazzini, che individua il magazzino 
+ aziendale da proporre. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO RIGO: indica 
+ il tipo rigo da proporre in fase di immissione.&#160;Sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">QUANTITÀ: indicare 
+ la quantità da proporre in fase di immissione movimenti.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Linguetta Causali di magazzino</p>
+<p style="font-weight: bold;"><span style="font-weight: normal;">La finestra, 
+ attiva solo nella versione OS1 Enterprise, permette di associare al singolo 
+ tipo rigo una specifica causale di magazzino, diversa dalla causale di 
+ magazzino principale.</span></p>
+<p style="text-align: center;"><img src="Images/sved0104f_03.png" alt="" style=" border:none; width:100%; max-width:661px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO RIGO: Indica 
+ il tipo rigo da associare alla causale.&#160;Sul campo sono attive le 
+ funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE MAGAZZINO: 
+ codice alfanumerico di 3 caratteri, presente nella tabella Causali di 
+ magazzino, che individua i parametri del movimento di magazzino generato 
+ automaticamente dal movimento attivo per il tipo rigo richiesto. Sul campo 
+ sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla 
+ tabella stessa.</p>
+</body>
+</html>

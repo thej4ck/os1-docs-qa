@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Configurazione base","url":"html/bbas/bbas0101f_01.htm"},{"type":"item","name":"Configurazione dati preferenziali","url":"html/bbas/bbas0101f_02.htm"},{"type":"item","name":"Configurazione conti fissi","url":"html/bbas/bbas0101f_03.htm"},{"type":"item","name":"Configurazione stampe","url":"html/bbas/bbas0101f_04.htm"},{"type":"item","name":"Configurazione scheda di trasporto","url":"html/bbas/bbas0101f_59.htm"},{"type":"item","name":"Configurazione standard","url":"html/bbas/bbas0101f_10.htm"},{"type":"item","name":"Configurazione magazzino remoto","url":"html/bbas/bbas0101f_27.htm"},{"type":"item","name":"Configurazione modulo POS","url":"html/bbas/bbas0101f_19.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

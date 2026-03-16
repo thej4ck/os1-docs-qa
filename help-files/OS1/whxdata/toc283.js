@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc280.js\"  name=\"Dichiarazioni d'intento\"><item name=\"Introduzione\" url=\"html/index/index_904065.htm\" /><item name=\"Annullamento stampa registro intenti\" url=\"html/bbas/bbas0083d.htm#bc-1\" /><item name=\"Assegnazione dichiarazioni di intento a documenti\" url=\"html/bbas/bbas0090f_F.htm\" /></data>";

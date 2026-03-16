@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_2034.htm"},{"type":"book","name":"Gestione pro forma","key":"toc58"},{"type":"item","name":"Stampa pro forma","url":"html/spar/spar0003d.htm"},{"type":"item","name":"Analisi pro forma","url":"html/spar/spar0007d.htm"},{"type":"item","name":"Lista pro forma","url":"html/spar/spar0008d.htm"},{"type":"item","name":"Solleciti pagamenti pro forma","url":"html/spar/spar0011d.htm"},{"type":"item","name":"Generazione parcelle definitive","url":"html/spar/spar0025d.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

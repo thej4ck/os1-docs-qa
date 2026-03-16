@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 27, 2010 3:52:57 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Analisi richieste di acquisto</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.6.1.0_8";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Acquisti > Richieste di acquisto" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; font-weight: bold;">Analisi richieste di acquisto</p>
+<p>Il programma effettua la visualizzazione delle richieste esistenti in archivio in base ai parametri inseriti dall’utente. Una volta visualizzati i risultati, è possibile attivare la stampa di quanto visualizzato nella sezione Risultati utilizzando il bottone Stampa o Anteprima della tool bar.</p>
+<p>E’ possibile visualizzare le richieste relative ad una tipologia omogenea di inserimenti, e/o ad uno o più prodotti, e/o relativi ad uno specifico magazzino entro limiti di data specificati. E’ anche possibile selezionare le richieste in qualsiasi stato di avanzamento si trovino, selezionare solo le richieste aperte oppure tutte.</p>
+<p>Se attiva la gestione progetti è possibile specificare anche il progetto da analizzare.</p>
+<p>Il programma si articola su due finestre video. La prima, Parametri, consente la definizione dei parametri di analisi.</p>
+<p style="text-align: center;"><img src="Images/sraf0003f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA PRODOTTO: eventuale codice dell'articolo, presente in anagrafica Prodotti, da cui si desidera iniziare la selezione di analisi. Confermando a vuoto, la selezione inizia con il primo prodotto valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A PRODOTTO: eventuale codice dell'articolo, presente in anagrafica Prodotti, a cui si desidera terminare la selezione di analisi. Confermando a vuoto, la selezione termina con l’ultimo valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO: eventuale codice del magazzino a cui si vuole restringere la selezione di analisi. Sul campo è attiva la vista F9 sulla tabella Magazzini.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; font-family: Verdana, sans-serif;"><span style="font-family: Verdana, sans-serif;">RICHIEDENTE: indica il codice dell'utente che ha presentato la richiesta da utilizzare per la selezione dei documenti. Sul campo sono disponibili le funzioni di ricerca (F9) sulla tabella stessa.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale data del documento da cui deve iniziare l’analisi dei documenti relativamente ai precedenti parametri di selezione. Confermando a vuoto, l’analisi inizia con il primo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale data del documento con cui si desidera terminare l’analisi dei documenti relativamente ai precedenti parametri di selezione. Confermando a vuoto, l’analisi si conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO INSERIMENTO: definisce la tipologia di richieste da analizzare:</p>
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">tutti;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">inseriti manualmente;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">da disposizioni di produzione;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">da MRP;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">da ordini clienti.</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STATO: definisce lo stato di avanzamento delle righe relative alle richieste da analizzare:</p>
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">tutti;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">in valutazione;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">approvato;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">accettato;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">generata richiesta di offerta;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">generato ordine fornitore;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">ricevuta merce</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">respinto.</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SOLO RICHIESTE APERTE: definisce se analizzare solo le richieste ancora da evadere (casella con segno di spunta) oppure tutte (casella bianca).</p>
+<p>&#160;</p>
+<p>Confermando tramite pressione del bottone Esegui, viene avviata la selezione e richiamata la finestra video Risultati.</p>
+<p style="text-align: center;"><img src="Images/sraf0003f_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p>La finestra video è articolata su due sezioni: la sezione superiore elenca i gli articoli selezionati.</p>
+<p>La sezione inferiore elenca invece i movimenti relativi all’articolo selezionato, che è quello contrassegnato dalla freccia, a sinistra del rigo nella sezione superiore. I pulsanti Dettaglio in basso, visibili solo se gestito il dettaglio delle quantità o delle commesse di produzione, se attivi, consentono la visualizzazione del dettaglio quantità o commesse di produzione del singolo rigo selezionato, oppure dei dettagli quantità o commesse di produzione totali del prodotto selezionato. Se attivo da configurazione è anche disponibile il pulsante Cronologia che consente di analizzare la situazione storica del rigo in analisi.</p>
+<p><img src="Images/sraf0003f_03.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:5px; margin-bottom:0px; width:100%; max-width:345px;" align="right" border="0" />La pressione del bottone Stampa della tool bar consente la produzione di un report a stampa relativo ai dati selezionati; se sono gestiti i dettagli quantità o commessa di produzione compare la finestra a lato per decidere se stamparli o meno.</p>
+</body>
+</html>

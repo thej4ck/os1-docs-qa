@@ -1,0 +1,298 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 10, 2016 6:24:07 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Gestione MPS - Manutenzione ODP/ODL</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.3.1.0_6";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Piano di produzione > Gestione MPS" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-weight: bold; font-size: 12pt;">Manutenzione ODP/ODL</p>
+<p><img src="images/sprb0010f_5_01.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-bottom:5px; margin-right:5px; width:100%; max-width:78px;" align="left" border="0" /></p>
+<p>La manutenzione ODP/ODL si articola su due pagine distinte selezionabili 
+ con le linguette a destra; per ogni pagina sono presenti dei limiti di 
+ selezione per consentire di visualizzare solo una parte dei documenti 
+ presenti. L'unico limite proposto è la data di fine consegna calcolata 
+ in base ai giorni presenti in configurazione; è comunque necessario premere 
+ il pulsante Seleziona per accedere alla manutenzione dei dati.</p>
+<p>Nel caso siano gestiti i progetti e si inserisca un codice prodotto 
+ è possibile includere nella selezione eventuali semilavorati associati 
+ al progetto del prodotto richiesto apponendo la spunta sul parametro &quot;Includi 
+ SL&quot;.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_5_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>Sopra la griglia è presente la barra dei filtri da cui è possibile, 
+ spuntando o meno le caselle presenti, impostare quali ODP visualizzare 
+ in relazione allo stato.</p>
+<p>L’ODP (e gli ODL collegati) possono assumere i seguenti stati:</p>
+<ul style="list-style: disc;">
+	<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;">Provvisorio: 
+	 l’ODP appena generato è provvisorio, tutti gli ODP provvisori vengono 
+	 cancellati e rigenerati ogni volta che viene eseguita la generazione 
+	 del piano di produzione. L’ordinato a produzione del composto e l’impegnato 
+	 da produzione dei componenti sono anch’essi provvisori e concorrono 
+	 alla determinazione della disponibilità di magazzino solo all’interno 
+	 delle procedure di produzione.</p></li>
+	<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;">Pianificato: 
+	 l’ODP assume lo stato di pianificato (cioè da produrre) nel caso di 
+	 modifiche manuale ad un ODP provvisorio oppure tramite l’apposita 
+	 funzione di pianificazione presente nella gestione piano. L’ODP dal 
+	 momento in cui diventa pianificato non viene più rielaborato automaticamente; 
+	 l’ordinato a produzione del composto e l’impegnato da produzione dei 
+	 componenti diventano definitivi e concorrono alla determinazione della 
+	 disponibilità di magazzino in tutta l’applicazione.</p></li>
+	<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;">Lanciato: 
+	 il lancio in produzione viene fatto per i singoli ODL relativi alle 
+	 fasi interne. Sugli ODL lanciati è possibile generare i buoni di prelievo 
+	 per il trasferimento dei materiali alla risorsa. Al momento in cui 
+	 viene lanciata la prima fase del ciclo viene impostato a Lanciato 
+	 anche lo stato dell’ODP. Nel caso di fasi esterne non esiste una fase 
+	 di lancio vera e propria e l’ODL in tale caso viene impostato a Lanciato 
+	 al momento in cui viene generato l’OT.</p></li>
+	<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;">In corso: 
+	 significa che per l’ODL è stato effettuato almeno un versamento (nel 
+	 caso di fasi interne) o un rientro (nel caso di fasi esterne) ma la 
+	 fase non è stata completata. Al momento in cui viene effettuato un 
+	 versamento parziale oppure un rientro parziale dell’ultima fase del 
+	 ciclo viene impostato a “In corso” anche lo stato dell’ODP.</p></li>
+	<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;">Evaso: 
+	 significa che l’ODL è stato evaso completamente, nel caso di completamento 
+	 dell’ultima fase viene impostato ad Evaso anche lo stato dell’ODP.</p></li>
+</ul>
+<p>Gli ODP/ODL possono essere modificati fino a quando non vengono pianificati.</p>
+<p>Per gli ODP è possibile modificare la quantità da produrre, la data 
+ di prevista consegna e se presente il lotto di rientro; la modifica manuale 
+ pone l’ODP automaticamente in stato di pianificato.</p>
+<p><img src="images/b_Alter.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:24px;" align="left" border="0" /><img src="images/dlgAlter.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:699px;" align="right" border="0" />Se 
+ prevista la gestione delle alternative sarà presente anche il pulsante 
+ mostrato a lato; premendolo si apre la finestra a destra dove viene indicata 
+ in giallo l'alternativa attualmente utilizzata, di default è la 0 (zero); 
+ in questa fase è possibile selezionare con il doppio click del mouse la 
+ nuova scheda tecnica alternativa che sarà utilizzata per rigenerare gli 
+ ODL. Premendo il tasto Salva la modifica diventa definitiva ed anche in 
+ questo caso l'ODP viene posto automaticamente in stato Pianificato.</p>
+<p>E’ comunque possibile annullare, tramite apposito <span style="text-align: center;"><img src="images/sprb0010f_5_07.png" alt="" style=" border:none; width:100%; max-width:20px;" border="0" /></span> 
+ bottone l’operazione, di pianificazione automatica fatta dal sistema; 
+ analogamente è possibile pianificare manualmente un ODP <img src="images/sprb0010f_5_06.png" alt="" style=" border:none; width:100%; max-width:24px;" border="0" /> sempre con l'apposito bottone.</p>
+<p style="text-align: left;">Il pulsante Stampa consente di stampare l'ODP 
+ selezionato; dalla griglia con il tasto destro del mouse si accede al 
+ menù contestuale da dove è &#160;possibile esportare il contenuto della 
+ griglia, stampare l'ODP selezionato o tutti gli ODP visualizzati. In tutti 
+ i casi è possibile effettuare la stampa includendo o meno le note tecniche 
+ eventualmente derivanti dalla scheda tecnica.</p>
+<p>&#160;</p>
+<p><img src="images/sprb0010f_5_12.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:83px;" align="left" border="0" />Utilizzando il pulsante Raggruppa è possibile effettuare 
+ il raggruppamento degli ordini di produzione; questa operazione consente 
+ di selezionare più ODP provvisori e generare un unico ODP già pianificato 
+ (a cui si collegano tutte le RDP), eliminando i singoli ODP provvisori. 
+ Nella finestra vengono riportati, nella prima griglia, gli ODP attivi 
+ raggruppati per prodotto, variante e progetto (in relazione alla gestione 
+ attiva) e selezionando un elemento compaiono, nella griglia inferiore 
+ gli ODP analitici.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_5_13.png" alt="" style=" border:none; margin-top:0px; margin-right:0px; margin-left:0px; margin-bottom:0px; width:100%; max-width:750px;" border="0" /></p>
+<p><img src="images/sprb0010f_5_14.gif" alt="" style=" border:none; margin-top:0px; margin-bottom:5px; margin-left:5px; margin-right:0px; width:100%; max-width:147px;" align="right" border="0" />Da questa griglia è possibile 
+ selezionare gli ODP da raggruppare con il doppio clic del mouse oppure 
+ utilizzando il menù associato al tasto destro del mouse tramite cui è 
+ possibile anche annullare la selezione a tutti gli ODP, selezionare tutti 
+ gli ODP oppure annullare un raggruppamento già effettuato; nella parte 
+ bassa, sotto la griglia, è presente la nuova data di produzione che può 
+ essere &#160;anche inserita manualmente (di base viene proposta la data 
+ minore fra tutti gli ODP selezionati) ed il pulsante Raggruppa. Con gli 
+ ODP selezionati se si preme il pulsante Raggruppa, viene effettuato il 
+ raggruppamento e gli ODP appaiono come nell'esempio:</p>
+<p style="text-align: center;"><img src="images/sprb0010f_5_15.png" alt="" style=" border:none; margin-top:0px; margin-right:0px; margin-left:0px; margin-bottom:0px; width:100%; max-width:632px;" border="0" /></p>
+<p>Gli ODP evidenziati in rosso saranno eliminati ed accorpati al primo 
+ ODP che sarà pianificato. Tutte le operazioni effettuate all'interno di 
+ questa finestra saranno salvate solo se si preme il pulsante Salva in 
+ basso, se si esce dalla finestra premendo Annulla tutte le modifiche effettuate 
+ andranno perse; analogamente se si esce premendo Salva sarà effettuato 
+ il raggruppamento degli ODP come previsto. <span style="font-weight: bold;">Una 
+ volta effettuato, il raggruppamento non potrà essere annullato</span>.</p>
+<p>&#160;</p>
+<p>La pagina fasi mostra gli ODL, in alto, e per ogni ODL i componenti, 
+ associati all'ODP su cui eravamo posizionati nella pagina ODP. Le fasi 
+ esterne vengono mostrate in blu.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_5_03.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p>Per ogni fase relativa a ODL è possibile la modifica dei componenti 
+ dell'ODL, la modifica dei componenti è attiva solo per ODP/ODL provvisori 
+ o pianificati e per i provvisori comporta la pianificazione dell'ODP; 
+ premere il tasto destro del mouse sulla griglia e selezionare &quot;Modifica 
+ componenti&quot;; la modifica si effettua tramite la finestra mostrata 
+ sotto; vengono elencati tutti i componenti dell'ODL con le relative giacenze; 
+ la modifica riguarda tutti i componenti materia prima, non i semilavorati 
+ o il semilavorato alla fase; è possibile comunque inserire nuovi componenti 
+ anche di tipo semilavorato; è possibile modificare il dettaglio lotti/ubicazioni, 
+ non del componente alla fase, anche modificando le quantità originali, 
+ al salvataggio finale viene fatto un controllo di coerenza tra quantità 
+ del componente e quantità del dettaglio, se nel dettaglio si inseriscono 
+ quantità che differiscono dal componente è possibile aggiornare quest'ultimo 
+ con un bottone che è stato aggiunto al navigatore dei dettagli</p>
+<p style="text-align: center;"><img src="images/sprb0040f_04.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; width:100%; max-width:724px;" border="0" /></p>
+<p>&#160;</p>
+<p><img src="images/sprb0010f_5_16.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:212px;" align="left" border="0" />Per ogni fase è possibile (a condizione che non sia 
+ già stata lanciata) modificare la tipologia da interna ad esterna o viceversa 
+ semplicemente con il doppio clic del mouse.</p>
+<p>Nella griglia dei componenti, tramite doppio click in corrispondenza 
+ di un semilavorato appare un menù che consente di cambiare la “natura” 
+ del componente e trasformare il semilavorato in materia prima (per la 
+ quale verrà generata la RDA) oppure di ritornare allo stato originale 
+ di semilavorato. Al momento in cui viene effettuata questa modifica l’ODP 
+ provvisorio viene passato in stato Pianificato (e quindi non più modificabile).</p>
+<p>&#160;</p>
+<p>&#160;</p>
+<p>&#160;</p>
+<p>Nella pagina Riferimenti ordini/RDP sono elencati i riferimenti ai documenti 
+ collegati: gli ordini clienti, se l'ODP deriva da RDP da ordini, oppure 
+ le RDP da reintegro o manuali.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_5_04.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p>La manutenzione degli ODL è simile a quella degli ODP per la parte di 
+ selezione e dei filtri; è possibile (a condizione che l’ODL non sia già 
+ stato lanciato): modificare una fase da interna ad esterna o viceversa, 
+ modificare la risorsa associata (per le fasi interne) e il fornitore (per 
+ le fasi esterne).</p>
+<p style="text-align: center;"><img src="images/sprb0010f_5_05.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p style="text-align: left;"><img src="images/b_Note.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:73px;" align="left" border="0" />Il pulsante 
+ Note consente di visualizzare ed eventualmente modificare le note dell'ODL 
+ che derivano da quelle indicate sulla fase del ciclo oppure sulla fase 
+ generica.</p>
+<p style="text-align: left;"><img src="images/b_riallinea.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:73px;" align="left" border="0" />Il pulsante 
+ Riallinea è attivo al momento in cui l’ODL della fase precedente è chiuso 
+ ma con una quantità diversa rispetto a quella prevista; cliccando sul 
+ bottone si riallinea la quantità da produrre degli ODL delle fasi successive 
+ a quella chiusa.</p>
+<p style="text-align: left;"><img src="images/sprb0010f_5_09.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:213px;" align="right" border="0" /><img src="images/sprb0010f_5_08.png" alt="" style=" border:none; margin-right:5px; margin-bottom:5px; width:100%; max-width:73px;" align="left" border="0" />Il 
+ pulsante Quantità consente di modificare la quantità di un ODL; questa 
+ esigenza potrebbe verificarsi in presenza di disponibilità di prodotto 
+ alla fase rimaste da precedenti produzione non portate a fine ciclo; in 
+ questo modo il responsabile di produzione può manualmente riutilizzare 
+ la quantità disponibile a magazzino. Alla conferma dell’operazione vengono 
+ aggiornate anche le quantità delle fasi precedenti; la modifica è attiva 
+ con le seguenti caratteristiche:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+		<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+			<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+				<li class="p"><p style="text-align: left; margin-top: 1.5pt; 
+								 margin-bottom: 1.5pt;">l'ODL e gli ODL 
+				 relativi alle fasi precedenti devono essere in stato provvisorio 
+				 o pianificato;</p></li>
+				<li class="p"><p style="text-align: left; margin-top: 1.5pt; 
+								 margin-bottom: 1.5pt;">il piano di produzione 
+				 attivo deve essere valido;</p></li>
+				<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">l'ODL 
+				 deve riguardare una fase interna;</p></li>
+				<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">l'ODL 
+				 non deve riguardare l'ultima fase del ciclo;</p></li>
+			</ul></li>
+		</ol></li>
+	</ol></li>
+</ol>
+<p style="text-align: left;">se queste condizioni sono soddisfatte il pulsante 
+ risulta attivo e premendolo si accede alla finestra riportata a lato da 
+ cui è possibile modificare la quantità; premendo il pulsante Salva sarà 
+ modificata la quantità sull'ODL corrente e sugli ODL relativi alle fasi 
+ precedenti, inoltre sia l'ODP di riferimento che tutti gli ODL collegati 
+ saranno messi in stato di Pianificato.</p>
+<p style="text-align: left;"><img src="images/sprb0010f_5_18.png" alt="" style=" border:none; margin-right:5px; margin-bottom:5px; width:100%; max-width:73px;" align="left" border="0" />Il pulsante Verifica 
+ consente di verificare automaticamente se esistono giacenze disponibili 
+ per fase da utilizzare per lo specifico ODL. In pratica la funzione del 
+ pulsante Quantità viene eseguita su tutti gli ODL presentati a video; 
+ se sono presenti quantità per fase disponibili la funzione consente di 
+ utilizzarle.</p>
+<p style="text-align: left;"><img src="images/b_AnalisiOT.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:72px;" align="left" border="0" /><img src="images/sprb0010f_5_17.png" alt="" style=" border:none; margin-top:0px; margin-bottom:5px; margin-left:5px; margin-right:0px; width:100%; max-width:833px;" align="right" border="0" />Il pulsante Analisi 
+ OT, attivo sulle fasi di lavorazioni esterne, consente di visualizzare 
+ la situazione degli OT (ordini terzisti) generati a fronte della lavorazione.</p>
+<p><img src="images/sprb0010f_5_16.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:212px;" align="left" border="0" />Nella griglia dei componenti, tramite doppio click 
+ in corrispondenza di un semilavorato appare un menù che consente di cambiare 
+ la “natura” del componente e trasformare il semilavorato in materia prima 
+ (per la quale verrà generata la RDA) oppure di ritornare allo stato originale 
+ di semilavorato. Al momento in cui viene effettuata questa modifica l’ODP 
+ provvisorio, a cui è collegato l'ODL, viene passato in stato Pianificato 
+ (e quindi non più modificabile).</p>
+<p style="text-align: left;">&#160;</p>
+<p style="text-align: left;">&#160;</p>
+<p style="text-align: left;">&#160;</p>
+<p style="text-align: left;">&#160;</p>
+<p style="text-align: left;">&#160;</p>
+<p style="text-align: left;">&#160;</p>
+<p style="text-align: left;">&#160;</p>
+<p style="text-align: left;">&#160;</p>
+<p>Per ogni ODL è possibile la modifica dei componenti, la modifica dei 
+ componenti è attiva solo per ODL provvisori o pianificati e per i provvisori 
+ comporta la pianificazione dell'ODP; premere il tasto destro del mouse 
+ sulla griglia e selezionare &quot;Modifica componenti&quot;; la modifica 
+ si effettua tramite la finestra mostrata sotto; vengono elencati tutti 
+ i componenti dell'ODL con le relative giacenze; la modifica riguarda tutti 
+ i componenti materia prima, non i semilavorati o il semilavorato alla 
+ fase; è possibile comunque inserire nuovi componenti anche di tipo semilavorato; 
+ è possibile modificare il dettaglio lotti/ubicazioni, non del componente 
+ alla fase, anche modificando le quantità originali, al salvataggio finale 
+ viene fatto un controllo di coerenza tra quantità del componente e quantità 
+ del dettaglio, se nel dettaglio si inseriscono quantità che differiscono 
+ dal componente è possibile aggiornare quest'ultimo con un bottone che 
+ è stato aggiunto al navigatore dei dettagli.</p>
+<p style="text-align: center;"><img src="images/sprb0040f_04.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; width:100%; max-width:724px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-align: left;">Il pulsante Stampa consente di stampare l'ODL 
+ selezionato; dalla griglia principale con il tasto destro del mouse si 
+ accede al menù contestuale da dove è &#160;possibile esportare il contenuto 
+ della griglia, stampare l'ODL selezionato o tutti gli ODL visualizzati. 
+ In tutti i casi è possibile effettuare la stampa includendo o meno le 
+ note tecniche eventualmente derivanti dalla scheda tecnica.</p>
+</body>
+</html>

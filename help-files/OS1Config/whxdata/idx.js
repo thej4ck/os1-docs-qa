@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><index>  <chunkinfo url=\"idata1.js\" first=\"Aggiornamento automatico semafori\" last=\"Firma remota - Tipi documento\" num=\"113\" />  <chunkinfo url=\"idata2.js\" first=\"Firma remota - Utenti\" last=\"Tipologie movimento scadenze\" num=\"26\" />  </index>";

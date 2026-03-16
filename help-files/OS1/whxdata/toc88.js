@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc84.js\"  name=\"Listini prezzi clienti\"><item name=\"Introduzione\" url=\"html/index/index_208940.htm\" /><item name=\"Manutenzione listini\" url=\"html/scla/scla0101f.htm\" /><item name=\"Stampa listini\" url=\"html/scla/scla0102d.htm\" /></data>";

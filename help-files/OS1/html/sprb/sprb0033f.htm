@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="12 17, 2011 11:53:23 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Analisi giacenze magazzino fasi</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.7.1_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Magazzino" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt;">Analisi 
+ giacenze</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;"><span style="font-family: Verdana, sans-serif; 
+													 font-size: 10pt;">Il 
+ programma permette di visualizzare le giacenze, complessive o dettagliate 
+ per singolo magazzino, di uno o più prodotti. Per ciascun prodotto viene 
+ visualizzata l’esistenza, la quantità impegnata da clienti e/o dalla produzione, 
+ la quantità ordinata a fornitori e/o alla produzione e la conseguente 
+ disponibilità.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">Se presente il modulo Liste 
+ di prelievo sarà possibile effettuare l'analisi delle giacenze considerando 
+ o meno le quantità prenotate.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">È possibile analizzare le giacenze 
+ del solo magazzino fasi oppure le giacenze complete dei dati del magazzino 
+ base.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: center;"><img src="images/sprb0033f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">&#160;</p>
+<p style="text-indent: -.417in; margin-left: 30pt;">TIPO ANALISI: definisce 
+ la tipologia di analisi: analisi completa, magazzino fasi e magazzino 
+ base, oppure analisi del solo magazzino fasi.</p>
+<p style="text-indent: -.417in; margin-left: 30pt;">DA PRODOTTO: eventuale 
+ codice dell'articolo, presente in anagrafica Prodotti, da cui si desidera 
+ iniziare la selezione dei &#160;movimenti di magazzino. Confermando a 
+ vuoto, la selezione inizia con il primo prodotto valido. Sul campo è attiva 
+ la ricerca (F9) sull’anagrafica prodotti.</p>
+<p style="text-indent: -.417in; margin-left: 30pt;">A PRODOTTO: eventuale 
+ codice dell'articolo, presente in anagrafica Prodotti, a cui si desidera 
+ terminare la selezione dei &#160;movimenti di magazzino. Confermando a 
+ vuoto, la selezione termina con l’ultimo valido. Sul campo è attiva la 
+ ricerca (F9) sull’anagrafica prodotti.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="font-family: Verdana, sans-serif; 
+															 font-size: 10pt;">FASE: 
+ eventuale codice della fase di lavorazione, per cui si desidera effettuare 
+ la selezione di analisi. Confermando a vuoto, la selezione considera tutte 
+ le fasi di lavorazione. Sul campo sono attive le funzioni di ricerca (F9).</span></p>
+<p style="text-indent: -.417in; margin-left: 30pt;">CATEGORIA MERCEOLOGICA: 
+ eventuale codice della categoria merceologica a cui si vuole restringere 
+ la selezione di analisi. Sul campo è attiva la ricerca (F9) sulla tabella 
+ Categorie merceologiche.</p>
+<p style="text-indent: -.417in; margin-left: 30pt;">MAGAZZINO: eventuale 
+ codice del magazzino a cui si vuole restringere la selezione di analisi. 
+ Confermando a vuoto, l’esistenza del prodotto si riferisce a tutti i magazzini. 
+ Sul campo è attiva la ricerca (F9) sulla tabella Magazzini.</p>
+<p style="text-indent: -.417in; margin-left: 30pt;">FORNITORE: eventuale 
+ codice del fornitore a cui si vuole restringere la selezione di analisi. 
+ Sul campo è attiva la ricerca (F9) sull’anagrafica fornitori.</p>
+<p style="text-indent: -.417in; margin-left: 30pt;"><span style="font-family: Verdana, sans-serif;">GIACENZA 
+ ALLA DATA: data a cui si desidera effettuare la selezione, viene proposta 
+ la data di sistema.</span></p>
+<p style="text-indent: -.417in; margin-left: 30pt;">TIPO QUANTITÀ: combo 
+ box per filtrare le esistenze negative. Valori ammessi: Tutte le esistenze; 
+ Esistenze diverse da 0; Solo esistenze negative.</p>
+<p style="text-indent: -.417in; margin-left: 30pt;">ORDINAMENTO PER: combo 
+ box per definire i criteri di ordinamento. Valori ammessi: Per prodotto; 
+ Per Magazzino</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="font-family: Verdana, sans-serif; 
+															 font-size: 10pt;"><span><span><span><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">T</span></span></span></span>IPO 
+ PRODOTTI: combo box per definire la tipologia dei prodotti da elaborare. 
+ Valori ammessi: tutti, escluso prodotti fuori inventario, solo prodotti 
+ fuori inventario.</span></p>
+<p style="text-indent: -.417in; margin-left: 30pt;"><span><span style="font-family: Verdana, sans-serif;">DETTAGLIO 
+ MAGAZZINI: check box per definire i criteri di visualizzazione in caso 
+ di presenza in più magazzini dello stesso prodotto. Valori ammessi: vuoto 
+ = visualizza il totale dei magazzini; spunta = visualizza analiticamente 
+ i singoli magazzini.</span></span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO MAGAZZINO: combo 
+ box per definire la tipologia di magazzino da elaborare. Valori ammessi: 
+ tutti, di proprietà, di terzi.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA MAGAZZINI ESCLUSI: 
+ indica se nella selezione si desidera i magazzini normalmente esclusi 
+ dalla stampa dell’inventario. Valori ammessi: No, Si, Solo esclusi.</p>
+<p>&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">Confermando tramite pressione 
+ del bottone Esegui, viene avviata la selezione e richiamata la finestra 
+ video Risultati. La finestra video riporta le esistenze, gli impegni e 
+ le disponibilità degli articoli selezionati in relazione ai criteri espressi. 
+ Nella parte bassa della finestra vengono riportate le descrizioni del 
+ prodotto e della fase attualmente selezionata in griglia.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">Cliccando sui bottoni anteprima 
+ di stampa o stampa della tool bar, si avviano le relative funzioni.</p>
+<p style="text-align: center;"><img src="images/sprb0033f_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+</body>
+</html>

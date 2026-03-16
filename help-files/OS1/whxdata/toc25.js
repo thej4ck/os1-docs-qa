@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc24.js\"  name=\"Centri di costo/ricavo\"><item name=\"Introduzione\" url=\"html/bcan/bcan0100f.htm\" /><item name=\"Dati anagrafici\" url=\"html/bcan/bcan0100f_01.htm\" /><item name=\"Saldi\" url=\"html/bcan/bcan0100f_02.htm\" /></data>";

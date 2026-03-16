@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_9097.htm"},{"type":"item","name":"Importazione fatture di vendita","url":"html/bipn/bipn0001d_F.htm"},{"type":"item","name":"Importazione DDT di vendita/lavorazione","url":"html/bipn/bipn0001d_D.htm"},{"type":"item","name":"Importazione prima nota magazzino","url":"html/bipn/bipn0005d.htm"},{"type":"item","name":"Importazione prima nota contabile","url":"html/bipn/bipn0006d.htm"},{"type":"item","name":"Importazione tabelle","url":"html/bipn/bipn0002d.htm"},{"type":"item","name":"Importazione fatture di acquisto","url":"html/bipn/bipn0021d_F.htm"},{"type":"item","name":"Importazione DDT di acquisto","url":"html/bipn/bipn0021d_D.htm"},{"type":"book","name":"Tabelle","key":"toc302"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

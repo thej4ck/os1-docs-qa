@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 26, 2010 11:12:15 AM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Gestione CONAI vendite</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+ <meta http-equiv="Content-Language" content="it-IT" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.13.0_1";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > Gestione CONAI" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-weight: bold; font-size: 12pt; text-align: left;"><span>Gestione CONAI</span></p>
+<p style="font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif;"><span style="font-size: 10pt; font-family: Verdana, sans-serif;">Il modulo gestisce le problematiche principali delle aziende che sono associate al consorzio Conai e che sono soggetto al pagamento del contributo. A seconda del tipo di attività svolta (rispetto al contributo) variano gli obblighi a cui i consorziati Conai sono soggetti.</span> <span style="font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif;">Gli adempimenti principali riguardano coloro che operano la prima cessione di imballaggi o materie prime per la produzione di imballaggi (relativamente alle sei tipologie di materiali gestite da Conai); in particolare sono stati gestiti gli obblighi relativi ai produttori che devono esporre l’importo del contributo in fattura e versare periodicamente il contributo.</span></p>
+<p style="font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif;">Sono state quindi realizzate le procedure per:</p>
+<ul style="list-style: disc;">
+<li class="p">
+<p style="font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif;">La gestione delle tabelle degli imballaggi</p>
+</li>
+<li class="p">
+<p style="font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif;">L’esposizione del contributo in fattura</p>
+</li>
+<li class="p">
+<p style="font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif;">La gestione delle percentuali di esenzione</p>
+</li>
+<li class="p">
+<p style="font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif;">Il calcolo dei prospetti relativi a:</p>
+</li>
+<li style="list-style: none; display: inline">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif;">Contributi da versare</p>
+</li>
+<li class="p">
+<p style="font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif;">Contributi in esenzione</p>
+</li>
+<li class="p">
+<p style="font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif;">Attività export (calcolo plafond)</p>
+</li>
+</ul>
+</li>
+</ul>
+<p style="font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif;">&#160;</p>
+<p style="font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif;">In fase di creazione dei documenti vengono generate le righe Conai che verranno successivamente utilizzate per i calcoli dei prospetti. In stampa fattura è possibile implementare un riepilogo del contributo per tipo materiale. E’ possibile scegliere, a livello di singolo cliente, se addebitare il contributo o meno; a livello di documento comunque le righe del contributo vengono generate utilizzando due tipi rigo distinti: uno che è incluso nel calcolo del totale documento, l’altro che invece è escluso. Nel caso di vendita a cliente estero per il corretto calcolo del plafond le righe dovranno essere generate ma non verranno ne stampate ne conteggiate nel totale fattura.</p>
+<p style="font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif;">Il modulo può essere applicato anche ad aziende che rientrano nella categoria degli “Utilizzatori” d’imballaggi per ottenere il calcolo corretto (dal ciclo passivo) del contributo Conai e la relativa contabilizzazione.</p>
+<p style="font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif;">&#160;</p>
+<table style=" vertical-align:Center; border-left-style:Solid; border-left-width:2px; border-right-style:Solid; border-right-width:2px; border-top-style:Solid; border-top-width:2px; border-bottom-style:Solid; border-bottom-width:2px; margin-left:2px; margin-right:2px; left:273px; top:194px; width:100%; max-width:363px;" cellspacing="0" align="center">
+<col width="248" />
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="248">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="margin-left: 0in; margin-right: 0in;"><a href="../scon/scon0001d_C.htm">Prospetto dichiarazione periodica</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="248">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="margin-left: 0in; margin-right: 0in;"><a href="../scon/scon0002d.htm">Prospetto dichiarazione cessioni in esenzione</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="248">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="margin-left: 0in; margin-right: 0in;"><a href="../scon/scon0003d.htm">Prospetto attività export</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-width: 1px; border-bottom-style: Solid;" width="248">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="margin-left: 0in; margin-right: 0in;"><a href="index_208490.htm">Tabelle</a></p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+</body>
+</html>

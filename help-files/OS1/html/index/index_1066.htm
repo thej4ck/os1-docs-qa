@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="09 28, 2004 4:33:48 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Contabilità analitica</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.11.0_1";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Contabilità analitica" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;">Introduzione</p>
+<p style="font-family: Verdana, sans-serif;"><span style="font-family: Verdana, sans-serif;">La procedura Contabilità analitica gestisce la problematica relativa ai centri di costo o di ricavo ed al trattamento dei movimenti relativi, derivanti dalla prima nota contabile dal ciclo attivo (contabilizzazione fatture di vendita), dal ciclo passivo (contabilizzazione fatture di acquisto) oppure inseriti extracontabilmente.</span></p>
+<p style="font-family: Verdana, sans-serif;">L’elemento fondamentale della contabilità analitica è la registrazione contabile. Quando sottoconti abilitati per la contabilità analitica vengono interessati da registrazioni contabili effettuate utilizzando causali contabili che prevedono l’accesso alla contabilità analitica, i programmi richiedono l’inserimento delle informazioni necessarie per la gestione del modulo di contabilità analitica (è possibile richiedere diverse tipologie di dati in relazione a come è stato configurato il modulo ed al tipo di installazione di OS1) relative alla transazione, registrandole in un'apposita tabella Movimenti di contabilità analitica. Tale tabella contiene quindi tutte le informazioni idonee a produrre analisi di vario genere. Ne consegue la possibilità di elaborare e produrre bilanci extracontabili con o senza raffronto con i valori di budget.</p>
+<p style="font-family: Verdana, sans-serif;">A tale proposito, per gli utenti che dispongono della versione Enterprise, sarà possibile trattare le informazioni attribuendo a ciascun movimento più criteri di selezione utilizzando oltre al centro di costo/ricavo, anche voci di costo/ricavo raggruppate per omogenee tipologie di voce e/o l'indicazione della singola commessa di produzione. Ne deriva la possibilità di utilizzare le varie analisi presenti nel modulo incrociando tali criteri.</p>
+<p style="font-family: Verdana, sans-serif;">Per gestire al meglio le varie casistiche è possibile definire, oltre ai classici centri di costo diretti, anche centri di costo temporanei, su cui “parcheggiare” i movimenti registrati per permettere al responsabile del controllo di gestione di operare correttamente su tali movimenti. Oltre alla ripartizione manuale gestibile attraverso i centri di costo temporanei è possibile definire tabelle di ribaltamento di centri di costo/ricavo intermedi su altri centri di costo intermedi o diretti.</p>
+<p style="font-family: Verdana, sans-serif;">Per gli utenti che dispongono del modulo Enterprise è possibile anche costruire bilanci di contabilità analitica per competenza di costo.</p>
+<p style="font-family: Verdana, sans-serif;">Può essere utilizzata sia dagli utenti che dispongono del modulo Contabilità generale base, sia dagli utenti che dispongono del modulo Gestione Vendite, sia del modulo Gestione Acquisti.</p>
+<p style="font-family: Verdana, sans-serif; text-align: center;">&#160;</p>
+<table style="vertical-align: Center; border-left-style: Solid; border-left-width: 2px; border-right-style: Solid; border-right-width: 2px; border-top-style: Solid; border-top-width: 2px; border-bottom-style: Solid; border-bottom-width: 2px; margin-left: 2px; margin-right: 2px; left: 87px; top: 106px;" cellspacing="0" align="center">
+<col width="279" />
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="279">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bcan/bcan0001f.htm">Manutenzione movimenti</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="279">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bcan/bcan0002d.htm">Lista movimenti</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="279">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bcan/bcan0003f.htm">Analisi movimenti</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="279">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bcan/bcan0004d.htm">Stampa situazione centri di costo</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-width: 1px; border-bottom-style: Solid;" width="279">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bcan/bcan0005d.htm">Ripartizione movimenti transitori</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="279">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bcan/bcan0006d.htm">Ribaltamento movimenti</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-width: 1px; border-bottom-style: Solid;" width="279">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bcan/bcan0010d.htm">Stampa situazione saldi mensili</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="279">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bcan/bcan0008d.htm">Stampa bilancio</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-width: 1px; border-bottom-style: Solid;" width="279">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="index_106690.htm">Tabelle</a></p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<p style="font-family: Verdana, sans-serif;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-weight: bold;">Avviamento</p>
+<p style="font-family: Verdana, sans-serif;">Per attivare la procedura Contabilità analitica, l'utente dovrà controllare e predisporre una serie di tabelle secondo una precisa sequenza operativa. La corretta esecuzione di tali operazioni è condizione imprescindibile per non incontrare difficoltà durante l'uso dei programmi della procedura. La sequenza prevede:</p>
+<ul style="list-style: disc;">
+<li class="p">
+<p style="font-family: Verdana, sans-serif;">Creazione o modifica delle causali contabili e dei codici dei sottoconti per attivare, per le causali, il collegamento tra contabilità generale ed analitica e per i sottoconti, l'eventuale modalità di gestione.</p>
+</li>
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Controllo e completamento della tabella <a href="../bbas/bbas0101f_03.htm">Configurazione Codici fissi</a></p>
+</li>
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Controllo e completamento della tabella <a href="../bbas/bbas0101f_09.htm">Configurazione contabilità analitica</a></p>
+</li>
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Verifica della corretta gestione nella tabella <a href="../bbas/bbas0036f.htm">Causali contabili</a></p>
+</li>
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Verifica della corretta gestione nella tabella <a href="../bbas/bbas0050f_01.htm">Sottoconti</a></p>
+</li>
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Inserimento e controllo delle apposite <a href="index_106690.htm">Tabelle di contabilità analitica</a></p>
+</li>
+</ul>
+<p style="font-family: Verdana, sans-serif;">&#160;</p>
+<p style="font-family: Verdana, sans-serif;">Tutti i programmi del modulo sono raggruppati sotto la scelta Contabilità analitica della procedura Contabilità.</p>
+</body>
+</html>

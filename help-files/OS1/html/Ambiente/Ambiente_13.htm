@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="02 27, 2012 5:50:24 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Gestione elaborazioni batch (OS1Batch)</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.1.1_12";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Ambiente di lavoro" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; margin-top: 12pt; 
+	 margin-bottom: 12pt; font-size: 12pt;">Gestione elaborazioni batch 
+ (OS1Batch)</p>
+<p class="MsoNormal">La possibilità di eseguire funzionalità in modalità 
+ batch può essere utilizzata per qualsiasi funzione a patto che quest’ultima 
+ sia stata realizzata con determinate caratteristiche.</p>
+<p class="MsoNormal">Le funzioni che attualmente sono disponibili anche 
+ in modalità batch sono:</p>
+<ul style="list-style: disc;">
+	<ul style="list-style: disc;">
+		<li><p class="MsoListParagraph" style="mso-list: l0 level1 lfo1; 
+				 margin-top: 1.5pt; margin-bottom: 1.5pt;"><a href="../sorc/sorc0021d.htm">Importazione 
+		 ordini clienti</a></p></li>
+		<li><p class="MsoListParagraph" style="mso-list: l0 level1 lfo1; 
+				 margin-top: 1.5pt; margin-bottom: 1.5pt;"><a href="../ssta/ssta0002d.htm">Generazione 
+		 statistiche</a></p></li>
+		<li><p class="MsoListParagraph" style="margin-top: 1.5pt; margin-bottom: 1.5pt; 
+				 mso-list: l0 level1 lfo1;"><a href="../sven/sven0007d.htm">Generazione 
+		 fatture di vendita</a></p></li>
+		<li><p class="MsoListParagraph" style="margin-top: 1.5pt; margin-bottom: 1.5pt; 
+				 mso-list: l0 level1 lfo1;"><a href="../sven/sven0012d.htm">Contabilizzazione 
+		 fatture di vendita</a></p></li>
+		<li><p class="MsoListParagraph" style="margin-top: 1.5pt; margin-bottom: 1.5pt; 
+				 mso-list: l0 level1 lfo1;"><span style="text-align: justify; 
+													 text-indent: -18.0pt; 
+													 mso-list: l0 level1 lfo1;"><a 
+		 href="../spar/spar0022d.htm">Contabilizzazione parcelle</a></span></p></li>
+	</ul>
+</ul>
+<p class="MsoNormal">L'attivazione della funzionalità è configurabile tramite 
+ l'opzione “Abilita pianificazione batch” presente nelle &quot;Opzioni&quot; 
+ <span style="mso-bidi-font-size: 10.0pt;">(dell’applicazione, della ditta, 
+ del gruppo utenti o dell’utente)</span> a livello di configuratore di 
+ applicazione (XConfig).</p>
+<p class="MsoNormal">&#160;</p>
+<p class="MsoNormal"><img src="../images/b_Pianifica.png" alt="" style=" border:none; width:100%; max-width:73px;" border="0" />Per poter schedulare una procedura 
+ è necessario prima di tutto impostare i parametri di elaborazione e definire 
+ la periodicità e data/ora di esecuzione. Allo scopo nelle funzioni sopra 
+ elencate è presente un bottone Pianifica che mostrerà la seguente finestra:</p>
+<p class="MsoNormal">&#160;</p>
+<p class="MsoNormal" style="text-align: center;"><img src="Images/Ambiente_13_01.png" alt="" style=" border:none; width:100%; max-width:919px;" border="0" /></p>
+<p class="MsoNormal">&#160;</p>
+<p class="MsoNormal">La finestra mostra l'elenco delle elaborazioni attive, 
+ relative alla procedura da cui si è premuto il pulsante Pianifica; per 
+ ogni operazione pianificata viene mostrata una breve descrizione, la data 
+ e ora relative alla prima esecuzione, l'eventuale scadenza, la frequenza, 
+ l'ultima esecuzione, il risultato e la data ed ora della prossima esecuzione; 
+ le operazioni con frequenza &quot;Una volta&quot; sono visibile fino al 
+ momento dell'esecuzione, una volta eseguite non compariranno più nell'elenco.</p>
+<p class="MsoNormal">I pulsanti in basso elencano le operazioni che è possibile 
+ effettuare: Eliminare una operazione pianificata, inserire una nuova pianificazione 
+ o modificare una già esistente e visualizzare lo storico delle operazioni 
+ effettuate per questo tipo di elaborazione. Il pulsante Nuovo e Modifica 
+ danno accesso alla seguente finestra:</p>
+<p class="MsoNormal">&#160;</p>
+<p class="MsoNormal" style="text-align: center;"><img src="Images/Ambiente_13_02.png" alt="" style=" border:none; width:100%; max-width:423px;" border="0" /></p>
+<p class="MsoNormal">&#160;</p>
+<p class="MsoNormal">Nella finestra di inserimento/modifica la descrizione 
+ e la data di inizio vengono proposti in automatico, è necessario specificare 
+ l'ora di inizio e se si vuole anche una data di fine a partire dalla quale 
+ l'elaborazione non dovrà più essere pianificata; la frequenza può essere:</p>
+<ul style="list-style: disc;">
+	<li><p class="MsoNormal" style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Una 
+	 volta: l'operazione sarà pianificata alla data ed ora indicata una 
+	 sola volta e non sarà mai ripetuta; una volta effettuata non sarà 
+	 più visibile nell'elenco delle attività attive.</p></li>
+	<li><p class="MsoNormal" style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Settimanalmente: 
+	 l'operazione sarà pianificata dalla data ed ora indicata ed eseguita 
+	 nei giorni della settimana che saranno indicati mediante la spunta; 
+	 l'operazione sarà visibile nell'elenco delle attività attive fino 
+	 a quando non sarà eliminata o trascorrerà la data di fine se impostata.</p></li>
+	<li><p class="MsoNormal" style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Mensilmente: 
+	 l'operazione sarà pianificata dalla data ed ora indicata ed eseguita 
+	 il giorno del mese che sarà indicato dall'utente; l'operazione sarà 
+	 visibile nell'elenco delle attività attive fino a quando non sarà 
+	 eliminata o trascorrerà la data di fine se impostata.</p></li>
+</ul>
+<p class="MsoNormal">&#160;</p>
+<p class="MsoNormal">Il pulsante Storico esecuzioni mostra una finestra 
+ in cui vengono riportate tutte le esecuzioni passate con l'indicazione 
+ dell'avvio, del termine e del risultato; per ognuna vengono anche mostrati, 
+ nei riquadri in basso, eventuali segnalazioni e messaggi di errore; facendo 
+ doppio clic con il mouse sui suddetti riquadri si apre una finestra dove 
+ viene mostrato per esteso il contenuto con la possibilità di stamparlo 
+ o copiarlo negli appunti.</p>
+<p class="MsoNormal" style="text-align: center;"><img src="Images/Ambiente_13_03.png" alt="" style=" border:none; width:100%; max-width:717px;" border="0" /></p>
+<p class="MsoNormal">&#160;</p>
+<p class="MsoNormal">La schedulazione viene presa in carico dal servizio 
+ che sarà installato sul server. Tale servizio ha un proprio programma 
+ di configurazione che consente di definire su quali database attivare 
+ il monitoraggio dei batch.</p>
+<p>&#160;</p>
+<p style="text-align: center;"><img src="Images/Ambiente_13_04.png" alt="" style=" border:none; width:100%; max-width:593px;" border="0" /></p>
+<p>&#160;</p>
+<p>Per ogni azienda è necessario indicare nome del Server SQL (istanza 
+ SQL), user name e password; è disponibile un pulsante per selezionare 
+ il nome del database ed uno per testare la connessione; inoltre è necessario 
+ indicare il nome del programma dedicato all'esecuzione batch (OS1Barch); 
+ la pressione del pulsante Salva configurazione effettua il salvataggio 
+ dei dati inseriti.</p>
+</body>
+</html>

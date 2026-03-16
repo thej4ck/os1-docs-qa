@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="04 22, 2003 11:49:38 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Introduzione gestione prima nota</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.1.1.0_1";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Prima nota contabile > Gestione prima nota" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;"><span>Introduzione</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Questo capitolo esamina le operazioni correnti di contabilità, costituite dal trattamento della prima nota.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">I movimenti contabili vengono normalmente inseriti manualmente tramite il programma di Gestione prima nota. I movimenti contabili inerenti le fatture attive o le note di credito a clienti possono provenire automaticamente dal modulo Vendite tramite il programma di Contabilizzazione Fatture, se tale modulo è attivo; i movimenti contabili inerenti le fatture passive o le note di credito di fornitori possono provenire automaticamente dal modulo Fatturazione Acquisti tramite il programma di Contabilizzazione Fatture di acquisto, se tale modulo è attivo; infine, i movimenti contabili inerenti le quote di ammortamento dei cespiti ammortizzabili possono provenire automaticamente dal modulo Gestione cespiti se tale modulo è attivo.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Da qualsiasi procedura provengano, tutti i movimenti contabili possono tuttavia essere modificati o cancellati, purché non siano ancora stati stampati sui registri fiscali in forma definitiva, tramite il programma di gestione prima nota.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold;">Movimenti contabili e Articoli contabili</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Il concetto di movimento contabile in OS1 merita un cenno di spiegazione. A ciascuna registrazione contabile, sia inserita manualmente che generata dai citati programmi, viene assegnato un numero di registrazione progressivo. Poiché OS1 consente di effettuare registrazioni contabili con date non ordinate, i numeri di registrazione dei movimenti contabili non sono coerenti con la progressione delle date. Quando un movimento contabile viene cancellato, il corrispondente numero di registrazione viene eliminato e non è più recuperato. Il numero di registrazione del movimento contabile serve quindi per la ricerca degli stessi e per l'eventuale variazione o cancellazione prima della stampa definitiva sul libro giornale.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Solo al momento della stampa definitiva dei movimenti contabili sul libro giornale, gli stessi vengono previamente rinumerati coerentemente con la loro data di registrazione, diventando quindi articoli contabili ed assumendo un numero progressivo di articolo contabile definitivo.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">La differenza fra i programmi Analisi sottoconti a stampa e Stampa partitari sta appunto nel tipo di numerazione adottata: il primo genera le stampe provvisorie dei movimenti contabili di uno o più sottoconti indicando per ciascuno di essi il numero di registrazione del movimento contabile; il secondo, da utilizzare dopo la stampa del libro giornale, genera invece le stampe definitive degli articoli contabili di uno o più sottoconti, indicando per ciascuno di essi il numero di articolo contabile ormai diverso dall'originario numero di movimento contabile.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;&#160;&#160;&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold;">Partite aperte clienti e fornitori</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">La presenza delle partite aperte clienti e fornitori sono la condizione essenziale per la creazione degli scadenzari attivi e passivi e degli estratti conto nonché, relativamente ai clienti, il prerequisito per l'emissione dei solleciti e per la generazione degli effetti attivi. Per questo motivo, il programma Contabilizzazione fatture del modulo Vendite provvede a generare, oltre che i movimenti contabili relativi alle fatture emesse, anche le relative partite aperte o scadenze.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Anche in occasione di registrazioni contabili manuali inerenti clienti e fornitori, grazie all'uso di specifiche causali contabili, la gestione delle partite aperte avviene in stretta connessione con le scritture contabili. In pratica, per ciascun rigo di contabilità generale inerente un cliente o un fornitore, viene creato un corrispondente movimento nella tabella scadenze &#160;che viene utilizzato dai programmi di trattamento delle partite aperte.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Analogamente, quando viene cancellato un rigo di prima nota inerente un cliente o un fornitore viene cancellato anche il corrispondente movimento di scadenza, e quando lo stesso viene modificato il programma presenta il rigo di scadenza allo scopo di effettuare analoga e coerente modifica sulla relativa scadenza.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">È possibile disabilitare, ove il Responsabile del Sistema lo ritenesse opportuno, la gestione delle partite aperte dei clienti, dei fornitori o di entrambi omettendo di definire i relativi parametri sulle casuali contabili. Tuttavia nel prosieguo del manuale si è ritenuto opportuno descrivere le registrazioni contabili illustrando anche le sezioni video di gestione delle partite. Pertanto le note operative di questo capitolo presentano gli esempi delle registrazioni contabili ed Iva attinenti a clienti e fornitori in situazione di abilitazione dei parametri relativi alla gestione delle Partite Aperte Clienti e Fornitori.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Le sezioni video delle partite sono facilmente identificabili per la loro denominazione, che compare nell'etichetta della linguetta: Registrazione partita, Registrazione incassi/pagamenti, Registrazione insoluti cliente, Registrazione anticipi, ecc.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Gli utenti che non utilizzassero le Partite Aperte Clienti/Fornitori, avendo creato causali contabili prive delle chiamate alle partite aperte, non vedranno comparire nei loro programmi queste linguette o sezioni video, e possono quindi consultare il manuale omettendo di seguire le indicazioni relative alla finestre video della Gestione Partite Aperte.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold;">Altri moduli correlati alla prima nota contabile</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">In questo capitolo, viceversa, non si fa cenno alcuno ai residui moduli aggiuntivi (Gestione Cespiti, Gestione Ritenute d'Acconto, Contabilità Analitica, Gestione Partite contabili, Gestione Pagamenti fornitori) che pure prevedono particolari modalità di lavoro nei programmi di trattamento della prima nota contabile. Specifici esempi di inserimento e variazione prima nota contabile sono presentati nei rispettivi capitoli.</p>
+</body>
+</html>

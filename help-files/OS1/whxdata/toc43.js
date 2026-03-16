@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc4.js\"  name=\"Regime margine\"><item name=\"Introduzione\" url=\"html/index/index_1088.htm\" /><item name=\"Gestione movimenti\" url=\"html/bcge/bcge0051f.htm\" /><item name=\"Stampa registro\" url=\"html/bcge/bcge0052d.htm\" /></data>";

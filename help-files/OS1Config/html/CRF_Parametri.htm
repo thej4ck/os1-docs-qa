@@ -1,0 +1,333 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="06 7, 2016 4:51:44 PM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Composizione file di configurazione CFG</title>
+<link rel="StyleSheet" href="../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "..";
+gCommonRootRelPath = "..";
+gTopicId = "2.1.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazioni esterne > Registratori di cassa" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../ehlpdhtm.js"></script>
+
+<h3>Composizione file di configurazione CFG</h3>
+<p style="font-weight: bold; font-size: 12pt;">Parametri generali sezione 
+ [Config]</p>
+<p><b>StampaDescrizione</b>: il parametro appare sempre commentato (preceduto 
+ dal carattere ';'); per non stampare la descrizione o stampare una descrizione 
+ fissa è necessario impostare il parametro a zero (StampaDescrizione=0)</p>
+<p><b>DicituraFissa</b>: il parametro appare sempre commentato (preceduto 
+ dal carattere ';'); per stampare una descrizione fissa è obbligatorio 
+ impostare il parametro StampaDescrizione a zero (StampaDescrizione=0) 
+ ed assegnare la descrizione fissa che si desidera (DicituraFissa=descrizione). 
+ Se all'interno della descrizione è presente il valore <b>_R</b> sarà stampato 
+ il numero del reparto del registratore di cassa a partire dalla posizione 
+ di _R (DicituraFissa=Reparto _R).</p>
+<p><b>DoppioDisplay</b>: da utilizzare se presenti due monitor; per visualizzare 
+ i dati della vendita sul secondo monitor è necessario impostare il parametro 
+ a uno (DoppioDisplay=1), altrimenti per disabilitare tale funzione o non 
+ c’è il secondo monitor è necessario impostare il parametro a zero (DoppioDisplay=0).</p>
+<p><b>StampaScontrino</b>: se presente con valore zero (StampaScontrino=0) 
+ consente il normale funzionamento delle procedure senza mai effettuare 
+ la stampa dello scontrino.</p>
+<p><b>TipoComunicazione</b>: il parametro indica il metodo di comunicazione 
+ con il RT; se deve essere utilizzata la scrittura diretta sulla porta 
+ seriale di ogni singola riga di scontrino è necessario impostare il parametro 
+ a zero (TipoComunicazione=0), altrimenti se deve essere generato un file 
+ o mandato tutto il contenuto dello scontrino alla porta seriale è necessario 
+ impostare il parametro a uno (TipoComunicazione=1).</p>
+<p><b>Parametri</b>: il parametro è strettamente correlato al precedente 
+ in quanto se il <b>TipoComunicazione</b> vale zero, contiene i parametri 
+ della porta seriale (es. Parametri=COM1:baud=9600 parity=N data=8 stop=1 
+ xon=on), altrimenti può contenere il nome del file, completo di percorso 
+ (C:\Scontrini\Scontrino.txt), oppure il nome della porta seriale (COM1:). 
+ Se è presente il nome del file scontrino è possibile omettere l’estensione 
+ (C:\Scontrini\Scontrino.) in questo caso saranno generati sempre file 
+ nuovi progressivi (.1,.2,.3, ecc.), questa particolare opzione è funzionale 
+ al programma che effettua il polling sulla cartella per inviare i files 
+ al RT che deve prevedere di trattare più file in coda (ad esempio WinEcr); 
+ altri programmi vogliono un nome fisso e trattano un file alla volta. 
+ Se è presente l’indicazione della porta seriale, tale porta deve essere 
+ preventivamente inizializzata eseguendo all’avvio del sistema un comando 
+ MODE COM… anche mediante un file batch.</p>
+<p><b>PathPgmExe</b>: il parametro è utilizzabile se si è optato per la 
+ creazione del file e se compilato consente di eseguire il programma indicato 
+ dal parametro al termine della generazione del file (PathPgmExe=C:\Programmi\MioProgramma.exe).</p>
+<p><b>ContaRighe</b>: il parametro è utilizzabile se si è optato per la 
+ creazione del file e se compilato consente di inserire nel file una riga 
+ che riporta il numero delle righe del file scontrino stesso a partire 
+ dalla riga indicata (ContaRighe=3).</p>
+<p><b>Modulo</b>: il parametro indica la bpl utilizzata da OS1; oltre le 
+ bpl esistenti relativi ai modelli gestiti è possibile indicare anche la 
+ dll del driver generico (Modello=OS1CRF_Generico).</p>
+<p>&#160;</p>
+<p style="font-size: 12pt; font-weight: bold;">Parametri specifici sezione 
+ [CRF]</p>
+<p><b>Modello</b>: il parametro indica il modello di RT utilizzato; se 
+ si utilizzano le bpl standard il parametro non deve essere modificato 
+ rispetto al file presente nella cartella Modelli (ad esempio per la Ditron 
+ Modello=Zip), se si utilizza il driver generico il parametro corrisponde 
+ al nome del file modello (anch’esso con estensione cfg) (Modello=DitronZip); 
+ il file di modello è presente nella cartella Modelli\CRF\ModCRF e sarà 
+ utilizzato se non viene trovato nessun file custom; il file custom alternativo<span 
+	 style="mso-spacerun: yes;">&#160;</span>&#160;al modello deve essere 
+ presente nella cartella Custom\CRF e deve essere nominato come NomePC_NomeUtente_CRFMOD.cfg 
+ <span style="mso-spacerun: yes;">&#160;</span>o NomePC_CRFMOD.cfg.</p>
+<p>I parametri che seguono sono tutti inerenti aspetti di funzionamento 
+ dei singoli RT e devono essere impostati in base alle caratteristiche 
+ di funzionamento del RT stesso; non tutti i parametri sono presenti sempre 
+ in tutti i file cfg della cartella modelli, ma solo dove il RT ne richiede 
+ l’utilizzo.</p>
+<p><b>ArrotondaAuto</b>: il parametro indica se il RT determina in modo 
+ automatico l'arrotondamento per i pagamenti in contanti; se è previsto 
+ l’arrotondamento automatico per il RT, caso di default, deve essere impostato 
+ il valore uno (ArrotondaAuto=1), altrimenti il valore zero (ArrotondaAuto=0); 
+ è previsto un caso particolare che dipende dal funzionamento del singolo 
+ RT, cioè nel caso in cui se il totale vendita corrisponde al totale incassato 
+ senza resto, alcuni modelli di RT in questo caso prevedono l’invio del 
+ comando di chiusura in contanti senza nessun parametro; se si è in presenza 
+ di questa casistica è necessario impostare il parametro con valore due 
+ (ArrotondaAuto=2).</p>
+<p><b>ArrotondamentiSAP</b>: il parametro indica se il RT tratta gli arrotondamenti 
+ come sconto a pagare; in caso affermativo va indicato il parametro uno 
+ (ArrotondamentiSAP=1) il valore dell’arrotondamento sarà azzerato e confluirà 
+ nel valore degli sconti a pagare, altrimenti è necessario impostare il 
+ valore zero (ArrotondamentiSAP=0). Il parametro è attivo solo se non è 
+ attivo l’arrotondamento automatico (ArrotondaAuto=0).</p>
+<p><b>BuoniMultiusoSAP</b>: il parametro indica se il RT tratta i buoni 
+ multiuso (Voucher) come sconto a pagare; in caso affermativo va indicato 
+ il parametro uno (BuoniMultiusoSAP=1) il valore dei voucher sarà azzerato 
+ e confluirà nel valore degli sconti a pagare, altrimenti è necessario 
+ impostare il valore zero (BuoniMultiusoSAP=0).</p>
+<p><b>AzzeraArrotMisto</b>: il parametro indica se azzerare il valore dell’arrotondamento 
+ in caso di pagamento misto; in caso affermativo (default) è necessario 
+ impostare il valore a 1 (AzzeraArrotMisto=1) altrimenti a zero (AzzeraArrotMisto=0).</p>
+<p><b>AzzeraArrotVoucher</b>: il parametro indica se azzerare il valore 
+ dell’arrotondamento in caso di utilizzo di voucher; in caso affermativo 
+ (default) è necessario impostare il valore a 1 (AzzeraArrotVoucher=1) 
+ altrimenti a zero (AzzeraArrotVoucher=0).</p>
+<p><b>RTRigheAnn</b>: il parametro indica se stampare le righe nello scontrino 
+ di annullamento; alcuni RT prevedono un singolo comando di annullamento 
+ senza l’invio delle righe, in questo caso il parametro va impostato a 
+ uno (RTRigheAnn=1) altrimenti a zero (RTRigheAnn=0).</p>
+<p><b>CRF_RT</b>: questo parametro è valido, per adesso, solo per i RT 
+ Olivetti con ElaExecute e se impostato a uno (CRF_RT=1) indica l’abilitazione 
+ all’utilizzo dei comandi RT, se impostato a zero (CRF_RT=0) non l’abilita 
+ e saranno utilizzati i comandi fiscali MF.</p>
+<p><b>StampaCodFiscale</b>: il parametro abilita la stampa del codice fiscale; 
+ impostando il valore zero (StampaCodFiscale=0) non sarà mai stampato, 
+ impostando il valore a uno (StampaCodFiscale=1) sarà stampato prima del 
+ totale vendita, impostando il valore due (StampaCodFiscale=2) sarà stampato 
+ dopo il totale vendita. <b>In caso sia presente il codice lotteria sulla 
+ vendita il codice fiscale non viene mai stampato.</b></p>
+<p><b>PosizioneCodiceLotteria</b>: il codice lotteria se presente viene 
+ sempre stampato, questo parametro indica dove posizionarlo all’interno 
+ del file: se impostato il valore zero (PosizioneCodiceLotteria=0) sarà 
+ inserito prima delle righe di vendita, se impostato il valore uno (PosizioneCodiceLotteria=1) 
+ dopo le righe di vendita.</p>
+<p><b>NumDecimali</b>: indicare il numero dei decimali gestiti dal RT, 
+ tipicamente 2; il valore -1 indica di utilizzare i decimali previsti per 
+ la divisa di OS1; questo parametro è utilizzato dalla movimentazione per 
+ impostare il numero dei decimali da utilizzare.</p>
+<p><b>ParametriCOM</b>: indicare i parametri di impostazione della porta 
+ seriale (ParametriCOM=1:9600,N,8,1); il parametro è valido per quei RT 
+ che per l’invio di ogni comando prevedono questo formalismo.</p>
+<p><b>StampaRigheDSC</b>: il parametro indica se stampare sullo scontrino 
+ anche le righe descrittive; impostando il valore uno (StampaRigheDSC=1) 
+ saranno stampate, impostando il valore zero (StampaRigheDSC=0) non saranno 
+ stampate.</p>
+<p><b>DisplayCliente</b>: impostando il parametro a uno (DisplayCliente=1) 
+ si attiva l’invio di ogni rigo al display cliente, impostando il valore 
+ zero (DisplayCliente=0) non sarà inviato niente al display cliente dalla 
+ procedura.</p>
+<p><b>DisplayOperatore</b>: impostando il parametro a uno (DisplayOperatore=1) 
+ si attiva l’invio di ogni rigo al display dell’operatore, impostando il 
+ valore zero (DisplayOperatore=0) non sarà inviato niente al display dell’operatore 
+ dalla procedura.</p>
+<p><b>DisplayChiusura</b>: se attivo il <b>DisplayCliente</b>, attiva l’invio 
+ delle informazioni sulla chiusura al display cliente; impostando il parametro 
+ a due (DisplayChiusura=2) saranno sempre inviate, impostando il valore 
+ a uno (DisplayChiusura=1) saranno inviate solo in presenza di resto zero, 
+ impostando il valore zero (DisplayChiusura=0) non sarà inviato niente 
+ dalla procedura.</p>
+<p><b>MilliSecondiAttesa</b>: il valore di questo parametro indica, in 
+ millisecondi, il tempo di attesa dopo l’invio dei singoli comandi relativi 
+ a display, cassetto e chiusura cassa prima di effettuare una nuova operazione 
+ (MilliSecondiAttesa=1000 corrisponde ad un secondo). Può essere utile 
+ nel caso in cui il polling sui files utilizzi sempre lo stesso nome e 
+ la procedura di invio del file al RT risulti un po’ lenta.</p>
+<p><b>ChiusuraCassa</b>: il parametro indica se attivare la funzionalità 
+ di chiusura di cassa (solo OS1SalePoint) e per alcuni modelli, che lo 
+ prevedono, il tipo di report da stampare; impostando il valore zero (ChiusuraCassa=0) 
+ non sarà abilitata la chiusura di cassa, impostando un valore diverso 
+ da zero sarà abilitata ed in base al valore, compatibilmente con il RT 
+ utilizzato si potrà utilizzare (ChiusuraCassa=1) report lungo, (ChiusuraCassa=2) 
+ report breve, (ChiusuraCassa=3) report medio.</p>
+<p><b>AperturaCassetto</b>: il parametro indica se attivare la funzionalità 
+ di apertura del cassetto (solo OS1SalePoint); impostando il valore a uno 
+ (AperturaCassetto=1) la funzionalità è attiva, impostando il valore a 
+ zero (AperturaCassetto=0) non è attiva.</p>
+<p><b>AperturaCassettoAuto</b>: il parametro indica se attivare la funzionalità 
+ di apertura automatica del cassetto all’inizio o al termine della vendita 
+ (solo OS1SalePoint); impostando il valore a uno (AperturaCassettoAuto=1) 
+ la funzionalità è attiva al termine della vendita, impostando il valore 
+ a due (AperturaCassettoAuto=2) la funzionalità è attiva all’inizio della 
+ vendita, impostando il valore a zero (AperturaCassettoAuto=0) non è attiva.</p>
+<p><b>StampaRiepilogoPunti</b>: il parametro indica se e come stampare 
+ il riepilogo punti della tessera al termine dello scontrino; impostando 
+ il valore a zero (StampaRiepilogoPunti=0) non viene stampato il riepilogo, 
+ impostando il valore a uno (StampaRiepilogoPunti=1) viene stampato il 
+ riepilogo come appendice congiunta, impostando il valore a due (StampaRiepilogoPunti=2) 
+ viene stampato il riepilogo come appendice disgiunta questa impostazione 
+ è valida solo per i modelli che prevedono questa opzione.</p>
+<p><b>TipoStampaCessioneGratuita</b>: il parametro indica se stampare sullo 
+ scontrino le righe di tipo omaggio/cessione gratuita; impostando il parametro 
+ a uno (TipoStampaCessioneGratuita=1) le righe saranno stampate, impostando 
+ il parametro a zero (TipoStampaCessioneGratuita=0) non saranno stampate.</p>
+<p><b>ConsentiScontrinoNegativo</b>: il parametro indica se è consentito 
+ emettere scontrini negativi; impostando il parametro a uno (ConsentiScontrinoNegativo=1) 
+ sarà consentito, impostando il parametro a zero (ConsentiScontrinoNegativo=0) 
+ non sarà consentito; in questo caso non sarà possibile neppure salvare 
+ il movimento di vendita se il totale della vendita fosse negativo.</p>
+<p><b>StampaRigheValoreZero</b>: il parametro indica se stampare sullo 
+ scontrino le righe con valore a zero; impostando il parametro a uno (StampaRigheValoreZero=1) 
+ le righe saranno stampate, impostando il parametro a zero (StampaRigheValoreZero=0) 
+ non saranno stampate.</p>
+<p><b>ComandiGestionali</b>: questo parametro è valido, per adesso, solo 
+ per i RT Olivetti con ElaExecute e se impostato a uno (ComandiGestionali=1) 
+ indica l’utilizzo dei comandi gestionali nel file scontrino, se impostato 
+ a zero (ComandiGestionali=0) indica l’utilizzo dei comandi fiscali.</p>
+<p><b>ScontrinoCortesia</b>: il parametro abilita la stampa dello scontrino 
+ di cortesia; impostando il valore zero (ScontrinoCortesia=0) lo scontrino 
+ di cortesia è disabilitato, impostando il parametro a uno (ScontrinoCortesia=1) 
+ lo scontrino di cortesia è abilitato e sarà stampato utilizzando tutte 
+ le righe della vendita, impostando il parametro a due (ScontrinoCortesia=2) 
+ lo scontrino di cortesia è abilitato e viene richiesto all’operatore quali 
+ e quante righe, rispetto alla vendita, andranno riportate sullo scontrino 
+ di cortesia. Se lo scontrino di cortesia è abilitato sarà sempre richiesto 
+ se effettuare un unico scontrino oppure più scontrini in base alle righe 
+ della vendita o selezionate in base a come impostato il parametro.</p>
+<p><b>StampaVoucher</b>: il parametro indica se stampare sul RT eventuali 
+ voucher/gift card, per cui è prevista la stampa, presenti nella vendita; 
+ impostando il valore uno (StampaVoucher=1) sarà effettuata la stampa sul 
+ RT, impostando il valore zero (StampaVoucher=0) non sarà effettuata la 
+ stampa sul RT, ma sarà richiesta la normale stampante di windows.</p>
+<p><b>MilliSecondiTermineScontrino</b>: il valore di questo parametro indica, 
+ in millisecondi, il tempo di attesa per l’invio dello scontrino di cortesia 
+ e del voucher in coda allo scontrino fiscale; se il parametro ha un valore 
+ diverso da zero (MilliSecondiTermineScontrino=1000 corrisponde ad un secondo) 
+ sarà atteso il tempo richiesto e poi avviata la stampa dello scontrino 
+ di cortesia o del voucher, se il parametro vale zero (MilliSecondiTermineScontrino=0) 
+ sarà visualizzato un messaggio di attesa del termine dell’operazione di 
+ stampa prima di avviare la stampa dello scontrino di cortesia o del voucher.</p>
+<p style="mso-fareast-font-family: Calibri;"><span style="mso-bidi-font-family: 'Times New Roman'; 
+													 mso-bidi-theme-font: minor-bidi; 
+													 mso-ansi-language: IT; 
+													 mso-fareast-language: EN-US; 
+													 mso-bidi-language: AR-SA;"><b>StampaRifInterni</b>: 
+ il parametro abilita la stampa sullo scontrino di vendita dei riferimenti 
+ interni; impostando il valore uno (StampaRifInterni=1) sarà abilitata 
+ la stampa, impostando il valore zero (StampaRifInterni=0) non sarà effettuata 
+ nessuna stampa. La stampa viene effettuata come rigo descrittivo riportando 
+ cassa, operatore, numero del movimento e numero dello scontrino inserito 
+ nella finestra di chiusura; se il RT non supporta la stampa delle righe 
+ descrittive non abilitare questo parametro.</span></p>
+<p><span style="mso-fareast-font-family: Calibri; mso-bidi-font-family: 'Times New Roman'; 
+		 mso-bidi-theme-font: minor-bidi; mso-ansi-language: IT; mso-fareast-language: EN-US; 
+		 mso-bidi-language: AR-SA; font-weight: bold;">ResoAnnulloLotteriaIstantanea</span><span 
+	 style="mso-fareast-font-family: Calibri; mso-bidi-font-family: 'Times New Roman'; 
+	 mso-bidi-theme-font: minor-bidi; mso-ansi-language: IT; mso-fareast-language: EN-US; 
+	 mso-bidi-language: AR-SA;">: il parametro è u</span>tilizzato, se 
+ attiva la lotteria istantanea, per indicare quando assegnare al movimento 
+ il codice lotteria 'AAAAAAAA' in caso di 
+ reso/annullamento: 0=nessuna gestione 1=assegna sempre 2=assegna se matricola 
+ CRF diversa (le matricole di entrambe le casse (vendita e annullo/reso) 
+ devono essere specificate); Il valore di default è 0 solo per la Epson 
+ è impostato a 2.</p>
+<p><span style="font-weight: bold;">ScontoPercPositivo</span>: 
+ <span style="mso-fareast-font-family: Calibri; mso-bidi-font-family: 'Times New Roman'; 
+		 mso-bidi-theme-font: minor-bidi; mso-ansi-language: IT; mso-fareast-language: EN-US; 
+		 mso-bidi-language: AR-SA;">il parametro è u</span>tilizzato per 
+ indicare di togliere il segno alla percentuale di sconto (0=Con segno 
+ 1=Senza segno); il default è 0. (Valido solo per Ditron)</p>
+<p>&#160;</p>
+<p style="font-size: 12pt; font-weight: bold;">Parametri funzionali [Funzioni]</p>
+<p><b>Reso</b>: il parametro indica se è supportato il tipo rigo reso nel 
+ movimento; impostando il valore uno (Reso=1) il tipo rigo sarà accettato, 
+ impostando il valore zero (Reso=0) non sarà accettato.</p>
+<p><b>MultiScontiR</b>: il parametro indica se è possibile utilizzare più 
+ di uno sconto/maggiorazione di rigo; impostando il valore uno (MultiScontiR=1) 
+ sarà possibile utilizzare più di uno sconto di rigo nel movimento, impostando 
+ il valore zero (MultiScontiR=0) sarà possibile utilizzare solo uno sconto 
+ di rigo, l’inserimento di più sconti non consentirà il salvataggio del 
+ rigo.</p>
+<p><b>ScontoR</b>: il parametro indica se il RT supporta gli sconti di 
+ rigo; impostando il valore uno (ScontoR=1) sarà possibile inserire gli 
+ sconti sul rigo, impostando il valore zero (ScontoR=0) non sarà possibile 
+ utilizzare gli sconti sul rigo, l’inserimento di qualsiasi valore di sconto 
+ non consentirà il salvataggio del rigo.</p>
+<p><b>MaggiorazioneR</b>: il parametro indica se il RT supporta le maggiorazioni 
+ di rigo; impostando il valore uno (MaggiorazioneR=1) sarà possibile inserire 
+ le maggiorazioni sul rigo, impostando il valore zero (MaggiorazioneR=0) 
+ non sarà possibile utilizzare le maggiorazioni sul rigo, l’inserimento 
+ di qualsiasi valore di maggiorazione non consentirà il salvataggio del 
+ rigo.</p>
+<p><span style="mso-bidi-theme-font: minor-bidi; mso-ansi-language: IT; 
+		 mso-fareast-language: EN-US; mso-bidi-language: AR-SA;"><b>SepDescrizione</b>: 
+ parametro attualmente attivo solo per RT che utilizzano il protocollo 
+ di comunicazione Xon/XOff; indica il carattere di separazione da utilizzare 
+ per inviare la descrizione del prodotto; impostando il valore zero (SepDescrizione=0) 
+ la descrizione sarà preceduta e seguita dal carattere apice singolo ''', 
+ impostando il valore uno (SepDescrizione=1) la descrizione sarà preceduta 
+ e seguita dal carattere apice doppio '&quot;'.</span></p>
+</body>
+</html>

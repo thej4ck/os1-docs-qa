@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="06 12, 2014 12:50:30 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Generazione documenti da fatture XML</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.11.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > OS1BoxFatture" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; text-align: justify; margin-left: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; font-weight: bold; font-size: 12pt;">Generazione 
+ documenti da fatture XML</p>
+<p>Tramite questa procedura è possibile generare le fatture importate da 
+ OS1BoxFatture come fatture di vendita di OS1. <span style="font-size: 10.0pt; 
+													 mso-bidi-font-size: 12.0pt; 
+													 mso-fareast-font-family: 'Times New Roman'; 
+													 mso-bidi-font-family: 'Times New Roman'; 
+													 mso-ansi-language: IT; 
+													 mso-fareast-language: IT; 
+													 mso-bidi-language: AR-SA;">Nei 
+ parametri sono richieste obbligatoriamente le date dei documenti da elaborare, 
+ è possibile inoltre indicare come parametro di selezione il cliente</span>.</p>
+<p>&#160;</p>
+<p style="text-align: center;"><img src="Images/SBas0024d_01.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p>Nell’elenco vengono visualizzati tutti i documenti che risultano non 
+ ancora importati in OS1. Nella linguetta “Preparazione” vengono proposti 
+ i dati come indicato nel paragrafo “Manutenzione fatture acquisite” presente 
+ nel manuale operativo del BoxFatture, la maschera è divisa in due sezioni, 
+ quella superiore che contiene i dati di testa e quella inferiore che contiene 
+ i dati di rigo. Nei dati di testa, sul cliente è presente il codice cliente 
+ assegnato, è attiva la ricerca dei clienti ed è possibile assegnare un 
+ cliente con la stessa partita Iva presente sul file XML. <span style="mso-bidi-font-size: 10.0pt;">Sulla 
+ causale è presente lo zoom delle causali di OS1. Modificando il codice 
+ esenzione viene richiesto se assegnare il nuovo codice Iva sulle righe 
+ su cui era presente il codice esenzione originale (presente prima della 
+ modifica).</span></p>
+<p><span style="mso-bidi-font-size: 10.0pt;">Nei dati di rigo è </span>possibile 
+ modificare tutti i campi presenti sulle righe mentre è possibile eliminare 
+ solo le righe che non hanno associazioni con il prodotto OS1. In fase 
+ di modifica dei dati sono presenti controlli di coerenza tra tipo rigo, 
+ articolo e aliquota Iva. <span style="mso-bidi-font-size: 10.0pt;">Tramite 
+ il bottone</span> <span style="mso-spacerun: yes; mso-bidi-font-size: 10.0pt;">accanto 
+ al sottoconto </span><span style="mso-bidi-font-size: 10.0pt;">è possibile 
+ assegnare il conto di ricavo presente sul rigo a tutte le righe del documento 
+ su cui siamo posizionati.</span></p>
+<p>&#160;</p>
+<p style="text-align: center;"><img src="Images/SBas0024d_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p><span style="mso-bidi-font-size: 10.0pt;">In fase di salvataggio dei 
+ dati vengono segnalate eventuali incoerenze, come ad esempio la mancata 
+ compilazione dell’articolo per i tipi rigo che prevedono la gestione dell’articolo 
+ o dell’aliquota Iva per le righe con importo, confermando sull’errore 
+ si viene automaticamente posizionati sul rigo del documento su cui tale 
+ errore si verifica per poterlo sistemare e procedere con la registrazione. 
+ </span><span style="font-family: Verdana, sans-serif; text-align: justify; 
+				 font-size: 10.0pt; mso-fareast-font-family: 'Times New Roman'; 
+				 mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: IT; 
+				 mso-fareast-language: IT; mso-bidi-language: AR-SA;">Salvando 
+ la preparazione viene richiesto se effettuare la generazione dei documenti, 
+ confermando vengono visualizzati i documenti salvati ed eventuali errori 
+ per cui non è stato possibile effettuare il salvataggio del documento.</span></p>
+<p>&#160;</p>
+<p style="text-align: center;"><img src="Images/SBas0024d_03.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+</body>
+</html>

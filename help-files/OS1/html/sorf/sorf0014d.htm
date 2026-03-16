@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="09 23, 2008 6:44:51 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Analisi evasione ordini fornitori</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.5.2.0_4";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Ordini fornitori > Interrogazione ordini" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; font-weight: bold; text-align: left;"><strong><span style="font-weight: bold;">Analisi evasione ordini</span></strong></p>
+<p>Il programma consente di visualizzare tutta la situazione delle consegne dell’ordine, quindi di vedere in maniera complessiva tutti i carichi che sono stati registrati, gli ordini clienti generati a fronte di tali ordini.</p>
+<p>E’ possibile visualizzare gli ordini relativi ad una tipologia omogenea di causali, e/o ad uno o più fornitori, e/o ad uno o più prodotti, e/o relativi ad uno specifico magazzino di arrivo entro limiti di data specificati.</p>
+<p>E’ possibile selezionare solo gli ordini evasi, da evadere oppure tutti gli ordini.</p>
+<p>Il programma si articola su due finestre video. La prima, Parametri, consente la definizione dei parametri di analisi.</p>
+<p style="text-align: center;"><img src="Images/sorf0014d_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA FORNITORE: eventuale codice del fornitore, presente in anagrafica fornitore, da cui si vuole iniziare la selezione di analisi. Confermando a vuoto, la selezione inizia dal primo fornitore valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A FORNITORE: eventuale codice del fornitore, presente in anagrafica fornitore, con cui si vuole terminare la selezione di analisi. Confermando a vuoto, la selezione termina con l’ultimo fornitore valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA PRODOTTO: eventuale codice dell'articolo, presente in anagrafica prodotti, da cui si desidera iniziare la selezione di analisi. Confermando a vuoto, la selezione inizia con il primo prodotto valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A PRODOTTO: eventuale codice dell'articolo, presente in anagrafica prodotti, a cui si desidera terminare la selezione di analisi. Confermando a vuoto, la selezione termina con l’ultimo prodotto valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale data del documento da cui deve iniziare l’analisi dei documenti relativamente ai precedenti parametri di selezione. Confermando a vuoto, l’analisi inizia con il primo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale data del documento con cui si desidera terminare l’analisi dei documenti relativamente ai precedenti parametri di selezione. Confermando a vuoto, l’analisi si conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STATO ORDINI: combo box per definire lo stato degli ordini da selezionare. Valori ammessi: tutti, da evadere oppure solo evasi.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO ORDINI: eventuale codice della tipologia di ordini (gruppo di causali omogenee) a cui si vuole limitare la selezione di analisi. Sul campo sono attive le funzioni di ricerca (F9) sulla tabella omonima.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO: eventuale codice del magazzino a cui si vuole restringere la selezione di analisi. Sul campo sono attive le funzioni di ricerca (F9) sulla tabella omonima.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ANNO: eventuale anno relativo agli ordini a cui si vuole restringere la selezione di analisi.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE: eventuale codice della causale degli ordini a cui si vuole restringere la selezione di analisi. Sul campo sono attive le funzioni di ricerca (F9) sulla tabella omonima.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NUMERO ORDINE: eventuale numero di ordine a cui si vuole restringere la selezione di analisi.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p>Confermando tramite pressione del bottone Esegui, viene avviata la selezione e richiamata la finestra video Risultati.</p>
+<p style="text-align: center;"><img src="Images/sorf0014d_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p>La finestra video è articolata su tre sezioni: la prima sezione elenca le teste degli ordini selezionati, la seconda sezione elenca le righe dell'ordine selezionato, che è quello contrassegnato dalla freccia, a sinistra del rigo nella sezione superiore. La terza sezione divisa in Spedizioni ed Acquisti riporta, per il rigo ordine selezionato, gli eventuali documenti di acquisto che lo hanno evaso e gli eventuali ordini clienti generati a fronte dell'ordine e relativi documenti di spedizione; facendo doppio clic con il mouse sull'indicazione di un documento si richiama la manutenzione dello stesso.</p>
+</body>
+</html>

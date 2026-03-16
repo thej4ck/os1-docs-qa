@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 30, 2014 11:53:11 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Definizione etichette</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.10.14.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Configurazioni > Barcode GS1-EAN128" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; 
+	 font-weight: bold;">Definizione etichette</p>
+<p>Il GS1-EAN128 è un codice che utilizza le specifiche del codice a barre 
+ Code128 e consente la rappresentazione di codici complessi come il GTIN 
+ (Global Trade Item Number), oppure il SSCC (Serial Shipping Container 
+ Code o etichetta logistica), all’interno del quale includere varie informazioni 
+ come ad esempio il lotto di produzione, la data di scadenza, il peso in 
+ kg. In pratica il GS1-EAN128 permette la concatenazione di più informazioni 
+ commerciali o logistiche tramite l’utilizzo di codici identificativi (Application 
+ Identifier) denominati AI che consentono di definire il significato del 
+ campo che sarà riportato di seguito.</p>
+<p>la compilazione di questa tabella consente di definire la struttura 
+ dell’etichetta barcode etichetta prodotto di tipo EAN128 oppure di tipo 
+ GS1 SSCC (etichetta logistica) utilizzando i campi a disposizione all’interno 
+ della base dati di OS1.</p>
+<p>E’ possibile creare due tipi di etichetta: l’etichetta di tipo prodotto 
+ e l’etichetta di tipo logistico (SSCC) spuntando la casella &quot;Stampa 
+ barcode SSCC&quot; la casella può essere modificata solo se non sono presenti 
+ strutture barcode.</p>
+<p style="margin-left: 40px; text-align: center;">.<img src="images/bean0100f_01.png" alt="" style=" border:none; width:100%; max-width:621px;" border="0" /></p>
+<p style="margin-left: 0px;">Nella parte inferiore della tabella deve essere 
+ indicata la “Struttura barcode” tramite la pressione del pulsante accanto 
+ alla descrizione si attiva la finestra di selezione degli AI gestiti da 
+ utilizzare per la composizione del barcode. Per aggiungere un AI al codice 
+ deve essere effettuato il doppio clic del mouse sul nome del campo; il 
+ pulsante Azzera consente di svuotare il codice composto.</p>
+<p style="margin-left: 0px; text-align: center;"><img src="images/bean0100f_02.png" alt="" style=" border:none; width:100%; max-width:467px;" border="0" /></p>
+<p style="margin-left: 0px;">Sono attivi alcuni controlli per segnalare 
+ gli AI che devono essere necessariamente utilizzati insieme o che non 
+ possono essere utilizzati insieme. In particolare:</p>
+<ul style="list-style: disc;">
+	<li class="p"><p style="margin-left: 0px;">gli AI 01-GTIN e 02-GTIN 
+	 contenute: sono entrambi utilizzati per l’identificazione del prodotto, 
+	 corrispondono al codice barcode del prodotto di OS1 e non possono 
+	 essere utilizzati insieme, lo 02 è utilizzato solo per etichette di 
+	 tipo SSCC;</p></li>
+	<li class="p"><p style="margin-left: 0px;">gli AI 10-Lotto, 15-Data 
+	 scadenza preferibile, 17-Data scadenza, 21-Serie: sono legati al lotto 
+	 del prodotto presente sul documento, i campi 10 e 21 corrispondono 
+	 al codice lotto di OS1 e i campi 15 e 17 alla data scadenza lotto;</p></li>
+	<li class="p"><p style="margin-left: 0px;">l’AI 241-Codice prodotto 
+	 cliente: corrisponde al codice prodotto del cliente intestatario del 
+	 documento, definito nelle codifiche in anagrafica prodotti;</p></li>
+	<li class="p"><p style="margin-left: 0px;">gli AI 3303-Peso lordo in 
+	 kg, 3312-Lunghezza in Mt, 3322-Larghezza in Mt, 3332-Altezza in Mt, 
+	 3363-Volume netto in Mt: sono legati alle misure indicate sul rigo 
+	 del documento;</p></li>
+	<li class="p"><p style="margin-left: 0px;">l’AI 37-Quantità prodotto: 
+	 indica la quantità del prodotto presente sul rigo del documento, può 
+	 essere utilizzato solo con etichette logistica;</p></li>
+	<li class="p"><p style="margin-left: 0px;">l’AI 400-Numero ordine cliente: 
+	 è riferito al campo “Vs. Ordine” presente sul documento;</p></li>
+	<li class="p"><p style="margin-left: 0px;">l’AI 422-Paese di origine: 
+	 è un campo fisso “ITA” che corrisponde al paese di origine e può essere 
+	 utilizzato solo insieme agli AI 01 e 02.</p></li>
+</ul>
+</body>
+</html>

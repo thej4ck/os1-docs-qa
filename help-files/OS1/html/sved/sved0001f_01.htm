@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 13, 2016 10:16:46 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Movimenti di vendita al dettaglio - Dati di testa</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.14.1.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > Vendita al dettaglio > Movimenti di vendita" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; 
+	 font-weight: bold;">Dati di testa</p>
+<p>La parte superiore della finestra contiene i dati di testa relativi 
+ al movimento.</p>
+<p style="text-align: center;"><img src="Images/sved0001f_02.png" alt="" style=" border:none; width:100%; max-width:756px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 text-align: justify; font-weight: normal; font-size: 10pt;">&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA E ORA: indica 
+ la data e l'ora in cui viene eseguita la registrazione del movimento. 
+ Viene proposta la data di sistema.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE: codice alfanumerico 
+ di 3 caratteri presente nella tabella <a href="sved0104f.htm">Causali 
+ Vendita</a> che definisce la tipologia di movimento in esame. La causale 
+ determina anche il valore di alcuni campi che vengono proposti in automatico. 
+ Sul campo sono attive le funzioni di ricerca (F9) ed accesso rapido (CTRL+W) 
+ sulla tabella stessa. Se prevista una causale predefinita in <a href="../bbas/bbas0101f_31.htm">configurazione 
+ vendita al dettaglio</a>, questa sarà proposta in automatico.</p>
+<p style="text-indent: -0.417in; margin-left: 40px;">NUMERO: campo numerico 
+ che contiene il numero progressivo del movimento. Viene completato automaticamente 
+ dal programma in base alla serie contenuta dalla causale. E’ modificabile 
+ dall’utente.</p>
+<p style="text-indent: -0.417in; margin-left: 40px;">NUMERO TESSERA: numero 
+ della tessera, eventualmente posseduta dal cliente. Sul campo sono attive 
+ le funzioni di ricerca (F9). Se indicata la tessera il campo successivo 
+ (cliente), viene completato automaticamente.</p>
+<p style="margin-left: 30pt; text-indent: -0.417in;"><img src="Images/sved0001f_05.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:5px; margin-bottom:0px; width:100%; max-width:278px;" align="right" border="0" />CLIENTE: 
+ codice alfanumerico di 8 caratteri, presente in anagrafica clienti, che 
+ individua il cliente da trattare. Sul campo, la cui compilazione è obbligatoria, 
+ sono attive le funzioni di ricerca (F9) ed accesso rapido alla tabella 
+ (CTRL+W) per eventuali nuovi inserimenti o variazioni. Il codice inserito 
+ in questo campo è quello del cliente a cui è intestato il movimento. Dopo 
+ aver selezionato il codice del cliente vengono visualizzati, senza possibilità 
+ di modifica, la ragione sociale e l’indirizzo dello stesso e riportati 
+ gli altri dati (divisa, listino, sconti) se presenti. Il cliente può essere 
+ privato oppure un normale cliente, la ricerca si attiene a quanto indicato 
+ nei dati preferenziali della causale per visualizzare l'elenco dei clienti. 
+ Se il cliente possiede una tessera il numero viene automaticamente inserito 
+ nel campo precedente (numero tessera); nel caso il cliente sia intestatario 
+ di più tessere si aprirà una finestra che, visualizzando le tessere attive 
+ per il cliente, consente di selezionare quale utilizzare. Se è presente 
+ il codice di cassa riportato in configurazione codici fissi ed il movimento 
+ non risulta contabilizzato è possibile modificare il codice cliente agendo 
+ sull'apposito pulsante posto a destra del codice.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CODICE DIVISA: codice 
+ alfanumerico di 3 caratteri, presente nella tabella Divise, per indicare 
+ la divisa stabilita per il movimento attivo. Viene proposta automaticamente 
+ la Divisa presente nell’anagrafica del cliente attivo, modificabile dall’utente. 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAMBIO: campo numerico, 
+ attivo solo in caso di divisa non appartenente all’area Euro, per inserire 
+ il cambio che consentirà la valorizzazione nella moneta di conto del movimento 
+ attivo. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SCONTI/MAGGIORAZIONI: 
+ campi numerici per inserire eventuali percentuali di sconto o maggiorazione 
+ che verranno applicate sul totale movimento. Vengono proposte automaticamente 
+ le percentuali presenti nell’anagrafica del cliente attivo, modificabili 
+ dall’utente. In numero di campi sconto/maggiorazione attivi dipende dal 
+ valore inserito in Configurazione base.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CODICE PAGAMENTO: 
+ codice alfanumerico di 3 caratteri, presente nella tabella Modalità di 
+ pagamento, per definire le condizioni di pagamento del movimento in esame. 
+ La compilazione del campo è obbligatoria. Viene automaticamente presentato 
+ il codice presente sulla causale o in anagrafica clienti. Sul campo sono 
+ attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LISTINO: eventuale 
+ codice alfanumerico di 3 caratteri, presente nella tabella Descrizione 
+ listini, per definire il listino prodotti da cui devono essere desunti 
+ i prezzi da applicare al movimento attivo. Se presente, viene proposto 
+ automaticamente il listino presente sulla causale o nell’anagrafica del 
+ cliente attivo, modificabile dall’utente. Sul campo sono attive le funzioni 
+ di ricerca (F9).</p>
+<p>&#160;</p>
+<p>Se è attiva la gestione delle vendite a privati UE (in base alla presenza 
+ delle date inizio adesione OSS/IOSS in configurazione) sarà presente il 
+ campo “Regime OSS”; il campo si compone di tre valori: “Nessuno”, “Regime 
+ OSS”, “Regime IOSS”; la presenza dei singoli regimi è condizionata alla 
+ presenza in configurazione delle rispettive date di inizio adesione. La 
+ proposta del campo viene così effettuata: cliente privato (flag privato 
+ in anagrafica clienti spuntato), la nazione del cliente o della destinazione 
+ se presente diversa da Italia (Iso IT) e membro UE (flag membro CEE spuntato); 
+ se attivi entrambi i regimi viene proposto sempre OSS. In base al tipo 
+ di regime ed alla nazione del cliente/destinazione, al tipo di regime 
+ ed al codice nomenclatura eventualmente presente sul prodotto viene ricercato 
+ sulla nuova tabella il codice Iva associato all’abituale codice Iva del 
+ prodotto; se con una specifica nomenclatura non viene trovata nessuna 
+ associazione viene effettuata un nuova ricerca con nomenclatura vuota. 
+ Al salvataggio dei documenti viene effettuato un controllo di coerenza 
+ dei codici Iva presenti sulle righe: devono essere tutti relativi alla 
+ stessa gestione del regime OSS, quindi tutti OSS, tutti IOSS o tutti senza 
+ gestione del regime; sono incluse nel controllo le aliquote Iva delle 
+ spese se è configurato che le spese non debbano essere ripartite e se 
+ valorizzate.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p style="margin-left: 0in;"><img src="../bbas/Images/b_LisTestaDoc.png" alt="" style=" border:none; margin-top:0px; margin-bottom:5px; margin-left:0px; margin-right:5px; width:100%; max-width:24px;" align="left" border="0" />Se 
+ attiva la gestione dei listini di rigo, configurabile tramite l’omonimo 
+ parametro in configurazione “Standard - ciclo attivo”, è presente, accanto 
+ al listino di testa, il pulsante mostrato a lato che può essere utilizzare 
+ per riassegnare il listino di testa (con relativo ricalcolo dell'importo) 
+ a tutte le righe. Il codice del listino è sempre presente sul rigo del 
+ documento, se non è gestito il listino di rigo viene assegnato comunque 
+ uguale al listino di testa al salvataggio finale del documento.</p>
+<p style="margin-left: 0in;"><img src="Images/sved_b_VisVoucherChiusura.png" alt="" style=" border:none; margin-top:0px; margin-bottom:5px; margin-left:0px; margin-right:5px; width:100%; max-width:23px;" align="left" border="0" />Se 
+ attiva la gestione dei voucher ed è configurata la gestione manuale è 
+ presente il pulsante a lato che attiva o disattiva prima della chiusura 
+ del movimento la ricerca di eventuali voucher presenti da utilizzare; 
+ se il pulsante è acceso (premuto) si attiva la gestione dei voucher, se 
+ il pulsante è spento (non premuto/Default) la gestione è disattiva; se 
+ viene inserito il barcode di un voucher il pulsante si disabilita e la 
+ gestione viene attivata automaticamente.</p>
+<p style="margin-left: 0in;"><img src="Images/SVed0001f_024.png" alt="" style=" border:none; margin-left:6px; margin-right:0px; margin-top:6px; margin-bottom:0px; width:100%; max-width:673px;" align="right" border="0" /><img src="Images/sved_b_agenti.png" alt="" style=" border:none; margin-top:0px; margin-bottom:5px; margin-left:0px; margin-right:5px; width:100%; max-width:24px;" align="left" border="0" />Se 
+ attiva la gestione delle provvigioni, è presente il pulsante sotto l'etichetta 
+ Cliente, che in base al tipo di gestione accede agli agenti ed alle percentuali 
+ di provvigione; il codice dell'agente addetto viene sempre visualizzato 
+ ma non è mai modificabile e la percentuale non è mai visualizzata; è presente 
+ un controllo sui movimenti di vendita per cui se l'agente dell'addetto 
+ è uguale all'agente 1 o 2 viene tolto e viene mandato un messaggio, ma 
+ si potrà continuare a registrare il movimento che sarà senza agente addetto.</p>
+</body>
+</html>

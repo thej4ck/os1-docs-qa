@@ -1,0 +1,369 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 12, 2016 12:20:38 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Manutenzione listini prodotti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.6.5.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Acquisti > Listini" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; font-weight: bold; 
+	 text-align: left;">Manutenzione listini prodotti</p>
+<p style="font-family: Verdana, Arial;"><span><span style="font-family: Verdana, Arial;">Il 
+ programma è necessario per l'inserimento e la successiva manutenzione 
+ di tutti i dati relativi ai listini prezzi dei prodotti, nelle varie unità 
+ di misura coerenti con i prodotti stessi.</span></span></p>
+<p style="font-family: Verdana, Arial;">La manutenzione si struttura in 
+ due finestre (linguette), una prima che si utilizza per l'indicazione 
+ del listino, della sua tipologia e la selezione, secondo criteri specifici, 
+ dei prodotti da inserire o modificare; una seconda finestra per la vera 
+ e propria definizione della validità e manutenzione dei prezzi del listino 
+ stesso.</p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial; font-weight: bold;">Selezione</p>
+<p style="font-family: Verdana, Arial; text-align: center;"><img src="Images/slis0001f_01.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LISTINO: indica il 
+ codice del listino per cui si vuole effettuare la manutenzione. L'inserimento 
+ del campo è obbligatorio. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="margin-left: 30pt; text-indent: -0.417in;">DIVISA: indica il 
+ codice della divisa per cui si vuole effettuare la manutenzione del listino 
+ richiesto. L'inserimento del campo è obbligatorio. Sul campo sono attive 
+ le funzioni di ricerca (F9). Nel caso in cui la combinazione listino-divisa 
+ non abbia alcun dato associato è possibile generare il listino con un 
+ metodo analogo all'<a href="#Importazione">Importazione dei prodotti</a> 
+ (vedi paragrafo successivo).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA RIFERIMENTO: 
+ definisce la data, tramite cui ricercare i prezzi all'interno del listino. 
+ Saranno disponibili per la manutenzione solo i prodotti le cui date di 
+ validità comprendono, come periodo, la data di riferimento.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LISTINO CORRENTE: 
+ indica di utilizzare il listino corrente, quello valido alla data di sistema 
+ (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA CAMBIO: definisce 
+ la data del cambio da utilizzare, al salvataggio finale del listino, per 
+ eventuali aggiornamenti di listini collegati in diversa divisa; viene 
+ proposta la data di sistema. Il cambio viene ricercato nella tabella cambi 
+ listini e se non presente alla data specificata sarà ricercato alla data 
+ più recente rispetto alla data specificata</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA PRODOTTO: eventuale 
+ codice dell'articolo, presente in anagrafica Prodotti, da cui si desidera 
+ iniziare la selezione. Confermando a vuoto, la selezione inizia con il 
+ primo prodotto valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A PRODOTTO: eventuale 
+ codice dell'articolo, presente in anagrafica Prodotti, con cui si desidera 
+ terminare la selezione. Confermando a vuoto, la selezione termina con 
+ l’ultimo valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">UNITà 
+ di misura</span>: codice relativo alla tabella unità di misura da utilizzare 
+ come filtro per la visualizzazione dei prezzi sul listino o la selezione 
+ degli articoli fuori listino; questo parametro è alternativo a &quot;Solo 
+ unità di misura primaria&quot;. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PRODOTTI FUORI LISTINO: 
+ definisce se includere nella manutenzione anche quei prodotti, nei limiti 
+ dei due campi precedenti, che non fanno ancora parte del listino (casella 
+ con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PRODOTTI OBSOLETI: 
+ definisce se includere nella manutenzione anche quei prodotti, nei limiti 
+ dei due campi precedenti, che risultano obsoleti (casella con segno di 
+ spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Solo 
+ unità di misura primaria</span>: se spuntato sarà applicato un filtro 
+ sulla selezione dei prodotti nel listino, oppure dei prodotti fuori listino, 
+ per includere solo i prodotti nella loro unità di misure primaria; questo 
+ parametro è alternativo a &quot;Unità di misura&quot;.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA INIZIO VALIDITÀ: 
+ utilizzata nel caso di spunta del campo precedente, definisce la data 
+ di inizio validità da inserire sui prodotti aggiunti al listino.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA FINE VALIDITÀ: 
+ utilizzata nel caso di spunta del campo precedente, definisce la data 
+ di fine validità da inserire in automatico sui prodotti aggiunti al listino.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CATEGORIA MERCEOLOGICA: 
+ eventuale codice della categoria merceologica, riferita ai prodotti, per 
+ cui effettuare la selezione.&#160;Sul campo sono attive le funzioni di 
+ ricerca (F9). Il campo viene controllato anche quando nel listino si inserisce 
+ un prodotto nuovo; il controllo non è bloccante.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CATEGORIA DI VENDITA: 
+ eventuale codice della categoria di vendita, riferita ai prodotti, per 
+ cui effettuare la selezione.&#160;Sul campo sono attive le funzioni di 
+ ricerca (F9). Il campo viene controllato anche quando nel listino si inserisce 
+ un prodotto nuovo; il controllo non è bloccante.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FORNITORE ABITUALE: 
+ eventuale codice del fornitore abituale, riferito ai prodotti, per cui 
+ effettuare la selezione.&#160;Sul campo sono attive le funzioni di ricerca 
+ (F9). Il campo viene controllato anche quando nel listino si inserisce 
+ un prodotto nuovo; il controllo non è bloccante.</p>
+<p>&#160;</p>
+<p style="font-family: Verdana, Arial; font-weight: bold;">Manutenzione</p>
+<p style="font-family: Verdana, Arial; font-weight: normal;">In questa 
+ sezione è possibile effettuare la manutenzione dei dati selezionati dal 
+ listino, inserire manualmente nuovi prodotti, o prodotti già presenti 
+ in altre unità di misure (sempre compatibili col prodotto stesso), variare 
+ il prezzo di prodotti esistenti e cancellarli. E' da notare che se il 
+ listino deriva da un altro cioè è collegato tramite le regole di aggiornamento 
+ (solo per listini di vendita), compare a destra in alto l'informazione 
+ &quot;Listino derivato&quot;, altrimenti viene visualizzato &quot;Listino 
+ manuale&quot;; per i listini derivati non è possibile effettuare l'importazione 
+ prodotti. Sulle righe sono presenti due pulsanti informativi relativi 
+ alla presenza del prodotto corrente in altri listini o in altri periodi.</p>
+<p style="font-family: Verdana, Arial; text-align: center;"><img src="Images/slis0001f_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PRODOTTO: codice dell'articolo, 
+ presente in anagrafica Prodotti, per cui modificare il prezzo del listino. 
+ Sul campo sono attive le funzioni di ricerca (F9) ed accesso rapido (CTRL+W).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">unità 
+ di misura</span>: codice dell'unità di misura, relativa a quelle previste 
+ per il prodotto, a cui fa riferimento il prezzo del listino. Sul campo 
+ sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">VALIDO DAL': definisce 
+ la data di inizio validità del prezzo per il prodotto, campo obbligatorio, 
+ non modificabile.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">AL: definisce la data 
+ di fine validità del prezzo per il prodotto. Se non specificata s'intende 
+ sempre valido a partire dalla data inizio validità; il campo non è modificabile.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PREZZO: prezzo relativo 
+ al prodotto nelle date di validità indicate.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SCONTI O MAGGIORAZIONI: 
+ campi, abilitati o meno in relazione al numero sconti previsto in configurazione, 
+ per inserire una percentuale di sconto o maggiorazione relativa al prodotto 
+ nelle date di validità indicate.</p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="margin-left: 0in;">Se attiva la gestione dei prezzi per variante 
+ in configurazione, è presente il campo Variante e l'omonimo bottone utilizzabili 
+ se il prodotto gestisce le varianti. In caso di variante vuota il bottone 
+ si attiva e se premuto visualizza le varianti del prodotto con la possibilità 
+ di selezionare quelle da includere nel listino, le varianti vengono incluse, 
+ se non già presenti, con le stesse caratteristiche del rigo di partenza, 
+ ma senza prezzo e senza sconti; alla registrazione saranno salvate solo 
+ quelle per cui sono stati inseriti prezzi o sconti.</p>
+<p style="margin-left: 0in;">&#160;</p>
+<p style="font-family: Verdana, Arial;"><span style="font-family: Verdana, Arial;"><img src="Images/slis0001f_08.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-bottom:0px; margin-top:5px; width:100%; max-width:209px;" align="right" border="0" />In questa fase, premendo il tasto destro del mouse compare 
+ un menù che consente di effettuare delle azioni riguardanti il listino 
+ attualmente in manutenzione. Tramite il menù è possibile aggiornare i 
+ prezzi dei prodotti, aggiornare gli sconti, aggiungere nuovi prodotti, 
+ terminare il listino oppure singoli prodotti ad una certa data (se non 
+ è derivato e non ha già una data di termine), prorogare il listino fino 
+ ad una certa data (se non è derivato ed ha già una data di termine), oppure 
+ eliminare completamente il listino; in caso di termine, proroga o eliminazione, 
+ dopo la richiesta di conferma per l'operazione su listino, viene richiesto 
+ se effettuare il salvataggio definitivo (come se fosse stato premuto il 
+ pulsante Salva nella toolbar).</span></p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial; font-weight: bold;"><span>Proroga 
+ listino al...</span></p>
+<p style="font-family: Verdana, Arial; text-align: center;"><img src="Images/slis0001f_09.png" alt="" style=" border:none; width:100%; max-width:248px;" border="0" /></p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial;">La finestra richiede la data fino 
+ a cui prorogare il listino, la data sarà assegnata a tutti gli elementi 
+ del listino; il salvataggio, previa doppia conferma, è definitivo.</p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial; font-weight: bold;"><span><span 
+	 style="font-family: Verdana, Arial; font-weight: bold;"><span>Termina 
+ listino al...</span></span></span></p>
+<p style="font-family: Verdana, Arial; text-align: center;"><img src="Images/slis0001f_07.png" alt="" style=" border:none; width:100%; max-width:248px;" border="0" /></p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial;">La finestra richiede la data a 
+ cui deve essere terminato il listino, la data sarà assegnata a tutti gli 
+ elementi del listino; il salvataggio, previa doppia conferma, è definitivo.</p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial; font-weight: bold;"><span style="font-family: Verdana, Arial; 
+	 font-weight: bold;">Termina prodotti al...</span></p>
+<p style="font-family: Verdana, Arial; text-align: center;"><img src="Images/DlgTerminaListinoProdotti.png" alt="" style=" border:none; width:100%; max-width:492px;" border="0" /></p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial;">La finestra richiede la data di 
+ termine e consente di selezionare i prodotti presenti nel listino, in 
+ basso a destra sono presenti i pulsanti per selezionare e deselezionare 
+ tutti i prodotti; la data sarà assegnata a tutti i prodotti selezionati 
+ del listino; il salvataggio, previa doppia conferma, è definitivo.</p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial; font-weight: bold;">Aggiornamento 
+ prezzi</p>
+<p style="font-family: Verdana, Arial; text-align: center;"><img src="Images/slis0001f_04.png" alt="" style=" border:none; width:100%; max-width:333px;" border="0" /></p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial;">La finestra di Aggiornamento richiede 
+ se effettuare un aggiornamento in percentuale oppure a valore ed la relativa 
+ percentuale o valore per aggiornare i prezzi. Il check box 'Non aggiornare 
+ prezzi modificati' definisce se l'aggiornamento deve riguardare anche 
+ i prodotti per cui è stato già modificato manualmente il prezzo.</p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial; font-weight: bold;"><span style="font-family: Verdana, Arial; 
+	 font-weight: bold;">Aggiornamento sconti</span></p>
+<p style="font-family: Verdana, Arial; text-align: center;"><img src="Images/slis0001f_05.png" alt="" style=" border:none; width:100%; max-width:375px;" border="0" /></p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial;">La finestra di Aggiornamento richiede 
+ se effettuare un aggiornamento in percentuale oppure a valore ed la relativa 
+ percentuale o valore per aggiornare gli sconti. <span style="text-transform: uppercase;">è</span> 
+ possibile specificare un eventuale valore di raffronto per sostituzioni 
+ mirate: ad esempio tutte le percentuali 5 diventano 7,5; è anche possibile 
+ indicare quali sconti aggiornare apponendo le apposite spunte sulle caselle 
+ presenti in basso.</p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial; font-weight: bold;"><a name="Importazione" 
+	 id="Importazione"></a>Importazione prodotti</p>
+<p style="font-family: Verdana, Arial;">La finestra di Importazione prodotti 
+ viene richiamata sia dal menù di manutenzione, sia in fase di selezione 
+ se il listino-divisa richiesto non contiene nessun elemento.</p>
+<p style="font-family: Verdana, Arial; text-align: center;"><img src="Images/slis0001f_06.png" alt="" style=" border:none; width:100%; max-width:566px;" border="0" /></p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial; text-indent: -0.417in; margin-left: 0.417in;">TIPO 
+ GENERAZIONE: definisce il metodo di generazione dei nuovi dati nel listino. 
+ Valori possibili: prezzo di vendita, costo di mercato, costo ultimo carico, 
+ prezzo medio di carico, da listino, da listino speciale; in base al criterio 
+ selezionato saranno attivi i criteri e le opzioni relative.</p>
+<p style="font-family: Verdana, Arial; text-indent: -0.417in; margin-left: 0.417in;">INCLUDI 
+ PRODOTTO SENZA PREZZO: attivo solo per le generazioni che non derivano 
+ da listini o prezzi speciali, consente di includere i prodotti che hanno 
+ un &#160;valore zero relativamente al prezzo selezionato come criterio 
+ di generazione (casella con segno di spunta).</p>
+<p style="font-family: Verdana, Arial; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="font-family: Verdana, Arial;">CLIENTE/FORNITORE: attivo solo 
+ per generazione da listino speciale; indica il tipo ed il codice del conto 
+ da cui effettuare la generazione. Sul campo sono attive le funzioni di 
+ ricerca (F9).</span></p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">LISTINO: attivo 
+ solo per generazione da listino; indica il codice del listino da cui si 
+ vuole effettuare la generazione. Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DIVISA: attivo 
+ solo per generazione da listino e da listino speciale; indica il codice 
+ della divisa da cui si vuole effettuare la generazione, per il listino 
+ richiesto. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DATA RIFERIMENTO: 
+ attivo solo per generazione da listino e da listino speciale; definisce 
+ la data, tramite cui ricercare i prezzi all'interno dell'eventuale listino 
+ di base. Saranno elaborati solo i prodotti le cui date di validità comprendono, 
+ come periodo, la data di riferimento.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">VALIDITÀ DAL: definisce 
+ la data di inizio validità da inserire sui prodotti aggiunti al listino.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">VALIDITÀ AL: definisce 
+ la data di fine validità da inserire in automatico sui prodotti aggiunti 
+ al listino.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DA PRODOTTO: eventuale 
+ codice dell'articolo, presente in anagrafica Prodotti, da cui si desidera 
+ iniziare la selezione. Confermando a vuoto, la selezione inizia con il 
+ primo prodotto valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">A PRODOTTO: eventuale 
+ codice dell'articolo, presente in anagrafica Prodotti, con cui si desidera 
+ terminare la selezione. Confermando a vuoto, la selezione termina con 
+ l’ultimo valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;"><span style="text-transform: uppercase;">UNITà 
+ di misura</span>: attivo solo per generazione da listino e da listino 
+ speciale; codice relativo alla tabella unità di misura da utilizzare come 
+ filtro per la selezione dei prezzi del listino di origine; questo parametro 
+ è alternativo a &quot;Solo unità di misura primaria&quot;. Sul campo sono 
+ attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;"><span style="text-transform: uppercase;">Solo 
+ unità di misura primaria</span>: attivo solo per generazione da listino 
+ e da listino speciale; se spuntato sarà applicato un filtro sulla selezione 
+ dei prodotti nel listino di origine per includere solo i prodotti nella 
+ loro unità di misure primaria; questo parametro è alternativo a &quot;Unità 
+ di misura&quot;.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">AGGIUNGI VARIANTI 
+ DEL PRODOTTO: la casella è visibile solo se attiva la gestione dei prezzi 
+ per variante in configurazione e abilitata solo se si seleziona la generazione 
+ da costo ultimo carico o prezzo medio di carico; in questi casi la ricerca 
+ del prezzo avviene esclusivamente per variante specifica, non viene utilizzato 
+ il prezzo del solo prodotto se non viene trovato nessun valore per la 
+ variante.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">CATEGORIA MERCEOLOGICA: 
+ eventuale codice della categoria merceologica, riferita ai prodotti, per 
+ cui effettuare la selezione.&#160;Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">CATEGORIA DI VENDITA: 
+ eventuale codice della categoria di vendita, riferita ai prodotti, per 
+ cui effettuare la selezione.&#160;Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FORNITORE ABITUALE: 
+ eventuale codice del fornitore abituale, riferito ai prodotti, per cui 
+ effettuare la selezione.&#160;Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA CAMBIO: attivo 
+ solo per generazione da listino e da listino speciale quando la divisa 
+ è diversa dalla divisa del listino di destinazione; definisce la data 
+ del cambio da utilizzare per la conversione del prezzo del listino origine; 
+ il cambio viene ricercato nella tabella cambi listini e se non presente 
+ alla data specificata sarà ricercato alla data più recente rispetto alla 
+ data specificata.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">TIPO OPERAZIONE: 
+ definisce un'eventuale operazione da compiere sul prezzo del prodotto; 
+ valori possibili: nessuna, divisione per valore costante, moltiplicazione 
+ per valore costante, percentuale di incremento/decremento, valore assoluto.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">VALORE: indica 
+ il valore con cui effettuare l'operazione richiesta; è alternativo alla 
+ percentuale.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">PERCENTUALE: indica 
+ la percentuale con cui effettuare l'operazione richiesta; è alternativa 
+ al valore.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">COPIA SCONTI: combo 
+ box per definire <span style="text-indent: -0.417in; margin-left: 0.417in;">se 
+ copiare anche gli sconti dal listino di origine o di destinazione. Valori 
+ possibili: Nessuna copia; Da listino origine; Da listino destinazione; 
+ Prezzi netti (questa opzione azzera gli sconti dopo averli applicati al 
+ prezzo ricalcolato).</span></p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">APPLICA IVA PRODOTTO: 
+ se spuntato applica al prezzo calcolato la percentuale di Iva relativa 
+ all'aliquota presente sull'anagrafica del prodotto trattato.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">TIPO ARROTONDAMENTO: 
+ definisce il metodo di arrotondamento per il calcolo del prezzo: matematico, 
+ per eccesso o per difetto. Viene proposto quello del listino-divisa selezionato.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">VALORE ARROTONDAMENTO: 
+ definisce il valore da utilizzare per effettuare l'arrotondamento dei 
+ prezzi. Viene proposto quello del listino-divisa selezionato.</p>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 25, 2015 9:43:30 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Analisi carichi risorse</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.5.0_13";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Versamenti" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; 
+	 font-weight: bold;">Analisi carichi risorse</p>
+<p>La funzione consente di ottenere, direttamente dai dati elaborati dal 
+ piano (quindi basati su calcoli a capacità infinita), la teorica occupazione 
+ delle risorse. In pratica gli ODL vengono trattati sulla risorsa indicata 
+ sull’ODL; in base al tempo di lavorazione ed in base al calendario viene 
+ determinata l’occupazione di ciascuna risorsa; in questa analisi sono 
+ ignorati i vincoli di fase (lo scopo dell’analisi è quello di dare un’idea 
+ di massima delle ore di impegno di ciascuna risorsa senza scendere nello 
+ specifico delle date di produzione).</p>
+<p>E' possibile indicare una singola risorsa o tutte, specificare un calendario 
+ (se vuoto viene utilizzato il calendario aziendale) e decidere di considerare 
+ nell'analisi anche gli ODL provvisori spuntando la relativa casella. Apponendo 
+ la spunta alla casella &quot;Includi tempo di setup&quot; saranno conteggiati 
+ nei tempi di lavorazione anche gli eventuali tempi di setup previsti dal 
+ ciclo.</p>
+<p>Nell’analisi se per gli ODP sono presenti più fasi (più ODL) questi 
+ sono considerati attivi fino a quando non viene rientrata completamente 
+ la fase mentre per l’ultima fase sono considerati anche i versamenti parziali.</p>
+<p style="text-align: center;"><img src="images/sprb0062f_01.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p>Effettuando la selezione vengono mostrati i risultati; nella griglia 
+ superiore compaiono i dati relativi alla singola risorsa con il tempo 
+ totale di occupazione, nella griglia di mezzo il dettaglio delle occupazioni 
+ giornaliere per singolo ODL e nella griglia in basso i riferimenti agli 
+ ordini/RDP collegati all'ODL. Il pulsante Stampa consente di stampare 
+ i dati presenti, spuntando la casella &quot;Stampa sintetica&quot; sarà 
+ stampata solo la parte relativa alla griglia superiore.</p>
+<p style="text-align: center;"><img src="images/sprb0062f_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+</body>
+</html>

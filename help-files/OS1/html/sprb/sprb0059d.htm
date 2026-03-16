@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 23, 2015 12:46:56 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Revisione ciclo ODP</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.11.9.3.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Servizi > Produzione > Piano di produzione" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; font-weight: bold; 
+	 text-align: left;">Revisione ciclo ODP</p>
+<p><img src="images/DlgRicercaODP.png" alt="" style=" border:none; margin-left:6px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:630px;" align="right" border="0" />La funzione consente di agire su uno specifico ODP 
+ al fine di aggiungere una o più fasi non previste dal ciclo sia prima, 
+ sia dopo fasi già esistenti consentendo di creare di fatto un ODP “personalizzato” 
+ senza modificare il ciclo standard.</p>
+<p>&#160;</p>
+<p>E' possibile selezionare un ODP tramite la finestra di ricerca utilizzando 
+ la funzione di zoom (F9) sul campo numero ODP.</p>
+<p>&#160;</p>
+<p>Nei parametri viene richiesta l'unità produttiva con proposta l'unità 
+ produttiva di default valida per l'utente connesso ad OS1; è possibile 
+ solo scegliere l'unità produttiva, se gestite in configurazione le unità 
+ produttive multiple; è possibile specificare un range di ODP e di date 
+ ODP; è presente poi una pagina relativa ai filtri dove è possibile inserire 
+ prodotto, variante e progetto se gestito, in modo da restringere di più 
+ il campo della ricerca. Premendo il pulsante Esegui vengono visualizzati 
+ nella griglia i dati relativi agli ODP trovati corrispondenti ai limiti 
+ ed ai filtri inseriti; gli ODP evasi, se presenti, saranno evidenziati 
+ dal colore grigio chiaro.</p>
+<p>&#160;</p>
+<p>Selezionando un ODP dalla finestra di ricerca oppure inserendo il numero 
+ nel relativo campo e premendo il pulsante di selezione sarà visualizzato 
+ lo stato dell'ODP ed i dati relativi; nella griglia saranno mostrati gli 
+ ODL relative alle fasi presenti, in blu quelle esterne; scorrendo le fasi 
+ i pulsanti in basso si accenderanno o meno in base alla possibilità di 
+ inserire o meno una nuova fase prima o dopo alla corrente. </p>
+<p>Il pulsante Trasforma si attiva solo per le fasi parzialmente evase 
+ e consente di sdoppiare la fase dando la possibilità di completarla in 
+ maniera opposta rispetto alla parte già evasa; se la fase è interna si 
+ completa come fase esterna oppure viceversa.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;">E' possibile aggiungere una fase prima della 
+ corrente solo se la corrente è pianificata o lanciata, è possibile inserire 
+ una fase dopo la corrente solo se la corrente è pianificata, lanciata 
+ oppure è l'ultima fase.</p>
+<p style="text-align: center;"><img src="images/sprb0059d_01.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p>Premendo uno dei due pulsanti viene aperta la finestra di inserimento 
+ nuova fase, dove saranno già inseriti in automatico i componenti relativi 
+ alla fase precedente, se presente.</p>
+<p style="text-align: center;"><img src="images/sprb0059d_02.png" alt="" style=" border:none; width:100%; max-width:762px;" border="0" /></p>
+<p>&#160;</p>
+<p>In questa finestra è necessario fornire tutte le informazioni relative 
+ alla nuova fase che può essere interna o esterna in base alla presenza 
+ della spunta sulla casella &quot;Fase esterna&quot;; è necessario inserire 
+ la risorsa associata ed i tempi di lavorazione/setup (per le fasi interne) 
+ oppure il fornitore ed il tempo di trasferimento in giorni (per le fasi 
+ esterne); è possibile inserire anche eventuali componenti aggiuntivi da 
+ utilizzare durante la nuova fase. <img src="images/DlgCalcTempi.png" alt="" style=" border:none; margin-right:0px; margin-top:0px; margin-left:5px; margin-bottom:5px; width:100%; max-width:308px;" align="right" border="0" />Per l'inserimento 
+ dei tempi di lavorazione e setup sono presenti i campi che è possibile 
+ inserire manualmente o tramite il pulsante <img src="images/b_tempi.png" alt="" style=" border:none; width:100%; max-width:20px;" border="0" /> che accede 
+ alla finestra di calcolo dei tempi da cui è possibile inserire un periodo 
+ di iniziale ed un periodo finale e premendo Calcola viene rapportato tutto 
+ in ore, minuti e secondi e riportato nei relativi campi sul movimento. 
+ Premendo il pulsante Salva viene generato il nuovo ODL e riportato nella 
+ finestra principale; non sarà possibile rimuovere una fase aggiunta se 
+ non annullando completamente la modifica all'ODP.</p>
+<p>&#160;</p>
+<p>Il pulsante Trasforma consente di sdoppiare una fase evasa parzialmente 
+ dando la possibilità di completarla in maniera opposta rispetto alla parte 
+ già evasa (avanzamento già fatto internamente da completare esternamente 
+ oppure viceversa). Il meccanismo, attivato dal bottone Trasforma, crea 
+ un ODL con la stessa fase e con la stessa sequenza dell’ODL originale 
+ e con quantità pari al residuo dell’ODL da trattare; in base alla fase 
+ di partenza vengono richiesti dati differenti, se la fase è interna viene 
+ richiesto fornitore e tempo di trasferimento, altrimenti risorsa e tempi 
+ di lavorazione.</p>
+<p style="text-align: center;"><img src="images/sprb0059d_03.png" alt="" style=" border:none; width:100%; max-width:762px;" border="0" /></p>
+<p style="text-align: center;"><img src="images/sprb0059d_04.png" alt="" style=" border:none; width:100%; max-width:762px;" border="0" /></p>
+<p>Dopo il salvataggio le fasi appaiono come nell'esempio; la fase di partenza 
+ viene saldata e la fase nuova viene pianificata.</p>
+<p style="text-align: center;"><img src="images/sprb0059d_05.png" alt="" style=" border:none; width:100%; max-width:940px;" border="0" /></p>
+<p>&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">Premendo il pulsante Salva 
+ presente nella <a href="../Ambiente/Ambiente_02.htm">Toolbar</a> o il 
+ tasto funzione F10, sarà effettuata la registrazione definitiva.</p>
+</body>
+</html>

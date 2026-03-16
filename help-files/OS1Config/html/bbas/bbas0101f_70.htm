@@ -1,0 +1,274 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 4, 2016 11:19:37 AM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Configurazione Produzione - OS1BMJob</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.1.1.6.0_7";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazione OS1 Enterprise > Generali > Configurazione moduli > Produzione" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h5>Configurazione Produzione - OS1BMJob</h5>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">Visualizza quantità ODL</span>: 
+ Se l’opzione è attiva vengono mostrate le quantità in ordine, versata 
+ ed a saldo relative all’ODL in esame quando si registra un evento su OS1BMJob.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">Disconnetti automaticamente dopo 
+ ogni operazione</span>: Se l’opzione è attiva dopo ogni registrazione 
+ di un evento su OS1BMJob, l’utente viene disconnesso automaticamente consentendo 
+ ad un altro operatore di utilizzare la procedura.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">Tolleranza tempo di inattività 
+ (minuti):</span> Definisce il tempo, in minuti, in cui un operatore può 
+ essere inattivo tra un evento ed un altro; superato il tempo di tolleranza 
+ viene richiesta obbligatoriamente la registrazione di un evento di pausa.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">Num. giorni ricerca ODL per rilavorazione:</span> 
+ Indicare il numero dei giorni, a partire dalla data odierna, utilizzati 
+ per determinare la data iniziale di ricerca degli ODL da selezionare per 
+ una rilavorazione tramite la finestra di ricerca.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">Num. giorni ricerca ODL per revisione</span>: 
+ Indicare il numero dei giorni, a partire dalla data odierna, utilizzati 
+ per determinare la data iniziale di ricerca degli ODL evasi da selezionare 
+ per una eventuale versamento aggiuntivo. Con il valore 0 saranno inclusi 
+ tutti gli ODL saldati, con il valore -1 saranno scartati tutti gli ODL 
+ saldati.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">Gestione causali fermi/scarti</span>: 
+ Se spuntato attiva la gestione delle causali relative alla motivazione 
+ dei fermi macchine e degli scarti; nella procedura OS1BMJob dovranno essere 
+ motivati, tramite apposite causali, i fermi macchina e gli scarti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">Assegnazione lotti solo su ultima 
+ fase</span>: Se la casella è spuntata i lotti potranno essere assegnati, 
+ da OS1BMJob, solo durante il versamento dell'ultima fase; se la casella 
+ non è spuntata i lotti potranno essere assegnati su ogni fase. Il valore 
+ del lotto sarà comunque proposto ricercandolo tra i versamenti della fase 
+ stessa o della precedente, oppure tra gli eventi della fase stessa o della 
+ precedente oppure dall'ODP.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">Considera quantità da eventi</span>: 
+ Considera come quantità versate anche quelle derivanti da eventi chiusi 
+ che non hanno generato ancora il versamento (casella con segno di spunta). 
+ L'opzione viene utilizzata nei movimenti bordo macchina back office, nei 
+ versamenti, nella suddivisione delle attività di schedulazione ed in OS1BMJob 
+ per calcolare la quantità versata totale.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">Tipo controllo quantità fase precedente</span>: 
+ Il campo viene utilizzato per definire il tipo di controllo sulle quantità 
+ versate in OS1BMJob se queste superano la quantità versata nella fase 
+ precedente. Valori possibili: nessun controllo, controllo non vincolante 
+ o controllo vincolante; se il controllo è impostato come non vincolante 
+ sarà effettuata una richiesta per proseguire nella registrazione, se il 
+ controllo è vincolante verrà segnalato un errore e non sarà possibile 
+ proseguire nella registrazione.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">Tipo controllo fase precedente 
+ in corso</span>: Il campo viene utilizzato per definire il tipo di controllo 
+ sulla fase precedente a quella per cui si avvia la produzione nel caso 
+ in cui sia solo avviata e nessun versamento sia stato mai eseguito. Se 
+ il controllo è impostato come non vincolante sarà effettuata una richiesta 
+ per proseguire nella registrazione, se il controllo è vincolante verrà 
+ segnalato un errore e non sarà possibile proseguire nella registrazione.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;"><span style="text-transform: uppercase;"><span 
+	 style="text-transform: uppercase;">G</span>estione componenti</span>: 
+ Se presente la spunta sarà possibile da OS1BMJob modificare, cancellare 
+ ed inserire i componenti al momento in cui viene registrata la chiusura 
+ degli eventi di produzione.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">Controllo validità componenti</span>: 
+ Il campo è operativo se è attiva la gestione dei componenti; se presente 
+ la spunta sarà comunque effettuato il controllo della validità dei componenti 
+ al salvataggio degli eventi anche se non è stata fatta nessuna modifica 
+ ai componenti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">Tipo controllo giacenza versamento</span>: 
+ Definisce il tipo di controllo della giacenza sul magazzino di scarico 
+ dei componenti in fase di generazione e gestione dei versamenti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">Gestione matricole</span>: Se presente 
+ la spunta sarà possibile da OS1BMJob gestire le matricole nel momento 
+ in cui viene registrata la chiusura degli eventi di produzione.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in; 
+	 line-height: 115%;"><span style="mso-ascii-theme-font: minor-latin; 
+								 mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; 
+								 mso-hansi-theme-font: minor-latin; mso-bidi-font-family: 'Times New Roman'; 
+								 mso-bidi-theme-font: minor-bidi; mso-ansi-language: IT; 
+								 mso-fareast-language: EN-US; mso-bidi-language: AR-SA; 
+								 text-transform: uppercase;">Integrazione 
+ EMachina attiva</span><span style="mso-ascii-theme-font: minor-latin; 
+							 mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; 
+							 mso-hansi-theme-font: minor-latin; mso-bidi-font-family: 'Times New Roman'; 
+							 mso-bidi-theme-font: minor-bidi; mso-ansi-language: IT; 
+							 mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">: 
+ </span><span style="mso-bidi-font-size: 11.0pt; mso-fareast-font-family: Calibri; 
+				 mso-fareast-theme-font: minor-latin; mso-bidi-font-family: 'Times New Roman'; 
+				 mso-bidi-theme-font: minor-bidi; mso-ansi-language: IT; 
+				 mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">Se 
+ presente la spunta è attiva la possibilità di collegare le risorse di 
+ produzione a delle macchine tramite EMachina.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in; 
+	 line-height: 115%;"><span style="mso-bidi-font-size: 11.0pt; mso-fareast-font-family: Calibri; 
+								 mso-fareast-theme-font: minor-latin; mso-bidi-font-family: 'Times New Roman'; 
+								 mso-bidi-theme-font: minor-bidi; mso-ansi-language: IT; 
+								 mso-fareast-language: EN-US; mso-bidi-language: AR-SA; 
+								 text-transform: uppercase;">N</span><span 
+	 style="text-transform: uppercase; mso-ascii-theme-font: minor-latin; 
+	 mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; 
+	 mso-hansi-theme-font: minor-latin; mso-bidi-font-family: 'Times New Roman'; 
+	 mso-bidi-theme-font: minor-bidi; mso-ansi-language: IT; mso-fareast-language: EN-US; 
+	 mso-bidi-language: AR-SA;">ome server OS1Maxima</span><span style="mso-ascii-theme-font: minor-latin; 
+	 mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; 
+	 mso-hansi-theme-font: minor-latin; mso-bidi-font-family: 'Times New Roman'; 
+	 mso-bidi-theme-font: minor-bidi; mso-ansi-language: IT; mso-fareast-language: EN-US; 
+	 mso-bidi-language: AR-SA;">: </span><span style="mso-bidi-font-size: 11.0pt; 
+												 mso-fareast-font-family: Calibri; 
+												 mso-fareast-theme-font: minor-latin; 
+												 mso-bidi-font-family: 'Times New Roman'; 
+												 mso-bidi-theme-font: minor-bidi; 
+												 mso-ansi-language: IT; 
+												 mso-fareast-language: EN-US; 
+												 mso-bidi-language: AR-SA;">Indicare 
+ il nome del PC su cui viene eseguito il servizio OS1Maxima.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in; 
+	 line-height: 115%;"><span style="mso-bidi-font-size: 11.0pt; mso-fareast-font-family: Calibri; 
+								 mso-fareast-theme-font: minor-latin; mso-bidi-font-family: 'Times New Roman'; 
+								 mso-bidi-theme-font: minor-bidi; mso-ansi-language: IT; 
+								 mso-fareast-language: EN-US; mso-bidi-language: AR-SA; 
+								 text-transform: uppercase;">P</span><span 
+	 style="mso-ascii-theme-font: minor-latin; mso-fareast-font-family: Calibri; 
+	 mso-fareast-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; 
+	 mso-bidi-font-family: 'Times New Roman'; mso-bidi-theme-font: minor-bidi; 
+	 mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; 
+	 text-transform: uppercase;">orta utilizzata da OS1Maxima</span><span 
+	 style="mso-ascii-theme-font: minor-latin; mso-fareast-font-family: Calibri; 
+	 mso-fareast-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; 
+	 mso-bidi-font-family: 'Times New Roman'; mso-bidi-theme-font: minor-bidi; 
+	 mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">: 
+ </span><span style="mso-bidi-font-size: 11.0pt; mso-fareast-font-family: Calibri; 
+				 mso-fareast-theme-font: minor-latin; mso-bidi-font-family: 'Times New Roman'; 
+				 mso-bidi-theme-font: minor-bidi; mso-ansi-language: IT; 
+				 mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">È 
+ il numero della porta TCP-IP del PC su cui viene eseguito il servizio 
+ OS1Maxima.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in; 
+	 line-height: 115%;"><span style="mso-bidi-font-size: 11.0pt; mso-fareast-font-family: Calibri; 
+								 mso-fareast-theme-font: minor-latin; mso-bidi-font-family: 'Times New Roman'; 
+								 mso-bidi-theme-font: minor-bidi; mso-ansi-language: IT; 
+								 mso-fareast-language: EN-US; mso-bidi-language: AR-SA; 
+								 text-transform: uppercase;">T</span><span 
+	 style="text-transform: uppercase; mso-ascii-theme-font: minor-latin; 
+	 mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; 
+	 mso-hansi-theme-font: minor-latin; mso-bidi-font-family: 'Times New Roman'; 
+	 mso-bidi-theme-font: minor-bidi; mso-ansi-language: IT; mso-fareast-language: EN-US; 
+	 mso-bidi-language: AR-SA;">empo di pausa automatica (minuti)</span><span 
+	 style="mso-ascii-theme-font: minor-latin; mso-fareast-font-family: Calibri; 
+	 mso-fareast-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; 
+	 mso-bidi-font-family: 'Times New Roman'; mso-bidi-theme-font: minor-bidi; 
+	 mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">: 
+ </span><span style="mso-bidi-font-size: 11.0pt; mso-fareast-font-family: Calibri; 
+				 mso-fareast-theme-font: minor-latin; mso-bidi-font-family: 'Times New Roman'; 
+				 mso-bidi-theme-font: minor-bidi; mso-ansi-language: IT; 
+				 mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">Indicare 
+ i minuti al di sotto dei quali gli eventi che arrivano da EMachina devono 
+ essere assegnati automaticamente con il codice evento pausa indicato nel 
+ campo successivo.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in; 
+	 line-height: 115%;"><span style="mso-bidi-font-size: 11.0pt; mso-fareast-font-family: Calibri; 
+								 mso-fareast-theme-font: minor-latin; mso-bidi-font-family: 'Times New Roman'; 
+								 mso-bidi-theme-font: minor-bidi; mso-ansi-language: IT; 
+								 mso-fareast-language: EN-US; mso-bidi-language: AR-SA; 
+								 text-transform: uppercase;">E</span><span 
+	 style="text-transform: uppercase; mso-ascii-theme-font: minor-latin; 
+	 mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; 
+	 mso-hansi-theme-font: minor-latin; mso-bidi-font-family: 'Times New Roman'; 
+	 mso-bidi-theme-font: minor-bidi; mso-ansi-language: IT; mso-fareast-language: EN-US; 
+	 mso-bidi-language: AR-SA;">vento pausa automatica</span><span style="mso-ascii-theme-font: minor-latin; 
+	 mso-fareast-font-family: Calibri; mso-fareast-theme-font: minor-latin; 
+	 mso-hansi-theme-font: minor-latin; mso-bidi-font-family: 'Times New Roman'; 
+	 mso-bidi-theme-font: minor-bidi; mso-ansi-language: IT; mso-fareast-language: EN-US; 
+	 mso-bidi-language: AR-SA;">: </span><span style="mso-bidi-font-size: 11.0pt; 
+												 mso-fareast-font-family: Calibri; 
+												 mso-fareast-theme-font: minor-latin; 
+												 mso-bidi-font-family: 'Times New Roman'; 
+												 mso-bidi-theme-font: minor-bidi; 
+												 mso-ansi-language: IT; 
+												 mso-fareast-language: EN-US; 
+												 mso-bidi-language: AR-SA;">È 
+ il codice dell'evento di pausa utilizzato per registrare gli eventi di 
+ pausa automatica relativi ai movimenti che arrivano da EMachina.</span></p>
+</body>
+</html>

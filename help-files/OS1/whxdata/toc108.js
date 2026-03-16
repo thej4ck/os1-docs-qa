@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc107.js\"  name=\"Categorie\"><item name=\"Introduzione\" url=\"html/ebas/ebas0102f.htm\" /><item name=\"Dati generali\" url=\"html/ebas/ebas0102f_01.htm\" /><item name=\"Immagine\" url=\"html/ebas/ebas0102f_02.htm\" /><item name=\"Articoli\" url=\"html/ebas/ebas0102f_03.htm\" /></data>";

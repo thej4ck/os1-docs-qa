@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_5038.htm"},{"type":"item","name":"Generazione liste di prelievo","url":"html/slpr/slpr0005f.htm"},{"type":"book","name":"Manutenzione liste di prelievo","key":"toc167"},{"type":"item","name":"Stampa liste di prelievo","url":"html/slpr/slpr0002d.htm"},{"type":"item","name":"Analisi liste di prelievo","url":"html/slpr/slpr0003f.htm"},{"type":"item","name":"Saldo liste di prelievo","url":"html/slpr/slpr0007f.htm"},{"type":"book","name":"Tabelle","key":"toc168"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

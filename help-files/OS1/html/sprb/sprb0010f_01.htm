@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="02 23, 2012 9:20:18 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Gestione MPS - Reintegri</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.3.1.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Piano di produzione > Gestione MPS" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-weight: bold; font-size: 12pt;">Reintegri</p>
+<p><img src="images/sprb0010f_1_01.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-bottom:5px; margin-right:5px; width:100%; max-width:78px;" align="left" border="0" />Questa funzionalità consente di generare RDP dall'analisi 
+ delle scorte eseguita sulla base dei criteri di selezione presenti nella 
+ sezione superiore della finestra; oltre i limiti di selezione è possibile 
+ specificare l'analisi dei prodotti con scorta, senza scorta ed includere 
+ gli articoli non movimentati spuntando le relative caselle. La pressione 
+ sul pulsante Elabora dà inizio all'elaborazione, gli articoli che risultano 
+ sottoscorta (in base al tipo di gestione scorte attivo) danno origine 
+ ad una proposta di RDP sul magazzino che risulta sottoscorta con data 
+ di produzione impostata come data odierna.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_1_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p><img src="images/sprb0010f_1_03.gif" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:144px;" align="right" border="0" />Le RDP proposte dal sistema 
+ possono essere selezionate/deselezionate, manualmente o tramite il menù 
+ del pulsante destro del mouse sulla griglia o tramite i tasti funzione, 
+ per essere confermate; premendo il pulsante Genera RDP saranno generate 
+ le RDP relative alle righe selezionate. Al momento della generazione eventuali 
+ RDP di reintegro già presenti che non hanno ancora generato ODP o che 
+ abbiano generato ODP provvisori saranno eliminate. La generazione delle 
+ RDP invalida il piano di produzione attuale che dovrà essere rigenerato.</p>
+<p>Le RDP derivanti da sottoscorta non vengono nettificate.</p>
+<p>La generazione delle RDP di reintegro scorta non è obbligatoria in quanto 
+ è possibile (spuntando l’opzione “Reintegro automatico scorta PF in generazione 
+ piano” presente in configurazione) reintegrare la scorta direttamente 
+ in fase di generazione del piano.</p>
+</body>
+</html>

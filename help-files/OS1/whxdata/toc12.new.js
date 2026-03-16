@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_1060.htm"},{"type":"item","name":"Manutenzione scadenze","url":"html/bpcf/bpcf0001f_c.htm"},{"type":"item","name":"Analisi estratto conto clienti","url":"html/bpcf/bpcf0002f_c.htm"},{"type":"item","name":"Stampa estratto conto clienti","url":"html/bpcf/bpcf0003d_c.htm"},{"type":"item","name":"Stampa scadenzario clienti","url":"html/bpcf/bpcf0004d_c.htm"},{"type":"item","name":"Solleciti clienti","url":"html/bpcf/bpcf0006d.htm"},{"type":"item","name":"Gestione interessi di mora","url":"html/bpcf/bpcf0014d_c.htm"},{"type":"item","name":"Situazione interessi di mora","url":"html/bpcf/bpcf0015d_c.htm"},{"type":"item","name":"Dettaglio scadenze da documenti","url":"html/bbas/DlgSelScadenze_V.htm"},{"type":"book","name":"Flussi finanziari","key":"toc13"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

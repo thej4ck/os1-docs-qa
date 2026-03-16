@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 22, 2010 12:13:14 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Generazione richieste di offerta a fornitori - Assegnazione condizioni</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function ehlp_showtip(current,e,text)
+{
+  if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape'))
+  {
+    document.tooltip.document.write("<layer bgColor='yellow' style='border:1px solid black;font-size:12px;'>"+ text + "</layer>");
+    document.tooltip.document.close();
+    document.tooltip.left=e.pageX+5;
+    document.tooltip.top=e.pageY+5;
+    document.tooltip.visibility="show";
+  }
+}
+function ehlp_hidetip()
+{
+  document.tooltip.visibility="hidden";
+}
+//]]>
+</script>
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.5.3.1.0_4";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Ordini fornitori > Richieste di offerta > Generazione richieste" /><script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function ehlp_showtip(current,e,text)
+{
+  if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape'))
+  {
+    document.tooltip.document.write("<layer bgColor='yellow' style='border:1px solid black;font-size:12px;'>"+ text + "</layer>");
+    document.tooltip.document.close();
+    document.tooltip.left=e.pageX+5;
+    document.tooltip.top=e.pageY+5;
+    document.tooltip.visibility="show";
+  }
+}
+function ehlp_hidetip()
+{
+  document.tooltip.visibility="hidden";
+}
+//]]>
+</script>
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, sans-serif; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 12pt;">Assegnazione condizioni</p>
+<p>Questa sezione è di fondamentale importanza per la creazione delle richieste 
+ di offerta, in quanto consente di specificare i fornitori e le condizioni 
+ da riportare sulla richiesta stessa; la gestione dei dati è completamente 
+ interattiva e comprende anche alcune funzionalità automatiche.</p>
+<p>La sezione appare divisa in tre parti: la griglia superiore che riporta 
+ i prodotti relativi ad ordini clienti, richieste di acquisto o riferimenti 
+ manuali risultanti dalle selezione precedenti; per ognuno nella griglia 
+ sottostante vengono generate tante righe quanti sono i fornitori associati 
+ in relazione al tipo di generazione scelta, con i fornitori abituali, 
+ gli ultimi movimentati o manuale, in quest'ultimo caso sarà selezionato 
+ un solo fornitore; il navigatore ed il pannello di input consentono la 
+ modifica e l'inserimento di nuovi fornitori a fronte di ogni rigo documento 
+ presente nella griglia in alto. Se presenti richieste di offerta già generate 
+ saranno riportate nella griglia centrale, visualizzate in grigio, non 
+ manutenibili al solo scopo informativo.</p>
+<p>Per ogni fornitore vengono determinati dalle anagrafiche il listino 
+ e la divisa, la quantità viene riportata dal documento di origine così 
+ com'è oppure rapportata al lotto di riordino in base alla selezione parametri, 
+ il prezzo e gli sconti vengono inseriti in relazione alla configurazione 
+ prezzi/sconti del ciclo passivo e la data di consegna calcolata in base 
+ alla consegna del documento di origine tenendo conto dei giorni di riordino.</p>
+<p style="text-align: center;"><img src="Images/soff0006f_06.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p>Tutti i dati ad eccezione del codice del fornitore sono modificabili, 
+ è possibile cancellare un fornitore oppure inserirne di nuovi. Se attiva 
+ la gestione del dettaglio quantità è presente il bottone dettaglio, a 
+ destra del campo, quantità tramite il quale sarà visualizzata la relativa 
+ finestra di <a href="../bbas/bbas0904f_ord.htm" title="Dettaglio lotti su ordini" onmouseover="if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape')) ehlp_showtip(this,event,'Dettaglio lotti su ordini');" onmouseout="if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape')) ehlp_hidetip();">dettaglio 
+ quantità</a>; l'attivazione della finestra avviene comunque in automatico 
+ al momento dell'accesso al campo quantità.</p>
+<p>Non è possibile inserire lo stesso fornitore più volte a fronte di un 
+ rigo documento.</p>
+<p>Quando si inserisce un nuovo fornitore è possibile farlo manualmente 
+ o con l'ausilio del pulsante <span style="font-style: italic;">Analisi 
+ ultimi acquisti</span> <img src="Images/soff_b_asspre.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:0px; width:100%; max-width:20px;" border="0" />che può 
+ essere utilizzato per modificare il prezzo di uno o più prodotti ed anche 
+ per assegnare i prodotti ad altri fornitori, in relazione agli ultimi 
+ acquisti fatti; premendo il pulsante compare la finestra seguente, dalla 
+ quale è possibile selezionare uno dei prezzi presenti da associare alla 
+ riga che si sta inserendo oppure a tutti i prodotti uguali a quello attivo; 
+ togliendo la spunta da Copia prezzi/sconti sarà possibile spostare il 
+ prodotto da un fornitore ad un altro, mantenendo le condizioni economiche 
+ esistenti. La pressione sul pulsante Salva effettuerà l'operazione. Il 
+ pulsante Ricerca, consente di specificare direttamente un fornitore, se 
+ dalla ricerca degli ultimi acquisti, non sarà trovato nessun dato.</p>
+<p style="text-align: center;"><img src="Images/soff0006f_07.png" alt="" style=" border:none; margin-right:0px; margin-top:0px; margin-bottom:0px; margin-left:0px; width:100%; max-width:709px;" border="0" /></p>
+<p>&#160;</p>
+<p><img src="Images/soff_b_sosfor.png" alt="" style=" border:none; margin-right:5px; width:100%; max-width:73px;" align="left" border="0" />Tramite il pulsante Sostituzione è possibile 
+ effettuare la sostituzione di un fornitore; si apre la finestra mostrata 
+ sotto nella quale inserire il codice del vecchio e del nuovo fornitore; 
+ la pressione del pulsante Esegui darà il via all'elaborazione che sostituirà 
+ tutte le occorrenze del vecchio fornitore con il nuovo, modificando di 
+ fatto anche le relative condizioni riguardanti quantità, prezzi, sconti 
+ e consegne..</p>
+<p style="text-align: center;"><img src="Images/soff0006f_08.png" alt="" style=" border:none; width:100%; max-width:552px;" border="0" /></p>
+<p>&#160;</p>
+<p>Al termine delle modifiche, tramite il bottone Avanti, oppure utilizzando 
+ il tasto funzione F10, si passa alla successiva fase di generazione; saranno 
+ elaborati i prodotti per cui sono presenti dei fornitori con quantità 
+ diversa da zero; è consentita la generazione delle richieste senza prezzo.</p>
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+ if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape'))
+  document.write("<div id='tooltip' class='WebHelpPopupMenu'></div>");
+//]]>
+</script><script type="text/javascript" language="JavaScript">
+//<![CDATA[
+ if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape'))
+  document.write("<div id='tooltip' class='WebHelpPopupMenu'></div>");
+//]]>
+</script>
+</body>
+</html>

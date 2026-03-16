@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 17, 2016 11:30:58 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Gestione matricole massiva</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.7.7.0_8";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Magazzino > Gestione matricole" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt; 
+	 text-align: left;">Gestione matricole massiva</p>
+<p><img src="Images/b_MatMassivo.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:79px;" align="left" border="0" />Nelle gestioni documenti/movimenti, 
+ in inserimento/variazione, ed in alcune procedure di elaborazione è presente 
+ il pulsante Matricole, tramite cui è possibile assegnare le matricole 
+ a tutte le righe/dettagli presenti sul documento/movimento evitando di 
+ dover accedere per singolo rigo/dettaglio; saranno elaborati i singoli 
+ prodotti che gestiscono le matricole se la data del documento non è antecedente 
+ alla data di inizio gestione specificata in configurazione; laddove è 
+ presente il tipo rigo, è necessario che siano gestiti il prodotto e la 
+ quantità, che la classe del rigo non sia di tipo annotazione e che non 
+ si tratti di un rigo di tipo recupero spese. Se il prodotto gestisce un 
+ dettaglio (variante, ubicazione o lotto) questi saranno visualizzati in 
+ maniera analitica nella finestra.</p>
+<p>&#160;</p>
+<p style="text-align: center;"><img src="Images/DlgMATAssegnazioneDoc_01.png" alt="" style=" border:none; width:100%; max-width:774px;" border="0" /></p>
+<p>&#160;</p>
+<p>La finestra presenta tre griglie: in alto le righe relative ai prodotti 
+ presenti sul documento/movimento già esplose negli eventuali dettagli 
+ presenti, le righe vengono visualizzate con sfondo in colore differente 
+ in base al numero di matricole assegnate e da assegnare.</p>
+<p style="text-align: center;"><img src="Images/DlgMATAssegnazioneDoc_02.PNG" alt="" style=" border:none; width:100%; max-width:775px;" border="0" /></p>
+<p>&#160;</p>
+<p>Per ogni rigo la griglia di mezzo riporta le matricole già assegnate, 
+ con il doppio click del mouse sulla riga si accede alla <a href="smat0101f.htm">manutenzione</a> 
+ della matricola.</p>
+<p style="text-align: center;"><img src="Images/DlgMATAssegnazioneDoc_03.png" alt="" style=" border:none; width:100%; max-width:776px;" border="0" /></p>
+<p>&#160;</p>
+<p>Per ogni rigo la griglia in basso riporta le matricole da assegnare, 
+ queste ultime proposte secondo lo schema previsto per l’<a href="DlgMATDocMatricole.htm">assegnazione 
+ da singolo rigo</a>.</p>
+<p style="text-align: center;"><img src="Images/DlgMATAssegnazioneDoc_04.png" alt="" style=" border:none; width:100%; max-width:776px;" border="0" /></p>
+<p>&#160;</p>
+<p><img src="Images/DlgMATAssegnazioneDoc_05.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:226px;" align="right" border="0" />I pulsanti e le funzionalità presenti 
+ sono le stesse presenti nella finestra di <a href="DlgMATDocMatricole.htm">assegnazione 
+ di rigo</a> fatta eccezione per i filtri di selezione e l’inserimento 
+ con barcode; nella griglia in basso per la selezione è disponibile anche 
+ il menù richiamabile con il tasto destro del mouse e relativi tasti funzione 
+ per la selezione delle matricole.</p>
+<p>Sarà possibile uscire dalla finestra anche se tutte le righe non risultano 
+ coperte da codici matricole assegnate o senza nessuna assegnazione; comunque 
+ viene mandato un messaggio per le righe che non risultano coperte.</p>
+</body>
+</html>

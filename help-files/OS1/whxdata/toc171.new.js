@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_5050.htm"},{"type":"item","name":"Controlli saldi prodotti","url":"html/bmag/bmag0013d.htm"},{"type":"item","name":"Rilevazione rimanenze","url":"html/bmag/bmag0015d.htm"},{"type":"item","name":"Stampa giornale","url":"html/bmag/bmag0016d.htm"},{"type":"item","name":"Stampa schede fiscali","url":"html/bmag/bmag0017d.htm"},{"type":"item","name":"Stampa registro partite","url":"html/bmag/bmag0018d.htm"},{"type":"item","name":"Contabilizzazione rimanenze","url":"html/bmag/bmag0029d.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

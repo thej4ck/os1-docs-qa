@@ -1,0 +1,216 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 17, 2016 12:38:45 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Elaborazione lancio</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.4.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Lancio in produzione" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-weight: bold; font-size: 12pt;">Elaborazione lancio</p>
+<p>La funzione di lancio in produzione determina l’effettivo avvio di un 
+ ODL (singola fase di produzione). In questa fase è possibile:</p>
+<ul style="list-style: disc;">
+	<li class="p" style="margin-left: -20px;"><p style="margin-top: 1.5pt; 
+												 margin-bottom: 1.5pt; 
+												 margin-left: 60px;">Modificare 
+	 i componenti da utilizzare</p></li>
+	<li class="p" style="margin-left: -20px;"><p style="margin-top: 1.5pt; 
+												 margin-bottom: 1.5pt; 
+												 margin-left: 60px;">Verificare 
+	 la disponibilità dei materiali</p></li>
+	<li class="p" style="margin-left: -20px;"><p style="margin-top: 1.5pt; 
+												 margin-bottom: 1.5pt; 
+												 margin-left: 60px;">Gestire 
+	 i buoni di prelievo</p></li>
+</ul>
+<p>E’ possibile vincolare o meno il lancio di un singolo ODL (di una fase 
+ successiva alla prima) al completamento della fase precedente ed è possibile 
+ vincolare il lancio di una fase alla disponibilità dei materiali necessari 
+ per la fase stessa agendo sugli appositi parametri di configurazione.</p>
+<p>Nei parametri oltre i normali limiti di selezione quali numero ODL, 
+ date di inizio, fine produzione, cliente, prodotto ecc. viene richiesta 
+ l'unità produttiva con proposta l'unità produttiva di default valida per 
+ l'utente connesso ad OS1; è possibile solo scegliere l'unità produttiva, 
+ se gestite in configurazione le unità produttive multiple. Se presente 
+ il modulo MRP II saranno richieste anche le date di schedulazione come 
+ filtro aggiuntivo alla selezione degli ODL oppure in alternativa è possibile 
+ spuntare la casella &quot;Seleziona tutti gli schedulati&quot; che includerà 
+ tutti gli ODL schedulati senza controllare nessuna data.</p>
+<p>La funzione di lancio consente anche di annullare una operazione di 
+ lancio erroneamente eseguita (a condizione che per l’ODL non siano stati 
+ effettuati versamenti) o che non sia stato generato il buono di prelievo; 
+ tramite la casella &quot;Tipo selezione ODL&quot; è possibile indicare:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Da 
+		 lanciare: seleziona gli ODL da lanciare, in questo caso la data 
+		 di lancio è obbligatoria e sarà memorizzata sugli ODL lanciati.</p></li>
+	</ul>
+	<ul style="list-style: disc;">
+		<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Lanciati: 
+		 seleziona gli ODL già lanciati, in questo caso la data di lancio 
+		 viene utilizzata come ulteriore filtro di selezione e può essere 
+		 lasciata vuota.</p></li>
+	</ul></li>
+</ol>
+<p><span style="text-transform: uppercase;">è</span> possibile agire opzionalmente 
+ anche sulle fasi esterne, spuntando la casella &quot;Visualizza fasi esterne&quot; 
+ consentendo successivamente alla selezione di:</p>
+<ul style="list-style: disc;">
+	<li class="p" style="margin-left: -20px;"><p style="margin-top: 1.5pt; 
+												 margin-bottom: 1.5pt; 
+												 margin-left: 60px;">Controllare 
+	 la disponibilità dei materiale necessari per la fase.</p></li>
+	<li class="p" style="margin-left: -20px;"><p style="margin-top: 1.5pt; 
+												 margin-bottom: 1.5pt; 
+												 margin-left: 60px;">Eseguire 
+	 la generazione dei DDT di trasferimento materiali per le fasi esterne 
+	 selezionate.</p></li>
+</ul>
+<p>Se prevista in configurazione la gestione dei buoni di prelievo sarà 
+ presente la casella di spunta relativa alla generazione automatica che 
+ , se spuntata, comporterà dopo una richiesta di conferma la <a href="sprb0042f.htm">generazione 
+ dei buoni di prelievo</a> in automatico.</p>
+<p style="text-align: center;"><img src="images/sprb0040f_01.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p>La pressione del pulsante Seleziona effettua l'elaborazione e mostra 
+ nella griglia le informazioni relative agli ODL selezionati in base ai 
+ parametri inseriti; le fasi esterne se richieste in visualizzazione vengono 
+ mostrate in blu, la colonna Inizio produzione se rossa indica che la data 
+ presente è antecedente alla data corrente; è possibile modificare l'ordinamento 
+ dei dati visualizzati cliccando sui cerchietti presenti nel box Ordinamento.</p>
+<p style="text-align: center;"><img src="images/sprb0040f_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p><img src="images/sprb0040f_03.gif" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:174px;" align="right" border="0" />Nella griglia è possibile 
+ selezionare o deselezionare i singoli ODL con il doppio clic del mouse 
+ o tramite il menù contestuale accessibile tramite il tasto destro del 
+ mouse; da questo menù è possibile anche selezionare o deselezionare tutti 
+ gli ODL ed accedere alla modifica dei componenti di un singolo ODL.</p>
+<p>La modifica dei componenti dell'ODL si effettua tramite la finestra 
+ mostrata sotto; vengono elencati tutti i componenti dell'ODL con le relative 
+ giacenze; la modifica riguarda tutti i componenti materia prima, non i 
+ semilavorati o il semilavorato alla fase; è possibile comunque inserire 
+ nuovi componenti anche di tipo semilavorato; è possibile modificare il 
+ dettaglio lotti/ubicazioni, non del componente alla fase, anche modificando 
+ le quantità originali, al salvataggio finale viene fatto un controllo 
+ di coerenza tra quantità del componente e quantità del dettaglio, se nel 
+ dettaglio si inseriscono quantità che differiscono dal componente è possibile 
+ aggiornare quest'ultimo con un bottone che è stato aggiunto al navigatore 
+ dei dettagli.</p>
+<p style="text-align: center;"><img src="images/sprb0040f_04.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-right:0px; margin-bottom:0px; width:100%; max-width:724px;" border="0" /></p>
+<p><img src="../smat/Images/b_MatMassivo.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-right:5px; margin-bottom:5px; width:100%; max-width:79px;" align="left" border="0" />Se attiva la 
+ gestione matricole sarà possibile, tramite il pulsante Matricole, accedere 
+ alla finestra di <a href="../smat/DlgMATAssegnazioneDoc.htm">gestione 
+ massiva</a>.</p>
+<p>&#160;</p>
+<p><img src="images/sprb0040f_05.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:83px;" align="left" border="0" />Una volta selezionati gli ODL è possibile effettuare 
+ il lancio premendo il pulsante Lancia che sarà acceso; se attivo in configurazione 
+ il controllo giacenza in fase di lancio non sarà possibile effettuare 
+ il lancio prima di aver premuto il pulsante Verifica; se non ci sono problemi 
+ di giacenze il pulsante Lancia si accenderà altrimenti sarà visualizzata 
+ la finestra sottostante. In questa finestra saranno visualizzati i problemi 
+ inerenti le giacenze, premendo Chiudi non sarà possibile effettuare il 
+ lancio e gli eventuali ODL selezionati che hanno causato gli errori saranno 
+ deselezionati in automatico; premendo Prosegui sarà comunque possibile 
+ procedere con il lancio ed il pulsante Lancia si accenderà.</p>
+<p style="text-align: center;"><img src="images/sprb0040f_08.png" alt="" style=" border:none; width:100%; max-width:625px;" border="0" /></p>
+<p>&#160;</p>
+<p><img src="images/sprb0040f_09.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-right:5px; margin-bottom:5px; width:100%; max-width:83px;" align="left" border="0" /><img src="images/sprb0040f_10.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-bottom:5px; margin-top:0px; width:100%; max-width:83px;" align="left" border="0" />Il 
+ pulsante Lancia/Annulla effettua l'effettiva registrazione delle operazioni 
+ di lancio o di annullamento del lancio relativamente agli ODL selezionati; 
+ se non c'è nessun ODL selezionato il pulsante risulta spento, altrimenti 
+ sarà acceso fatto salvo quanto specificato sopra in relazione al controllo 
+ giacenze. Al momento della registrazione effettiva del lancio vengono 
+ eseguite le seguenti operazioni:</p>
+<ul style="list-style: disc;">
+	<li class="p"><p style="margin-left: 80px; margin-top: 1.5pt; margin-bottom: 1.5pt;">Aggiornamento 
+	 dell’ODL con le modifiche manualmente apportate.</p></li>
+	<li class="p"><p style="margin-left: 80px; margin-top: 1.5pt; margin-bottom: 1.5pt;">Aggiornamento 
+	 dei componenti dell’ODL eventualmente modificati.</p></li>
+	<li class="p"><p style="margin-left: 80px; margin-top: 1.5pt; margin-bottom: 1.5pt;">Aggiornamento 
+	 dello stato dell’ODL (che diventa &quot;Lanciato&quot;); sull’ODL 
+	 viene riportata la data del lancio.</p></li>
+	<li class="p"><p style="margin-left: 80px; margin-top: 1.5pt; margin-bottom: 1.5pt;">Aggiornamento 
+	 dell’ordinato a produzione del composto e dell’impegnato da produzione 
+	 dei componenti che viene spostato dai magazzini associati all’unità 
+	 produttiva al magazzino WIP associato alla risorsa/reparto; se non 
+	 è presente un magazzino WIP a nessun livello (Risorsa/Reparto) l’ordinato 
+	 a produzione del composto e l’impegnato da produzione dei componenti 
+	 rimangono sui magazzini dell'unità produttiva.</p></li>
+	<li class="p"><p style="margin-left: 80px; margin-top: 1.5pt; margin-bottom: 1.5pt;"><span 
+	 style="margin-left: 80px; margin-top: 1.5pt; margin-bottom: 1.5pt;">Stampa 
+	 (su richiesta) dell’elenco dei componenti da trasferire sui magazzini 
+	 WIP degli ODL lanciati. Questa funzione è attiva solo se l’opzione 
+	 “Gestione buoni di prelievo” nella configurazione “Piano di produzione” 
+	 non è attiva e serve a dare un ausilio all’addetto di magazzino per 
+	 la successiva compilazione manuale del buono di prelievo. La stampa 
+	 può essere eseguita anche successivamente al salvataggio per gli ODL 
+	 lanciati (tramite il bottone “Fabbisogni”).</span></p></li>
+</ul>
+<p><img src="images/sprb0040f_06.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-right:5px; margin-bottom:5px; width:100%; max-width:91px;" align="left" border="0" />Se visualizzate e selezionate delle fasi esterne 
+ sarà attivo anche il pulsante DDT c/to lavoro; premendo questo pulsante 
+ saranno elaborati gli ODL relativi a fasi esterne selezionati e si accederà 
+ in automatico alla procedura di <a href="../sclv/sclv0014f.htm">Generazione 
+ DDT terzisti</a> direttamente nella pagina relativa alle giacenze con 
+ i componenti già selezionati per l'invio in relazione alla loro giacenza.</p>
+<p><img src="images/sprb0040f_07.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-right:5px; margin-bottom:5px; width:100%; max-width:83px;" align="left" border="0" />Se non sono gestiti i buoni di prelievo sarà presente 
+ il pulsante Fabbisogni attivo se si selezionano ODL già lanciati, consente 
+ di stampare l'elenco dei fabbisogni relativi agli ODL selezionati allo 
+ scopo di compilare manualmente o controllare il buono di prelievo.</p>
+</body>
+</html>

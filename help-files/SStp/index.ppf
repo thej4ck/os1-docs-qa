@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ppfml version="1.00" project="OS1SStp" type="4">
+ <windowlist>
+ </windowlist>
+ <contextmap>
+ </contextmap>
+ <topiclist defaulttopic="html\sstp\sstp0001f.htm">
+  <topic>html\about.htm
+  </topic>
+  <topic>html\sstp\sstpModSql.htm
+  </topic>
+  <topic>html\sstp\sstp0001f_006.htm
+  </topic>
+  <topic>html\sstp\sstp0001f_003.htm
+  </topic>
+  <topic>html\sstp\sstprun_tipo.htm
+  </topic>
+  <topic>html\sstp\sstp0001f_010.htm
+  </topic>
+  <topic>html\sstp\sstp0001f_007.htm
+  </topic>
+  <topic>html\sstp\sstp0001f_002.htm
+  </topic>
+  <topic>html\sstp\sstprun.htm
+  </topic>
+  <topic>html\sstp\sstp0001f_009.htm
+  </topic>
+  <topic>html\sstp\sstpesecuzione.htm
+  </topic>
+  <topic>html\sstp\sstp0001f_001.htm
+  </topic>
+  <topic>html\sstp\sstp0001f_012.htm
+  </topic>
+  <topic>html\sstp\sstp0001f_008.htm
+  </topic>
+  <topic>html\sstp\sstp0001f_005.htm
+  </topic>
+  <topic>html\sstp\sstp0001f.htm
+  </topic>
+  <topic>html\sstp\sstp0001f_011.htm
+  </topic>
+  <topic>html\sstp\sstp0002f.htm
+  </topic>
+  <topic>html\sstp\sstp0001f_004.htm
+  </topic>
+ </topiclist>
+ <projectincludes>
+ </projectincludes>
+ <filenamemap>
+  <filenameentry moniker="wh_languagetype">it_IT
+  </filenameentry>
+  <filenameentry moniker="startpage">index.htm
+  </filenameentry>
+  <filenameentry moniker="topicpage">index.htm
+  </filenameentry>
+  <filenameentry moniker="keywordinfo">SearchOptions.xml
+  </filenameentry>
+ </filenamemap>
+</ppfml>

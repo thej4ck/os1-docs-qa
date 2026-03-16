@@ -1,0 +1,165 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 3, 2016 10:28:24 AM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Configurazione parametri invio eMail/Fax</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.11.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazione OS1 Enterprise > Invio documenti email/fax" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h4><span style="font-weight: bold;">Configurazione parametri</span></h4>
+<p>Nel caso di invio a mezzo e-mail attraverso la configurazione è possibile 
+ definire se l’invio utilizzata la tecnologia MAPI oppure quella SMTP oppure 
+ tramite Outlook (OLE Automation). La tecnologia MAPI ha il vantaggio di 
+ archiviare i documenti all’interno del gestore di posta (Outlook) ma ha 
+ lo svantaggio di dover richiedere una conferma aggiuntiva per ciascuna 
+ e-mail da inviare. La tecnologia SMTP ha il vantaggio di essere assolutamente 
+ trasparente e rapida (nel senso che non viene richiesta nessuna conferma 
+ aggiuntiva) ma il messaggio non viene archiviato dal gestore di posta.</p>
+<p>Nel caso di invio a mezzo fax viene utilizzato il servizio Fax di Windows. 
+ A tale scopo è stata introdotta una nuova applicazione OSIFax (la cui 
+ installazione è presente nell’area Componenti client del presente CD) 
+ che si preoccupa di inviare i documenti generati da OS1 al servizio Fax 
+ di Windows.</p>
+<p>La tabella consente appunto di configurare i parametri di base relativi 
+ all'invio di documenti; la parametrizzazione è comunque modificabile per 
+ singolo utente di OS1 tramite il programma di configurazione Utenti presente 
+ nel relativo menù di OS1.</p>
+<p style="font-weight: bold;">NB: per utilizzare account di tipo SSL e/o 
+ TLS il campo “Utente SMTP&quot; deve essere codificato facendo seguire 
+ all’indirizzo di posta SMTP: SSL per protocollo SSL e TLS per protocollo 
+ TLS, come nell’esempio riportato di seguito:</p>
+<ul style="list-style: disc;">
+	<li class="p"><p style="font-weight: bold; margin-top: 0pt; margin-bottom: 0pt;">utente@gmail.com:SSL 
+	 nel caso si voglia utilizzare il protocollo SSL con port 465</p></li>
+	<li class="p"><p style="font-weight: bold; margin-top: 0pt; margin-bottom: 0pt;">utente@gmail.com:TLS 
+	 nel caso si voglia utilizzare il protocollo TLS con port 587</p></li>
+</ul>
+<p>&#160;</p>
+<p style="text-align: center;"><img src="images/bidm0101f_01.png" alt="" style=" border:none; width:100%; max-width:467px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: Left;">TIPO 
+ SERVIZIO: Indica il tipo di servizio email, valori ammessi:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+		<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+			<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+				<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+					<li style="list-style: none; display: inline;"><ul 
+							 style="list-style: disc;">
+						<li class="p"><p style="text-indent: -0.417in; 
+										 margin-left: 30pt; text-align: Left; 
+										 margin-top: 0pt; margin-bottom: 0pt;">Server 
+						 MAPI (utilizzo di un client di posta elettronica 
+						 per esempio OutLook)</p></li>
+						<li class="p"><p style="text-indent: -0.417in; 
+										 margin-left: 30pt; text-align: Left; 
+										 margin-top: 0pt; margin-bottom: 0pt;">Server 
+						 SMTP (utilizzo di un server SMTP)</p></li>
+						<li class="p"><p style="text-indent: -0.417in; 
+										 margin-left: 30pt; text-align: Left; 
+										 margin-top: 0pt; margin-bottom: 0pt;">Outlook 
+						 (OLE Automation)</p></li>
+					</ul></li>
+				</ol></li>
+			</ol></li>
+		</ol></li>
+	</ol></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: Left;">HOST 
+ SMTP: Definisce il nome dell'host per l’invio di email tramite SMTP. (Il 
+ campo è visibile solo se è gestito il servizio Server SMTP).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: Left;">PORT: 
+ Definisce il numero della porta per l’invio di email tramite SMTP (la 
+ porta di default per i server SMTP è la 25). (Il campo è visibile solo 
+ se è gestito il servizio Server SMTP).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: Left;">UTENTE 
+ SMTP: Definisce L'utente per l’invio di email tramite SMTP. (Il campo 
+ è visibile solo se è gestito il servizio Server SMTP).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: Left;">PASSWORD: 
+ Definisce la password per l’invio di email tramite SMTP. (Il campo è visibile 
+ solo se è gestito il servizio Server SMTP).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: Left;">MITTENTE 
+ DESCRITTIVO: Indica il nome del mittente.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: Left;">INDIRIZZO 
+ DI PARTENZA: Definisce l’indirizzo email dal quale vengono inviati i documenti.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: Left;">TEMPO 
+ ATTESA (MS.): Indicare il tempo di attesa (espresso in millisecondi) tra 
+ l'invio delle email.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: Left;">PERCORSO 
+ INVIO FAX: indicare il percorso di transizione in cui saranno memorizzati 
+ i files relativi ai documenti da inviare per fax.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: Left;">PERCORSO 
+ MEMORIZZAZIONE PDF: indicare il percorso di transizione in cui saranno 
+ memorizzati i files PDF relativi ai documenti da inviare.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: Left;">MODULO 
+ EMAIL DEFAULT: definisce la copia, relativa alle copie dei documenti, 
+ da utilizzare come modello per l'invio; valori ammessi: Destinatario, 
+ Mittente, Amministrativo.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: Left;">TESTO 
+ INVIO DEFAULT: indica il codice relativo alla tabella dei testi invio 
+ da utilizzare come default per l'invio dei documenti; sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: Left;">RICHIESTA 
+ CONFERMA LETTURA: se spuntata indica di inviare il messaggio con la richiesta 
+ di conferma di lettura da parte del destinatario.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: Left;">INDIRIZZO 
+ CC: Definisce l’indirizzo email al quale vengono inviati i documenti per 
+ conoscenza.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: Left;">INDIRIZZO 
+ CCN: Definisce l’indirizzo email al quale vengono inviati i documenti 
+ per conoscenza non visibile agli altri indirizzi.</p>
+</body>
+</html>

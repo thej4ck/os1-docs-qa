@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="02 18, 2013 4:01:15 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Analisi avanzamento (produzione)</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.5.0_9";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Versamenti" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-weight: bold; font-size: 12pt;">Analisi avanzamento (produzione)</p>
+<p>Attraverso questa analisi è possibile per gli operatori del reparto 
+ produzione ottenere informazioni sullo stato di avanzamento degli ODP 
+ e de singoli ODL.</p>
+<p>Nei parametri viene richiesta l'unità produttiva con proposta l'unità 
+ produttiva di default valida per l'utente connesso ad OS1; è possibile 
+ solo scegliere l'unità produttiva, se gestite in configurazione le unità 
+ produttive multiple; sono presenti vari criteri di selezione che consentono 
+ di selezionare un singolo ordine, un singolo ODP, un periodo di consegne, 
+ un reparto, una risorsa, un prodotto, un magazzino, un progetto se gestito 
+ e la possibilità di selezionare lo stato degli ODP tra Tutti, Pianificati, 
+ Lanciati, In corso, Evasi e Da evadere che comprende gli stati prima di 
+ Evaso; spuntando la casella &quot;Considera eventi&quot; si indica se 
+ devono essere considerati gli ODP/ODL in stato &quot;Lanciato&quot; come 
+ stato &quot;In corso&quot; se sono presenti eventi associati; spuntando 
+ la casella &quot;Includi ODP pianificati&quot;, attiva solo se si seleziona 
+ lo &quot;Stato ODP&quot; &quot;Tutti&quot; o &quot;Da evadere&quot;, saranno 
+ considerati anche gli ODP in stato Pianificato. Sono presenti anche due 
+ caselle di spunta &quot;Mostra reparto&quot; e &quot;Mostra risorsa&quot; 
+ che se spuntate modificano la visualizzazione della struttura del risultato. 
+ <span style="text-transform: uppercase;">è</span> possibile specificare 
+ l'opzione &quot;ODP/ODL in ritardo&quot; per filtrare gli ODP/ODL in ritardo 
+ (cioè ancora aperti e la cui data di prevista fine lavorazione è ormai 
+ trascorsa); è possibile impostare il parametro come filtro (solo ODP/ODL 
+ in ritardo) oppure come avviso (evidenzia ODP/ODL in ritardo).</p>
+<p style="text-align: center;"><img src="images/sprb0053f_P_01.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p>La pressione del pulsante Esegui avvia l'elaborazione e porta alla pagina 
+ Risultati.</p>
+<p style="text-align: center;"><img src="images/sprb0053f_P_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p>In questa pagina vengono mostrati i dati elaborati in base ai criteri 
+ di selezione suddivisi in due sezioni: la sezione a sinistra in formato 
+ grafico riporta gli ODP e gli ODL collegati, se spuntate le caselle &quot;Mostra 
+ Risorsa&quot; e &quot;Mostra reparto&quot; saranno presenti anche questi 
+ elementi ed i dati saranno raggruppati per reparto e/o risorsa. Questa 
+ sezione è &quot;navigabile&quot;, nel senso che spostandosi tra gli elementi 
+ la parte di destra visualizza gli stessi dati in formato esteso. Nella 
+ griglia in alto sono presenti i riferimenti agli ODP su cui compaiono 
+ le quantità da produrre e versate, inoltre viene riportata anche l'indicazione 
+ dello stato accompagnata da un indicatore colorato: grigio per i pianificati, 
+ bianco per i lanciati, giallo per quelli in corso e verde per quelli evasi. 
+ Per ogni ODP vengono visualizzati nella griglia sottostante i relativi 
+ ODL su cui compaiono le quantità da produrre e versate, inoltre viene 
+ riportata anche l'indicazione dello stato accompagnata da un indicatore 
+ colorato con stesso significato di quello presente sugli ODP, in più le 
+ fasi esterne vengono colorate in blu. Per ogni ODL vengono mostrati nelle 
+ due griglie sottostanti i componenti ognuno con i relativi utilizzi ed 
+ i versamenti con le relative quantità.</p>
+<p>Se attiva l'opzione &quot;ODP/ODL in ritardo&quot; sarà presente la 
+ colonna Data prevista fine produzione, per gli ODP e fine fase per gli 
+ ODL con un indicatore visivo per capire se il rigo risulta nei tempi (clessidra 
+ con pallino verde), alla scadenza (clessidra con triangolo giallo) oppure 
+ in ritardo (clessidra con pallino rosso).</p>
+<p style="text-align: center;"><img src="images/sprb0053f_P_04.png" alt="" style=" border:none; width:100%; max-width:715px;" border="0" /></p>
+<p><img src="images/sprb0053f_P_03.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:293px;" align="right" border="0" />Utilizzando i bottoni Anteprima o Stampa presenti 
+ nella <a href="../Ambiente/Ambiente_02.htm">toolbar</a> è possibile effettuare 
+ la stampa dei dati elaborati; prima di effettuare la stampa viene mostrata 
+ la finestra riportata a lato dove è possibile indicare, spuntando le relative 
+ caselle, se includere nella stampa anche i dati dei componenti e/o dei 
+ versamenti, oppure stampare solo i dati relativi ad ODP ed ODL.</p>
+</body>
+</html>

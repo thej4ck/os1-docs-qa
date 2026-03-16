@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Avviamento","url":"html/index/index_4020.htm"},{"type":"book","name":"Gestione Ddt","key":"toc130"},{"type":"item","name":"Stampa Ddt","url":"html/sacq/sacq0002d.htm"},{"type":"item","name":"Analisi Ddt","url":"html/sacq/sacq0003f.htm"},{"type":"item","name":"Lista Ddt","url":"html/sacq/sacq0004d.htm"},{"type":"item","name":"Registrazione costi","url":"html/sbas/sbas0007f_bf.htm"},{"type":"item","name":"Stampa etichette","url":"html/sacq/sacq0013d.htm"},{"type":"item","name":"Saldo Ddt","url":"html/sbas/sbas0019f_f.htm"},{"type":"item","name":"Evasione ordini","url":"html/sacq/sacq0001f_001.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

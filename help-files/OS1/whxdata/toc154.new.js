@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_5030.htm"},{"type":"item","name":"Analisi movimenti","url":"html/slot/slot0004d.htm"},{"type":"item","name":"Analisi giacenze","url":"html/slot/slot0003f.htm"},{"type":"item","name":"Stampa inventario","url":"html/slot/slot0005d.htm"},{"type":"item","name":"Analisi flussi lotti","url":"html/slot/slot0006d.htm"},{"type":"item","name":"Stampa registro lotti","url":"html/slot/slot0007d.htm"},{"type":"item","name":"Dettaglio quantità su documenti","url":"html/bbas/bbas0904f.htm#bc-1"},{"type":"item","name":"Dettaglio quantità su ordini/offerte","url":"html/bbas/bbas0904f_ord.htm#bc-1"},{"type":"item","name":"Dettaglio quantità in evasione ordini/offerte","url":"html/bbas/bbas0904f_eva.htm#bc-1"},{"type":"book","name":"Tabelle","key":"toc155"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc.js\"  name=\"Esecuzione statistica da menù\"><item name=\"Voci di menù\" url=\"html/sstp/sstprun.htm\" /><item name=\"Richiesta tipo esecuzione\" url=\"html/sstp/sstprun_tipo.htm\" /></data>";

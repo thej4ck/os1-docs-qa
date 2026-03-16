@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="04 10, 2003 5:15:22 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Causali autofatture</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.6.4.2.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Acquisti > Autofatture > Tabelle" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; font-weight: bold;">Causali autofatture</p>
+<p>Le causali autofatture vengono utilizzate al momento dell’emissione di una autofattura e determinano il tipo di documento da emettere. Le informazioni presenti in una causale di autofattura consentono di gestire correttamente l’imputazione in contabilità, l’eventuale attivazione del magazzino, ecc.</p>
+<p>&#160;</p>
+<p style="text-align: center;"><img src="Images/bbas0048f_01.png" alt="" style=" border:none; width:100%; max-width:605px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CODICE: codice alfanumerico di 3 caratteri, a libera scelta dell'utente, per individuare la causale attiva. Sul campo sono attive le funzioni di ricerca (F9) &#160;sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; font-family: Verdana, sans-serif;">OBSOLETO: flag attivabile dall’utente per inibire il possibile utilizzo dell’elemento di tabella in esame nelle successive transazioni.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE: campo alfanumerico di 30 caratteri per inserire la descrizione della causale attiva. Questa descrizione &#160;viene riportata anche nella stampa del documento stesso.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE ESTESA: campo alfanumerico di 60 caratteri per inserire la descrizione estesa della causale attiva ad uso interno dell’utente. Questa descrizione &#160;non viene stampata sui documenti ma viene visualizzata nelle viste.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO REGISTRO: list box per indicare il registro obbligatorio a cui verrà imputato il documento generato dalla causale attiva. Valori possibili: libro giornale, registro Iva acquisti, registro Iva acquisti in sospensione d'imposta.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-indent: -0.417in; margin-left: 30pt;">SERIE: identifica in numero di sezionale Iva a cui le fatture verranno attribuite in fase di contabilizzazione.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SCORPORO: Definisce se il documento è soggetto a scorporo dell'Iva dal totale del documento in fase di registrazione (casella con segno di spunta). In questo caso i prezzi inseriti nel documenti saranno al lordo di Iva.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO DOCUMENTO: list box per definire il tipo di documento generato dalla causale attiva. Valori possibili: autofattura, nota di debito, nota di credito.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">GENERAZIONE PARTITE: abilita, se presente la spunta, la generazione delle partite aperte fornitori da parte del documento generato dalla causale attiva.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE MAGAZZINO: codice alfanumerico di 3 caratteri, presente nella tabella Causali di magazzino, che individua i parametri del movimento di magazzino generato automaticamente dal documento attivo. L’informazione può essere omessa in caso di assenza della procedura Gestione magazzino oppure se non si intende generare automaticamente movimenti di magazzino. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE CONTABILE: codice alfanumerico di 3 caratteri, presente nella tabella Causali contabili, che definisce i parametri del movimento contabile generato dal documento attivo all’atto della contabilizzazione delle fatture. L’informazione può essere omessa in caso di assenza della procedura Contabilità. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CODICE IVA: eventuale codice alfanumerico di 3 caratteri, presente nella tabella Aliquote iva, che verrà forzato in tutti i righi del documento attivo in sostituzione dell’aliquota Iva presente in anagrafica prodotti. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NOTE: campo note a disposizione dell’utente.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO RIGO PREFERENZIALE: Indica il tipo rigo da proporre in fase di acquisizione della fattura.&#160;Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; font-family: Verdana, sans-serif;">TIPO REPORT: consente di specificare un tipo di report specifico per i documenti che saranno emessi utilizzando questa causale. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CONTO DI COSTO: eventuale codice alfanumerico di 8 caratteri, presente in piano dei conti, per definire il sottoconto contabile di costo a cui verrà addebitato l’imponibile della fattura o della nota di credito. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CENTRO DI COSTO: campo significativo solo in presenza del modulo Contabilità analitica opportunamente configurato. Può contenere un codice alfanumerico di 15 caratteri, per definire il centro di costo a cui verrà accreditato l’imponibile della fattura. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">VOCE DI COSTO: campo significativo solo in presenza del modulo Contabilità analitica opportunamente configurato. Può contenere un codice alfanumerico di 15 caratteri, per definire la voce di costo a cui verrà accreditato l’imponibile della fattura. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">COMMESSA: campo significativo solo in presenza del modulo Contabilità analitica opportunamente configurato. Può contenere un codice alfanumerico di 15 caratteri, per definire la commessa a cui verrà accreditato l’imponibile della fattura. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+</body>
+</html>

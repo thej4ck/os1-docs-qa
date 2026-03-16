@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_2035.htm"},{"type":"item","name":"Movimenti prestazioni","url":"html/spar/spar0004d.htm"},{"type":"item","name":"Generazione mov. da prestazioni ricorrenti","url":"html/spar/spar0010d.htm"},{"type":"item","name":"Analisi movimenti prestazioni","url":"html/spar/spar0005d.htm"},{"type":"item","name":"Lista movimenti prestazioni","url":"html/spar/spar0006d.htm"},{"type":"item","name":"Generazione documenti di addebito","url":"html/spar/spar0009d.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc13.js\"  name=\"Tabelle\"><item name=\"Introduzione\" url=\"html/index/index_10602090.htm\" /><item name=\"Definizione raggruppamenti\" url=\"html/bbas/bbas0175f.htm\" /></data>";

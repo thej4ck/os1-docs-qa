@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc149.js\"  name=\"Tabelle\"><item name=\"Introduzione\" url=\"html/index/index_502590.htm\" /><item name=\"Lavorazioni\" url=\"html/sdba/sdba0006f.htm\" /><item name=\"Gruppi costi\" url=\"html/sbas/sbas0216f.htm\" /><item name=\"Voci costi di produzione\" url=\"html/sbas/sbas0217f.htm\" /></data>";

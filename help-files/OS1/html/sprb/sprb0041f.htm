@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 17, 2016 12:35:37 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Manutenzione buoni di prelievo</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.4.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Lancio in produzione" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-weight: bold; font-size: 12pt;">Manutenzione buoni di prelievo</p>
+<p>I buoni di prelievo vengono utilizzati per gestire la fase di trasferimento 
+ dei materiali ai magazzini WIP; possono essere generati automaticamente 
+ oppure inseriti manualmente a seconda che il parametro “Gestione buoni 
+ di prelievo” presente nella configurazione “Piano di produzione” si gestito 
+ o meno. E’ possibile utilizzare i buoni di prelievo attraverso tre diverse 
+ modalità:</p>
+<ul style="list-style: disc;">
+	<li class="p"><p>BP generato contestualmente al lancio in produzione 
+	 (parametro “Gestione buoni di prelievo” attivo): per gli ODL pianificati 
+	 in fase di salvataggio del lancio in produzione vengono generati i 
+	 BP (uno per ogni risorsa); la generazione può tenere conto di eventuali 
+	 giacenze e/o disponibilità del magazzino della risorsa (tale controllo 
+	 viene attivato il base al parametro “Tipo controllo giacenza WIP” 
+	 presente nella configurazione “Piano di produzione”).</p></li>
+	<li class="p"><p>BP generato autonomamente (parametro “Gestione buoni 
+	 di prelievo” attivo): attraverso l’apposita funzione “Generazione 
+	 buoni” vengono selezionati gli ODL lanciati che non hanno generato 
+	 buono e vengono generati i BP (uno per risorsa); la generazione tiene 
+	 conto di eventuali giacenze e/o disponibilità del magazzino associato 
+	 alla risorsa (tale controllo viene attivato il base al parametro “Tipo 
+	 controllo giacenza WIP” presente nella configurazione “Piano di produzione”).</p></li>
+	<li class="p"><p>BP inserito manualmente (parametro “Gestione buoni 
+	 di prelievo” non attivo): la compilazione del BP viene fatta tramite 
+	 la funzione “Manutenzione buoni” in cui l’operatore può inserire manualmente 
+	 i materiali (e gli eventuali lotti se gestiti) da trasferire; è possibile, 
+	 tramite il bottone “Genera righe” far proporre le righe dei componenti 
+	 degli ODL lanciati nella data richiesta a video.</p></li>
+</ul>
+<p>&#160;</p>
+<p>Il buono di prelievo si compone di una testata dove è necessario inserire 
+ la data, la causale tramite cui sarà proposto il numero, la risorsa di 
+ destinazione da cui sarà dedotto anche il magazzino di destinazione che 
+ è un campo obbligatorio; per proporre il magazzino di destinazione viene 
+ letta la risorsa e se presente il magazzino WIP viene utilizzato, altrimenti 
+ viene utilizzato, sempre se presente, il magazzino WIP del reparto a cui 
+ la risorsa è associata ed in ultimo viene proposto il magazzino WIP di 
+ configurazione.</p>
+<p style="text-align: center;"><img src="images/sprb0041f_01.png" alt="" style=" border:none; width:100%; max-width:971px;" border="0" /></p>
+<p>&#160;</p>
+<p>Nel corpo del buono di prelievo vanno inseriti i prodotti oggetto del 
+ trasferimento con l'indicazione obbligatoria del magazzino di prelievo 
+ e della quantità; se il prodotto gestisce un dettaglio lotti o ubicazioni 
+ le quantità saranno imputabili nella parte sottostante il rigo dove deve 
+ essere indicato anche il lotto/ubicazione, la quantità del rigo sarà disabilitata.</p>
+<p>Al momento del salvataggio, premendo il pulsante Salva presente nella 
+ <a href="../Ambiente/Ambiente_02.htm">Toolbar</a> o il tasto funzione 
+ F10, sarà registrato il buono di prelievo, generati i movimenti di magazzino 
+ ed in fase di inserimento sarà richiesto se effettuare la stampa del buono 
+ di prelievo appena registrato.</p>
+<p>&#160;</p>
+<p><img src="images/sprb0041f_02.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:88px;" align="left" border="0" />Nella testata del documento è presente il pulsante 
+ Elenco ODL che consente di visualizzare in una finestra quali ODL hanno 
+ originato il buono di prelievo; il buono di prelievo generato dal lancio 
+ o dalla procedura di <a href="sprb0042f.htm">Generazione buoni di prelievo</a> 
+ non è modificabile.</p>
+<p style="text-align: center;"><img src="images/sprb0041f_03.png" alt="" style=" border:none; width:100%; max-width:980px;" border="0" /></p>
+<p>&#160;</p>
+<p><img src="images/sprb0041f_04.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:93px;" align="left" border="0" /><img src="images/sprb0041f_05.png" alt="" style=" border:none; margin-top:0px; margin-bottom:5px; margin-left:5px; margin-right:0px; width:100%; max-width:625px;" align="right" border="0" />Se 
+ non è attiva la gestione dei buoni di prelievo da configurazione, sarà 
+ presente nella testata del documento anche il pulsante Genera righe, attivo 
+ solo in inserimento di un nuovo buono di prelievo che non contenga già 
+ delle righe; il pulsante apre la finestra mostrata a lato che richiede 
+ la data del lancio, il numero ODP, il numero ODL e se gestito anche il 
+ progetto; sulla base dei limiti inseriti, la data del lancio è obbligatoria, 
+ vengono calcolati i fabbisogni dei lanci selezionati e generate le relative 
+ righe; se è attivo il controllo delle giacenze non vincolante durante 
+ la generazione delle righe saranno dati i messaggi qualora vi siano problemi 
+ con le giacenze, se è attivo il controllo vincolante non saranno generate 
+ le righe in caso di errore sulle giacenze del prodotto e sarà lasciata 
+ la quantità a zero nel caso di errore sulle giacenze di un eventuale dettaglio 
+ lotti/ubicazioni, ma comunque l'elaborazione non si interromperà. Terminata 
+ la generazione delle righe sarà compito dell'operatore effettuare il salvataggio 
+ dopo aver apportato eventuali modifiche o correzioni.</p>
+<p>&#160;</p>
+<p><img src="images/sprb_b_barcode.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:0px; width:100%; max-width:83px;" align="left" border="0" />Tramite il pulsante Barcode, se presente ad attivo 
+ il relativo modulo è possibile inserire nel documento <a href="../bbas/DlgRichiestaBC.htm">dati 
+ provenienti da lettori ottici</a>. Prima di effettuare la lettura dei 
+ barcode compare, se la configurazione lo prevede, la finestra di generazione 
+ da fabbisogni ODL per l'inserimento dei parametri di ricerca degli ODL 
+ e sei i barcode importati corrispondono ad articoli presenti sugli ODL 
+ relativa alla ricerca le righe generate vengono collegate agli ODL.</p>
+<table style="vertical-align: top;" cellspacing="0">
+	<col />
+	<col />
+	<tr style="vertical-align: top;">
+		<td style="padding-right: 10px; padding-left: 10px; vertical-align: center;"><p 
+			 style="text-align: center;"><img src="../smat/Images/b_MatRigo.png" alt="" style=" border:none; margin-top:0px; margin-right:0px; margin-left:0px; margin-bottom:0px; width:100%; max-width:25px;" border="0" /></p>
+		<p style="text-align: center;"><img src="../smat/Images/b_MatMassivo.png" alt="" style=" border:none; margin-left:0px; margin-right:0px; margin-top:0px; margin-bottom:0px; width:100%; max-width:79px;" border="0" /></p></td>
+		<td style="padding-right: 10px; padding-left: 10px;"><p>Se attiva 
+		 la gestione matricole sarà possibile accedere dal singolo rigo/dettaglio 
+		 alla <a href="../smat/DlgMATDocMatricole.htm">finestra delle matricole</a> 
+		 tramite il pulsante sul rigo o tramite il pulsante Matricole in 
+		 alto con cui si accede alla finestra di <a href="../smat/DlgMATAssegnazioneDoc.htm">gestione 
+		 massiva</a>.</p></td>
+	</tr>
+</table>
+<p>&#160;</p>
+</body>
+</html>

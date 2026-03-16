@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc223.js\"  name=\"Invio documenti e-mail/fax\"><item name=\"Introduzione\" url=\"html/index/index_8065.htm\" /><item name=\"Testi invio\" url=\"html/bidm/bidm0100f.htm\" /><item name=\"Utenti\" url=\"html/bidm/bidm0102f.htm\" /></data>";

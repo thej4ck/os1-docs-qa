@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 15, 2015 4:51:35 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Causali Ddt clienti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.19.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > Tabelle" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left;"><strong style="font-weight: bold;">Causali Ddt</strong></p>
+<p><strong style="font-weight: normal;">L</strong>e causali vengono utilizzate al momento dell’emissione di un Ddt di consegna e determinano il tipo di documento da emettere.</p>
+<p>Grazie alle diverse causali possono essere emessi Ddt di vendita che generano fatture, Ddt di uscita merce verso clienti o verso terzi che non generano fatture (visione, fine riparazione, ecc), Ddt di uscita merce verso fornitori che non generano fatture (reso su acquisto).</p>
+<p>Se è presente la procedura di Gestione Magazzino, nella causale può essere inserita la relativa causale di magazzino affinché l’emissione di un Ddt determini, senza ulteriori interventi da parte dell’operatore, una scrittura di prima nota di magazzino.</p>
+<p>E’ possibile gestire causali che movimentano trasferimenti di merci fra due magazzini della stessa azienda, ovvero fra l’azienda e lavoranti esterni.</p>
+<p>E’ possibile gestire causali che consentono di inserire documenti che genereranno fatture o note di credito solo a valore, agendo comunque sui movimenti di magazzino solo a valore. Ovviamente è opportuno assegnare a queste causali una “serie” di documenti diversa rispetto a quella utilizzata dalle causali che generano documenti di effettivo trasferimento merci.</p>
+<p>La finestra video di manutenzione Causali Ddt <span style="font-family: Verdana, sans-serif;">si articola su 5 pagine video, suddivise in due sezioni. La sezione superiore rimane invariata in tutte le pagine video e contiene le informazioni anagrafiche della causale stessa.</span></p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Linguetta dati generali</p>
+<p style="text-align: center;"><img src="Images/bbas0038f_01.png" alt="" style=" border:none; width:100%; max-width:657px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CODICE: codice alfanumerico di 3 caratteri, a libera scelta dell'utente, per individuare la causale attiva. Sul campo sono attive le funzioni di ricerca (F9) &#160;sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE: campo alfanumerico di 30 caratteri per inserire la descrizione della causale attiva. Questa descrizione &#160;viene stampata sui documenti se il programma di stampa lo prevede.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; font-family: Verdana, sans-serif;">OBSOLETO: flag attivabile dall’utente per inibire il possibile utilizzo dell’elemento di tabella in esame nelle successive transazioni.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: left;">DESCRIZIONE ESTESA: campo alfanumerico di 60 caratteri per inserire la descrizione estesa della causale attiva ad uso interno dell’utente. Questa descrizione &#160;non viene stampata sui documenti ma viene visualizzata nelle viste.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SERIE: campo numerico per inserire il numero di serie del documento. Ciascuna serie attiva una propria numerazione di documenti. E’ necessario, &#160;in &#160;fase &#160;di immissione del documento, per proporre automaticamente &#160;e correttamente il numero progressivo del documento acquisito dalla tabella protocolli.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NUMERO COPIE: Indicare il numero di copie da stampare, se zero saranno stampate le copie previste sull'anagrafica del cliente.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO ANAGRAFICA: definisce quale tipo di anagrafica verrà utilizzata dal documento. Valori possibili: clienti, fornitori, magazzini esterni.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE MAGAZZINO: codice alfanumerico di 3 caratteri, presente nella tabella Causali di magazzino, che individua i parametri del movimento di magazzino generato automaticamente dal documento attivo. L’informazione può essere omessa in caso di assenza della procedura Gestione magazzino oppure se non si intende generare automaticamente movimenti di magazzino. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO ORDINE: codice alfanumerico di 3 caratteri, presente nella tabella Tipologie ordini, che individua la tipologia di ordini che possono essere evasi tramite il documento attivo. L’informazione può essere omessa in caso di assenza della procedura Gestione ordini di vendita oppure se non si intende riservare il documento attivo all’evasione di una specifica tipologia di ordini. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA DOCUMENTO: determina, se presente la spunta, la richiesta della stampa del documento direttamente al termine dell'inserimento. L’assenza della spunta è giustificata in caso di gestione dei Ddt dei depositari.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DOCUMENTO TRASFERIMENTO: abilita, se presente la spunta, l’emissione di documenti di trasferimento fra magazzini diversi della stessa azienda. La presenza della spunta rende significativo il campo successivo.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO DI DESTINAZIONE: codice numerico, presente nella tabella Magazzini, che individua il magazzino aziendale di destinazione della merce. Il valore è significativo se il flag precedente contiene la spunta; in questo caso, l’indicazione del magazzino di destinazione preferenziale nella causale non potrà essere modificata dall’utente all’atto dell’emissione del documento. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DOCUMENTO LAVORAZIONE: abilita, se presente la spunta, l’emissione di documenti di trasferimento verso lavoranti esterni.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">GESTIONE CONTO DEPOSITO: abilita, se presente la spunta, la gestione del conto deposito.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">GESTIONE CONTO LAVORO ATTIVO: consente di specificare per quale tipo di documento sarà utilizzata la causale:</p>
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 0in; margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">Ddt di vendita, il parametro è da utilizzare per i documenti che non interessano il conto lavoro attivo;</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 0in; margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">Ddt di uscita c/to lavoro attivo, parametro da utilizzare per le causali di documenti di restituzione di merce lavorata al cliente;</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 0in; margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">Ddt di ingresso c/to lavoro attivo, parametro da utilizzare per la registrazione di Ddt di merce inviata dal cliente.</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NOTE: campo note per descrizioni relative al documento attivo.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Linguetta dati fatturazione</p>
+<p>La linguetta contiene le informazioni relative ai criteri di generazione della successiva fattura.</p>
+<p style="text-align: center;"><img src="Images/bbas0038f_02.png" alt="" style=" border:none; width:100%; max-width:657px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">GENERAZIONE FATTURA: abilita, se presente la spunta, la successiva generazione di fatture a partire dal documento attivo.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ESCLUDI DA EVASIONE: Attivo per i Ddt non fatturabili; se spuntato definisce che i documenti con questa causale non dovranno comparire nell'elenco dei Ddt evadibili.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE FATTURA: eventuale codice alfanumerico di 3 caratteri, presente nella tabella Causali di fatturazione, che definisce il tipo di fattura che sarà generato dal documento attivo. Il valore è significativo se il flag precedente contiene la spunta. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SCORPORO: Definisce se il documento è soggetto a scorporo dell'Iva dal totale del documento in fase di registrazione (casella con segno di spunta). In questo caso i prezzi inseriti nel documenti saranno al lordo di Iva.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DETTAGLIO DOCUMENTI: determina, se presente la spunta, la stampa in fattura dei riferimenti ai numeri di Ddt.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE DOCUMENTO: campo alfanumerico di 8 caratteri per descrivere la dicitura che si vuole premettere ai numeri dei documenti in stampa fattura (es: DDT; Nota cr.)</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">COMPETENZA IVA: flag per indicare il tipo di competenza dei Ddt emessi ai fini della liquidazione Iva. Valori possibili: per data di consegna, per data fattura.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CONTO DI RICAVO: eventuale codice alfanumerico di 8 caratteri, presente nel piano dei conti, per definire il sottoconto contabile di ricavo a cui verrà accreditato l’imponibile della fattura generata dal documento attivo. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CENTRO DI RICAVO: campo significativo solo in presenza del modulo Contabilità analitica opportunamente configurato. Può contenere un codice alfanumerico di 15 caratteri, per definire il centro di ricavo a cui verrà accreditato l’imponibile della fattura generata dal documento attivo. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">VOCE DI RICAVO: campo significativo solo in presenza del modulo Contabilità analitica opportunamente configurato. Può contenere un codice alfanumerico di 15 caratteri, per definire la voce di ricavo a cui verrà accreditato l’imponibile della fattura generata dal documento attivo. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">COMMESSA: campo significativo solo in presenza del modulo Contabilità analitica opportunamente configurato. Può contenere un codice alfanumerico di 15 caratteri, per definire la commessa a cui verrà accreditato l’imponibile della fattura generata dal documento attivo. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Linguetta varie</p>
+<p style="text-align: center;"><img src="Images/bbas0038f_03.png" alt="" style=" border:none; width:100%; max-width:657px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO SPEDIZIONE: codice numerico, presente nella tabella Magazzini, che individua il magazzino aziendale di partenza della merce. L’informazione è facoltativa e viene utilizzata per definire il magazzino che verrà scaricato della merce. In caso di mancata compilazione di questo campo, l’informazione dovrà essere digitata al momento dell’emissione del documento. Anche in caso di presenza di valori in questo campo, tuttavia, l’indicazione del magazzino di destinazione preferenziale nella causale potrà essere modificata dall’utente all’atto dell’emissione del documento. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LUOGO DI PARTENZA: Definisce, se inserito, il luogo di partenza della merce. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PROVINCIA DI ORIGINE: campo significativo per il modulo Modelli Intra. Codice alfanumerico di 2 caratteri, presente nella tabella Province, che definisce la provincia di provenienza della merce. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">RETTIFICHE A VALORE: Definisce se il Ddt è relativo ad un movimento di rettifica a valore (casella con segno di spunta).</p>
+<p style="margin-left: 30pt; text-indent: -0.417in;">RICHIESTA DOCUMENTO: Definisce se in fase di emissione documento, deve essere richiesto anche il riferimento ad un documento non emesso direttamente.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA DESCRIZIONE ESTESA ARTICOLO: Indica se sul Ddt deve essere riportata e stampata la descrizione estesa dell'articolo (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO EVASIONE ORDINI: Definisce se un eventuale ordine dovrà essere evaso a quantità oppure a valore; valori possibili: a quantità, a valore.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CONTROLLO RISCHIO: Definisce se al termine della registrazione del Ddt deve essere attivato un ulteriore controllo (tenendo conto del documento in corso di inserimento) sulla situazione del cliente (casella con segno di spunta)</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO RIGO PREFERENZIALE: Indica il tipo rigo da proporre in fase di emissione del Ddt.&#160;Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE DDT ACQUISTO: Il campo è attivo per causali fornitori che non generano fatture; se presente la causale del Ddt di acquisto sarà generato al salvataggio del Ddt di vendita un Ddt di acquisto; il campo è attivo solo per Ddt relativi a fornitori che non generano fattura e la causale di acquisto non deve movimentare il magazzino.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PROPOSTA DATA/ORA PARTENZA: Se spuntato inserisce automaticamente la data e l'ora di inizio trasporto nei rispettivi campi del documento.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">APPLICA RIDUZIONE IVA MANODOPERA: Se spuntato indica che il documento creato con questa causale è soggetto ad IVA agevolata su ristrutturazioni.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO REPORT: consente di specificare un tipo di report specifico per i documenti che saranno emessi utilizzando questa causale. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA SU MODULO POLIVALENTE: definisce la stampa deve essere eseguita sul modulo di stampa polivalente (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">BOLLA ACCOMPAGNATORIA: se utilizzato il modulo polivalente, consente di specificare che si tratta di una bolla di accompagnamento fiscale XAB (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">GESTIONE PREZZO SU DDT: attivo solo su causali DDT che non generano fatture, definisce se sul DDT deve essere comunque richiesto il prezzo (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">VARIAZIONE PREZZI LISTINO: definisce se dai documenti emessi con questa causale è consentito modificare i prezzi di listino in base a quanto definito sull'anagrafica dell'intestatario (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA RIEPILOGO NOMENCLATURA: Consente di stampare, in coda al documento, un riepilogo pesi/colli per nomenclatura combinata; è possibile non stampare il riepilogo, stamparlo solo per le nomenclature relative a beni, solo per le nomenclature relative a servizi o sempre.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO CARICO TENTATA VENDITA: Il campo è presente se attivo il modulo di tentata vendita e può assumere i valori: Nessuno, documento di carico fiscale oppure documento di carico integrativo.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Linguetta magazzini</p>
+<p>La linguetta consente di elencare i magazzini di partenza o di destinazione che possono essere interessati dalla causale attiva, allo scopo di diminuire le possibilità di selezione magazzini in sede di emissione documento.</p>
+<p>La sua compilazione è pertanto significativa solo se l’azienda effettua consegne da diversi magazzini.</p>
+<p style="text-align: center;"><img src="Images/bbas0038f_04.png" alt="" style=" border:none; width:100%; max-width:657px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO: codice numerico, presente nella tabella Magazzini, che individua il magazzino di possibile utilizzo con la causale attiva. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Linguetta Causali di magazzino</p>
+<p style="font-weight: bold;"><span style="font-weight: normal;">La finestra permette di associare al singolo tipo rigo una specifica causale di magazzino, diversa dalla causale di magazzino principale.</span></p>
+<p style="text-align: center;"><img src="Images/bbas0038f_05.png" alt="" style=" border:none; width:100%; max-width:657px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO RIGO: Indica il tipo rigo da associare alla causale.&#160;Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE MAGAZZINO: codice alfanumerico di 3 caratteri, presente nella tabella Causali di magazzino, che individua i parametri del movimento di magazzino generato automaticamente dal documento attivo per il tipo rigo richiesto. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+</body>
+</html>

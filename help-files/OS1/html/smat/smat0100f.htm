@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 13, 2016 5:01:12 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Classi matricole</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.7.7.1.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Magazzino > Gestione matricole > Tabelle" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt;">Classi 
+ matricole</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in;">La classe 
+ della matricola definisce la tipologia di creazione del codice della matricola 
+ stessa; viene associata all’articolo tramite l’<a href="../bbas/bbas0055f_03.htm">anagrafica 
+ articoli</a>. Dalla procedure di manutenzione è possibile effettuare la 
+ stampa delle classi utilizzando i tasti funzione della <a href="../Ambiente/Ambiente_02.htm">toolbar</a>.</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in;">&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: center;"><img src="Images/smat0100f_01.png" alt="" style=" border:none; width:100%; max-width:529px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in;">Per ogni 
+ classe è presente un codice, una descrizione, la tipologia di creazione, 
+ il valore di incremento relativo all’eventuale progressivo da applicare 
+ per ogni codice generato e la casella “Matricole univoche” che è visibile 
+ e attiva se in configurazione è selezionata l'univocità per classe ed 
+ indica, se presente la spunta, che la classe prevede solo matricole univoche, 
+ altrimenti l’univocità sarà per prodotto.</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in;">Se la tipologia 
+ di creazione è manuale la matricola dovrà obbligatoriamente essere imputata 
+ dall’utente, se è automatica il codice matricola sarà generato in automatico 
+ in base alla struttura del codice definita sulla classe stessa. La modalità 
+ mista consente l’inserimento manuale del codice ed anche la generazione 
+ automatica utilizzando il tasto funzione F11.</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in;">La struttura 
+ del codice matricola, obbligatoria per le classi automatiche, può essere 
+ composta da una serie di valori così riepilogati:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; 
+						 margin-bottom: 0px;"><span style="font-weight: bold;">Nessuno</span>: 
+		 da utilizzare per inserire delle parti fisse nel codice della 
+		 matricola tramite il campo Valore.</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; 
+						 margin-bottom: 0px;"><span style="font-weight: bold;">Esercizio</span>: 
+		 utilizza l'esercizio attuale al momento della creazione.</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; 
+						 margin-bottom: 0px;"><span style="font-weight: bold;">Anno</span>: 
+		 calcolato in base alla data di sistema al momento della creazione.</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; 
+						 margin-bottom: 0px;"><span style="font-weight: bold;">Semestre</span>: 
+		 calcolato in base alla data di sistema al momento della creazione.</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; 
+						 margin-bottom: 0px;"><span style="font-weight: bold;">Quadrimestre</span>: 
+		 calcolato in base alla data di sistema al momento della creazione.</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; 
+						 margin-bottom: 0px;"><span style="font-weight: bold;">Trimestre</span>: 
+		 calcolato in base alla data di sistema al momento della creazione.</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; 
+						 margin-bottom: 0px;"><span style="font-weight: bold;">Mese</span>: 
+		 calcolato in base alla data di sistema al momento della creazione.</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; 
+						 margin-bottom: 0px;"><span style="font-weight: bold;">Settimana</span>: 
+		 calcolato in base alla data di sistema al momento della creazione.</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; 
+						 margin-bottom: 0px;"><span style="font-weight: bold;">Giorno 
+		 dell'anno</span>: calcolato in base alla data di sistema al momento 
+		 della creazione.</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; 
+						 margin-bottom: 0px;"><span style="font-weight: bold;">Giorno 
+		 del mese</span>: calcolato in base alla data di sistema al momento 
+		 della creazione.</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; 
+						 margin-bottom: 0px;"><span style="font-weight: bold;">Progressivo</span>: 
+		 utilizza un progressivo univoco all'interno della combinazione 
+		 classe/prodotto in base al tipo di univocità della matricola; 
+		 il valore viene memorizzato nella tabella protocolli (deve essere 
+		 l’ultimo campo del codice). Il campo valore indica il valore da 
+		 cui iniziare la numerazione.</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; 
+						 margin-bottom: 0px;"><span style="font-weight: bold;">Progressivo 
+		 periodico</span>: utilizza un progressivo calcolato in base alla 
+		 combinazione dei valori impiegati per la formazione del codice 
+		 (deve essere l’ultimo campo del codice). Il campo valore indica 
+		 il valore da cui iniziare la numerazione. Il valore è attivo solo 
+		 in caso di gestione matricole “univoche aziendali”.</p></li>
+	</ul></li>
+</ol>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">&#160;</p>
+<p style="margin-left: 0in; margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">&#160;</p>
+<p>&#160;</p>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="02 8, 2013 7:04:28 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Importazione listini</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.7.0_12";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > Listini" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-size: 12pt; font-weight: bold; text-align: left;"><strong><span 
+	 style="font-weight: bold;">Importazione listini</span></strong></p>
+<p>Il programma consente di importare listini esterni, precedentemente 
+ configurati.</p>
+<p>La maschera si compone di due sezioni: Parametri e Risultati. La sezione 
+ Parametri consente di definire i criteri di generazione.</p>
+<p style="text-align: center;"><img src="Images/slis0010d_01.png" alt="" style=" border:none; width:100%; max-width:697px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO IMPORTAZIONE: 
+ indicare la tipologia di importazione, definita con l'apposita procedura, 
+ da utilizzare per l'importazione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FORNITORE: codice 
+ del fornitore relativo al listino che si sta importando, campo obbligatorio. 
+ <span style="font-family: Verdana, Arial;">Sul campo sono attive le funzioni 
+ di ricerca (F9).</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CONTRATTO: eventuale 
+ codice del contratto da aggiornare. <span style="font-family: Verdana, Arial;">Sul 
+ campo sono attive le funzioni di ricerca (F9).</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TRATTAMENTO ARTICOLI: 
+ I valori possibili sono:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+		<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+			<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+				<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+					<li><p style="margin-left: 0in; margin-top: 2pt; margin-bottom: 2pt;">Non 
+					 inserire articoli nuovi: non sarà effettuato alcun 
+					 inserimento di nuovi prodotti.</p></li>
+					<li><p style="margin-left: 0in; margin-top: 2pt; margin-bottom: 2pt;">Inserimento 
+					 articoli nuovi: saranno inseriti i nuovi prodotti 
+					 presenti nel file di importazione.</p></li>
+					<li><p style="margin-left: 0in; margin-top: 2pt; margin-bottom: 2pt;">Lettura 
+					 codice fornitore: se già presente una codifica di 
+					 tipo fornitore per il prodotto e il file di importazione 
+					 riporta tale codice, sarà possibile leggere il codice 
+					 fornitore (DsCodProdotto) presente in ArticoliCliFor 
+					 ed importare il listino costi.</p></li>
+					<li><p style="margin-left: 0in; margin-top: 2pt; margin-bottom: 2pt;">Lettura 
+					 codice fornitore (no blocco): stesso comportamento 
+					 del &quot;Lettura codice fornitore&quot;. Si differenzia 
+					 nell'ipotesi che nel file siano presenti righe di 
+					 importazione di prodotti o codifiche non presenti 
+					 in archivio. Con questa opzione la procedura non si 
+					 bloccherà e tale record non sarà trattato.</p></li>
+				</ul></li>
+			</ol></li>
+		</ol></li>
+	</ol></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO AGGIORNAMENTO 
+ ARTICOLI: definisce quali dati aggiornare relativamente ai prodotti: nessuno, 
+ prezzo, dati anagrafici, prezzo e dati anagrafici.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA SU INVENTARIO: 
+ utilizzato per essere memorizzato su nuovi prodotti. Definisce se il prodotto 
+ può essere stampato sull'inventario (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LISTINO (1-5): codici 
+ dei listini da aggiornare/generare, in relazione a come definita l'importazione. 
+ <span style="font-family: Verdana, Arial;">Sul campo sono attive le funzioni 
+ di ricerca (F9).</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DIVISA (1-5): codici 
+ delle divise da combinare ai codici listino. <span style="font-family: Verdana, Arial;">Sul 
+ campo sono attive le funzioni di ricerca (F9).</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PREZZI IVA COMPRESA: 
+ definisce se il prezzo presente sul file di importazione è comprensivo 
+ di Iva (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">RICALCOLO CODICE IVA: 
+ definisce se effettuare il ricalcolo dell'Iva (casella con segno di spunta). 
+ Da utilizzare se sul file di importazione è presente un'aliquota Iva che 
+ non corrisponde ai codici Iva di OS1.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">IVA 
+ aliquota minima</span>: Indicare il codice Iva per l'aliquota minima. 
+ Da utilizzare se sul file di importazione è presente un'aliquota Iva che 
+ non corrisponde ai codici Iva di OS1. <span style="font-family: Verdana, Arial;">Sul 
+ campo sono attive le funzioni di ricerca (F9).</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">IVA 
+ aliquota ridotta</span>: Indicare il codice Iva per l'aliquota ridotta. 
+ Da utilizzare se sul file di importazione è presente un'aliquota Iva che 
+ non corrisponde ai codici Iva di OS1. <span style="font-family: Verdana, Arial;">Sul 
+ campo sono attive le funzioni di ricerca (F9).</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">IVA 
+ aliquota ordinaria</span>: Indicare il codice Iva per l'aliquota ordinaria. 
+ Da utilizzare se sul file di importazione è presente un'aliquota Iva che 
+ non corrisponde ai codici Iva di OS1. <span style="font-family: Verdana, Arial;">Sul 
+ campo sono attive le funzioni di ricerca (F9).</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-transform: uppercase;"><span 
+	 style="text-transform: none;">AGGIORNA LISTINI CON PREZZO INVARIATO: 
+ se spuntato saranno comunque scritti tutti i listini importati anche se 
+ già presenti e con stesso prezzo.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO CODICE: identifica 
+ il tipo di codice a barre eventualmente presente sul file di importazione.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DATA INIZIO VALIDITÀ: 
+ definisce la data di inizio validità da inserire sui dati generati, se 
+ non già presente sul file di importazione.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DATA FINE VALIDITÀ: 
+ definisce la data di fine validità da inserire in automatico sui dati 
+ generati, se non già presente sul file di importazione.</p>
+<p>&#160;</p>
+<p>La pressione del pulsante Esegui, dopo la conferma all'operazione, richiede 
+ di selezionare il file da cui effettuare l'importazione ed inizia l'elaborazione.</p>
+<p>Al termine delle operazioni nella sezione Risultati saranno visualizzati 
+ i dati importati e, nel riquadro in basso, gli eventuali errori occorsi.</p>
+<p style="text-align: center;"><img src="Images/slis0010d_02.png" alt="" style=" border:none; width:100%; max-width:697px;" border="0" /></p>
+<p style="margin-left: 0px;"><img src="Images/slis_b_risult.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:5px; margin-bottom:5px; width:100%; max-width:83px;" align="left" border="0" /> Tramite il pulsante 
+ Risultato è possibile stampare un report relativo a quanto visualizzato.</p>
+</body>
+</html>

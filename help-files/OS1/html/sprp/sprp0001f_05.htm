@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 25, 2015 10:43:15 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Schedulazione attività - Verifica</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.9.1.0_6";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Schedulazione > Schedulazione" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-weight: bold; font-size: 12pt;">Verifica</p>
+<p><img src="images/sprp0001f_5_01.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-bottom:5px; margin-right:5px; width:100%; max-width:78px;" align="left" border="0" />Attraverso questa funzione è possibile eseguire la 
+ verifica del rispetto dei tempi e della sostenibilità dei componenti; 
+ il mancato rispetto dei vincoli non impedisce comunque il salvataggio 
+ della schedulazione.</p>
+<p>Al termine della verifica, che si esegue automaticamente appena premuto 
+ il pulsante, gli indicatori evidenziano le segnalazioni:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+		<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+			<li class="p"><p>Ritardi di produzione: le attività sono in 
+			 ritardo, l’inizio dell’attività è stata schedulata in una 
+			 data successiva a quella prevista dal piano per l’ODL.</p></li>
+			<li class="p"><p>Attività non schedulate: l’attività non è 
+			 stata schedulata in quanto non è stata trovata una risorsa 
+			 disponibile sia nell’orizzonte di schedulazione, che nell’orizzonte 
+			 successivo.</p></li>
+			<li class="p"><p>Fabbisogni non sufficienti: sono presenti 
+			 fabbisogni mancanti in relazione alle attività schedulate.</p></li>
+		</ul></li>
+	</ol></li>
+</ol>
+<p>Nel riquadro in basso possono comparire eventuali messaggi di errore; 
+ le pagine visualizzate sono relative alle segnalazioni presenti e potrebbero 
+ non essere tutte visibili.</p>
+<p style="text-align: center;"><img src="images/sprp0001f_5_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p style="text-align: left;">&#160;</p>
+<p>La pagina Ritardi di produzione è visibile se sono stati riscontrate 
+ attività schedulate in ritardo rispetto alla data di inizio lavorazione 
+ prevista sul relativo ODL. I dati visualizzati possono essere esportati, 
+ tramite il clic destro del mouse sulla griglia, oppure stampati tramite 
+ il pulsante Stampa.</p>
+<p style="text-align: center;"><img src="images/sprp0001f_5_03.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p style="text-align: left;">&#160;</p>
+<p>La pagina Attività non schedulate è visibile se sono stati riscontrate 
+ attività per cui non è stato possibile trovare una risorsa disponibile 
+ sia nell’orizzonte di schedulazione, che nell’orizzonte successivo; oppure 
+ perchè risorse non schedulabili relativi a fasi per cui non è stato specificato 
+ un tempo di attraversamento. I dati visualizzati possono essere esportati, 
+ tramite il clic destro del mouse sulla griglia, oppure stampati tramite 
+ il pulsante Stampa.</p>
+<p style="text-align: center;"><img src="images/sprp0001f_5_04.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p style="text-align: center;">&#160;</p>
+<p>La pagina Fabbisogni è sempre visibile e riporta i fabbisogni relativi 
+ alle attività schedulate; in basso sono presenti due caselle di spunta, 
+ una per visualizzare solo i fabbisogni non coperti e l'altra per visualizzare 
+ solo gli eventuali semilavorati presenti che sono comunque evidenziati 
+ per distinguerli dalle materie prime. I dati visualizzati possono essere 
+ esportati, tramite il clic destro del mouse sulla griglia, oppure stampati 
+ tramite il pulsante Stampa.</p>
+<p style="text-align: center;"><img src="images/sprp0001f_5_05.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>Tramite il tasto destro del mouse sulla griglia dei fabbisogni è possibile 
+ richiamare l'analisi disponibilità del prodotto su cui siamo posizionati. 
+ Spuntando la casella &quot;Visualizza dettaglio ODL&quot; compare una 
+ sezione in basso che mostra i dati degli ODL a cui il fabbisogno si riferisce.</p>
+<p style="text-align: center;"><img src="images/sprp0001f_5_06.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p style="text-align: center;">&#160;</p>
+<p>La pagina ODL in pianificazione è visibile se sono presenti nell'elaborazione 
+ della schedulazione ODL provvisori che, al momento del salvataggio della 
+ schedulazione, saranno pianificati. I dati visualizzati possono essere 
+ esportati, tramite il clic destro del mouse sulla griglia, oppure stampati 
+ tramite il pulsante Stampa.</p>
+<p style="text-align: center;"><img src="images/sprp0001f_5_07.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+</body>
+</html>

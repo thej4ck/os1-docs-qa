@@ -1,0 +1,239 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 9, 2015 11:33:10 AM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Configurazione esterna lettori barcode</title>
+<link rel="StyleSheet" href="../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "..";
+gCommonRootRelPath = "..";
+gTopicId = "2.0_1";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazioni esterne" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../ehlpdhtm.js"></script>
+
+<h2>Configurazione esterna lettori barcode</h2>
+<p>Per configurare un lettore barcode è necessario creare nella cartella 
+ <span style="font-weight: bold;">Custom</span> una cartella <span style="font-weight: bold;">Barcode</span> 
+ e copiare dalla cartella <span style="font-weight: bold;">Modelli\Barcode</span> 
+ il file relativo al lettore barcode utilizzato.</p>
+<p>Il file copiato deve essere rinominato con nome macchina seguito dal 
+ suffisso '_BCODE' e deve avere estensione cfg. Ad esempio: <span style="font-weight: bold;">MIOPC_BCODE.cfg</span></p>
+<p>Attualmente sono gestiti i seguenti lettori barcode:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+		<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+			<li class="p"><p>DataLogic Formula 734</p></li>
+			<li class="p"><p>DataLogic MemorX3</p></li>
+			<li class="p"><p>Meteor ECO 486</p></li>
+			<li class="p"><p>Meteor Sirio2000</p></li>
+			<li class="p"><p>Meteor Lion Zigbee</p></li>
+			<li class="p"><p>Denso BHT-8000</p></li>
+		</ul></li>
+	</ol></li>
+</ol>
+<p>&#160;</p>
+<p style="font-weight: bold;">Struttura dei file di configurazione</p>
+<p style="font-weight: bold;"><span style="font-weight: normal;">Ogni file 
+ ha parametri specifici e contiene anche delle righe di commento, precedute 
+ dal carattere '</span>;<span style="font-weight: normal;">' che spiegano 
+ come effettuare gli eventuali settaggi.</span></p>
+<p style="font-weight: normal;">&#160;</p>
+<p style="font-weight: bold;">DataLogic Formula 734</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">[Config]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">;DataLogic - Formula 734 
+ Laser</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">Port=COM1 <span style="font-style: italic; 
+	 font-weight: bold;">[</span><span style="font-weight: bold; font-style: italic;">Porta 
+ di comunicazione da utilizzare]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">Parametri=baud=9600 parity=M 
+ data=7 stop=1 <span style="font-style: italic; font-weight: bold;">[Settaggio 
+ della porta]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">Modulo=OS1BC_DLG <span 
+	 style="font-style: italic; font-weight: bold;">[nome del modulo .bpl]</span></p>
+<p>&#160;</p>
+<p style="font-weight: bold;"><span style="font-weight: bold;">DataLogic 
+ MemorX3</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">Per utilizzare questo tipo 
+ di lettore è necessario installare il software a corredo RXAS (RX Active 
+ Sync v.2.2.7).</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">[Config]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">;Datalogic 
+ - MemorX3</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">;Il parametro 
+ Port non deve essere lasciato vuoto</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Port=COM1 
+ <span style="font-style: italic; font-weight: bold;">[parametro non significativo, 
+ ma obbligatorio]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">;Impostare 
+ il separatore di campo sul lettore portatile</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Separatore=| 
+ <span style="font-style: italic; font-weight: bold;">[carattere separatore 
+ di lista da impostare anche sul lettore]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">LenCodice= 
+ <span style="font-style: italic; font-weight: bold;">[è obbligatorio, 
+ in assenza di separatore, la dimensione del barcode]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Parametri=C:\DataLogic\Dati.txt 
+ <span style="font-style: italic; font-weight: bold;">[</span><span style="font-weight: bold; 
+	 font-style: italic;">nome completo di percorso del file proveniente 
+ dal lettore tramite RXAS]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">SeparatoreEANGS1=]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Modulo=OS1BC_MET 
+ <span style="font-style: italic; font-weight: bold;">[nome del modulo 
+ .bpl]</span></p>
+<p style="font-weight: bold;">&#160;</p>
+<p style="font-weight: bold;">Meteor ECO 486</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">Per utilizzare questo tipo 
+ di lettore è necessario installare il software a corredo RSFTerminal.</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">[Config]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">;Meteor 
+ - ECO 486</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">;Il parametro 
+ Port non deve essere lasciato vuoto</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Port=COM1 
+ <span style="font-style: italic; font-weight: bold;">[parametro non significativo, 
+ ma obbligatorio]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">;Impostare 
+ il separatore di campo sul lettore portatile</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Separatore=; 
+ <span style="font-style: italic; font-weight: bold;">[carattere separatore 
+ di lista da impostare anche sul lettore]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Parametri=C:\RSFTerminal\Eacq.dat 
+ <span style="font-style: italic; font-weight: bold;">[</span><span style="font-weight: bold; 
+	 font-style: italic;">nome completo di percorso del file proveniente 
+ dal lettore tramite RSFTerminal]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Modulo=OS1BC_MET 
+ <span style="font-style: italic; font-weight: bold;">[nome del modulo 
+ .bpl]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">&#160;</p>
+<p style="font-weight: bold;"><span style="font-weight: bold;"><span>Meteor 
+ Sirio2000</span></span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">Per utilizzare questo tipo 
+ di lettore è necessario installare il software a corredo EacqCE Daemon 
+ v.2.1.0.</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">[Config]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">;Meteor - Sirio2000</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">;Il parametro Port non 
+ deve essere lasciato vuoto</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Port=COM1 
+ <span style="font-style: italic; font-weight: bold;">[parametro non significativo, 
+ ma obbligatorio]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">;Impostare il separatore 
+ di campo sul lettore portatile</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">Separatore=| <span style="font-style: italic; 
+	 font-weight: bold;">[carattere separatore di lista da impostare anche 
+ sul lettore]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">LenCodice= <span style="font-style: italic; 
+	 font-weight: bold;">[è obbligatorio, in assenza di separatore, la 
+ dimensione del barcode]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">Parametri=C:\EacqCE_Daemon\EacqCE_Data.txt 
+ <span style="font-style: italic; font-weight: bold;">[</span><span style="font-weight: bold; 
+	 font-style: italic;">nome completo di percorso del file proveniente 
+ dal lettore tramite EacqCE Daemon]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">SeparatoreEANGS1=]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">Modulo=OS1BC_MET <span 
+	 style="font-style: italic; font-weight: bold;">[nome del modulo .bpl]</span></p>
+<p>&#160;</p>
+<p style="font-weight: bold;"><span style="font-weight: bold;">Meteor Lion 
+ Zigbee</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">[Config]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">;METEOR - Lion Zigbee</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">;Il parametro Port non 
+ deve essere lasciato vuoto</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Port=COM1&#160;<span 
+	 style="font-style: italic; font-weight: bold;">[parametro non significativo, 
+ ma obbligatorio]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">;Impostare il separatore 
+ di campo sul lettore portatile</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">Separatore=&#160;<span 
+	 style="font-style: italic; font-weight: bold;">[parametro non significativo]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">LenCodice=&#160;<span style="font-style: italic; 
+	 font-weight: bold;">[parametro non significativo]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">Parametri=&#160;<span style="font-style: italic; 
+	 font-weight: bold;">[parametro non significativo]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">SeparatoreEANGS1=]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">Modulo=OS1BC_MET&#160;<span 
+	 style="font-style: italic; font-weight: bold;">[parametro non significativo, 
+ ma obbligatorio]</span></p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Denso BHT-8000</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">Per utilizzare questo tipo 
+ di lettore è necessario installare il software a corredo BHT Manager.</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">[Config]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">;DENSO 
+ - BHT8000</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">;Il parametro 
+ Port non deve essere lasciato vuoto</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Port=COM1 
+ <span style="font-style: italic; font-weight: bold;">[parametro non significativo, 
+ ma obbligatorio]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">;Impostare 
+ il separatore di campo sul lettore portatile solo se presente altrimenti 
+ impostare LenCodice</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Separatore= 
+ &#160;<span style="font-style: italic; font-weight: bold;">[il programma 
+ Wizard del lettore di solito non prevede separatore di lista]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">LenCodice=13 
+ <span style="font-style: italic; font-weight: bold;">[è obbligatorio, 
+ in assenza di separatore, la dimensione del barcode]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Parametri=C:\DENSO\Dati.dat 
+ <span style="font-style: italic; font-weight: bold;">[</span><span style="font-weight: bold; 
+	 font-style: italic;">nome completo di percorso del file proveniente 
+ dal lettore tramite BHT Manager]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">SeparatoreEANGS1=]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Modulo=OS1BC_MET 
+ <span style="font-style: italic; font-weight: bold;">[nome del modulo 
+ .bpl]</span></p>
+</body>
+</html>

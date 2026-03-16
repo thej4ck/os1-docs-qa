@@ -1,0 +1,583 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 6, 2016 6:56:54 PM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Configurazione codici fissi</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.10.1.1.1.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Configurazioni > Generali > Configurazione moduli > Generale" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h5>Configurazione codici fissi</h5>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">La compilazione della tabella 
+ Codici fissi è obbligatoria perché i suoi elementi sono essenziali per 
+ il corretto funzionamento dei programmi.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">Tuttavia questa tabella può 
+ essere compilata solo dopo la creazione del piano dei conti, delle causali 
+ contabili e di talune tabelle generali perché nei vari campi di questa 
+ tabella devono essere inseriti codici già esistenti nelle rispettive tabelle.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">DIVISA 
+ LIRE: Indica il codice divisa per le lire. Nei programmi dove è richiesto 
+ se stampare in lire o in euro, viene utilizzato come riferimento questo 
+ codice per le lire.</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">DIVISA 
+ EURO: Indica il codice divisa per l’euro. Nei programmi dove è richiesto 
+ se stampare in lire o in euro, viene utilizzato come riferimento questo 
+ codice per l’euro.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">NAZIONE 
+ UTENTE: Codice nazione di default dell’utente, proposta nell’inserimento 
+ di clienti e fornitori Italia. Tutti i clienti e fornitori che hanno un 
+ codice nazione diverso da questo sono da considerarsi esteri.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CASSA 
+ CONTANTI: Sottoconto presente nel piano dei conti aziendale riservato 
+ per la cassa contanti; utilizzato in gestione prima nota e in fase di 
+ contabilizzazione documenti e acconti su documenti.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CASSA 
+ ASSEGNI: Sottoconto presente nel piano dei conti aziendale riservato per 
+ la cassa assegni; utilizzato in fase di contabilizzazione documenti e 
+ acconti su documenti.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">IVA 
+ VENDITE: Sottoconto presente nel piano dei conti aziendale riservato per 
+ l’Iva vendite; utilizzato in gestione prima nota e in fase di contabilizzazione 
+ documenti.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">IVA 
+ VENDITE DIFFERITA: Sottoconto presente nel piano dei conti aziendale riservato 
+ per l’Iva differita su vendite; utilizzato in gestione prima nota e in 
+ fase di contabilizzazione documenti.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Iva vendite split payment</span>: 
+ Il campo deve essere compilato se si intende utilizzare un conto diverso 
+ da quello utilizzato normalmente per l'Iva a debito.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">IVA 
+ VENDITE CEE: Sottoconto presente nel piano dei conti aziendale riservato 
+ per l’Iva vendite cee; utilizzato in gestione prima nota e in fase di 
+ contabilizzazione documenti.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif;">IVA VENDITE OSS: Sottoconto 
+ presente nel piano dei conti aziendale riservato per l’Iva vendite <span 
+	 style="font-size: 12.0pt; line-height: 107%; font-family: Calibri, sans-serif; 
+	 mso-ascii-theme-font: minor-latin; mso-fareast-font-family: Calibri; 
+	 mso-fareast-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; 
+	 mso-bidi-font-family: 'Times New Roman'; mso-bidi-theme-font: minor-bidi; 
+	 mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">One-Stop-Shop 
+ regime OSS</span> ; utilizzato in fase di contabilizzazione documenti.</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif;">IVA VENDITE IOSS: Sottoconto 
+ presente nel piano dei conti aziendale riservato per l’Iva vendite </span><span 
+	 style="font-size: 12.0pt; line-height: 107%; font-family: Calibri, sans-serif; 
+	 mso-ascii-theme-font: minor-latin; mso-fareast-font-family: Calibri; 
+	 mso-fareast-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; 
+	 mso-bidi-font-family: 'Times New Roman'; mso-bidi-theme-font: minor-bidi; 
+	 mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">One-Stop-Shop 
+ regime IOSS</span><span style="font-family: Verdana, sans-serif;"> ; utilizzato 
+ in fase di contabilizzazione documenti.</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">IVA 
+ CORRISPETTIVI: Sottoconto presente nel piano dei conti aziendale riservato 
+ per l’Iva corrispettivi; utilizzato in gestione prima nota, stampa liquidazione 
+ Iva, &#160;contabilizzazione documenti e contabilizzazione incassi (nel 
+ modulo Vendita al dettaglio).</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">IVA 
+ ACQUISTI: Sottoconto presente nel piano dei conti aziendale riservato 
+ per l’Iva acquisti; utilizzato in gestione prima nota e in fase di contabilizzazione 
+ documenti di acquisto</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">IVA 
+ ACQUISTI DIFFERITA: Sottoconto presente nel piano dei conti aziendale 
+ riservato per l’Iva differita su acquisti; utilizzato in gestione prima 
+ nota e in fase di contabilizzazione documenti e acconti su documenti.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">IVA 
+ ACQUISTI CEE: Sottoconto presente nel piano dei conti aziendale riservato 
+ per l’Iva acquisti cee; utilizzato in gestione prima nota e in fase di 
+ contabilizzazione documenti di acquisto.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">IVA 
+ C/ERARIO: Sottoconto presente nel piano dei conti aziendale riservato 
+ per l’Iva c/erario; utilizzato in fase di stampa liquidazione Iva per 
+ la generazione del movimento contabile di chiusura mensile dell’Iva.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">IVA 
+ ACQUISTI INDETRAIBILE: Sottoconto presente nel piano dei conti aziendale 
+ riservato per l’Iva indetraibile su acquisti; utilizzato in fase di stampa 
+ liquidazione Iva per la generazione del movimento contabile di chiusura 
+ mensile dell’Iva e in fase di registrazione dei documenti di acquisto 
+ da prima nota o dalla contabilizzazione delle fatture, se il conto è presente 
+ l'Iva indetraibile viene imputata a questo conto altrimenti viene imputata 
+ alla contropartita di costo del movimento.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">IVA 
+ INDETRAIBILE DA PRORATA: Sottoconto presente nel piano dei conti aziendale 
+ riservato per la parte di Iva indetraibile su acquisti derivante dal calcolo 
+ del prorata in fase di liquidazione; utilizzato in fase di stampa liquidazione 
+ Iva per la generazione del movimento contabile di chiusura mensile dell’Iva.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">IVA 
+ INDETRAIBILE ACQUISTI AGRICOLI: Sottoconto presente nel piano dei conti 
+ aziendale riservato per l’Iva indetraibile su acquisti agricoli; utilizzato 
+ in fase di stampa liquidazione Iva per la generazione del movimento contabile 
+ di chiusura mensile dell’Iva.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">DIFFERENZA 
+ CAMBI ATTIVA: Sottoconto presente nel piano dei conti aziendale riservato 
+ per la registrazione automatica della differenza cambi (nel caso di differenza 
+ cambi attiva); utilizzato in gestione prima nota contabile e in contabilizzazione 
+ effetti.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">DIFFERENZA 
+ CAMBI PASSIVA: Sottoconto presente nel piano dei conti aziendale riservato 
+ per la registrazione automatica della differenza cambi (nel caso di differenza 
+ cambi passiva); utilizzato in gestione prima nota contabile e in contabilizzazione 
+ effetti.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif;">ABBUONI ATTIVI: Sottoconto 
+ presente nel piano dei conti aziendale riservato per gli abbuoni attivi; 
+ utilizzato in gestione prima nota e in fase di contabilizzazione documenti 
+ e incassi.</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">ABBUONI 
+ PASSIVI: Sottoconto presente nel piano dei conti aziendale riservato per 
+ gli abbuoni passivi; utilizzato in gestione prima nota e in fase di contabilizzazione 
+ documenti e incassi.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span>ARROTONDAMENTI 
+ ATTIVI: Sottoconto presente nel piano dei conti aziendale riservato per 
+ gli arrotondamenti attivi; utilizzato in fase di contabilizzazione movimenti 
+ di vendita al dettaglio.</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">ARROTONDAMENTI 
+ PASSIVI: Sottoconto presente nel piano dei conti aziendale riservato per 
+ gli arrotondamenti passivi; utilizzato in fase di contabilizzazione movimenti 
+ di vendita al dettaglio.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">RITENUTE 
+ IRPEF C/ERARIO: Sottoconto presente nel piano dei conti aziendale riservato 
+ per le ritenute IRPEF; utilizzato in gestione prima nota e in fase di 
+ stampa distinta pagamenti. Viene utilizzato come conto contabile qualora 
+ non sia stato indicato il campo “Conto contabile” nella tabella “Codici 
+ tributo”.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">INPS 
+ C/ERARIO: Sottoconto presente nel piano dei conti aziendale riservato 
+ le ritenute INPS; utilizzato in gestione prima nota e in fase di stampa 
+ distinta pagamenti. Viene utilizzato come conto contabile qualora non 
+ sia stato indicato il campo “Conto Erario” nella tabella “Codici Inps”.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">INAIL 
+ C/ERARIO: Sottoconto presente nel piano dei conti aziendale riservato 
+ le ritenute Inail; utilizzato in gestione prima nota e in fase di stampa 
+ distinta pagamenti. Viene utilizzato come conto contabile qualora non 
+ sia stato indicato il campo “Conto Erario” nella tabella “Codici Inail”.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">ENASARCO 
+ C/ERARIO: Attualmente non utilizzato</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">BOLLETTE 
+ DOGANALI: Sottoconto presente nel piano dei conti aziendale riservato 
+ per le bollette doganali; utilizzato in fase di stampa dati Iva generali 
+ per il calcolo dell’utilizzo del plafond.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">BILANCIO 
+ D'APERTURA: Sottoconto presente nel piano dei conti aziendale riservato 
+ allo stato patrimoniale di apertura; utilizzato nell’apposita procedura 
+ di “Elaborazione apertura”</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">BILANCIO 
+ DI CHIUSURA: Sottoconto presente nel piano dei conti aziendale riservato 
+ allo stato patrimoniale di chiusura; utilizzato nell’apposita procedura 
+ di “Elaborazione chiusura”.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">PROFITTI 
+ E PERDITE: Sottoconto presente nel piano dei conti aziendale riservato 
+ per il conto di profitti e perdite; utilizzato nelle procedure di apertura 
+ e chiusura esercizio contabile.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">UTILE 
+ D'ESERCIZIO: Sottoconto presente nel piano dei conti aziendale riservato 
+ per il conto di rilevazione dell’utile di esercizio; utilizzato in fase 
+ di chiusura esercizio contabile.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">PERDITA 
+ D'ESERCIZIO: Sottoconto presente nel piano dei conti aziendale riservato 
+ per il conto di rilevazione della perdita di esercizio utilizzato in fase 
+ di chiusura esercizio contabile.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Utile portato a nuovo</span>: Sottoconto 
+ presente nel piano dei conti aziendale utilizzato dalla stampa del bilancio 
+ CEE con esercizio precedente aperto per assegnare l'utile calcolato dai 
+ valori CEE presenti per l'esercizio aperto; nel caso non sia compilato 
+ viene utilizzato il sottoconti di Utile d'esercizio.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Perdita portata a nuovo</span>: 
+ Sottoconto presente nel piano dei conti aziendale utilizzato dalla stampa 
+ del bilancio CEE con esercizio precedente aperto per assegnare la perdita 
+ calcolata dai valori CEE presenti per l'esercizio aperto; nel caso non 
+ sia compilato viene utilizzato il sottoconti di Perdita d'esercizio.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">PLUSVALENZE 
+ CESSIONI CESPITI: Sottoconto presente nel piano dei conti aziendale riservato 
+ alle plusvalenze derivanti da movimenti di vendita di beni ammortizzabili; 
+ utilizzato in gestione prima nota contabile e in fase di contabilizzazione 
+ documenti di vendita.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">MINUSVALENZE 
+ CESSIONI CESPITI: Sottoconto presente nel piano dei conti aziendale riservato 
+ alle minusvalenze derivanti da movimenti di vendita di beni ammortizzabili; 
+ utilizzato in gestione prima nota contabile e in fase di contabilizzazione 
+ documenti di vendita.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">COSTI 
+ DA CLASSIFICARE: Sottoconto presente nel piano dei conti aziendale riservato 
+ ai costi da classificare; utilizzato in fase di calcolo del conto di costo 
+ sulle righe dei documenti qualora non sia stato trovato nessun altro conto 
+ di costo (da tabella contropartite di costo, da anagrafica articoli, da 
+ fornitore o da causale documento).</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">RICAVI 
+ DA CLASSIFICARE: Sottoconto presente nel piano dei conti aziendale riservato 
+ ai ricavi da classificare; utilizzato in fase di calcolo del conto di 
+ ricavo sulle righe dei documenti qualora non sia stato trovato nessun 
+ altro conto di ricavo (da tabella contropartite di ricavo, da anagrafica 
+ articoli, da cliente o da causale documento).</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CENTRO 
+ DI COSTO/RICAVO GENERICO: Codice presente nella tabella “Centri di costo/ricavo” 
+ riservato al centro di costo/ricavo generico; utilizzato in fase di gestione 
+ documenti qualora non sia stato trovato nessun altro centro di costo/ricavo 
+ (da tabella contropartite o da causale documento). Deve essere impostato 
+ solo se si gestisce il modulo “Contabilità analitica”.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">VOCE 
+ DI COSTO/RICAVO GENERICA: Codice presente nella tabella “Voci di costo/ricavo” 
+ riservato alla voce di costo/ricavo generica; utilizzato in fase di gestione 
+ documenti qualora non sia stato trovato nessun altra voce costo/ricavo 
+ (da tabella contropartite o da causale documento). Deve essere impostato 
+ solo se si gestisce il modulo “Contabilità analitica”.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">COMMESSA 
+ GENERICA: Codice presente nella tabella “Commesse” riservato alla voce 
+ di costo/ricavo generica; utilizzato in fase di gestione documenti qualora 
+ non sia stato trovato nessun altra voce costo/ricavo (da tabella contropartite 
+ o da causale documento). Deve essere impostato solo se si gestisce il 
+ modulo “Contabilità analitica”.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">SPESE 
+ DI TRASPORTO: Sottoconto presente nel piano dei conti aziendale riservato 
+ al recupero spese di trasporto su vendite; utilizzato in fase di registrazione 
+ documento del ciclo attivo.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">SPESE 
+ DI IMBALLO: Sottoconto presente nel piano dei conti aziendale riservato 
+ al recupero spese di imballo su vendite; utilizzato in fase di registrazione 
+ documento del ciclo attivo.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">SPESE 
+ ART. 15: Sottoconto presente nel piano dei conti aziendale riservato al 
+ recupero spese art. 15 su vendite; utilizzato in fase di registrazione 
+ documento del ciclo attivo.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">SPESE 
+ MARCHE DA BOLLO VIRTUALI: E' il conto (utilizzato per la contabilizzazione 
+ delle fatture di vendita) in cui confluiscono le spese bolli relative 
+ a fatture emesse in modalità telematica (come ad esempio le fatturePA). 
+ Tali importi rappresentano un debito verso l'erario e dovranno essere 
+ periodicamente versati.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">SPESE 
+ DI INCASSO: Sottoconto presente nel piano dei conti aziendale riservato 
+ al recupero spese di incasso su vendite; utilizzato in fase di registrazione 
+ documento del ciclo attivo.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CODICE 
+ IVA SPESE INCASSO: Codice Iva riservato alle spese di incasso inserite 
+ nei documenti. Se il campo viene compilato con un codice Iva valido in 
+ fase di calcolo totali documento le spese di incasso vengono assoggettate 
+ a tale codice, altrimenti se il campo resta vuoto viene applicata la ripartizione 
+ fra i vari imponibili.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CODICE 
+ IVA SPESE TRASPORTO: Se il campo viene compilato con un codice Iva valido 
+ e i parametri presenti nella configurazione del modulo standard &quot;T. 
+ calcolo Iva spese (vendite)&quot; o &quot;T.calcolo Iva spese (acquisti)&quot; 
+ sono impostati a &quot;In base al codice Iva&quot;, le spese di trasporto 
+ in chiusura del documento, anzichè essere ripartite, verranno assoggettate 
+ al codice Iva indicato. Se il campo non viene compilato la ripartizione 
+ delle spese di trasporto viene effettuata in base agli imponibili presenti 
+ nel documento.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CODICE 
+ IVA SPESE IMBALLO: Se il campo viene compilato con un codice Iva <span 
+	 style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">valido 
+ e i parametri presenti nella configurazione del modulo standard &quot;T. 
+ calcolo Iva spese (vendite)&quot; o &quot;T.calcolo Iva spese (acquisti)&quot; 
+ sono impostati a &quot;In base al codice Iva&quot;, le spese di imballo 
+ in chiusura del documento, anzichè essere ripartite, verranno assoggettate 
+ al codice Iva indicato.</span> <span style="text-indent: -0.417in; margin-left: 30pt; 
+										 font-family: Verdana, sans-serif;">Se 
+ il campo non viene compilato la ripartizione delle spese di imballo viene 
+ effettuata in base agli imponibili presenti nel documento.</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CLIENTE 
+ AUTOFATTURA: Codice cliente riservato al cliente intestatario delle autofatture 
+ ex art. 17; utilizzato nella stampa dei registri Iva per stampare la ragione 
+ sociale di tale cliente al posto del fornitore intestatario del documento.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CAUSALE 
+ APERTURA CONTABILE: Codice della causale contabile riservata all’apertura 
+ del bilancio d’esercizio; utilizzata nella procedura di apertura esercizio 
+ contabile.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CAUSALE 
+ CHIUSURA CONTABILE: Codice della causale contabile riservata alla di chiusura 
+ del bilancio d’esercizio; viene proposta nella &#160;procedura di chiusura 
+ esercizio contabile, e viene utilizzata nei programmi di analisi movimenti 
+ (a video e a stampa) e nella fase di elaborazione bilanci (sia normali 
+ che CEE) per identificare i movimenti di chiusura.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CAUSALE 
+ CONTABILIZ. DISTINTA: Codice della causale contabile utilizzato per la 
+ contabilizzazione della distinta effetti. Il movimento generato è del 
+ tipo: <span style="font-weight: bold;">C/C Presentazione effetti a Portafoglio 
+ effetti</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CAUSALE 
+ CONTABILIZ. EFFETTI: Codice della causale contabile utilizzato per la 
+ contabilizzazione del cliente. Viene utilizzato nel programma di “Generazione 
+ effetti”, “Stampa distinta di presentazione” (definitiva) per generare 
+ il movimento di creazione dell’esposizione cliente. Il movimento generato 
+ è del tipo: <span style="font-weight: bold;">Portafoglio effetti a Cliente 
+ X</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CAUSALE 
+ CONTABILIZ. ESITO: Codice della causale contabile di registrazione esito 
+ effetti; utilizzata nel programma di esito effetti per registrare il movimento 
+ di chiusura del conto del cliente. Il movimento generato è del tipo: <span 
+	 style="font-weight: bold;">Cliente c/effetti a Cliente X</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CLIENTI 
+ C/EFFETTI: Sottoconto presente nel piano dei conti aziendale utilizzato 
+ in fase di contabilizzazione effetti in sostituzione del codice del cliente 
+ stesso (qualora sia stata attivata l’opzione “Contabilizza su conto di 
+ transito”) e in fase di esito effetti per chiudere l’esposizione cambiaria 
+ del cliente stesso.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CAUSALE 
+ PAGAMENTI FORNITORI: Codice della causale contabile utilizzata in stampa 
+ definitiva distinta pagamenti per i fornitori (non percipienti)</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CAUSALE 
+ PAGAMENTI PERCIPIENTI: Codice della causale contabile utilizzata in stampa 
+ definitiva distinta pagamenti per i percipienti.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CAUSALE 
+ ANTICIPI A FORNITORI: Codice della causale contabile utilizzata in stampa 
+ definitiva distinta pagamenti per i pagamenti anticipati a fornitori (non 
+ percipienti).</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CAUSALE 
+ ANTICIPI A PERCIPIENTI: Codice della causale contabile utilizzata in stampa 
+ definitiva distinta pagamenti per i pagamenti anticipati a percipienti.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">ONERI 
+ BANCARI: Sottoconto presente nel piano dei conti aziendale utilizzato, 
+ in fase di contabilizzazione distinte pagamenti fornitori, per l’addebito 
+ degli oneri bancari.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CAUSALE 
+ GIROCONTO IVA: Codice causale contabile riservato per la contabilizzazione 
+ della liquidazione Iva; utilizzato pertanto nel programma di stampa liquidazione 
+ Iva.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CAUSALE 
+ GIROCONTO VENTILAZIONE: Codice causale contabile riservato per la registrazione 
+ dello storno iva, in fase di stampa definitiva della ventilazione corrispettivi.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CODICE 
+ IVA ART. 15: Codice Iva riservato alle spese articolo 15 ed ai bolli esenzione 
+ inserite nei documenti. Se il campo viene compilato con un codice Iva 
+ valido in fase di calcolo totali documento le spese articolo 15 ed i bolli 
+ esenzione vengono assoggettate a tale codice, altrimenti se il campo resta 
+ vuoto viene applicata la ripartizione fra i vari imponibili.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CODICE 
+ IVA ART. 8 2C.: Codice IVA riservato per le vendite ad esportatore abituale; 
+ utilizzato nelle stampe dei documenti per stampare o meno la dicitura 
+ dell’esenzione con i relativi estremi della lettera.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CODICE 
+ IVA ART. 41 DL 513: Codice IVA riservato per le vendita che indica il 
+ codice esenzione IVA articolo 41 utilizzato nelle stampe dei documenti 
+ come parametro di confronto con il codice esenzione per stampare o meno 
+ la dicitura di esenzione IVA.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CODICE 
+ IVA FATTURE PERCEPENTI: Attualmente non utilizzato</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CODICE 
+ IVA ART. 74 C. 7-8 (ROTTAMI): Utilizzato in fase di stampa dati iva generali 
+ indica il codice presente nella tabella “Codici iva” riservato all’iva 
+ per le rottamazioni.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CAUSALE 
+ AUTOFATTURA: Attualmente non utilizzato</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">GRUPPO 
+ COSTI ACQUISTI: Attualmente non utilizzato</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">GRUPPO 
+ COSTI VENDITE: Attualmente non utilizzato</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CAUSALE 
+ MAGAZZINO CALI: Attualmente non utilizzato</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">RATEI 
+ ATTIVI: Sottoconto presente nel piano dei conti aziendale riservato ai 
+ ratei attivi; utilizzato nella procedura di rilevazione rettifiche dell’analisi 
+ di bilancio.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">RISCONTI 
+ ATTIVI: Sottoconto presente nel piano dei conti aziendale riservato ai 
+ risconti attivi; utilizzato nella procedura di rilevazione rettifiche 
+ dell’analisi di bilancio.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">RATEI 
+ PASSIVI: Sottoconto presente nel piano dei conti aziendale riservato ai 
+ ratei passivi; utilizzato in prima nota e nella procedura di rilevazione 
+ rettifiche dell’analisi di bilancio.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">RISCONTI 
+ PASSIVI: Sottoconto presente nel piano dei conti aziendale riservato ai 
+ risconti passivi, utilizzato in prima nota e nella procedura di rilevazione 
+ rettifiche dell’analisi di bilancio.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif;">COSTO OMAGGI A CLIENTI: 
+ Sottoconto presente nel piano dei conti aziendale riservato al costo degli 
+ omaggi ai propri clienti; utilizzato in gestione prima nota contabile 
+ e in fase di registrazione e contabilizzazione documenti. Viene utilizzato 
+ per contabilizzare la parte imponibile delle righe che hanno Tipo rigo 
+ con classe “Omaggio imponibile”</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">COSTO 
+ IVA OMAGGI A CLIENTI: Sottoconto presente nel piano dei conti aziendale 
+ riservato al costo degli omaggi ai propri clienti; utilizzato in gestione 
+ prima nota contabile e in fase di registrazione e contabilizzazione documenti. 
+ Viene utilizzato per contabilizzare l’imposta delle righe che hanno Tipo 
+ rigo con classe “Omaggio imponibile + Iva”</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif;">COSTO OMAGGI DA FORNITORI: 
+ Sottoconto presente nel piano dei conti aziendale riservato al costo degli 
+ omaggi dai propri fornitori; utilizzato in gestione prima nota contabile 
+ e in fase di registrazione e contabilizzazione documenti. Viene utilizzato 
+ per contabilizzare la parte imponibile delle righe che hanno Tipo rigo 
+ con classe “Omaggio imponibile”</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">COSTO 
+ IVA OMAGGI DA FORNITORI: Sottoconto presente nel piano dei conti aziendale 
+ riservato al costo degli omaggi dai propri fornitori; utilizzato in gestione 
+ prima nota contabile e in fase di registrazione e contabilizzazione documenti. 
+ Viene utilizzato per contabilizzare l’imposta delle righe che hanno Tipo 
+ rigo con classe “Omaggio imponibile + Iva”</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CLIENTE 
+ RIC. FISCALI NON INTESTATE: Codice cliente utilizzato per indicare il 
+ conto di default delle ricevute fiscali (tipicamente è il cliente “Cassa” 
+ o “Cassa corrispettivi”); utilizzato in gestione ricevute fiscali sia 
+ dal modulo vendite che dal modulo vendite al dettaglio.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">IVA 
+ RIC. FISC. SERVIZI NON INCASSATE: Sottoconto presente nel piano dei conti 
+ aziendale riservato all’Iva sulle ricevute di servizi emesse e non incassate 
+ (si tratta quindi di Iva differita su corrispettivi); utilizzato in gestione 
+ prima nota contabile e in contabilizzazione documenti.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">SPESE 
+ DI TRASPORTO: Sottoconto presente nel piano dei conti aziendale riservato 
+ all’addebito delle spese di trasporto su acquisti; utilizzato in fase 
+ di registrazione documenti del ciclo passivo.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">SPESE 
+ DI IMBALLO: Sottoconto presente nel piano dei conti aziendale riservato 
+ all’addebito delle spese di imballo su acquisti; utilizzato in fase di 
+ registrazione documenti del ciclo passivo.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">SPESE 
+ VARIE: Attualmente non utilizzato</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">SPESE 
+ ART. 15: Sottoconto presente nel piano dei conti aziendale riservato all’addebito 
+ delle spese art. 15 su acquisti; utilizzato in fase di registrazione documenti 
+ del ciclo passivo.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">SPESE 
+ BOLLI: Attualmente non utilizzato</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">SPESE 
+ DI INCASSO: Sottoconto presente nel piano dei conti aziendale riservato 
+ all’addebito delle spese di incasso su acquisti; utilizzato in fase di 
+ registrazione documenti del ciclo passivo.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CODICE 
+ IVA LIQUIDAZIONE AGENZIE VIAGGIO: E' il codice Iva utilizzato in fase 
+ di liquidazione Iva per la determinazione dell'Iva a debito.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CONTO 
+ CEE RISERVE: Utilizzato in fase di stampa bilancio CEE indica il codice 
+ presente nella tabella “Piano dei conti IV direttiva CEE” riservato al 
+ conto per le riserve.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Conto CEE utile/perdita portati 
+ a nuovo</span>: Utilizzato dalla stampa del bilancio CEE con esercizio 
+ precedente aperto per assegnare l'utile/perdita calcolato dai valori CEE 
+ presenti per l'esercizio aperto; nel caso non sia compilato viene utilizzato 
+ il conto CEE 2A080000.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">ERARIO 
+ CONTO RITENUTE SUBITE: Codice del sottoconto, presente in Piano dei conti, 
+ che verrà utilizzato come contropartita per l'importo della RdA in fase 
+ di registrazione incasso di documenti emessi nei confronti di clienti 
+ soggetti a RdA (condomini). Sul campo è attivo lo zoom F9 sulla tabella 
+ Conti.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Erario c/ritenute subite (agg.)</span>: 
+ Codice del sottoconto, presente in Piano dei conti, che verrà utilizzato 
+ come contropartita per l'importo della RdA in fase di registrazione incasso 
+ di documenti emessi nei confronti di clienti soggetti a RdA (condomini). 
+ Sul campo è attivo lo zoom F9 sulla tabella Conti.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CONTO 
+ INCASSI BANCOMAT: Sottoconto presente nel piano dei conti aziendale, identifica 
+ il conto riservato per la registrazione contabile degli incassi a mezzo 
+ Bancomat.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CONTO 
+ INCASSI CARTE DI CREDITO: Sottoconto presente nel piano dei conti aziendale, 
+ identifica il conto riservato per la registrazione contabile degli incassi 
+ a mezzo carta di credito.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CONTO 
+ INCASSI TICKET: Sottoconto presente nel piano dei conti aziendale, identifica 
+ il conto riservato per la registrazione contabile degli incassi a mezzo 
+ ticket.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif;"><span style="text-transform: uppercase;"><span 
+	 style="text-transform: uppercase;">C</span>onto incassi voucher</span>:&#160;Sottoconto 
+ presente nel piano dei conti aziendale, identifica il conto riservato 
+ per la registrazione contabile dei valori derivanti dall'utilizzo dei 
+ voucher.</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Conto incassi sconto a pagare</span>:&#160;Sottoconto 
+ presente nel piano dei conti aziendale, identifica il conto riservato 
+ per la registrazione contabile dei valori derivanti dall'utilizzo dello 
+ sconto a pagare.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Fatture da ricevere</span>: Sottoconto 
+ presente nel piano dei conti aziendale, identifica il conto riservato 
+ per la registrazione contabile relativa alle fatture da ricevere utilizzato 
+ dalla procedura di elaborazione da fatture da ricevere/emettere.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Fatture da emettere</span>: Sottoconto 
+ presente nel piano dei conti aziendale, identifica il conto riservato 
+ per la registrazione contabile relativa alle fatture da emettere utilizzato 
+ dalla procedura di elaborazione da fatture da ricevere/emettere.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Iva acquisti per dichiarazione</span>: 
+ Sottoconto presente nel piano dei conti aziendale, definisce il conto 
+ riservato ad identificare l'Iva su acquisti relativa a documenti dell'anno 
+ precedente che sono stati registrati entro il termine per la presentazione 
+ della dichiarazione Iva annuale.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Iva acquisti non detratta</span>: 
+ Sottoconto presente nel piano dei conti aziendale, definisce il conto 
+ riservato ad identificare l'Iva su acquisti relativa a documenti dell'anno 
+ precedente che sono stati registrati oltre il termine per la presentazione 
+ della dichiarazione Iva annuale.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Iva acquisti provvisoria</span>: 
+ Indicare il conto da utilizzare nel caso di registrazione di fattura di 
+ acquisto registrata nei primi 15 giorni del mese ma di competenza del 
+ mese precedente.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Iva vendite provvisoria</span>: 
+ Indicare il conto da utilizzare nel caso di registrazione di fattura di 
+ vendita emessa nei primi 15 giorni del mese ma di competenza del mese 
+ precedente.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Conto contributi</span>: Indicare 
+ il conto da utilizzare per la contabilizzazione del valore del contributo 
+ presente in fattura.</p>
+</body>
+</html>

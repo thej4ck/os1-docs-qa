@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="12 17, 2011 11:53:04 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Analisi movimenti magazzino fasi</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.7.1_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Magazzino" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt;">Analisi 
+ movimenti</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;"><span style="font-family: Verdana, sans-serif; 
+													 font-size: 10pt;">Il 
+ programma effettua la visualizzazione dei movimenti di magazzino in base 
+ ai parametri inseriti dall’utente. Una volta visualizzati i movimenti, 
+ è possibile attivare la stampa della scheda o delle schede utilizzando 
+ il bottone Stampa della tool bar.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;"><span style="font-family: Verdana, sans-serif; 
+													 font-size: 10pt;">È 
+ possibile analizzare le giacenze del solo magazzino fasi oppure le giacenze 
+ complete dei dati del magazzino base.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">È possibile visualizzare i 
+ movimenti relativi ad uno o più prodotti, o fasi, ad un fornitore, limitandone 
+ la selezione entro due date indicate dall’utente, ad una specifica causale, 
+ ad uno specifico magazzino. Se attive le relative gestioni è possibile 
+ specificare anche variante e/o lotto.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">Il programma si articola su 
+ due finestre video. La prima, Parametri, consente la definizione dei parametri 
+ di analisi.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: center;"><img src="images/sprb0032f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">&#160;</p>
+<p style="text-indent: -.417in; margin-left: 30pt;">TIPO ANALISI: definisce 
+ la tipologia di analisi: analisi completa, magazzino fasi e magazzino 
+ base, oppure analisi del solo magazzino fasi.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">DA 
+ PRODOTTO: eventuale codice dell'articolo, presente in anagrafica Prodotti, 
+ da cui si desidera iniziare la selezione dei &#160;movimenti di magazzino. 
+ Confermando a vuoto, la selezione inizia con il primo prodotto valido. 
+ Sul campo è attiva la ricerca (F9) sull’anagrafica prodotti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">A 
+ PRODOTTO: eventuale codice dell'articolo, presente in anagrafica Prodotti, 
+ a cui si desidera terminare la selezione dei &#160;movimenti di magazzino. 
+ Confermando a vuoto, la selezione termina con l’ultimo valido. Sul campo 
+ è attiva la ricerca (F9) sull’anagrafica prodotti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">DA 
+ DATA: eventuale data da cui deve iniziare l’analisi dei movimenti di magazzino 
+ per gli articoli precedentemente selezionati. Confermando a vuoto, l’analisi 
+ inizia con il primo movimento valido.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">A 
+ DATA: eventuale data con cui si desidera terminare l’analisi dei movimenti 
+ di magazzino per gli articoli precedentemente selezionati. Confermando 
+ a vuoto, l’analisi si conclude con l'ultimo movimento valido.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">FASE LAVORAZIONE: 
+ eventuale codice della fase di lavorazione, per cui si desidera effettuare 
+ la selezione di analisi. Confermando a vuoto, la selezione considera tutte 
+ le fasi di lavorazione. Sul campo sono attive le funzioni di ricerca (F9).</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span>VARIANTE: presente 
+ se previsto dalla configurazione, eventuale codice della variante, per 
+ cui si desidera effettuare la selezione di analisi. Confermando a vuoto, 
+ la selezione considera tutte le varianti. Sul campo sono attive le funzioni 
+ di ricerca (F9).</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LOTTO: presente se 
+ previsto dalla configurazione, eventuale codice del lotto, per cui si 
+ desidera effettuare la selezione di analisi. Confermando a vuoto, la selezione 
+ considera tutti i lotti. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">CAUSALE: 
+ eventuale codice della causale di magazzino a cui si vuole restringere 
+ la selezione di analisi. Sul campo è attiva la ricerca (F9) sulla tabella 
+ Causali di magazzino.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO: 
+ eventuale codice del magazzino a cui si vuole restringere la selezione 
+ di analisi. Sul campo è attiva la ricerca (F9) sulla tabella Magazzini.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">CATEGORIA 
+ MERCEOLOGICA: eventuale codice della categoria merceologica a cui si vuole 
+ restringere la selezione di analisi. Sul campo è attiva la ricerca (F9) 
+ sulla tabella Categorie merceologiche.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">FORNITORE: 
+ eventuale codice del fornitore a cui si vuole restringere la selezione 
+ di analisi. Sul campo è attiva la ricerca (F9) sull’anagrafica fornitori.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">TRATTA 
+ OBSOLETI: definisce come se includere nell'analisi anche gli articoli 
+ obsoleti: Si, No, Solo obsoleti.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">ORDINAMENTO 
+ PER: combo box per definire i criteri di ordinamento. Valori ammessi: 
+ Per data; Per Magazzino/data; per Causale/data.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">SALDI 
+ PRECEDENTI: check box significativo se la data di inizio selezione non 
+ corrisponde alla data di inizio esercizio. In questo caso, la presenza 
+ della spunta determina la visualizzazione dei totali carico / scarico 
+ dall’inizio esercizio al giorno precedente l’inizio dell’analisi.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">INCLUDI 
+ ORDINI A PRODUZIONE: check box per includere nell'analisi anche gli ordini 
+ relativi alla produzione (casella con segno di spunta).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">INCLUDI 
+ IMPEGNI DA PRODUZIONE: check box per includere nell'analisi anche gli 
+ impegni derivanti dalla produzione (casella con segno di spunta).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">Confermando tramite pressione 
+ del bottone Esegui, viene avviata la selezione e richiamata la finestra 
+ video Risultati. La finestra video è articolata su due sezioni: la sezione 
+ superiore elenca l’articolo o gli articoli selezionati, indicando per 
+ ciascuno di essi il codice, la descrizione, l’unità di misura e l’eventuale 
+ saldo iniziale (se richiesto).</p>
+<p>La sezione inferiore elenca invece i movimenti relativi all’articolo 
+ selezionato, che è quello contrassegnato dal segno freccia a destra del 
+ rigo nella sezione superiore; i movimenti relativi ad ordini ed impegni 
+ vengono presentati in colore diverso, rosso per gli impegni e verde per 
+ gli ordinati; se l'analisi è completa le righe provenienti dal magazzino 
+ fiscale compaiono in blu.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: center;"><img src="images/sprb0032f_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">Se l'articolo prevede la gestione 
+ dei dettagli (varianti/lotti) l'indicatore del mouse cambia in base alla 
+ presenza di dettagli e facendo doppio clic viene mostrata la finestra 
+ dei dettagli.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: center;"><img src="images/sprb0032f_03.png" alt="" style=" border:none; width:100%; max-width:697px;" border="0" /></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">Cliccando invece sui bottoni 
+ anteprima di stampa o stampa della tool bar, si avviano le relative funzioni.</p>
+</body>
+</html>

@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Avviamento","url":"html/index/index_2010.htm"},{"type":"book","name":"Gestione packing","key":"toc48"},{"type":"item","name":"Stampa packing","url":"html/spkg/spkg0002d.htm"},{"type":"item","name":"Analisi packing","url":"html/spkg/spkg0003f.htm"},{"type":"item","name":"Stampa etichette colli","url":"html/spkg/spkg0004d.htm"},{"type":"item","name":"Assegnazione pallet","url":"html/bean/bean0002f_3.htm"},{"type":"item","name":"Evasione ordini","url":"html/spkg/spkg0001f_001.htm"},{"type":"item","name":"Generazione da ddt/fatture","url":"html/spkg/spkg0001f_003.htm"},{"type":"book","name":"Tabelle","key":"toc49"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

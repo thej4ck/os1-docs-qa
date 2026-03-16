@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="11 19, 2005 12:58:06 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Generazione giroconti incassi/pagamenti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.2.0_17";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Registri bollati" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;">Generazione 
+ giroconti incassi/pagamenti</p>
+<p>La procedura può essere utilizzata quando in <span style="mso-fareast-font-family: 'Times New Roman'; 
+														 mso-bidi-font-family: 'Times New Roman'; 
+														 mso-ansi-language: IT; 
+														 mso-fareast-language: IT; 
+														 mso-bidi-language: AR-SA;">configurazione 
+ contabilità speciali l'opzione &quot;Gestione semplificata per cassa&quot; 
+ è impostata sia </span>Sintetica che Analitica con funzionalità differenti.</p>
+<p style="font-weight: bold;">Sintetica</p>
+<p><span style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; mso-fareast-font-family: 'Times New Roman'; 
+		 mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: IT; 
+		 mso-fareast-language: IT; mso-bidi-language: AR-SA;">Consente 
+ di effettuare la generazione dei movimenti contabili di giroconto dei 
+ documenti degli anni precedenti per cui è stato generato il movimento 
+ di storno incassi/pagamenti a fine anno (generato tramite la procedura 
+ </span><a href="bcsp0011d.htm"><span style="font-family: Verdana, sans-serif; 
+										 font-size: 10pt;">Generazione 
+ storno mancati incassi/pagamenti</span></a><span style="font-size: 10.0pt; 
+													 mso-bidi-font-size: 12.0pt; 
+													 mso-fareast-font-family: 'Times New Roman'; 
+													 mso-bidi-font-family: 'Times New Roman'; 
+													 mso-ansi-language: IT; 
+													 mso-fareast-language: IT; 
+													 mso-bidi-language: AR-SA;">) 
+ incassati/pagati nel periodo elaborato.</span></p>
+<p style="font-weight: bold;">Analitica</p>
+<p><span style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; mso-fareast-font-family: 'Times New Roman'; 
+		 mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: IT; 
+		 mso-fareast-language: IT; mso-bidi-language: AR-SA;">Consente 
+ </span>di effettuare la generazione del giroconto contabile di storno 
+ del conto di ricavo o costo sospeso a conto di ricavo o costo effettivo. 
+ Se le registrazioni di incasso/pagamento vengono effettuate da prima nota 
+ con causale che interessa i movimenti transitori tale operazione non è 
+ necessaria, se invece le registrazioni di incasso/pagamento sono generate 
+ esternamente (es. incasso con effetti pagamenti tramite il modulo bonifici 
+ o causale di incasso che non movimenta i transitori) le registrazioni 
+ di giroconto devono essere create attraverso questa procedura.</p>
+<p>&#160;</p>
+<p>Il campo &quot;Da data documento” è proposto in automatico in base al 
+ campo “Esercizio inizio utilizzo semplificata per cassa” indicato in configurazione 
+ ed è utilizzato per selezionare i documenti da trattare per cui effettuare 
+ il giroconto; il campo “Elabora inc./pag. fino al” corrisponde alla data 
+ fino alla quale considerare gli incassi/ pagamenti, è proposta in automatico 
+ la data del fine mese. Il campo “Causale” riporta la causale indicata 
+ in configurazione da utilizzare per effettuare il giroconto; la causale 
+ è una normale causale di giroconto che non tratta le partite, non tratta 
+ i movimenti transitori e il registro incassi pagamenti. <span style="font-size: 10.0pt; 
+	 mso-bidi-font-size: 12.0pt; font-family: Verdana, sans-serif; mso-fareast-font-family: 'Times New Roman'; 
+	 mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: IT; 
+	 mso-bidi-language: AR-SA;">Il campo “Data registrazione”, corrisponde 
+ alla data in cui verranno generati i movimenti di giroconto, viene proposta 
+ in automatico in base alla data indicata nel campo “Elabora inc./pag. 
+ fino al”.</span></p>
+<p>&#160;</p>
+<p style="text-align: center;"><img src="Images/BCsp0013f_01.png" alt="" style=" border:none; width:100%; max-width:761px;" border="0" /></p>
+<p>&#160;</p>
+<p><img src="Images/BCsp0013f_03.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:5px; margin-bottom:0px; width:100%; max-width:232px;" align="right" border="0" />L'elaborazione definitiva tutti i documenti risultano 
+ automaticamente selezionati, tramite il menù richiamabile tramite il tasto 
+ destro del mouse, o tramite gli <span style="text-indent: -0.417in;">appositi 
+ tasti funzione, è possibile selezionare o deselezionare il singolo rigo 
+ o tutte le righe ed esportare i dati in Excel o copiarli negli appunti; 
+ è inoltre possibile effettuare la stampa; in quest'ultimo caso se saranno 
+ selezionati solo alcuni documenti sarà richiesto per quali di questi si 
+ vuole effettuare la stampa tramite la finestra mostrata a lato: tutto, 
+ solo i selezionati o solo i non selezionati.</span></p>
+<p>&#160;</p>
+<p style="text-align: center;"><img src="Images/BCsp0013f_02.png" alt="" style=" border:none; width:100%; max-width:947px;" border="0" /></p>
+<p><span style="font-family: Verdana, sans-serif; font-size: 10pt; font-weight: bold;">Sintetica</span></p>
+<p>Nei risultati viene riportato l’elenco dei documenti degli anni precedenti 
+ i cui costi/ricavi sono stati stornati a fine anno e che sono stati chiusi 
+ nel periodo elaborato, tramite <span style="text-indent: -18.0pt; mso-list: l0 level1 lfo1;">movimenti 
+ contabili di incasso/pagamento, assegnazioni di note di credito e di anticipi 
+ oppure</span><span style="text-indent: -18.0pt; mso-list: Ignore; font-family: Symbol; 
+					 mso-fareast-font-family: Symbol; mso-bidi-font-family: Symbol;"> 
+ </span><span style="text-indent: -18.0pt; mso-list: l0 level1 lfo1;">esito 
+ di effetti attivi; v</span>engono girocontati tutti i documenti non già 
+ girocontati precedentemente.</p>
+<p><span style="font-family: Verdana, sans-serif; font-size: 10pt; font-weight: bold;">Analitica</span></p>
+<p>Nei risultati viene riportato l’elenco dei documenti emessi con movimento 
+ transitorio per cui è presente un movimento di incasso o pagamento per 
+ cui non è stato fatto il giroconto; nel caso di documenti per cui è stato 
+ generato effetto questi sono riportati solo con effetto esitato e nel 
+ caso di fatture fornitori per cui è stata generata la distinta pagamenti 
+ questi sono riportati nel caso di stampa definitiva di questa. Sono selezionati 
+ anche i documenti quali note di credito e fatture assegnate di pari importo 
+ per cui non è presente alcun movimento contabile di incasso o pagamento. 
+ Non sono invece selezionate le fatture solo omaggio imponibile o omaggio 
+ imponibile più Iva (in quanto non esiste ricavo da girocontare)</p>
+<p>&#160;</p>
+<p>Alla conferma saranno generati i movimenti contabili di giroconto da 
+ conto/ricavo sospeso a conti di ricavo o costo effettivi relativi ai documenti 
+ selezionati con la causale e la data indicata nei parametri, viene inoltre 
+ richiesto se stampare la lista dei movimenti generati. È consigliata l’esecuzione 
+ del programma di generazione mensilmente indicando come data elaborazione 
+ incassi quella di fine mese.</p>
+</body>
+</html>

@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_8055.htm"},{"type":"item","name":"Calendari","url":"html/sprb/sprb0108f.htm"},{"type":"item","name":"Giorni chiusura/assenze","url":"html/sprb/sprb0112f.htm"},{"type":"item","name":"Configurazione periodi","url":"html/sprb/sprb0114f.htm"},{"type":"item","name":"Generazione date periodi","url":"html/sprb/sprb0020d.htm"},{"type":"item","name":"Unità produttive","url":"html/sprb/sprb0115f.htm"},{"type":"item","name":"Utenti unità produttive","url":"html/sprb/sprb0116f.htm"},{"type":"item","name":"Regole di instradamento ordini","url":"html/sprb/sprb0117f.htm"},{"type":"item","name":"Definizione fasce orarie","url":"html/sprb/sprb0127f.htm"},{"type":"book","name":"Schede tecniche","key":"toc242"},{"type":"book","name":"Schedulazione","key":"toc243"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="12 1, 2008 10:06:17 AM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Voci di menù</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "2.0_1";
+</script>
+ <meta name="topic-breadcrumbs" content="Esecuzione statistica da menù" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h2>Voci di menù</h2>
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-size: 10pt; font-weight: normal;">E' possibile aggiungere la 
+ chiamata ad una statistica al menù della procedura OS1; di seguito riportiamo 
+ un'esempio della sintassi da utilizzare all'interno del file .kmnu.</p>
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-size: 10pt; font-weight: normal;">Perchè una statistica possa 
+ essere richiamata dal menù è necessario che tutti i files relativi (i 
+ files iniziano con il nome della statistica .STX.*) siano presenti nella 
+ cartella <span style="font-weight: bold;">Statistiche+.Run</span> che 
+ deve risiedere nella cartella <span style="font-weight: bold;">Custom</span>.</p>
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-size: 10pt; font-weight: normal;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; margin-top: 0pt; margin-bottom: 0pt; 
+	 font-style: italic;">[Moduli]</p>
+<p style="font-family: Verdana, sans-serif; margin-top: 0pt; margin-bottom: 0pt; 
+	 font-style: italic;">SSTP=Statistiche+</p>
+<p style="font-family: Verdana, sans-serif; margin-top: 0pt; margin-bottom: 0pt; 
+	 font-style: italic;">[SSTP]</p>
+<p style="font-family: Verdana, sans-serif; margin-top: 0pt; margin-bottom: 0pt; 
+	 font-style: italic;">AA=Statistiche</p>
+<p style="font-family: Verdana, sans-serif; margin-top: 0pt; margin-bottom: 0pt; 
+	 font-style: italic;">AA01=Fatturato per anno;<span style="font-weight: bold;">SSTPRUN,Fatturato 
+ per anno e cliente,0</span>;M</p>
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-size: 10pt; font-weight: normal;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-style: italic; font-weight: bold; 
+	 text-align: left;">Sintassi: sstprun,nome statistica, tipo esecuzione.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">SSTPRUN: 
+ nome della procedura da richiamare per eseguire la statistica in modo 
+ automatico.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">NOME 
+ STATISTICA: nome della statistica da eseguire; i file della statistica 
+ devono essere residenti nella cartella <span style="font-style: italic;">custom\</span>statistiche+.run.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">TIPO 
+ ESECUZIONE: indica la modalità di esecuzione della statistica:</p>
+<ul style="list-style: disc;">
+	<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+					 margin-top: 2pt; margin-bottom: 2pt;">0: <a href="sstprun_tipo.htm">richiede 
+	 la modalità di esecuzione all'utente</a>;</p></li>
+	<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+					 margin-top: 2pt; margin-bottom: 2pt;">1: visualizzazione 
+	 del risultato in griglia;</p></li>
+	<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+					 margin-top: 2pt; margin-bottom: 2pt;">2: copia del 
+	 risultato in appunti;</p></li>
+	<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+					 margin-top: 2pt; margin-bottom: 2pt;">3: esportazione 
+	 del risultato in Excel;</p></li>
+	<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+					 margin-top: 2pt; margin-bottom: 2pt;">4: esportazione 
+	 del risultato in Word;</p></li>
+	<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+					 margin-top: 2pt; margin-bottom: 2pt;">5: esecuzione 
+	 su formato di stampa (report) in anteprima di stampa;</p></li>
+	<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+					 margin-top: 2pt; margin-bottom: 2pt;">6: esecuzione 
+	 su formato di stampa (report) in stampa.</p></li>
+</ul>
+</body>
+</html>

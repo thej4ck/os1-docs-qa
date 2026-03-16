@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc5.js\"  name=\"Avviamento\"><item name=\"Introduzione avviamento contabile\" url=\"html/bcge/Avviamento_01.htm\" /><item name=\"Fasi preliminari\" url=\"html/bcge/Avviamento_02.htm\" /><item name=\"Ripresa saldi d’apertura\" url=\"html/bcge/Avviamento_03.htm\" /></data>";

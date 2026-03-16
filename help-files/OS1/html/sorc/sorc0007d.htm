@@ -1,0 +1,311 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 21, 2015 12:48:34 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Analisi ordini clienti - Interrogazione</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.4.2.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Ordini clienti > Interrogazione ordini" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="text-align: left; font-size: 12pt;"><strong style="font-weight: bold;">Analisi 
+ ordini clienti</strong></p>
+<p>Il programma produce analisi sintetiche ed analitiche degli ordini esistenti 
+ in base ad una serie di parametri principali, di ulteriori parametri aggiuntivi 
+ e di opzioni di selezione inseriti dall’utente. I parametri di selezione 
+ sono ripartiti su tre finestre video consecutive.</p>
+<p style="text-align: center;"><img src="Images/sorc0007d_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA PRODOTTO: eventuale 
+ codice dell'articolo, presente in anagrafica Prodotti, da cui si desidera 
+ iniziare la selezione di analisi. Confermando a vuoto, la selezione inizia 
+ con il primo prodotto valido. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A PRODOTTO: eventuale 
+ codice dell'articolo, presente in anagrafica Prodotti, a cui si desidera 
+ terminare la selezione di analisi. Confermando a vuoto, la selezione termina 
+ con l’ultimo valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CLIENTE: eventuale 
+ codice del cliente, presente in anagrafica clienti, da cui si vuole iniziare 
+ la selezione di analisi. Confermando a vuoto, la selezione inizia dal 
+ primo cliente valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CLIENTE: eventuale 
+ codice del cliente, presente in anagrafica clienti, con cui si vuole terminare 
+ la selezione di analisi. Confermando a vuoto, la selezione termina con 
+ l’ultimo cliente valido. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale 
+ data da cui deve iniziare l’analisi dei documenti relativamente ai precedenti 
+ parametri di selezione. Confermando a vuoto, l’analisi inizia con il primo 
+ documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale 
+ data con cui si desidera terminare l’analisi dei documenti relativamente 
+ ai precedenti parametri di selezione. Confermando a vuoto, l’analisi si 
+ conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO ORDINE: eventuale 
+ codice della tipologia di ordini (gruppo di causali omogenee) a cui si 
+ vuole limitare la selezione di analisi. Sul campo sono attive le funzioni 
+ di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE ORDINE: eventuale 
+ codice della Causale ordini a cui si vuole limitare la selezione di analisi. 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SELEZIONE SERIE ORDINI: 
+ check box per definire se devono essere esaminati gli ordini relativi 
+ ad una specifica serie sezionale indipendentemente dalla causale o dal 
+ tipo ordine o meno. Valori ammessi: vuoto = no; spunta = si.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SERIE ORDINI: Campo 
+ abilitato solo in caso di selezione serie ordini attiva, per indicare 
+ il numero della serie sezionale da esaminare.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA NUMERO ORDINE: 
+ <span style="text-indent: -0.417in; margin-left: 30pt;">indicare il numero 
+ dell'ordine da cui iniziare l'analisi.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A NUMERO ORDINE: <span 
+	 style="text-indent: -0.417in; margin-left: 30pt;">indicare il numero 
+ dell'ordine con cui terminare l'analisi.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO RAGGRUPPAMENTO: 
+ combo box per definire le modalità di raggruppamento in fase di stampa 
+ degli ordini selezionati. Valori ammessi: Nessuno; Agente 1; Agente 2; 
+ Nazione; Zona; Zona di consegna; Progetto.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO ORDINAMENTO: 
+ combo box per definire le modalità di ordinamento in fase di stampa degli 
+ ordini selezionati. Valori ammessi: Per cliente; Per prodotto; Anno/numero.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO ORDINAMENTO RIGHE: 
+ combo box per definire le modalità di ordinamento delle righe degli ordini 
+ selezionati. Valori ammessi: Per cliente; Per prodotto; Anno/numero/numero 
+ rigo.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO ORDINAMENTO CLIENTE: 
+ combo box per definire, in caso di ordinamento per cliente, le ulteriori 
+ modalità di ordinamento relativamente al cliente in fase di stampa degli 
+ ordini selezionati. Valori ammessi: Per codice; Per ragione sociale.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO ORDINAMENTO PRODOTTO: 
+ combo box per definire, in caso di ordinamento per prodotto, le ulteriori 
+ modalità di ordinamento relativamente al prodotto in fase di stampa degli 
+ ordini selezionati. Valori ammessi: Per codice; Per descrizione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SALTO PAGINA: Campo 
+ abilitato solo in caso di raggruppamento attivo, indicare se effettuare 
+ il salto pagina al cambio di codice di raggruppamento (casella con segno 
+ di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ANALISI SINTETICA: 
+ indica se effettuare la stampa in formato sintetico (casella con segno 
+ di spunta) o completa (casella vuota).</p>
+<p>&#160;</p>
+<p>I criteri di selezione principali fin qui esaminati sarebbero già sufficienti 
+ per eseguire una selezione. Necessitando tuttavia di ulteriori filtri, 
+ si passa alla seconda sezione video:</p>
+<p style="text-align: center;"><img src="Images/sorc0007d_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA AGENTE: codice 
+ dell'agente da cui si intende iniziare la selezione di analisi; confermando 
+ a vuoto la selezione inizia dal primo codice valido. Sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A AGENTE: codice dell'agente 
+ con cui si intende concludere la selezione di analisi; confermando a vuoto 
+ la selezione termina con l’ultimo codice valido. Sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA NAZIONE: codice 
+ della nazione da cui si intende iniziare la selezione di analisi; confermando 
+ a vuoto la selezione inizia dal primo codice valido. Sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A NAZIONE: codice 
+ della nazione con cui si intende concludere la selezione di analisi; confermando 
+ a vuoto la selezione termina con l’ultimo codice valido. Sul campo sono 
+ attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA ZONA: codice della 
+ zona da cui si intende iniziare la selezione di analisi; confermando a 
+ vuoto la selezione inizia dal primo codice valido. Sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A ZONA: codice della 
+ zona con cui si intende concludere la selezione di analisi; confermando 
+ a vuoto la selezione termina con l’ultimo codice valido. Sul campo sono 
+ attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA ZONA CONSEGNA: 
+ codice della zona di consegna da cui si intende iniziare la selezione 
+ di analisi; confermando a vuoto la selezione inizia dal primo codice valido. 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A ZONA CONSEGNA: codice 
+ della zona di consegna con cui si intende concludere la selezione di analisi; 
+ confermando a vuoto la selezione termina con l’ultimo codice valido. Sul 
+ campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA MAGAZZINO: codice 
+ del magazzino da cui si intende iniziare la selezione di analisi; confermando 
+ a vuoto la selezione inizia dal primo codice valido. Sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A MAGAZZINO: codice 
+ del magazzino con cui si intende concludere la selezione di analisi; confermando 
+ a vuoto la selezione termina con l’ultimo codice valido. Sul campo sono 
+ attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DIVISA: codice 
+ della divisa da cui si intende iniziare la selezione di analisi; confermando 
+ a vuoto la selezione inizia dal primo codice valido. Sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DIVISA: codice della 
+ divisa con cui si intende concludere la selezione di analisi; confermando 
+ a vuoto la selezione termina con l’ultimo codice valido. Sul campo sono 
+ attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA PROGETTO: campo 
+ attivo solo in caso di gestione progetti attiva; codice del progetto da 
+ cui si intende iniziare la selezione di analisi; confermando a vuoto la 
+ selezione inizia dal primo codice valido. Sul campo sono attive le funzioni 
+ di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A PROGETTO: campo 
+ attivo solo in caso di gestione progetti attiva; codice del progetto con 
+ cui si intende concludere la selezione di analisi; confermando a vuoto 
+ la selezione termina con l’ultimo codice valido. Sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DESTINAZIONE: campo 
+ attivo solo in caso di selezione di singolo cliente; codice della destinazione 
+ da cui si intende iniziare la selezione di analisi; confermando a vuoto 
+ la selezione inizia dal primo codice valido. Sul campo sono attive le 
+ funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DESTINAZIONE: campo 
+ attivo solo in caso di selezione di singolo cliente; codice della destinazione 
+ con cui si intende concludere la selezione di analisi; confermando a vuoto 
+ la selezione termina con l’ultimo codice valido. Sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p>Al termine della seconda finestra video di selezione, non avviando la 
+ selezione si passa alla finestra video opzioni:</p>
+<p style="text-align: center;"><img src="Images/sorc0007d_03.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TRATTAMENTO DATA: 
+ combo box per definire quale fra le date presenti sugli ordini deve essere 
+ assunta come criterio di analisi. Valori ammessi: Data ordine; Data richiesta; 
+ Data produzione; Data consegna; Data spedizione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPOLOGIA CLIENTE: 
+ combo box per definire quale tipologia di cliente deve essere assunta 
+ come criterio di analisi. Valori ammessi: Tutti; Italia; Estero.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO QUANTITÀ: combo 
+ box per definire quale tipologia di quantità deve essere considerata in 
+ analisi. Valori ammessi: Ordinata lorda; Ordinata netta; Da produrre; 
+ Da spedire; Annullata.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA VALORE: combo 
+ box per definire i criteri per la stampa del valore. Valori ammessi: Non 
+ stampa il valore; Stampa anche il valore; Stampa solo il valore.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STATO ORDINI: definisce 
+ lo stato dei documenti da selezionare. Valori ammessi: tutti, da evadere, 
+ già evasi, solo completamente inevasi, solo parzialmente evasi, solo totalmente 
+ evasi.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO ORDINI: il campo 
+ è presente solo se è attivo il modulo del conto lavoro attivo; consente 
+ di specificare quali ordini si vogliono analizzare: tutti, solo quelli 
+ del conto lavoro attivo, solo ordini di vendita escludendo quelli del 
+ conto lavoro attivo.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ORDINI SOSPESI: il 
+ campo è presente solo se è attiva la gestione degli ordini sospesi, consente 
+ di specificare se nell'analisi devono essere mostrati gli ordini sospesi; 
+ può assumere i valori di Includi sospesi, Solo sospesi, Escludi sospesi.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA NOTE ORDINE: 
+ check box per definire se stampare le note di ordine o meno. Valori ammessi: 
+ vuoto = no; spunta = si.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA NOTE DDT: check 
+ box per definire se stampare le note di Ddt o meno. Valori ammessi: vuoto 
+ = no; spunta = si.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA NOTE FATTURA: 
+ check box per definire se stampare le note di fattura o meno. Valori ammessi: 
+ vuoto = no; spunta = si.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA PRODOTTO CLIENTE: 
+ check box per definire se stampare codici e descrizione prodotti dei clienti, 
+ se presenti, o meno. Valori ammessi: vuoto = no; spunta = si.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA INTESTAZIONE: 
+ indica se deve essere stampata come prima pagina del report una pagina 
+ contenente tutte le informazioni inerenti i criteri di selezione specificati 
+ per il report stesso (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p>Al termine della finestra Opzioni, non avviando la selezione si passa 
+ alla finestra video Opzioni avanzate:</p>
+<p style="text-align: center;"><img src="Images/sorc0007d_04.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CALCOLO COSTO: definisce 
+ se e su che base deve essere determinato il costo relativo al documento; 
+ valori possibili: nessuno, prezzo medio, costo ultimo carico, costo di 
+ mercato, prezzo di vendita o listino. Se gestito il calcolo del costo, 
+ sarà determinato il costo e rapportato al valore del documento fornendo 
+ il margine in valore ed in percentuale.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CODICE LISTINO: codice 
+ del listino prezzi da utilizzare per ricercare il costo per il calcolo 
+ costo da listino. Sul campo sono attive le funzioni di ricerca (F9) sulla 
+ tabella listini.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">TIPO 
+ CALCOLO %</span>: definisce se nel calcolo della percentuale si deve applicare 
+ la formula del margine ((venduto-acquistato)/venduto) o del ricarico ((venduto-acquistato)/acquistato); 
+ valori possibili: Ricarico o Margine.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">modalità 
+ calcolo margine</span>: definisce quali righe dei documenti influiranno 
+ sul calcolo del margine; valori possibili:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+		<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+			<li><p style="margin-top: 2pt; margin-bottom: 2pt;">Includi 
+			 tutte le righe</p></li>
+			<li><p style="margin-top: 2pt; margin-bottom: 2pt;"><span style="text-indent: -0.417in;">Includi 
+			 solo le righe prodotto</span></p></li>
+			<li><p style="margin-top: 2pt; margin-bottom: 2pt;">Includi 
+			 solo le righe prodotto con costo valorizzato</p></li>
+		</ul></li>
+	</ol></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">COSTO SPECIFICO: definisce 
+ se ignorare le normali valorizzazioni del calcolo costo e prelevare il 
+ prezzo indicato sull’ordine fornitore generato dall’ordine cliente, se 
+ attiva la gestione del codice fornitore sugli ordini (casella con segno 
+ di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p>Confermando tramite pressione del bottone Esegui, viene avviata la selezione 
+ e richiamata la finestra video Risultati. Sono attivi i tasti Anteprima 
+ e Stampa sulla toolbar principale per effettuare la stampa del report.</p>
+<p style="text-align: center;"><img src="Images/sorc0007d_05.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+</body>
+</html>

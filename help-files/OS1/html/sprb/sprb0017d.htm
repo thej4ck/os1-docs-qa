@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="02 25, 2012 11:59:40 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Controllo consegne</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.3.2.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Piano di produzione > Interrogazioni" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; 
+	 font-weight: bold;">Controllo consegne</p>
+<p style="font-family: Verdana, sans-serif;">Il programma permette di controllare 
+ se gli ordini clienti possono rispettare le consegne pattuite in relazione 
+ alla pianificazione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: center;"><img src="images/sprb0017d_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif;">Nei parametri di selezione 
+ è possibile impostare i prodotti, i clienti e gli ordini da analizzare; 
+ è possibile ordinare i risultati per prodotto o per cliente e, tramite 
+ la casella di spunta, includere solo gli ordini con problematiche di consegna 
+ o tutti.</p>
+<p style="font-family: Verdana, sans-serif;">Nella griglia dei Risultati 
+ vengono riportati per ogni rigo di ordine oltre i riferimenti la data 
+ di produzione, la data di consegna ed una data di produzione ricalcolata 
+ in relazione alla data di consegna considerando i tempi di consegna del 
+ cliente; i calcoli sulle date vengono effettuati considerando sempre il 
+ calendario aziendale.</p>
+<p style="font-family: Verdana, sans-serif;">Dalla pagina Risultati, tramite 
+ i pulsanti presenti nella <a href="../Ambiente/Ambiente_02.htm">Toolbar</a> 
+ sarà possibile effettuare la stampa e con il doppio clic del mouse sull'ordine 
+ accedere direttamente alla manutenzione.</p>
+<p style="font-family: Verdana, sans-serif;">Vengono analizzati gli ordini 
+ clienti ed in relazione alla data di elaborazione raffrontata con la data 
+ di produzione, la data di consegna e la data di consegna effettiva calcolata 
+ sulla base del periodo di consegna del cliente riportati i dati in colori 
+ differenti in modo da far capire immediatamente all'operatore lo stato 
+ degli ordini:</p>
+<ul style="list-style: disc;">
+	<li class="p"><p style="margin-left: 80px; margin-top: 1.5pt; margin-bottom: 1.5pt;">rosso: 
+	 indica che la data di produzione o la data di consegna presente sull'ordine 
+	 sono antecedenti alla data di elaborazione;</p></li>
+	<li class="p"><p style="margin-left: 80px; margin-top: 1.5pt; margin-bottom: 1.5pt;">marrone: 
+	 indica che la data di produzione o la data di consegna presente sull'ordine 
+	 sono successive alla data di elaborazione e la data di produzione 
+	 è uguale o successiva alla data di consegna;</p></li>
+	<li class="p"><p style="margin-left: 80px; margin-top: 1.5pt; margin-bottom: 1.5pt;">blu: 
+	 indica che la data di produzione è coerente con la data di consegna, 
+	 ma antecedente a quella ricalcolata in base ai tempi di consegna;</p></li>
+	<li class="p"><p style="margin-left: 80px; margin-top: 1.5pt; margin-bottom: 1.5pt;">verde: 
+	 indica che la data di produzione è coerente con la data di consegna.</p></li>
+</ul>
+<p style="text-align: center;"><img src="images/sprb0017d_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+</body>
+</html>

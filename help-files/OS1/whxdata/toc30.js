@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc26.js\"  name=\"Tabelle\"><item name=\"Introduzione\" url=\"html/index/index_106791.htm\" /><item name=\"Categorie fiscali\" url=\"html/bces/bces0100f.htm\" /><item name=\"Categorie gestionali\" url=\"html/bces/bces0101f.htm\" /></data>";

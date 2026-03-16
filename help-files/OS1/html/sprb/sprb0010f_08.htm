@@ -1,0 +1,202 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 16, 2016 5:08:09 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Gestione MPS - Generazione RDA/RLE</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.3.1.0_9";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Piano di produzione > Gestione MPS" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-weight: bold; font-size: 12pt;">Generazione RDA/RLE/RDP</p>
+<p><img src="images/sprb0010f_8_01.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-bottom:5px; margin-right:5px; width:100%; max-width:78px;" align="left" border="0" />Una volta che l’ODP è pianificato è possibile procedere 
+ alla generazione delle RDA per l’approvvigionamento dei materiali e delle 
+ RLE per l'&quot;approvvigionamento” di lavorazioni esterne.</p>
+<p>Nel caso di gestione di più unità produttive in cui una unità produttiva 
+ produce semilavorati utilizzati da un’altra unità produttiva saranno create 
+ anche le eventuali RDP per i componenti di tipo materia prima che sono 
+ instradati su un’unità produttiva diversa rispetto a quella del composto.</p>
+<p>Le RDA costituiscono il punto di contatto fra la produzione e l’ufficio 
+ acquisti. Le RDA vengono generate come provvisorie (stato in valutazione); 
+ ogni volta che viene lanciata la generazione delle nuove RDA eventuali 
+ RDA provvisorie vengono eliminate. Se l’operatore ne ha facoltà (è sia 
+ operatore che responsabile di produzione) può fare in modo di creare la 
+ RDA come approvata.</p>
+<p>La RDA così creata entra nella gestione del modulo Richieste di acquisto 
+ e da esso viene trattato secondo le logiche già conosciute per tale modulo. 
+ Dalla gestione del piano una volta generata la RDA è possibile accedere 
+ alla funzione di gestione RDA da cui eventualmente apportare modifiche 
+ alle RDA create e generare (se previsto) automaticamente anche l’ordine 
+ a fornitore.</p>
+<p>Le RLE vengono generate solo per le fasi esterne del ciclo e costituiscono 
+ il punto di contatto fra la gestione produzione e la gestione del conto 
+ lavoro.</p>
+<p>Dalla gestione del piano è possibile accedere, una volta generate le 
+ RLE, al programma di assegnazione fornitore, al termine del quale è possibile 
+ procedere alla generazione dell’OT.</p>
+<p>Una volta generato l’OT, l’ODL viene posto in stato di lanciato e non 
+ è più possibile annullare la pianificazione (per poter fare questo è necessario 
+ cancellare l’OT).</p>
+<p>Viene proposta la data di fine elaborazione basandosi sui giorni presenti 
+ in configurazione, ed è possibile specificare anche una data di inizio 
+ consegna e come e se deve essere utilizzato il lotto di riordino; la casella 
+ &quot;Considera provvisori&quot; è utilizzata per il calcolo della disponibilità 
+ dei componenti selezionati; se spuntata vengono inclusi nel calcolo anche 
+ gli impegni dei componenti di ODP non pianificati, altrimenti considera 
+ solo gli impegni dei componenti relativi ai soli ODP pianificati (casella 
+ vuota); se attiva la &quot;Gestione misure componenti&quot; il parametro 
+ sarà non spuntato e disabilitato. La pressione sul pulsante Selezione 
+ effettua l'elaborazione e mostra nelle griglie le materie prime che possono 
+ eventualmente essere oggetto di generazione RDA e le eventuali RLE che 
+ saranno generate.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_8_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p><img src="images/sprb0010f_8_03.gif" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:144px;" align="right" border="0" />Le materie prime visualizzate 
+ nella griglia possono essere selezionate o deselezionate con il doppio 
+ clic del mouse oppure utilizzando il tasto destro del mouse che accede 
+ all menù contestuale da dove è possibile effettuare oltre che le selezioni, 
+ anche l'esportazione dei dati visualizzati; le RLE sono presenti solo 
+ a scopo di visualizzazione e saranno comunque sempre generate tutte.</p>
+<p>Nella parte bassa della finestra sono presenti alcune caselle di spunta 
+ utilizzabili per nascondere componenti visualizzati, ma per cui non necessita 
+ acquisto (spunta) e visualizzare i semilavorati (spunta) o nasconderli. 
+ Se l'utente ha le caratteristiche sarà possibile impostare l'approvazione 
+ delle RDA generate. Premendo il pulsante Genera viene effettuata l'effettiva 
+ generazione delle RDA selezionate e delle RLE.</p>
+<p>Se attiva la gestione misure prodotti e sono presenti dei materiali 
+ che includono le misure non sarà consentito di effettuare la generazione 
+ fino a quando non saranno verificate le misure ed eventualmente riassegnate 
+ le quantità in relazione alle misure presenti; la parte bassa della finestra 
+ conterrà il pulsante Misure RDA ed il pulsante Genera sarà disabilitato.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_8_13.png" alt="" style=" border:none; width:100%; max-width:852px;" border="0" /></p>
+<p>La pressione del pulsante Misure RDA consente l'accesso alla finestra 
+ di verifica delle misure;la parte alta della finestra riporta i materiali 
+ che hanno delle misure collegate, per ogni rigo vengono mostrati nella 
+ seconda griglia le misure che fanno capo al materiale, è possibile che 
+ siano presenti più di un rigo se lo stesso materiale è presente con misure 
+ differenti. Per ogni &quot;raggruppamento&quot; di misure è possibile 
+ modificare il numero dei pezzi o la quantità; la modifica del numero dei 
+ pezzi causa il ricalcolo della quantità in base alla formula ed alle misure 
+ indicate, la modifica della quantità non ha alcun effetto sul numero dei 
+ pezzi. Al salvataggio del rigo viene visualizzata nella colonna &quot;Differenza&quot; 
+ la differenza tra la quantità prevista dal fabbisogno e la quantità attualmente 
+ indicata; premendo il pulsante Chiudi si esce dalla finestra e sarà visualizzato 
+ un messaggio &#160;di conferma per ogni differenza riscontrata. La chiusura 
+ della finestra attiverà il pulsante Genera per proseguire nel normale 
+ iter della procedura.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_8_14.png" alt="" style=" border:none; width:100%; max-width:738px;" border="0" /></p>
+<p>&#160;</p>
+<p>Se gestite le unità produttive multiple ed è attivo a livello di configurazione 
+ il parametro &quot;Unità produttive collegate&quot;, è possibile da questa 
+ procedura generare, al posto delle RDA, RDP destinate ad altre unità produttive 
+ riguardanti semilavorati gestiti come materie prime ed instradati verso 
+ altre unità produttive; il funzionamento è analogo alla generazione delle 
+ RDA, comparirà un gruppo in più con l'elenco delle RDP da generare con 
+ indicata l'unità produttiva di destinazione. Le RDP vengono eliminate 
+ e rigenerate fino a che l’unità produttiva assegnataria non ha generato 
+ il piano.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_8_12.png" alt="" style=" border:none; width:100%; max-width:856px;" border="0" /></p>
+<p>&#160;</p>
+<p><img src="images/sprb0010f_8_08.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:83px;" align="left" border="0" />Utilizzando il pulsante Raggruppa RDA è possibile 
+ effettuare il raggruppamento delle richieste di acquisto; questa operazione 
+ consente di selezionare più materiali e generare un'unica richiesta, eliminando 
+ le singole righe. Nella finestra vengono riportati, nella prima griglia, 
+ i materiali raggruppati per prodotto, variante e progetto (in relazione 
+ alla gestione attiva) e selezionando un elemento compaiono, nella griglia 
+ inferiore le righe analitiche relative alle richieste da generare.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_8_09.png" alt="" style=" border:none; margin-top:0px; margin-right:0px; margin-left:0px; margin-bottom:0px; width:100%; max-width:702px;" border="0" /></p>
+<p><img src="images/sprb0010f_8_10.gif" alt="" style=" border:none; margin-top:0px; margin-bottom:5px; margin-left:5px; margin-right:0px; width:100%; max-width:147px;" align="right" border="0" />Da questa griglia è possibile 
+ selezionare le righe da raggruppare con il doppio clic del mouse oppure 
+ utilizzando il menù associato al tasto destro del mouse tramite cui è 
+ possibile anche annullare la selezione a tutte le righe, selezionare tutte 
+ le righe oppure annullare un raggruppamento già effettuato; nella parte 
+ bassa, sotto la griglia, è presente la nuova data di consegna che può 
+ essere anche inserita manualmente (di base viene proposta la data minore 
+ fra tutte le righe selezionate) ed il pulsante Raggruppa. Con le righe 
+ selezionate se si preme il pulsante Raggruppa, viene effettuato il raggruppamento 
+ e le righe appaiono come nell'esempio:</p>
+<p style="text-align: center;"><img src="images/sprb0010f_8_11.png" alt="" style=" border:none; margin-top:0px; margin-right:0px; margin-left:0px; margin-bottom:0px; width:100%; max-width:559px;" border="0" /></p>
+<p>Le righe evidenziate in rosso saranno eliminate ed accorpate al primo 
+ rigo che sarà generato. Tutte le operazioni effettuate all'interno di 
+ questa finestra saranno salvate solo se si preme il pulsante Salva in 
+ basso, se si esce dalla finestra premendo Annulla tutte le modifiche effettuate 
+ andranno perse; analogamente se si esce premendo Salva sarà effettuato 
+ il raggruppamento delle righe come previsto. <span style="font-weight: bold;">Una 
+ volta effettuato, il raggruppamento non potrà essere annullato se non 
+ effettuando nuovamente la selezione generale</span>.</p>
+<p>&#160;</p>
+<p>Terminata la fase di generazione si accede alla finestra seguente; la 
+ finestra è composta di una pagina relativa alle RDA generate (solitamente 
+ una o più di una in caso di progetto di testa) ed una pagina per le RLE; 
+ su ogni pagina sono disponibili funzionalità diverse.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_8_04.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p style="text-align: left;"><img src="images/sprb0010f_8_05.gif" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-right:6px; margin-bottom:0px; width:100%; max-width:95px;" align="left" border="0" />La pagina 
+ RDA mostra le RDA generate riportando nella prima griglia la testata e 
+ sotto le righe; tramite il clic destro dell mouse si accede al menù contestuale 
+ che consente oltre all'esportazione, l'accesso alla manutenzione della 
+ RDA appena generata con la possibilità di generare immediatamente ordine 
+ a fornitore e la stampa.</p>
+<p>&#160;</p>
+<p>&#160;</p>
+<p style="text-align: center;"><img src="images/sprb0010f_8_06.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p style="text-align: left;"><img src="images/sprb0010f_8_07.gif" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:121px;" align="left" border="0" /><span style="text-align: left;">La 
+ pagina RLE mostra le RLE generate; tramite il clic destro dell mouse si 
+ accede al menù contestuale che consente oltre all'esportazione, l'accesso 
+ diretto all'assegnazione fornitore, che se eseguita in questa fase assegna 
+ automaticamente il fornitore presente sull'ODL alle RLE e consente quindi 
+ l'immediata generazione dell'OT con conseguente &quot;Lancio&quot; della 
+ fase.</span></p>
+</body>
+</html>

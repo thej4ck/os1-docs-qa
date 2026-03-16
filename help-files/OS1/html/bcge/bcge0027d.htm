@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="09 18, 2001 6:33:47 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Elaborazione chiusura</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.14.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Operazioni fine esercizio" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;"><strong><span style="font-weight: bold;">Elaborazione chiusura</span></strong></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: Justify;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">Il programma effettua la chiusura d’esercizio, effettiva o simulata, generando sia la scrittura contabile di rilevazione dell’utile o della perdita, sia le scritture contabili di giroconto a Profitti e perdite e a Stato Patrimoniale finale.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: Justify;">Per eseguire tali scritture, il programma utilizza una causale contabile di &#160;“chiusura”, desunta automaticamente dalla Tabella Codici fissi, e una causale contabile di “rilevazione utile (o perdita)” che invece deve essere impostata dall’utente.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: Justify;">Una particolare attenzione va posta, in questa fase, a tali causali: esse, devono avere la spunta nel check box “Movimento esercizio precedente” se la chiusura viene effettuata in una data dell’esercizio successivo. Se invece la chiusura viene effettuata con la data dell’ultimo giorno dell’esercizio contabile, il check box deve essere vuoto.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: Justify;">La causale della rilevazione dell’utile serve esclusivamente per la sua descrizione e, appunto, per l’eventuale spunta esercizio precedente perché il programma provvede da solo ad imputare correttamente i conti Profitti e Perdite, Utile d’esercizio, Perdita d’esercizio.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: Justify;">È possibile effettuare una elaborazione preliminare di prova stampando gli articoli contabili generati dal programma.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: Justify;">Scegliere Contabilità, Operazioni di fine esercizio, Elaborazione chiusura. Appare la seguente maschera video:</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: center;"><img src="Images/bcge0027d_01.png" alt="" style=" border:none; width:100%; max-width:497px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: Justify;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: Justify;">Ad eccezione della data di chiusura, della causale di rilevazione utile, e del tipo operazione, tutte le altre informazioni vengono proposte automaticamente. Gli articoli contabili della chiusura non possono essere variati dall’operatore, perché l’esecuzione definitiva di questo programma “chiude” definitivamente l’esercizio. In caso di necessità, il Servizio Assistenza Software può rendere reversibile una chiusura definitiva. Le registrazioni contabili di chiusura devono ovviamente essere stampate sul giornale.</p>
+</body>
+</html>

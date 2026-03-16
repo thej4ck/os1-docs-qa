@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc16.js\"  name=\"Flussi finanziari\"><item name=\"Introduzione\" url=\"html/index/index_106220.htm\" /><item name=\"Analisi flussi\" url=\"html/bbas/bbas0137d.htm#bc-1\" /><item name=\"Movimenti cash flow\" url=\"html/bpcf/bpcf0008f_f.htm\" /><book name=\"Tabelle\" src=\"toc18.js\" /></data>";

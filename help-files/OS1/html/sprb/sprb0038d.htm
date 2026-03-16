@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 10, 2016 5:21:50 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Rilevazione rettifiche magazzino fasi</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.7.2.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Magazzino > Inventario fisico" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt;">Rilevazione 
+ rettifiche magazzino fasi</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">Il 
+ programma legge le esistenze finali di ciascun articolo/fase/magazzino 
+ e confrontandole con i valori dell'inventario fisico genera automaticamente 
+ movimenti di magazzino per l'eventuale differenza riscontrata, utilizzando 
+ la causale di magazzino inserita dall’utente.</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: center; font-size: 10pt;"><img src="../sclv/images/sclv0038d_01.png" alt="" style=" border:none; width:100%; max-width:761px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; margin-right: 0in; margin-top: 6pt; 
+	 margin-bottom: 6pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in; 
+	 font-size: 10pt;">CODICE INVENTARIO: inserire il codice inventario 
+ per cui si vogliono rilevare le rettifiche. Sul campo sono attive le funzioni 
+ di ricerca F9 sulla tabella stessa, dei soli inventari che risultano chiusi 
+ ma per cui non siano ancora state rilevate le rettifiche.</p>
+<p style="font-family: Verdana, sans-serif; margin-right: 0in; margin-top: 6pt; 
+	 margin-bottom: 6pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in; 
+	 font-size: 10pt;">CAUSALE: inserire la causale di magazzino idonea 
+ alla rilevazione delle rettifiche. Sul campo è attiva la ricerca (F9) 
+ sulla tabella Causali magazzino.</p>
+<p style="font-family: Verdana, sans-serif; margin-right: 0in; margin-top: 6pt; 
+	 margin-bottom: 6pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in; 
+	 font-size: 10pt;">IGNORA TIPO CALCOLO PREZZO DA CAUSALE: non assegna 
+ il prezzo sulle righe del movimento di magazzino anche se sulla causale 
+ è previsto un tipo di calcolo del prezzo (casella con segno di spunta); 
+ il campo è abilitato se la causale ha attivo il calcolo del prezzo.</p>
+<p style="font-family: Verdana, sans-serif; margin-right: 0in; margin-top: 6pt; 
+	 margin-bottom: 6pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in; 
+	 font-size: 10pt;">ELABORAZIONE DEFINITIVA: check box. Valori ammessi: 
+ vuoto = elaborazione di prova; spunta = elaborazione definitiva (vengono 
+ generati i movimenti, previa conferma).</p>
+<p>Nei &quot;Dati inventario&quot; vengono visualizzati i dati presenti 
+ nella codifica dell'inventario selezionato, i dati sono in sola visualizzazione.</p>
+<p>Nella pagina dei risultati vengono visualizzate le operazioni che saranno 
+ effettuate sui prodotti, che è possibile stampare utilizzando i tasti 
+ della toolbar (anteprima o stampa).</p>
+<p style="text-align: center;"><img src="../sclv/images/sclv0038d_02.png" alt="" style=" border:none; width:100%; max-width:985px;" border="0" /></p>
+</body>
+</html>

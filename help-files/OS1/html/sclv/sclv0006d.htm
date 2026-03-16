@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="09 19, 2008 12:01:39 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Lista approvvigionamento materiali</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.6.1.1_4";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Conto lavoro > Ordini terzisti" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; font-weight: bold; 
+	 text-align: left;">Lista approvvigionamento materiali</p>
+<p>Il programma effettua la stampa di una situazione, dei componenti suddivisi 
+ in richieste, ordinati, da ordinare e disponibili, relative alle date 
+ di consegna degli ordini analizzati.</p>
+<p>E’ possibile analizzare un singolo ordine, gli ordini relativi ad una 
+ tipologia omogenea di causali, e/o ad uno o più fornitori, e/o ad uno 
+ o più prodotti, e/o relativi ad una singola fase, ad uno specifico magazzino 
+ entro limiti di data specificati, alla data odierna o a date successive. 
+ Se attiva la gestione progetti è possibile specificare anche il progetto 
+ da analizzare.</p>
+<p style="text-align: center;"><img src="images/sclv0006d_01.png" alt="" style=" border:none; width:100%; max-width:657px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">RIFERIMENTO ORDINE 
+ (ANNO): indica l'anno degli ordini a cui si vuole limitare la selezione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">RIFERIMENTO ORDINE 
+ (CAUSALE): eventuale codice della Causale ordini a cui si vuole limitare 
+ la selezione. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">RIFERIMENTO ORDINE 
+ (NUMERO): indica il numero dell'ordine a cui si vuole limitare la selezione, 
+ in combinazione con anno e/o causale.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA FORNITORE: eventuale 
+ codice del fornitore, presente in anagrafica fornitori, da cui si vuole 
+ iniziare la selezione di analisi. Confermando a vuoto, la selezione inizia 
+ dal primo fornitore valido. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A FORNITORE: eventuale 
+ codice del fornitore, presente in anagrafica fornitori, con cui si vuole 
+ terminare la selezione di analisi. Confermando a vuoto, la selezione termina 
+ con l’ultimo fornitore valido. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA PRODOTTO: eventuale 
+ codice dell'articolo, presente in anagrafica Prodotti, da cui si desidera 
+ iniziare la selezione di analisi. Confermando a vuoto, la selezione inizia 
+ con il primo prodotto valido. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A PRODOTTO: eventuale 
+ codice dell'articolo, presente in anagrafica Prodotti, a cui si desidera 
+ terminare la selezione di analisi. Confermando a vuoto, la selezione termina 
+ con l’ultimo valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">TIPO 
+ ARTICOLO: combo box per definire il tipo di articolo da trattare. Valori 
+ ammessi: Tutti, Nessuno ,Materia prima, Semilavorato, Prodotto finito, 
+ Prodotto transitorio, In lavorazione, Prestazione/servizio, Manodopera, 
+ Lavorazione, Costi vari.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PROGETTO: campo attivo 
+ solo in caso di gestione progetti attiva; codice del progetto per cui 
+ si intende effettuare la selezione di analisi; confermando a vuoto la 
+ selezione considera tutti i progetti. Sul campo sono attive le funzioni 
+ di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FASE: eventuale codice 
+ della fase di lavorazione, per cui si desidera effettuare la selezione 
+ di analisi. Confermando a vuoto, la selezione considera tutte le fasi 
+ di lavorazione. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA DOCUMENTO: 
+ eventuale data del documento da cui deve iniziare l’analisi dei documenti 
+ relativamente ai precedenti parametri di selezione. Confermando a vuoto, 
+ l’analisi inizia con il primo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA DOCUMENTO: 
+ eventuale data del documento con cui si desidera terminare l’analisi dei 
+ documenti relativamente ai precedenti parametri di selezione. Confermando 
+ a vuoto, l’analisi si conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA CONSEGNA: 
+ eventuale data di consegna da cui deve iniziare l’analisi dei documenti 
+ relativamente ai precedenti parametri di selezione. Confermando a vuoto, 
+ l’analisi inizia con il primo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA CONSEGNA: eventuale 
+ data di consegna con cui si desidera terminare l’analisi dei documenti 
+ relativamente ai precedenti parametri di selezione. Confermando a vuoto, 
+ l’analisi si conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE: eventuale 
+ codice della causale a cui si vuole restringere la selezione di analisi. 
+ Sul campo è attiva la vista F9 sulla tabella Causali ordini terzisti.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO: eventuale 
+ codice del magazzino a cui si vuole restringere la selezione di analisi. 
+ Sul campo è attiva la vista F9 sulla tabella Magazzini.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA DI STAMPA: indica 
+ la data di analisi; non può essere indicata una data antecedente alla 
+ data di sistema. L'indicazione dell'ordinato per date antecedenti al valore 
+ di questo campo sarà riportato nel tabulato a questa data.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LOTTO DI RIORDINO: 
+ definisce come gestire la quantità in relazione al lotto di riordino del 
+ prodotto:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">utilizzato 
+		 come minimo: la quantità non sarà mai inferiore al lotto di riordino 
+		 se diverso da zero;</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">utilizzato 
+		 come multiplo: la quantità sarà calcolata sempre come multiplo 
+		 (arrotondata per eccesso) del lotto di riordino se diverso da 
+		 zero;</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">non 
+		 utilizzato: non sarà mai utilizzato il lotto di riordino, né come 
+		 minimo né come multiplo.</p></li>
+	</ul></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA INTESTAZIONE: 
+ Indica se stampare una pagina con i criteri di selezione della stampa, 
+ l’operatore che l’ ha eseguita, la data e l’ora (casella con segno di 
+ spunta).</p>
+</body>
+</html>

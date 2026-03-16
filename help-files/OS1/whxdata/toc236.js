@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc223.js\"  name=\"Pagamenti fornitori\"><item name=\"Introduzione\" url=\"html/index/index_8037.htm\" /><item name=\"Causali CVS\" url=\"html/bpgf/bpgf0100f.htm\" /><item name=\"Schemi contabilizzazione\" url=\"html/bbas/bbas0157f.htm\" /></data>";

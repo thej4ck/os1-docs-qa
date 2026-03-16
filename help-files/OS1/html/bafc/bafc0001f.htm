@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 19, 2016 11:14:56 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Gestione distinta</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.13.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Anticipi fatture clienti" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; font-weight: bold;">Gestione 
+ distinta</p>
+<p>La procedura consente di preparare e manutenere le distinte di anticipazione 
+ da presentare all’istituto di credito tramite un elenco valori “Tipo elaborazione”.</p>
+<ul style="list-style: disc;">
+	<li class="p"><p>Preparazione distinta: tramite questa funzione è possibile 
+	 selezionare, per conto anticipi, le rate relative alle fatture dei 
+	 clienti da presentare; i limiti di selezione comprendono il codice 
+	 divisa che sarà obbligatoriamente quello del conto anticipi se tale 
+	 conto non tratta il controvalore, la percentuale di anticipazione 
+	 che proposta in base a quanto indicato sulle <a href="bafc0100f.htm">condizioni</a> 
+	 del conto, l’intervallo di data scadenza, di codice cliente e di tipologia 
+	 movimento scadenze. Le uniche tipologie che si possono presentare 
+	 sono “RD” – rimessa diretta – e “BO” – bonifico. Infine è possibile 
+	 includere le rate che sono in stato “respinto” relative a distinte 
+	 di presentazione appoggiate su un diverso conto anticipi. Tale prestazione 
+	 è utile nell’ipotesi che si intenda presentare nuovamente un documento 
+	 / rata a fronte di una bocciatura da parte di un’altra banca. La data 
+	 di elaborazione in fase di salvataggio sarà utilizzata come data della 
+	 distinta; qualora il conto di presentazione gestisca i giorni di scadenza 
+	 questi saranno sommati alla data per determinare il limite massimo 
+	 di selezione delle rate.</p></li>
+	<li class="p"><p>Manutenzione distinta: in questa modalità vengono 
+	 richiesti gli estremi della distinta, esercizio, numero distinta e 
+	 conto presentazione.</p></li>
+</ul>
+<p style="font-family: Verdana, sans-serif; text-align: center;"><img src="images/bafc0001f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p><img src="images/bafc0001f_03.gif" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:146px;" align="right" border="0" />In caso di presentazione, 
+ terminata la selezione, saranno mostrati i risultati in una griglia con 
+ cui l’utente potrà inserire dei filtri per ciascuna colonna ed imputare 
+ manualmente l’importo richiesto alla banca qualora, per motivi particolari, 
+ fosse diverso da quello calcolato dalla procedura che risulta essere il 
+ totale disponibile della rata (quindi il saldo al netto ad esempio delle 
+ note di credito assegnate alla rata) per la percentuale indicata nella 
+ selezione.</p>
+<p>Con il doppio clic del mouse, o con il menù associato al tasto destro 
+ del mouse, è possibile selezionare una o più rate direttamente.</p>
+<p>Da evidenziare per quanto riguarda i controlli sollevati in fase di 
+ selezione della rata è quello relativo all’incoerenza tra l’importo totale 
+ presentato, desunto dalla somma degli importi richiesti delle rate selezionate, 
+ con l’importo totale disponibile del conto di presentazione. Tale controllo 
+ è scatenato solo se il conto anticipi gestisce l’importo massimo che è 
+ un tetto massimo concesso dalla banca al cliente per conto anticipi per 
+ presentare i documenti da anticipare. Il valore totale disponibile, che 
+ è mostrato in un campo di sola lettura in fase di creazione della distinta, 
+ è ottenuto dalla differenza tra il totale dell’importo massimo al netto 
+ della somma degli importi presentati nelle distinte relativi a rate elaborate, 
+ accettate, accese. In fase di salvataggio la rata passa in stato di “Elaborata”; 
+ questo cambio stato riguarda anche le rate che in precedenza erano “respinte” 
+ ed incluse nella selezione. Viene infine richiesto se si intende stampare 
+ la distinta appena creata / aggiornata.</p>
+<p>In caso di manutenzione. se la distinta non è stata stampata in definitivo 
+ sarà possibile eliminare la singola rata oppure tutta la distinta; qualora 
+ sia stata già effettuata la stampa definitiva potrà essere solo consultata.</p>
+<p>In entrambi i casi potremo eseguire la stampa tramite l’apposito pulsante 
+ posto nella barra degli strumenti.</p>
+<p style="text-align: center;"><img src="images/bafc0001f_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+</body>
+</html>

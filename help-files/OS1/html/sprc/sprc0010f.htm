@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="06 4, 2014 12:28:42 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Analisi efficienza</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.8.0_10";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Consuntivazione" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt;">Analisi 
+ efficienza</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">La 
+ funzione consente di analizzare l’efficienza delle risorse (O.E.E.) sulla 
+ base degli ODP completati; i dati derivano dagli eventi registrati tramite 
+ OS1BMJob e vengono considerati solo gli eventi definiti come elaborati, 
+ cioè su cui è stato calcolato il tempo risorsa.</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">Nella 
+ pagina dei parametri sono presenti i criteri di selezione per risorsa, 
+ reparto, prodotto e periodo di date relative agli ODP; è possibile ottenere 
+ le informazioni per una specifica risorsa, reparto oppure prodotto, con 
+ valori mensili o settimanali e, spuntando l'apposita casella, visualizzare 
+ il dettaglio giornaliero dei movimenti; è possibile configurare i colori 
+ con cui saranno visualizzati i risultati in forma grafica.</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">Di 
+ seguito si riportano le formule utilizzate per effettuare i calcoli presenti 
+ in analisi:</p>
+<ul style="list-style: disc;">
+	<li><p style="margin-left: 0in; margin-right: 0in; margin-top: 2pt; 
+			 margin-bottom: 2pt;">Tempo fermi programmati: totale dei tempi 
+	 degli eventi di tipo pausa con assegnazione a fermo programmato.</p></li>
+	<li><p style="margin-left: 0in; margin-right: 0in; margin-top: 2pt; 
+			 margin-bottom: 2pt;">Tempo di esercizio: tempo totale annuo 
+	 da calendario - tempo fermi programmati (il tempo mostrato è rapportato 
+	 al periodo di analisi).</p></li>
+	<li><p style="margin-left: 0in; margin-right: 0in; margin-top: 2pt; 
+			 margin-bottom: 2pt;">Tempo non operativo: totale dei tempi 
+	 degli eventi di tipo pausa con assegnazione a tempo non operativo.</p></li>
+	<li><p style="margin-left: 0in; margin-right: 0in; margin-top: 2pt; 
+			 margin-bottom: 2pt;">Tempo operativo: tempo di esercizio - 
+	 tempo non operativo - tempo di fermo - tempo di setup.</p></li>
+	<li><p style="margin-left: 0in; margin-right: 0in; margin-top: 2pt; 
+			 margin-bottom: 2pt;">Indice di disponibilità: tempo operativo 
+	 / tempo di esercizio.</p></li>
+	<li><p style="margin-left: 0in; margin-right: 0in; margin-top: 2pt; 
+			 margin-bottom: 2pt;"><span style="font-family: Verdana, sans-serif; 
+										 text-align: justify; font-size: 10pt;">Tempo 
+	 best performance: tempo totale del ciclo di produzione * quantità 
+	 versata.</span></p></li>
+	<li><p style="margin-left: 0in; margin-right: 0in; margin-top: 2pt; 
+			 margin-bottom: 2pt;">Perdita di prestazione: tempo operativo 
+	 - tempo best performance.</p></li>
+	<li><p style="margin-left: 0in; margin-right: 0in; margin-top: 2pt; 
+			 margin-bottom: 2pt;">Indice di prestazione: tempo best performance 
+	 / tempo operativo.</p></li>
+	<li><p style="margin-left: 0in; margin-right: 0in; margin-top: 2pt; 
+			 margin-bottom: 2pt;">Tempo scarto: tempo totale del ciclo 
+	 di produzione * quantità scartate.</p></li>
+	<li><p style="margin-left: 0in; margin-right: 0in; margin-top: 2pt; 
+			 margin-bottom: 2pt;">Tempo a valore: tempo best performance 
+	 - tempo di scarto.</p></li>
+	<li><p style="margin-left: 0in; margin-right: 0in; margin-top: 2pt; 
+			 margin-bottom: 2pt;">Indice di qualità: tempo a valore / tempo 
+	 best performance.</p></li>
+	<li><p style="margin-left: 0in; margin-right: 0in; margin-top: 2pt; 
+			 margin-bottom: 2pt;">O.E.E.: indice di disponibilità * indice 
+	 di prestazione * indice di qualità.</p></li>
+</ul>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">Premendo 
+ il pulsante Esegui si avvia l'elaborazione che porterà alla pagina dei 
+ risultati.</span></p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: center; font-size: 10pt;"><img src="Images/sprc0010f_01.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">La 
+ pagina dei Risultati presenta una barra di pulsanti che consente di alternare 
+ la visualizzazione tra dati e forma grafica; una griglia superiore che 
+ riporta, in base al tipo di analisi risorsa, reparto oppure prodotto, 
+ una griglia inferiore con il dettaglio richiesto mensile o settimanale.</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: center; font-size: 10pt;"><img src="Images/sprc0010f_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: center; font-size: 10pt;"><img src="Images/sprc0010f_03.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>Se è stato richiesto il dettaglio giornaliero sarà presente una ulteriore 
+ griglia per i valori giornalieri.</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: center; font-size: 10pt;"><img src="Images/sprc0010f_04.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>Tramite il bottone Stampa o Anteprima della toolbar è possibile effettuare 
+ la stampa dei dati mostrati.</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">Tramite 
+ il pulsante Grafico è possibile visualizzare il grafico relativo ai dati; 
+ se si utilizza il bottone Stampa o Anteprima della toolbar è possibile 
+ stampare il grafico visualizzato.</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;"><span 
+	 style="font-family: Verdana, Arial;"><span><img src="../bbas/Images/b_3d.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:24px;" align="left" border="0" /></span>Il 
+ pulsante presente sulla maschera dei grafici, consente di alternare la 
+ visualizzazione del grafico in tre o due dimensioni.</span></p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-align: center; font-size: 10pt;"><img src="Images/sprc0010f_05.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+</body>
+</html>

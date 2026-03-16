@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 31, 2014 12:53:52 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Elaborazione pagamenti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.8.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Pagamenti fornitori" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;">Elaborazione pagamenti</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">Il programma, assumendo informazioni dalla tabella Movimenti scadenze relativamente alle scadenze dei fornitori o dei percipienti R.A., consente di disporre i pagamenti. Sono previste due modalità di trattamento: il Ritiro effetti, che riguarda le scadenze passive di tipo RB (ricevute bancarie), TR (Tratte autorizzate) e CE (Cessioni, Cambiali): le Disposizioni di pagamento che riguardano le scadenze passive di tipo BO (Bonifico bancario), AS (Assegno). La seconda modalità genera successivamente, oltre alla distinta e al file, anche lettere di avviso ai fornitori interessati.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">È importante ricordare che questo programma genera “distinte di pagamento”, e che queste diventano definitive solo all’atto della stampa. Pertanto accedendo più volte a questo programma senza stampare ogni volta la distinta definitiva, si continuerà ad aggiungere pagamenti alla stessa distinta purché ogni volta vengano indicati Riferimenti della distinta identici.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold;">Ritiro effetti</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Scegliendo l’opzione Ritiro effetti, si configura la seguente finestra video di selezione:</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: center;"><img src="Images/bpgf0001f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold;">Definizione parametri di selezione:</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">CONTO DI PRESENTAZIONE: eventuale codice del conto di presentazione, presente nell’apposita tabella, già esistente sulle scadenze passive da selezionare perché presente in Anagrafica Fornitori o perché inserito dall’utente all’atto della registrazione del documento. Indicando il codice del conto di presentazione, verranno selezionate solo le scadenze passive che lo contengono; confermando a vuoto vengono invece selezionate tutte le scadenze passive prive di tale codice. Sul campo è attiva la ricerca su finestra F9 sulla Tabella Conti Correnti.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DIVISA: codice della divisa di cui devono essere estratti gli effetti per la preparazione della distinta. È necessario indicare una divisa perché gli Istituti bancari non accettano singole disposizioni di pagamento con più di una divisa. Sul campo è attiva la ricerca su finestra F9 sulla Tabella omonima.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">TIPO SCADENZA: codice del tipo pagamento che si vuole selezionare. Sul campo è attiva la ricerca su finestra F9 sulla Tabella omonima.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DA DATA SCADENZA: indicare la data scadenza da cui inizia la selezione degli effetti per l'elaborazione della distinta. Confermando a vuoto, vengono selezionate tutte le scadenze anche con date precedenti a quella del giorno, relative al tipo scadenza indicato e non ancora pagate.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">A DATA SCADENZA: indicare la data finale di scadenza a cui deve terminare la selezione degli effetti per l'elaborazione della distinta.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 0.417in; margin-bottom: 0pt;">PAGAMENTI SOSPESI: check box che consente di visualizzare anche le scadenze “sospese”. Valori ammessi:</p>
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">vuoto = solo le scadenze ordinarie e quelle sospese con blocco parziale;</p>
+</li>
+<li class="p">
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">spunta = anche le scadenze sospese con blocco totale.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DATA DISTINTA: indicare la data di presentazione della distinta con la quale si vogliono disporre i pagamenti. Viene proposta la data di sistema, modificabile a cura dell’utente</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">TIPO PAGAMENTO: inserire il codice del tipo pagamento disposto tramite la distinta. Deve essere uguale al codice del tipo scadenza indicato nel campo precedente. Sul campo è attiva la ricerca su finestra F9 sulla Tabella omonima.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">BANCA DI PRESENTAZIONE: inserire il codice del conto corrente sul quale si vogliono disporre i pagamenti, non necessariamente corrispondente al codice indicato nel campo “Conto di presentazione”. Sul campo è attiva la ricerca su finestra F9 sulla Tabella conti correnti</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">IMPORTO MASSIMO: Indicare un importo massimo di spesa che si intende raggiungere come limite al totale degli effetti presentati. Può corrispondere alla disponibilità di c/c esistente al momento sulla banca di presentazione. Non è comunque necessario indicare un importo massimo. Nel caso venga indicato, nella colonna pagato verranno aggiunti gli importi fino a non eccedere l'importo massimo.</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in;"><img src="Images/b_banchecc.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:60px;" align="left" border="0" /> Il pulsante Inserisci conti correnti consente di inserire in modo automatico i conti correnti bancari eventualmente già presenti per gli effetti che rientrano nella selezione. Viene riportato nell'apposita casella l'importo totale degli effetti assegnati alla banca.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold;">Finestra video pagamenti</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Premendo il bottone Esegui, viene visualizzata la finestra video Pagamenti suddivisa in due sezioni: nella griglia della sezione superiore, vengono visualizzate tutte le scadenze coerenti con i parametri di selezione indicati. Per ciascuno di essi vengono visualizzate le informazioni salienti, lo scoperto e, nella colonna “Pagato” risulta già assegnato l’importo da pagare, corrispondente allo scoperto.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">La sezione inferiore presenta il pannello di input e riporta analiticamente i dati di una delle scadenze presenti nella griglia superiore, e precisamente di quella contrassegnata con il simbolo freccia nella colonna di destra. L’utente può scorrere le varie scadenze tramite freccia giù o freccia su, fino ad individuare quella da modificare o da togliere dalla distinta. Per operare sulla scadenza, occorre utilizzare la barra funzioni del pannello di input, cliccando su Modifica per variare l’importo (confermando al termine con Salva) o cliccando su Cancella se si vuole eliminare la scadenza dalla distinta. &#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: center;"><img src="Images/bpgf0001f_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">FORNITORE: campo obbligatorio contenente il codice del fornitore, presente nella rispettiva Anagrafica, cui si riferisce la scadenza. Sul campo è attiva la funzione di ricerca a video F9 sulla tabella omonima.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DOCUMENTO: serie e numero del documento cui si riferisce la scadenza</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DEL: data del documento cui si riferisce la scadenza</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">SCADENZA: data di scadenza di pagamento della rata in esame del documento.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">SOSP. PAGAMENTO: combo box che indica lo stato della rata. Valori possibili: Nessuno; Sospeso. Le scadenze sospese vengono presentate solo se richieste come parametro di selezione, allo scopo di consentirne la modifica in scadenze ordinarie.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">TIPO PAGAMENTO: codice e descrizione della modalità di pagamento della scadenza attiva.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">NUMERO PAGAMENTO: due campi (ANNO e NUMERO) contenenti il numero progressivo (nell’anno) di pagamento, assegnato alla scadenza in esame dal programma di Elaborazione pagamenti. Verrà stampato sulla distinta.</p>
+<p style="margin-left: 0in;"><img src="Images/bpgf0001f_05.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:448px;" align="right" border="0" /><img src="Images/bpgf0001f_02_bAvv.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-right:7px; margin-bottom:0px; width:100%; max-width:23px;" align="left" border="0" />Il bottone permette sia di visualizzare il numero avviso assegnato sia di variare il numero avviso, la modifica di tale dato è possibile in stato di variazione del pagamento. Se il numero avviso che si intende modificare risulta assegnato ad un pagamento che raggruppa più scadenze deve essere specificato se il nuovo numero di avviso deve essere assegnato a tutti i documenti assegnati al pagamento stesso, tramite l’attivazione del flag (“Assegna numero avviso a tutti i documenti”) presente sotto il numero di avviso, se il nuovo numero di avviso non viene associato a tutti i documenti viene generato un nuovo pagamento con la sola scadenza su cui è stato modificato il numero avviso. In questa fase è possibile modificare il numero avviso ma non ne è permessa la cancellazione.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">CONTO BANCARIO: codice alfanumerico di 8 caratteri, presente nella tabella Conti correnti, per indicare la banca di presentazione della distinta. Nella griglia in basso sono riepilogati i totali, degli importi saldato e abbuono, relativi al conto selezionato. Sul campo è attiva la viste F9 sulla tabella stessa.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">SCOPERTO: importo della scadenza, assunto dalla tabella Movimenti scadenze.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">SALDATO: importo che verrà pagato a saldo della scadenza in esame. Viene proposto automaticamente un importo identico allo scoperto, modificabile dall’utente in relazione all’effettivo importo che si vuole pagare.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">ABBUONO: eventuale importo dell’abbuono. Viene proposto automaticamente se l’importo saldato è inferiore all’importo scoperto per una cifra compresa entro il limiti di sconto previsti in configurazione. Può essere modificato o eliminato dall’utente.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">ESTREMI PAGAMENTO: campo descrittivo per scrivere il numero dell'assegno. Significativo solo per distinte assegni.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DATA VALUTA: eventuale data di accredito dell’importo al fornitore. Significativo solo per distinte bonifici.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold;">Disposizioni di pagamento</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Scegliendo invece l’opzione Disposizione di pagamento, si configura la seguente finestra video di selezione tramite la quale è necessario selezionare un fornitore per volta.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;"><span style="font-weight: bold;">Definizione parametri di selezione</span></p>
+<p style="font-family: Verdana, sans-serif; text-align: center;"><img src="Images/bpgf0001f_03.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA FORNITORE: codice del fornitore da cui si desidera iniziare la selezione relativa ai pagamenti da effettuare. Sul campo è attiva la ricerca su finestra F9 sulla Tabella omonima.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A FORNITORE: codice del fornitore con cui si desidera terminare la selezione relativa ai pagamenti da effettuare. Sul campo è attiva la ricerca su finestra F9 sulla Tabella omonima.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DIVISA: codice della divisa di cui devono essere estratti le scadenze per la preparazione della distinta. È necessario indicare una divisa perché gli Istituti bancari non accettano singole disposizioni di pagamento con più di una divisa. Sul campo è attiva la ricerca su finestra F9 sulla Tabella omonima.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">TIPO SCADENZA: codice del tipo pagamento che si vuole selezionare. Sul campo è attiva la ricerca su finestra F9 sulla Tabella omonima. Per questo tipo di disposizione sono ammessi i valori: BO = Bonifico bancario; AS = Assegno.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DA DATA SCADENZA: indicare la data scadenza da cui inizia la selezione delle scadenze per l'elaborazione della distinta. Confermando a vuoto, vengono selezionate tutte le scadenze anche con date precedenti a quella del giorno, relative al tipo scadenza indicato e non ancora pagate.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">A DATA SCADENZA: indicare la data finale di scadenza a cui deve terminare la selezione delle scadenze per l'elaborazione della distinta.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 0.417in; margin-bottom: 0pt;"><span style="font-family: Verdana, sans-serif;">PAGAMENTI SOSPESI: check box che consente di visualizzare anche le scadenze “sospese”. Valori ammessi:</span></p>
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">vuoto = solo le scadenze ordinarie e quelle sospese con blocco parziale;</p>
+</li>
+<li class="p">
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">spunta = anche le scadenze sospese con blocco totale.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DATA DISTINTA: indicare la data di presentazione della distinta con la quale si vogliono disporre i pagamenti. Viene proposta la data di sistema, modificabile a cura dell’utente</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">TIPO PAGAMENTO: inserire il codice del tipo pagamento disposto tramite la distinta. Deve essere uguale al codice del tipo scadenza indicato nel campo precedente. Sul campo è attiva la ricerca su finestra F9 sulla Tabella omonima.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">TIPO FLUSSO: filtro di selezione per scegliere se selezionare fornitori Italia, Estero o entrambi; in fase di salvataggio dati comunque vengono create due distinte diverse in relazione al tipo flusso.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">BANCA DI PRESENTAZIONE: inserire il codice del conto corrente sul quale si vogliono disporre i pagamenti, non necessariamente corrispondente al codice indicato nel campo “Conto di presentazione”. Sul campo è attiva la ricerca su finestra F9 sulla Tabella conti correnti</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">IMPORTO MASSIMO: Indicare un importo massimo di spesa che si intende raggiungere come limite al totale degli effetti presentati. Può corrispondere alla disponibilità di c/c esistente al momento sulla banca di presentazione. Non è comunque necessario indicare un importo massimo. Nel caso venga indicato, nella colonna pagato verranno aggiunti gli importi fino a non eccedere l'importo massimo.</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in;"><img src="Images/b_banchecc.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:60px;" align="left" border="0" /> Il pulsante Inserisci conti correnti consente di inserire in modo automatico i conti correnti bancari eventualmente già presenti per gli effetti che rientrano nella selezione. Viene riportato nell'apposita casella l'importo totale degli effetti assegnati alla banca.</p>
+<p>&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold;">Finestra video pagamenti</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Premendo il bottone Esegui, viene visualizzata la finestra video Pagamenti suddivisa in due sezioni: nella griglia della sezione superiore, vengono visualizzate tutte le scadenze coerenti con i parametri di selezione indicati. Per ciascuno di essi vengono visualizzate le informazioni salienti, lo scoperto e, nella colonna “Pagato” risulta già assegnato l’importo da pagare, corrispondente allo scoperto.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">La sezione inferiore presenta il pannello di input e riporta analiticamente i dati di una delle scadenze presenti nella griglia superiore, e precisamente di quella contrassegnata con il simbolo freccia nella colonna di destra. L’utente può scorrere le varie scadenze tramite freccia giù o freccia su, fino ad individuare quella da modificare o da togliere dalla distinta. Per operare sulla scadenza, occorre utilizzare la barra funzioni del pannello di input, cliccando su Modifica per variare l’importo (confermando al termine con Salva) o cliccando su Cancella se si vuole eliminare la scadenza dalla distinta. &#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: center;"><img src="Images/bpgf0001f_04.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">FORNITORE: campo obbligatorio contenente il codice del fornitore, presente nella rispettiva Anagrafica, cui si riferisce la scadenza. Sul campo è attiva la funzione di ricerca a video F9 sulla tabella omonima. Il pulsante Coordinate, se gestite in configurazione le coordinate bancarie multiple, consente di selezionare quelle previste per il fornitore.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DOCUMENTO: serie e numero del documento cui si riferisce la scadenza</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DEL:data del documento cui si riferisce la scadenza</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">SCADENZA: data di scadenza di pagamento della rata in esame del documento.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">SOSP. PAGAMENTO: combo box che indica lo stato della rata. Valori possibili: Nessuno; Sospeso. Le scadenze sospese vengono presentate solo se richieste come parametro di selezione, allo scopo di consentirne la modifica in scadenze ordinarie.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">TIPO PAGAMENTO: codice e descrizione della modalità di pagamento della scadenza attiva.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">NUMERO PAGAMENTO: due campi (ANNO e NUMERO) contenenti il numero progressivo (nell’anno) di pagamento, assegnato alla scadenza in esame dal programma di Elaborazione pagamenti. Verrà stampato sulla distinta.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">CONTO BANCARIO: codice alfanumerico di 8 caratteri, presente nella tabella Conti correnti, per indicare la banca di presentazione della distinta. Nella griglia in basso sono riepilogati i totali, degli importi saldato e abbuono, relativi al conto selezionato. Sul campo è attiva la viste F9 sulla tabella stessa.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">SCOPERTO: importo della scadenza, assunto dalla tabella Movimenti scadenze.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">SALDATO: importo che verrà pagato a saldo della scadenza in esame. Viene proposto automaticamente un importo identico allo scoperto, modificabile dall’utente in relazione all’effettivo importo che si vuole pagare.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">ABBUONO: eventuale importo dell’abbuono. Viene proposto automaticamente se l’importo saldato è inferiore all’importo scoperto per una cifra compresa entro il limiti di sconto previsti in configurazione. Può essere modificato o eliminato dall’utente.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">ESTREMI PAGAMENTO: campo descrittivo per scrivere il numero dell'assegno. Significativo solo per distinte assegni.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DATA VALUTA: eventuale data di accredito dell’importo al fornitore. Significativo solo per distinte bonifici.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">SPESE: definiscono il criterio di calcolo ed addebito spese; vengono riportate in base all'anagrafica del fornitore, ma sono modificabili.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DATI CVS: sono attivi solo per i bonifici estero; saranno riportati sul flusso.</p>
+</body>
+</html>

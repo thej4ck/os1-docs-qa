@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_3080.htm"},{"type":"item","name":"Importazione ordini web B2B","url":"html/eb2b/eb2b0001f.htm"},{"type":"item","name":"Importazione ordini web B2C","url":"html/eb2c/eb2c0001f.htm"},{"type":"item","name":"Offerte speciali","url":"html/ebas/ebas0001f.htm"},{"type":"item","name":"Stampa offerte speciali","url":"html/ebas/ebas0002d.htm"},{"type":"item","name":"Riallineamento Web B2B","url":"html/eb2b/eb2b0900d.htm"},{"type":"item","name":"Riallineamento Web B2C","url":"html/eb2c/eb2c0900d.htm"},{"type":"item","name":"Generazione immagini per WEB","url":"html/ebas/ebas0902d.htm"},{"type":"book","name":"Tabelle generali","key":"toc107"},{"type":"book","name":"Tabelle B2B","key":"toc109"},{"type":"book","name":"Tabelle B2C","key":"toc110"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

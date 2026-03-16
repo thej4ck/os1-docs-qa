@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_5025.htm"},{"type":"item","name":"Gestione distinta base","url":"html/sdba/sdba0002f.htm"},{"type":"item","name":"Stampa distinta base","url":"html/sdba/sdba0003d.htm"},{"type":"item","name":"Schede di lavorazione","url":"html/sdba/sdba0007f.htm"},{"type":"item","name":"Costi di produzione","url":"html/sbas/sbas0201f.htm"},{"type":"item","name":"Valorizzazione manuale distinta","url":"html/sdba/sdba0008d.htm"},{"type":"item","name":"Stampa valorizzazione distinta base","url":"html/sdba/sdba0004d.htm"},{"type":"item","name":"Generazione movimenti da distinta base","url":"html/sdba/sdba0005d.htm"},{"type":"item","name":"Ricerca componenti","url":"html/sdba/sdba0014d.htm"},{"type":"item","name":"Simulazione fabbisogni","url":"html/sdba/sdba0018d.htm"},{"type":"book","name":"Tabelle","key":"toc150"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

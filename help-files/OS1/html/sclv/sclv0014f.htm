@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 17, 2016 12:40:57 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Generazione DDT terzisti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.6.2.1_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Conto lavoro > DDT terzisti" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; font-weight: bold; 
+	 text-align: left;">Generazione DDT</p>
+<p>Il programma, analizzando i fabbisogni e gli impegni del terzista, le 
+ giacenze presso il suo magazzino e le giacenze dei magazzini aziendali 
+ provvede a creare in automatico i documenti di spedizione dei materiali 
+ necessari per la lavorazione; la selezione avviene in maniera interattiva 
+ lasciando all'utente la possibilità di selezionare liberamente cosa inviare 
+ ai terzisti; se in configurazione Conto lavoro il parametro “Tipo controllo 
+ giacenza” è impostato a “Nessun controllo” oppure a “Controllo non vincolante” 
+ sarà possibile spedire anche una quantità maggiore di quella presente 
+ a magazzino, altrimenti non si potrà andare oltre la giacenza.</p>
+<p>Il programma si articola su due finestre video. La prima, Parametri, 
+ consente la definizione dei parametri di analisi.</p>
+<p style="text-align: center;"><img src="images/sclv0014f_01.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p>E' possibile analizzare gli ordini per riferimento, anno causale e numero, 
+ per fornitore, prodotto, data documento, data di consegna, causale e magazzino; 
+ viene proposta come causale DDT per la generazione quella eventualmente 
+ presente nei dati preferenziali utente, altrimenti la causale presente 
+ in configurazione nei dati preferenziali. Se presente il modulo di produzione 
+ sarà richiesta anche l'unità produttiva, che se compilata, limiterà l'utilizzo 
+ dei magazzini solo a quelli previsti dall'unità produttiva stessa. Se 
+ presente il modulo Progetti/Commesse ed attiva la gestione sarà richiesto 
+ anche il codice progetto, che se compilato, limiterà la selezione degli 
+ ordini a quel solo progetto.</p>
+<p>La casella &quot;Utilizza tutti i magazzini di proprietà&quot; indica 
+ di utilizzare tutti i magazzini di proprietà (casella con spunta), oppure 
+ consente di specificare gli eventuali magazzini da cui scaricare i materiali 
+ da inviare al terzista; se si clicca sulla casella con la spunta si apre 
+ la finestra di selezione che permette di specificare, apponendo la spunta 
+ ai magazzini desiderati, quali magazzini considerare per lo scarico.</p>
+<p style="text-align: center;"><img src="images/sclv0014f_02.png" alt="" style=" border:none; width:100%; max-width:277px;" border="0" /></p>
+<p>La casella &quot;Spedizioni solo da magazzini propri&quot;, se spuntata, 
+ indica se considerare, per la spedizione, solo le giacenze dei magazzini 
+ propri, cioè, di proprietà senza indicazione del fornitore.</p>
+<p>La casella &quot;Controllo su disponibilità&quot;, se spuntata, di confrontare 
+ le quantità da inviare con le disponibilità sul magazzino del terzista 
+ e non sulla giacenza del terzista.</p>
+<p>Tramite la casella &quot;Considera prenotazioni&quot; è possibile utilizzare 
+ le giacenze al netto delle prenotazioni eventualmente effettuate tramite 
+ liste di prelievo (casella con segno di spunta) oppure le giacenze lorde 
+ (casella vuota).</p>
+<p>La casella &quot;Generazione Ddt interattiva&quot; viene proposta spuntata 
+ o vuota in base all'omonimo parametro presente nella configurazione del 
+ conto lavoro e consente di verificare i Ddt che saranno generati, mostrandoli 
+ prima del salvataggio in una pagina aggiuntiva.</p>
+<p>Nel caso in cui il controllo giacenza non sia vincolante compaiono anche 
+ i magazzini da utilizzare per le eventuali righe create relativamente 
+ a prodotti senza giacenza o con giacenza inferiore al necessario; tali 
+ magazzini vengono proposti automaticamente dalla configurazione del conto 
+ lavoro o, se presente la produzione, dall'unità produttiva ed in questo 
+ caso non saranno modificabili.</p>
+<p>Le caselle &quot;Selezione interattiva ordini&quot; e &quot;Genera righe 
+ riferimenti OT&quot; sono collegate ed impostate con la spunta in base 
+ al parametro di configurazione del conto lavoro &quot;Genera righe Ddt 
+ per ordine terzista&quot;; la casella &quot;Genera righe riferimenti OT&quot; 
+ è attivabile se la casella &quot;Selezione interattiva ordini&quot; ha 
+ la spunta; se la casella è spuntata saranno generati i componenti analiticamente 
+ per rigo OT e di conseguenza generate le righe dei Ddt anteposte da un 
+ rigo descrittivo riportante nella descrizione il riferimento all'ordine 
+ terzista (secondo la tabella <a href="../bbas/bbas0150f.htm">riferimenti 
+ documenti</a>) e la data e nel campo note il prodotto/fase dell'ordine 
+ terzista a cui si riferiscono i componenti inserendo le diciture che vengono 
+ utilizzate in fase di stampa dei Ddt (codice <a href="../bbas/bbas0104f.htm">testo 
+ stampa</a> 38 prima del composto e codice <a href="../bbas/bbas0104f.htm">testo 
+ stampa</a> 39 prima dell'elenco componenti).</p>
+<p>La casella &quot;Selezione interattiva ordini&quot; quando spuntata 
+ consente di accedere ad una pagina aggiuntiva prima dell'elaborazione 
+ dei Ddt da cui è possibile decidere quali ordini elaborare.</p>
+<p style="text-align: center;"><img src="images/SClv0014f_05.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>Confermando tramite pressione del bottone Esegui, Vengono mostrati gli 
+ ordini tutti in stato di selezionato ed possibile Selezionare/annullare 
+ un rigo (col doppio clic del mouse), oppure tramite il menù contestuale 
+ richiamabile tramite il tasto destro del mouse che include le funzioni 
+ di selezionare oppure annullare tutte le righe; è possibile intervenire 
+ anche manualmente sulla quantità agendo sull'apposito campo &quot;Selezionata&quot;.</p>
+<p><img src="images/b_invmag.png" alt="" style=" border:none; margin-left:0px; margin-right:6px; margin-top:0px; margin-bottom:0px; width:100%; max-width:24px;" align="left" border="0" />La pressione sul pulsante avvierà l'elaborazione 
+ per la generazione delle righe Ddt relativamente a quanto selezionato.</p>
+<p>&#160;</p>
+<p>Se non è stata selezionata l'elaborazione interattiva degli ordini, 
+ confermando tramite pressione del bottone Esegui, viene avviata l'elaborazione 
+ ed al termine viene richiamata la finestra Risultati dove appaiono già 
+ selezionati tutti i materiali per cui è presente un impegno, è presente 
+ una giacenza, in base al tipo di controllo attivo, ed il terzista non 
+ dispone del quantitativo sufficiente.</p>
+<p style="text-align: center;"><img src="images/sclv0014f_03.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>Sopra le colonne, ad eccezione delle quantità, sono presenti delle caselle 
+ che consentono di filtrare la visualizzazione in relazione ai valori delle 
+ singole colonne: ad esempio cliccando sulla colonna fornitore, se presenti 
+ più codici, selezionandone uno saranno visualizzate solo le righe dove 
+ compare il fornitore selezionato; le caselle di filtro sono combinabili, 
+ ad esempio seleziono un fornitore ed un prodotto.</p>
+<p>Nella colonna prodotto è presente un cerchio colorato che indica lo 
+ stato del prodotto:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-top: 0px; margin-bottom: 0px;">rosso: 
+		 giacenza zero, il prodotto non è disponibile per la spedizione;</p></li>
+		<li class="p"><p style="margin-top: 0px; margin-bottom: 0px;">giallo: 
+		 giacenza non sufficiente, il prodotto è disponibile per la spedizione, 
+		 ma in quantità non sufficiente a coprire le necessità del terzista;</p></li>
+		<li class="p"><p style="margin-top: 0px; margin-bottom: 0px;">verde: 
+		 giacenza sufficiente, il prodotto è disponibile per la spedizione 
+		 ed in quantità sufficiente a coprire le necessità del terzista;</p></li>
+		<li class="p"><p style="margin-top: 0px; margin-bottom: 0px;">grigio: 
+		 rigo giallo o verde selezionato.</p></li>
+	</ul></li>
+</ol>
+<p>L'utente ha la facoltà, tramite un menù richiamabile col tasto destro 
+ del mouse, di effettuare la selezione generale, di annullare l'intera 
+ selezione, selezionare ed annullare singoli materiali; ovviamente saranno 
+ selezionate solo le righe per cui è presente una giacenza, quindi quelle 
+ con cerchio verde o giallo. E' inoltre possibile modificare la quantità 
+ dal campo &quot;Quantità in spedizione&quot; per effettuare invii parziali 
+ anche in presenza di giacenza sufficiente; dal campo,&#160;tramite i tasti 
+ CTRL+F12, si può accedere alla finestra relativa alla <a href="../bbas/DlgSelUmConvQuantita_Sel.htm">conversione 
+ di una unità di misura all'unità di misura del documento</a>.</p>
+<p>La pressione sul tasto Salva sulla toolbar determinerà il salvataggio, 
+ previa richiesta di conferma e sarà avviata la generazione dei documenti. 
+ Al termine della generazione sarà visualizzato un messaggio dove vengono 
+ riportati tutti i Ddt generati e sarà richiesto se si vuole effettuarne 
+ la stampa.</p>
+<p>Se è stata spuntata la casella &quot;Generazione Ddt interattiva&quot; 
+ non sarà effettuata subito la generazione ma sarà visualizzata la pagina 
+ &quot;Generazione Ddt&quot;.</p>
+<p style="text-align: center;"><img src="images/sclv0014f_04.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>In questa pagina vengono visualizzati, prima della generazione, i Ddt 
+ risultato della selezione precedente; la pagina mostra la griglia delle 
+ teste e la griglia delle righe con il dettaglio dei campi nel pannello 
+ in basso; è possibile inserire delle note sulle righe tramite l'apposito 
+ pulsante, cancellare le righe e tramite il pulsante Cancella in alto, 
+ eliminare l'intero Ddt su cui si è posizionati.</p>
+<p>&#160;</p>
+<p><img src="../smat/Images/b_MatMassivo.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-right:5px; margin-bottom:5px; width:100%; max-width:79px;" align="left" border="0" />In presenza della 
+ gestione matricole la generazione Ddt terzisti viene eseguita forzatamente 
+ in modo interattivo perché dopo la generazione temporanea dei documenti 
+ è necessario procedere all’assegnazione delle matricole dalla pagina di 
+ Generazione dove vengono visualizzati i documenti che saranno generati; 
+ è presente il pulsante Matricole che consente l’utilizzo della finestra 
+ di <a href="../smat/DlgMATAssegnazioneDoc.htm">assegnazione massiva matricole</a> 
+ per completare l’assegnazione. Se non vengono assegnate tutte le matricole, 
+ eccezion fatta per i componenti alla fase nel caso di assegnazione matricola 
+ all’ultima fase della produzione, non sarà possibile effettuare la generazione. 
+ I Ddt temporanei, in caso di gestione lotti/ubicazioni non definiti, saranno 
+ creati già con i lotti/ubicazioni assegnati, se trovate delle giacenze.</p>
+<p>&#160;</p>
+<p>La pressione sul tasto Salva sulla toolbar determinerà il salvataggio, 
+ previa richiesta di conferma e sarà avviata la generazione dei documenti. 
+ Al termine della generazione sarà visualizzato un messaggio dove vengono 
+ riportati tutti i Ddt generati e sarà richiesto se si vuole effettuarne 
+ la stampa.</p>
+</body>
+</html>

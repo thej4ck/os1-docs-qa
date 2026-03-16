@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Aggiornamento automatico semafori</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.5.0_4";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazione OS1 Enterprise > Company Shield" />
+</head>
+
+<body>
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h4>Aggiornamento automatico semafori</h4>
+<p>Il programma AggiornaCreditShield ha la funzione di effettuare l’aggiornamento 
+ automatico dei semafori di OS1, con la possibilità di schedularne il lancio 
+ tramite l’utilità di pianificazione presente nei sistemi Windows.</p>
+<p>Il programma può essere lanciato in tre diverse modalità:</p>
+<ol style="list-style: decimal;">
+	<ol style="list-style: decimal;">
+		<li><span style="mso-bidi-font-size: 10.0pt;">Senza parametri: 
+		 in questo caso utilizza la configurazione standard di registro 
+		 per ottenere i parametri di accesso al database di logon.</span></li>
+		<li><span style="mso-bidi-font-size: 10.0pt;">Con parametro che 
+		 corrisponde al nome di una multi-configurazione: in questo caso 
+		 utilizza i valori della configurazione indicata per ottenere i 
+		 parametri di accesso al database di logon.</span></li>
+		<li><span style="mso-bidi-font-size: 10.0pt;">Con parametro che 
+		 corrisponde ad un file: in questo caso utilizza i valori contenuti 
+		 nel file per recuperare i parametri di accesso al database di 
+		 logon. La struttura del file è la seguente:</span></li>
+	</ol>
+</ol>
+<p style="margin-top: 3pt; margin-bottom: 3pt; margin-left: 120px;"><b>[Connessione]</b></p>
+<p style="margin-top: 3pt; margin-bottom: 3pt; margin-left: 120px;">Server=Nome 
+ o IP del server</p>
+<p style="margin-top: 3pt; margin-bottom: 3pt; margin-left: 120px;">DataBase=OSILogon</p>
+<p style="margin-top: 3pt; margin-bottom: 3pt; margin-left: 120px;">UserName=sa</p>
+<p style="margin-top: 3pt; margin-bottom: 3pt; margin-left: 120px;">Password=MiaPassword</p>
+<p>&#160;</p>
+<p>Indipendentemente dalla modalità, una volta individuato il database 
+ di logon, il programma analizza tutte le Ditte configurate; per ogni ditta 
+ che ha impostate le credenziali di accesso ai servizi CreditShield e il 
+ flag di aggiornamento automatico, il programma procede all’aggiornamento 
+ dei valori semaforici.</p>
+<p>&#160;</p>
+<p>Esiste inoltre la possibilità di utilizzare un file di configurazione 
+ “AggiornaCreditShield.ini”, posto nella stessa cartella del programma, 
+ dove si possono impostare i parametri per l’invio di notifiche via email. 
+ Con l’installazione viene reso disponibile un file di esempio (AggiornaCreditShield.ini.sample) 
+ il cui contenuto è il seguente:</p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;"><b>[Opzioni]</b></p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;"><i>; Se diverso da 0 abilita 
+ l'invio di email</i></p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;">InviaEmail=0</p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;"><i>; Se diverso da 0 invia 
+ email solo in caso di errori</i></p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;">EmailSoloSuErrore=0</p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;">&#160;</p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;"><b>[SMTP]</b></p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;"><i>; Impostare TestInvio 
+ = 1 per fare prove di invio email; nessun aggiornamento verrà eseguito</i></p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;">TestInvio=0</p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;"><i>; Specificare l'indirizzo 
+ dell'host e l'eventuale port (default = 25)</i></p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;">Host=MioHostSMTP</p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;">Port=MiaPortaSMTP</p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;"><i>; Specificare il tipo 
+ di sicurezza: (vuoto = nessuna, SSL, TLS)</i></p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;">Sicurezza=</p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;"><i>; Se il provider richiede 
+ autenticazione specificare Utente e Password</i></p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;">UtenteSMTP=</p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;">Password=</p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;"><i>; Indirizzo email mittente</i></p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;">Mittente=</p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;"><i>; Indirizzo email destinatario 
+ (se sono più di uno separarli con punto e virgola &quot;;&quot;)</i></p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;">Destinatario=</p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;"><i>; Specificare l'oggetto 
+ della mail inserendo anche il simbolo %s per consentire</i></p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;"><i>;di integrare il messaggio 
+ prodotto dall'applicazione. Valore predefinito:</i></p>
+<p style="margin-top: 3pt; margin-bottom: 3pt;">;Oggetto=Aggiornamento 
+ CreditShield: %s</p>
+<p>Da notare che se viene impostata la voce TestInvio=1, il programma non 
+ effettua alcun aggiornamento, ma vengono utilizzati i parametri SMTP per 
+ inviare un’email di prova.</p>
+<p>È inoltre possibile specificare una parte dell’oggetto del messaggio 
+ che si va a comporre con la parte generata dal programma.</p>
+</body>
+</html>

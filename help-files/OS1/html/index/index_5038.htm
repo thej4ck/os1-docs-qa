@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="11 7, 2005 4:02:10 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Liste di prelievo</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.7.10.0_1";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Magazzino > Liste di prelievo" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;">Introduzione</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">Il modulo è stato realizzato per rispondere alle esigenze di tutte quelle aziende che necessitano di ottimizzare le giacenze di magazzino e quindi operano tenendo costantemente sotto controllo il materiale disponibile a magazzino.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Si integra da un lato con i moduli del ciclo attivo (Ordini clienti, Vendite) e dall’altro lato con il modulo di Produzione Light.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">L’aspetto fondamentale che viene preso in considerazione è la prenotazione di un prodotto presente a magazzino. Tale evento di per sé non da luogo ad una modifica della giacenza del prodotto e quindi analizzando il fatto puramente da un punto di vista di magazzino, gli elementi restano gli stessi. Tuttavia è molto importante da un punto di vista di disponibilità di magazzino conoscere l’effettiva disponibilità del prodotto.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">La lista di prelievo, dando luogo ad una prenotazione di materiale e di conseguenza diminuendo la disponibilità, permette all’operatore di magazzino di appartare un certo materiale pronto per la spedizione, rendendolo non più disponibile per altre spedizioni.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Il documento Lista di prelievo può essere generato dal portafoglio ordini da evadere, oppure inserita manualmente. In entrambi i casi dalla lista di prelievo è possibile generare i documenti di spedizione successivi (Ddt/fattura).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">L’altro caso in cui è possibile riservare una quantità disponibile a magazzino è durante la fase di generazione delle disposizioni di produzione; in questo caso è l’operatore di produzione che avendo una disponibilità di un determinato prodotto finito decide di riservare tale quantità (o una parte di essa) ad un determinato ordine; di conseguenza l’ordine a produzione verrà generato solo per la parte mancante a magazzino, e sarà creata una lista di prelievo per prenotare il materiale disponibile.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">La nuova informazione, insieme all’indicazione della giacenza, può essere analizzata attraverso le procedure di analisi giacenze di magazzino.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: center;">&#160;</p>
+<table style="vertical-align: Center; border-left-style: Solid; border-left-width: 2px; border-right-style: Solid; border-right-width: 2px; border-top-style: Solid; border-top-width: 2px; border-bottom-style: Solid; border-bottom-width: 2px; margin-left: 2px; margin-right: 2px; left: 206px; top: 74px;" cellspacing="0" align="center">
+<col width="252" />
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="252">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../slpr/slpr0005f.htm">Generazione liste di prelievo</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="252">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../slpr/slpr0001f.htm">Manutenzione liste di prelievo</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="252">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../slpr/slpr0002d.htm">Stampa liste di prelievo</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="252">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../slpr/slpr0003f.htm">Analisi liste di prelievo</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-width: 1px; border-bottom-style: Solid;" width="252">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../slpr/slpr0007f.htm">Saldo liste di prelievo</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-width: 1px; border-bottom-style: Solid;" width="252">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="index_503890.htm">Tabelle</a></p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+</body>
+</html>

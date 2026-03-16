@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="06 7, 2011 10:20:10 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Indice di rotazione delle scorte</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.7.2.0_12";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Magazzino > Interrogazioni" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt;">Indice di rotazione delle scorte</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">L</span>a procedura calcola l’indice di rotazione della scorta di ciascun articolo seguendo le seguenti regole:</span></p>
+<ul style="list-style: disc;">
+<li class="p">
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;">calcolo della quantità e del valore del venduto</p>
+</li>
+<li class="p">
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;">calcolo della scorta media (scorta ad inizio anno e alla fine di ogni mese) a quantità e a valore</p>
+</li>
+<li class="p">
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;">calcolo dell’indice di rotazione come rapporto fra costo del venduto e costo della scorta media.</p>
+</li>
+</ul>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: center;"><img src="Images/bmag0035d_01.png" alt="" style=" border:none; width:100%; max-width:705px;" border="0" /></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;">&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">DA CATEGORIA: eventuale codice della categoria merceologica da cui si vuole iniziare la selezione di analisi. Sul campo è attiva la ricerca (F9) sulla tabella Categorie merceologiche.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">A CATEGORIA: eventuale codice della categoria merceologica con cui si vuole concludere la selezione di analisi. Sul campo è attiva la ricerca (F9) sulla tabella Categorie merceologiche.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">DA COD. INVENTARIO: eventuale codice Inventario da cui si vuole iniziare la selezione di analisi. Sul campo è attiva la ricerca (F9) sulla tabella Codici inventario.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">A COD. INVENTARIO: eventuale codice Inventario con cui vi vuole concludere la selezione di analisi. Sul campo è attiva la ricerca (F9) sulla tabella Codici inventario.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">DA MAGAZZINO: eventuale codice del magazzino da cui si vuole iniziare la selezione di analisi. Confermando a vuoto, l’analisi inizia dal primo magazzino valido. Sul campo è attiva la ricerca (F9) F9 sulla tabella Magazzini.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">A MAGAZZINO: eventuale codice del magazzino con cui si vuole concludere la selezione di analisi. Confermando a vuoto, l’analisi termina con l’ultimo magazzino valido. Sul campo è attiva la ricerca (F9) sulla tabella Magazzini.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">DA PRODOTTO: eventuale codice dell'articolo, presente in anagrafica Prodotti, da cui si desidera iniziare la selezione dei &#160;movimenti di magazzino. Confermando a vuoto, la selezione inizia con il primo prodotto valido. Sul campo è attiva la ricerca (F9) sull’anagrafica prodotti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">A PRODOTTO: eventuale codice dell'articolo, presente in anagrafica Prodotti, a cui si desidera terminare la selezione dei &#160;movimenti di magazzino. Confermando a vuoto, la selezione termina con l’ultimo valido. Sul campo è attiva la ricerca (F9) sull’anagrafica prodotti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">FORNITORE ABITUALE: eventuale codice del fornitore abituale dei prodotti con cui si desidera effettuare la selezione dei prodotti. Sul campo è attiva la ricerca (F9) sull’anagrafica fornitori.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">DATA ELABORAZIONE: data in cui viene effettuata l'elaborazione; viene proposta la data di sistema ed il campo è obbligatorio.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">ORDINAMENTO PER: combo box per definire i criteri di ordinamento. Valori ammessi: nessuno, crescente o decrescente.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; margin-left: 30pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in;">TIPO STAMPA: definisce il tipo di stampa da effettuare: analitica (singolo prodotto), raggruppata per categoria, raggruppata per codice inventario.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">TRATTA OBSOLETI: definisce come se includere nell'analisi anche gli articoli obsoleti: Si, No, Solo obsoleti.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">VALORIZZAZIONE SCORTA MEDIA: definisce il metodo di valorizzazione della scorta media. Valori possibili:</span></p>
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Prezzo medio</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Prezzo ultimo carico</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Costo di mercato</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Prezzo medio di vendita</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Prezzo di listino</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">LISTINO SCORTA MEDIA: Indica il codice del listino, presente sulla tabella Listini, da utilizzare in caso di utilizzo della valorizzazione a prezzo di listino. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">VALORIZZAZIONE VENDITE: definisce il metodo di valorizzazione delle vendite. Valori possibili:</span></p>
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Prezzo medio</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Prezzo ultimo carico</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Costo di mercato</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Prezzo medio di vendita</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Prezzo di listino</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">LISTINO VENDITE: Indica il codice del listino, presente sulla tabella Listini, da utilizzare in caso di utilizzo della valorizzazione a prezzo di listino. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; margin-left: 30pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in;">STAMPA INTESTAZIONE: Indica se stampare una pagina con i criteri di selezione della stampa, l’operatore che l’ ha eseguita, la data e l’ora (casella con segno di spunta).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; margin-left: 30pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in;">DETTAGLIO VARIANTE: definisce se effettuare la stampa dettagliata delle singole varianti (casella con segno di spunta).</p>
+</body>
+</html>

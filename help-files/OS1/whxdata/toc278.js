@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc277.js\"  name=\"Gestione ordini\"><item name=\"Introduzione\" url=\"html/index/index_903510.htm\" /><item name=\"Eliminazione ordini evasi\" url=\"html/sbas/sbas0015d_f.htm\" /></data>";

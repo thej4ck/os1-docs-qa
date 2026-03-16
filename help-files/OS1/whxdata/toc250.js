@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc223.js\"  name=\"Gestione barcode\"><item name=\"Introduzione\" url=\"html/index/index_8090.htm\" /><item name=\"Configurazione etichette barcode\" url=\"html/bpos/bpos0100f.htm\" /></data>";

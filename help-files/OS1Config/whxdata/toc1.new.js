@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_80.htm"},{"type":"book","name":"Generali","key":"toc2"},{"type":"book","name":"Partite aperte","key":"toc11"},{"type":"book","name":"Documenti","key":"toc12"},{"type":"book","name":"eCommerce","key":"toc13"},{"type":"book","name":"Company Shield","key":"toc14"},{"type":"book","name":"Open Banking","key":"toc15"},{"type":"book","name":"Business Intelligence","key":"toc16"},{"type":"book","name":"Statistiche+","key":"toc17"},{"type":"book","name":"Produzione","key":"toc18"},{"type":"book","name":"Archiviazione","key":"toc19"},{"type":"book","name":"Invio documenti email/fax","key":"toc20"},{"type":"book","name":"Gestione Retail Touch Screen","key":"toc21"},{"type":"book","name":"OS1Mobile","key":"toc22"},{"type":"book","name":"Firma remota","key":"toc23"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_909502.htm"},{"type":"item","name":"Pagamenti","url":"html/tfis/tfis0100f.htm"},{"type":"item","name":"Attività IVA","url":"html/tfis/tfis0101f.htm"},{"type":"item","name":"Causali contabili","url":"html/tfis/tfis0102f.htm"},{"type":"item","name":"Aliquote IVA","url":"html/tfis/tfis0103f.htm"},{"type":"item","name":"Divise","url":"html/tfis/tfis0104f.htm"},{"type":"item","name":"Mastri","url":"html/tfis/tfis0105f.htm"},{"type":"item","name":"Conti","url":"html/tfis/tfis0106f.htm"},{"type":"item","name":"Sezionali IVA","url":"html/tfis/tfis0107f.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

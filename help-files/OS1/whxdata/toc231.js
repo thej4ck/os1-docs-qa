@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc225.js\"  name=\"Produzione\"><item name=\"Configurazione disposizioni\" url=\"html/bbas/bbas0101f_23.htm\" /><item name=\"Configurazione conto lavoro\" url=\"html/bbas/bbas0101f_40.htm\" /><item name=\"Configurazione conto lavoro attivo\" url=\"html/bbas/bbas0101f_75.htm\" /></data>";

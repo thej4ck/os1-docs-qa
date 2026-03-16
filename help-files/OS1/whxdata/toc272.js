@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc267.js\"  name=\"OS1Mobile\"><item name=\"Introduzione\" url=\"html/index/index_902088.htm\" /><item name=\"Analisi esito riallineamenti\" url=\"html/bbas/bbas0164d_MOBIL.htm\" /></data>";

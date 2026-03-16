@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc1.js\"  name=\"Open Banking\"><item name=\"Introduzione\" url=\"html/index/index_8046.htm\" /><item name=\"Credenziali accesso\" url=\"html/bbas/bbas0201f.htm\" /><item name=\"Utenti\" url=\"html/bbas/bbas0202f.htm\" /></data>";

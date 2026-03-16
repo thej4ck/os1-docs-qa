@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 29, 2014 6:35:28 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Generazione giroconti IVA per cassa</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.2.0_10";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Registri bollati" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;"><span>Generazione 
+ giroconti IVA per cassa</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt;">Il programma consente la generazione 
+ automatica dei giroconti per le fatture saldate nel periodo (quelle che 
+ ovviamente non hanno già generato il giroconto) e per quelle scadute ma 
+ non saldate. La procedura visualizza un elenco dei giroconti da generare 
+ effettuando una prima selezione automatica, l'utente può comunque selezionare 
+ le righe e specificare gli importi dei singoli movimenti da generare.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; 
+	 margin-bottom: 6pt; text-align: center;"><img src="Images/bcge0049f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">TIPO 
+ CONTO: Indica la tipologia dei conti utilizzati come limiti: clienti, 
+ fornitori o tutti. Se indicato Tutti non saranno richiesti i codici.</p>
+<p>E' possibile specificare un periodo per data di documento oppure lasciare 
+ le date vuote ed il limite non sarà considerato. La data di fine elaborazione 
+ (ELABORA INC./PAG. FINO AL) è un campo obbligatorio e viene utilizzato 
+ per considerare solo gli incassi/pagamenti fino ad una certa data; anche 
+ la DATA ELABORAZIONE è obbligatoria e non può essere successiva alla data 
+ di elaborazione incassi pagamenti; entrambe le date non possono essere 
+ successive alla fine del mese relativo alla data con cui si è connessi 
+ ad OS1.</p>
+<p>La casella ELABORAZIONE DEFINITIVA, se spuntata, consente di effettuare 
+ la generazione dei giroconti ed è attiva solo se i parametri di configurazione 
+ sono inseriti correttamente, altrimenti la procedura funzionerà solo come 
+ una semplice analisi.</p>
+<p>La casella INCLUDI SOGGETTI ENTI PUBBLICI, se spuntato, consente di 
+ includere nell'elaborazione anche i documenti relativi ad enti pubblici 
+ (solo per la parte relativa ad incassi/pagamenti).</p>
+<p>La casella INCLUDI FATTURE SENZA INCASSI/PAGAMENTI, se spuntata, consente 
+ di visualizzare anche le fatture per le quali non è scaduto il termine 
+ per la liquidazione &quot;automatica&quot; e per le quali non sono presenti 
+ incassi/pagamenti nel periodo richiesto.</p>
+<p>La pressione del pulsante Esegui avvia l'elaborazione e porta alla pagina 
+ Risultati effettuando, dove è possibile, la selezione dei giroconti da 
+ generare. E' comunque possibile con il doppio clic del mouse, selezionare 
+ e deselezionare le righe, cliccando sulla colonna Saldato/Scaduto sarà 
+ possibile modificare l'importo dell'eventuale incasso/pagamento. Da questa 
+ pagina è disponibile anche una stampa dei dati elaborati utilizzando i 
+ bottoni Stampa ed Anteprima presenti sulla toolbar. La pressione del bottone 
+ Salva sulla toolbar, previa richiesta conferma, effettuerà le registrazioni 
+ contabili per le righe selezionate.</p>
+<p style="text-align: center;"><img src="Images/bcge0049f_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+</body>
+</html>

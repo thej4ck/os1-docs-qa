@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_555710.htm"},{"type":"item","name":"Pianificazione lavorazioni","url":"html/sclv/sclv0005f.htm"},{"type":"book","name":"Gestione ordini","key":"toc186"},{"type":"item","name":"Stampa ordini","url":"html/sclv/sclv0002d.htm"},{"type":"item","name":"Analisi ordini","url":"html/sclv/sclv0003f.htm"},{"type":"item","name":"Analisi disponibilità componenti","url":"html/sclv/sclv0004f.htm"},{"type":"item","name":"Lista approvvigionamento materiali","url":"html/sclv/sclv0006d.htm"},{"type":"item","name":"Riassegnazione fornitore","url":"html/sclv/sclv0007f.htm"},{"type":"item","name":"Saldo ordini","url":"html/sclv/sclv0008f.htm"},{"type":"book","name":"Interrogazioni","key":"toc187"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

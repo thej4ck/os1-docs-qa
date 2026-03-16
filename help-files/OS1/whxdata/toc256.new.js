@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_9010.htm"},{"type":"book","name":"Contabilità generale","key":"toc257"},{"type":"book","name":"Contabilità semplificata","key":"toc258"},{"type":"book","name":"Partite aperte clienti","key":"toc259"},{"type":"book","name":"Effetti attivi","key":"toc260"},{"type":"book","name":"Partite aperte fornitori","key":"toc261"},{"type":"book","name":"Pagamenti fornitori","key":"toc262"},{"type":"book","name":"Ritenute di acconto","key":"toc263"},{"type":"book","name":"Contabilità analitica","key":"toc264"},{"type":"book","name":"Cespiti","key":"toc265"},{"type":"book","name":"Anticipi fatture clienti","key":"toc266"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

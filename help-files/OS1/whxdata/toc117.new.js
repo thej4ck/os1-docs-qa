@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Avviamento","url":"html/index/index_3530.htm"},{"type":"book","name":"Generazione richieste","key":"toc118"},{"type":"book","name":"Gestione richieste","key":"toc119"},{"type":"item","name":"Stampa richieste","url":"html/soff/soff0002d.htm"},{"type":"item","name":"Analisi richieste","url":"html/soff/soff0003f.htm"},{"type":"item","name":"Esito richieste","url":"html/soff/soff0007f.htm"},{"type":"item","name":"Saldo richieste","url":"html/soff/soff0004f.htm"},{"type":"book","name":"Listini","key":"toc120"},{"type":"book","name":"Tabelle","key":"toc122"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

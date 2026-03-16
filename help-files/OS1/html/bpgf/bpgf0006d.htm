@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 31, 2014 11:40:32 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Bonifici / Ritiro effetti - Home banking</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.8.0_7";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Pagamenti fornitori" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;">Bonifici 
+ / Ritiro effetti - Home banking</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt;">Il programma crea il “file pagamenti” 
+ che contiene l’elenco informatico dei pagamenti relativi ad una determinata 
+ distinta di pagamento definitiva, secondo le specifiche del tracciato 
+ record utilizzato dall’ABI (Associazione Bancaria Italiana), oppure un 
+ file di testo o XML secondo le specifiche SEPA.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt;">Tale file, a cui deve essere 
+ assegnato un nome non più lungo di 8 caratteri e privo di punti e caratteri 
+ divisori, può successivamente essere trasmesso alla banca tramite un programma 
+ di home banking, oppure può essere generato su un floppy disk per la consegna, 
+ unitamente alla distinta, alla banca.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; 
+	 margin-bottom: 6pt; text-align: center;"><img src="Images/bpgf0006d_01.png" alt="" style=" border:none; width:100%; max-width:459px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">ESERCIZIO: 
+ inserire l'anno relativo alla distinta da generare. Viene proposto il 
+ numero dell’esercizio in corso.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">NUMERO 
+ DISTINTA: inserire il numero progressivo della distinta di pagamento di 
+ cui si vuole generare il file Ri.Ba. Normalmente viene presentato il numero 
+ dell’ultima distinta stampata.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DATA 
+ CREAZIONE: viene proposta la data del giorno, modificabile, che verrà 
+ memorizzata sul file.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Tipo esito ordinante</span>: Il 
+ campo consente di scegliere come gestire l'esito ordinante nel flusso 
+ XML generato. Valori disponibili:</p>
+<ul style="list-style: disc;">
+	<ul style="list-style: disc;">
+		<ul style="list-style: disc;">
+			<li><p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; 
+					 margin-bottom: 1.5pt;">senza esito all'ordinante (TRF); 
+			 parametro di default</p></li>
+			<li><p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; 
+					 margin-bottom: 1.5pt;">con Esito all'ordinante (TRA)</p></li>
+		</ul>
+	</ul>
+</ul>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">ADDEBITO 
+ CUMULATIVO: Il campo consente di scegliere se gestire l'addebito cumulativo 
+ (campo BtchBookg) nel flusso XML generato. Valori disponibili:</p>
+<ul style="list-style: disc;">
+	<ul style="list-style: disc;">
+		<ul style="list-style: disc;">
+			<li><p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; 
+					 margin-bottom: 1.5pt; font-family: Verdana, sans-serif;">Non 
+			 gestito (NO - False). Parametro di default.</p></li>
+			<li><p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; 
+					 margin-bottom: 1.5pt; font-family: Verdana, sans-serif;">Gestito 
+			 (SI - True).</p></li>
+			<li><p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; 
+					 margin-bottom: 1.5pt;"><span style="font-family: Verdana, sans-serif; 
+													 font-size: 10pt; text-align: justify; 
+													 text-indent: -0.417in;">Non 
+			 impostare (il campo non viene inserito nel file XML).</span></p></li>
+		</ul>
+	</ul>
+</ul>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">FILE 
+ DESTINAZIONE: inserire un nome file valido; il pulsante accanto al campo 
+ consente di scegliere un determinato percorso oltre al nome del file.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt;">Gli utenti che intendono generare 
+ il file per acquisirlo tramite home banking, devono anteporre al nome 
+ del file di destinazione il percorso per indicare la directory di destinazione 
+ in cui deve essere salvato il file.</p>
+</body>
+</html>

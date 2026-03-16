@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="02 23, 2012 9:19:42 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Gestione MPS - Verifica piano</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.3.1.0_5";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Piano di produzione > Gestione MPS" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-weight: bold; font-size: 12pt;">Verifica piano</p>
+<p><img src="images/sprb0010f_4_01.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-bottom:5px; margin-right:5px; width:100%; max-width:78px;" align="left" border="0" />La verifica di fattibilità del piano analizza ed 
+ evidenzia le situazioni di criticità del piano stesso.</p>
+<p>Viene proposta la data di fine elaborazione basandosi sui giorni presenti 
+ in configurazione, durante la fase di elaborazione è possibile interrompere 
+ in qualsiasi momento con l'apposito pulsante che si abilita automaticamente, 
+ l'interruzione è sottoposta a richiesta di conferma. Prima della verifica 
+ gli indicatori di risultato sono neutri.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_4_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>Al termine della verifica gli indicatori evidenziano le segnalazioni:</p>
+<p style="text-align: center;"><img src="images/sprb0010f_4_03.png" alt="" style=" border:none; width:100%; max-width:848px;" border="0" /></p>
+<p>La parte destra indica le rottura di stock (disponibilità non coperta); 
+ il caso si verifica quando analizzando la disponibilità nel tempo del 
+ composto la disponibilità non è sufficiente a coprire le richieste. Il 
+ sistema propone la creazione di correttivi che consentano di soddisfare 
+ la richiesta.</p>
+<p>La parte sinistra indica le verifica di fattibilità; vengono segnalati 
+ gli ODP per i quali si verifica una delle seguenti condizioni:</p>
+<ul style="list-style: disc;">
+	<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Ritardi 
+	 di produzione: se la produzione dell’ordine è pianificata nel passato 
+	 (rispetto alla data di sistema)</p></li>
+	<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Possibili 
+	 ritardi di produzione: se la produzione di uno dei semilavorati (a 
+	 qualsiasi livello) è pianificata nel passato (rispetto alla data di 
+	 sistema)</p></li>
+	<li class="p"><p style="margin-top: 1.5pt; margin-bottom: 1.5pt;">Possibili 
+	 ritardi di approvvigionamento: se l’approvvigionamento in uno dei 
+	 componenti (a qualsiasi livello) è pianificata nel passato (rispetto 
+	 alla data di sistema)</p></li>
+</ul>
+<p>Qualora si verifichi una di queste condizioni è possibile modificare 
+ la data di richiesta produzione della RDP in modo che rielaborando il 
+ piano la produzione non occorra più nel passato.</p>
+<p>&#160;</p>
+<p>Nella pagina rotture di stock vengono riepilogate le rotture di stock 
+ e per quelle scoperte vengono proposti i correttivi.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_4_04.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p><img src="images/sprb0010f_4_05.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:264px;" align="right" border="0" />L’operatore può confermare la proposta oppure selezionare/deselezionare 
+ manualmente le RDP da creare. Sulla griglia dei correttivi è possibile 
+ selezionare o deselezionare un rigo tramite il doppio click del mouse 
+ oppure utilizzare il menù contestuale richiamabile col tasto destro del 
+ mouse.</p>
+<p>&#160;</p>
+<p><img src="images/sprb0010f_4_08.png" alt="" style=" border:none; margin-left:0px; margin-right:7px; margin-top:0px; margin-bottom:7px; width:100%; max-width:389px;" align="left" border="0" />Se attiva la gestione dei progetti è presente la 
+ colonna Progetto ed nel menù contestuale della griglia dei correttivi 
+ è presente la scelta &quot;Assegna progetto&quot; che è attiva sui correttivi 
+ che non hanno ancora un progetto assegnato. Eseguendo la scelta si apre 
+ una finestra che riporta in alto, in visualizzazione, i dati del correttivo 
+ e consente di inserire un codice progetto ed una quantità. </p>
+<p>Sulla finestra sono attivi i seguenti controlli:</p>
+<p>- non è possibile inserire lo stesso progetto più volte</p>
+<p>- non è possibile inserire una quantità totale maggiore di quella del 
+ correttivo originale</p>
+<p>Sul campo quantità col doppio clic del mouse si assegna al campo la 
+ differenza tra la quantità del correttivo originale ed al totale delle 
+ quantità assegnate ai progetti. Alla pressione del pulsante Salva viene 
+ sostituito il correttivo originale con tante righe per quanti sono i progetti 
+ inseriti; se non è stata assegnata l'intera quantità originale del correttivo 
+ viene inserito un nuovo correttivo senza progetto.</p>
+<p style="font-weight: bold;">Effettuando nuovamente la verifica, senza 
+ effettuare la generazione dei correttivi, le eventuali assegnazioni a 
+ progetti andranno perdute.</p>
+<p>&#160;</p>
+<p>&#160;</p>
+<p>&#160;</p>
+<p>Il correttivo, se confermato tramite la pressione del pulsante &quot;Genera 
+ correttivi&quot;, determina la generazione di apposite RDP e quindi rielaborando 
+ nuovamente il piano la disponibilità verrà adeguata. La generazione dei 
+ correttivi invalida il piano di produzione attuale.</p>
+<p>&#160;</p>
+<p>Nella pagina verifiche di fattibilità vengono riepilogati i casi di 
+ ritardo o possibile ritardo evidenziati nello stesso colore degli indicatori 
+ della prima pagina;</p>
+<p style="text-align: center;"><img src="images/sprb0010f_4_06.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>Con il doppio clic sul rigo, se la correzione è fattibile a livello 
+ di RDP, si apre la parte bassa che consente la modifica della data di 
+ produzione proponendo direttamente quella ricalcolata; premendo il pulsante 
+ Salva la modifica diventa effettiva ed il rigo assume lo sfondo grigio.</p>
+<p style="text-align: center;"><img src="images/sprb0010f_4_07.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p style="text-align: left;">La modifica della data di richiesta produzione 
+ della RDP viene replicata anche sugli ordini clienti originali (nel caso 
+ di RDP da ordini) fornendo di fatto la possibilità all’operatore che si 
+ occupa degli ordini clienti di verificare attraverso apposita funzione 
+ eventuali rinvii nelle consegne che devono essere comunicati al cliente.</p>
+<p style="text-align: left;">Le modifiche effettuate in questa fase invalidano 
+ il piano di produzione attuale che dovrà essere rigenerato.</p>
+</body>
+</html>

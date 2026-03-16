@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="09 18, 2008 6:20:39 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Rilevazione rimanenze</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.7.13.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Magazzino > Operazioni fine esercizio" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt;">Rilevazione rimanenze</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">Il programma legge le esistenze finali di ciascun articolo / magazzino per l’esercizio precedente e genera automaticamente movimenti di magazzino di rilevazione esistenze iniziali in base alla causale di magazzino inserita dall’utente. Contestualmente viene prodotto un report a stampa.</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">Se presente il modulo del conto lavoro, la procedura rileva le rimanenze anche dei prodotti in corso di lavorazione (alle varie fasi del ciclo produttivo).</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; margin-top: 6pt; margin-bottom: 6pt; text-align: center; font-size: 10pt;"><img src="Images/bmag0015d_01.png" alt="" style=" border:none; width:100%; max-width:413px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in; margin-right: 0in; margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-size: 10pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; margin-right: 0in; margin-top: 6pt; margin-bottom: 6pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in; font-size: 10pt;">ESERCIZIO: inserire il numero dell’esercizio per cui si vuole eseguire la rilevazione delle rimanenze iniziali.</p>
+<p style="font-family: Verdana, sans-serif; margin-right: 0in; margin-top: 6pt; margin-bottom: 6pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in; font-size: 10pt;">DATA REGISTRAZIONE. Indicare la data con cui si desidera siano registrati i movimenti di magazzino generati dal programma.</p>
+<p style="font-family: Verdana, sans-serif; margin-right: 0in; margin-top: 6pt; margin-bottom: 6pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in; font-size: 10pt;">CAUSALE: inserire la causale di magazzino idonea alla rilevazione delle rimanenze iniziali. Sul campo è attiva la ricerca (F9) sulla tabella Causali magazzino.</p>
+<p style="font-family: Verdana, sans-serif; margin-right: 0in; margin-top: 6pt; margin-bottom: 6pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in; font-size: 10pt;">RILEVA GIACENZE NEGATIVE: determina la rilevazione delle rimanenze anche per i prodotti con esistenza negativa (casella con segno di spunta).</p>
+<p style="font-family: Verdana, sans-serif; margin-right: 0in; margin-top: 6pt; margin-bottom: 6pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in; font-size: 10pt;">APPLICA PREZZO PER MAGAZZINO: l'opzione è disponibile solo se la valutazione delle rimanenze è configurata a prezzo medio o costo ultimo carico; se spuntato viene utilizzato per la valorizzazione il prezzo specifico del magazzino altrimenti il prezzo complessivo del prodotto. <span style="font-family: Verdana, sans-serif; margin-right: 0in; margin-top: 6pt; margin-bottom: 6pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in; font-size: 10pt;">In mancanza del prezzo medio/costo ultimo verrà utilizzato il prezzo medio/costo ultimo complessivo dell'articolo.</span></p>
+<p style="font-family: Verdana, sans-serif; margin-right: 0in; margin-top: 6pt; margin-bottom: 6pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in; font-size: 10pt;">ELABORAZIONE DEFINITIVA: check box. Valori ammessi: vuoto = elaborazione di prova; spunta = elaborazione definitiva.</p>
+</body>
+</html>

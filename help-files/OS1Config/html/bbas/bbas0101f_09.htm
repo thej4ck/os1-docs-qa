@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 18, 2015 5:49:34 PM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Configurazione contabilità analitica</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.1.1.2.0_9";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazione OS1 Enterprise > Generali > Configurazione moduli > Contabilità" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h5>Configurazione contabilità analitica</h5>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">N. LIVELLI 
+ MASTRO: Indica il numero di livelli massimi gestiti nei mastri centri 
+ di costo/ricavo per definire la struttura del piano dei conti per la contabilità 
+ analitica attiva con il modulo BCAN. Se la versione è standard vengono 
+ gestiti al massimo 2 livelli.</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE 
+ PRIMO LIVELLO: Indica all’interno della struttura del piano dei conti 
+ analitico il significato delle voci di livello 1.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE 
+ SECONDO LIVELLO: Indica all’interno della struttura del piano dei conti 
+ analitico il significato delle voci di livello 2.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE 
+ TERZO LIVELLO: Indica all’interno della struttura del piano dei conti 
+ analitico il significato delle voci di livello 3.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE 
+ QUARTO LIVELLO: Indica all’interno della struttura del piano dei conti 
+ analitico il significato delle voci di livello 4.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE 
+ QUINTO LIVELLO: Indica all’interno della struttura del piano dei conti 
+ analitico il significato delle voci di livello 5.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE 
+ SESTO LIVELLO: Indica all’interno della struttura del piano dei conti 
+ analitico il significato delle voci di livello 6.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">TIPO 
+ QUADRATURA: Indica il tipo di controllo di quadratura da applicare fra 
+ i valori del movimento contabile e i valori ripartiti in contabilità analitica; 
+ utilizzato in gestione prima nota contabile, manutenzione movimenti di 
+ contabilità analitica, contabilizzazione ammortamenti (per la parte riguardante 
+ la contabilità analitica). Valori ammessi:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in;">Nessuna 
+		 quadratura: non effettua nessun tipo di controllo.</p></li>
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in;">Quadratura 
+		 non vincolante: segnala eventuali incoerenze con un messaggio 
+		 non bloccante</p></li>
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in;">Quadratura 
+		 vincolante: segnala eventuali incoerenze con un messaggio bloccante; 
+		 per uscire da tale situazione è necessario comunque far quadrare 
+		 il movimento di contabilità analitica con il rigo di contabilità 
+		 generale.</p></li>
+	</ul></li>
+</ol>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">GESTIONE 
+ SALDI PER SOTTOCONTO: Utilizzato nella fase di aggiornamento saldi commesse, 
+ definisce se gestire i saldi dettagliati anche per sottoconto oppure soltanto 
+ a livello di centro di costo/ricavo.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">GESTIONE 
+ VOCI DI COSTO/RICAVO: Indica se è gestita a livello di contabilità analitica 
+ la voce di costo/ricavo; utilizzato dalle procedure del modulo contabilità 
+ analitica, in prima nota contabile, e nei documenti.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">GESTIONE 
+ COMMESSE: Permette l’attivazione della gestione delle commesse e la gestione 
+ di queste e dei centri di costo/ricavo nei documenti. Valori ammessi:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in;">Nessuna 
+		 gestione: non è attiva la gestione delle commesse, sul rigo documento 
+		 non è possibile specificare né la commessa né il centro di costo. 
+		 In questo caso se il sottoconto contabile del rigo documento prevede 
+		 la gestione in contabilità analitica sarà necessario impostare 
+		 per il sottoconto stesso l’apposita tabella di ripartizione (vedere 
+		 successivo paragrafo relativo ai sottoconti).</p></li>
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in;">Solo 
+		 centro di costo/ricavo: non è attiva la gestione delle commesse, 
+		 sul rigo documento è possibile specificare il centro di costo/ricavo 
+		 ma non la commessa.</p></li>
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in;">Solo 
+		 commessa: è attiva la gestione delle commesse, sul rigo documento 
+		 è possibile specificare la commessa ma non il centro di costo/ricavo. 
+		 In questo caso se il sottoconto contabile del rigo documento prevede 
+		 la gestione in contabilità analitica sarà necessario impostare 
+		 per il sottoconto stesso l’apposita tabella di ripartizione.</p></li>
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in;">Centro 
+		 di costo/ricavo e commessa: è attiva la gestione delle commesse 
+		 e sui documenti è possibile specificare sia la commessa che il 
+		 centro di costo/ricavo.</p></li>
+	</ul></li>
+</ol>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Dettaglio centri di costo/ricavo 
+ su fatture</span>: Consente di specificare sulle righe delle fatture un 
+ dettaglio di centri di costo/ricavo; il parametro è attivo solo se il 
+ campo precedente (Gestione commesse) è impostato a &quot;Solo centro di 
+ costo/ricavo&quot; o &quot;Centro di costo/ricavo e commessa&quot;.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Importo massimo per riallineamento</span>: 
+ Questo campo è operativo solo se è attivo il &quot;Dettaglio centri di 
+ costo/ricavo&quot;. <span style="font-family: Verdana, sans-serif; text-indent: -0.417in; 
+							 margin-left: 30pt;">In fase di generazione 
+ dei movimenti di analitica viene effettuato il controllo di coerenza tra 
+ il totale dei centri di costo/ricavo e l'importo del sottoconto contabile 
+ per riallineare eventuali differenze; se il campo è operativo e la differenza 
+ riscontrata è maggiore del valore presente nel campo questa l'operazione 
+ di riallineamento non sarà effettuata.</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">GESTIONE 
+ COMPETENZA: Indica se si intende gestire a livello di riga di contabilità 
+ analitica il periodo di competenza (inteso come dalla data di inizio alla 
+ data di fine); utilizzato dalle procedure del modulo contabilità analitica, 
+ prima nota contabile, contabilizzazione fatture, autofatture, e incassi. 
+ Gestendo il periodo di competenza in fase di generazione movimenti di 
+ contabilità analitica vengono riportate le date impostate sul documento 
+ di origine, siano questi fatture o movimenti contabili inseriti con causale 
+ che gestisce il periodo di competenza.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">GESTIONE 
+ MOVIMENTI DI RETTIFICA: Se spuntato, in fase di registrazione movimenti 
+ di rettifica (menù Gestione bilanci), permette di creare movimenti di 
+ contabilità analitica legati ai movimenti di rettifica.</p>
+</body>
+</html>

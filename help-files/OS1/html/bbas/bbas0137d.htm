@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 5, 2016 5:49:14 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Analisi flussi finanziari</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.5.1.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Partite aperte clienti > Flussi finanziari" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-weight: bold; margin-top: 6pt; margin-bottom: 6pt; font-size: 12pt;">Analisi flussi finanziari</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;"><span style="font-family: Verdana, Arial;">Il programma permette di ottenere una pianificazione teorica dei propri flussi di cassa, tenendo conto sia dei crediti verso clienti che dei debiti verso fornitori.</span></p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Oltre alla normale movimentazione gestita dalla contabilità è possibile tenere in considerazione sia dati presunti (legati quindi a documenti ancora da evadere o da fatturare), sia dati extracontabili registrando movimenti che non hanno ancora avuto la loro manifestazione numeraria in contabilità attraverso l’apposita funzione di <a href="../bpcf/bpcf0008f_c.htm">manutenzione</a>.</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Includendo sia debiti che crediti verrà calcolato un prospetto finale di riepilogo che riporta i saldi di cassa alle varie date, evidenziando eventuali deficit.</p>
+<p style="font-family: Verdana, Arial; text-align: center;"><img src="Images/BBas0137d_01.png" alt="" style=" border:none; width:100%; max-width:965px;" border="0" /></p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;"><span style="font-family: Verdana, Arial;">Il “Tipo elaborazione” definisce quali tipologie di documenti e movimenti analizzare, se clienti, fornitori, sottoconti o tutti. In base al tipo elaborazione impostato vengono attivati o disattivati i campi di selezione non inerenti quali i clienti, i fornitori e i sottoconti.</span></p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Il “Tipo stampa” definisce la tipologia di stampa che si vuole ottenere, se analisi o scadenzario, quest’ultima analisi, disponibile solo a stampa, permette di dettagliare i movimenti che concorrono alla formazione dell’analisi.</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Nelle date di movimento o di scadenza possono essere indicate le date con cui si vuole iniziare e terminare l’elaborazione dei movimenti.</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Il flag “Ordini comprensivi d’IVA” permette di includere nel calcolo i dati relativi agli ordini comprensivi di IVA oppure solo i dati relativi ai soli valori imponibili.</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Il flag “Ricalcola scadenze in ordini” permette di ricalcolare le scadenze relative agli ordini da evadere, altrimenti vengono utilizzate le scadenze presenti sugli ordini. Nel caso di ricalcolo viene applicata la modalità di pagamento alla data di consegna dell’ordine, nel caso in cui la data di consegna sia precedente alla data di stampa la modalità di pagamento viene applicata alla data di stampa stessa.</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Nel “Periodo” deve essere indicato il numero dei giorni che intercorre tra la data di stampa e le date successive, nel caso in cui nel periodo venga impostato a 30, o ad un suo multiplo, è possibile attivare il flag "Utilizza calendario commerciale", che permette di calcolare le date passate e future considerando il calendario commerciale.</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Le date definiscono le colonne dell'analisi; vengono calcolate in automatico dalla data di stampa in base ai giorni indicati nel periodo e al flag di utilizzo del calendario commerciale, variando la data di stampa vengono ricalcolate le altre date, che sono comunque variabili.</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Il campo “Includi ordini” permette di includere nell’elaborazione gli ordini clienti da evadere e/o gli ordini fornitori da ricevere, in base al tipo di elaborazione impostato. Le scadenze saranno calcolate in base alla data di consegna dell’ordine e in base al flag “Ricalcola scadenze in ordini”, gli importi possono essere al netto o al lordo dell’Iva in base al flag “Ordini comprensivi d’IVA”.</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Il campo “Includi Ddt” permette di includere nell’elaborazione i Ddt clienti e/o fornitori da evadere, in base al tipo di elaborazione impostato.</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Il campo “Includi Fatture” permette di includere nell’elaborazione le fatture clienti e/o fornitori da contabilizzare, in base al tipo di elaborazione impostato.</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Il campo “Includi scoperto” permette di includere nell'elaborazione le partite aperte dei clienti e dei fornitori e le partite contabili aperte, in base al tipo elaborazione impostato. In particolare le partite contabili vengono incluse se viene impostato di elaborare solo i sottoconti o tutti i conti.</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Il campo “Includi esposizione” permette di includere nell'elaborazione le scadenze in esposizione, mentre il campo “Includi saldi banche” permette di includere nell’elaborazione il saldo contabile dei conti definiti come banche (sottoconti collegati a mastri identificati come banche) e non gestiti a partite (campo “Partite contabili” non attivo nel sottoconto). Nel caso in cui venga impostato di includere sia l’esposizione che i saldi delle banche gli effetti contabilizzati vengono riportati nel saldo del conto bancario e non del conto del cliente.</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Il campo “Includi movimenti extracontabili” permette di includere nell’elaborazione i movimenti extracontabili, presenti nei movimenti cash flow, come abbiamo visto nel paragrafo precedente.</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Attivando il campo “Controvalore” viene effettuata la stampa nel controvalore della moneta di conto e non nella divisa originaria dei documenti.</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Impostando il tipo stampa a scadenzario è possibile effettuare l’ordinamento dei dati per scadenza o per conto, e la stampa dei totali per scadenza o per mese. Impostando il tipo stampa ad analisi è possibile effettuare il raggruppamento dei dati per conto di presentazione impostato sulle scadenze, sui documenti per i bonifici clienti o sui clienti e/o fornitori.</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;"><span style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Effettuando l'elaborazione con Tipo stampa impostato ad Analisi viene presentata una pagina Risultati; qui</span> <span style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, Arial;">sono presenti le linguette relative ai dati dei crediti, dei debiti, dei totali e dei grafici, in base ai dati selezionati nella maschera dei parametri.</span></p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Nei “Crediti” vengono riportati i valori relativi ai clienti e ai conti definiti come attività, ad esempio le banche.</p>
+<p style="font-family: Verdana, Arial; text-align: center;"><img src="Images/bbas0137d_02.png" alt="" style=" border:none; width:100%; max-width:965px;" border="0" /></p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">&#160;<span style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Nei “Debiti” vengono riportati i valori relativi ai fornitori e ai conti definiti come passività.</span></p>
+<p style="font-family: Verdana, Arial; text-align: center;">&#160;<img src="Images/bbas0137d_03.png" alt="" style=" border:none; width:100%; max-width:965px;" border="0" /></p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">Nei “Totali” viene visualizzato un prospetto finale di riepilogo che riporta i saldi dei crediti, dei debiti e l’effettivo saldo.</p>
+<p style="font-family: Verdana, Arial; text-align: center;">&#160;<img src="Images/bbas0137d_04.png" alt="" style=" border:none; width:100%; max-width:965px;" border="0" /></p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">La linguetta “Grafici” viene visualizzata solo nel caso in cui siano stati definiti i raggruppamenti e almeno uno dei conti elaborato faccia parte di un raggruppamento. Di default vengono selezionati automaticamente tutti i raggruppamenti e di questi viene visualizzato il grafico generale, è possibile deselezionare manualmente uno o più raggruppamenti.</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;"><img src="Images/b_3d.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:24px;" align="left" border="0" />Il pulsante presente sulla maschera dei grafici, consente di alternare la visualizzazione del grafico in tre o due dimensioni.</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;"><img src="Images/b_Generale.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:96px;" align="left" border="0" />Il pulsante consente la visualizzazione del grafico Generale.</p>
+<p style="font-family: Verdana, Arial; text-align: center;"><img src="Images/bbas0137d_05.png" alt="" style=" border:none; width:100%; max-width:965px;" border="0" /></p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;"><img src="Images/b_Andamento.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:96px;" align="left" border="0" />Il pulsante consente la visualizzazione del grafico lineare.</p>
+<p style="font-family: Verdana, Arial; text-align: center;">&#160;<img src="Images/bbas0137d_06.png" alt="" style=" border:none; width:100%; max-width:965px;" border="0" /></p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;"><img src="Images/b_Composizione.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:105px;" align="left" border="0" />Il pulsante consente la visualizzazione del grafico di composizione.</p>
+<p style="font-family: Verdana, Arial; text-align: center;">&#160;<img src="Images/bbas0137d_07.png" alt="" style=" border:none; width:100%; max-width:965px;" border="0" /></p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;"><img src="Images/b_Sintesi.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:96px;" align="left" border="0" />Il pulsante consente la visualizzazione del grafico lineare dei dati di sintesi.</p>
+<p style="font-family: Verdana, Arial; text-align: center;">&#160;<img src="Images/bbas0137d_08.png" alt="" style=" border:none; width:100%; max-width:965px;" border="0" /></p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;">L'analisi della composizione dei raggruppamenti può essere visualizzata tramite la selezione della voce “Dati di sintesi”.</p>
+<p style="font-family: Verdana, Arial; text-align: center;">&#160;<img src="Images/BBas0137d_09.png" alt="" style=" border:none; width:100%; max-width:965px;" border="0" /></p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt;"><img src="Images/b_DettaglioAF.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:24px;" align="left" border="0" />Il pulsante, presente sulla maschera dei dati di sintesi, consente di attivare o disattivare la visualizzazione del dettaglio dei conti relativi ai raggruppamenti visualizzati sopra.</p>
+<p style="font-family: Verdana, Arial; text-align: center;">&#160;<img src="Images/bbas0137d_10.png" alt="" style=" border:none; width:100%; max-width:965px;" border="0" /></p>
+</body>
+</html>

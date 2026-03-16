@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_9096.htm"},{"type":"item","name":"Esportazione dati contabili","url":"html/bipn/bipn0050d.htm"},{"type":"item","name":"Esportazione tabelle","url":"html/bipn/bipn0052d.htm"},{"type":"item","name":"Elenco esportazioni effettuate","url":"html/bipn/bipn0051d.htm"},{"type":"item","name":"Ripristino esportazioni","url":"html/bipn/bipn0053d.htm"},{"type":"item","name":"Esportazioni documenti","url":"html/bipn/bipn0011d.htm"},{"type":"book","name":"Tabelle","key":"toc300"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

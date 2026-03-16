@@ -1,0 +1,438 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 9, 2016 6:11:03 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Stampa scadenzario clienti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.5.0_5";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Partite aperte clienti" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;">Stampa 
+ scadenzario clienti</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt;"><span style="font-family: Verdana, sans-serif; 
+												 font-size: 10pt;">I programmi, 
+ provvedono alla stampa di scadenzari attivi per clienti, per divisa, riepiloghi 
+ generali, liste insoluti e per giorni medi assumendo informazioni dalle 
+ tabelle Movimenti scadenze. Le finestre video di input sono parametrizzate 
+ e si modificano in funzione del tipo di stampa prescelto.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO STAMPA: check 
+ box per definire il tipo di stampa da effettuare. Valori ammessi: Scadenzario 
+ per cliente; Scadenzario per divisa; Riepilogo generale; Lista insoluti; 
+ Per giorni medi.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">Lo scadenzario per 
+ giorni medi <span style="font-size: 10.0pt; mso-fareast-font-family: 'Times New Roman'; 
+					 mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: IT; 
+					 mso-fareast-language: IT; mso-bidi-language: AR-SA;">effettua 
+ il calcolo dei giorni medi di incasso al fine di raffrontare i tempi teorici 
+ ed i tempi effetti di incasso.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt;"><span style="font-weight: bold;">Tipi 
+ stampa per cliente, per divisa e giorni medi</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; 
+	 margin-bottom: 6pt; text-align: center;"><img src="Images/bpcf0004d_c_01.png" alt="" style=" border:none; width:100%; max-width:533px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DA 
+ CLIENTE: indicare il codice del cliente da cui si intende iniziare la 
+ stampa dello scadenzario; confermando a vuoto la stampa inizia dal primo 
+ codice valido. Sul campo è attiva la funzione di ricerca (F9).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">A 
+ CLIENTE: indicare il codice del cliente con cui si intende far terminare 
+ la stampa dello scadenzario; se si conferma a vuoto la stampa termina 
+ con l'ultimo codice valido. Sul campo è attiva la funzione di ricerca 
+ (F9).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">DA DATA: 
+ indicare la data di scadenza da cui si vuole iniziare la lettura dei movimenti. 
+ Confermando a vuoto la stampa inizia con il primo movimento valido presente 
+ sulla tabella movimenti contabili per il primo conto selezionato.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">A 
+ DATA: indicare la data di scadenza con cui si vuole terminare la lettura 
+ dei movimenti. Confermando a vuoto la stampa termina con l’ultimo movimento 
+ valido presente sulla tabella movimenti contabili per l'ultimo conto selezionato.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">DA DATA 
+ DOC.: indicare la data documento da cui si vuole iniziare la lettura dei 
+ movimenti. Confermando a vuoto la stampa inizia con il primo movimento 
+ valido presente sulla tabella movimenti contabili per il primo conto selezionato.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">A 
+ DATA DOC.: indicare la data documento con cui si vuole terminare la lettura 
+ dei movimenti. Confermando a vuoto la stampa termina con l’ultimo movimento 
+ valido presente sulla tabella movimenti contabili per l'ultimo conto selezionato.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DA 
+ DIVISA: indicare il codice della prima divisa di cui vogliono stampare 
+ le scadenze. Confermando a vuoto la selezione inizia con la prima divisa 
+ valida. Sul campo è attiva la funzione di ricerca (F9).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">A 
+ DIVISA: indicare il codice dell’ultima divisa di cui vogliono stampare 
+ le scadenze. Confermando a vuoto la selezione termina con l’ultima divisa 
+ valida. Sul campo è attiva la funzione di ricerca (F9).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">TIPO 
+ SCADENZA: indicare la tipologia di pagamento di cui si vuole stampare 
+ lo scadenzario.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">ELABORAZIONE 
+ AL: consente di stampare lo scadenzario in essere alla data specificata.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DATA 
+ DI STAMPA: indicare la data in cui viene stampato lo scadenzario (viene 
+ proposta la data di sistema, modificabile).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">STAMPA 
+ RIEPILOGO: combo box per determinare le modalità di stampa del riepilogo 
+ finale. Valori ammessi: Non stampa il riepilogo; Stampa anche il riepilogo</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">TIPO 
+ ORDINAMENTO: combo box per determinare il tipo di ordinamento. Valori 
+ ammessi: Codice; Ragione sociale</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">STAMPA 
+ TOTALI: combo box per determinare &#160;le modalità di stampa dei totali. 
+ Valori ammessi: Non stampa i totali; Stampa i totali per data scadenza; 
+ Stampa i totali per mese</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">STAMPA 
+ NOTE DI CREDITO: check box significativo nel caso in cui si stampi lo 
+ scadenzario delle rimesse dirette; permette di selezionare in stampa anche 
+ le note di credito. Valori ammessi: Non stampa le note di credito; Stampa 
+ anche le note di credito; Stampa solo le note di credito</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">STAMPA 
+ ANTICIPI: check box significativo nel caso in cui si stampi lo scadenzario 
+ delle rimesse dirette; permette di selezionare in stampa anche gli anticipi. 
+ Valori ammessi: Non stampa gli anticipi; Stampa anche gli anticipi; Stampa 
+ solo gli anticipi</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">STAMPA 
+ INSOLUTI: check box significativo nel caso in cui si stampi lo scadenzario 
+ delle rimesse dirette; permette di selezionare in stampa anche gli insoluti. 
+ Valori ammessi: Non stampa gli insoluti; Stampa anche gli insoluti; Stampa 
+ solo gli insoluti.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif;">INCLUDI FORNITORE DI RIFERIMENTO: 
+ se spuntato include le partite del fornitore di riferimento, se presente; 
+ tali partite saranno evidenziate in corsivo in stampa.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">VALORI 
+ ESPRESSI IN: definisce la moneta di conto in cui verranno visualizzati 
+ i controvalori.</span></p>
+<p>&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; font-weight: bold;">Avanzate</p>
+<p style="text-align: center;"><img src="Images/bpcf0004d_c_04.png" alt="" style=" border:none; width:100%; max-width:533px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">DA ZONA: 
+ indicare il codice della zona da cui si intende iniziare la stampa dello 
+ scadenzario; confermando a vuoto la stampa inizia dal primo codice valido. 
+ Sul campo è attiva la funzione di ricerca (F9).</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">A 
+ ZONA: indicare il codice della zona con cui si intende far terminare la 
+ stampa dello scadenzario; se si conferma a vuoto la stampa termina con 
+ l'ultimo codice valido. Sul campo è attiva la funzione di ricerca (F9).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">DA CONTO 
+ PRESENTAZIONE: indicare il codice del conto di presentazione da cui si 
+ intende iniziare la stampa dello scadenzario; confermando a vuoto la stampa 
+ inizia dal primo codice valido. Sul campo è attiva la funzione di ricerca 
+ (F9).</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">A 
+ CONTO PRESENTAZIONE: indicare il codice del conto di presentazione con 
+ cui si intende far terminare la stampa dello scadenzario; se si conferma 
+ a vuoto la stampa termina con l'ultimo codice valido. Sul campo è attiva 
+ la funzione di ricerca (F9).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;"><span><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">DA AGENTE: 
+ indicare il codice dell'agente da cui si intende iniziare la stampa dello 
+ scadenzario; confermando a vuoto la stampa inizia dal primo codice valido. 
+ Sul campo è attiva la funzione di ricerca (F9).</span></span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">A 
+ AGENTE: indicare il codice dell'agente con cui si intende far terminare 
+ la stampa dello scadenzario; se si conferma a vuoto la stampa termina 
+ con l'ultimo codice valido. Sul campo è attiva la funzione di ricerca 
+ (F9).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">DA MASTRO: 
+ indicare il codice del mastro da cui si intende iniziare la stampa dello 
+ scadenzario; confermando a vuoto la stampa inizia dal primo codice valido. 
+ Sul campo è attiva la funzione di ricerca (F9).</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">A 
+ MASTRO: indicare il codice del mastro con cui si intende far terminare 
+ la stampa dello scadenzario; se si conferma a vuoto la stampa termina 
+ con l'ultimo codice valido. Sul campo è attiva la funzione di ricerca 
+ (F9).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">RAGGRUPPAMENTO: 
+ definisce quale raggruppamento deve essere eseguito in stampa. Valori</span> 
+ <span style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+		 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">ammessi: 
+ Nessuno, Agente, Zona, Agente/Zona. Questa opzione è presente solo nella 
+ stampa per cliente.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">RAGGRUPPAMENTO 
+ PER CONTO DI PRESENTAZIONE: selezionando questa opzione la stampa sarà 
+ raggruppata ed ordinata per conto di presentazione.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">ORDINA 
+ PER VALORE SCADUTO: effettua l'ordinamento decrescente dei dati in base 
+ calcolo dei giorni di scaduto per l'importo scoperto (casella con segno 
+ di spunta).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">INCLUDI 
+ EFFETTI IN ESPOSIZIONE: definisce se stampare sullo scadenzario anche 
+ gli effetti in esposizione (casella con segno di spunta) oppure no (casella 
+ vuota).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">STAMPA 
+ PROTOCOLLO IVA: definisce se aggiungere alla stampa anche il protocollo 
+ IVA (casella con segno di spunta).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">STAMPA 
+ IMPORTI NETTI: valido per le fatture emesse con ritenuta d’acconto, se 
+ spuntato presenta il valore netto delle ritenute.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">CONSIDERA 
+ EFFETTI MANUALI COME ANTICIPI: se spuntato consente di trattare gli effetti 
+ emessi manualmente in via anticipata come se fossero anticipi (visibili 
+ quindi fino a che non completamente assegnati)</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">STAMPA 
+ INTESTAZIONE: indica se deve essere stampata come prima pagina del report 
+ una pagina contenente tutte le informazioni inerenti i criteri di selezione 
+ specificati per il report stesso (casella con segno di spunta).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">STAMPA 
+ NOTE: indica se deve essere stampato il contenuto del campo note presente 
+ sulle scadenze.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">se 
+ presente il modulo Anticipi fatture clienti, sarà presente anche il parametro 
+ &quot;Anticipaz. fatture&quot;, che definisce lo stato della scadenza. 
+ I valori disponibili sono:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+		<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+			<li class="p"><p style="text-indent: -0.417in; margin-left: 0in; 
+							 margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">Tutti: 
+			 non sarà applicato alcun filtro di selezione</p></li>
+			<li class="p"><p style="text-indent: -0.417in; margin-left: 0in; 
+							 margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">Non 
+			 gestito: la scadenza non è interessata dalla gestione anticipi 
+			 fatture clienti.</p></li>
+			<li class="p"><p style="text-indent: -0.417in; margin-left: 0in; 
+							 margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">Elaborato: 
+			 la rata fa parte di una distinta di anticipazione provvisoria..</p></li>
+			<li class="p"><p style="text-indent: -0.417in; margin-left: 0in; 
+							 margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">Richiesto: 
+			 la rata fa parte di una distinta di anticipazione stampata 
+			 in definitivo.</p></li>
+			<li class="p"><p style="text-indent: -0.417in; margin-left: 0in; 
+							 margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">Concesso: 
+			 la banca ha accettato la richiesta e concesso l'anticipo per 
+			 la rata.</p></li>
+			<li class="p"><p style="text-indent: -0.417in; margin-left: 0in; 
+							 margin-right: 0in; margin-top: 0px; margin-bottom: 0px;">Respinto: 
+			 la banca ha respinto la richiesta di anticipazione.</p></li>
+		</ul></li>
+	</ol></li>
+</ol>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; font-weight: bold;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; font-weight: bold;">Tipo stampa 
+ Riepilogo generale</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; 
+	 margin-bottom: 6pt; text-align: center;"><img src="Images/bpcf0004d_c_02.png" alt="" style=" border:none; width:100%; max-width:533px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DA 
+ DATA: indicare la data di scadenza da cui si vuole iniziare la lettura 
+ dei movimenti. Confermando a vuoto la stampa inizia con il primo movimento 
+ valido presente sulla tabella movimenti contabili per il primo conto selezionato.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">A 
+ DATA: indicare la data di scadenza con cui si vuole terminare la lettura 
+ dei movimenti. Confermando a vuoto la stampa termina con l’ultimo movimento 
+ valido presente sulla tabella movimenti contabili per l'ultimo conto selezionato.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DA 
+ DIVISA: indicare il codice della prima divisa di cui vogliono stampate 
+ le scadenze. Confermando a vuoto la selezione inizia con la prima divisa 
+ valida. Sul campo è attiva la funzione di ricerca (F9).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">A 
+ DIVISA: indicare il codice dell’ultima divisa di cui vogliono stampate 
+ le scadenze. Confermando a vuoto la selezione termina con l’ultima divisa 
+ valida. Sul campo è attiva la funzione di ricerca (F9).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DATA 
+ DI STAMPA: indicare la data in cui viene stampato il riepilogo (viene 
+ proposta la data di sistema, modificabile).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">PERIODO 
+ DI STAMPA: il programma produce un prospetto a colonne, e ciascuna colonna 
+ raggruppa i crediti di un determinato periodo in giorni. In questo campo 
+ deve essere indicato appunto il numero di giorni che compongono tale periodo.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">STAMPA 
+ SCADUTO: check box per definire se stampare o meno i crediti scaduti. 
+ Valori ammessi: vuoto = non stampa i crediti scaduti; spunta = stampa 
+ anche i crediti scaduti.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">VALORI 
+ ESPRESSI IN: definisce la moneta di conto in cui verranno visualizzati 
+ i controvalori.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">STAMPA 
+ INTESTAZIONE: indica se deve essere stampata come prima pagina del report 
+ una pagina contenente tutte le informazioni inerenti i criteri di selezione 
+ specificati per il report stesso (casella con segno di spunta).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; margin-left: 0in;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; margin-left: 0in; font-weight: bold;">Tipo 
+ stampa Lista insoluti</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; 
+	 margin-bottom: 6pt; margin-left: 0in; text-align: center;"><img src="Images/bpcf0004d_c_03.png" alt="" style=" border:none; width:100%; max-width:533px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; margin-left: 0in;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DA 
+ CLIENTE: indicare il codice del cliente da cui si intende iniziare la 
+ stampa della lista insoluti; confermando a vuoto la stampa inizia dal 
+ primo codice valido. Sul campo è attiva la funzione di ricerca (F9).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">A 
+ CLIENTE: indicare il codice del cliente con cui si intende far terminare 
+ la stampa della lista insoluti; se si conferma a vuoto la stampa termina 
+ con l'ultimo codice valido. Sul campo è attiva la funzione di ricerca 
+ (F9).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DA 
+ DATA: indicare la data di scadenza da cui si vuole iniziare la lettura 
+ dei movimenti. Confermando a vuoto la stampa inizia con il primo movimento 
+ valido presente sulla tabella movimenti contabili per il primo conto selezionato.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">A 
+ DATA: indicare la data di scadenza con cui si vuole terminare la lettura 
+ dei movimenti. Confermando a vuoto la stampa termina con l’ultimo movimento 
+ valido presente sulla tabella movimenti contabili per l'ultimo conto selezionato.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DA 
+ DIVISA: indicare il codice della prima divisa di cui vogliono stampate 
+ gli insoluti. Confermando a vuoto la selezione inizia con la prima divisa 
+ valida. Sul campo è attiva la funzione di ricerca (F9).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">A 
+ DIVISA: indicare il codice dell’ultima divisa di cui vogliono stampate 
+ gli insoluti. Confermando a vuoto la selezione termina con l’ultima divisa 
+ valida. Sul campo è attiva la funzione di ricerca (F9).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">TIPO 
+ SCADENZA: indicare la tipologia di pagamento di cui si vogliono stampare 
+ gli insoluti.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">DATA 
+ DI STAMPA: indicare la data in cui viene stampato la lista (viene proposta 
+ la data di sistema, modificabile).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">TIPO 
+ ORDINAMENTO: combo box per determinare il tipo di ordinamento. Valori 
+ ammessi: Codice; Ragione sociale</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">TIPO 
+ DATA: combo box per determinare il tipo di ordinamento in base alla data. 
+ Valori ammessi: Per data scadenza; Per data registrazione</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">INCLUDI 
+ INSOLUTI SALDATI: check box per definire se inserire o meno nella lista 
+ anche gli insoluti saldati. Valori ammessi: vuoto = no; spunta = sì.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">VALORI 
+ ESPRESSI IN: definisce la moneta di conto in cui verranno visualizzati 
+ i controvalori.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">STAMPA 
+ INTESTAZIONE: indica se deve essere stampata come prima pagina del report 
+ una pagina contenente tutte le informazioni inerenti i criteri di selezione 
+ specificati per il report stesso (casella con segno di spunta).</p>
+</body>
+</html>

@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc194.js\"  name=\"Prima nota\"><item name=\"Introduzione\" url=\"html/sclv/sclv0030f.htm\" /><item name=\"Dati generali\" url=\"html/sclv/sclv0030f_01.htm\" /><item name=\"Righe movimento\" url=\"html/sclv/sclv0030f_02.htm\" /></data>";

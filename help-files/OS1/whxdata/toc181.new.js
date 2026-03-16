@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_553520.htm"},{"type":"item","name":"Analisi MPS","url":"html/sprb/sprb0011f.htm"},{"type":"item","name":"Controllo consegne","url":"html/sprb/sprb0017d.htm"},{"type":"item","name":"Analisi disponibilità prodotti","url":"html/sprb/sprb0014d.htm"},{"type":"item","name":"Analisi disponibilità componenti","url":"html/sprb/sprb0016d.htm"},{"type":"item","name":"Analisi acquisti componenti","url":"html/sprb/sprb0018d.htm"},{"type":"item","name":"Analisi approvvigionamento componenti","url":"html/sprb/sprb0025f.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

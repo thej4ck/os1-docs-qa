@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc256.js\"  name=\"Anticipi fatture clienti\"><item name=\"Introduzione\" url=\"html/index/index_901068.htm\" /><item name=\"Annullamento stampa distinta\" url=\"html/bafc/bafc0004d.htm\" /></data>";

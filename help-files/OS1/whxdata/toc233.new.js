@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_8030.htm"},{"type":"item","name":"Intestazione sezionali Iva","url":"html/bcge/bcge0103f.htm"},{"type":"item","name":"Intestazione bollati","url":"html/bcge/bcge0104f.htm"},{"type":"item","name":"Attività Iva","url":"html/bcge/bcge0105f.htm"},{"type":"item","name":"Regioni IVA","url":"html/bbas/bbas0149f.htm"},{"type":"item","name":"Iva editoria","url":"html/bcge/bcge0107f.htm"},{"type":"item","name":"Gestione plafond","url":"html/bcge/bcge0108f.htm"},{"type":"item","name":"Configurazione gruppo IVA","url":"html/bcge/bcge0109f.htm"},{"type":"item","name":"Codici Iva per nazioni UE","url":"html/bbas/bbas0183f.htm"},{"type":"item","name":"Codici Iva vendita auto UE","url":"html/bcge/bcge0110f.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

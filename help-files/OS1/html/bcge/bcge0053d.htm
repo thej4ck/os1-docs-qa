@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 30, 2014 10:00:24 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Fatture da ricevere/emettere</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.3.0_8";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Bilanci correnti" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; 
+	 font-weight: bold;">Fatture da ricevere/emettere</p>
+<p style="font-family: Verdana, sans-serif;">Il programma consente di generare 
+ automaticamente le scritture extracontabili derivanti da DDT di vendita 
+ e DDT di acquisto non fatturati nel periodo. <span style="font-family: Verdana, sans-serif;">Per 
+ avere una quadratura economica corretta è stato introdotto nei DDT (sia 
+ di vendita che di acquisto) il periodo di competenza a livello di testa/rigo 
+ documento; tale funzionalità viene attivata in funzione del parametro 
+ “Gestione date di competenza” presente nelle configurazioni “Vendite” 
+ e “Acquisti”.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: center;"><img src="Images/bcge0053d_01.png" alt="" style=" border:none; width:100%; max-width:756px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif;">Nei parametri di selezione 
+ è possibile impostare i sottoconti, clienti o fornitori con possibilità 
+ di selezione di un gruppo di conti, o entrambi senza possibilità di selezione; 
+ è possibile specificare un periodo di date oppure un range di documenti 
+ utilizzando i parametri per anno, serie, numero; tramite la casella di 
+ spunta è possibile effettuare una elaborazione di prova che effettua solo 
+ la selezione senza possibilità di generazione, oppure una elaborazione 
+ definitiva che consente di effettuare il salvataggio dei movimenti; in 
+ caso di elaborazione definitiva è necessario indicare il periodo che sarà 
+ utilizzato per la generazione dei movimenti, la data di elaborazione sarà 
+ mostrata in automatico in base al periodo .</p>
+<p style="font-family: Verdana, sans-serif;">Nella griglia dei Risultati 
+ vengono riportati i documenti elaborati ed i relativi importi calcolati, 
+ già selezionati per la generazione; con il doppio clic del mouse o tramite 
+ il menù del tasto destro del mouse sulla griglia sarà possibile modificare 
+ le selezioni oppure accedere direttamente al documento indicato.</p>
+<p style="text-align: center;"><img src="Images/bcge0053d_02.png" alt="" style=" border:none; width:100%; max-width:756px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif;">La funzione di generazione 
+ rettifiche elabora i DDT da fatturare e genera un movimento di rettifica 
+ per ogni documento utilizzando come contropartita i conti “Fatture da 
+ emettere” e “Fatture da ricevere” inseriti nella configurazione “Codici 
+ fissi” assegnandolo al periodo di bilancio indicato nei parametri; ogni 
+ volta che la funzione viene eseguita vengono cancellati tutti i movimenti 
+ di tipo “Fatture da ricevere” e/o “Fatture da emettere” già presenti per 
+ il periodo richiesto.</p>
+<p style="font-family: Verdana, sans-serif;"><span><span style="font-family: Verdana, sans-serif;">Tramite 
+ i pulsanti presenti nella <a href="../Ambiente/Ambiente_02.htm">Toolbar</a> 
+ sarà possibile effettuare la stampa e, in caso di elaborazione definitiva, 
+ effettuare il salvataggio con conseguente generazione dei movimenti.</span></span></p>
+</body>
+</html>

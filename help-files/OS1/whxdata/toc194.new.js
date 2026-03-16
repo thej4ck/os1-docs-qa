@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_555750.htm"},{"type":"book","name":"Prima nota","key":"toc195"},{"type":"item","name":"Lista prima nota","url":"html/sclv/sclv0031d.htm"},{"type":"item","name":"Analisi movimenti","url":"html/sclv/sclv0032f.htm"},{"type":"item","name":"Analisi giacenze","url":"html/sclv/sclv0033f.htm"},{"type":"item","name":"Stampa inventario","url":"html/sclv/sclv0034d.htm"},{"type":"item","name":"Analisi avanzamento produzione","url":"html/sclv/sclv0035d.htm"},{"type":"book","name":"Inventario fisico","key":"toc196"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

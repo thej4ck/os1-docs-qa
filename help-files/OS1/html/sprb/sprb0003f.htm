@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 15, 2015 5:45:16 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Cicli di produzione</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.2.0_5";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Scheda tecnica" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; 
+	 font-weight: bold;"><span style="font-family: Verdana, Arial; font-size: 12pt; 
+								 font-weight: bold;">Cicli di produzione</span></p>
+<p style="font-family: Verdana, Arial;"><span style="font-family: Verdana, Arial;">Il 
+ ciclo di produzione determina tempi e costi delle fasi necessarie per 
+ la produzione della scheda tecnica. Possono essere gestite sia fasi interne 
+ che fasi esterne; è possibile anche indicare fasi non operative (utilizzate 
+ quindi solo per la preventivazione, ma che non danno luogo ad ODL).</span></p>
+<p style="font-family: Verdana, Arial;">Ogni fase operativa del ciclo di 
+ produzione determina in fase di generazione piano la generazione di un 
+ ODL.</p>
+<p style="font-family: Verdana, Arial;">Una volta che un ciclo è stato 
+ utilizzato all'interno di un ODP non possono essere più variati i tempi.</p>
+<p style="font-family: Verdana, Arial; text-align: center;"><img src="images/sprb0003f_01.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p style="font-family: Verdana, Arial; font-weight: bold;">&#160;</p>
+<p style="font-family: Verdana, Arial; font-weight: normal;"><img src="images/sprb0003f_06.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:426px;" align="right" border="0" /><img src="images/b_RitSK.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:73px;" align="left" border="0" />Se 
+ presente il modulo di Schedulazione sarà visibile il relativo pulsante 
+ che consente impostare i parametri per gestire la sovrapposizione delle 
+ fasi ed il tempo per le fasi non schedulabili. L'entità dell'anticipo 
+ nell'avvio della fase successiva è definito a livello di ciclo e/o a livello 
+ di <a href="sprb0103f.htm">fase</a> mediante l'indicazione di una percentuale 
+ sulla quantità prodotta con la possibilità di specificare eventualmente 
+ anche una quantità minima unitaria. Se le informazioni non vengono compilate 
+ (né per il ciclo né per la fase la sequenza di produzione è comunque FinishToStart 
+ (avvio la fase successiva al completamento della fase corrente). Per la 
+ gestione delle fasi non schedulabili, sono&#160;presenti i campi ore e 
+ minuti di attraversamento fase, dove indicare il tempo relativo alla durata 
+ della fase; il tempo non è legato alla quantità ed è utilizzato dalla 
+ schedulazione per consentire di mostrare la fase per le risorse non schedulabili 
+ (ad esempio nesting) nel Gantt per ODP. Se presenti dei valori il pulsante 
+ si colora di blu.</p>
+<p style="font-family: Verdana, Arial; font-weight: normal;">&#160;</p>
+<p style="font-family: Verdana, Arial; font-weight: normal;">Per aggiungere 
+ le fasi di produzione si può procedere manualmente inserendo il codice 
+ della fase, oppure trascinando la fase dall'elenco a destra o facendo 
+ doppio clic sulla fase presente nell'elenco a destra; nell'elenco delle 
+ fasi sono evidenziate in rosso eventuali fasi obsolete che possono non 
+ essere mostrate se si toglie la spunta alla casella &quot;Mostra fasi 
+ obsolete&quot;. Nella parte sottostante all'elenco delle fasi viene riepilogato 
+ il tempo totale del ciclo.</p>
+<p style="font-family: Verdana, Arial; font-weight: bold;">Fasi interne</p>
+<p style="font-family: Verdana, Arial;">Devono essere indicati i tempi 
+ di lavorazione (espressi in ore/minuti/secondi/millisecondi) e l'eventuale 
+ tempo di setup; è necessario indicare anche una risorsa (macchina), che 
+ può essere preferenziale oppure obbligatoria, su cui la lavorazione verrà 
+ eseguita (ai fini della valorizzazione scheda tecnica) viene proposta 
+ in automatico la risorsa preferenziale del <a href="sprb0102f.htm">gruppo 
+ fasi</a> in cui la fase è presente. Se la risorsa è obbligatoria non sarà 
+ mai possibile cambiarla, altrimenti la modifica della risorsa è prevista 
+ nelle seguenti fasi:</p>
+<ol style="list-style: disc;">
+	<ul style="list-style: disc;">
+		<li class="kadov-p"><p style="font-family: Verdana, Arial; margin-top: 0px; 
+								 margin-bottom: 0px;"><a href="sprb0010f_05.htm">Manutenzione 
+		 ODL</a> (all'interno della gestione piano) a condizione che l'ODL 
+		 stesso non sia già stato lanciato;</p></li>
+		<li class="kadov-p"><p style="font-family: Verdana, Arial; margin-top: 0px; 
+								 margin-bottom: 0px;"><a href="sprb0045f.htm">Manutenzione 
+		 movimenti bordo macchina</a> (escluso i movimenti derivanti da 
+		 OS1BMJob);</p></li>
+		<li class="kadov-p"><p style="font-family: Verdana, Arial; margin-top: 0px; 
+								 margin-bottom: 0px;">Registrazione manuale 
+		 <a href="sprb0051f.htm#Inserimento di un nuovo versamento">versamenti</a>.</p></li>
+	</ul>
+</ol>
+<p style="font-family: Verdana, Arial;">Se sulla fase è spuntato &quot;Fase 
+ a capacità&quot; sarà abilitato il campo Capacità, l'indicazione di un 
+ valore diverso da 1 sul ciclo di lavorazione determina un diverso calcolo 
+ del tempo di lavorazione.</p>
+<p style="font-family: Verdana, Arial;">Questo significa che per eseguire 
+ una determinata lavorazione impiego la stessa quantità di tempo sia a 
+ lavorare un pezzo che a lavorare fino ad un massimo di n pezzi. In questo 
+ caso il tempo di lavorazione è legato ad una quantità che .</p>
+<p style="font-family: Verdana, Arial;">I costi orari di lavorazione (distinti 
+ fra costo risorsa e costo operatori) possono essere indicati sulla fase 
+ del ciclo oppure lasciati vuoti in modo da utilizzare i due valori previsti 
+ a livello di <a href="sprb0104f.htm">risorsa</a> mostrati a video.</p>
+<p>Nella sezione Setup è presente il tempo di setup e l'eventuale costo 
+ fisso; <span style="font-size: 11.0pt; line-height: 107%; font-family: Calibri, sans-serif; 
+				 mso-ascii-theme-font: minor-latin; mso-fareast-font-family: Calibri; 
+				 mso-fareast-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; 
+				 mso-bidi-font-family: 'Times New Roman'; mso-bidi-theme-font: minor-bidi; 
+				 mso-ansi-language: IT; mso-fareast-language: EN-US; mso-bidi-language: AR-SA;">il 
+ campo “Costo attività setup” viene calcolato tramite l’utilizzo delle 
+ attività di setup eventualmente presenti sulla risorsa preferenziale: 
+ vengono ricercate le attività di setup, letto il costo orario alla data 
+ di accesso, moltiplicato per il numero di addetti e per la percentuale 
+ di utilizzo; la somma di questi valori delle varie attività danno luogo 
+ al costo attività setup. È presente anche un pulsante che consente l’aggiornamento 
+ del campo Costo fisso applicando il costo attività setup al tempo di setup 
+ presente; il calcolo avviene rapportando il tempo a secondi e moltiplicandolo 
+ per il costo/3600</span>.</p>
+<p>&#160;</p>
+<p style="font-family: Verdana, Arial;"><img src="images/b_set.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:48px;" align="left" border="0" />Come specificato 
+ in precedenza, se la risorsa associata alla fase interna del ciclo è di 
+ tipo preferenziale, è possibile utilizzare in sostituzione della risorsa 
+ indicata qualsiasi altra risorsa associate al gruppo fasi cui la fase 
+ appartiene, ma è anche possibile restringere l'ambito delle risorse alternative 
+ utilizzando un set di risorse riservato alla fase del ciclo. Tramite il 
+ pulsante Set si richiama la finestra di assegnazione set da cui è possibile 
+ assegnare le risorse previste per il gruppo fase al set che si sta componendo; 
+ in visualizzazione del ciclo se è presente un set di risorse il pulsante 
+ appare evidenziato e premendolo viene mostrato il set con le risorse incluse. 
+ La gestione dei set è diversa a seconda che sia gestita una o più unità 
+ produttive; in quest'ultimo caso le risorse compaiono in base all'unità 
+ produttiva su cui si è posizionati; se viene richiesta la risorsa obbligatoria, 
+ dovrà essere effettuata l'assegnazione di almeno una risorsa per ogni 
+ unità produttiva.</p>
+<table style="vertical-align: top;" cellspacing="0" align="center">
+	<col />
+	<col />
+	<tr>
+		<td style="padding-right: 10px; padding-left: 10px;"><p><img src="images/sprb0003f_03.png" alt="" style=" border:none; width:100%; max-width:576px;" border="0" /></p></td>
+		<td style="padding-right: 10px; padding-left: 10px;"><p style="font-family: Verdana, Arial;"><img src="images/sprb0003f_02.png" alt="" style=" border:none; margin-right:0px; margin-top:0px; margin-left:0px; margin-bottom:0px; width:100%; max-width:576px;" border="0" /></p></td>
+	</tr>
+	<tr>
+		<td style="padding-right: 10px; padding-left: 10px;"><p><img src="images/sprb0003f_04.png" alt="" style=" border:none; width:100%; max-width:576px;" border="0" /></p></td>
+		<td style="padding-right: 10px; padding-left: 10px;"><p style="font-family: Verdana, Arial;"><img src="images/sprb0003f_05.png" alt="" style=" border:none; margin-right:0px; margin-top:0px; margin-left:0px; margin-bottom:0px; width:100%; max-width:576px;" border="0" /></p></td>
+	</tr>
+</table>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial; font-weight: bold;">Fasi esterne</p>
+<p style="font-family: Verdana, Arial;">Può essere indicato il tempo di 
+ trasferimento, l'eventuale fornitore preferenziale ed il costo di lavorazione.</p>
+</body>
+</html>

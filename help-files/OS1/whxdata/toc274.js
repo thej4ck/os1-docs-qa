@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc253.js\"  name=\"Ordini clienti\"><item name=\"Introduzione\" url=\"html/index/index_9030.htm\" /><book name=\"Conferme d'ordine\" src=\"toc275.js\" /><book name=\"Offerte\" src=\"toc276.js\" /></data>";

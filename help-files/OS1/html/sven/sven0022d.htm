@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="12 12, 2003 3:33:31 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Generazione fatture di anticipo</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.3.2_10";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > Fatturazione" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; 
+	 font-weight: bold;">Generazione fatture di anticipo</p>
+<p>Il programma effettua la generazione delle fatture di anticipo collegate 
+ agli ordini clienti in base ai parametri inseriti dall’utente.</p>
+<p>La sezione Parametri consente l'inserimento dei parametri di selezione 
+ ed elaborazione:</p>
+<p style="text-align: center;"><img src="Images/sven0022d_01.png" alt="" style=" border:none; width:100%; max-width:727px;" border="0" /></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p><span style="mso-bidi-font-size: 10.0pt;">Le date, la causale e la divisa 
+ inseriti nei parametri servono per filtrare gli ordini del cliente impostato, 
+ che non può essere lasciato vuoto. Saranno selezionati tutti gli ordini 
+ inevasi per cui non è stato indicato un acconto in fase di inserimento 
+ ordine.</span></p>
+<p><span style="mso-bidi-font-size: 10.0pt;">Nella causale fattura deve 
+ essere indicata la causale con cui generare la fattura di anticipo, sul 
+ campo è presente la vista sulle causali di fatturazione abilitate alla 
+ gestione degli anticipi, come visto nel paragrafo “Causali fatturazione”. 
+ Possono essere indicate causali di fatturazione a scorporo, in tal caso 
+ saranno selezionati solo ordini inseriti con tale modalità. Il campo non 
+ può esser lasciato vuoto.</span></p>
+<p><span style="mso-bidi-font-size: 10.0pt;">Nel campo “Pagamento” può 
+ essere indicata la modalità di pagamento con cui generare la fattura di 
+ anticipo, altrimenti viene assunta quella indicata in anagrafica cliente. 
+ Nel caso in cui la modalità di pagamento indicata corrisponda ad un pagamento 
+ in contanti sarà possibile accedere anche ai campi “Tipo doc. acconto”, 
+ “Rif. doc. acconto” e “Conto di incasso”, quest’ultimo è attivo solo se 
+ è abilitata la variazione del conto incassi nelle “Opzioni” (dell’applicazione, 
+ della ditta, del gruppo utenti o dell’utente) in XConfig, il conto viene 
+ automaticamente proposto in base a quanto indicato nei codici fissi di 
+ OS1Config e in base al “Tipo doc. acconto” selezionato.</span></p>
+<p><span style="mso-bidi-font-size: 10.0pt;">La spunta sul campo “Specifica 
+ primo numero fattura” attiva il campo “Num. Prima fattura”, dove indicare 
+ il numero della fattura di anticipo che si andrà a generare.</span></p>
+<p style="mso-bidi-font-size: 10.0pt;">Nel campo “Percentuale” può essere 
+ indicata la percentuale dell’importo del valore dell'ordine con cui generare 
+ la fattura, l’importo calcolato è mostrato nel campo &quot;Incasso&quot; 
+ per ogni ordine presente nella selezione. Se viene indicata la percentuale 
+ non è possibile accedere all’importo e al Tipo calcolo; è possibile indicare, 
+ tramite il campo &quot;Applicazione percentuale&quot;, su quale valore 
+ deve essere applicata la percentuale:</p>
+<ul style="list-style: disc;">
+	<li><p style="mso-bidi-font-size: 10.0pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Residuo 
+	 (default): il valore totale dell'ordine decurtato degli anticipi fatturati</p></li>
+	<li><p style="mso-bidi-font-size: 10.0pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Totale: 
+	 il valore totale dell'ordine.</p></li>
+</ul>
+<p><span style="mso-bidi-font-size: 10.0pt;">Nell’importo può essere indicato 
+ l’imponibile dell’anticipo che verrà assegnato agli ordini elaborati; 
+ l'importo viene assegnato in base a quanto stabilito dal 'Tipo calcolo' 
+ che può essere impostato a:</span></p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li><p style="margin-top: 2pt; margin-bottom: 2pt;"><span style="mso-bidi-font-size: 10.0pt;">in 
+		 proporzione: l'importo viene assegnato a tutti gli ordini selezionati 
+		 in modo proporzionale al totale dell'ordine</span></p></li>
+		<li><p style="margin-top: 2pt; margin-bottom: 2pt;"><span style="mso-bidi-font-size: 10.0pt;">in 
+		 concorrenza: vengono decrementati gli ordini selezionati partendo 
+		 dal primo ordine</span></p></li>
+	</ul></li>
+</ol>
+<p><img src="Images/SVen0022d_03.png" alt="" style=" border:none; margin-left:0px; margin-right:6px; margin-top:0px; margin-bottom:0px; width:100%; max-width:367px;" align="left" border="0" />Inoltre se la causale di fatturazione non è a scorporo 
+ è disponibile sul campo &quot;Importo&quot; la funzione di scorporo dell'Iva, 
+ tramite i tasti CTRL+I, dopo aver inserito l'importo, viene richiesto 
+ il codice Iva da utilizzare ed è possibile scorporare l'Iva dall'importo 
+ inserito. In particolare si attiva la finestra mostrata a lato. Dopo aver 
+ indicato l’aliquota Iva cliccando sul campo scorpora sarà calcolato l’importo 
+ scorporato da utilizzare.</p>
+<p style="mso-bidi-font-size: 10.0pt;">&#160;</p>
+<p style="mso-bidi-font-size: 10.0pt;">Eseguendo l’elaborazione nella pagina 
+ “Risultati” vengono visualizzati gli ordini selezionati e l’importo assegnato 
+ per ogni ordine; tali importi sono modificabili, modificando quindi l’assegnazione 
+ proposta.</p>
+<p style="mso-bidi-font-size: 10.0pt;">Nel caso in cui si sia selezionato 
+ ordini a scorporo il calcolo dell'assegnazione dell'importo incassato 
+ sarà effettuato sul valore relativo alla somma di Imponibili ed Iva dell'ordine, 
+ mentre se si sono selezionati documenti non a scorporo tale calcolo viene 
+ effettuato sul solo imponibile.</p>
+<p style="margin-left: 0in; text-align: center; mso-bidi-font-size: 10.0pt;"><span><span 
+	 style="mso-bidi-font-size: 10.0pt; mso-no-proof: yes;"><img src="Images/sven0022d_02.png" alt="" style=" border:none; width:100%; max-width:727px;" border="0" /></span></span></p>
+<p><span style="mso-bidi-font-size: 10.0pt; mso-no-proof: yes;">Nel caso 
+ in cui nella maschera dei parametri non sia stato indicato l’importo dell’anticipo 
+ sarà necessario indicarlo nel campo incasso dei risultati; inoltre se 
+ selezionati documenti a scorporo la colonna Imponibile assumerà l’etichetta 
+ Imponibile + Iva.</span></p>
+<p><span style="mso-bidi-font-size: 10.0pt;">Nella colonna Incassato sono 
+ riportati gli importi derivanti da fatture di anticipo già emesse, nella 
+ colonna Fatturato è riportato quanto della fattura di anticipo è stato 
+ stornato in fattura definitiva.</span></p>
+<p><span style="mso-bidi-font-size: 10.0pt;">Confermando la generazione 
+ viene richiesta la stampa del documento e successivamente la contabilizzazione 
+ della fattura.</span></p>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 22, 2015 12:12:49 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Approvazione/Sospensione ordini</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.4.1.1_8";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Ordini clienti > Conferme d'ordine" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; font-weight: bold; 
+	 text-align: left;">Approvazione/Sospensione ordini</p>
+<p>Il programma consente la sospensione/accettazione degli ordini. L'accettazione 
+ dell'ordine valorizza i campi operatore e data accettazione presenti sulla 
+ testa dell'ordine; se l'utente non è abilitato ad accettare gli ordini 
+ non sarà consentito l'accesso alla procedura; se l'utente ha un limite 
+ di importo saranno visualizzati solo i documenti al di sotto del limite, 
+ se l'utente è un responsabile saranno visualizzati anche gli ordini degli 
+ utenti per cui è indicato come responsabile.</p>
+<p>Gli ordini sospesi non possono essere evasi o dar luogo alla generazione 
+ di altri documenti, non potranno essere saldati, non potranno essere oggetto 
+ di conferma di annullamento e gli acconti eventualmente presenti non saranno 
+ considerati.</p>
+<p>Gli ordini che arrivano dalla generazione eCommerce e da OS1Mobile sono 
+ considerati sempre approvati.</p>
+<p>Il programma si articola su due finestre video. La prima, Parametri, 
+ consente la definizione dei parametri di selezione.</p>
+<p style="text-align: center;"><img src="Images/sorc0020f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO OPERAZIONE: consente 
+ di indicare se si vuole effettuare la sospensione o l'approvazione degli 
+ ordini che si andranno a selezionare.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CLIENTE: eventuale 
+ codice del cliente, presente in anagrafica clienti, da cui si vuole iniziare 
+ la selezione di analisi. Confermando a vuoto, la selezione inizia dal 
+ primo cliente valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CLIENTE: eventuale 
+ codice del cliente, presente in anagrafica clienti, con cui si vuole terminare 
+ la selezione di analisi. Confermando a vuoto, la selezione termina con 
+ l’ultimo cliente valido. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">DA RIFERIMENTO 
+ ORDINE: indicare anno, serie (-1 tutte), e numero da cui iniziare l'elaborazione.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; 
+	 margin-top: 6pt; margin-bottom: 6pt; text-indent: -0.417in; margin-left: 30pt;">A 
+ RIFERIMENTO ORDINE: indicare anno, serie (-1 tutte), e numero con cui 
+ terminare l'elaborazione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA ORDINE: eventuale 
+ data del documento da cui deve iniziare l’analisi dei documenti relativamente 
+ ai precedenti parametri di selezione. Confermando a vuoto, l’analisi inizia 
+ con il primo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA&#160;ORDINE: 
+ eventuale data del documento con cui si desidera terminare l’analisi dei 
+ documenti relativamente ai precedenti parametri di selezione. Confermando 
+ a vuoto, l’analisi si conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CAUSALE: codice 
+ della causale documento da cui si vuole iniziare la selezione. Confermando 
+ a vuoto, la selezione inizia dalla prima causale valida. Sul campo sono 
+ attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CAUSALE: codice 
+ della causale documento con cui si vuole iniziare la selezione. Confermando 
+ a vuoto, la selezione termina all’ultima causale valida. Sul campo sono 
+ attive le funzioni di ricerca (F9).</p>
+<p>&#160;</p>
+<p><img src="Images/SOrc0020f_03.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:5px; margin-bottom:0px; width:100%; max-width:264px;" align="right" border="0" />Confermando tramite pressione del bottone Esegui, 
+ viene avviata la selezione e richiamata la finestra video Risultati dove 
+ saranno riportati gli ordini da approvare/sospendere in base ai limiti 
+ inseriti ed al tipo di utente. L'utente può selezionare o deselezionare 
+ gli ordini da approvare/sospendere tramite il doppio clic del mouse, il 
+ tasto F11 o mediante il menù riportato a lato richiamabile con il pulsante 
+ destro del mouse; è anche possibile accedere direttamente al documento 
+ selezionando &quot;Manutenzione&quot;.</p>
+<p style="text-align: center;"><img src="Images/sorc0020f_02.png" alt="" style=" border:none; width:100%; max-width:792px;" border="0" /></p>
+<p>&#160;</p>
+<p>Una volta effettuate le necessarie selezioni, premendo il pulsante Salva 
+ presente nella <a href="../Ambiente/Ambiente_02.htm">Toolbar</a> sarà 
+ possibile effettuare il salvataggio definitivo, previa conferma.</p>
+</body>
+</html>

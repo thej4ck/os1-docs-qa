@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc35.js\"  name=\"Indici di bilancio\"><item name=\"Introduzione\" url=\"html/index/index_108008.htm\" /><item name=\"Manutenzione\" url=\"html/babi/babi0010f.htm\" /><item name=\"Stampa indici\" url=\"html/babi/babi0011d.htm\" /><item name=\"Analisi indici e flussi\" url=\"html/babi/babi0014d.htm\" /></data>";

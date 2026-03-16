@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 4, 2016 11:36:32 AM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Configurazione Parametri generali</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.1.1.1.0_13";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazione OS1 Enterprise > Generali > Configurazione moduli > Generale" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h5>Configurazione Parametri generali</h5>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Vendite - Competenza contabile 
+ da competenza IVA</span>: Se spuntato imposta la competenza contabile 
+ in base alla competenza IVA nelle fatture di vendita e nelle parcelle 
+ e nei documenti attivi in prima nota contabile.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Acquisti - Tipo competenza contabile</span>: 
+ Definisce la modalità di impostazione della competenza contabile dei documenti 
+ di acquisto registrati nei primi 15 giorni del mese successivo ma di competenza 
+ del periodo precedente. Valori previsti:</p>
+<ul style="list-style: disc;">
+	<ul style="list-style: disc;">
+		<li><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+				 margin-top: 1.5pt; margin-bottom: 1.5pt;">Da data registrazione 
+		 (default): per tutti i documenti il periodo di competenza contabile 
+		 (da/a) è calcolato in funzione della data di registrazione.</p></li>
+		<li><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+				 margin-top: 1.5pt; margin-bottom: 1.5pt;">Solo acquisti 
+		 normali da competenza Iva: per i documenti normali (non soggetti 
+		 a reverse charge) il periodo di competenza contabile è calcolato 
+		 in funzione del periodo di competenza Iva (anno/mese), per i documenti 
+		 soggetti a reverse charge il periodo di competenza contabile è 
+		 impostato in funzione della data di registrazione.</p></li>
+		<li><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+				 margin-top: 1.5pt; margin-bottom: 1.5pt;">Anche acquisti 
+		 reverse charge da data documento: per i documenti normali (non 
+		 soggetti a reverse charge) il periodo di competenza contabile 
+		 è calcolato in funzione del periodo di competenza Iva (anno/mese), 
+		 per i documenti soggetti a reverse charge il periodo di competenza 
+		 contabile è impostato in funzione della data documento (la competenza 
+		 Iva in questo caso non viene impostata).</p></li>
+	</ul>
+</ul>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Utilizza data ricezione</span>: 
+ Definisce se e come deve essere utilizzata la data di ricezione in fase 
+ di acquisizione fatture da Os1BoxFatture acquisti; i valori possibili 
+ sono:</p>
+<ul style="list-style: disc;">
+	<ul style="list-style: disc;">
+		<li><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+				 margin-top: 1.5pt; margin-bottom: 1.5pt;">Non utilizzare: 
+		 la data di registrazione rimane inalterata.</p></li>
+		<li><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+				 margin-top: 1.5pt; margin-bottom: 1.5pt;">Utilizza su 
+		 richiesta: viene controllato se la data di ricezione è diversa 
+		 dalla data di registrazione e viene richiesto se utilizzarla.</p></li>
+		<li><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+				 margin-top: 1.5pt; margin-bottom: 1.5pt;">Utilizza sempre: 
+		 viene sempre impostata la data di registrazione uguale alla data 
+		 di ricezione.</p></li>
+	</ul>
+</ul>
+</body>
+</html>

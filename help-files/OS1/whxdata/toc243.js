@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc241.js\"  name=\"Schedulazione\"><item name=\"Introduzione\" url=\"html/index/index_805560.htm\" /><item name=\"Configurazione gantt\" url=\"html/sprp/sprp0900f.htm\" /></data>";

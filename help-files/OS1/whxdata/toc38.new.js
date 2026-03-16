@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_108090.htm"},{"type":"item","name":"Modelli di riclassificazione","url":"html/babi/babi0100f.htm"},{"type":"item","name":"Voci di riclassificazione","url":"html/babi/babi0101f.htm"},{"type":"item","name":"Visualizzazione voci di riclassificazione","url":"html/babi/babi0016f.htm"},{"type":"item","name":"Piano dei conti di riferimento","url":"html/babi/babi0103f.htm"},{"type":"item","name":"Voci analisi flussi","url":"html/babi/babi0105f.htm"},{"type":"book","name":"Piano dei conti aziendale","key":"toc39"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

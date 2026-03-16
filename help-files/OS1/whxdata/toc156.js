@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc155.js\"  name=\"Anagrafica lotti\"><item name=\"Introduzione\" url=\"html/slot/slot0001f.htm\" /><item name=\"Dati anagrafici\" url=\"html/slot/slot0001f_01.htm\" /><item name=\"Giacenze\" url=\"html/slot/slot0001f_02.htm\" /><item name=\"Ordini\" url=\"html/slot/slot0001f_03.htm\" /></data>";

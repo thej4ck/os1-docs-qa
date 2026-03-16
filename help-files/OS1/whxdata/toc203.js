@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc201.js\"  name=\"Inventario fisico\"><item name=\"Introduzione\" url=\"html/index/index_555060.htm\" /><item name=\"Gestione inventario\" url=\"html/sprb/sprb0037f.htm\" /><item name=\"Rilevazione rettifiche\" url=\"html/sprb/sprb0038d.htm\" /></data>";

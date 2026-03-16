@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="06 16, 2011 11:41:01 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Analisi fabbisogni</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.4.3.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Ordini clienti > Fabbisogni" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; font-weight: bold;">Analisi fabbisogni</p>
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-weight: normal; font-size: 10pt;">La procedura consente di visualizzare i dati e produrre dei report relativi alle necessità produttive di ordini inseriti. La finestra è suddivisa in quattro linguette, la prima contiene i Parametri necessari all'analisi degli ordini.</p>
+<p style="text-align: center; margin-left: 40px;"><img src="Images/sorc0013d_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-weight: normal; font-size: 10pt;">&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA RIFERIMENTO ORDINE: tre campi per contenere rispettivamente anno, causale e numero dell'ordine da cui si vuole iniziare la selezione. Confermando a vuoto, la selezione inizia dal primo ordine compatibile con gli altri parametri.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A RIFERIMENTO ORDINE: tre campi per contenere rispettivamente anno, causale e numero dell'ordine con cui si vuole terminare la selezione. Confermando a vuoto, la selezione termina con l'ultimo ordine compatibile con gli altri parametri.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA ORDINE: data dell'ordine da cui deve iniziare l’analisi degli ordini. Confermando a vuoto, l’analisi inizia con il primo ordine valido.</p>
+<p style="margin-left: 30pt; text-indent: -0.417in;">A DATA ORDINE: data dell'ordine con cui si desidera terminare l’analisi degli ordini. Confermando a vuoto, l’analisi si conclude con l'ultimo ordine valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-indent: -0.417in; margin-left: 30pt;">D</span>A CLIENTE: eventuale codice del cliente, presente in anagrafica clienti, da cui si vuole iniziare la selezione di analisi. Confermando a vuoto, la selezione inizia dal primo cliente valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CLIENTE: eventuale codice del cliente, presente in anagrafica clienti, con cui si vuole terminare la selezione di analisi. Confermando a vuoto, la selezione termina con l’ultimo cliente valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA CONSEGNA: data di consegna da cui deve iniziare l’analisi degli ordini. Confermando a vuoto, l’analisi inizia con il primo ordine valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA CONSEGNA: data di consegna con cui si desidera terminare l’analisi degli ordini. Confermando a vuoto, l’analisi si conclude con l'ultimo ordine valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA PRODOTTO: eventuale codice dell'articolo, presente in anagrafica Prodotti, da cui si desidera iniziare la selezione di analisi. Confermando a vuoto, la selezione inizia con il primo prodotto valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A PRODOTTO: eventuale codice dell'articolo, presente in anagrafica Prodotti, a cui si desidera terminare la selezione di analisi. Confermando a vuoto, la selezione termina con l’ultimo valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA PRODUZIONE: data di produzione da cui deve iniziare l’analisi degli ordini. Confermando a vuoto, l’analisi inizia con il primo ordine valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA PRODUZIONE: eventuale data di produzione con cui si desidera terminare l’analisi degli ordini. Confermando a vuoto, l’analisi si conclude con l'ultimo ordine valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA VARIANTE: campo presente solo se attiva la gestione varianti. Eventuale codice della variante, da cui si desidera iniziare la selezione di analisi. Confermando a vuoto, la selezione inizia con la prima variante valida. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A VARIANTE: campo presente solo se attiva la gestione varianti. Eventuale codice della variante, a cui si desidera terminare la selezione di analisi. Confermando a vuoto, la selezione termina con l’ultima variante valida. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA MAGAZZINO: eventuale codice del magazzino da cui si vuole iniziare la selezione degli ordini. Confermando a vuoto, la selezione considera tutti i magazzini validi. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A MAGAZZINO: eventuale codice del magazzino con cui si vuole terminare la selezione degli ordini. Confermando a vuoto, la selezione considera tutti i magazzini validi. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CONSIDERA CONSUMI SL ORDINATI: Definisce, nel caso in cui all'interno del calcolo siano presenti ordini relativi ad un prodotto che è anche componente di altre distinta (semilavorato), se l'eventuale "consumo" di giacenza/disponibile deve essere considerato nei fabbisogni oppure no.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ESPANDI LIVELLI: definisce se devono essere espansi i livelli della distinta base, mostrando i semilavorati ed i loro componenti tra i fabbisogni e determina fino a quale livello effettuare l'espansione.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span><span style="font-family: Verdana, sans-serif; font-size: 10pt;">TIPO VALORIZZAZIONE: definisce il metodo di valorizzazione del componente. Valori possibili:</span></span></p>
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Nessuna</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Prezzo medio</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Costo ultimo carico</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Costo di mercato</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Prezzo di vendita</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Prezzo di listino</p>
+</li>
+<li class="p">
+<p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Come stabilito in distinta base</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 0.417in;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">CODICE LISTINO: codice del listino prezzi da utilizzare per ricercare il costo del componente. Sul campo sono attive le funzioni di ricerca (F9) sulla tabella listini.</span></p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">FABBISOGNO COMPOSTO SU: definisce il criterio per la determinazione della quantità utilizzata per il calcolo dei fabbisogni: da produrre, esistenza o disponibilità.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">MAGAZZINO PRODOTTI: codice del magazzino da utilizzare per i progressivi dei prodotti. Sul campo sono attive le funzioni di ricerca (F9) sulla tabella magazzini. Viene proposto quello <a href="../bbas/bbas0101f_02.htm">predefinito</a>.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">MAGAZZINO SEMILAVORATI: codice del magazzino da utilizzare per i progressivi dei semilavorati. Sul campo sono attive le funzioni di ricerca (F9) sulla tabella magazzini. Viene proposto, se attiva la gestione, quello riportato in <a href="../bbas/bbas0101f_23.htm">configurazione produzione</a> se presente il modulo.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">MAGAZZINO COMPONENTI: codice del magazzino da utilizzare per i progressivi delle materie prime. Sul campo sono attive le funzioni di ricerca (F9) sulla tabella magazzini. Viene proposto quello riportato in <a href="../bbas/bbas0101f_23.htm">configurazione produzione</a> se presente il modulo.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DISPONIBILITÀ ORDINI CLIENTI: determina l'aggiunta al calcolo della disponibilità di magazzino dell'impegno derivante dagli ordini clienti (casella con segno di spunta). Viene proposto quanto come indicato nella <a href="../bbas/bbas0101f_23.htm">configurazione produzione</a> se presente il modulo.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DISPONIBILITÀ ORDINI FORNITORI: determina l'aggiunta al calcolo della disponibilità di magazzino dell'ordinato derivante dagli ordini fornitori (casella con segno di spunta). Viene proposto quanto come indicato nella <a href="../bbas/bbas0101f_23.htm">configurazione produzione</a> se presente il modulo.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DISPONIBILITÀ ORDINI PRODUZIONE: determina l'aggiunta al calcolo della disponibilità di magazzino dell'ordinato derivante dalla produzione (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DISPONIBILITÀ IMPEGNI DA PRODUZIONE: determina l'aggiunta al calcolo della disponibilità di magazzino dell'impegno derivante dalla produzione (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">STAMPA INTESTAZIONE: indica se deve essere stampata come prima pagina del report una pagina contenente tutte le informazioni inerenti i criteri di selezione specificati per il report stesso (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">INCLUDI PRODOTTI SENZA DISTINTA BASE: se spuntato mostra in una pagina apposita i <a href="#Articoli senza DB">prodotti senza distinta base</a>.</p>
+<p style="margin-left: 0in;">&#160;</p>
+<p style="margin-left: 0in;">La pressione del pulsante Esegui dà inizio all'elaborazione e riporta le righe ordini, risultato della selezione nella sezione Ordini.</p>
+<p style="margin-left: 0in; text-align: center;"><img src="Images/sorc0013d_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="margin-left: 0in;">Da questa sezione è possibile modificare la quantità presente su ogni rigo ed eventualmente inserire nuove righe che saranno considerate nel calcolo dei fabbisogni.</p>
+<p style="margin-left: 0in;"><img src="Images/b_calcfab.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:73px;" align="left" border="0" />La pressione del pulsante Calcolo dà il via al calcolo effettivo dei fabbisogni che sarà visualizzabile nelle due sezioni successive. Fino a quando non sarà effettuato il calcolo non sarà possibile accedere alle sezioni successive.</p>
+<p style="margin-left: 0in;">&#160;</p>
+<p style="margin-left: 0in;">La sezione Fabbisogni prodotti mostra nella sezione superiore i composti e per ognuno nella sezione inferiore i componenti; per ogni articolo sono indicate l'esistenza corrente, la disponibilità, il quantitativo da produrre per i composti e la quantità necessaria per i componenti, l'esistenza e la disponibilità nette e l'eventuale fabbisogno; nel caso sia stata richiesta la valorizzazione, per prodotto sarà visualizzato anche il valore. Sia i composti che i componenti sono visualizzati in colore verde se sufficienti, oppure in rosso se non sufficienti, in relazione alla quantità utilizzata per calcolare il fabbisogno selezionata nei parametri; nella sezione dei componenti è presente la colonna livello che riporta il livello del prodotto nella distinta base ed i semilavorati vengono evidenziati in grassetto. Sono attivi i tasti Anteprima e Stampa sulla toolbar principale per effettuare la stampa del report.</p>
+<p style="margin-left: 0in; text-align: center;"><img src="Images/sorc0013d_03.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="margin-left: 0in;">&#160;</p>
+<p style="margin-left: 0in;">La sezione Fabbisogni globali mostra solo i componenti di tutti i prodotti per cui è stato richiesto il calcolo dei fabbisogni; per ogni articolo sono indicate l'esistenza corrente, la disponibilità, la quantità necessaria, l'esistenza e la disponibilità nette e l'eventuale fabbisogno. Anche in questa pagina i prodotti sono visualizzati in colore verde se sufficienti, oppure in rosso se non sufficienti, in relazione alla quantità utilizzata per calcolare il fabbisogno selezionata nei parametri.</p>
+<p style="margin-left: 0in; text-align: center;"><img src="Images/sorc0013d_04.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="margin-left: 0in;">&#160;</p>
+<p style="margin-left: 0in;"><a name="Articoli senza DB"></a>La sezione Articoli senza DB, attiva solo se spuntata la relativa casella nella pagina dei parametri, mostra solo i prodotti che non hanno distinta base; per ogni articolo sono indicate l'esistenza corrente, la disponibilità, la quantità necessaria da acquistare, l'esistenza e la disponibilità nette. Sono attivi i tasti Anteprima e Stampa sulla toolbar principale per effettuare la stampa del report relativo.</p>
+<p style="margin-left: 0in; text-align: center;"><img src="Images/sorc0013d_05.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+</body>
+</html>

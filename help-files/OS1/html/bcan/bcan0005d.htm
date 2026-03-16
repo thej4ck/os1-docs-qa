@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 16, 2016 4:36:41 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Ripartizione movimenti transitori</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.11.0_6";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Contabilità analitica" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="text-align: left; font-weight: bold; font-size: 12pt;">Ripartizione movimenti transitori</p>
+<p>Il programma consente di elaborare i movimenti che utilizzano centri di costo/ricavo definiti transitori, per generare altri movimenti collegati contenenti &#160;gli effettivi centri di costo/ricavo diretti oppure intermedi che potranno a loro volta essere oggetto di successivo ribaltamento.</p>
+<p>Il programma si articola su due finestre video. La prima, Parametri, consente la definizione dei parametri di analisi.</p>
+<p style="text-align: center;"><img src="Images/bcan0005d_01.png" alt="" style=" border:none; width:100%; max-width:709px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CENTRO C/R.: eventuale codice del centro di costo/ricavo, presente in anagrafica, da cui si vuole iniziare la selezione di analisi. Confermando a vuoto, la selezione inizia dal primo codice valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CENTRO C/R.: eventuale codice del centro di costo/ricavo, presente in anagrafica, con cui si vuole terminare la selezione di analisi. Confermando a vuoto, la selezione termina con l’ultimo codice valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale data del movimento da cui deve iniziare l’analisi dei movimenti relativamente ai precedenti parametri di selezione. Confermando a vuoto, l’analisi inizia con il primo movimento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale data del movimento con cui si desidera terminare l’analisi dei movimenti relativamente ai precedenti parametri di selezione. Confermando a vuoto, l’analisi si conclude con l'ultimo movimento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO MOVIMENTO: definisce il tipo di movimenti da analizzare. Valori ammessi: <span>Tutti; Contabili; Extracontabili.</span></p>
+<p>&#160;</p>
+<p>Confermando tramite pressione del pulsante Esegui, viene avviata la selezione e richiamata la sezione Risultati.</p>
+<p style="text-align: center;"><img src="Images/bcan0005d_02.png" alt="" style=" border:none; width:100%; max-width:709px;" border="0" /></p>
+<p>&#160;</p>
+<p>Nella parte superiore vengono riportati i centri di costo/ricavo trovati come risultato della selezione effettuata. Con il doppio clic del mouse su di una riga è possibile effettuare la ripartizione del rigo selezionato; se presente una ripartizione per il centro di costo/ricavo questa verrà inserita nella parte sottostante e saranno effettuati in automatico i calcoli necessari per ripartire l'importo del rigo nelle relative percentuali. Nel caso in cui non esista una ripartizione verrà proposta una richiesta per proseguire con l'inserimento manuale. Le righe per cui è già stata inserita una ripartizione figurano in un colore diverso. <span style="font-family: Verdana, Arial;">Se previsto in configurazione sarà presente ed utilizzabile anche la &#160;Voce di costo/ricavo.</span></p>
+<p style="text-align: center;"><img src="Images/bcan0005d_03.png" alt="" style=" border:none; width:100%; max-width:709px;" border="0" /></p>
+<p>&#160;</p>
+<p>La parte inferiore della finestra contiene, come spiegato precedentemente, la ripartizione del centro di costo/ricavo che può essere stata generata automaticamente, dalle ripartizioni presenti per il centro di costo/ricavo selezionato, oppure inserita manualmente. In questa sezione è possibile apportare le necessarie modifiche.</p>
+<p>Al termine delle operazioni premendo il pulsante Salva oppure il relativo tasto F10 sarà richiesta la conferma per la registrazione.</p>
+</body>
+</html>

@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc1.js\"  name=\"Maschere video\"><item name=\"Manutenzione\" url=\"html/sstp/sstp0001f_008.htm\" /><item name=\"Proprietà dei campi\" url=\"html/sstp/sstp0001f_009.htm\" /><item name=\"Ordine di tabulazione\" url=\"html/sstp/sstp0001f_010.htm\" /></data>";

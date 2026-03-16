@@ -1,0 +1,371 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 18, 2015 6:44:29 PM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Configurazione Magazzino</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.1.1.5.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazione OS1 Enterprise > Generali > Configurazione moduli > Magazzino" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h5>Configurazione magazzino</h5>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA ULTIMA STORICIZZAZIONE: 
+ Attualmente non gestito</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO GESTIONE PARTITE: 
+ Indica il tipo di gestione delle partite sui movimenti di magazzino. Valori 
+ ammessi:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">Nessuna 
+		 gestione: il campo Partita sul rigo dei documenti e dei movimenti 
+		 di magazzino non viene gestito.</p></li>
+	</ul>
+	<ul style="list-style: disc;">
+		<li class="p"><p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">Gestione 
+		 libera (rif. interno): il campo Partita sul rigo dei documenti 
+		 e nei movimenti di magazzino è considerato un campo descrittivo 
+		 da utilizzarsi come filtro di ricerca.</p></li>
+	</ul>
+	<ul style="list-style: disc;">
+		<li class="p"><p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">Gestione 
+		 completa (partite di lavorazione): il campo Partita agisce in 
+		 base al parametro “Gestione partite” indicato sulla causale di 
+		 magazzino per creare o aggiornare l’archivio “Saldi per partita”; 
+		 in questo caso sui documenti nel caso di movimentazione di partita 
+		 esistente viene abilitata la visualizzazione delle partite aperte 
+		 per il prodotto specificato sul rigo.</p></li>
+	</ul>
+	<ul style="list-style: disc;">
+		<li class="p"><p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">Gestione 
+		 di entrambe le modalità: permette sia la gestione libera che codificata; 
+		 la distinzione fra i due casi è legata al flag “Gestione partite” 
+		 indicato in causale di magazzino (quindi se uso un riferimento 
+		 interno sulla causale di magazzino il campo “Gestione partite” 
+		 deve essere impostato a nessuna gestione.</p></li>
+	</ul></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA REGISTRO PARTITE: 
+ Se attivo permette la stampa definitiva del registro partite di magazzino.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO STAMPA GIORNALE 
+ MAGAZZINO: Indica il tipo di stampa per il giornale di magazzino, valori 
+ ammessi:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Modulo A4 
+		 (verticale): stampa su stampante laser.</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Modulo continuo 
+		 (aghi): stampa su stampante ad aghi.</p></li>
+	</ul></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO STAMPA REGISTRO 
+ PARTITE: Indica il tipo di stampa per il registro partite, valori ammessi:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Modulo A4 
+		 (verticale): stampa su stampante laser.</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Modulo continuo 
+		 (aghi): stampa su stampante ad aghi.</p></li>
+	</ul></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO VALORIZZAZIONE 
+ RIMANENZE: Indica quale prezzo deve essere applicato in fase di calcolo 
+ rimanenze. Per il calcolo del prezzo medio e del costo ultimo concorrono 
+ anche i parametri &quot;Gestione valorizzazione magazzino&quot;, &quot;Gestione 
+ valori giornalieri&quot; e &quot;Calcolo costo medio/costo ultimo da movimenti&quot;.<span>Valori 
+ ammessi:</span></p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Prezzo medio</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">LIFO: è 
+		 il prezzo medio derivante dalla valorizzazione LIFO.</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">FIFO: è 
+		 il prezzo medio derivante dalla valorizzazione FIFO.</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Costo ultimo</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Costo di 
+		 mercato</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Da listino</p></li>
+	</ul></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Listino 
+ valorizzazione rimanenze</span>: Indicare il codice del listino da utilizzare 
+ per la lettura dei prezzi dei prodotti nel caso di valorizzazione rimanenze 
+ per listino (parametro precedente).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">INCLUDI ONERI ACCESSORI: 
+ Se attivo in fase di calcolo del prezzo medio include anche il valore 
+ degli oneri accessori direttamente registrati nel movimento di magazzino. 
+ Utilizzato in fase di valorizzazione magazzino.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">GESTIONE VALORI MAGAZZINO: 
+ Se spuntato indica all'applicazione che vengono gestite le valorizzazioni 
+ periodiche di magazzino, altrimenti i calcoli relativi ai prezzi sono 
+ effettuati in base ai progressivi degli articoli.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">GESTIONE VALORI GIORNALIERI: 
+ Indica se i valori di magazzino devono essere gestiti a livello giornaliero 
+ (casella con segno di spunta) oppure mensile (casella vuota); nel primo 
+ caso nell’archivio delle valorizzazioni di magazzino è presente un record 
+ per ciascun articolo per ogni data movimentata per il prodotto; nel secondo 
+ caso il valore viene memorizzato alla data di fine elaborazione della 
+ valorizzazione stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Costo 
+ medio per movimento</span>: Se spuntato in fase di valorizzazione magazzino 
+ viene calcolato il prezzo medio secondo la logica del prezzo medio per 
+ movimento.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CALCOLO COSTO MEDIO/ULTIMO 
+ DA MOVIMENTI: Il parametro viene utilizzato nella funzione di calcolo 
+ del costo medio e del costo ultimo del prodotto. Se attivo, indica all'applicazione 
+ di trattare anche i movimenti di magazzino per la determinazione del costo 
+ medio / costo ultimo. La lettura dei movimenti di magazzino viene effettuata 
+ in due casi: se il parametro &quot;Gestione valorizzazione magazzino&quot; 
+ è attivo (e quindi le informazioni vengono prelevate direttamente dalla 
+ tabella ValoriMagazzino generata dal programma di valorizzazione), nel 
+ caso in cui si stia calcolando il costo ad una data non ancora valorizzata. 
+ Se il parametro &quot;Gestione valorizzazione magazzino&quot; non è attivo 
+ (e quindi le informazioni vengono prelevate direttamente dai progressivi 
+ aggiornati in tempo reale), nel caso in cui si stia calcolando il costo 
+ ad una data antecedente alla data di sistema.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA INTESTAZIONE 
+ DITTA SU BOLLATI: Se spuntato indica se nella stampe fiscali di magazzino 
+ viene stampata l’intestazione aziendale comprensiva di ragione sociale, 
+ dati aggiuntivi, partita Iva, anno di competenza e numero pagina.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DETTAGLIO QUANTITÀ 
+ IN PRIMA NOTA: Indica se è abilitata la gestione del dettaglio quantità 
+ a livello di prima nota di magazzino.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">VOCE DI COSTO MATERIE 
+ PRIME: Indica il codice di voce di costo riservato per i costi delle materie 
+ prime; utilizzato in gestione prima nota di magazzino e generazione movimenti 
+ di rientro prodotto finito.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">VOCE DI COSTO LAVORAZIONI: 
+ Indica il codice di voce di costo riservate per i costi di lavorazione; 
+ utilizzato in gestione prima nota di magazzino e generazione movimenti 
+ di rientro prodotto finito (modulo Produzione Light).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">VOCE DI COSTO RICARICHI: 
+ Indica il codice della voce di costo per memorizzare il valore dei costi 
+ di produzione in fase di carico di un prodotto con distinta base e scheda 
+ di lavorazione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">GESTIONE QUANTITÀ 
+ SECONDARIA: Se spuntato abilita la gestione dei pezzi (quantità secondaria) 
+ in prima nota di magazzino.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">RILEV. RIM. PROD. 
+ FUORI INVENTARIO: Definisce come trattare le rimanenze finali dei prodotti 
+ e/o dei depositi, dichiarati fuori dalla stampa dell’inventario. E’ possibile 
+ quindi non riportare nulla, oppure trasferire sul nuovo esercizio solo 
+ la quantità, oppure trasferire anche il valore (sulla base del parametro 
+ definito nel campo “Tipo valorizzazione”):</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TRATTAMENTO MAGAZZINI 
+ FUORI INVENTARIO: Indica se in fase di elaborazione valorizzazione fiscale 
+ (LIFO/FIFO) anche i movimenti i magazzini esclusi dalla stampa dell'inventario 
+ devono essere conteggiati o meno nel calcolo della giacenza; se l'opzione 
+ è attiva vengono elaborati anche i magazzini di proprietà non inclusi 
+ in inventario.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO VALORIZZAZIONE 
+ SEMILAVORATI: Definisce il metodo di calcolo del prezzo per i semilavorati; 
+ utilizzato in prima nota di magazzino, valorizzazione magazzino e procedure 
+ di produzione per determinare il valore di un semilavorato. Valori possibili:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Standard: 
+		 utilizza il tipo di calcolo definito in distinta base</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Al valore 
+		 delle materie prime: utilizza come prezzo il valore derivante 
+		 dalla somma dei costi dei componenti.</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Al valore 
+		 dei costi di lavorazione: utilizza come prezzo il valore dalla 
+		 somma dei costi dei componenti aumentato dei costi di lavorazione.</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in; 
+						 margin-top: 0pt; margin-bottom: 0pt;">Al valore 
+		 dei costi di produzione: utilizza come prezzo il valore dalla 
+		 somma dei costi dei componenti aumentato dei costi di lavorazione 
+		 e dei costi di produzione.</p></li>
+	</ul></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">GESTIONE SCORTE PER 
+ MAGAZZINO: Se spuntato, attiva in anagrafica articoli la gestione delle 
+ scorte dettagliata per magazzino.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">GESTIONE COMMESSA 
+ DI PRODUZIONE: Definisce se deve essere gestita la commessa di produzione 
+ a livello di magazzino e documenti. Per i documenti che generano direttamente 
+ il magazzino (Ddt e Fatture), la commessa sarà presente se gestita a livello 
+ di causale di magazzino.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE DI SCARICO 
+ UBICAZIONI: Utilizzato dal programma di trasferimento ubicazioni indica 
+ la causale con la quale effettuare i movimenti di scarico sul magazzino 
+ selezionato.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE DI CARICO 
+ UBICAZIONI: <span style="text-indent: -0.417in; margin-left: 30pt;">Utilizzato 
+ dal programma di trasferimento ubicazioni indica la causale con la quale 
+ effettuare i movimenti di scarico sul magazzino selezionato.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PRENOTAZIONE ARTICOLI 
+ IN INVENTARIO FISICO: abilita la gestione delle prenotazioni sui records, 
+ in fase di manutenzione dei valori dell’inventario fisico (casella con 
+ segno di spunta), in modo che più utenti non possono trattare lo stesso 
+ articolo in fase di inserimento dell’inventario fisico.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">UTILIZZA QUANTITA' 
+ SECONDARIA IN INVENTARIO FISICO: Indica se nell'inventario fisico deve 
+ essere richiesta anche la quantità secondaria; il parametro è valido solo 
+ se è gestita la quantità secondaria in magazzino.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Raggr. dettaglio in rilevazione rettifiche</span>: 
+ Definisce il tipo di raggruppamento da utilizzare sul dettaglio quantità 
+ in fase di rilevazione rettifiche da inventario fisico:</p>
+<ul style="list-style: disc;">
+	<ul style="list-style: disc;">
+		<li><p style="margin-left: 0px; margin-top: 0pt; margin-bottom: 0pt;">raggruppamento 
+		 per prodotto: i dettagli vengono raggruppati ricercando i movimenti 
+		 per prodotto, data e causale movimento;</p></li>
+		<li><p style="margin-left: 0px; margin-top: 0pt; margin-bottom: 0pt;">raggruppamento 
+		 per inventario/prodotto: i dettagli vengono raggruppati ricercando 
+		 i movimenti per codice inventario, prodotto, data e causale movimento 
+		 (il codice inventario viene memorizzato sul riferimento documento);</p></li>
+		<li><p style="margin-left: 0px; margin-top: 0pt; margin-bottom: 0pt;">nessun 
+		 raggruppamento: vengono generate sempre righe di magazzino nuove. 
+		 </p></li>
+	</ul>
+</ul>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CONTROLLO DETTAGLIO 
+ IN RILEVAZIONE RIMANENZE: Indica il tipo di controllo da utilizzare in 
+ fase di rilevazione rimanenze di magazzino, tra le esistenze sull’archivio 
+ dei saldi prodotto e quello dei saldi lotti; t<span style="font-family: Verdana, sans-serif;">ale 
+ controllo, se attivo, può essere vincolante o meno.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="font-family: Verdana, sans-serif;">TIPO 
+ CONTROLLO GIACENZA:</span> Indica il tipo di controllo da effettuare in 
+ fase di inserimento movimento di scarico sulle giacenze di magazzino. 
+ Tale controllo, se attivo, può essere vincolante o meno e può essere attivato 
+ solo sul magazzino indicato sul rigo del movimento oppure su tutti i magazzini 
+ di proprietà dell’azienda.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="font-family: Verdana, sans-serif;">TIPO 
+ CONTROLLO DISPONIBILITÀ:</span> Indica il tipo di controllo da effettuare 
+ in fase di inserimento movimento di scarico sulle disponibilità di magazzino. 
+ Tale controllo, se attivo, può essere vincolante o meno e può essere attivato 
+ solo sul magazzino indicato sul rigo del movimento oppure su tutti i magazzini 
+ di proprietà dell’azienda.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">APPLICA SCONTI LISTINO: 
+ Se spuntato nella stampa dell'inventario di magazzino, con valorizzazione 
+ per listino, tratterà gli eventuali sconti presenti.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">RICALCOLO INFORMAZIONI 
+ COSTO ULTIMO: Definisce se in fase di storno progressivi articolo (a seguito 
+ di cancellazione di un movimento) devono essere ricalcolati automaticamente 
+ i dati relativi agli ultimi carichi (data e prezzo ultimo, data e prezzo 
+ penultimo) e/o i dati relativi agli ultimi scarichi (data e prezzo ultimo). 
+ Il meccanismo è opzionale in quanto l'attivazione potrebbe rallentare 
+ l'operatività normale, quindi attivarlo solo se le informazioni relative 
+ ai costi ultimi presenti in anagrafica articolo vengono consultate continuamente 
+ e quindi devono essere assolutamente in linea (altrimenti il dato può 
+ essere ricalcolato utilizzando la funzione &quot;Controllo saldi prodotti&quot; 
+ presente nel menù Magazzino, Operazioni di fine esercizio).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Visualizza 
+ descrizioni documenti su movimenti</span>: Se spuntato, per i movimenti 
+ di magazzino derivanti da documenti saranno visualizzate le descrizioni 
+ dei documenti e non dell'anagrafica articoli. La visualizzazione è attiva 
+ su prima nota di magazzino, analisi movimenti e lista prima nota.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Collega 
+ movimenti da distinta base</span>: Se spuntato, i movimenti di magazzino 
+ relativi ai componenti di distinta base saranno collegati al movimento 
+ di magazzino del composto che li ha generati.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Controllo 
+ movimenti derivanti da doc.</span>: Il parametro consente di determinare 
+ il comportamento della procedura in fase di modifica di un movimento di 
+ prima nota che deriva da documento. I valori disponibili sono:</p>
+<ul style="list-style: disc;">
+	<ul style="list-style: disc;">
+		<li class="p"><p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">Nessun 
+		 controllo</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">Controllo 
+		 non vincolante</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 0pt; margin-bottom: 0pt;">Controllo 
+		 vincolante</p></li>
+	</ul>
+</ul>
+<p style="text-indent: -0.417in; margin-left: 0.417in;"><span style="text-transform: uppercase;">Num. 
+ giorni senza movimentazione</span>: Indicare il numero dei giorni, a partire 
+ dalla data odierna, utilizzati per determinare la data di ultima movimentazione 
+ da proporre in analisi scorte.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;"><span style="text-transform: uppercase;">Causale 
+ di rimanenza iniziale</span>: se presente sarà considerata come unica 
+ causale di rimanenza iniziale sia per la rilevazione rimanenze che per 
+ il calcolo del prezzo medio.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;"><span style="text-transform: uppercase;">Esclusione 
+ ricerca prezzi</span>: Indica alle procedure di calcolo del prezzo medio 
+ di carico e del costo ultimo carico se escludere determinate ricerche 
+ aggiuntive rispetto alla ricerca configurata:</p>
+<ul style="list-style: disc;">
+	<ul style="list-style: disc;">
+		<li><p style="text-indent: -0.417in; margin-left: 0.417in; margin-top: 0pt; 
+				 margin-bottom: 0pt;">Nessuna esclusione: vengono effettuati 
+		 tutti i tentativi di ricerca del prezzo previsti dalla configurazione 
+		 attiva.</p></li>
+		<li><p style="text-indent: -0.417in; margin-left: 0.417in; margin-top: 0pt; 
+				 margin-bottom: 0pt;">Escludi ricerca su esercizi precedenti: 
+		 non viene effettuata la ricerca sugli esercizi precedenti chiusi 
+		 nel caso in cui il prodotto non sia valorizzabile nell'esercizio 
+		 per cui viene effettuata la richiesta.</p></li>
+		<li><p style="text-indent: -0.417in; margin-left: 0.417in; margin-top: 0pt; 
+				 margin-bottom: 0pt;">Escludi ricerca su esercizi precedenti 
+		 e su progressivi: come la precedente in più viene esclusa anche 
+		 la ricerca del prezzo dai progressivi correnti a meno che non 
+		 sia l'unico criterio di ricerca.</p></li>
+	</ul>
+</ul>
+</body>
+</html>

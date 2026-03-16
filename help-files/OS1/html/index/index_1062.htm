@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 6, 2016 9:15:04 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Partite aperte fornitori</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.7.0_1";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Partite aperte fornitori" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;">Introduzione</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">Come si è già visto, le partite aperte gestiscono tutte le problematiche relative ai debiti nei confronti di fornitori.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Prima di esaminare i vari programmi inerenti le partite, è bene chiarire alcuni termini. Una “partita” corrisponde ad un documento (fattura, nota credito) o, meglio, all’insieme di operazioni che si riferiscono a quel documento. Si dice quindi che la partita è totalmente o parzialmente “scoperta” quando il documento non è stato pagato o lo è stato solo in parte.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Una “partita” può avere più “scadenze”, se il pagamento è previsto in più rate. Ciascuna scadenza o rata può essere di tipo RD (Rimessa diretta), RB (Ricevuta bancaria), TR (Tratta), BO (Bonifico bancario), AT (Assegno di traenza) e così va, in funzione della modalità di pagamento prevista.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Ciascuna “scadenza” o “rata” può avere più “dettagli”: ha certamente come primo il rigo di rata che definisce l’importo e la data di scadenza della rata, nonché la modalità di pagamento. Ad esempio, RD. Successivamente si aggiunge un nuovo “dettaglio” riferito alla stessa rata quando viene incassato un primo acconto. Ancora vi si può aggiungere un terzo “dettaglio” sempre riferito alla stessa rata quando viene incassato il saldo e, se fosse stato praticato uno sconto, si aggiungerebbe un quarto “dettaglio” pari all’importo dello sconto.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Una nota di credito a se stante è una nuova partita e una nuova scadenza. Se tuttavia la stessa nota di credito è riferita ad un documento precedente da cui deve essere scalata, diventa un “dettaglio” della partita relativa al documento a cui si riferisce.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Analogamente un anticipo, finchè resta privo di riferimenti, è una partita e una scadenza a se stante. Ma quando l’anticipo viene portato in deduzione di una fattura, diventa un “dettaglio” della partita relativa alla fattura stessa.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Una partita si dice chiusa quando la somma algebrica degli importi dei suoi dettagli di scadenze totalizza zero.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Ciò detto, risulta facile comprendere il meccanismo adottato dall'applicazione. Le “partite” (documenti) vengono memorizzate nella tabella Movimenti contabili; i “dettagli di scadenza” (per brevità, “scadenze”) vengono invece memorizzati nella tabella Scadenze, ma contengono il riferimento della partita da cui provengono.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">La registrazione di una fattura da pagarsi a 30 e a 60 giorni genera un rigo di Movimento contabile, intestato al fornitore per il totale della fattura, e genera anche contestualmente due righi di Movimenti scadenze, di cui uno per la prima rata e metà dell’importo e uno per la seconda rata per la residua metà. Il rigo contabile non contiene le date di scadenza ed è quindi utile per tutti gli adempimenti contabili; i righi scadenze contengono invece le date, gli importi di ciascuna rata e le modalità di scadenza, e sono quindi utili per gli scadenzari.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">La registrazione del pagamento della prima rata genera un rigo di Movimento contabile e un rigo di tipo AC (accredito) di Movimento scadenze, riferito alla prima rata.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Quanto detto è documentato dall’analisi di una “partita” del fornitore Bartolini, e più precisamente della partita 28 del 2001 corrispondente alla fattura 19 del 21/08/2001 per complessivi Euro 3306,82. L’analisi raggruppa tutti i Movimenti scadenze relativi ad una partita, ordinati per numero di rata.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Vediamo il primo rigo della rata 1 che definisce la data di scadenza (15/11) tramite RD (rimessa diretta) della prima rata per un importo Avere di 1653,41 Euro. Vediamo anche che la rata 1 è saldata tramite un pagamento (AC) di 1650 Euro in Dare e uno sconto (SC) di 3,41 Euro in Dare. Vediamo ancora il rigo della rata 2 che definisce la seconda data di scadenza (15/12) tramite RD (rimessa diretta) per un importo Avere di 1653,41 Euro.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;">Abbiamo pertanto al momento quattro “dettagli scadenze” per questa partita, mentre in contabilità abbiamo tre righi di movimenti contabili: uno per il totale fattura in Avere e due successivi per il pagamento parziale della prima rata e per lo sconto a pareggio della prima rata in Dare. La partita, come risulta evidente, è ancora aperta.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: center;"><img src="Images/Index_1062_01.png" alt="" style=" border:none; width:100%; max-width:736px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">I righi della tabella movimenti Scadenze contengono quindi le informazioni atte a riconoscerne il tipo, la data di scadenza, i riferimenti alla partita, i riferimenti all’effetto se il tipo è RB, TR, CE, il riferimento agli agenti che percepiscono le provvigioni e soprattutto l’importo, che viene memorizzato sia nella divisa originaria del documento, sia, grazie alla presenza del cambio del giorno, nel controvalore in divisa di conto (Euro o Lire). Ciò permette di ottenere scadenzari, estratti conto e situazioni debiti sia in divisa di conto che in divisa originaria e consente la determinazione automatica delle differenze cambio attive e passive al momento del pagamento.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Ciascuna partita è contrassegnata da un numero progressivo nell’anno che non ha nulla a che vedere con il numero di movimento contabile. Le successive registrazione di pagamenti (anche a mezzo effetti), insoluti e altre operazioni inerenti lo stesso documento creano ulteriori dettagli scadenze, fino alla “chiusura” della partita stessa.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Le scadenze consentono di generare i pagamenti a fornitori e dalla loro situazione scaturiscono gli scadenzari e gli estratti conto.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Le note di credito e gli anticipi possono creare scadenze autonome, se non sono “assegnati” a nessuna scadenza, ovvero possono costituire ulteriori dettagli di altre scadenze, se viene indicato il numero di documento (fattura) a cui si riferiscono.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Nel caso in cui un pagamento saldi, in tutto o in parte, più di una scadenza, avviene un “aggregazione”, ovvero alle scadenze interessate viene anche assegnato un nuovo numero di partita.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Poiché le scadenze nascono e si aggiornano tramite le registrazioni contabili, i programmi di gestione sono sostanzialmente costituiti dai programmi di interrogazione, stampa e trattamento delle partite aperte fornitori.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">È previsto un programma di manutenzione che consente, all’occorrenza, di modificare le scadenze delle varie partite in termini di tipo pagamento e di importi e di aggregare e disaggregare partite esistenti. In ogni caso, gli importi complessivi dei vari dettagli scadenze non possono essere modificati da questo programma, perché tale modifica creerebbe una incoerenza con l’importo delle scritture contabili. In tale evenienza occorrerà quindi procedere ad una variazione tramite il programma di Gestione prima nota.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">I programmi di gestione delle partite sono raggruppati sotto la scelta Partite aperte fornitori del menù di Contabilità.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<table style="vertical-align: Center; border-left-style: Solid; border-left-width: 2px; border-right-style: Solid; border-right-width: 2px; border-top-style: Solid; border-top-width: 2px; border-bottom-style: Solid; border-bottom-width: 2px; margin-left: 2px; margin-right: 2px; left: 79px; top: 2129px;" cellspacing="0" align="center">
+<col width="275" />
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="275">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bpcf/bpcf0001f_f.htm">Manutenzione scadenze</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="275">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bpcf/bpcf0002f_f.htm">Analisi estratto conto fornitori</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="275">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bpcf/bpcf0003d_f.htm">Stampa estratto conto fornitori</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="275">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bpcf/bpcf0004d_f.htm">Stampa scadenzario fornitori</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-width: 1px; border-bottom-style: Solid;" width="275">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bpcf/bpcf0014d_f.htm">Gestione interessi di mora</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="275">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bpcf/bpcf0015d_f.htm">Situazione interessi di mora</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-width: 1px; border-bottom-style: Solid;" width="275">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="index_106220.htm">Flussi finanziari</a></p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 25, 2016 6:34:24 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Registrazione rapida corrispettivi</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.1.1_11";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Prima nota contabile" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; 
+	 font-weight: bold;">Registrazione rapida corrispettivi</p>
+<p style="font-family: Verdana, sans-serif;">Il programma consente la registrazione 
+ rapida dei corrispettivi di vendita.</p>
+<p style="font-family: Verdana, sans-serif;">E' necessario configurare 
+ la procedura prima del primo utilizzo, attraverso la compilazione dell’apposita 
+ configurazione “Registrazione rapida corrispettivi” all’interno della 
+ quale vanno indicati i codici Iva da trattare, le causali contabili ed 
+ i conti di ricavo, o i conti di ricavo in combinazione con i codici Iva, 
+ da utilizzare per la registrazione contabile.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: center;"><img src="Images/bcge0054f_01.png" alt="" style=" border:none; width:100%; max-width:971px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif;">Nei parametri di selezione 
+ è necessario indicare il tipo di corrispettivi da elaborare: a scorporo 
+ o ventilabili. Se da configurazione contabilità entrambi i campi (Corrispettivi 
+ a scorporo e corrispettivi ventilabili) sono disabilitati non sarà consentito 
+ l'accesso alla procedura; se è abilitata una sola delle gestioni il campo 
+ è disabilitato e riporta l'indicazione della gestione attiva; altrimenti 
+ è abilitato e cambiando gestione vengono proposti i relativi campi per 
+ causale e ricavo; solo in questo caso (entrambe le gestioni abilitate) 
+ viene effettuato un controllo sulle causali contabili per verificare che 
+ le causali relative alla registrazione dei corrispettivi abbiano numero 
+ registro Iva differenti in relazione alla gestione (scorporo o ventilabili). 
+ Non sarà possibile effettuare la registrazione se sono presenti casuali 
+ relative a tipologie di corrispettivi differenti con stessa serie registro 
+ Iva.</p>
+<p style="font-family: Verdana, sans-serif;"><span style="font-family: Verdana, sans-serif;">Sono 
+ presenti come parametri di selezione l'anno, il mese, la causale, il sottoconto 
+ ed il conto di ricavo necessari per poter generare i movimenti contabili; 
+ la causale ed i sottoconti vengono proposti in automatico dalla configurazione, 
+ l'anno ed il mese vengono proposti in automatico in base alla data corrente 
+ impostata in OS1; possono essere utilizzate causali che si riferiscono 
+ a sezionali differenti per registrare movimenti nella stessa data; sono 
+ presenti due caselle di spunta alternative l'una all'altra ed utilizzate 
+ dalla fase di importazione: &quot;Compensa differenze su sconto a pagare&quot;: 
+ se la casella è spuntata le eventuali differenze tra il riepilogo totali 
+ e la somma di imponibili ed imposta sarà assegnata all'importo relativo 
+ allo sconto a pagare; &quot;Compensa differenze su totali&quot;: se la 
+ casella è spuntata le eventuali differenze tra il riepilogo totali e la 
+ somma di imponibili ed imposta sarà scalata dai totali in concorrenza 
+ cominciando dal totale contanti; saranno considerati solo i totali valorizzati.</span></p>
+<p style="font-family: Verdana, sans-serif;">Nella griglia dei Risultati, 
+ vengono riportati tutti i giorni del mese selezionato, per i corrispettivi 
+ a scorporo, le colonne relative alle aliquote Iva configurate ed è consentito 
+ l’inserimento dei valori dei corrispettivi indicandoli nelle colonne delle 
+ varie aliquote Iva; cliccando sulla barra del titolo della griglia l'intestazione 
+ passa da aliquota Iva a conto di ricavo assegnato. I dati eventualmente 
+ già presenti vengono visualizzati su sfondo bianco, e sono modificabili, 
+ se ancora non è stato generato il movimento contabile, oppure su sfondo 
+ grigio e non modificabili, se già generato il movimento contabile. I giorni 
+ per cui sono presenti dati importati hanno uno sfondo giallo chiaro.</p>
+<p style="text-align: center;"><img src="Images/BCge0054f_02.png" alt="" style=" border:none; width:100%; max-width:971px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif;">Per i corrispettivi ventilabili 
+ cambia solo la visualizzazione delle colonne Iva e viene mostrata una 
+ sola colonna relativa al codice Iva di configurazione.</p>
+<p style="text-align: center;"><img src="Images/BCge0054f_04.png" alt="" style=" border:none; width:100%; max-width:971px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif;">&#160;</p>
+<p style="font-family: Verdana, sans-serif;"><img src="Images/b_ImpCorrispettivi.png" alt="" style=" border:none; margin-left:0px; margin-right:7px; margin-top:0px; margin-bottom:7px; width:100%; max-width:73px;" align="left" border="0" />Se 
+ previsto in configurazione è presente il pulsante di importazione; premendolo 
+ si accede alla finestra di selezione dei file XML che possono essere scaricati 
+ dal portale fatture e corrispettivi; il percorso predefinito viene proposto 
+ in base alla configurazione.</p>
+<p style="text-align: center;"><img src="Images/BCge0054d_01.png" alt="" style=" border:none; width:100%; max-width:707px;" border="0" /></p>
+<p>Premendo il pulsante Elabora vengono ricercati i files nel percorso 
+ selezionato e relativi al periodo che si sta elaborando; vengono mostrati 
+ nel corpo della finestra con la spunta predefinita.</p>
+<p style="text-align: center;"><img src="Images/BCge0054d_02.png" alt="" style=" border:none; width:100%; max-width:707px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif;"><span style="text-transform: uppercase;">è</span> 
+ possibile togliere e mettere la spunta singolarmente per ogni file oppure 
+ con i pulsanti in basso a sinistra per tutti i files presenti nell'elenco; 
+ la pressione sul pulsante Esegui avvia l'importazione dei files che terminerà 
+ con una finestra in cui vengono mostrati i risultati dell'importazione 
+ che sia andata a buon fine o meno; i files importati correttamente vengono 
+ spostati automaticamente sotto delle cartelle create automaticamente con 
+ una struttura ad albero per anno, mese e giorno dove nella cartella del 
+ giorno sono presenti i files importati. La selezione dei file XML controlla 
+ che il file sia della stessa tipologia di corrispettivi selezionata nei 
+ parametri e se differente non elabora il file segnalandolo ed il file 
+ rimane nella cartella originale; di conseguenza se si ha una situazione 
+ mista si elabora prima una tipologia ed i relativi file vengono processati, 
+ poi si elabora l'altra tipologia e vengono elaborati i files rimanenti.</p>
+<p style="text-align: center;"><img src="Images/BCge0054d_03.png" alt="" style=" border:none; width:100%; max-width:436px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif;">Al termine dell'importazione 
+ si ritorna sulla pagina risultati con i dati importati che hanno popolato 
+ la griglia nei relativi giorni ed alle relative aliquote, evidenziati 
+ con un colore giallo chiaro.</p>
+<p style="font-family: Verdana, sans-serif;">&#160;</p>
+<p style="font-family: Verdana, sans-serif;"><img src="Images/BCge0054f_03.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:731px;" align="right" border="0" />E’ 
+ possibile suddividere il totale incassato per tipologia di incasso (contanti, 
+ assegni, bancomat, carte di credito, ticket) una volta inseriti gli importi 
+ del giorno, tramite il doppio clic del mouse sulla riga interessata; compare 
+ la finestra mostrata a lato, dove sarà possibile inserire i vari importi 
+ fino a concorrenza del totale del giorno; i giorni che comportano una 
+ suddivisione sono facilmente riconoscibili in quanto scritti in verde. 
+ Se gestita l'importazione saranno presenti anche i valori relativi a &quot;Non 
+ riscosso&quot; e &quot;Sconto a pagare&quot;.</p>
+<p style="font-family: Verdana, sans-serif;">Tramite i pulsanti presenti 
+ nella <a href="../Ambiente/Ambiente_02.htm">Toolbar</a> sarà possibile 
+ effettuare la stampa di quanto mostrato a video e con il pulsante Salva 
+ effettuare il salvataggio dei valori nella relativa tabella; sarà inoltre 
+ richiesto se generare i movimenti contabili ed Iva che potranno essere 
+ generati anche in un secondo momento<span style="font-family: Verdana, sans-serif;">. 
+ Se il movimento contabile viene eliminato, sarà sufficiente accedere al 
+ mese relativo ed effettuando nuovamente l'elaborazione ed il salvataggio 
+ sarà possibile generare nuovamente i movimenti.</span></p>
+</body>
+</html>

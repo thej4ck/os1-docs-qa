@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data ><book name=\"Statistiche+\" url=\"html/sstp/sstp0001f.htm\" src=\"toc1.js\" /><book name=\"Esecuzione statistica da menù\" src=\"toc6.js\" /></data>";

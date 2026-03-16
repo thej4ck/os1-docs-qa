@@ -1,0 +1,1839 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rhlayout majorversion="2" minorversion="0">
+	<flags>1</flags>
+	<media>
+		<query css_selector="@SCREEN" id="dummy" name="dummy"/>
+	</media>
+	<groups>
+		<group layoutimage="preview/user-settings.png" res_ID="ID_GROUP_USERSETTINGS">Basic settings</group>
+		<group layoutimage="preview/layout-media-queries.png" res_ID="ID_GROUP_BREAKPOINTS">Media Query</group>
+		<group layoutimage="preview/header.png" res_ID="ID_GROUP_HEADER">Header</group>
+		<group layoutimage="preview/content.png" res_ID="ID_GROUP_CONTENT">Content (Desktop)</group>
+		<group layoutimage="preview/functionbar-desktop.png" res_ID="ID_GROUP_FUNCTIONBAR_DESKTOP">Functionbar (Desktop)</group>
+		<group layoutimage="preview/functionbar-tablet.png" res_ID="ID_GROUP_FUNCTIONBAR_TABLET">Functionbar (Tablet)</group>
+		<group layoutimage="preview/functionbar-mobile.png" res_ID="ID_GROUP_FUNCTIONBAR_MOBILE">Functionbar (Mobile)</group>
+		<group layoutimage="preview/sidebar-desktop.png" res_ID="ID_GROUP_SIDEBAR_DESKTOP">Sidebar (Desktop)</group>
+		<group layoutimage="preview/sidebar-tablet.png" res_ID="ID_GROUP_SIDEBAR_TABLET">Sidebar (Tablet)</group>
+		<group layoutimage="preview/sidebar-mobile.png" res_ID="ID_GROUP_SIDEBAR_MOBILE">Sidebar (Mobile)</group>
+		<group layoutimage="preview/search.png" res_ID="ID_GROUP_SEARCH">Search (All)</group>
+		<group layoutimage="preview/search-mobile.png" res_ID="ID_GROUP_SEARCH_MOBILE">Search (Mobile)</group>
+		<group layoutimage="preview/toc-desktop.png" res_ID="ID_GROUP_TOC_DESKTOP">TOC (All)</group>
+		<group layoutimage="preview/toc-mobile.png" res_ID="ID_GROUP_TOC_MOBILE">TOC (Tablet / Mobile)</group>
+		<group layoutimage="preview/index.png" res_ID="ID_GROUP_IDX">Index</group>
+		<group layoutimage="preview/glossary.png" res_ID="ID_GROUP_GLO">Glossary</group>
+		<group layoutimage="preview/filter.png" res_ID="ID_GROUP_FILTER">Filter (All)</group>
+		<group layoutimage="preview/filter-mobile.png" res_ID="ID_GROUP_FILTER_MOBILE">Filter (Mobile)</group>
+		<group layoutimage="preview/social.png" res_ID="ID_GROUP_SOCIAL">Social media</group>
+	</groups>
+	<variables>
+		<variable>
+			<name>breakpoint_mobile</name>
+			<uiname>Phone maximum width</uiname>
+			<type>LITERAL</type>
+			<value>941</value>
+			<group res_ID="ID_GROUP_BREAKPOINTS"/>
+			<visual_properties height="10px" left="15px" top="11px" width="80px"/>
+			<description>The maximum width of a device (in pixels) that is served the mobile layout. Devices with a width smaller than specified will see the mobile layout. Devices with a higher width will see the tablet or desktop layout.</description>
+			<default-value>941</default-value>
+			<allowedvalues/>
+			<sources>
+				<source filename="usersettings.js" variable="phone_max_width"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>breakpoint_tablet</name>
+			<uiname>Tablet maximum width</uiname>
+			<type>LITERAL</type>
+			<value>1295</value>
+			<group res_ID="ID_GROUP_BREAKPOINTS"/>
+			<visual_properties height="10px" left="260px" top="11px" width="80px"/>
+			<description>The maximum width of a device (in pixels) that is served the tablet layout. Devices with a screen width between the Mobile phone maximum width and the Tablet maximum width will see the tablet layout. Devices with a higher width will see the desktop layout.</description>
+			<default-value>1295</default-value>
+			<allowedvalues/>
+			<sources>
+				<source filename="usersettings.js" variable="tablet_max_width"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>us_font</name>
+			<uiname>Layout font</uiname>
+			<type>CSS_FONT_FAMILY</type>
+			<value>"Trebuchet MS", Arial, sans-serif</value>
+			<group res_ID="ID_GROUP_USERSETTINGS"/>
+			<visual_properties height="10px" left="45px" top="28px" width="30px"/>
+			<description>The font used in the layout. Changing this setting will affect the entire layout but will not change your topic content.</description>
+			<default-value>"Trebuchet MS", Arial, sans-serif</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body" cssproperty="font-family" filename="layout.css"></source>
+				<source css_selector="body" cssproperty="font-family" filename="layout-rtl.css"></source>
+				<source filename="usersettings.js" variable="fontFamily"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>us_default_pane</name>
+			<uiname>Default pane</uiname>
+			<type>STRING</type>
+			<value>toc</value>
+			<group res_ID="ID_GROUP_USERSETTINGS"/>
+			<visual_properties height="10px" left="45px" top="83px" width="80px"/>
+			<description>The default sidebar/menu opened in the output. Make sure this pane is one of the panes you enabled. If all panes are disabled, this setting will be ignored. Choose a pane: 'toc': Table of Contents; 'idx': Index'; 'glo': 'fts': Search; 'filter': Dynamic Content Filter.</description>
+			<default-value>toc</default-value>
+			<allowedvalues>
+				<value type="STRING">toc</value>
+				<value type="STRING">idx</value>
+				<value type="STRING">glo</value>
+				<value type="STRING">filter</value>
+				<value type="STRING">fts</value>
+			</allowedvalues>
+			<sources>
+				<source filename="usersettings.js" variable="defaultPane"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>us_useTOC</name>
+			<uiname>Show TOC</uiname>
+			<type>BOOLEAN</type>
+			<value>true</value>
+			<group res_ID="ID_GROUP_USERSETTINGS"/>
+			<visual_properties height="10px" left="45px" top="135px" width="80px"/>
+			<description>Do you want to show the TOC in the output?</description>
+			<default-value>true</default-value>
+			<allowedvalues/>
+			<sources>
+				<source filename="usersettings.js" variable="useTOC"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>us_useIDX</name>
+			<uiname>Show Index</uiname>
+			<type>BOOLEAN</type>
+			<value>true</value>
+			<group res_ID="ID_GROUP_USERSETTINGS"/>
+			<visual_properties height="10px" left="45px" top="171px" width="80px"/>
+			<description>Do you want to show the index in the output?</description>
+			<default-value>true</default-value>
+			<allowedvalues/>
+			<sources>
+				<source filename="usersettings.js" variable="useIDX"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>us_useGLO</name>
+			<uiname>Show Glossary</uiname>
+			<type>BOOLEAN</type>
+			<value>true</value>
+			<group res_ID="ID_GROUP_USERSETTINGS"/>
+			<visual_properties height="10px" left="597px" top="43px" width="80px"/>
+			<description>Do you want to show the Glossary in the output?</description>
+			<default-value>true</default-value>
+			<allowedvalues/>
+			<sources>
+				<source filename="usersettings.js" variable="useGLO"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>us_useFilter</name>
+			<uiname>Show Filter</uiname>
+			<type>BOOLEAN</type>
+			<value>true</value>
+			<group res_ID="ID_GROUP_USERSETTINGS"/>
+			<visual_properties height="10px" left="597px" top="134px" width="80px"/>
+			<description>Do you want to show the filter option in the output? Setting this to false will only hide the filter for the reader. You can still use the filter through a context sensitive help call. (If you enable dynamic filters in your output settings.)</description>
+			<default-value>true</default-value>
+			<allowedvalues/>
+			<sources>
+				<source filename="usersettings.js" variable="useFilter"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>us_loading_image</name>
+			<uiname>Loading image</uiname>
+			<type>FILE</type>
+			<value>loading.gif</value>
+			<group res_ID="ID_GROUP_USERSETTINGS"/>
+			<visual_properties height="10px" left="597px" top="196px" width="30px"/>
+			<description>The image shown when loading a topic or other resource. Use an animated GIF for best effect.</description>
+			<default-value>loading.gif</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>to_top</name>
+			<uiname>Go to top</uiname>
+			<type>FILE</type>
+			<value>top.png</value>
+			<group res_ID="ID_GROUP_CONTENT"/>
+			<visual_properties height="10px" left="20px" top="109px" width="30px"/>
+			<description>The go to top image to show on desktop. Use a square image for best results.</description>
+			<default-value>top.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>mobile_header_visible</name>
+			<uiname>Show header on phones</uiname>
+			<type>BOOLEAN</type>
+			<value>false</value>
+			<group res_ID="ID_GROUP_HEADER"/>
+			<visual_properties height="10px" left="597px" top="30px" width="80px"/>
+			<description>Determines whether the header will be visible on phones. It is turned off by default to optimize screen space for content.</description>
+			<default-value>false</default-value>
+			<allowedvalues/>
+			<sources>
+				<source filename="usersettings.js" variable="mobileHeader"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>head_titlecolor</name>
+			<uiname>Title text color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#FFB200</value>
+			<group res_ID="ID_GROUP_HEADER"/>
+			<visual_properties height="10px" left="45px" top="27px" width="80px"/>
+			<description>The color of the title shown in the header</description>
+			<default-value>#ffffff</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.header" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="div.header" cssproperty="color" filename="layout-rtl.css"></source>
+				<source filename="usersettings.js" variable="titleColor"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>head_logo</name>
+			<uiname>Logo</uiname>
+			<type>FILE</type>
+			<value>logo.png</value>
+			<group res_ID="ID_GROUP_HEADER"/>
+			<visual_properties height="10px" left="45px" top="87px" width="30px"/>
+			<description>The logo to use. Use a square logo for best results.</description>
+			<default-value>logo.png</default-value>
+			<allowedvalues/>
+			<sources>
+				<source filename="usersettings.js" variable="logo"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>head_bgcolor</name>
+			<uiname>Background color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#003300</value>
+			<group res_ID="ID_GROUP_HEADER"/>
+			<visual_properties height="10px" left="45px" top="133px" width="80px"/>
+			<description>The background color of the header. This will affect all devices.</description>
+			<default-value>#509de6</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.header" cssproperty="background-color" filename="layout.css"></source>
+				<source css_selector="div.header" cssproperty="background-color" filename="layout-rtl.css"></source>
+				<source filename="usersettings.js" variable="backgroundColor"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>fbd_search_text</name>
+			<uiname>Search text color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#000000</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_DESKTOP"/>
+			<visual_properties height="10px" left="25px" top="25px" width="80px"/>
+			<description>The color of the text in the search box.</description>
+			<default-value>#000000</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-desktop div.searchbar-extra input.wSearchField" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="body.media-desktop div.searchbar-extra input.wSearchField" cssproperty="color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>fbd_search_section_bgcolor</name>
+			<uiname>Search background color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#e6e6e6</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_DESKTOP"/>
+			<visual_properties height="10px" left="25px" top="66px" width="80px"/>
+			<description>The background color of the search section.</description>
+			<default-value>#e6e6e6</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-desktop div.searchbar-extra" cssproperty="background-color" filename="layout.css"></source>
+				<source css_selector="body.media-desktop div.searchbar-extra" cssproperty="background-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>fbd_search_bgcolor</name>
+			<uiname>Search field background color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#ffffff</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_DESKTOP"/>
+			<visual_properties height="10px" left="25px" top="101px" width="80px"/>
+			<description>The background color of the search box.</description>
+			<default-value>#ffffff</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-desktop div.searchbar-extra input.wSearchField" cssproperty="background-color" filename="layout.css"></source>
+				<source css_selector="body.media-desktop div.searchbar-extra input.wSearchField" cssproperty="background-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>fbd_search_image</name>
+			<uiname>Search button image</uiname>
+			<type>FILE</type>
+			<value>search_desktop.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_DESKTOP"/>
+			<visual_properties height="7px" left="564px" top="7px" width="80px"/>
+			<description>The search button image. Use a square image for best results.</description>
+			<default-value>search_desktop.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fbd_search_image_active</name>
+			<uiname>Search active button image</uiname>
+			<type>FILE</type>
+			<value>search_desktop_active.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_DESKTOP"/>
+			<visual_properties height="10px" left="564px" top="35px" width="80px"/>
+			<description>The search button image when the search button is being clicked. Use a square image for best results.</description>
+			<default-value>search_desktop_active.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fbd_bgcolor</name>
+			<uiname>Function bar background color</uiname>
+			<type>HTML_COLOR</type>
+			<value>transparent</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_DESKTOP"/>
+			<visual_properties height="10px" left="25px" top="139px" width="80px"/>
+			<description>The background color of the function bar.</description>
+			<default-value>transparent</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-desktop div.topic div.functionholder" cssproperty="background-color" filename="layout.css"></source>
+				<source css_selector="body.media-desktop div.topic div.functionholder" cssproperty="background-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>fbd_border_color</name>
+			<uiname>Function bar border color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#e6e6e6</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_DESKTOP"/>
+			<visual_properties height="10px" left="25px" top="179px" width="80px"/>
+			<description>The (bottom) border color of the function bar.</description>
+			<default-value>#e6e6e6</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-desktop div.topic div.functionholder" cssproperty="border-bottom-color" filename="layout.css"></source>
+				<source css_selector="body.media-desktop div.topic div.functionholder" cssproperty="border-bottom-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>fbd_prev_image</name>
+			<uiname>Previous button image</uiname>
+			<type>FILE</type>
+			<value>previous.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_DESKTOP"/>
+			<visual_properties height="10px" left="564px" top="64px" width="80px"/>
+			<description>The previous button image. Use a square image for best results.</description>
+			<default-value>previous.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fbd_prev_image_active</name>
+			<uiname>Previous active button image</uiname>
+			<type>FILE</type>
+			<value>previous_active.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_DESKTOP"/>
+			<visual_properties height="10px" left="564px" top="90px" width="80px"/>
+			<description>The previous button image when the button is being clicked. Use a square image for best results.</description>
+			<default-value>previous_active.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fbd_next_image</name>
+			<uiname>Next button image</uiname>
+			<type>FILE</type>
+			<value>next.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_DESKTOP"/>
+			<visual_properties height="10px" left="564px" top="120px" width="80px"/>
+			<description>The next button image. Use a square image for best results.</description>
+			<default-value>next.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fbd_next_image_active</name>
+			<uiname>Next active button image</uiname>
+			<type>FILE</type>
+			<value>next_active.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_DESKTOP"/>
+			<visual_properties height="10px" left="564px" top="151px" width="80px"/>
+			<description>The next button image when the button is being clicked. Use a square image for best results.</description>
+			<default-value>next_active.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fbd_print</name>
+			<uiname>Print button image</uiname>
+			<type>FILE</type>
+			<value>print_desktop.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_DESKTOP"/>
+			<visual_properties height="10px" left="564px" top="180px" width="80px"/>
+			<description>The print button image. Use a square image for best results.</description>
+			<default-value>print_desktop.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fbt_next_image</name>
+			<uiname>Next button image</uiname>
+			<type>FILE</type>
+			<value>next_tab.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_TABLET"/>
+			<visual_properties height="10px" left="15px" top="20px" width="80px"/>
+			<description>The next button image. Use a square image for best results.</description>
+			<default-value>next_tab.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fbt_next_image_active</name>
+			<uiname>Next active button image</uiname>
+			<type>FILE</type>
+			<value>next_tab_active.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_TABLET"/>
+			<visual_properties height="10px" left="15px" top="51px" width="80px"/>
+			<description>The next button image when the button is being clicked. Use a square image for best results.</description>
+			<default-value>next_tab_active.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fbt_prev_image</name>
+			<uiname>Previous button image</uiname>
+			<type>FILE</type>
+			<value>previous_tab.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_TABLET"/>
+			<visual_properties height="10px" left="564px" top="20px" width="80px"/>
+			<description>The previous button image. Use a square image for best results.</description>
+			<default-value>previous_tab.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fbt_prev_image_active</name>
+			<uiname>Previous active button image</uiname>
+			<type>FILE</type>
+			<value>previous_tab_active.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_TABLET"/>
+			<visual_properties height="10px" left="564px" top="51px" width="80px"/>
+			<description>The previous button image when the button is being clicked. Use a square image for best results.</description>
+			<default-value>previous_tab_active.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fbm_bgcolor</name>
+			<uiname>Background color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#f0f0f0</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_MOBILE"/>
+			<visual_properties height="10px" left="10px" top="53px" width="80px"/>
+			<description>The background color of the function bar.</description>
+			<default-value>#f0f0f0</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.mobilespecialfunctions" cssproperty="background-color" filename="layout.css"></source>
+				<source css_selector="div.mobilespecialfunctions" cssproperty="background-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>fbm_border_color</name>
+			<uiname>Border color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#e6e6e6</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_MOBILE"/>
+			<visual_properties height="10px" left="10px" top="83px" width="80px"/>
+			<description>The (bottom and right) border color of the function bar.</description>
+			<default-value>#e6e6e6</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-mobile div.mobilespecialfunctions" cssproperty="border-bottom-color" filename="layout.css"></source>
+				<source css_selector="body.media-mobile div.mobilespecialfunctions" cssproperty="border-bottom-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>fbm_menu</name>
+			<uiname>Menu button image</uiname>
+			<type>FILE</type>
+			<value>menu.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_MOBILE"/>
+			<visual_properties height="10px" left="10px" top="21px" width="80px"/>
+			<description>The menu button image. Use an image of 31x32 pixels for best results.</description>
+			<default-value>menu.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fbm_search</name>
+			<uiname>Search button image</uiname>
+			<type>FILE</type>
+			<value>search_mobile_navigation.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_MOBILE"/>
+			<visual_properties height="10px" left="10px" top="117px" width="80px"/>
+			<description>The search button image. Use a square image for best results.</description>
+			<default-value>search_mobile_navigation.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fbm_next_image</name>
+			<uiname>Next button image</uiname>
+			<type>FILE</type>
+			<value>next_mobile.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_MOBILE"/>
+			<visual_properties height="10px" left="659px" top="17px" width="80px"/>
+			<description>The next button image. Use a square image for best results.</description>
+			<default-value>next_mobile.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fbm_next_image_active</name>
+			<uiname>Next active button image</uiname>
+			<type>FILE</type>
+			<value>next_mobile_active.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_MOBILE"/>
+			<visual_properties height="10px" left="659px" top="48px" width="80px"/>
+			<description>The next button image when the button is being clicked. Use a square image for best results.</description>
+			<default-value>next_mobile_active.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fbm_prev_image</name>
+			<uiname>Previous button image</uiname>
+			<type>FILE</type>
+			<value>previous_mobile.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_MOBILE"/>
+			<visual_properties height="10px" left="659px" top="77px" width="80px"/>
+			<description>The previous button image. Use a square image for best results.</description>
+			<default-value>previous_mobile.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fbm_prev_image_active</name>
+			<uiname>Previous active button image</uiname>
+			<type>FILE</type>
+			<value>previous_mobile_active.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_MOBILE"/>
+			<visual_properties height="10px" left="659px" top="108px" width="80px"/>
+			<description>The previous button image when the button is being clicked. Use a square image for best results.</description>
+			<default-value>previous_mobile_active.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fbm_filter</name>
+			<uiname>Filter button image</uiname>
+			<type>FILE</type>
+			<value>filter_mobile.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_MOBILE"/>
+			<visual_properties height="10px" left="659px" top="137px" width="80px"/>
+			<description>The filter button image when no filter is applied. Use a square image for best results.</description>
+			<default-value>filter_mobile.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fbm_filter_applied</name>
+			<uiname>Filter applied button image</uiname>
+			<type>FILE</type>
+			<value>filter_mobile_applied.png</value>
+			<group res_ID="ID_GROUP_FUNCTIONBAR_MOBILE"/>
+			<visual_properties height="10px" left="659px" top="166px" width="80px"/>
+			<description>The filter button image when a filter is applied. Use a square image for best results.</description>
+			<default-value>filter_mobile_applied.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>us_desktopsidebar_state</name>
+			<uiname>Desktop sidebar opened</uiname>
+			<type>BOOLEAN</type>
+			<value>true</value>
+			<group res_ID="ID_GROUP_SIDEBAR_DESKTOP"/>
+			<visual_properties height="10px" left="515px" top="21px" width="80px"/>
+			<description>Choose whether the desktop sidebar must be opened (true) or closed (false) by default.</description>
+			<default-value>true</default-value>
+			<allowedvalues/>
+			<sources>
+				<source filename="usersettings.js" variable="desktopSidebarVisibleDefault"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>sid_header_bgcolor</name>
+			<uiname>Header background color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#f0f0f0</value>
+			<group res_ID="ID_GROUP_SIDEBAR_DESKTOP"/>
+			<visual_properties height="10px" left="515px" top="51px" width="80px"/>
+			<description>The background color of the header.</description>
+			<default-value>#f0f0f0</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-desktop div.functionbar" cssproperty="background-color" filename="layout.css"></source>
+				<source css_selector="body.media-desktop div.functionbar" cssproperty="background-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>sid_header_border_color</name>
+			<uiname>Header border color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#e6e6e6</value>
+			<group res_ID="ID_GROUP_SIDEBAR_DESKTOP"/>
+			<visual_properties height="10px" left="515px" top="79px" width="80px"/>
+			<description>The border color of the header.</description>
+			<default-value>#e6e6e6</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-desktop div.functionbar" cssproperty="border-bottom-color" filename="layout.css"></source>
+				<source css_selector="body.media-desktop div.functionbar" cssproperty="border-bottom-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>sid_header_active_bgcolor</name>
+			<uiname>Active background</uiname>
+			<type>HTML_COLOR</type>
+			<value>#fcfcfc</value>
+			<group res_ID="ID_GROUP_SIDEBAR_DESKTOP"/>
+			<visual_properties height="10px" left="15px" top="33px" width="80px"/>
+			<description>The background color of the active pane tab.</description>
+			<default-value>#fcfcfc</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-desktop div.functionbar div.nav a.active" cssproperty="background-color" filename="layout.css"></source>
+				<source css_selector="body.media-desktop div.functionbar div.nav a.active" cssproperty="background-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>sid_header_active_border</name>
+			<uiname>Active border</uiname>
+			<type>HTML_COLOR</type>
+			<value>#d2d2d2</value>
+			<group res_ID="ID_GROUP_SIDEBAR_DESKTOP"/>
+			<visual_properties height="10px" left="15px" top="68px" width="80px"/>
+			<description>The border color of the active pane tab.</description>
+			<default-value>#d2d2d2</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-desktop div.functionbar div.nav a.active" cssproperty="border-top-color" filename="layout.css"></source>
+				<source css_selector="body.media-desktop div.functionbar div.nav a.active" cssproperty="border-top-color" filename="layout-rtl.css"></source>
+				<source css_selector="body.media-desktop div.functionbar div.nav a.active" cssproperty="border-left-color" filename="layout.css"></source>
+				<source css_selector="body.media-desktop div.functionbar div.nav a.active" cssproperty="border-left-color" filename="layout-rtl.css"></source>
+				<source css_selector="body.media-desktop div.functionbar div.nav a.active" cssproperty="border-right-color" filename="layout.css"></source>
+				<source css_selector="body.media-desktop div.functionbar div.nav a.active" cssproperty="border-right-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>sid_header_toc</name>
+			<uiname>TOC tab image</uiname>
+			<type>FILE</type>
+			<value>toc_desktop.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_DESKTOP"/>
+			<visual_properties height="10px" left="15px" top="105px" width="80px"/>
+			<description>The TOC tab image. Use an image of 31x23 pixels for best results.</description>
+			<default-value>toc_desktop.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>sid_header_idx</name>
+			<uiname>Index tab image</uiname>
+			<type>FILE</type>
+			<value>index_desktop.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_DESKTOP"/>
+			<visual_properties height="10px" left="15px" top="135px" width="80px"/>
+			<description>The index tab image. Use an image of 31x23 pixels for best results.</description>
+			<default-value>index_desktop.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>sid_header_glo</name>
+			<uiname>Glossary tab image</uiname>
+			<type>FILE</type>
+			<value>glossary_desktop.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_DESKTOP"/>
+			<visual_properties height="10px" left="15px" top="161px" width="80px"/>
+			<description>The glossary tab image. Use an image of 31x23 pixels for best results.</description>
+			<default-value>glossary_desktop.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>sid_header_filter</name>
+			<uiname>Filter tab image</uiname>
+			<type>FILE</type>
+			<value>filter_desktop.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_DESKTOP"/>
+			<visual_properties height="10px" left="15px" top="191px" width="80px"/>
+			<description>The filter tab image when no filter is applied. Use an image of 31x23 pixels for best results.</description>
+			<default-value>filter_desktop.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>sid_header_filter_applied</name>
+			<uiname>Filter applied tab image</uiname>
+			<type>FILE</type>
+			<value>filter_desktop_applied.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_DESKTOP"/>
+			<visual_properties height="10px" left="15px" top="224px" width="80px"/>
+			<description>The filter tab image when no filter is applied. Use an image of 31x23 pixels for best results.</description>
+			<default-value>filter_desktop_applied.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>sid_header_search</name>
+			<uiname>Search tab image</uiname>
+			<type>FILE</type>
+			<value>search_desktop_navigation.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_DESKTOP"/>
+			<visual_properties height="10px" left="515px" top="134px" width="80px"/>
+			<description>The search tab image. (Only visible to readers when you choose to show search results in the sidebar.) Use an image of 31x23 pixels for best results.</description>
+			<default-value>search_desktop_navigation.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>sid_slider_ltr</name>
+			<uiname>Close sidebar image (LTR)</uiname>
+			<type>FILE</type>
+			<value>slider_ltr.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_DESKTOP"/>
+			<visual_properties height="10px" left="515px" top="183px" width="80px"/>
+			<description>The close sidebar image for left to right languages. Use an image of 16x25 pixels for best results.</description>
+			<default-value>slider_ltr.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>sid_slider_open_ltr</name>
+			<uiname>Open sidebar image (LTR)</uiname>
+			<type>FILE</type>
+			<value>slider_open_ltr.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_DESKTOP"/>
+			<visual_properties height="10px" left="515px" top="214px" width="80px"/>
+			<description>The open sidebar image for left to right languages. Use an image of 16x25 pixels for best results.</description>
+			<default-value>slider_open_ltr.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>sid_slider_rtl</name>
+			<uiname>Close sidebar image (RTL)</uiname>
+			<type>FILE</type>
+			<value>slider_rtl.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_DESKTOP"/>
+			<visual_properties height="10px" left="515px" top="246px" width="80px"/>
+			<description>The close sidebar image for right to left languages. Use an image of 16x25 pixels for best results.</description>
+			<default-value>slider_rtl.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>sid_slider_open_rtl</name>
+			<uiname>Open sidebar image (RTL)</uiname>
+			<type>FILE</type>
+			<value>slider_open_rtl.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_DESKTOP"/>
+			<visual_properties height="10px" left="515px" top="278px" width="80px"/>
+			<description>The open sidebar image for right to left languages. Use an image of 16x25 pixels for best results.</description>
+			<default-value>slider_open_rtl.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>sit_header_active_bgcolor</name>
+			<uiname>Active background</uiname>
+			<type>HTML_COLOR</type>
+			<value>#ffffff</value>
+			<group res_ID="ID_GROUP_SIDEBAR_TABLET"/>
+			<visual_properties height="10px" left="594px" top="58px" width="80px"/>
+			<description>The background color of the active pane tab.</description>
+			<default-value>#ffffff</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-landscape div.functionbar div.nav a.active" cssproperty="background-color" filename="layout.css"></source>
+				<source css_selector="body.media-landscape div.functionbar div.nav a.active" cssproperty="background-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>sit_header_active_border</name>
+			<uiname>Active border</uiname>
+			<type>HTML_COLOR</type>
+			<value>#aaa7a7</value>
+			<group res_ID="ID_GROUP_SIDEBAR_TABLET"/>
+			<visual_properties height="10px" left="594px" top="120px" width="80px"/>
+			<description>The border color of the active pane tab.</description>
+			<default-value>#aaa7a7</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-landscape div.functionbar div.nav a.active" cssproperty="border-top-color" filename="layout.css"></source>
+				<source css_selector="body.media-landscape div.functionbar div.nav a.active" cssproperty="border-top-color" filename="layout-rtl.css"></source>
+				<source css_selector="body.media-landscape div.functionbar div.nav a.active" cssproperty="border-left-color" filename="layout.css"></source>
+				<source css_selector="body.media-landscape div.functionbar div.nav a.active" cssproperty="border-left-color" filename="layout-rtl.css"></source>
+				<source css_selector="body.media-landscape div.functionbar div.nav a.active" cssproperty="border-bottom-color" filename="layout.css"></source>
+				<source css_selector="body.media-landscape div.functionbar div.nav a.active" cssproperty="border-bottom-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>sit_header_bgcolor</name>
+			<uiname>Header background color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#f0f0f0</value>
+			<group res_ID="ID_GROUP_SIDEBAR_TABLET"/>
+			<visual_properties height="10px" left="594px" top="190px" width="80px"/>
+			<description>The background color of the header.</description>
+			<default-value>#f0f0f0</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-landscape div.functionbar" cssproperty="background-color" filename="layout.css"></source>
+				<source css_selector="body.media-landscape div.functionbar" cssproperty="background-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>sit_header_border_color</name>
+			<uiname>Header border color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#aaa7a7</value>
+			<group res_ID="ID_GROUP_SIDEBAR_TABLET"/>
+			<visual_properties height="10px" left="594px" top="260px" width="80px"/>
+			<description>The border color of the header.</description>
+			<default-value>#aaa7a7</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-landscape div.functionbar" cssproperty="border-right-color" filename="layout.css"></source>
+				<source css_selector="body.media-landscape div.functionbar" cssproperty="border-left-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>sit_sidebar_border_color</name>
+			<uiname>Sidebar border color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#e6e6e6</value>
+			<group res_ID="ID_GROUP_SIDEBAR_TABLET"/>
+			<visual_properties height="10px" left="594px" top="330px" width="80px"/>
+			<description>The border color of the sidebar.</description>
+			<default-value>#e6e6e6</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-landscape div.toc-holder" cssproperty="border-right-color" filename="layout.css"></source>
+				<source css_selector="body.media-landscape div.toc-holder" cssproperty="border-left-color" filename="layout-rtl.css"></source>
+				<source css_selector="body.media-landscape div.idx-holder" cssproperty="border-right-color" filename="layout.css"></source>
+				<source css_selector="body.media-landscape div.idx-holder" cssproperty="border-left-color" filename="layout-rtl.css"></source>
+				<source css_selector="body.media-landscape div.glo-holder" cssproperty="border-right-color" filename="layout.css"></source>
+				<source css_selector="body.media-landscape div.glo-holder" cssproperty="border-left-color" filename="layout-rtl.css"></source>
+				<source css_selector="body.media-landscape div.filter-holder" cssproperty="border-right-color" filename="layout.css"></source>
+				<source css_selector="body.media-landscape div.filter-holder" cssproperty="border-left-color" filename="layout-rtl.css"></source>
+				<source css_selector="body.media-landscape div.searchbar" cssproperty="border-right-color" filename="layout.css"></source>
+				<source css_selector="body.media-landscape div.searchbar" cssproperty="border-left-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>sit_header_toc</name>
+			<uiname>TOC tab image</uiname>
+			<type>FILE</type>
+			<value>toc_tab.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_TABLET"/>
+			<visual_properties height="10px" left="30px" top="82px" width="80px"/>
+			<description>The TOC tab image. Use an image with maximum size of 50x50 pixels for best results. Smaller sizes will always fit.</description>
+			<default-value>toc_tab.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>sit_header_idx</name>
+			<uiname>Index tab image</uiname>
+			<type>FILE</type>
+			<value>index_tab.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_TABLET"/>
+			<visual_properties height="10px" left="30px" top="157px" width="80px"/>
+			<description>The index tab image. Use an image with maximum size of 50x50 pixels for best results. Smaller sizes will always fit.</description>
+			<default-value>index_tab.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>sit_header_glo</name>
+			<uiname>Glossary tab image</uiname>
+			<type>FILE</type>
+			<value>glossary_tab.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_TABLET"/>
+			<visual_properties height="10px" left="30px" top="228px" width="80px"/>
+			<description>The glossary tab image. Use an image with maximum size of 50x50 pixels for best results. Smaller sizes will always fit.</description>
+			<default-value>glossary_tab.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>sit_header_filter</name>
+			<uiname>Filter tab image</uiname>
+			<type>FILE</type>
+			<value>filter_tab.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_TABLET"/>
+			<visual_properties height="10px" left="30px" top="270px" width="80px"/>
+			<description>The filter tab image when no filter is applied. Use an image with maximum size of 50x50 pixels for best results. Smaller sizes will always fit.</description>
+			<default-value>filter_tab.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>sit_header_filter_applied</name>
+			<uiname>Filter applied tab image</uiname>
+			<type>FILE</type>
+			<value>filter_tab_applied.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_TABLET"/>
+			<visual_properties height="10px" left="30px" top="331px" width="80px"/>
+			<description>The filter tab image when no filter is applied. Use an image with maximum size of 50x50 pixels for best results. Smaller sizes will always fit.</description>
+			<default-value>filter_tab_applied.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>sit_header_search</name>
+			<uiname>Search tab image</uiname>
+			<type>FILE</type>
+			<value>search_tab.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_TABLET"/>
+			<visual_properties height="10px" left="30px" top="372px" width="80px"/>
+			<description>The search tab image. (Only visible to readers when you choose to show search results in the sidebar.) Use an image with maximum size of 50x50 pixels for best results. Smaller sizes will always fit.</description>
+			<default-value>search_tab.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>sim_header_bgcolor</name>
+			<uiname>Header background color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#f0f0f0</value>
+			<group res_ID="ID_GROUP_SIDEBAR_MOBILE"/>
+			<visual_properties height="10px" left="511px" top="14px" width="80px"/>
+			<description>The background color of the header.</description>
+			<default-value>#f0f0f0</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-mobile div.functionbar" cssproperty="background-color" filename="layout.css"></source>
+				<source css_selector="body.media-mobile div.functionbar" cssproperty="background-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>sim_header_border_color</name>
+			<uiname>Header border color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#e6e6e6</value>
+			<group res_ID="ID_GROUP_SIDEBAR_MOBILE"/>
+			<visual_properties height="10px" left="510px" top="61px" width="80px"/>
+			<description>The border color of the header.</description>
+			<default-value>#e6e6e6</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-mobile div.functionbar" cssproperty="border-bottom-color" filename="layout.css"></source>
+				<source css_selector="body.media-mobile div.functionbar" cssproperty="border-bottom-color" filename="layout-rtl.css"></source>
+				<source css_selector="body.media-mobile div.functionbar" cssproperty="border-right-color" filename="layout.css"></source>
+				<source css_selector="body.media-mobile div.functionbar" cssproperty="border-left-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>sim_header_active_bgcolor</name>
+			<uiname>Active background</uiname>
+			<type>HTML_COLOR</type>
+			<value>#ffffff</value>
+			<group res_ID="ID_GROUP_SIDEBAR_MOBILE"/>
+			<visual_properties height="10px" left="36px" top="19px" width="80px"/>
+			<description>The background color of the active pane tab.</description>
+			<default-value>#ffffff</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-mobile div.functionbar div.nav a.active" cssproperty="background-color" filename="layout.css"></source>
+				<source css_selector="body.media-mobile div.functionbar div.nav a.active" cssproperty="background-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>sim_header_toc</name>
+			<uiname>TOC tab image</uiname>
+			<type>FILE</type>
+			<value>toc_mobile.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_MOBILE"/>
+			<visual_properties height="10px" left="36px" top="59px" width="80px"/>
+			<description>The TOC tab image. Use an image of 31x23 pixels for best results.</description>
+			<default-value>toc_mobile.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>sim_header_idx</name>
+			<uiname>Index tab image</uiname>
+			<type>FILE</type>
+			<value>index_mobile.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_MOBILE"/>
+			<visual_properties height="10px" left="36px" top="88px" width="80px"/>
+			<description>The index tab image. Use an image of 31x23 pixels for best results.</description>
+			<default-value>index_mobile.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>sim_header_glo</name>
+			<uiname>Glossary tab image</uiname>
+			<type>FILE</type>
+			<value>glossary_mobile.png</value>
+			<group res_ID="ID_GROUP_SIDEBAR_MOBILE"/>
+			<visual_properties height="10px" left="36px" top="116px" width="80px"/>
+			<description>The glossary tab image. Use an image of 31x23 pixels for best results.</description>
+			<default-value>glossary_mobile.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>us_searchresults_location</name>
+			<uiname>Search results in sidebar</uiname>
+			<type>BOOLEAN</type>
+			<value>true</value>
+			<group res_ID="ID_GROUP_SEARCH"/>
+			<visual_properties height="10px" left="10px" top="21px" width="80px"/>
+			<description>Choose whether the the search results on desktop are shown in the sidebar (true) or in the content section (false). This setting affects Desktop only.</description>
+			<default-value>true</default-value>
+			<allowedvalues/>
+			<sources>
+				<source filename="usersettings.js" variable="searchLocationBoolean"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>fts_highlight_color</name>
+			<uiname>Highlight color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#FCFF00</value>
+			<group res_ID="ID_GROUP_SEARCH"/>
+			<visual_properties height="10px" left="635px" top="69px" width="10px"/>
+			<description>The highlight color for search results in the current topic.</description>
+			<default-value>#FCFF00</default-value>
+			<allowedvalues/>
+			<sources>
+				<source attribute="bgcolorval" filename="Topic.slp" id="highlightsearch"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>fts_highlight_text_color</name>
+			<uiname>Highlight text color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#000000</value>
+			<group res_ID="ID_GROUP_SEARCH"/>
+			<visual_properties height="10px" left="635px" top="101px" width="10px"/>
+			<description>The text color for highlighted search results in the current topic.</description>
+			<default-value>#000000</default-value>
+			<allowedvalues/>
+			<sources>
+				<source attribute="textcolorval" filename="Topic.slp" id="highlightsearch"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>fts_input_bgcolor</name>
+			<uiname>Field background color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#ffffff</value>
+			<group res_ID="ID_GROUP_SEARCH"/>
+			<visual_properties height="10px" left="10px" top="81px" width="80px"/>
+			<description>The background color of the search field.</description>
+			<default-value>#ffffff</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="input.wSearchField" cssproperty="background-color" filename="layout.css"></source>
+				<source css_selector="input.wSearchField" cssproperty="background-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>fts_input_border-color</name>
+			<uiname>Field border color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#999999</value>
+			<group res_ID="ID_GROUP_SEARCH"/>
+			<visual_properties height="10px" left="10px" top="113px" width="80px"/>
+			<description>The border color of the search field.</description>
+			<default-value>#999999</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="input.wSearchField" cssproperty="border-top-color" filename="layout.css"></source>
+				<source css_selector="input.wSearchField" cssproperty="border-top-color" filename="layout-rtl.css"></source>
+				<source css_selector="input.wSearchField" cssproperty="border-left-color" filename="layout.css"></source>
+				<source css_selector="input.wSearchField" cssproperty="border-left-color" filename="layout-rtl.css"></source>
+				<source css_selector="input.wSearchField" cssproperty="border-right-color" filename="layout.css"></source>
+				<source css_selector="input.wSearchField" cssproperty="border-right-color" filename="layout-rtl.css"></source>
+				<source css_selector="input.wSearchField" cssproperty="border-bottom-color" filename="layout.css"></source>
+				<source css_selector="input.wSearchField" cssproperty="border-bottom-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>us_andsearch</name>
+			<uiname>Use AND search option</uiname>
+			<type>BOOLEAN</type>
+			<value>true</value>
+			<group res_ID="ID_GROUP_SEARCH"/>
+			<visual_properties height="10px" left="635px" top="133px" width="80px"/>
+			<description>Choose the reader has a setting to choose to search all search terms (true) or whether this option is hidden for the reader (false).</description>
+			<default-value>true</default-value>
+			<allowedvalues/>
+			<sources>
+				<source filename="usersettings.js" variable="useANDsearch"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>fts_and_enabled</name>
+			<uiname>AND search enabled image</uiname>
+			<type>FILE</type>
+			<value>andsearch_mark.png</value>
+			<group res_ID="ID_GROUP_SEARCH"/>
+			<visual_properties height="10px" left="635px" top="166px" width="80px"/>
+			<description>The image when the AND search option is enabled.</description>
+			<default-value>andsearch_mark.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fts_and_disabled</name>
+			<uiname>AND search disabled image</uiname>
+			<type>FILE</type>
+			<value>andsearch_nomark.png</value>
+			<group res_ID="ID_GROUP_SEARCH"/>
+			<visual_properties height="10px" left="635px" top="196px" width="80px"/>
+			<description>The image when the AND search option is disabled.</description>
+			<default-value>andsearch_nomark.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fts_filter_msg_color</name>
+			<uiname>Filter message color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#000000</value>
+			<group res_ID="ID_GROUP_SEARCH"/>
+			<visual_properties height="10px" left="10px" top="147px" width="80px"/>
+			<description>The color of the changed filter message.</description>
+			<default-value>#000000</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.searchresults div.search-alert" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="div.searchresults div.search-alert" cssproperty="color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>fts_msg_color</name>
+			<uiname>Message color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#929292</value>
+			<group res_ID="ID_GROUP_SEARCH"/>
+			<visual_properties height="10px" left="10px" top="178px" width="80px"/>
+			<description>The color of the search message.</description>
+			<default-value>#929292</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.searchresults .wSearchMessage" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="div.searchresults .wSearchMessage" cssproperty="color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>fts_title_color</name>
+			<uiname>Title color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#1268b8</value>
+			<group res_ID="ID_GROUP_SEARCH"/>
+			<visual_properties height="10px" left="10px" top="247px" width="80px"/>
+			<description>The title color of the found topic in the search results.</description>
+			<default-value>#1268b8</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.searchresults a" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="div.searchresults a" cssproperty="color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>fts_preview_color</name>
+			<uiname>Preview color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#000000</value>
+			<group res_ID="ID_GROUP_SEARCH"/>
+			<visual_properties height="10px" left="10px" top="278px" width="80px"/>
+			<description>The preview color of the found topic in the search results.</description>
+			<default-value>#000000</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.searchresults span.wSearchContext" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="div.searchresults span.wSearchContext" cssproperty="color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>fts_bread_color</name>
+			<uiname>Breadcrumb color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#1268b8</value>
+			<group res_ID="ID_GROUP_SEARCH"/>
+			<visual_properties height="10px" left="10px" top="380px" width="80px"/>
+			<description>The breadcrumb color of the found topic in the search results.</description>
+			<default-value>#1268b8</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.searchresults span.wSearchURL" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="div.searchresults span.wSearchURL" cssproperty="color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>fts_back_image_ltr</name>
+			<uiname>Back image (LTR)</uiname>
+			<type>FILE</type>
+			<value>back_mobile_ltr.png</value>
+			<group res_ID="ID_GROUP_SEARCH_MOBILE"/>
+			<visual_properties height="10px" left="20px" top="13px" width="80px"/>
+			<description>The back image to exit search mode on mobile devices for left to right languages. Use a square image for best results.</description>
+			<default-value>back_mobile_ltr.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>fts_back_image_rtl</name>
+			<uiname>Back image (RTL)</uiname>
+			<type>FILE</type>
+			<value>back_mobile_rtl.png</value>
+			<group res_ID="ID_GROUP_SEARCH_MOBILE"/>
+			<visual_properties height="10px" left="20px" top="56px" width="80px"/>
+			<description>The back image to exit search mode on mobile devices for right to left languages. Use a square image for best results.</description>
+			<default-value>back_mobile_rtl.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>toc_entry_color</name>
+			<uiname>TOC color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#000000</value>
+			<group res_ID="ID_GROUP_TOC_DESKTOP"/>
+			<visual_properties height="10px" left="600px" top="90px" width="10px"/>
+			<description>The text color of topic entries.</description>
+			<default-value>#000000</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.toc-holder li" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="div.toc-holder li" cssproperty="color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>toc_entry_selected_color</name>
+			<uiname>Selected color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#00331F</value>
+			<group res_ID="ID_GROUP_TOC_DESKTOP"/>
+			<visual_properties height="10px" left="600px" top="153px" width="10px"/>
+			<description>The text color of the selected topic entry.</description>
+			<default-value>#509de6</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.toc-holder li.selected" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="div.toc-holder li.selected" cssproperty="color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>toc_entry_selected_border_color</name>
+			<uiname>Selected indicator color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#00331F</value>
+			<group res_ID="ID_GROUP_TOC_DESKTOP"/>
+			<visual_properties height="10px" left="10px" top="148px" width="10px"/>
+			<description>The color of the indicator left of the selected topic entry.</description>
+			<default-value>#509de6</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.toc-holder li.selected" cssproperty="border-left-color" filename="layout.css"></source>
+				<source css_selector="div.toc-holder li.selected" cssproperty="border-right-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>toc_desktop_closed_book_image</name>
+			<uiname>Closed book image (desktop)</uiname>
+			<type>FILE</type>
+			<value>toc_book_closed_desktop.png</value>
+			<group res_ID="ID_GROUP_TOC_DESKTOP"/>
+			<visual_properties height="10px" left="10px" top="64px" width="1px"/>
+			<description>The closed book image on desktops. Use an image of 15x15 pixels for best results.</description>
+			<default-value>toc_book_closed_desktop.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>toc_desktop_open_book_image</name>
+			<uiname>Open book image (desktop)</uiname>
+			<type>FILE</type>
+			<value>toc_book_open_desktop.png</value>
+			<group res_ID="ID_GROUP_TOC_DESKTOP"/>
+			<visual_properties height="10px" left="10px" top="112px" width="80px"/>
+			<description>The opened book image on desktops. Use an image of 15x15 pixels for best results.</description>
+			<default-value>toc_book_open_desktop.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>toc_desktop_page_image</name>
+			<uiname>Topic image (desktop)</uiname>
+			<type>FILE</type>
+			<value>toc_topic_desktop.png</value>
+			<group res_ID="ID_GROUP_TOC_DESKTOP"/>
+			<visual_properties height="10px" left="600px" top="123px" width="80px"/>
+			<description>The topic image on desktops. Use an image of 15x15 pixels for best results.</description>
+			<default-value>toc_topic_desktop.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>toc_desktop_link_image_ltr</name>
+			<uiname>Link image (desktop LTR)</uiname>
+			<type>FILE</type>
+			<value>toc_link_desktop_ltr.png</value>
+			<group res_ID="ID_GROUP_TOC_DESKTOP"/>
+			<visual_properties height="10px" left="10px" top="172px" width="80px"/>
+			<description>The image for external links on desktops for left to right languages. Use an image of 15x15 pixels for best results.</description>
+			<default-value>toc_link_desktop_ltr.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>toc_desktop_link_image_rtl</name>
+			<uiname>Link image (desktop RTL)</uiname>
+			<type>FILE</type>
+			<value>toc_link_desktop_rtl.png</value>
+			<group res_ID="ID_GROUP_TOC_DESKTOP"/>
+			<visual_properties height="10px" left="10px" top="202px" width="80px"/>
+			<description>The image for external links on desktops for right to left languages. Use an image of 15x15 pixels for best results.</description>
+			<default-value>toc_link_desktop_rtl.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>us_toc_drilldown</name>
+			<uiname>Mobile TOC drill down</uiname>
+			<type>BOOLEAN</type>
+			<value>false</value>
+			<group res_ID="ID_GROUP_TOC_MOBILE"/>
+			<visual_properties height="10px" left="550px" top="83px" width="80px"/>
+			<description>Choose whether the TOC for mobile and tablet shows only the current TOC level (true) or shows all levels like on desktop (false).</description>
+			<default-value>false</default-value>
+			<allowedvalues/>
+			<sources>
+				<source filename="usersettings.js" variable="mobileTocDrilldown"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>toc_mobile_book_image_drilldown</name>
+			<uiname>Up one level image</uiname>
+			<type>FILE</type>
+			<value>toc_book_open_drildown.png</value>
+			<group res_ID="ID_GROUP_TOC_MOBILE"/>
+			<visual_properties height="10px" left="10px" top="21px" width="80px"/>
+			<description>The up one level image for the TOC when you selected the drill down mode in the Settings section. Only available on tablets and mobile devices. Use a square image for best results.</description>
+			<default-value>toc_book_open_drildown.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>toc_mobile_open_book_image</name>
+			<uiname>Open book image</uiname>
+			<type>FILE</type>
+			<value>toc_book_open_mobile.png</value>
+			<group res_ID="ID_GROUP_TOC_MOBILE"/>
+			<visual_properties height="10px" left="10px" top="61px" width="80px"/>
+			<description>The opened book image on tablets and mobile devices. Use a square image for best results.</description>
+			<default-value>toc_book_open_mobile.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>toc_mobile_closed_book_image</name>
+			<uiname>Closed book image</uiname>
+			<type>FILE</type>
+			<value>toc_book_closed_mobile.png</value>
+			<group res_ID="ID_GROUP_TOC_MOBILE"/>
+			<visual_properties height="10px" left="10px" top="94px" width="80px"/>
+			<description>The closed book image on tablets and mobile devices. Use a square image for best results.</description>
+			<default-value>toc_book_closed_mobile.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>toc_mobile_page_image</name>
+			<uiname>Topic image</uiname>
+			<type>FILE</type>
+			<value>toc_topic_mobile.png</value>
+			<group res_ID="ID_GROUP_TOC_MOBILE"/>
+			<visual_properties height="10px" left="10px" top="128px" width="80px"/>
+			<description>The topic image on tablets and mobile devices. Use a square image for best results.</description>
+			<default-value>toc_topic_mobile.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>toc_mobile_link_image_ltr</name>
+			<uiname>Link image (LTR)</uiname>
+			<type>FILE</type>
+			<value>toc_link_mobile_ltr.png</value>
+			<group res_ID="ID_GROUP_TOC_MOBILE"/>
+			<visual_properties height="10px" left="10px" top="161px" width="80px"/>
+			<description>The image for external links on tablets and mobile devices for left to right languages. Use a square image for best results.</description>
+			<default-value>toc_link_mobile_ltr.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>toc_mobile_link_image_rtl</name>
+			<uiname>Link image (RTL)</uiname>
+			<type>FILE</type>
+			<value>toc_link_mobile_rtl.png</value>
+			<group res_ID="ID_GROUP_TOC_MOBILE"/>
+			<visual_properties height="10px" left="10px" top="207px" width="80px"/>
+			<description>The image for external links on tablets and mobile devices for right to left languages. Use a square image for best results.</description>
+			<default-value>toc_link_mobile_rtl.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>idx_search_text</name>
+			<uiname>Search text color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#000000</value>
+			<group res_ID="ID_GROUP_IDX"/>
+			<visual_properties height="10px" left="20px" top="21px" width="80px"/>
+			<description>The color of the text in the search box.</description>
+			<default-value>#000000</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.Index input" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="div.Index input" cssproperty="color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>idx_input_border_color</name>
+			<uiname>Search border color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#999999</value>
+			<group res_ID="ID_GROUP_IDX"/>
+			<visual_properties height="10px" left="20px" top="53px" width="80px"/>
+			<description>The border color of the search field.</description>
+			<default-value>#999999</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.Index input" cssproperty="border-top-color" filename="layout.css"></source>
+				<source css_selector="div.Index input" cssproperty="border-top-color" filename="layout-rtl.css"></source>
+				<source css_selector="div.Index input" cssproperty="border-left-color" filename="layout.css"></source>
+				<source css_selector="div.Index input" cssproperty="border-left-color" filename="layout-rtl.css"></source>
+				<source css_selector="div.Index input" cssproperty="border-right-color" filename="layout.css"></source>
+				<source css_selector="div.Index input" cssproperty="border-right-color" filename="layout-rtl.css"></source>
+				<source css_selector="div.Index input" cssproperty="border-bottom-color" filename="layout.css"></source>
+				<source css_selector="div.Index input" cssproperty="border-bottom-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>idx_alphabet_color</name>
+			<uiname>Alphabet color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#003300</value>
+			<group res_ID="ID_GROUP_IDX"/>
+			<visual_properties height="10px" left="20px" top="81px" width="10px"/>
+			<description>The text color of the alphabet letter between index entries.</description>
+			<default-value>#509de6</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.Index .IndexAlphabet" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="div.Index .IndexAlphabet" cssproperty="color" filename="layout-rtl.css"></source>
+				<source css_selector="div.Index .GloAlphabet" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="div.Index .GloAlphabet" cssproperty="color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>idx_alphabeth_separator_color</name>
+			<uiname>Index separator</uiname>
+			<type>HTML_COLOR</type>
+			<value>#e6e6e6</value>
+			<group res_ID="ID_GROUP_IDX"/>
+			<visual_properties height="10px" left="20px" top="105px" width="10px"/>
+			<description>The text color of the alphabet separator (line below) between index entries.</description>
+			<default-value>#e6e6e6</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.Index .IndexAlphabet" cssproperty="border-color" filename="layout.css"></source>
+				<source css_selector="div.Index .IndexAlphabet" cssproperty="border-color" filename="layout-rtl.css"></source>
+				<source css_selector="div.Index .GloAlphabet" cssproperty="border-color" filename="layout.css"></source>
+				<source css_selector="div.Index .GloAlphabet" cssproperty="border-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>idx_entry_color</name>
+			<uiname>Index item color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#000000</value>
+			<group res_ID="ID_GROUP_IDX"/>
+			<visual_properties height="10px" left="20px" top="142px" width="10px"/>
+			<description>The text color of index entries.</description>
+			<default-value>#000000</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.Index" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="div.Index" cssproperty="color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>idx_page_image</name>
+			<uiname>Topic image</uiname>
+			<type>FILE</type>
+			<value>idx_topic.png</value>
+			<group res_ID="ID_GROUP_IDX"/>
+			<visual_properties height="10px" left="20px" top="177px" width="80px"/>
+			<description>The topic (link) image in the Index. Use an image of 15x15 pixels for best results.</description>
+			<default-value>idx_topic.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>glo_search_text</name>
+			<uiname>Search text color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#000000</value>
+			<group res_ID="ID_GROUP_GLO"/>
+			<visual_properties height="10px" left="20px" top="21px" width="80px"/>
+			<description>The color of the text in the search box.</description>
+			<default-value>#000000</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.wGlossary input" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="div.wGlossary input" cssproperty="color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>glo_input_border-color</name>
+			<uiname>Search border color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#999999</value>
+			<group res_ID="ID_GROUP_GLO"/>
+			<visual_properties height="10px" left="20px" top="53px" width="80px"/>
+			<description>The border color of the search field.</description>
+			<default-value>#999999</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.wGlossary input" cssproperty="border-top-color" filename="layout.css"></source>
+				<source css_selector="div.wGlossary input" cssproperty="border-top-color" filename="layout-rtl.css"></source>
+				<source css_selector="div.wGlossary input" cssproperty="border-left-color" filename="layout.css"></source>
+				<source css_selector="div.wGlossary input" cssproperty="border-left-color" filename="layout-rtl.css"></source>
+				<source css_selector="div.wGlossary input" cssproperty="border-right-color" filename="layout.css"></source>
+				<source css_selector="div.wGlossary input" cssproperty="border-right-color" filename="layout-rtl.css"></source>
+				<source css_selector="div.wGlossary input" cssproperty="border-bottom-color" filename="layout.css"></source>
+				<source css_selector="div.wGlossary input" cssproperty="border-bottom-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>glo_alphabet_color</name>
+			<uiname>Alphabet color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#509de6</value>
+			<group res_ID="ID_GROUP_GLO"/>
+			<visual_properties height="10px" left="20px" top="80px" width="10px"/>
+			<description>The text color of the alphabet letter between glossary entries.</description>
+			<default-value>#509de6</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.wGlossary .GloAlphabet" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="div.wGlossary .GloAlphabet" cssproperty="color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>glo_alphabet_separator_color</name>
+			<uiname>Glossary separator</uiname>
+			<type>HTML_COLOR</type>
+			<value>#e6e6e6</value>
+			<group res_ID="ID_GROUP_GLO"/>
+			<visual_properties height="10px" left="20px" top="112px" width="10px"/>
+			<description>The text color of the alphabet separator (line below) between glossary entries.</description>
+			<default-value>#e6e6e6</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.wGlossary .GloAlphabet" cssproperty="border-color" filename="layout.css"></source>
+				<source css_selector="div.wGlossary .GloAlphabet" cssproperty="border-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>glo_entry_color</name>
+			<uiname>Term color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#000000</value>
+			<group res_ID="ID_GROUP_GLO"/>
+			<visual_properties height="10px" left="20px" top="139px" width="10px"/>
+			<description>The text color of glossary entries.</description>
+			<default-value>#000000</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.wGlossary" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="div.wGlossary" cssproperty="color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>glo_def_color</name>
+			<uiname>Definition color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#000000</value>
+			<group res_ID="ID_GROUP_GLO"/>
+			<visual_properties height="10px" left="20px" top="187px" width="10px"/>
+			<description>The text color of glossary definitions.</description>
+			<default-value>#000000</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.wGlossary span.GlossDefinitionText" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="div.wGlossary span.GlossDefinitionText" cssproperty="color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>filter_title_color</name>
+			<uiname>Title color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#000000</value>
+			<group res_ID="ID_GROUP_FILTER"/>
+			<visual_properties height="10px" left="20px" top="64px" width="10px"/>
+			<description>The text color of the filter title.</description>
+			<default-value>#000000</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.filter-holder p.filter-title" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="div.filter-holder p.filter-title" cssproperty="color" filename="layout-rtl.css"></source>
+				<source css_selector="body.media-mobile div.filter-holder div.mobile-filter-heading div.page-title" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="body.media-mobile div.filter-holder div.mobile-filter-heading div.page-title" cssproperty="color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>filter_title_border_color</name>
+			<uiname>Title separator</uiname>
+			<type>HTML_COLOR</type>
+			<value>#e6e6e6</value>
+			<group res_ID="ID_GROUP_FILTER"/>
+			<visual_properties height="10px" left="20px" top="96px" width="10px"/>
+			<description>The separator (line below) of the filter title.</description>
+			<default-value>#e6e6e6</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.filter-holder p.filter-title" cssproperty="border-bottom-color" filename="layout.css"></source>
+				<source css_selector="div.filter-holder p.filter-title" cssproperty="border-bottom-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>filter_reset_image</name>
+			<uiname>Reset image</uiname>
+			<type>FILE</type>
+			<value>filter_clearall.png</value>
+			<group res_ID="ID_GROUP_FILTER"/>
+			<visual_properties height="10px" left="530px" top="93px" width="80px"/>
+			<description>The image for the clear filter button. Use a square image for best results.</description>
+			<default-value>filter_clearall.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>filter_group_bgcolor</name>
+			<uiname>Group background</uiname>
+			<type>HTML_COLOR</type>
+			<value>#eeeeee</value>
+			<group res_ID="ID_GROUP_FILTER"/>
+			<visual_properties height="10px" left="20px" top="131px" width="10px"/>
+			<description>The background color of a filter group header.</description>
+			<default-value>#eeeeee</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.filter-holder ul.wFltOpts span.tag-parent" cssproperty="background-color" filename="layout.css"></source>
+				<source css_selector="div.filter-holder ul.wFltOpts span.tag-parent" cssproperty="background-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>filter_item_color</name>
+			<uiname>Filter entry color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#000000</value>
+			<group res_ID="ID_GROUP_FILTER"/>
+			<visual_properties height="10px" left="20px" top="294px" width="10px"/>
+			<description>The text color of filter entries.</description>
+			<default-value>#000000</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.filter-holder ul.wFltOpts span" cssproperty="color" filename="layout.css"></source>
+				<source css_selector="div.filter-holder ul.wFltOpts span" cssproperty="color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>filter_selected_image_checkbox</name>
+			<uiname>Active checkbox</uiname>
+			<type>FILE</type>
+			<value>filter_mark.png</value>
+			<group res_ID="ID_GROUP_FILTER"/>
+			<visual_properties height="10px" left="20px" top="156px" width="80px"/>
+			<description>The image shown before an active filter when you use the checkbox filter type. Use a square image for best results.</description>
+			<default-value>filter_mark.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>filter_unselected_image_checkbox</name>
+			<uiname>Inactive checkbox</uiname>
+			<type>FILE</type>
+			<value>filter_nomark.png</value>
+			<group res_ID="ID_GROUP_FILTER"/>
+			<visual_properties height="10px" left="20px" top="183px" width="80px"/>
+			<description>The image shown before an inactive filter when you use the checkbox filter type. Use a square image for best results.</description>
+			<default-value>filter_nomark.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>filter_selected_image_radio</name>
+			<uiname>Active radio button</uiname>
+			<type>FILE</type>
+			<value>filter_mark_radio.png</value>
+			<group res_ID="ID_GROUP_FILTER"/>
+			<visual_properties height="10px" left="20px" top="238px" width="80px"/>
+			<description>The image shown before an active filter when you use the radio button filter type. Use a square image for best results.</description>
+			<default-value>filter_mark_radio.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>filter_unselected_image_radio</name>
+			<uiname>Inactive radio button</uiname>
+			<type>FILE</type>
+			<value>filter_nomark_radio.png</value>
+			<group res_ID="ID_GROUP_FILTER"/>
+			<visual_properties height="10px" left="20px" top="264px" width="80px"/>
+			<description>The image shown before an inactive filter when you use the radio button filter type. Use a square image for best results.</description>
+			<default-value>filter_nomark_radio.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>filter_mobile_header_border_color</name>
+			<uiname>Title separator</uiname>
+			<type>HTML_COLOR</type>
+			<value>#e6e6e6</value>
+			<group res_ID="ID_GROUP_FILTER_MOBILE"/>
+			<visual_properties height="10px" left="50px" top="36px" width="10px"/>
+			<description>The separator color (line below) of the filter header. This header is visible on mobile devices only.</description>
+			<default-value>#e6e6e6</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="body.media-mobile div.filter-holder div.mobile-filter-heading" cssproperty="border-bottom-color" filename="layout.css"></source>
+				<source css_selector="body.media-mobile div.filter-holder div.mobile-filter-heading" cssproperty="border-bottom-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>filter_mobile_back_image</name>
+			<uiname>Back image</uiname>
+			<type>FILE</type>
+			<value>back_mobile_filter.png</value>
+			<group res_ID="ID_GROUP_FILTER_MOBILE"/>
+			<visual_properties height="10px" left="570px" top="16px" width="10px"/>
+			<description>The back image to exit filter mode on mobile devices. Use a square image for best results.</description>
+			<default-value>back_mobile_filter.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>social_close_ltr</name>
+			<uiname>Close image (LTR)</uiname>
+			<type>FILE</type>
+			<value>social_close_ltr.png</value>
+			<group res_ID="ID_GROUP_SOCIAL"/>
+			<visual_properties height="10px" left="1px" top="17px" width="80px"/>
+			<description>The image to close the social media dialog for left to right languages. Use a square image for best results.</description>
+			<default-value>social_close_ltr.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>social_close_rtl</name>
+			<uiname>Close image (RTL)</uiname>
+			<type>FILE</type>
+			<value>social_close_rtl.png</value>
+			<group res_ID="ID_GROUP_SOCIAL"/>
+			<visual_properties height="10px" left="1px" top="67px" width="80px"/>
+			<description>The image to close the social media dialog for right to left languages. Use a square image for best results.</description>
+			<default-value>social_close_rtl.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+		<variable>
+			<name>us_useFacebook</name>
+			<uiname>Use Facebook</uiname>
+			<type>BOOLEAN</type>
+			<value>false</value>
+			<group res_ID="ID_GROUP_SOCIAL"/>
+			<visual_properties height="10px" left="1px" top="114px" width="80px"/>
+			<description>Do you want to show the Facebook like button in the output? Setting this to false will hide the Facebook like button. (Works for hosted output only.)</description>
+			<default-value>false</default-value>
+			<allowedvalues/>
+			<sources>
+				<source filename="usersettings.js" variable="useFacebook"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>us_useTwitter</name>
+			<uiname>Use Twitter</uiname>
+			<type>BOOLEAN</type>
+			<value>false</value>
+			<group res_ID="ID_GROUP_SOCIAL"/>
+			<visual_properties height="10px" left="747px" top="66px" width="80px"/>
+			<description>Do you want to show the Tweet button in the output? Setting this to false will hide the Tweet button. (Works for hosted output only.)</description>
+			<default-value>false</default-value>
+			<allowedvalues/>
+			<sources>
+				<source filename="usersettings.js" variable="useTwitter"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>social_border_color</name>
+			<uiname>Border color</uiname>
+			<type>HTML_COLOR</type>
+			<value>#003300</value>
+			<group res_ID="ID_GROUP_SOCIAL"/>
+			<visual_properties height="10px" left="747px" top="160px" width="80px"/>
+			<description>The border color of the social media overlay.</description>
+			<default-value>#3079D7</default-value>
+			<allowedvalues/>
+			<sources>
+				<source css_selector="div.social_buttons" cssproperty="border-top-color" filename="layout.css"></source>
+				<source css_selector="div.social_buttons" cssproperty="border-top-color" filename="layout-rtl.css"></source>
+				<source css_selector="div.social_buttons" cssproperty="border-bottom-color" filename="layout.css"></source>
+				<source css_selector="div.social_buttons" cssproperty="border-bottom-color" filename="layout-rtl.css"></source>
+				<source css_selector="div.social_buttons" cssproperty="border-left-color" filename="layout.css"></source>
+				<source css_selector="div.social_buttons" cssproperty="border-right-color" filename="layout-rtl.css"></source>
+			</sources>
+		</variable>
+		<variable>
+			<name>social_open</name>
+			<uiname>Open image</uiname>
+			<type>FILE</type>
+			<value>social_open.png</value>
+			<group res_ID="ID_GROUP_SOCIAL"/>
+			<visual_properties height="10px" left="747px" top="185px" width="80px"/>
+			<description>The image to open the social media dialog. Use a square image for best results.</description>
+			<default-value>social_open.png</default-value>
+			<allowedvalues/>
+			<sources/>
+		</variable>
+	</variables>
+	<resources/>
+</rhlayout>

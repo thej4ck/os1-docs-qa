@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_4040.htm"},{"type":"item","name":"Manutenzione listini prodotti","url":"html/slis/slis0001f_f.htm"},{"type":"item","name":"Stampa listino prodotti","url":"html/slis/slis0004d_f.htm"},{"type":"item","name":"Stampa listino prodotti multipla","url":"html/slis/slis0009d_f.htm"},{"type":"item","name":"Manutenzione listino fornitori","url":"html/slis/slis0005f_f.htm"},{"type":"item","name":"Stampa listino fornitori","url":"html/slis/slis0006d_f.htm"},{"type":"item","name":"Manutenzione contratti","url":"html/slis/slis0007f_f.htm"},{"type":"item","name":"Stampa contratti","url":"html/slis/slis0008d_f.htm"},{"type":"item","name":"Gestione variazione prezzi da documenti","url":"html/bbas/DlgVarPrezziDoc.htm#bc-1"},{"type":"book","name":"Tabelle","key":"toc137"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

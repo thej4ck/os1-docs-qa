@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_106730.htm"},{"type":"item","name":"Stampa schede cespiti","url":"html/bces/bces0011d.htm"},{"type":"item","name":"Stampa libro cespiti","url":"html/bces/bces0012d.htm"},{"type":"item","name":"Stampa riepilogo ammortamenti","url":"html/bces/bces0013d_a.htm"},{"type":"item","name":"Stampa riepilogo cespiti","url":"html/bces/bces0013d_s.htm"},{"type":"item","name":"Stampa prospetto manutenzioni","url":"html/bces/bces0015d.htm"},{"type":"item","name":"Prospetto eccedenze ammortamenti","url":"html/bces/bces0023d.htm"},{"type":"item","name":"Stampa etichette cespiti","url":"html/bces/bces0020d.htm"},{"type":"item","name":"Controllo schede","url":"html/bces/bces0005d.htm"},{"type":"item","name":"Controllo cespiti/contabilità","url":"html/bces/bces0021d.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

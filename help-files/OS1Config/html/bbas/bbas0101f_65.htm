@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 4, 2016 11:06:44 AM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Configurazione Produzione - Impostazioni generali</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.1.1.6.0_4";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazione OS1 Enterprise > Generali > Configurazione moduli > Produzione" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h5>Configurazione Produzione - Impostazioni generali</h5>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 text-align: justify; font-size: 10pt; font-weight: normal;">La compilazione 
+ di questa tabella è richiesta agli utenti che utilizzano il modulo Produzione.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif;"><span style="font-family: Verdana, sans-serif; 
+													 font-size: 10pt; font-weight: normal;">D</span>ATA 
+ ATTIVAZIONE: È la data in cui viene attivato il modulo di produzione. 
+ Se precedentemente è stato utilizzato il modulo Distinta base questa campo 
+ opera da discriminante per la ricerca delle schede tecniche. Attivo anche 
+ nella generazione RDP da ordini (vengono presi in considerazione gli ordini 
+ successivi alla data di attivazione).</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CALENDARIO 
+ AZIENDALE: È il calendario di base utilizzato nella gestione del piano 
+ e nei calcoli delle date di consegna e di produzione, se non specificato 
+ diversamente sull’unità produttiva.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CALENDARIO 
+ ACQUISTI: È il calendario utilizzato per il calcolo delle date di approvvigionamento 
+ materiali; se si intende utilizzare il calendario aziendale indicare lo 
+ stesso codice del campo precedente..</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">UNITÀ 
+ PRODUTTIVE MULTIPLE: Definisce se all’interno dell’azienda sono presenti 
+ più unità produttive distinte (casella con segno di spunta) o meno.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">UNITÀ 
+ PRODUTTIVA DEFAULT: Indica l’unità produttiva di default che viene proposta 
+ nelle varie gestioni; se è l’unica unità produttiva configurata (campo 
+ precedente vuoto) verrà proposta senza possibilità di modifica.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Unità produttive collegate</span>: 
+ Il campo è valido se sono gestite le unità produttive multiple ed è presente 
+ almeno una seconda unità produttiva. Se la casella è spuntata, in fase 
+ di generazione RDA viene effettuato un controllo sui componenti di tipo 
+ materia prima, che abbiano una scheda tecnica valida, per verificare se 
+ possibile instradarli ad un'altra unità produttiva; se possibile non sarà 
+ generata una RDA, ma una RDP sull'unità produttiva d'instradamento.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">TIPO 
+ VALORIZZAZIONE COMPOSTI FASE PRECEDENTE: Indica la modalità di default 
+ di valorizzazione degli scarichi del prodotto finito in corso di avanzamento. 
+ Tale parametro viene utilizzato in combinazione con il valore indicato 
+ nell’omonimo campo presente in anagrafica articoli. Per il calcolo sono 
+ previsti quattro casi:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+		<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+			<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+							 margin-top: 1.5pt; margin-bottom: 1.5pt;">Non 
+			 assegnato: in questo caso sarà utilizzato il parametro “Tipo 
+			 valorizzazione default” presente nella configurazione scheda 
+			 tecnica (paragrafo successivo)</p></li>
+			<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+							 margin-top: 1.5pt; margin-bottom: 1.5pt;">Prezzo 
+			 medio (articolo/fase)</p></li>
+			<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+							 margin-top: 1.5pt; margin-bottom: 1.5pt;">Costo 
+			 ultimo (articolo/fase)</p></li>
+			<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+							 margin-top: 1.5pt; margin-bottom: 1.5pt;">Costo 
+			 di mercato (dall’anagrafica articoli)</p></li>
+		</ul></li>
+	</ol></li>
+</ol>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">UNITÀ 
+ DI MISURA ORE: Indica il codice dell’unità di misura relativo alle Ore 
+ (utilizzato per i tempi di lavorazione in valorizzazione scheda tecnica 
+ e in visualizzazione dettaglio valori progetti).</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">GEN. 
+ AUTOMATICA VERSAM. DA BACK OFFICE: Definisce se in fase di salvataggio 
+ versamenti da back office i movimenti di versamento devono essere generati 
+ automaticamente, su richiesta oppure non generati.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Verifica versamenti</span>: Se 
+ l'opzione è attiva (casella con segno di spunta) i versamenti saranno 
+ generati solo se il movimento bordo macchina è stato preventivamente verificato 
+ dal back office.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">TIPO 
+ GENERAZIONE TRASFERIMENTI: Definisce se per il trasferimento dei prodotti 
+ finiti dal magazzino di produzione ai magazzini di spedizione è necessario 
+ generare un DDT oppure un semplice movimento di magazzino.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CAUSALE 
+ MOVIMENTO TRASFERIMENTO: Nel caso in cui il trasferimento dei prodotti 
+ finiti dal magazzino di produzione ai magazzini di spedizione sia gestito 
+ tramite movimento di magazzino indicare la causale di magazzino da utilizzare 
+ per la generazione di tali movimenti (la causale deve avere il campo Classe 
+ impostato a “Movimento tra magazzini” e la “Causale automatica” impostata).</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CLIENTE 
+ MAGAZZINO: Nel caso in cui il trasferimento dei prodotti finiti dal magazzino 
+ di produzione ai magazzini di spedizione sia gestito tramite generazione 
+ DDT indicare in questo campo il codice del cliente interno a cui verrà 
+ intestato il documento.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CAUSALE 
+ DDT DI TRASFERIMENTO: Nel caso in cui il trasferimento dei prodotti finiti 
+ dal magazzino di produzione ai magazzini di spedizione sia gestito tramite 
+ generazione DDT indicare il codice della causale DDT da utilizzare (la 
+ causale deve avere l’opzione “Documento di trasferimento” spuntata).</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Gestione articoli solo costo</span>: 
+ Se spuntato viene abilitato il flag 'Articolo solo costo' nella pagina 
+ dei dati di produzione dell'articolo. I componenti marcati con tale flag 
+ se inseriti in scheda tecnica non verranno comunque considerati nella 
+ generazione del piano ma solo come valore all'interno del movimento di 
+ versamento/rientro.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Causale scarico componenti solo 
+ costo</span>: <span style="text-transform: uppercase;">è</span> la causale 
+ che deve essere utilizzata per lo scarico dei componenti di tipo 'solo 
+ costo' nei movimenti di magazzino derivanti da versamenti interni e rientri 
+ di conto lavoro. La causale deve avere il 'Tipo movimento' impostato a 
+ 'Solo valore'.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Utilizza lotti assegnati ad ODP</span>: 
+ Se attivo in fase di movimentazione (buoni di prelievo/versamenti per 
+ le fasi interne, ddt/rientri conto lavoro per le fasi esterne) vengono 
+ movimentati solo i lotti assegnati al composto in fase di versamento/rientro.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Costo operatori per fascia oraria</span>: 
+ Indica che il costo consuntivo degli operatori sarà calcolato per fascia 
+ oraria sulla base degli eventi assegnati al versamento (casella con segno 
+ di spunta).</p>
+</body>
+</html>

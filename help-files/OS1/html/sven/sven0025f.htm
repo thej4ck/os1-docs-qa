@@ -1,0 +1,158 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 17, 2016 12:21:12 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Generazione documenti da liste di prelievo</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.2.2_10";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > Documenti di trasporto" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; font-weight: bold; 
+	 text-align: left;"><span>Generazione documenti da liste di prelievo</span></p>
+<p>Il programma effettua la generazione di DDT o Fatture direttamente evadendo 
+ in maniera automatica le liste di prelievo. Tramite le preferenze dell'<a 
+	 href="../bbas/bbas0051f_06.htm">anagrafica clienti</a> è possibile 
+ indicare il tipo di documento preferenziale da generare.</p>
+<p>Il programma si articola su due finestre video. La prima, Parametri, 
+ consente la definizione dei parametri di selezione delle liste da evadere.</p>
+<p style="text-align: center;"><img src="Images/sven0025f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CLIENTE: codice 
+ del cliente, presente in anagrafica clienti, da cui si vuole iniziare 
+ la selezione di analisi. Confermando a vuoto, la selezione inizia dal 
+ primo cliente valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CLIENTE: codice 
+ del cliente, presente in anagrafica clienti, con cui si vuole terminare 
+ la selezione di analisi. Confermando a vuoto, la selezione termina con 
+ l’ultimo cliente valido. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA RIFERIMENTO LISTA: 
+ tre campi per contenere rispettivamente anno, causale e numero della lista 
+ da cui si vuole iniziare la selezione. Confermando a vuoto, la selezione 
+ inizia dalla prima lista compatibile con gli altri parametri.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A RIFERIMENTO LISTA: 
+ tre campi per contenere rispettivamente anno, causale e numero della lista 
+ con cui si vuole concludere la selezione. Confermando a vuoto, la selezione 
+ termina con l'ultima lista compatibile con gli altri parametri.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA LISTA: data 
+ della lista da cui deve iniziare l’analisi. Confermando a vuoto, l’analisi 
+ inizia con la prima lista valida.</p>
+<p style="margin-left: 30pt; text-indent: -0.417in;">A DATA LISTA: data 
+ della lista con cui si desidera terminare l’analisi. Confermando a vuoto, 
+ l’analisi si conclude con l'ultima lista valida.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO DOCUMENTO: definisce 
+ il tipo documento da generare: DDT oppure fattura.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA GENERAZ. DOC.: 
+ indicare la data che si vuole assegnare ai documenti generati.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE DDT: causale 
+ di DDT da utilizzare per la generazione dei documenti. Il campo è obbligatorio.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE FATTURA: causale 
+ di fatturazione da utilizzare per la generazione dei documenti. Il campo 
+ è obbligatorio.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO ELABORAZIONE: 
+ definisce la tipologia di liste di prelievo da considerare: tutte le liste, 
+ solo liste intestate o solo liste non intestate.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ELABORA SOLO RIGHE 
+ PRODOTTI: definisce se devono essere considerate solo le righe delle liste 
+ che contengono un codice prodotto (casella con segno di spunta) oppure 
+ tutte (casella vuota).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO GENERAZIONE: 
+ <span style="margin-left: 0in; font-family: Verdana, Arial;">definisce 
+ il criterio di raggruppamento per la fase di generazione documenti: per 
+ cliente/destinazione/ordine, per cliente/destinazione, per cliente.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Assegna 
+ causale anagrafica</span>: Se la casella è spuntata, al documento verrà 
+ assegnata la causale del cliente (se presente) definita nella linguetta 
+ preferenze. La casella è visibile se in configurazione del modulo Vendite 
+ non è attiva l'opzione &quot;Contabilizzazione diretta&quot;.</p>
+<p>&#160;</p>
+<p>Confermando tramite pressione del bottone Esegui, viene avviata la selezione 
+ e richiamata la finestra di selezione delle liste.</p>
+<p style="text-align: center;"><img src="Images/sven0025f_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>Le liste di prelievo vengono visualizzate su due griglie, una per le 
+ testate e l'altra per le righe.</p>
+<p>E' possibile selezionare o deselezionare le righe con il doppio clic 
+ del mouse, il menù corrispondente al tasto destro del mouse oppure il 
+ tasto F11 o F12 per la selezione di tutte le righe selezionabili; è anche 
+ possibile selezionare con CTRL+F11, o deselezionare tutte le liste presenti.</p>
+<p>&#160;</p>
+<table style="vertical-align: top;" cellspacing="0">
+	<col />
+	<col />
+	<tr style="vertical-align: top;">
+		<td style="padding-right: 10px; padding-left: 10px; vertical-align: center;"><p 
+			 style="text-align: center;"><img src="../smat/Images/b_MatMassivo.png" alt="" style=" border:none; margin-left:0px; margin-right:0px; margin-top:0px; margin-bottom:0px; width:100%; max-width:79px;" border="0" /></p></td>
+		<td style="padding-right: 10px; padding-left: 10px;"><p>L’assegnazione 
+		 delle matricole in fase di generazione liste di prelievo deve 
+		 essere effettuata al termine dell’elaborazione; prima del salvataggio 
+		 viene aperta la finestra di <a href="../smat/DlgMATAssegnazioneDoc.htm">assegnazione 
+		 massiva matricole</a> per completare l’assegnazione; la stessa 
+		 funzionalità è disponibile prima del salvataggio tramite l’utilizzo 
+		 del pulsante Matricole. Se non vengono assegnate tutte le matricole 
+		 viene dato comunque un avviso e viene richiesto se proseguire 
+		 col salvataggio, in caso affermativo sarà eventualmente possibile 
+		 completare successivamente l’assegnazione delle matricole tramite 
+		 la variazione delle liste di prelievo</p></td>
+	</tr>
+</table>
+<p>&#160;</p>
+<p>Al termine delle operazioni, quando viene premuto il tasto F10 oppure 
+ il pulsante Salva nella tool bar compare la finestra di conferma della 
+ generazione dei documenti. Al termine della registrazione, viene richiesto 
+ se si deve effettuare la stampa diretta dei documenti generati.</p>
+</body>
+</html>

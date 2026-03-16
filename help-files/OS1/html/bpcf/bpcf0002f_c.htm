@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="10 17, 2001 12:03:16 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Analisi estratto conto clienti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.5.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Partite aperte clienti" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;">Analisi estratto conto clienti</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">I programmi di analisi estratti conto accedono alla tabella Movimenti contabili relativamente al cliente indicato e visualizzano i movimenti relativi alle partite coerenti con i parametri di selezione inseriti.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">I programmi si articolano su una prima finestra video Parametri, in cui vengono fornite le informazioni necessarie per effettuare le selezioni, ed una seconda finestra video Risultati, in cui vengono visualizzate le partite ed i movimenti contabili relativi a ciascuna partita.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Cliccando su uno dei righi partita evidenziati, è possibile accedere interattivamente alla manutenzione delle scadenze relative alla patita attiva.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">L’analisi partite clienti è accessibile tramite le scelte Contabilità, Partite aperte clienti, Analisi estratto conto; effettuata la scelta, appare la seguente maschera video:</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold;">Finestra video Parametri</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: center;"><img src="Images/bpcf0002f_c_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CLIENTE: campo obbligatorio per inserire il codice del cliente, presente nell'anagrafica, di cui si intendono visualizzare i movimenti sulle partite. Sul campo è attiva la funzione di ricerca a video F9</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale data di registrazione contabile da cui deve iniziare l’analisi dei movimenti delle partite, relativamente al cliente indicato. Confermando a vuoto, l’analisi inizia dal primo movimento contabile valido.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale data di registrazione contabile a cui deve terminare l’analisi dei movimenti delle partite, relativamente al cliente indicato. Confermando a vuoto, l’analisi termina con l’ultimo movimento contabile valido.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">DIVISA: codice obbligatorio della divisa di cui devono essere visualizzate le partite. Viene proposta automaticamente la divisa contenuta nell’anagrafica del cliente, che può essere variata a cura dell’utente nel caso in cui il cliente indicato abbia partite in varie divise. Non è possibile confermare a vuoto al fine di evitare una eventuale totalizzazione fra divise differenti. Sul campo è attiva la funzione di ricerca a video F9.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">TIPO ANALISI: combo box per definire lo stato delle partite da analizzare. Valori ammessi:</p>
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="margin-left: 0px; margin-top: 2pt; margin-bottom: 2pt;">Partite aperte</p>
+</li>
+<li class="p">
+<p style="margin-left: 0px; margin-top: 2pt; margin-bottom: 2pt;">Partite aperte e partite esposte (RB già presentate ma non incassate)</p>
+</li>
+<li class="p">
+<p style="margin-left: 0px; margin-top: 2pt; margin-bottom: 2pt;">Partite chiuse</p>
+</li>
+</ul>
+</li>
+</ol>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">IMPORTI IN CONTROVALORE: check box per definire in quale divisa devono essere visualizzate le partite. Valori ammessi:</p>
+<ul style="list-style: disc;">
+<li style="list-style:none;display: inline">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="margin-left: 0px; margin-top: 2pt; margin-bottom: 2pt;">vuoto = importi in divisa dei documenti</p>
+</li>
+<li class="p">
+<p style="margin-left: 0px; margin-top: 2pt; margin-bottom: 2pt;">spunta = importi in divisa di conto</p>
+</li>
+</ul>
+</li>
+</ul>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span>INCLUDI FORNITORE DI RIFERIMENTO: se spuntato include le partite del fornitore di riferimento, se presente; tali partite saranno evidenziate in blu nella finestra risultati.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Indicati tutti i parametri di selezione ritenuti opportuni, occorre avviare la selezione premendo il bottone Esegui. Viene quindi visualizzata la finestra video Risultati:</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold;">Finestra video Risultati</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: center;"><img src="Images/bpcf0002f_c_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">La finestra video è suddivisa in due sezioni. Nella sezione superiore vengono visualizzati, su un rigo, i dati di sintesi delle partite coerenti con i parametri di selezione indicati. Vengono visualizzati anno e numero della partita; tipo, serie e numero del documento; data del documento, divisa, eventuale saldo della partita se ancora aperta, eventuale importo esposizione se esposta. In calce alla sezione, il totale scoperto e il totale esposto.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Nella sezione inferiore vengono visualizzati i movimenti contabili relativi alla partita attiva, ovvero a quella evidenziata nella sezione superiore. Scorrendo le partite tramite freccia giù e freccia su nella sezione superiore, il contenuto della sezione inferiore cambia al cambiare della partita.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Cliccando due volte sulla partita evidenziata nella sezione superiore, si accede interattivamente al programma di Manutenzione scadenze per visualizzare i dettagli scadenze della partita attiva.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;"><img src="Images/b_Dettaglio.png" alt="" style=" border:none; margin-left:0px; margin-right:6px; margin-top:0px; margin-bottom:6px; width:100%; max-width:24px;" align="left" border="0" /><img src="Images/Bpcf0002f_c_03.png" alt="" style=" border:none; margin-left:6px; margin-right:0px; margin-top:0px; margin-bottom:6px; width:100%; max-width:573px;" align="right" border="0" />Il pulsante Dettaglio si attiva per i documenti associati ad altri; se premuto mostra il dettaglio dei documenti associati. Se il documento associato deriva dalle vendite è possibile, tramite il pulsante Documento accedervi.</p>
+</body>
+</html>

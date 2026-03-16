@@ -1,0 +1,234 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="06 10, 2016 9:52:44 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Generazione richieste di acquisto</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.6.1.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Acquisti > Richieste di acquisto" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; 
+	 font-weight: bold;">Generazione richieste di acquisto</p>
+<p>La procedura consente di generare i documenti di richieste di acquisto 
+ partendo dagli ordini clienti, dai fabbisogni derivanti dalle disposizioni 
+ di produzione oppure dalle MRP. Ogni opzione di generazione è utilizzabile 
+ solo in presenza del relativo modulo. La generazione si compone di due 
+ fasi; la prima di selezione dei documenti da cui effettuare la generazione 
+ attraverso una serie di criteri e la seconda di manutenzione della richiesta 
+ elaborata per ulteriori modifiche. Per la fase di manutenzione si rimanda 
+ al capitolo relativo alla <a href="sraf0001f_M.htm">gestione delle richieste 
+ di acquisto</a>.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;"><span style="font-weight: bold;">Selezione 
+ documenti</span></p>
+<p>La richiesta parametri si diversifica a seconda che si utilizzi la <a 
+	 href="#Generazione RDA da ordini clienti">generazione da ordini clienti</a> 
+ oppure la <a href="#Generazione RDA da disposizioni">generazione da fabbisogni 
+ su disposizioni</a>; il campo tipo selezione determina il tipo di selezione 
+ dei dati per la generazione delle richieste di acquisto. Se non sono presenti 
+ i moduli necessari al funzionamento della procedura, questo sarà segnalato 
+ e non sarà possibile utilizzarla. La scelta del tipo selezione sarà limitata 
+ ai soli moduli presenti (ordini e produzione light).</p>
+<p>&#160;</p>
+<p style="font-weight: bold;"><a name="Generazione RDA da ordini clienti">Generazione 
+ da ordini clienti</a></p>
+<p style="text-align: left;">Se presente il modulo di produzione sarà presente 
+ la casella Escludi prodotti con <span style="text-align: left;">scheda 
+ tecnica, spuntata, per escludere le righe ordini di detti articoli dalla 
+ generazione.</span></p>
+<p style="text-align: center;"><img src="Images/sraf0001f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CLIENTE: eventuale 
+ codice del cliente, presente in anagrafica clienti, da cui si vuole iniziare 
+ la selezione. Confermando a vuoto, la selezione inizia dal primo cliente 
+ valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CLIENTE: eventuale 
+ codice del cliente, presente in anagrafica clienti, con cui si vuole terminare 
+ la selezione. Confermando a vuoto, la selezione termina con l’ultimo cliente 
+ valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale 
+ data da cui deve iniziare l’analisi dei documenti relativamente ai precedenti 
+ parametri di selezione. Confermando a vuoto, l’analisi inizia con il primo 
+ documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale 
+ data con cui si desidera terminare l’analisi dei documenti relativamente 
+ ai precedenti parametri di selezione. Confermando a vuoto, l’analisi si 
+ conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ANNO: indica l'anno 
+ degli ordini a cui si vuole limitare la selezione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE: eventuale 
+ codice della Causale ordini a cui si vuole limitare la selezione. Sul 
+ campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NUMERO: indica il 
+ numero dell'ordine a cui si vuole limitare la selezione, in combinazione 
+ con anno e/o causale.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE RDA: codice 
+ della causale con cui sarà generata la richiesta di acquisto, la causale 
+ deve essere abilitata alla generazione da ordini fornitori e l'utente 
+ deve esserne abilitato all'uso. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LOTTO DI RIORDINO: 
+ definisce come gestire la quantità in relazione al lotto di riordino del 
+ prodotto:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">utilizzato 
+		 come minimo: la quantità non sarà mai inferiore al lotto di riordino 
+		 se diverso da zero;</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">utilizzato 
+		 come multiplo: la quantità sarà calcolata sempre come multiplo 
+		 (arrotondata per eccesso) del lotto di riordino se diverso da 
+		 zero;</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">non 
+		 utilizzato: non sarà mai utilizzato il lotto di riordino, né come 
+		 minimo né come multiplo.</p></li>
+	</ul></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA DOCUMENTO: definisce 
+ la data da assegnare alla richiesta che sarà generata.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;"><a name="Generazione RDA da disposizioni">Generazione 
+ da fabbisogni su disposizioni</a></p>
+<p style="text-align: center;"><img src="Images/sraf0001f_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DISPOSIZIONE: tre 
+ campi per contenere rispettivamente anno, causale e numero della disposizione 
+ da cui si vuole iniziare la selezione. Confermando a vuoto, la selezione 
+ inizia dalla prima disposizione compatibile con i successivi parametri.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DISPOSIZIONE: tre 
+ campi per contenere rispettivamente anno, causale e numero della disposizione 
+ con cui si vuole concludere la selezione. Confermando a vuoto, la selezione 
+ termina con l’ultima disposizione compatibile con i successivi parametri.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: data disposizione 
+ da cui si vuole iniziare la selezione. Confermando a vuoto, la selezione 
+ inizia dalla prima data valida.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: data disposizione 
+ con cui si vuole concludere la selezione. Confermando a vuoto, la selezione 
+ termina con l'ultima data valida.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">INCLUDI DISPOSIZIONI 
+ IMPEGNATE: definisce se considerare anche le disposizioni che sono già 
+ impegnate (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">INCLUDI DISPOSIZIONI 
+ RIENTRATE: definisce se considerare anche le disposizioni che sono già 
+ rientrate (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DISPONIBILITÀ ORDINI 
+ CLIENTI: determina l'aggiunta al calcolo della disponibilità di magazzino 
+ dell'impegno derivante dagli ordini clienti (casella con segno di spunta). 
+ Viene proposto quanto come indicato nella <a href="../bbas/bbas0101f_23.htm">configurazione 
+ produzione</a>.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DISPONIBILITÀ ORDINI 
+ FORNITORI: determina l'aggiunta al calcolo della disponibilità di magazzino 
+ dell'ordinato derivante dagli ordini fornitori (casella con segno di spunta). 
+ Viene proposto quanto come indicato nella <a href="../bbas/bbas0101f_23.htm">configurazione 
+ produzione</a>.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DISPONIBILITÀ ORDINI 
+ PRODUZIONE: determina l'aggiunta al calcolo della disponibilità di magazzino 
+ dell'ordinato derivante dalla produzione (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DISPONIBILITÀ IMPEGNI 
+ DA PRODUZIONE: determina l'aggiunta al calcolo della disponibilità di 
+ magazzino dell'impegno derivante dalla produzione (casella con segno di 
+ spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CATEGORIA MERCEOLOGICA: 
+ eventuale codice della categoria merceologica, riferita ai prodotti, per 
+ cui effettuare la selezione.&#160;Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CATEGORIA DI VENDITA: 
+ eventuale codice della categoria di vendita, riferita ai prodotti, per 
+ cui effettuare la selezione.&#160;Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CODICE INVENTARIO: 
+ eventuale codice inventario, riferito ai prodotti, per cui effettuare 
+ la selezione.&#160;Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">GRUPPO VENDITA: eventuale 
+ codice del gruppo vendita, riferito ai prodotti, per cui effettuare la 
+ selezione.&#160;Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">MAGAZZINO COMPONENTI: 
+ codice del magazzino da utilizzare per i progressivi delle materie prime. 
+ Sul campo sono attive le funzioni di ricerca (F9) sulla tabella magazzini. 
+ Viene proposto quello riportato in <a href="../bbas/bbas0101f_23.htm">configurazione 
+ produzione</a>.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">MAGAZZINO SEMILAVORATI: 
+ codice del magazzino da utilizzare per i progressivi dei semilavorati. 
+ Sul campo sono attive le funzioni di ricerca (F9) sulla tabella magazzini. 
+ Viene proposto, se attiva la gestione, quello riportato in <a href="../bbas/bbas0101f_23.htm">configurazione 
+ produzione</a>.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE RDA: codice 
+ della causale con cui sarà generata la richiesta di acquisto, la causale 
+ deve essere abilitata alla generazione da disposizioni e l'utente deve 
+ esserne abilitato all'uso. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LOTTO DI RIORDINO: 
+ definisce come gestire la quantità in relazione al lotto di riordino del 
+ prodotto:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">utilizzato 
+		 come minimo: la quantità non sarà mai inferiore al lotto di riordino 
+		 se diverso da zero;</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">utilizzato 
+		 come multiplo: la quantità sarà calcolata sempre come multiplo 
+		 (arrotondata per eccesso) del lotto di riordino se diverso da 
+		 zero;</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">non 
+		 utilizzato: non sarà mai utilizzato il lotto di riordino, né come 
+		 minimo né come multiplo.</p></li>
+	</ul></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA DOCUMENTO: definisce 
+ la data da assegnare alla richiesta che sarà generata.</p>
+</body>
+</html>

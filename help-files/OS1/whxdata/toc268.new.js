@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_902020.htm"},{"type":"item","name":"Annullamento fatturazione","url":"html/sven/sven0013d.htm"},{"type":"item","name":"Annullamento contabilizzazione fatture","url":"html/sven/sven0015d.htm"},{"type":"item","name":"Annullamento contabilizzazione acconti ddt","url":"html/sven/sven0017d.htm"},{"type":"item","name":"Controllo importo bolli virtuali","url":"html/sbas/sbas0025d.htm"},{"type":"item","name":"Manutenzione dati fatture","url":"html/sven/sven0031f.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

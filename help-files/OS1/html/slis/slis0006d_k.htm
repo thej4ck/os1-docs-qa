@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="02 8, 2013 6:48:03 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Stampa listino clienti provvisori</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.4.5.2.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Ordini clienti > Offerte > Listini" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left;"><strong 
+	 style="font-weight: bold;">Stampa listino clienti provvisori</strong></p>
+<p style="text-align: center;"><img src="Images/slis0006d_k_01.png" alt="" style=" border:none; width:100%; max-width:664px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CLIENTE: codice 
+ del cliente, presente in anagrafica, da cui si vuole iniziare la selezione 
+ di stampa. Confermando a vuoto, la selezione inizia dal primo cliente 
+ valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CLIENTE: codice 
+ del cliente, presente in anagrafica, con cui si vuole terminare la selezione 
+ di stampa. Confermando a vuoto, la selezione termina con l'ultimo cliente 
+ valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DIVISA: codice della 
+ divisa per cui si vuole effettuare la stampa. Sul campo sono attive le 
+ funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA PRODOTTO: codice 
+ del prodotto da cui si intende iniziare la selezione di stampa; confermando 
+ a vuoto la selezione inizia dal primo codice valido. Sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A PRODOTTO: codice 
+ del prodotto con cui si intende concludere la selezione di stampa; confermando 
+ a vuoto la selezione termina con l’ultimo codice valido. Sul campo sono 
+ attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;"><span style="text-transform: uppercase;">UNITà 
+ di misura</span>: codice relativo alla tabella unità di misura da utilizzare 
+ come filtro per la selezione dei prezzi del listino; questo parametro 
+ è alternativo a &quot;Solo unità di misura primaria&quot;. Sul campo sono 
+ attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;"><span style="text-transform: uppercase;">Solo 
+ unità di misura primaria</span>: se spuntato sarà applicato un filtro 
+ sulla selezione dei prodotti nel listino per includere solo i prodotti 
+ nella loro unità di misure primaria; questo parametro è alternativo a 
+ &quot;Unità di misura&quot;.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">TIPO STAMPA: definisce 
+ il tipo di stampa da effettuare: completa, listino prezzi, sconti per 
+ categoria, sconti per scaglione.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">RAGGRUPPAMENTO: 
+ definisce per quale codice effettuare il raggruppamento in stampa: per 
+ cliente, per prodotto, per agente, per zona.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">ORDINAMENTO PRODOTTO: 
+ definisce il metodo di ordinamento dei prodotti in stampa: per codice, 
+ per descrizione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FORMATO: definisce 
+ il formato di stampa da utilizzare; valori possibili: stampa ad uso interno, 
+ stampa ad uso esterno su carta bianca, stampa ad uso esterno su carta 
+ intestata.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">TIPO SELEZIONE: 
+ definisce il criterio di selezione dei prezzi da visualizzare:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in;">Listino 
+		 corrente: indica di utilizzare il listino corrente, quello valido 
+		 alla data di sistema.</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in;">Listino 
+		 alla data: indica di utilizzare il listino valido alla data presente 
+		 nel successivo campo &quot;Data rif.&quot; che sarà attivo solo 
+		 in questo caso.</p></li>
+		<li class="p"><p style="text-indent: -0.417in; margin-left: 0.417in;">Tutto: 
+		 toglie qualsiasi limite di data e consente la visualizzazione 
+		 di tutti i prezzi del cliente.</p></li>
+	</ul></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">INCLUDI LISTINO PRODOTTO: 
+ indica se nella stampa si desidera visualizzare i dati del prodotto, riguardanti 
+ il listino prodotti, &#160;per quegli articoli che non sono definiti nel 
+ listino del cliente. I prodotti preceduti da un asterisco derivano dal 
+ listino cliente.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FORMATO IMMAGINE: 
+ in caso di stampa dell'immagine del prodotto, definisce il formato di 
+ stampa: come da prodotto, piccola, media, grande.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA DESCRIZIONE 
+ ESTESA: definisce se deve essere stampate la descrizione estesa dei prodotti 
+ (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA IMMAGINE: definisce 
+ se deve essere stampata l'immagine associata al prodotto (casella con 
+ segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA PRODOTTI ESCLUSI: 
+ consente di stampare anche i prodotti definiti come non stampabili sul 
+ listino (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA PRODOTTI OBSOLETI: 
+ consente di stampare anche i prodotti definiti come obsoleti (casella 
+ con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: center;"><img src="Images/slis0006d_k_02.png" alt="" style=" border:none; width:100%; max-width:664px;" border="0" /></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA AGENTE: codice 
+ dell'agente da cui si intende iniziare la selezione di stampa; confermando 
+ a vuoto la selezione inizia dal primo codice valido. Sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A AGENTE: codice dell'agente 
+ con cui si intende concludere la selezione di stampa; confermando a vuoto 
+ la selezione termina con l’ultimo codice valido. Sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA ZONA: codice della 
+ zona da cui si intende iniziare la selezione di stampa; confermando a 
+ vuoto la selezione inizia dal primo codice valido. Sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A ZONA: codice della 
+ zona con cui si intende concludere la selezione di stampa; confermando 
+ a vuoto la selezione termina con l’ultimo codice valido. Sul campo sono 
+ attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CATEGORIA: codice 
+ della categoria merceologica da cui si intende iniziare la selezione di 
+ stampa; confermando a vuoto la selezione inizia dal primo codice valido. 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CATEGORIA: codice 
+ della categoria merceologica con cui si intende concludere la selezione 
+ di stampa; confermando a vuoto la selezione termina con l’ultimo codice 
+ valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CATEGORIA VENDITA: 
+ codice della categoria di vendita da cui si intende iniziare la selezione 
+ di stampa; confermando a vuoto la selezione inizia dal primo codice valido. 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CATEGORIA VENDITA: 
+ codice della categoria di vendita con cui si intende concludere la selezione 
+ di stampa; confermando a vuoto la selezione termina con l’ultimo codice 
+ valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+</body>
+</html>

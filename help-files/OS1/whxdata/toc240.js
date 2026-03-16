@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc239.js\"  name=\"Gestione matricole\"><item name=\"Introduzione\" url=\"html/index/index_805020.htm\" /><item name=\"Stampe documenti\" url=\"html/smat/smat0103f.htm\" /></data>";

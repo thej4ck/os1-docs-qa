@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="06 27, 2011 12:55:51 PM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Configurazione esterna archiviazione</title>
+<link rel="StyleSheet" href="../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "..";
+gCommonRootRelPath = "..";
+gTopicId = "2.1_3";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazioni esterne" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../ehlpdhtm.js"></script>
+
+<h2>Configurazione esterna archiviazione</h2>
+<p>Per il corretto funzionamento di ArchiviOK in modalità integrata con 
+ OS1 in versioni antecedenti alla 3.1 oppure dalla versione 3.1 senza utilizzare 
+ l’interrogazione diretta da OS1 (utilizzo di XAOKPlugIn), i file SmartDb.dll 
+ e SmartUtils.dll presenti nella sottocartella Program di installazione 
+ di ArchiviOK, devono essere copiati nella cartella principale di OS1.</p>
+<p>&#160;</p>
+<p>Per configurare l'archiviazione è necessario creare nella cartella <span 
+	 style="font-weight: bold;">Custom</span> una cartella <span style="font-weight: bold;">Archiviazione</span> 
+ e copiare dalla cartella <span style="font-weight: bold;">Modelli\Archiviazione</span> 
+ il file per l'utilizzo della procedura di archiviazione.</p>
+<p>Il file copiato deve essere rinominato con nome macchina seguito dal 
+ suffisso '_ARCHDOC' e deve avere estensione cfg. Ad esempio: <span style="font-weight: bold;">MIOPC_ARCHDOC.cfg</span></p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Struttura dei file di configurazione</p>
+<p style="font-weight: bold;"><span style="font-weight: normal;">Il file 
+ contiene parametri specifici e delle righe di commento, precedute dal 
+ carattere '</span>;<span style="font-weight: normal;">' che spiegano come 
+ effettuare gli eventuali settaggi.</span></p>
+<p style="font-weight: bold; font-style: italic;">Attenzione, se il parametro 
+ Scanner, relativo all'acquisizione di documenti esterni, ha valore 0 (zero), 
+ l'utente utilizzatore non avrà la facoltà di archiviare documenti esterni.</p>
+<p style="font-weight: bold;"><span style="font-weight: normal;">Riportiamo 
+ un esempio:</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-style: italic;">[Config]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-style: italic;">;Determina 
+ l'abilitazione all'acquisizione dei documenti: 0=No 1=Solo scanner 2=Solo 
+ PDF 3=Sia scanner che PDF</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-style: italic;">Scanner=3</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-style: italic;"><span 
+	 style="font-style: italic;">;Indica se, in caso di acquisizione da 
+ scanner, il documento viene acquisito subito o successivamente</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-style: italic;">;0 
+ = acquisizione immediata; 1 = acquisizione differita; 2 = richiedere ogni 
+ volta</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-style: italic;">;In 
+ caso di acquisizione differita vengono archiviate solo le chiavi ed effettuata 
+ la stampa di un barcode</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-style: italic;">Differita=2</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-style: italic;">;Path 
+ della procedura di archiviazione documentale</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-style: italic;">Programma=C:\Programmi\ArchiviOK\Program\ArchiviOK.exe</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-style: italic;"><span 
+	 style="font-style: italic;">;Utilizza le funzionalità della XAOKPlugIn 
+ che estendono/sostituiscono le funzionalità di ArchiviOK: 1=si 0=No</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-style: italic;">UsaXAOKPlugIn=1 
+ <span style="font-style: normal; font-weight: bold;">[Se il parametro 
+ non esiste viene inteso come impostato a 1, nel caso sia impostato a 1 
+ non è necessario copiare le dll sopra descritte]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">Nella cartella <span style="font-weight: bold;">Modelli\Archiviazione\ArchiviOK</span> 
+ sono presenti i files di configurazione relativi alle tipologie di documento 
+ gestite; di seguito riportiamo un esempio del file di configurazione relativo 
+ alle fatture di vendita.</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">&#160;</p>
+<p style="font-weight: bold;">FatturaV</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">[Dati]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">Select=SELECT 
+ F.IdCliente, C.RagioneSociale, F.Anno, F.Serie, F.Numero, F.IdCausale, 
+ F.DataDocumento FROM FattureCliTeste F LEFT JOIN Clienti C ON C.IdConto 
+ = F.IdCliente WHERE F.KFattCliT = :Chiave</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">NomeFile=FTV[Anno]-[Serie]-[Numero].pdf</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">Titolo=FT 
+ VEN. N. [Anno]-[Serie]-[Numero]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;"><span 
+	 style="font-style: italic;">;Specificare in caso si voglia effettuare 
+ l'acquisizione differita. Deve essere di 2 caratteri numerici.</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">;Se 
+ attiva l'acquisizione differita il titolo non viene creato come indicato 
+ nella voce &quot;Titolo&quot;, ma in modo automatico utilizzando un barcode 
+ EAN13.</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">;TipoDocumento=01</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">[ArchiviOK]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">GRUPPO=%%Archivio%Vendite%Fatture%</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">MODELLO=Fattura</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">[Chiavi]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">; 
+ Per valori costanti far precedere il valore dal carattere %</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">TipoAnag=%CL</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">CodiceAnag=IdCliente</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">RagSoc=RagioneSociale</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">Causale=IdCausale</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">DataDoc=DataDocumento</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">Numero=Numero</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">Anno=Anno</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px; font-style: italic;">Serie=Serie</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Il file 
+ è diviso in sezioni il cui nome è racchiuso tra parentesi quadre.</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Il primo 
+ gruppo <span style="font-weight: bold;">[Dati]</span> contiene la sintassi 
+ SQL (<span style="font-weight: bold;">Select</span>) per l'estrazione 
+ dei dati, la struttura del nome del file (<span style="font-weight: bold;">NomeFile</span>) 
+ con cui saranno salvati i documenti archiviati ed il formato del titolo 
+ (<span style="font-weight: bold;">Titolo</span>) per il documento archiviato 
+ ed il tipo documento (<span style="font-weight: bold;">TipoDocumento</span>) 
+ nel caso si utilizzi l'archiviazione differita. I nomi dei campi riportati 
+ tra parentesi quadre fanno riferimento ai campi presenti nell'istruzione 
+ SQL e riporteranno dove inseriti il valore.</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Il gruppo 
+ [<span style="font-weight: bold;">ArchiviOK</span>] è relativo alla procedura 
+ di archiviazione e deve rimanere fisso.</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0px;">Il gruppo 
+ [<span style="font-weight: bold;">Chiavi</span>] contiene l'indicazione 
+ delle possibili chiavi di ricerca del documento all'interno della procedura 
+ di archiviazione con il relativo campo o valore costante (preceduto dal 
+ carattere <span style="font-weight: bold;">%</span>).</p>
+</body>
+</html>

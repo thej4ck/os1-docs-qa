@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_303091.htm"},{"type":"item","name":"Causali offerte","url":"html/bbas/bbas0043f.htm"},{"type":"book","name":"Clienti provvisori","key":"toc104"},{"type":"book","name":"Articoli provvisori","key":"toc105"},{"type":"item","name":"Listini articoli provvisori","url":"html/sbas/sbas0104f.htm"},{"type":"item","name":"Definizione clienti provvisori","url":"html/sofc/sofc0102f.htm"},{"type":"item","name":"Definizione articoli provvisori","url":"html/sbas/sbas0103f.htm"},{"type":"item","name":"Testi note per offerte","url":"html/sofc/sofc0105f.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

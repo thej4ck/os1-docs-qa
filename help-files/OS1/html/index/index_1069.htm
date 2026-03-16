@@ -1,0 +1,313 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 4, 2016 12:22:43 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Operazioni fine esercizio contabile</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function ehlp_showtip(current,e,text)
+{
+  if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape'))
+  {
+    document.tooltip.document.write("<layer bgColor='yellow' style='border:1px solid black;font-size:12px;'>"+ text + "</layer>");
+    document.tooltip.document.close();
+    document.tooltip.left=e.pageX+5;
+    document.tooltip.top=e.pageY+5;
+    document.tooltip.visibility="show";
+  }
+}
+function ehlp_hidetip()
+{
+  document.tooltip.visibility="hidden";
+}
+//]]>
+</script>
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.14.0_1";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Operazioni fine esercizio" /><script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function ehlp_showtip(current,e,text)
+{
+  if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape'))
+  {
+    document.tooltip.document.write("<layer bgColor='yellow' style='border:1px solid black;font-size:12px;'>"+ text + "</layer>");
+    document.tooltip.document.close();
+    document.tooltip.left=e.pageX+5;
+    document.tooltip.top=e.pageY+5;
+    document.tooltip.visibility="show";
+  }
+}
+function ehlp_hidetip()
+{
+  document.tooltip.visibility="hidden";
+}
+//]]>
+</script>
+</head>
+<body style="color: #000000;" page-style="x-size: A4;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;">Introduzione</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">OS1 è strutturato in modo di poter contenere più esercizi “in linea”. Pertanto nella stessa azienda convivono i dati relativi a più esercizi, ed è comunque possibile operare sull’esercizio precedente non ancora chiuso e sul nuovo appena aperto avendo a disposizione tutte le informazioni. Occorre ovviamente effettuare alcune operazioni per rendere operativo il “doppio esercizio”</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Le operazioni di fine esercizio si suddividono in due parti ben distinte.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">La prima parte, che consiste nella “Generazione del nuovo esercizio”, viene effettuata nell’immediata prossimità dell’inizio del nuovo esercizio, serve esclusivamente ad iniziare il lavoro amministrativo per il nuovo anno e non ha nulla a che vedere con le chiusure contabili, fiscali e inventariali che verranno effettuate in tempi successivi, generalmente dopo l’approvazione dei bilanci.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">La seconda parte, che consiste nella “Chiusura / riapertura dell’esercizio”, viene invece effettuata tre/quattro mesi dopo, appunto dopo l’approvazione dei bilanci.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Nel lasso di tempo intercorrente fra la “Generazione del nuovo esercizio” e la “Chiusura/riapertura dell’esercizio” l’utente può effettuare scritture contabili con data di registrazione e competenza nel nuovo esercizio; con data di registrazione e competenza dell’esercizio precedente. Può inoltre effettuare scritture contabili “di rettifica” con data di registrazione nel nuovo esercizio ma con competenza dell’esercizio precedente, utilizzando apposite causali contabili contrassegnate dalla spunta nel check box “Movimento esercizio precedente”. La caratteristica di tali operazioni (che non possono comunque riferirsi a movimenti Iva) consiste nel fatto che, pur venendo stampate sul giornale di contabilità del nuovo anno, concorrono alla formazione del bilancio e vengono stampate sulle schede dell’anno precedente.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold;">Esercizio fiscale e esercizio contabile</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Prima di procedere con l’illustrazione dei programmi, occorre dare significato a due termini usati da OS1: Esercizio fiscale e Esercizio contabile. Per Esercizio Fiscale si intende quell’insieme di adempimenti che, per tutti gli utenti, corrisponde all’anno solare, ovvero dal primo gennaio al 31 dicembre: la gestione Iva, che va appunto dal primo gennaio al 31 dicembre, la gestione percipienti mod. 770, che pure va dal primo gennaio al 31 dicembre.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Per Esercizio Contabile si intende invece l’anno contabile che si conclude con il &#160;bilancio di chiusura per dare successivamente luogo alla dichiarazione dei redditi, e la cui durata, non necessariamente coincidente con l’anno solare, varia da utente ad utente in funzione di quanto previsto dallo statuto.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Per la maggior parte degli utenti l’esercizio fiscale e l’esercizio contabile coincidono: sarà quindi sufficiente, in prossimità del 1° gennaio, effettuare una sola volta la generazione del nuovo esercizio aprendo contemporaneamente i “protocolli Iva” ed i “protocolli contabili” del nuovo anno.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Le Società che prevedono invece l’esercizio contabile non coincidente con l’anno solare dovranno procedere alla generazione del nuovo esercizio in due tempi: in prossimità del 1° gennaio si effettuerà l’apertura del solo esercizio fiscale, inizializzando i protocolli Iva del nuovo anno; in prossimità dell’inizio del nuovo esercizio si effettuerà l’apertura del solo esercizio contabile, inizializzando i protocolli contabili.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Le note di questo capitolo si articolano sui seguenti paragrafi:</p>
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;"><a href="#Generazione del nuovo esercizio">Generazione del nuovo esercizio</a></p>
+</li>
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;"><a href="#Scritture di rettifica">Scritture di rettifica relative all’esercizio precedente</a></p>
+</li>
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;"><a href="#Adempimenti annuali IVA">Adempimenti annuali Iva</a></p>
+</li>
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;"><a href="#Chiusura/Riapertura">Chiusura e riapertura dell’esercizio</a></p>
+</li>
+</ul>
+</li>
+</ol>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">L’apertura del nuovo esercizio è un programma di Configurazione. Pertanto l’accesso al programma è riservato al responsabile del sistema.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Tutti i programmi di questo capitolo sono raggruppati sotto la scelta Operazioni di fine esercizio della procedura Contabilità:</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: center;">&#160;</p>
+<table style="vertical-align: Center; border-left-style: Solid; border-left-width: 2px; border-right-style: Solid; border-right-width: 2px; border-top-style: Solid; border-top-width: 2px; border-bottom-style: Solid; border-bottom-width: 2px; margin-left: 2px; margin-right: 2px; left: 180px; top: 962px;" cellspacing="0" align="center">
+<col width="292" />
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="292">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bcge/bcge0026d.htm">Controllo saldi sottoconti</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="292">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bcge/bcge0027d.htm">Elaborazione chiusura</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="292">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bcge/bcge0028d_A.htm">Elaborazione apertura</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="292">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bcge/bcge0028d_G.htm">Generazione giroconti apertura</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="292">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bcge/bcge0030d.htm">Stampa dati IVA generali</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-width: 1px; border-bottom-style: Solid;" width="292">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bcge/bcge0031d.htm">Stampa dati IVA clienti/fornitori</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-width: 1px; border-bottom-style: Solid;" width="292">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bcge/bcge0042d.htm">Rilevazione differenze su cambi</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="292">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bcge/bcge0010d_A.htm">Calcolo acconto IVA</a></p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: center;">&#160;</p>
+<p>Se presente il modulo di contabilità semplificata saranno presenti anche le seguenti scelte:</p>
+<p>&#160;</p>
+<table style=" vertical-align:Center; border-left-style:Solid; border-left-width:2px; border-right-style:Solid; border-right-width:2px; border-top-style:Solid; border-top-width:2px; border-bottom-style:Solid; border-bottom-width:2px; margin-left:2px; margin-right:2px; left:542px; top:1086px; width:100%; max-width:371px;" cellspacing="0" align="center">
+<col width="348" />
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="364">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../bcsp/bcsp0011d.htm">Generazione storno mancati incassi/pagamenti</a></p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold; text-decoration: none;"><a name="Generazione del nuovo esercizio" style="text-decoration: none;">Generazione del nuovo esercizio</a></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold; margin-left: 0px;">1. Aziende con esercizio fiscale ed esercizio contabile coincidenti</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: center;"><img src="Images/Index_1069_02.png" alt="" style=" border:none; width:100%; max-width:413px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">NUMERO ESERCIZIO CONTABILE: Il campo contiene il numero dell'esercizio contabile da aprire: inserire l’anno nuovo (es: 2002). &#160;</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">DATA INIZIO ESERCIZIO: È la data di inizio dell'esercizio contabile da aprire. In automatico viene proposto il giorno successivo alla data di chiusura dell'esercizio precedente, che, per questi utenti, è il 1° gennaio. Confermare la data che viene proposta.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">DATA FINE ESERCIZIO: È la data di fine dell'esercizio contabile da aprire. Viene proposta in automatico la data corrispondente a 12 mesi dopo la data di inizio che, per questi utenti è il 31 dicembre. Se non esistono controindicazioni particolari (esercizi di durata superiore o inferiore al 12 mesi), confermare la data proposta.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">ANNO FISCALE: Il campo dovrebbe contenere il numero dell’esercizio fiscale. Quando le date di inizio e fine esercizio contabile precedentemente inserite o confermate, vanno dal 1° gennaio al 31 dicembre, il numero di anno fiscale corrisponde al numero di esercizio.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">PLAFOND DISPONIBILE: È l'importo disponibile per il nuovo anno per acquisti in esenzione effettuati in base all'art. 8 D.P.R. 663/72 riportato sul quadro A del modello Iva 99bis. Interessa solo gli esportatori abituali, che devono inserire l’importo per gestire correttamente il plafond del nuovo anno.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">PERCENTUALE PRO-RATA: È la percentuale di pro-rata da applicare al totale Iva acquisti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;">Confermando l’apertura, vengono aperti i protocolli di tutte le procedure amministrative attive: contabilità, registri Iva, ritenute d’acconto, cespiti, contabilità analitica, ecc.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold; margin-left: 0px;">2. Aziende con esercizio fiscale diverso dall’esercizio contabile.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; margin-left: 40px; font-style: italic;">a) Apertura dell’esercizio fiscale (IVA)</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Nei primi giorni di gennaio, alla ripresa del lavoro, accedere al programma di Apertura esercizio per creare i protocolli Iva.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: center;"><img src="Images/Index_1069_03.png" alt="" style=" border:none; width:100%; max-width:413px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">NUMERO ESERCIZIO CONTABILE: confermare a vuoto sul campo per procedere all'apertura del solo anno fiscale (Iva), dal momento che l’esercizio contabile corrente risulta ancora attivo all’inizio del nuovo anno solare. Vengono automaticamente saltate le richieste delle date di inizio e fine esercizio contabile.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">ANNO FISCALE: Inserire il numero indicativo dell’anno (es: 2002) per aprire i protocolli Iva per il nuovo anno.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">PLAFOND DISPONIBILE: È l'importo disponibile per il nuovo anno per acquisti in esenzione effettuati in base all'art. 8 D.P.R. 663/72 riportato sul quadro A del modello Iva 99bis. Interessa solo gli esportatori abituali, che devono inserire l’importo per gestire correttamente il plafond del nuovo anno.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span style="font-family: Verdana, sans-serif;">PERCENTUALE PRO-RATA: È la percentuale di pro-rata da applicare al totale Iva acquisti.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Dopo l’apertura dell’anno fiscale, la numerazione della prima nota contabile prosegue mentre i protocolli Iva vendite, Iva acquisti ed Iva corrispettivi ripartono da 1.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; margin-left: 40px; font-style: italic;">b) Apertura dell’esercizio contabile (Contabilità generale)</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Quando si devono effettuare le prime scritture del nuovo esercizio contabile (es: 1 luglio), accedere nuovamente al programma “Apertura nuovo esercizio” per aprire i protocolli contabili:</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: center;"><img src="Images/Index_1069_04.png" alt="" style=" border:none; width:100%; max-width:413px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">NUMERO ESERCIZIO CONTABILE: Il campo contiene il numero dell'esercizio contabile da aprire: inserire l’anno nuovo (es: 2002). &#160;</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">DATA INIZIO ESERCIZIO: È la data di inizio dell'esercizio contabile da aprire. In automatico viene proposto il giorno successivo alla data di chiusura dell'esercizio precedente. Confermare la data che viene proposta accertandosi che corrisponda a quella di effettivo inizio.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">DATA FINE ESERCIZIO: È la data di fine dell'esercizio contabile da aprire. Viene proposta in automatico la data corrispondente a 12 mesi dopo la data di inizio. Se non esistono controindicazioni particolari (esercizi di durata superiore o inferiore al 12 mesi), confermare la data proposta.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span style="font-family: Verdana, sans-serif;">PERCENTUALE PRO-RATA: È la percentuale di pro-rata da applicare al totale Iva acquisti.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Poiché l’esercizio fiscale (Iva) era già stato aperto precedentemente, il programma passa direttamente alla richiesta di conferma senza fermarsi sugli ulteriori campi. Dopo l’apertura, la numerazione della prima nota contabile riparte da 1, mentre i protocolli Iva vendite, Iva acquisti ed Iva corrispettivi proseguono.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold; text-decoration: none;"><a name="Scritture di rettifica" style="text-decoration: none;">Scritture di rettifica</a></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Esiste spesso l’abitudine di effettuare la registrazione delle scritture di rettifica dell’esercizio precedente con data 31 dicembre, anche se si riferiscono a operazioni che si sono concretizzate dopo tale data. È evidente a chiunque che, ad esempio, l’importo degli interessi attivi o passivi bancari, dei ratei e dei risconti, degli ammortamenti e degli accantonamenti diventano noti in data successiva al 31 dicembre. A norma di Codice Civile, tali scritture dovrebbero essere effettuate con data di registrazione contestuale all’effettivo momento delle rilevazione e non con data precedente. Ovviamente gli importi di queste operazioni dovrebbero tuttavia aggregarsi a quelli dell’esercizio cui si riferiscono.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">OS1 gestisce questa possibilità. Occorre creare una apposita causale contabile, da utilizzare esclusivamente per questo tipo di operazioni, caratterizzata dalla presenza della spunta nel campo “Movimento relativo esercizio precedente”.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: center;"><img src="Images/Index_1069_05.png" alt="" style=" border:none; width:100%; max-width:737px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Naturalmente questa causale è valida solo per le operazioni di contabilità generale, poiché nessun documento valido ai fini Iva può essere registrato nell’esercizio corrente con competenza dell'esercizio precedente.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Tutte le operazioni contraddistinte da questa causale vengono stampate sul giornale dell’anno in corso, sulla base della data di registrazione. Viceversa, aggiornano i valori progressivi dell’anno precedente.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">In Analisi sottoconti a video queste operazioni non vengono visualizzate fra le operazioni del corrente esercizio, &#160;ma appariranno come ultime (a causa della data successiva al 31 dicembre o, per chi ha l’esercizio contabile diverso, alla data di chiusura) fra le operazioni dell’esercizio precedente.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">In Analisi sottoconti a video e in Stampa situazione sottoconti esiste una apposita richiesta nella maschera di input: il valore del flag “scritture di rettifica” determina la stampa o l’esclusione di queste operazioni dal tabulato e dal relativi totali, come previsto dall’help a video.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Analogo trattamento prevedono tutti i programmi di elaborazione e stampa dei bilanci non riclassificati e riclassificati, con le apposite richieste “mov. rettifica” e “fino a data” che consentono di ottenere bilanci secondo la duplice funzione di totalizzazione delle registrazioni effettuate entro due date, oppure bilancio secondo la competenza.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold; text-decoration: none;"><a name="Adempimenti annuali IVA" style="text-decoration: none;">Adempimenti annuali IVA</a></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Durante il corso dell’anno fiscale, la registrazione di fatture e note di credito determina il duplice aggiornamento dei “progressivi Iva per aliquota” e dei “progressivi Iva” di clienti e fornitori.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Ciò consente di ottenere, dopo la registrazione delle ultime fatture e la stampa definitiva dei registri Iva e delle liquidazioni periodiche, alcuni prospetti riepilogativi utili per il controllo delle quadrature Iva e per la compilazione della dichiarazione annuale Iva.</p>
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;"><a href="../bcge/bcge0030d.htm">Stampa dati Iva generali</a></p>
+</li>
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;"><a href="../bcge/bcge0031d.htm" title="Stampa dati Iva clienti e fornitori" onmouseover="if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape')) ehlp_showtip(this,event,'Stampa dati Iva clienti e fornitori');" onmouseout="if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape')) ehlp_hidetip();">Stampa dati Iva clienti e fornitori</a></p>
+</li>
+</ul>
+</li>
+</ol>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: bold; text-decoration: none;"><a name="Chiusura_Riapertura" style="text-decoration: none;">Chiusure / riaperture d’esercizio</a></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">Dopo aver completato tutte le scritture di rettifica dell’esercizio trascorso, è possibile procedere alla chiusura dell’esercizio con la seguente sequenza</p>
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; margin-left: 0px;"><a href="../bcge/bcge0026d.htm">Controllo saldi sottoconti</a></p>
+</li>
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; margin-left: 0px;"><a href="../bcge/bcge0027d.htm">Elaborazione chiusura</a></p>
+</li>
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; margin-left: 0px;"><a href="../bcge/bcge0028d_A.htm">Elaborazione apertura</a></p>
+</li>
+</ul>
+</li>
+</ol>
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+ if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape'))
+  document.write("<div id='tooltip' class='WebHelpPopupMenu'></div>");
+//]]>
+</script><script type="text/javascript" language="JavaScript">
+//<![CDATA[
+ if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape'))
+  document.write("<div id='tooltip' class='WebHelpPopupMenu'></div>");
+//]]>
+</script>
+</body>
+</html>

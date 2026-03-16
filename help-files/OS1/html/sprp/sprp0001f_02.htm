@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 11, 2016 9:59:24 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Schedulazione attività - Schedulazione</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.9.1.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Schedulazione > Schedulazione" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-weight: bold; font-size: 12pt;">Schedulazione</p>
+<p><img src="images/sprp0001f_2_01.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-bottom:5px; margin-right:5px; width:100%; max-width:78px;" align="left" border="0" />La fase di schedulazione ha lo scopo di allocare 
+ le attività sulle risorse; vengono analizzate le attività nella sequenza 
+ definita assegnando la risorsa secondo l’indicazione stabilita a livello 
+ di ciclo:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt;">Risorsa 
+		 preferenziale: vengono utilizzate le risorse associate al gruppo 
+		 fasi appartenenti all’unità produttiva; se è presente un set di 
+		 risorse le risorse utilizzate sono quelle presenti nel set.</p></li>
+		<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt;">Risorsa 
+		 obbligatoria: se sono presenti più unità produttive viene utilizzato 
+		 il set di risorse abbinando una risorsa per ciascuna unità produttiva, 
+		 altrimenti viene utilizzata la risorsa indicata sul ciclo.</p></li>
+	</ul></li>
+</ol>
+<p>I vincoli considerati nella schedulazione sono:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ol style="list-style: disc;">
+		<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+			<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt;">Vincoli 
+			 di fase (la sequenza delle fasi deve essere rispettata)</p></li>
+			<li class="p"><p style="margin-top: 0pt; margin-bottom: 0pt;">Vincoli 
+			 di calendario (non è possibile allocare oltre il tempo a disposizione 
+			 della risorsa).</p></li>
+		</ul></li>
+	</ol></li>
+</ol>
+<p>Vengono proposti i parametri di elaborazione in base alle opzioni presenti 
+ sull'<a href="../sprb/sprb0115f.htm">unità produttiva</a>. La schedulazione 
+ viene effettuata al più presto a partire dalla data di inizio schedulazione 
+ (viene proposta la data di sistema); vengono trattate le attività fino 
+ ad una determinata data di inizio lavorazione (derivante dagli ODL); si 
+ può comunque modificare la durata dell’orizzonte di schedulazione e dell’orizzonte 
+ successivo.</p>
+<p style="text-align: center;"><img src="images/sprp0001f_2_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>Sono previsti 4 tipi di elaborazione:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0pt; 
+						 margin-bottom: 0pt;">Elaborazione per manutenzione: 
+		 vengono elaborate tutte le attività già schedulate per presentarle 
+		 all’interno dei Gantt.</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0pt; 
+						 margin-bottom: 0pt;">Elaborazione nuove attività: 
+		 le attività già presenti nell’orizzonte di schedulazione vengono 
+		 lette così come sono, le attività non ancora schedulate e selezionate 
+		 vanno ad accodarsi alla situazione esistente.</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0pt; 
+						 margin-bottom: 0pt;">Rielaborazione con vincoli: 
+		 le attività vincolate già presenti nell’orizzonte di schedulazione 
+		 vengono lette così come sono, le attività già schedulate ma non 
+		 vincolate e le attività non ancora schedulate e selezionate vengono 
+		 rielaborate.</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-right: 0in; margin-top: 0pt; 
+						 margin-bottom: 0pt;">Rielaborazione totale: vengono 
+		 rielaborate tutte le attività già schedulate e le attività non 
+		 ancora schedulate selezionate.</p></li>
+	</ul></li>
+</ol>
+<p>Tramite la casella &quot;Includi fasi successive&quot; consente di trattare 
+ un ODP nella sua interezza; le attività che sono oltre l’orizzonte di 
+ schedulazione vengono comunque presentate nell’orizzonte successivo; le 
+ fasi esterne sono considerate solo ai fini della visualizzazione nel Gantt 
+ ODP e sono trattate a capacità infinita (viene considerato il lead time 
+ di fase in giorni).</p>
+<p>Tramite la casella &quot;Includi ODL provvisori&quot; è possibile trattare, 
+ anche gli ODL provvisori; se inclusi e schedulati, al momento del salvataggio, 
+ l’ODP e gli ODL saranno resi definitivi (vengono pianificati).</p>
+<p>Se attiva la gestione degli ordini di previsione sarà presente anche 
+ la casella &quot;Includi ordini aperti&quot; sarà possibile includere 
+ anche gli ODL derivanti da questi ordini. <span style="font-weight: bold;">Se 
+ al termine dell'elaborazione saranno presenti attività derivanti da ordini 
+ di previsione nell'orizzonte di schedulazione la schedulazione non potrà 
+ essere salvata.</span></p>
+<p><span style="text-transform: uppercase;">è</span> possibile ripianificare 
+ automaticamente le attività che non sono avviate (per le quali quindi 
+ non è stato registrato nessun versamento) e la cui data di inizio è ormai 
+ nel passato; la selezione di tali attività è basata sul numero di giorni 
+ indicati nel parametro “Elabora attività in ritardo di … giorni non ancora 
+ avviate”; tali attività vengono selezionate automaticamente e presentate 
+ in cima nella lista delle attività da schedulare.</p>
+<p>Ad eccezione del tipo elaborazione per manutenzione, premendo il pulsante 
+ Seleziona vengono elaborate le attività ed è prevista una fase interattiva.</p>
+<p style="text-align: center;"><img src="images/sprp0001f_2_03.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>In questa fase è possibile eseguire una ulteriore selezione interattiva, 
+ tramite il doppio clic del mouse oppure utilizzando il menù contestuale 
+ al tasto destro del mouse.</p>
+<table style="vertical-align: top;" cellspacing="0">
+	<col width="1295" />
+	<tr style="vertical-align: top;">
+		<td style="padding-right: 10px; padding-left: 10px;" width="1295"><p><img src="images/sprp0001f_2_04.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:73px;" align="left" border="0" /><img src="images/sprp0001f_2_05.png" alt="" style=" border:none; margin-top:0px; margin-bottom:5px; margin-left:5px; margin-right:0px; width:100%; max-width:878px;" align="right" border="0" />Tramite 
+		 il pulsante Ordina è possibile modificare l'ordinamento delle 
+		 attività spostandole singolarmente tramite gli appositi tasti 
+		 di scorrimento oppure selezionando e trascinando le singole righe. 
+		 La pressione sul pulsante Salva determina la modifica effettiva 
+		 dell'ordinamento.</p>
+		<p>&#160;</p></td>
+	</tr>
+	<tr style="vertical-align: top;">
+		<td style="padding-right: 10px; padding-left: 10px;" width="1295"><p><img src="images/sprp0001f_2_06.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:73px;" align="left" border="0" /><img src="images/sprp0001f_2_07.png" alt="" style=" border:none; margin-top:0px; margin-bottom:5px; margin-left:5px; margin-right:0px; width:100%; max-width:672px;" align="right" border="0" />Tramite 
+		 il pulsante Simula è possibile aggiungere alla schedulazione prodotti 
+		 (e relative quantità) da inserire nella schedulazione; è possibile 
+		 inserire qualsiasi prodotto, o prodotto variante, associato ad 
+		 una scheda tecnica; se gestite le alternative sarà presente anche 
+		 il pulsante che ne permette la selezione; è richiesta inoltre 
+		 la data di inizio produzione e la quantità da produrre; sarà utilizzato 
+		 il ciclo di produzione per determinare le fasi da schedulare.</p>
+		<p style="font-weight: bold;">In presenza di dati simulati la schedulazione 
+		 non potrà essere salvata.</p>
+		<p>&#160;</p></td>
+	</tr>
+</table>
+<p>&#160;</p>
+<p>Terminata questa fase tramite il pulsante Elabora, se presente, altrimenti 
+ direttamente dalla pagina dei parametri, viene effettuata l'elaborazione 
+ della schedulazione che rielabora le attività in memoria, attivando gli 
+ altri pulsanti, sulla sinistra, e consentendo le successive operazioni 
+ di manutenzione, &#160;attraverso il <a href="sprp0001f_03.htm">gantt 
+ risorse</a>, visualizzazione, attraverso il <a href="sprp0001f_04.htm">Gantt 
+ ODP</a> e <a href="sprp0001f_05.htm">verifica</a>. Nella pagina risultati 
+ vengono visualizzate le informazioni sull'elaborazione compresi eventuali 
+ messaggi di errore.</p>
+<p style="text-align: center;"><img src="images/sprp0001f_2_08.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+</body>
+</html>

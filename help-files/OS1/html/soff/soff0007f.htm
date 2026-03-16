@@ -1,0 +1,321 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="06 3, 2014 12:22:07 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Esito richieste di offerta fornitori</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function ehlp_showtip(current,e,text)
+{
+  if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape'))
+  {
+    document.tooltip.document.write("<layer bgColor='yellow' style='border:1px solid black;font-size:12px;'>"+ text + "</layer>");
+    document.tooltip.document.close();
+    document.tooltip.left=e.pageX+5;
+    document.tooltip.top=e.pageY+5;
+    document.tooltip.visibility="show";
+  }
+}
+function ehlp_hidetip()
+{
+  document.tooltip.visibility="hidden";
+}
+//]]>
+</script>
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.5.3.2_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Ordini fornitori > Richieste di offerta" /><script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function ehlp_showtip(current,e,text)
+{
+  if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape'))
+  {
+    document.tooltip.document.write("<layer bgColor='yellow' style='border:1px solid black;font-size:12px;'>"+ text + "</layer>");
+    document.tooltip.document.close();
+    document.tooltip.left=e.pageX+5;
+    document.tooltip.top=e.pageY+5;
+    document.tooltip.visibility="show";
+  }
+}
+function ehlp_hidetip()
+{
+  document.tooltip.visibility="hidden";
+}
+//]]>
+</script>
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, sans-serif; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 12pt;">Esito richieste</p>
+<p style="font-size: 10pt;">La procedura consente di effettuare o modificare 
+ l'esito delle richieste di offerte, cioè di determinare lo stato delle 
+ singole righe dei documenti presenti; inoltre permette di generare gli 
+ ordini fornitori. Nel caso la generazione degli ordini avvenga da richieste 
+ di offerta derivanti da richieste di acquisto, su quest'ultime sarà aggiornato 
+ lo stato delle righe e, se gestita, anche la cronologia.</p>
+<p>La finestra principale si articola su due pagine: una per i parametri 
+ di selezione delle richieste di offerta e l'altra con il risultato dell'elaborazione, 
+ ovvero le righe delle richieste selezionate; da questa pagina sarà possibile 
+ assegnare gli stati di esito ed effettuare la generazione degli ordini 
+ fornitori, in questa sezione sarà possibile apportare anche delle modifiche 
+ relativamente alle condizioni della richiesta quali quantità, prezzi, 
+ sconti e consegna.</p>
+<p>&#160;</p>
+<p style="text-align: center;"><img src="Images/soff0007f_01.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">tipo 
+ documento di origine</span>: il campo determina il criterio di selezione 
+ principale relativo alla richieste di offerta; consente di selezionare 
+ le righe delle richieste in base al documento che le ha originate, è possibile 
+ scegliere fra ordini clienti, richieste di acquisto, riferimenti manuali 
+ e richieste inserite manualmente quindi senza documento di origine oppure 
+ tutte le tipologie. Nel caso si selezioni ordini clienti o richieste di 
+ acquisto sarà possibile specificare, nei riquadri sottostanti, ulteriori 
+ criteri di selezione relativi al documento di origine, come specificato 
+ di seguito.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">Se selezionato il 
+ documento di origine <span style="font-weight: bold;">O</span><span style="font-weight: bold;">rdini 
+ clienti</span>:</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ANNO: indica l'anno 
+ degli ordini a cui si vuole limitare la selezione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE: eventuale 
+ codice della Causale ordini a cui si vuole limitare la selezione. Sul 
+ campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NUMERO: indica il 
+ numero dell'ordine a cui si vuole limitare la selezione, in combinazione 
+ con anno e/o causale.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale 
+ data dell'ordine da cui deve iniziare l’analisi dei documenti relativamente 
+ ai precedenti parametri di selezione. Confermando a vuoto, l’analisi inizia 
+ con il primo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale 
+ data dell'ordine con cui si desidera terminare l’analisi dei documenti 
+ relativamente ai precedenti parametri di selezione. Confermando a vuoto, 
+ l’analisi si conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CLIENTE: eventuale 
+ codice del cliente intestatario dell'ordine, a cui si vuole limitare la 
+ selezione.&#160;Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">Se selezionato il 
+ documento di origine <span style="font-weight: bold;">R</span><span style="font-weight: bold;">ichieste 
+ di acquisto</span>:</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ANNO: indica l'anno 
+ delle richieste di acquisto a cui si vuole limitare la selezione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE: eventuale 
+ codice della Causale richiesta di acquisto a cui si vuole limitare la 
+ selezione. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NUMERO: indica il 
+ numero della richieste di acquisto a cui si vuole limitare la selezione, 
+ in combinazione con anno e/o causale.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale 
+ data delle richieste di acquisto da cui deve iniziare l’analisi dei documenti 
+ relativamente ai precedenti parametri di selezione. Confermando a vuoto, 
+ l’analisi inizia con il primo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale 
+ data delle richieste di acquisto con cui si desidera terminare l’analisi 
+ dei documenti relativamente ai precedenti parametri di selezione. Confermando 
+ a vuoto, l’analisi si conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">Se selezionato il 
+ documento di origine <span style="font-weight: bold;">Da riferimenti manuali</span>:</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">RIFER. DOCUMENTO: 
+ è possibile indicare il riferimento specifico ad un documento.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">I restanti parametri 
+ sono relativi alla selezione delle righe di richiesta di offerta:</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FORNITORE: è il codice 
+ del fornitore da utilizzare per la selezione delle richieste di offerta. 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ANNO: indica l'anno 
+ delle richieste di offerta a cui si vuole limitare la selezione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE: eventuale 
+ codice della Causale richiesta di offerta a cui si vuole limitare la selezione. 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NUMERO: indica il 
+ numero della richieste di offerta a cui si vuole limitare la selezione, 
+ in combinazione con anno e/o causale.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale 
+ data delle richieste di offerta da cui deve iniziare l’analisi dei documenti 
+ relativamente ai precedenti parametri di selezione. Confermando a vuoto, 
+ l’analisi inizia con il primo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale 
+ data delle richieste di offerta con cui si desidera terminare l’analisi 
+ dei documenti relativamente ai precedenti parametri di selezione. Confermando 
+ a vuoto, l’analisi si conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA CONSEGNA: 
+ eventuale data di consegna delle richieste di offerta da cui deve iniziare 
+ l’analisi dei documenti relativamente ai precedenti parametri di selezione. 
+ Confermando a vuoto, l’analisi inizia con il primo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA CONSEGNA: eventuale 
+ data di consegna delle richieste di offerta con cui si desidera terminare 
+ l’analisi dei documenti relativamente ai precedenti parametri di selezione. 
+ Confermando a vuoto, l’analisi si conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PRODOTTO: eventuale 
+ codice del prodotto, a cui si vuole limitare la selezione.&#160;Sul campo 
+ sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO: eventuale 
+ codice del magazzino, a cui si vuole limitare la selezione.&#160;Sul campo 
+ sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; font-family: Verdana, sans-serif;">STATO 
+ ESITO RIGHE: definisce quali tipologie di righe, si desidera elaborare: 
+ tutti, in valutazione, accettate dal fornitore, approvate, respinte, respinte 
+ dal fornitore.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE ORDINE FORNITORE: 
+ codice della causale con cui saranno generati gli ordini, viene proposta 
+ quella definita in configurazione. Se viene lasciata vuota sarà assegnata 
+ quella indicata sull'anagrafica del fornitore. Sul campo sono attive le 
+ funzioni di ricerca (F9).</p>
+<p>&#160;</p>
+<p>La pressione sul pulsante Esegui determina l'avvio dell'elaborazione; 
+ se saranno trovati documenti validi verranno riportati i dati derivanti 
+ dalle righe di richiesta di offerta e visualizzati nella pagina risultati, 
+ da cui sarà possibile effettuare l'esito, la manutenzione e la generazione 
+ degli ordini fornitori.</p>
+<p>Questa sezione appare divisa in tre parti: la parte superiore che contiene 
+ i documenti di origine delle richieste di offerta; in base alla selezione 
+ potranno trovarvisi ordini clienti, richieste di acquisto, riferimenti 
+ inseriti manualmente in fase di generazione e dei quali sarà visualizzato 
+ il riferimento documento oppure una dicitura &quot;Nessun documento di 
+ origine&quot; o tutte le tre tipologia; in corrispondenza di un documento 
+ di origine, o &quot;Nessuno&quot;, nella griglia centrale saranno visualizzati 
+ i prodotti relativi e nella parte inferiore le righe delle richieste di 
+ acquisto collegate mostrate sia in griglia che nel pannello di modifica 
+ dei dati che sarà abilitato solo per righe <span style="font-weight: bold;">Approvate</span> 
+ o <span style="font-weight: bold;">Accettate dal fornitore</span>, solo 
+ per alcuni campi, per le righe <span style="font-weight: bold;">Annullate</span> 
+ o <span style="font-weight: bold;">Respinte dal fornitore</span>.</p>
+<p style="text-align: center;"><img src="Images/soff0007f_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p><img src="Images/soff0007f_03.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:221px;" align="right" border="0" />In questa ultima sezione potranno trovarsi più richieste 
+ relative allo stesso prodotto/documento di origine ed è da qui che ne 
+ sarà determinato l'esito; tramite il clic destro del mouse si può richiamare 
+ il menù mostrato a lato selezionando una voce, o utilizzando i relativi 
+ tasti funzione, sarà determinato l'esito del rigo su cui si è posizionati. 
+ Se il rigo viene <span style="font-weight: bold;">Approvato</span>, le 
+ altre righe presenti, appartenenti ad altri fornitori, saranno <span style="font-weight: bold;">Respinte</span> 
+ in automatico e nelle note del rigo sarà inserita la motivazione, cioè 
+ l'approvazione dell'altro rigo. In ogni riga l'esito viene mostrato con 
+ un colore diverso, in più le righe modificate rispetto all'inizio dell'elaborazione 
+ appariranno su sfondo giallo chiaro e le righe approvate su sfondo giallo. 
+ Nel caso un rigo venga <span style="font-weight: bold;">Respinto</span> 
+ manualmente o <span style="font-weight: bold;">Respinto dal fornitore</span>, 
+ si aprirà in automatico <img src="Images/soff0007f_04.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:362px;" align="left" border="0" />una 
+ finestra per selezionare la causa che ha portato a tale decisione. La 
+ finestra mostrata a lato riporterà l'elenco di tutte le cause presenti 
+ nell'apposita tabella <a href="soff0103f.htm">Cause annullamento/respinta 
+ richieste</a> ed una volta selezionata la causa il testo presente nel 
+ campo memo della causa sarà riportato nelle note di esito del rigo oggetto 
+ dell'esito.</p>
+<p>Al momento dell'approvazione sono attivi dei controlli non bloccanti 
+ che avvisano l'operatore se sta approvando un rigo ed esistono altre righe 
+ ancora da valutare, oppure con prezzo o data consegna più favorevoli.</p>
+<p>Inoltre se saranno approvate righe relative a prodotti o fornitori provvisori 
+ sarà visualizzato un avviso che invita ad effettuare la definizione per 
+ poter effettuare la generazione degli ordini fornitori; questo non compromette 
+ il salvataggio dei dati, ma comporta l'utilizzo dell'apposita procedura 
+ di definizione per poi accedere nuovamente all'esito per effettuare la 
+ generazione degli ordini fornitori.</p>
+<p>Le righe <span style="font-weight: bold;">Approvate</span> o <span style="font-weight: bold;">Accettate 
+ dal fornitore</span> attivano il pannello di input che consente la modifica 
+ della quantità, del prezzo, degli sconti e della data di consegna. Se 
+ attiva la gestione del dettaglio quantità è presente il bottone dettaglio, 
+ a destra del campo, tramite il quale sarà visualizzata la relativa finestra 
+ di <a href="../bbas/bbas0904f_ord.htm" title="Dettaglio lotti su ordini" onmouseover="if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape')) ehlp_showtip(this,event,'Dettaglio lotti su ordini');" onmouseout="if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape')) ehlp_hidetip();">dettaglio 
+ quantità</a>; l'attivazione della finestra avviene comunque in automatico 
+ al momento dell'accesso al campo quantità; se in questa fase non si inserisce 
+ un prezzo sulle richieste presenti a prezzo zero non sarà possibile generare 
+ gli ordini a fornitore.</p>
+<p>Al termine delle modifiche, con la pressione sul bottone Salva della 
+ toolbar o del tasto F10, verrà richiesto se effettuare il salvataggio 
+ dei dati relativi all'esito delle richieste di offerta e se presenti righe 
+ <span style="font-weight: bold;">Approvate</span> relative a fornitori 
+ e prodotti effettivi, non provvisori, sarà mostrata la finestra per la 
+ generazione degli ordini.</p>
+<p style="text-align: center;"><img src="Images/soff0007f_05.png" alt="" style=" border:none; width:100%; max-width:243px;" border="0" /></p>
+<p>La finestra consente di selezionare un'opzione per effettuare la generazione 
+ diretta degli ordini oppure accedere ad una fase di anteprima da cui controllare 
+ quali ordini saranno generati e la loro struttura definitiva.</p>
+<p style="text-align: center;"><img src="Images/soff0007f_06.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p>La sezione mostra quali ordini saranno generati indicando che la numerazione 
+ potrebbe non essere quella definitiva in caso altri utenti stiano contemporaneamente 
+ inserendo altri ordini. La sezione è suddivisa in tre parti: la griglia 
+ in alto che contiene i dati di testa, la griglia centrale che contiene 
+ le righe e, se attiva la gestione, la griglia inferiore che mostra i dettagli 
+ delle righe.</p>
+<p>Sia dalla finestra di generazione precedente che da questa sezione è 
+ possibile annullare la sola generazione degli ordini fornitori tramite 
+ il pulsante Annulla, per la finestra precedente, o da questa sezione il 
+ pulsante Annulla &#160;della toolbar o l'utilizzo del tasto ESC; la generazione 
+ sarà di nuovo possibile semplicemente riselezionando i documenti per l'esito, 
+ senza apportare alcuna modifica in quanto l'esito è già stato effettuato.</p>
+<p><img src="Images/soff0007f_07.png" alt="" style=" border:none; margin-top:0px; margin-bottom:5px; margin-left:5px; margin-right:0px; width:100%; max-width:296px;" align="right" border="0" />La pressione del pulsante Esegui della finestra precedente 
+ con l'opzione generazione attiva o del pulsante Genera, o del tasto F10 
+ da questa pagina consentirà l'effettiva generazione degli ordini fornitori; 
+ al termine della generazione comparirà una finestra, come quella mostrata 
+ a lato, dove saranno indicati gli estremi degli ordini fornitori generati.</p>
+<p>Successivamente sarà richiesto se si desidera effettuare la stampa degli 
+ ordini fornitori generati.</p>
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+ if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape'))
+  document.write("<div id='tooltip' class='WebHelpPopupMenu'></div>");
+//]]>
+</script><script type="text/javascript" language="JavaScript">
+//<![CDATA[
+ if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == 'Netscape'))
+  document.write("<div id='tooltip' class='WebHelpPopupMenu'></div>");
+//]]>
+</script>
+</body>
+</html>

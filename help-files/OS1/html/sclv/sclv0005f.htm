@@ -1,0 +1,291 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 10, 2016 4:53:08 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Pianificazione lavorazioni</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.6.1.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Conto lavoro > Ordini terzisti" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; 
+	 font-weight: bold;">Pianificazione lavorazioni</p>
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 text-align: justify; font-weight: normal; font-size: 10pt;">La procedura 
+ consente, sulla base dei cicli di lavorazione e delle fasi inserite sulle 
+ distinte base, di generare tutti gli ordini da produrre esternamente; 
+ se per ciascuna fase del ciclo di produzione è definito un fornitore preferenziale 
+ è possibile generare immediatamente l’ordine, altrimenti attraverso l’apposita 
+ funzione di assegnazione fornitore è possibile scegliere fra i terzisti 
+ l’azienda che provvederà a svolgere la lavorazione c/terzi e generare 
+ l’ordine al fornitore.</p>
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 text-align: justify; font-weight: normal; font-size: 10pt;">La procedura 
+ di pianificazione contempla una serie di metodi di selezione relativi 
+ alla generazione dei dati che porteranno ed una fase di assegnazione a 
+ terzisti ed eventualmente alla generazione diretta degli ordini terzisti 
+ (di seguito OT). La procedura consente di generare gli OT partendo dagli 
+ ordini clienti, dalle disposizioni di produzione oppure manualmente. Ogni 
+ opzione di generazione è utilizzabile solo in presenza del relativo modulo.</p>
+<p>La richiesta parametri si diversifica a seconda che si utilizzi la <a 
+	 href="#Generazione pianificazione da ordini clienti">generazione da 
+ ordini clienti</a>, oppure la <a href="#Generazione pianificazione da disposizioni">generazione 
+ da disposizioni</a>, oppure la <a href="#Generazione pianificazione manuale">generazione 
+ manuale</a>; il campo tipo elaborazione determina il tipo di selezione 
+ dei dati relativi alla preparazione; è possibile utilizzare la procedura 
+ anche in un secondo momento, dopo la generazione della pianificazione, 
+ per effettuare direttamente l'<a href="#Assegnazione fornitore">assegnazione 
+ a fornitori</a>. Una volta ultimata la selezione si passa alla fase di 
+ <a href="#Preparazione">preparazione</a> ed infine alla fase di <a href="#Assegnazione definitiva e salvataggio">salvataggio 
+ della preparazione</a> da cui è possibile effettuare l'assegnazione a 
+ fornitori e la generazione degli OT; la data dell'operazione viene utilizzata 
+ per la registrazione della pianificazione e come data ordine in caso di 
+ generazione degli OT.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;"><a name="Generazione pianificazione da ordini clienti">Generazione 
+ da ordini clienti</a></p>
+<p style="text-align: center;"><img src="images/sclv0005f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CLIENTE: eventuale 
+ codice del cliente, presente in anagrafica clienti, da cui si vuole iniziare 
+ la selezione. Confermando a vuoto, la selezione inizia dal primo cliente 
+ valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CLIENTE: eventuale 
+ codice del cliente, presente in anagrafica clienti, con cui si vuole terminare 
+ la selezione. Confermando a vuoto, la selezione termina con l’ultimo cliente 
+ valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale 
+ data da cui deve iniziare l’analisi dei documenti relativamente ai precedenti 
+ parametri di selezione. Confermando a vuoto, l’analisi inizia con il primo 
+ documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale 
+ data con cui si desidera terminare l’analisi dei documenti relativamente 
+ ai precedenti parametri di selezione. Confermando a vuoto, l’analisi si 
+ conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">RIFERIMENTO ORDINE 
+ (ANNO): indica l'anno degli ordini a cui si vuole limitare la selezione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">RIFERIMENTO ORDINE 
+ (CAUSALE): eventuale codice della Causale ordini a cui si vuole limitare 
+ la selezione. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">RIFERIMENTO ORDINE 
+ (NUMERO): indica il numero dell'ordine a cui si vuole limitare la selezione, 
+ in combinazione con anno e/o causale.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">Se attiva la gestione 
+ progetti è possibile specificare anche il progetto da analizzare.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;"><a name="Generazione pianificazione da disposizioni">Generazione 
+ da disposizioni produzione</a></p>
+<p style="text-align: center;"><img src="images/sclv0005f_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DISPOSIZIONE: tre 
+ campi per contenere rispettivamente anno, causale e numero della disposizione 
+ da cui si vuole iniziare la selezione. Confermando a vuoto, la selezione 
+ inizia dalla prima disposizione compatibile con i successivi parametri.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DISPOSIZIONE: tre 
+ campi per contenere rispettivamente anno, causale e numero della disposizione 
+ con cui si vuole concludere la selezione. Confermando a vuoto, la selezione 
+ termina con l’ultima disposizione compatibile con i successivi parametri.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: data disposizione 
+ da cui si vuole iniziare la selezione. Confermando a vuoto, la selezione 
+ inizia dalla prima data valida.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: data disposizione 
+ con cui si vuole concludere la selezione. Confermando a vuoto, la selezione 
+ termina con l'ultima data valida.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CATEGORIA MERCEOLOGICA: 
+ eventuale codice della categoria merceologica, riferita ai prodotti, per 
+ cui effettuare la selezione.&#160;Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CATEGORIA DI VENDITA: 
+ eventuale codice della categoria di vendita, riferita ai prodotti, per 
+ cui effettuare la selezione.&#160;Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CODICE INVENTARIO: 
+ eventuale codice inventario, riferito ai prodotti, per cui effettuare 
+ la selezione.&#160;Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">GRUPPO VENDITA: eventuale 
+ codice del gruppo vendita, riferito ai prodotti, per cui effettuare la 
+ selezione.&#160;Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">Se attiva la gestione 
+ progetti è possibile specificare anche il progetto da analizzare.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;"><a name="Generazione pianificazione manuale">Generazione 
+ manuale</a></p>
+<p style="text-align: center;"><img src="images/sclv0005f_04.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p>Questo tipo di selezione utilizza dei dati inseriti manualmente in fase 
+ di preparazione e non contempla nessun tipo di selezione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p style="font-weight: bold;"><a name="Assegnazione fornitore">Assegnazione 
+ fornitore</a></p>
+<p>Questa sezione consente di specificare criteri di ricerca relativi a 
+ preparazioni già effettuate per le quali non sia stata ancora effettuata 
+ la fase di assegnazione a fornitore. Di conseguenza da questa sezione 
+ si passerà direttamente all'assegnazione ed eventuale generazione degli 
+ OT. Se presente il modulo di produzione saranno disponibili come limiti 
+ di selezione anche da data consegna ed a data consegna, per filtrare ulteriormente 
+ le richieste in relazione alle consegne di produzione.</p>
+<p style="text-align: center;"><img src="images/sclv0005f_05.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale 
+ data da cui deve iniziare l’analisi delle preparazioni da selezionare. 
+ Confermando a vuoto, l’analisi inizia con il primo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale 
+ data con cui si desidera terminare l'analisi delle preparazioni da selezionare. 
+ Confermando a vuoto, l’analisi si conclude con l'ultima preparazione valida.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PRODOTTO: codice del 
+ prodotto per cui si vuole effettuare l'assegnazione. Sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FASE: codice della 
+ fase di lavorazione per cui si vuole effettuare l'assegnazione. Sul campo 
+ sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">VISUALIZZA RICHIESTE 
+ ASSEGNATE: consente di vedere solo gli ordini ancora da assegnare (casella 
+ vuota) oppure anche le richieste già assegnate (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">Se attiva la gestione 
+ progetti è possibile specificare anche il progetto da analizzare.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p style="font-weight: bold;"><a name="Preparazione" id="Preparazione">Preparazione</a></p>
+<p style="font-weight: normal;">Terminata la fase di selezione, si accede 
+ alla pagina relativa alla preparazione, dove saranno elencati i prodotti 
+ selezionati dalla sezione precedente e/o dove si potranno inserire prodotti 
+ in modo manuale. Nel caso si provenga dall'elaborazioni di ordini o di 
+ disposizioni saranno visualizzati i riferimenti al documento e sarà possibile 
+ modificare solo i campi magazzino e consegna.</p>
+<p style="text-align: center;"><img src="images/sclv0005f_06.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PRODOTTO: campo alfanumerico 
+ per inserire il codice dell’articolo che si intende preparare, il prodotto 
+ deve avere una distinta base ed un ciclo di lavorazione. Sul campo sono 
+ attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">QUANTITÀ: campo numerico 
+ per inserire la quantità da preparare per l'articolo attivo.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CONSEGNA: campo data 
+ per l'inserimento della data effettiva di consegna.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO: codice 
+ del magazzino aziendale da cui deve essere ordinata la merce. Sul campo 
+ sono attive le funzioni di ricerca (F9).</p>
+<p style="margin-left: 0in;">&#160;</p>
+<p style="margin-left: 0in;"><img src="images/b_pialav.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:20px;" align="left" border="0" />La pressione 
+ sul bottone Elabora determina l'avvio dell'elaborazione e la determinazione 
+ dei cicli di lavorazione con eventuale assegnazione diretta del terzista; 
+ il risultato compare nella pagina relativa all'assegnazione.</p>
+<p style="margin-left: 0in;">&#160;</p>
+<p style="font-weight: bold;"><a name="Assegnazione definitiva e salvataggio">Assegnazione 
+ definitiva e salvataggio</a></p>
+<p style="text-align: center;"><img src="images/sclv0005f_07.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="font-weight: normal;">In questa pagina vengono visualizzate le 
+ fasi di lavorazione elaborate per i prodotti indicati in preparazione; 
+ dove possibile viene effettuata l'assegnazione al fornitore preferenziale 
+ della fase di lavorazione. Sopra le colonne sono presenti delle caselle 
+ che consentono di filtrare la visualizzazione in relazione ai valori delle 
+ singole colonne: ad esempio cliccando sulla colonna prodotto, se presenti 
+ più codici, selezionandone uno saranno visualizzate solo le righe dove 
+ compare il prodotto selezionato; le caselle di filtro sono combinabili, 
+ ad esempio seleziono un prodotto ed una fase.</p>
+<p style="font-weight: normal;"><img src="images/sclv0005f_12.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:616px;" align="right" border="0" />In questa fase è possibile 
+ anche modificare l'unità di misura e la quantità, se il prodotto ha più 
+ unità di misura, oppure la data di consegna; cliccando sull'apposita colonna 
+ in corrispondenza del valore da modificare si aprirà un pannello con i 
+ dati da modificare.</p>
+<p style="font-weight: normal;"><img src="images/b_modrich.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:20px;" align="left" border="0" />Il pulsante mostrato 
+ a lato consente di accedere ad una specifica finestra che permette la 
+ modifica dei campi sopra elencati in modalità classica, di conseguenza 
+ se si devono effettuare variazioni su più righe risulta più comoda. Le 
+ righe vengono mostrate, come nella finestra principale, in blu se sono 
+ state modificate manualmente, evidenziate se risultano assegnate a fornitore, 
+ in rosso se hanno già generato ordine terzista; queste ultime non possono 
+ essere modificate o selezionate in alcun modo. Sul campo unità di misura, 
+ sia della finestra di modifica, che della finestra principale, in caso 
+ di utilizzo di una unità di misura diversa dalla primaria, è attivo il 
+ tasto funzione F11 con cui si può accedere alla finestra relativa al <a 
+	 href="../bbas/DlgFattConv.htm">fattore di conversione</a>. La modifica 
+ dell'unità di misura determina l'immediato ricalcolo della quantità utilizzando 
+ il fattore di conversione inserito, o quello del prodotto.</p>
+<p style="font-weight: normal;">&#160;</p>
+<p style="font-weight: normal;"><img src="images/sclv0005f_10.gif" alt="" style=" border:none; margin-top:0px; margin-left:0px; margin-right:5px; margin-bottom:5px; width:100%; max-width:185px;" align="left" border="0" />Per effettuare 
+ l'associazione è sufficiente fare doppio clic sul fornitore, in basso, 
+ dopo avere selezionato la fase desiderata. Sulla griglia principale è 
+ attivo il menù, richiamabile col tasto destro del mouse, riprodotto a 
+ lato, dal quale è possibile togliere l'assegnazione alla singola fase 
+ (tasto DEL), togliere l'assegnazione a tutte le fasi oppure eliminare 
+ direttamente una fase di lavorazione, oppure suddividere la richiesta 
+ fra più fornitori quando esistono più fornitori disponibili per la fase; 
+ se presente la produzione ed abilitato il flag &#160;&quot;Aggiorna componenti 
+ da ordini terzisti&quot; non sarà possibile effettuare la suddivisione 
+ della richiesta. Selezionando la voce dal menù o premendo F11 sul rigo 
+ viene attivata la seguente finestra:</p>
+<p style="text-align: center;"><img src="images/sclv0005f_11.png" alt="" style=" border:none; width:100%; max-width:645px;" border="0" /></p>
+<p style="font-weight: normal;">La finestra consente di inserire a quantità 
+ necessaria per ogni fornitore disponibile ed eventualmente assegnare una 
+ parte a &quot;Nessun fornitore&quot;; sul campo è disponibile il tasto 
+ F11 che porta automaticamente la quantità rimasta da assegnare; premendo 
+ Esegui si salva la selezione.</p>
+<p style="font-weight: normal;">La pressione sul tasto Salva sulla toolbar 
+ determinerà il salvataggio, previa richiesta di conferma, delle fasi di 
+ lavorazione, assegnate e non, presenti. Nel caso sia stata effettuata 
+ anche una <img src="images/sclv0005f_08.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:543px;" align="left" border="0" />sola assegnazione 
+ viene richiesto se si desidera generare gli ordini fornitori e nel caso 
+ affermativo compare la finestra mostrata a lato. In questa finestra è 
+ necessario specificare la causale ordine da utilizzare per la generazione 
+ degli OT<img src="images/sclv0005f_09.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:294px;" align="right" border="0" /> ed eventualmente 
+ un codice pagamento da applicare a tutti gli ordini, altrimenti sarà preso 
+ il pagamento specificato sul fornitore. Al termine della generazione degli 
+ ordini sarà visualizzato un messaggio dove sono riportati tutti gli ordini 
+ generati e sarà richiesto se si vuole effettuarne la stampa.</p>
+<p style="font-weight: normal;">&#160;</p>
+</body>
+</html>

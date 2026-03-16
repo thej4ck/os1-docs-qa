@@ -1,0 +1,342 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 10, 2016 9:36:45 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Causali fatture clienti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.19.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > Tabelle" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; 
+	 font-weight: bold;"><strong><span style="font-weight: bold;">Causali 
+ fatture</span></strong></p>
+<p>Le causali fatture vengono utilizzate al momento dell’emissione di una 
+ fattura o di una nota di accredito e determinano il tipo di documento 
+ da emettere. Le informazioni presenti in una causale di fatturazione consentono 
+ di gestire correttamente l’imputazione in contabilità, l’eventuale attivazione 
+ del magazzino in caso di fattura accompagnatoria, ecc.</p>
+<p>La finestra video di manutenzione Causali di fatturazione <span style="font-family: Verdana, sans-serif;">si 
+ articola su 4 pagine video, suddivise in due sezioni. La sezione superiore 
+ rimane invariata in tutte le pagine video e contiene le informazioni anagrafiche 
+ della causale stessa.</span></p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Linguetta Dati generali</p>
+<p style="text-align: center;"><img src="Images/bbas0039f_01.png" alt="" style=" border:none; width:100%; max-width:605px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CODICE: codice alfanumerico 
+ di 3 caratteri, a libera scelta dell'utente, per individuare la causale 
+ attiva. Sul campo sono attive le funzioni di ricerca (F9) &#160;sulla 
+ tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; font-family: Verdana, sans-serif;">OBSOLETO: 
+ flag attivabile dall’utente per inibire il possibile utilizzo dell’elemento 
+ di tabella in esame nelle successive transazioni.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE: campo 
+ alfanumerico di 30 caratteri per inserire la descrizione della causale 
+ attiva. Questa descrizione &#160;viene riportata anche nella stampa del 
+ documento stesso.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DESCRIZIONE ESTESA: 
+ campo alfanumerico di 60 caratteri per inserire la descrizione estesa 
+ della causale attiva ad uso interno dell’utente. Questa descrizione &#160;non 
+ viene stampata sui documenti ma viene visualizzata nelle viste.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO REGISTRO: list 
+ box per indicare il registro obbligatorio a cui verrà imputato il documento 
+ generato dalla causale attiva. Valori possibili: libro giornale, registro 
+ Iva vendite, registro Iva vendite in sospensione d'imposta, registro corrispettivi, 
+ registro Iva acquisti, registro Iva acquisti in sospensione d'imposta.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-indent: -0.417in; 
+															 margin-left: 30pt;">SERIE 
+ REGISTRO: identifica in numero di sezionale Iva a cui le fatture verranno 
+ attribuite in fase di contabilizzazione.</span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NUMERO COPIE: Indicare 
+ il numero di copie da stampare, se zero saranno stampate le copie previste 
+ sull'anagrafica del cliente.</p>
+<p style="margin-left: 30pt; text-indent: -0.417in;">TIPO DOCUMENTO: list 
+ box per definire il tipo di documento generato dalla causale attiva. Valori 
+ possibili: fattura, nota di debito, nota di credito, autofattura, fattura 
+ ad Iva differita.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO EMISSIONE: list 
+ box per definire il tipo di emissione del documento generato dalla causale 
+ attiva. Valori possibili: differita, accompagnatoria.</p>
+<p style="margin-left: 30pt; text-indent: -0.417in;">RICEVUTA FISCALE: 
+ list box per definire se la causale riguarda le ricevute fiscali ed il 
+ tipo di ricevuta. Le tipologie previste sono le seguenti:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-left: 0px; margin-top: 2pt; margin-bottom: 2pt;">Ricevuta 
+		 fiscale di beni: è il caso normale di emissione di ricevuta fiscale 
+		 per vendita di beni o prestazione di servizi; la registrazione 
+		 contabile va a generare un movimento di corrispettivo per ogni 
+		 ricevuta emessa (il raggruppamento viene effettuato in fase di 
+		 stampa registro corrispettivi).</p></li>
+		<li class="p"><p style="margin-left: 0px; margin-top: 2pt; margin-bottom: 2pt;">Ricevuta 
+		 fiscale di servizi: si tratta di una ricevuta fiscale che se incassata 
+		 va ad alimentare il normale registro corrispettivi, altrimenti 
+		 viene registrata come Iva differita (e in fase di liquidazione 
+		 Iva) non viene conteggiata fino all’effettivo incasso della ricevuta 
+		 fiscale.</p></li>
+		<li class="p"><p style="margin-left: 0px; margin-top: 2pt; margin-bottom: 2pt;">Fattura 
+		 fiscale a seguito di ricevuta fiscale: in questo caso viene emessa 
+		 una fattura dopo che era stata emessa e contabilizzata una ricevuta 
+		 fiscale; il documento viene contabilizzato ma sia dal punto di 
+		 vista contabile che dal punto di vista Iva non determina alcuna 
+		 variazione.</p></li>
+		<li class="p"><p style="margin-left: 0px; margin-top: 2pt; margin-bottom: 2pt;">Incasso 
+		 ricevuta fiscale per beni: in questo caso la ricevuta fiscale 
+		 determina all’atto della registrazione contabile un movimento 
+		 di incasso sulla ricevuta fiscale emessa senza essere stata pagata; 
+		 in fase di emissione del documento è possibile selezionare per 
+		 l’incasso le ricevute fiscali contabilizzate non incassate.</p></li>
+		<li class="p"><p style="margin-left: 0px; margin-top: 2pt; margin-bottom: 2pt;">Incasso 
+		 ricevuta fiscale di servizi: valgono gli stessi concetti espressi 
+		 per il caso precedente; tuttavia si differenzia dal precedente 
+		 per il trattamento dell’Iva, poiché oltre al normale trattamento 
+		 a livello di partite (si tratta di un incasso), poiché le ricevute 
+		 che possono essere incassate sono quelle relative a servizi (per 
+		 cui ad Iva differita) e quindi viene generato anche il giroconto 
+		 dall’Iva differita all’Iva corrispettivi, oltre che il movimento 
+		 sul registro Iva vendite.</p></li>
+		<li class="p"><p style="margin-left: 0px; margin-top: 2pt; margin-bottom: 2pt;">Ricevuta 
+		 di incasso per acconto prestazioni: si tratta di una ricevuta 
+		 di incasso che genera movimento contabile di anticipo.</p></li>
+	</ul></li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SCORPORO: Definisce 
+ se il documento è soggetto a scorporo dell'Iva dal totale del documento 
+ in fase di registrazione (casella con segno di spunta). In questo caso 
+ i prezzi inseriti nel documenti saranno al lordo di Iva.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CONAI: definisce se 
+ in fase di stampa deve essere riportata la dicitura relativa al CONAI, 
+ casella con segno di spunta.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">GENERAZIONE PARTITE: 
+ abilita, se presente la spunta, la generazione delle partite aperte clienti 
+ da parte del documento generato dalla causale attiva.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE MAGAZZINO: 
+ codice alfanumerico di 3 caratteri, presente nella tabella Causali di 
+ magazzino, che individua i parametri del movimento di magazzino generato 
+ automaticamente dal documento attivo. L’informazione può essere omessa 
+ in caso di assenza della procedura Gestione magazzino oppure se non si 
+ intende generare automaticamente movimenti di magazzino. Sul campo sono 
+ attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella 
+ stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE CONTABILE: 
+ codice alfanumerico di 3 caratteri, presente nella tabella Causali contabili, 
+ che definisce i parametri del movimento contabile generato dal documento 
+ attivo all’atto della contabilizzazione delle fatture. L’informazione 
+ può essere omessa in caso di assenza della procedura Contabilità. Sul 
+ campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) 
+ sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CODICE IVA: eventuale 
+ codice alfanumerico di 3 caratteri, presente nella tabella Aliquote iva, 
+ che verrà forzato nel codice esenzione del documento attivo in modo da 
+ essere impostato su tutte le righe in sostituzione dell’aliquota Iva presente 
+ in anagrafica prodotti. Sul campo sono attive le funzioni di ricerca (F9) 
+ e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO ORDINE: codice 
+ alfanumerico di 3 caratteri, presente nella tabella Tipologie ordini, 
+ che individua la tipologia di ordini che possono essere evasi tramite 
+ il documento attivo. L’informazione può essere omessa in caso di assenza 
+ della procedura Gestione ordini di vendita oppure se non si intende riservare 
+ il documento attivo all’evasione di una specifica tipologia di ordini. 
+ Sul campo sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) 
+ sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CONTO DI RICAVO: eventuale 
+ codice alfanumerico di 8 caratteri, presente in piano dei conti, per definire 
+ il sottoconto contabile di ricavo a cui verrà accreditato l’imponibile 
+ della fattura o della nota di credito. Sul campo sono attive le funzioni 
+ di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CENTRO DI RICAVO: 
+ campo significativo solo in presenza del modulo Contabilità analitica 
+ opportunamente configurato. Può contenere un codice alfanumerico di 15 
+ caratteri, per definire il centro di ricavo a cui verrà accreditato l’imponibile 
+ della fattura. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione 
+ (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">VOCE DI RICAVO: campo 
+ significativo solo in presenza del modulo Contabilità analitica opportunamente 
+ configurato. Può contenere un codice alfanumerico di 15 caratteri, per 
+ definire la voce di ricavo a cui verrà accreditato l’imponibile della 
+ fattura. Sul campo sono attive le funzioni di ricerca (F9) e manutenzione 
+ (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">COMMESSA: campo significativo 
+ solo in presenza del modulo Contabilità analitica opportunamente configurato. 
+ Può contenere un codice alfanumerico di 15 caratteri, per definire la 
+ commessa a cui verrà accreditato l’imponibile della fattura. Sul campo 
+ sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla 
+ tabella stessa.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Linguetta Varie</p>
+<p style="text-align: center;"><img src="Images/bbas0039f_02.png" alt="" style=" border:none; width:100%; max-width:605px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA DESCRIZIONE 
+ ESTESA ARTICOLO: Indica se sulla fattura deve essere riportata e stampata 
+ la descrizione estesa dell'articolo, casella con segno di spunta.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">BOLLO VIRTUALE: Se 
+ spuntato, nel caso in cui la fattura sia soggetta a bollo, l'importo di 
+ bollo eventualmente addebitato viene contabilizzato sull'apposito conto 
+ &quot;Spese bolli virtuali&quot; (a condizione che tale conto sia stato 
+ compilato).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO EVASIONE ORDINI: 
+ Definisce se un eventuale ordine dovrà essere evaso a quantità oppure 
+ a valore; valori possibili: a quantità, a valore.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CONTROLLO RISCHIO: 
+ Definisce se al termine della registrazione della fattura deve essere 
+ fatto un ulteriore controllo sulla situazione del cliente, casella con 
+ segno di spunta.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA RIEPILOGO NOMENCLATURA: 
+ Consente di stampare, in coda al documento, un riepilogo pesi/colli per 
+ nomenclatura combinata; è possibile non stampare il riepilogo, stamparlo 
+ solo per le nomenclature relative a beni, solo per le nomenclature relative 
+ a servizi o sempre.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO RIGO PREFERENZIALE: 
+ Indica il tipo rigo da proporre in fase di emissione della fattura.&#160;Sul 
+ campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PROPOSTA DATA/ORA 
+ PARTENZA: Se spuntato inserisce automaticamente la data e l'ora di inizio 
+ trasporto nei rispettivi campi del documento.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Stampa 
+ riepilogo codici HS</span>: Consente di stampare, in coda al documento, 
+ un riepilogo delle codifiche HS legate agli articoli presenti in fattura 
+ che riporta per ogni codifica/Um anche il totale 
+ quantità e valore.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">APPLICA RIDUZIONE 
+ IVA MANODOPERA: Se spuntato indica che il documento creato con questa 
+ causale è soggetto ad IVA agevolata su ristrutturazioni.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO TRANSAZIONE: 
+ definisce il tipo transazione ai fini INTRASTAT. Sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FATTURA DI ANTICIPO: 
+ attivo se previsto in configurazione vendite; definisce se la causale 
+ è relativa a fatture di anticipo (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Abilita 
+ gestione pesi / volume</span>: Attivo solo in caso di causale con tipo 
+ emissione &quot;differita&quot;. Se spuntato nella linguetta riepilogo 
+ totali del documento saranno resi visibili i campi relativi al peso ed 
+ al volume.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FATTURA PROFORMA: 
+ definisce se la causale è relativa a fatture proforma (casella con segno 
+ di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">RICHIESTA DESTINAZIONE 
+ DIVERSA: definisce se deve essere richiesta la destinazione diversa (casella 
+ con segno di spunta); l'opzione è valida solo per i documenti di tipo 
+ differito e deve essere spuntato se si intende utilizzare il raggruppamento 
+ per cliente/destinazione in fase di fatturazione Ddt.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO SPEDIZIONE: 
+ codice numerico, presente nella tabella Magazzini, che individua il magazzino 
+ aziendale di partenza della merce. L’informazione è facoltativa e viene 
+ utilizzata per definire il magazzino che verrà scaricato della merce. 
+ In caso di mancata compilazione di questo campo, l’informazione dovrà 
+ essere digitata al momento dell’emissione del documento. Anche in caso 
+ di presenza di valori in questo campo, tuttavia, l’indicazione del magazzino 
+ di destinazione preferenziale nella causale potrà essere modificata dall’utente 
+ all’atto dell’emissione del documento. Sul campo sono attive le funzioni 
+ di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LUOGO DI PARTENZA: 
+ Definisce, se inserito, il luogo di partenza della merce. Sul campo sono 
+ attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella 
+ stessa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO REPORT: consente 
+ di specificare un tipo di report specifico per i documenti che saranno 
+ emessi utilizzando questa causale. Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA SU MODULO POLIVALENTE: 
+ definisce la stampa deve essere eseguita sul modulo di stampa polivalente 
+ (casella con segno di spunta).</p>
+<p style="font-family: Verdana, Arial; margin-top: 6pt; margin-bottom: 6pt; 
+	 text-align: Justify; font-size: 10pt; text-indent: -0.417in; margin-left: 30pt;"><span><span 
+	 style="font-family: Verdana, Arial; font-size: 10pt;">STAMPA CEDOLINO: 
+ definisce se stampare il cedolino provvigioni sulla fattura, qualora l'agente 
+ lo gestisca (casella con segno di spunta).</span></span></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA CASTELLETTO 
+ TOTALI SU RIC. FISCALI: Se spuntato e in caso di &quot;Ricevuta fiscale 
+ per beni / servizi (no fattura)&quot; consente di stampare il castelletto 
+ di chiusura.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">VARIAZIONE PREZZI 
+ LISTINO: definisce se dai documenti emessi con questa causale è consentito 
+ modificare i prezzi di listino in base a quanto definito sull'anagrafica 
+ dell'intestatario (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NOTE: campo note a 
+ disposizione dell’utente.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Linguetta Magazzini</p>
+<p>La linguetta consente di elencare i magazzini di partenza o di destinazione 
+ che possono essere interessati dalla causale attiva.</p>
+<p>La sua compilazione è pertanto significativa solo se l’azienda effettua 
+ consegne da diversi magazzini. Nel caso in cui venga gestito un solo magazzino, 
+ la compilazione della linguetta è assolutamente inutile.</p>
+<p style="text-align: center;"><img src="Images/bbas0039f_03.png" alt="" style=" border:none; width:100%; max-width:605px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO: codice 
+ numerico, presente nella tabella Magazzini, che individua il magazzino 
+ di possibile utilizzo con la causale attiva. Sul campo sono attive le 
+ funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla tabella stessa.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Linguetta Causali di magazzino</p>
+<p style="font-weight: normal;">La finestra, attiva solo nella versione 
+ OS1 Enterprise, permette di associare al singolo tipo rigo una specifica 
+ causale per generare il magazzino, diversa dalla causale principale.</p>
+<p style="text-align: center;"><img src="Images/bbas0039f_04.png" alt="" style=" border:none; width:100%; max-width:605px;" border="0" /></p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO RIGO: Indica 
+ il tipo rigo da associare alla causale.&#160;Sul campo sono attive le 
+ funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE MAGAZZINO: 
+ codice alfanumerico di 3 caratteri, presente nella tabella Causali di 
+ magazzino, che individua i parametri del movimento di magazzino generato 
+ automaticamente dal documento attivo per il tipo rigo richiesto. Sul campo 
+ sono attive le funzioni di ricerca (F9) e manutenzione (CTRL+W) sulla 
+ tabella stessa.</p>
+</body>
+</html>

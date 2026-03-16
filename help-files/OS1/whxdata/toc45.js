@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc4.js\"  name=\"Tabelle\"><item name=\"Introduzione\" url=\"html/index/index_1091.htm\" /><item name=\"Causali contabili\" url=\"html/bbas/bbas0036f.htm\" /><item name=\"Periodi bilanci\" url=\"html/bbas/bbas0076f.htm\" /><item name=\"Progressivi libro giornale\" url=\"html/bcge/bcge0100f.htm\" /></data>";

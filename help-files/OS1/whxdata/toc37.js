@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc35.js\"  name=\"Dettaglio valori\"><item name=\"Introduzione\" url=\"html/index/index_108009.htm\" /><item name=\"Manutenzione valori\" url=\"html/babi/babi0006f.htm\" /><item name=\"Stampa valori\" url=\"html/babi/babi0007d.htm\" /><item name=\"Stampa rettifiche\" url=\"html/babi/babi0004d.htm\" /></data>";

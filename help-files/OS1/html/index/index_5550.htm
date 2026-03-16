@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="02 22, 2012 4:09:52 PM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Lancio in produzione</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+ <meta http-equiv="Content-Language" content="it-IT" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.4.0_1";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Lancio in produzione" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt; text-align: left;">Introduzione</p>
+<p style="margin-left: 0in; margin-right: 0in;">Il menù Lancio in produzione raggruppa le scelte necessarie all'avvio delle fasi di produzione ed all'eventuale gestione dei buoni di prelievo. L’avanzamento della produzione si distingue in due grandi aree a seconda che la fase sia gestita internamente sulle risorse dell’azienda oppure esternamente tramite terzisti.</p>
+<p style="margin-left: 0in; margin-right: 0in;">Nel primo caso l’iter produttivo prevede l’avvio della fase attraverso la procedura di lancio, il trasferimento dei materiali attraverso il buono di prelievo (opzionale) e la chiusura della fase attraverso la registrazione dei versamenti.</p>
+<p style="margin-left: 0in; margin-right: 0in;">Nel secondo caso l’iter produttivo è gestito dalla procedura del conto lavoro; non è previsto un avvio vero e proprio della fase mentre è prevista la generazione del DDT di trasferimento materiali dai propri magazzini al magazzino del terzista e la chiusura della fase attraverso la funzione di registrazione dei DDT di rientro. Per questa parte si rimanda alla documentazione specifica del modulo “<a href="index_5557.htm">Conto lavoro</a>” .</p>
+<p style="margin-left: 0in; margin-right: 0in;">In fase di avanzamento è possibile gestire lo spostamento degli impegni ed il trasferimento dei materiali dai magazzini dall’unità produttiva al magazzino bordo macchina a condizione che a livello di risorsa associata all’ODL (o a livello del suo reparto di appartenenza) sia stato indicato un magazzino WIP valido. <span style="margin-left: 0in; margin-right: 0in;">Da questa considerazione derivano quindi due possibili scenari (applicabili singolarmente ad ogni risorsa):</span></p>
+<ul style="list-style: disc;">
+<li style="list-style:none;display: inline">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="margin-left: 0in; margin-right: 0in;">la risorsa ha un magazzino WIP associato: in fase di lancio viene spostato l’impegno sul magazzino WIP ed è quindi necessario effettuare il trasferimento dei materiali tramite BP (per le varie modalità di creazione dei BP si rimanda al paragrafo “Buoni di prelievo”); il versamento provvederà a scaricare i componenti dal magazzino WIP;</p>
+</li>
+<li class="p">
+<p style="margin-left: 0in; margin-right: 0in;">la risorsa non ha un magazzino WIP associato: in fase di lancio l’impegno non viene spostato e quindi non è necessario trasferire i materiali sul magazzino WIP in quanto il versamento provvederà a scaricare i componenti dal magazzino dell’unità produttiva (assegnato all’ODL in fase di generazione piano).</p>
+</li>
+</ul>
+</li>
+</ul>
+<p style="font-family: Verdana, sans-serif;"><span style="font-style: italic;">Se attivata la gestione delle varianti, è importante notare che saranno richiesti e visualizzati, nelle varie finestre delle procedure il codice e la descrizione della variante.</span></p>
+<p style="font-family: Verdana, sans-serif;">&#160;</p>
+<table style="vertical-align: Center; border-left-style: Solid; border-left-width: 2px; border-right-style: Solid; border-right-width: 2px; border-top-style: Solid; border-top-width: 2px; border-bottom-style: Solid; border-bottom-width: 2px; margin-left: 2px; margin-right: 2px; left: 205px; top: 106px;" cellspacing="0" align="center">
+<col width="270" />
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="270">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../sprb/sprb0040f.htm">Elaborazione lancio</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="270">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../sprb/sprb0042f.htm">Generazione buoni di prelievo</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-width: 1px; border-bottom-style: Solid;" width="270">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../sprb/sprb0041f.htm">Manutenzione buoni di prelievo</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="270">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../sprb/sprb0043d.htm">Stampa buoni di prelievo</a></p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="02 13, 2013 11:48:23 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Rilevazione differenza su cambi</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.14.0_8";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Operazioni fine esercizio" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;"><span>Rilevazione differenza su cambi</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: Justify;">La procedura analizza le partite aperte alla data di fine esercizio, calcola il valore alla data di fine esercizio e genera una differenza cambi (attiva o passiva) per adeguare il valore del credito/debito. Per un corretto utilizzo della procedura è necessario aver inserito nei <a href="../bbas/bbas0037f.htm">cambi giornalieri</a> il cambio alla fine dell'esercizio.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: Justify;">È possibile effettuare una elaborazione preliminare di prova stampando i dati elaborati dalla procedura.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: center;"><img src="Images/bcge0042d_01.png" alt="" style=" border:none; width:100%; max-width:569px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: Justify;">&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ESERCIZIO: indicare l'esercizio per il quale deve essere effettuata la rilevazione; viene proposto l'esercizio corrente.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DIVISA: indicare il codice della divisa per cui effettuare la rilevazione; se il campo è lasciato vuoto saranno considerate tutte le divise movimentate. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FILTRO CLIENTI/FORNITORI: è possibile definire un range di clienti o fornitori da utilizzare come filtro per l'elaborazione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALI CONTABILI: inserire i codici delle causali contabili relative alla rilevazione che saranno utilizzate per la generazione dei movimenti. &#160;Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SOTTOCONTI: inserire i codici dei sottoconti relativi alla rilevazione che saranno utilizzati per la generazione dei movimenti; vengono proposti i sottoconti inseriti negli appositi campi dei codici fissi. &#160;Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ELABORAZIONE DEFINITIVA: consente di effettuare la stampa di un report di controllo (casella vuota) oppure di generare i movimenti contabili (casella con segno di spunta).</p>
+</body>
+</html>

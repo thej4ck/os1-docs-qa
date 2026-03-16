@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_5557.htm"},{"type":"book","name":"Ordini terzisti","key":"toc185"},{"type":"book","name":"DDT terzisti","key":"toc188"},{"type":"book","name":"Rientri","key":"toc190"},{"type":"book","name":"Fatturazione","key":"toc192"},{"type":"book","name":"Magazzino","key":"toc194"},{"type":"book","name":"Listini terzisti","key":"toc197"},{"type":"book","name":"Scheda di trasporto","key":"toc198"},{"type":"book","name":"Tabelle","key":"toc200"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

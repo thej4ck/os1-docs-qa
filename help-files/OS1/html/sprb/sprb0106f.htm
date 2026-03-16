@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="12 22, 2011 9:54:01 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Tipologie attività operatori di produzione</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.10.0_6";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Tabelle" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left;"><span 
+	 style="font-weight: bold;">Tipologie attività operatori</span></p>
+<p>La tabella consente di definire le varie tipologie di operatore da utilizzare 
+ per la definizione dei costi collegati alle risorse.</p>
+<p style="text-align: center;"><img src="images/sprb0106f_01.png" alt="" style=" border:none; width:100%; max-width:432px;" border="0" /></p>
+<p>Per ciascun elemento della tabella è possibile definire il costo orario 
+ da applicare ed il periodo di validità; se la data di fine validità viene 
+ lasciata vuota il costo sarà valido sempre a partire dalla data di decorrenza 
+ fino a quando non sarà inserito un costo in una data successiva, alla 
+ decorrenza, allora il periodo precedente sarà chiuso automaticamente al 
+ giorno prima dell'inizio validità del nuovo costo.</p>
+<p>&#160;</p>
+<p>Se è gestito in configurazione il costo operatori per fascia oraria 
+ la manutenzione delle tipologie cambia radicalmente:</p>
+<p style="text-align: center;"><img src="images/sprb0106f_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>Per ciascun elemento della tabella è possibile definire il costo orario 
+ da applicare ed il periodo di validità ed alla singola fascia oraria; 
+ se la data di fine validità viene lasciata vuota il costo sarà valido 
+ sempre a partire dalla data di decorrenza fino a quando non sarà inserito 
+ un costo in una data successiva, alla decorrenza, allora il periodo precedente 
+ sarà chiuso automaticamente al giorno prima dell'inizio validità del nuovo 
+ costo. Sono presenti anche i campi relativi al costo orario ed alla percentuale 
+ di maggiorazione sia per il giorno del sabato che per la domenica; i campi 
+ costo e percentuale sono alternativi l'uno all'altro e non possono essere 
+ valorizzati entrambi. Il record senza fascia oraria (fascia 0) derivante 
+ dalla gestione senza fascia oraria sarà utilizzato per la valorizzazione 
+ preventiva.</p>
+<p>Il nuovo calcolo assegna il costo dell'operatore in base alla durata 
+ dell'evento ed alle fasce orarie assegnate alla tipologia di attività; 
+ l'attuale calcolo non viene effettuato se per un versamento sono presenti 
+ singoli eventi con tempo evento maggiore alle 24 ore. Se la valorizzazione 
+ per fascia oraria non riporta nessun valore il costo assegnato è quello 
+ derivante dal calcolo standard per risorsa, come la valorizzazione preventiva.</p>
+<p>Se gestiti i costi per fascia oraria devono obbligatoriamente essere 
+ definite tutte le fasce dell'orario lavorativo per poter valorizzare tutte 
+ le ore di lavoro; se viene trovato il valore per fascia orario dell'orario 
+ di inizio valorizza solo i costi per fascia oraria, se presenti in ordine 
+ di orario, non effettuando il calcolo standard per risorsa anche se ci 
+ sono fasce orarie il cui costo non è definito.</p>
+<p>Il nuovo calcolo viene applicato in fase di generazione versamenti e 
+ dalla consuntivazione, aggiornamento valore magazzino se richiesto di 
+ ricalcolare i versamenti.</p>
+</body>
+</html>

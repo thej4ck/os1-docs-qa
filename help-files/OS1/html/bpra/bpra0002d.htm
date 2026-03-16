@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="02 21, 2013 3:25:14 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Registrazione incassi</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.8.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > Provvigioni agenti" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; font-weight: bold; text-align: left;"><span>Registrazione incassi</span></p>
+<p>La procedura di registrazione incassi ricerca all'interno della tabella scadenze i movimenti relativi ad incassi e pagamenti e genera i rispettivi movimenti sulle provvigioni. In base a quanto specificato in <a href="../bbas/bbas0101f_15.htm">configurazione provvigioni</a> è possibile effettuare la registrazione a saldo della singola rata oppure a saldo dell'intera partita.</p>
+<p>La procedura si sviluppa su due pagine, nella prima sono presenti i parametri di selezione.</p>
+<p style="text-align: center;"><img src="Images/bpra0002d_01.png" alt="" style=" border:none; width:100%; max-width:755px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: indica la data di registrazione, relativa ai movimenti contabili, da cui iniziare l'elaborazione. Il campo è obbligatorio.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: indica la data di registrazione, relativa ai movimenti contabili, con cui terminare l'elaborazione. Il campo è obbligatorio.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CLIENTE: codice del cliente, presente in anagrafica, da cui si vuole iniziare l'elaborazione. Confermando a vuoto, l'elaborazione inizia dal primo codice valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CLIENTE: codice del cliente, presente in anagrafica, con cui si vuole terminare l'elaborazione. Confermando a vuoto, l'elaborazione termina con l'ultimo codice valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA AGENTE: codice dell'agente, da cui si vuole iniziare l'elaborazione. Confermando a vuoto, l'elaborazione inizia dal primo codice valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A AGENTE: codice dell'agente, con cui si vuole terminare l'elaborazione. Confermando a vuoto, l'elaborazione termina con l'ultimo codice valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ELABORAZIONE DEFINITIVA: definisce se effettuare un'elaborazione di prova (casella vuota), oppure definitiva (casella con segno di spunta). L'elaborazione definitiva effettua la scrittura dei movimenti sui movimenti &#160;delle provvigioni.</p>
+<p style="margin-left: 0in;">&#160;</p>
+<p style="margin-left: 0in;">La pressione del pulsante Esegui porta il risultato dell'elaborazione nella pagina Risultati; nella pagina sono elencati i documenti per cui saranno generati gli incassi. Nel caso fosse attiva la gestione degli agenti di rigo compare in basso a destra un campo contenente l'importo incassato modificabile dall'utente. Nel caso di incasso derivante da compensazione la riga viene visualizzata di colore blu e l’operatore può decidere se riconoscere o meno le provvigioni su tale movimento (per non riconoscere le provvigioni è sufficiente deselezionare la riga con il doppio click sulla griglia).</p>
+<p style="margin-left: 0in;">Sono attivi i tasti Anteprima e Stampa sulla toolbar principale per effettuare la stampa del report.</p>
+<p style="margin-left: 0in;">La pressione del tasto Salva sulla toolbar principale, in caso di elaborazione definitiva, previa richiesta di conferma, effettua la registrazione definitiva.</p>
+<p style="margin-left: 0in; text-align: center;"><img src="Images/bpra0002d_02.png" alt="" style=" border:none; width:100%; max-width:755px;" border="0" /></p>
+</body>
+</html>

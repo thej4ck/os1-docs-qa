@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="06 5, 2015 9:15:11 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Analisi materiali forniti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.18.3.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > Conto lavoro attivo > Interrogazioni" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; 
+	 font-weight: bold;">Analisi materiali forniti</p>
+<p style="font-family: Verdana, sans-serif;">L’analisi considera gli ordini 
+ del conto lavoro aperti per cui sono presenti ordini di lavorazione aperti 
+ anche provvisori, e riporta per ogni magazzino il carico, lo scarico, 
+ i resi, la giacenza, l’impegnato, il disponibile.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; text-align: center;"><img src="images/scla0020f_01.png" alt="" style=" border:none; width:100%; max-width:971px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif;">Nei parametri di selezione 
+ è possibile specificare cliente, data ordine e data consegna, inoltre 
+ tramite delle caselle di spunta è possibile includere nell'analisi gli 
+ ODP provvisori (casella Considera provvisori spuntata) e se nell’analisi 
+ devono essere riportati solo i materiali per cui non è presente sufficiente 
+ giacenza (casella <span style="font-family: Verdana, sans-serif;">Solo 
+ materiali mancanti spuntata).</span></p>
+<p style="font-family: Verdana, sans-serif;">L’analisi può essere eseguita 
+ anche a stampa e tramite i campi specificati nelle “Opzioni di stampa” 
+ è possibile indicare quali dettagli riportare.</p>
+<p style="text-align: center;"><img src="images/scla0020f_02.png" alt="" style=" border:none; width:100%; max-width:971px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif;">Una volta impostati i criteri 
+ di selezione viene presentato nella griglia superiore l’elenco dei clienti 
+ relativi agli ordini del conto lavoro ancora aperti: per ognuno vengono 
+ visualizzate nella griglia le seguenti colonne per prodotto e magazzino:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;"><span 
+		 style="font-weight: bold;">Carico</span>, le quantità relative 
+		 ai Ddt di ingresso registrati dall’apposita procedura, il doppio 
+		 click del mouse sulla cella mostra il dettaglio dei documenti 
+		 registrati;</p></li>
+		<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;"><span 
+		 style="font-weight: bold;">Scarico</span>, le quantità relative 
+		 a scarichi effettuati con documenti di versamento di produzione 
+		 di ordini di produzione, il doppio click del mouse sulla cella 
+		 mostra il dettaglio dei documenti registrati;</p></li>
+		<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;"><span 
+		 style="font-weight: bold;">Reso</span>, le quantità relative ai 
+		 componenti degli ODL, derivanti da righe evase in ddt di uscita 
+		 e derivanti a loro volta da ddt di ingresso, il doppio click del 
+		 mouse sulla cella mostra il dettaglio dei documenti registrati;</p></li>
+		<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;"><span 
+		 style="font-weight: bold;">Altro</span>, le quantità relative 
+		 a movimenti manuali sul magazzino interessato del cliente con 
+		 tipo movimento interno, il doppio click del mouse sulla cella 
+		 mostra il dettaglio dei movimenti registrati;</p></li>
+		<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;"><span 
+		 style="font-weight: bold;">Giacenza</span>, la giacenza del materiale;</p></li>
+		<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;"><span 
+		 style="font-weight: bold;">Impegnato</span>, le quantità impegnate 
+		 del materiale nel magazzino del cliente, il doppio click del mouse 
+		 sulla cella mostra il dettaglio dei documenti di impegno;</p></li>
+		<li class="p"><p style="margin-top: 2pt; margin-bottom: 2pt;"><span 
+		 style="font-weight: bold;">Disponibile</span>, le quantità disponibili 
+		 del materiale.</p></li>
+	</ul></li>
+</ol>
+<p style="font-family: Verdana, sans-serif;">Dalla pagina Risultati, tramite 
+ i pulsanti presenti nella <a href="../Ambiente/Ambiente_02.htm">Toolbar</a> 
+ sarà possibile effettuare la stampa.</p>
+</body>
+</html>

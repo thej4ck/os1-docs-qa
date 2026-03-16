@@ -1,0 +1,310 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 18, 2015 4:57:51 PM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Configurazione base</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.1.1.1.0_1";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazione OS1 Enterprise > Generali > Configurazione moduli > Generale" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h5>Configurazione base</h5>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">TIPO MONETA 
+ CONTO: Definisce la moneta di conto che verrà impiegata in tutte le procedure 
+ dell'applicazione.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">ESERCIZIO 
+ INIZIO EURO: Indica il numero di esercizio dal quale inizia l'utilizzo 
+ dell'Euro come moneta di conto. I dati storici (in moneta di conto) presenti 
+ nei vari archivi (movimenti contabili, scadenze, statistiche) sono espressi 
+ in Lire per gli esercizi precedenti a quello indicati in questo campo, 
+ ed in Euro per tutti gli esercizi a partire da quello indicato in questo 
+ campo.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">N. 
+ LIVELLI CONTO: Definire la struttura del piano dei conti a livello di 
+ mastro:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-top: 1.5pt; 
+						 margin-bottom: 1.5pt; margin-left: 0in;">2 = struttura 
+		 a 2 livelli (Classe + Mastro)</p></li>
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-top: 1.5pt; 
+						 margin-bottom: 1.5pt; margin-left: 0in;">3 = struttura 
+		 a 3 livelli (Classe + Gruppo + Mastro); possibile solo su OS1 
+		 Enterprise.</p></li>
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-top: 1.5pt; 
+						 margin-bottom: 1.5pt; margin-left: 0in;">4 = struttura 
+		 a 4 livelli (Classe + Sezione +Gruppo + Mastro) possibile solo 
+		 su OS1 Enterprise</p></li>
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-top: 1.5pt; 
+						 margin-bottom: 1.5pt; margin-left: 0in;">5 = struttura 
+		 a 5 livelli (Classe + Sezione + Livello + Gruppo + Mastro) possibile 
+		 solo su OS1 Enterprise</p></li>
+	</ul></li>
+</ol>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in;">Il sottoconto 
+ è comunque sempre presente come ultimo livello della struttura del piano 
+ dei conti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">GESTIONE 
+ LINGUE: Abilita la possibilità di gestire più lingue e di conseguenza 
+ la richiesta, nelle tabelle della procedura che lo prevedono, di inserimento 
+ delle descrizioni in lingua estera. Ove previsto è presente un bottone 
+ Lingue che fornisce la possibilità di inserire il relativo testo in lingua 
+ straniera.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">TIPO 
+ GESTIONE MAGAZZINO: Indica se l'azienda utilizza un unico magazzino o 
+ più magazzini, depositi periferici o lavoranti esterni. Nel caso in cui 
+ non sia gestito nessun magazzino non saranno mai generati i movimenti 
+ di magazzino e non sarà richiesto il magazzino sui documenti. Nel caso 
+ di gestione singolo magazzino indicare nel campo “Magazzino preferenziale” 
+ della configurazione <a href="bbas0101f_02.htm">Dati preferenziali</a> 
+ il codice del magazzino stesso.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">N. 
+ SCONTI DI TESTA GESTITI: Definisce il numero massimo di sconti/maggiorazioni 
+ da applicare sul corpo dei documenti. Utilizzato per abilitare i relativi 
+ campi nelle procedure di gestione documenti e nelle anagrafiche che li 
+ prevedono.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">N. 
+ SCONTI DI RIGO GESTITI: Definisce il numero massimo di sconti/maggiorazioni 
+ da applicare sulle righe dei documenti. Utilizzato per abilitare i relativi 
+ campi nelle procedure di gestione documenti e nelle anagrafiche che li 
+ prevedono.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">TIPO 
+ TRATTAMENTO SCONTI: Definisce il segno degli sconti/maggiorazioni; indica 
+ se gestire i campi relativi agli sconti con o senza segno algebrico. Se 
+ prevedo sconti positivi e maggiorazioni negative significa che normalmente 
+ applico sconti e che intendo inserirli senza segno; in caso contrario 
+ gli sconti saranno inseriti con segno negativo e le maggiorazioni con 
+ segno positivo (o meglio senza segno). Utilizzato nelle procedure di gestione 
+ documenti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">BASE 
+ APPLICAZIONE SCONTI DI RIGO: Definisce se applicare gli sconti di rigo 
+ all'importo, calcolato come quantità per prezzo, oppure direttamente sul 
+ prezzo unitario. L'opzione è attiva solo per il modulo vendita al dettaglio 
+ ed è consigliato di settare il valore in base al prezzo nel caso in cui 
+ il registratore di cassa sia configurato per inviare in automatico le 
+ informazioni all'Agenzia delle Entrate.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">CODIFICA 
+ AUTOMATICA CLI/FOR.: Se spuntato indica che si utilizza una codifica automatica 
+ numerica progressiva per fornitori, clienti, clienti privati, e clienti 
+ provvisori. E’ gestito nei relativi programmi di manutenzione anagrafiche. 
+ In fase di inserimento nuovo cliente o fornitore viene proposto il codice 
+ in base al contatore presente sulla tabella Clienti_CP o Fornitori_CP, 
+ in fase di salvataggio della nuova anagrafica viene aggiornato anche il 
+ relativo contatore con il numero progressivo del codice.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">PERC. 
+ BOLLO TRATTE ITALIA: Definisce la percentuale da applicare sui documenti 
+ in moneta di conto, per il calcolo dei bolli su tratte.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">BOLLO 
+ MINIMO TRATTE ITALIA: Indica il valore minimo del bollo sui documenti 
+ in moneta di conto, viene utilizzato nel caso in cui l’importo derivante 
+ dalla percentuale dei bolli sia inferiore a tale valore.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">PERC. 
+ BOLLO TRATTE ESTERO: Definisce la percentuale da applicare sui documenti 
+ in divisa estera, per il calcolo dei bolli su tratte.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">BOLLO 
+ MINIMO TRATTE ESTERO: Indica il valore minimo del bollo sui documenti 
+ in divisa estera, viene utilizzato nel caso in cui l’importo derivante 
+ dalla percentuale dei bolli sia inferiore a tale valore.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">GESTIONE 
+ SCADENZE VARIABILI: Se spuntato indica che sui documenti è attiva la gestione 
+ delle scadenze variabili; pertanto sarà possibile in qualsiasi documento 
+ modificare il piano di pagamento; se il piano di pagamento viene modificato 
+ nel ddt di vendita all’atto della generazione fattura (solo nel caso in 
+ cui una bolla generi una fattura) viene riportato il piano di pagamento 
+ previsto in ddt. I documenti con le scadenze variate vengono visualizzati 
+ in fase di evasione interattiva documenti con la scritta di carattere 
+ viola. In fase di generazione fatture da Ddt, tramite l'apposito programma, 
+ i Ddt su cui risulta variata la scadenza non sono soggetti al raggruppamento 
+ previsto sull'anagrafica del cliente.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">GESTIONE 
+ SALDI CLIENTI FORNITORI: Indica il metodo di gestione dei saldi per i 
+ clienti e per i fornitori. Valori ammessi:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+						 margin-top: 1.5pt; margin-bottom: 1.5pt;">Nessuna 
+		 gestione: non sono gestiti i progressivi per cliente/fornitore.</p></li>
+	</ul>
+	<ul style="list-style: disc;">
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+						 margin-top: 1.5pt; margin-bottom: 1.5pt;">Gestione 
+		 manuale: si possono gestire i saldi solo dalle anagrafiche dei 
+		 clienti e fornitori, ed è resa disponibile la situazione amministrativa. 
+		 L'aggiornamento è a cura dell'utente tramite l'utilizzo dei pulsanti 
+		 aggiorna presenti nelle anagrafiche e nella situazione amministrativa.</p></li>
+	</ul>
+	<ul style="list-style: disc;">
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in; 
+						 margin-top: 1.5pt; margin-bottom: 1.5pt;">Gestione 
+		 automatica: sono gestiti i progressivi per cliente/fornitore; 
+		 pertanto oltre ad essere visualizzati i saldi in anagrafica e 
+		 nella situazione amministrativa, vengono aggiornati i saldi nei 
+		 programmi di gestione documenti, in prima nota contabile, in esito 
+		 effetti. Inoltre abilita sulle causali Ddt, fatture e ordini il 
+		 flag “Controllo rischio”.</p></li>
+	</ul></li>
+</ol>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">CONFERMA 
+ SU DOCUMENTI/MOVIMENTI: Utilizzato sui documenti e sui programmi di manutenzione 
+ movimenti, indica se si desidera una conferma ulteriore in fase di salvataggio 
+ del documento/movimento.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">TIPO CODIFICA 
+ C/C: Definisce il tipo di trattamento da applicare al campo &quot;Numero 
+ c/c&quot; in anagrafica clienti/fornitori. I casi previsti sono:</span></p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="font-family: Verdana, sans-serif; text-indent: -0.417in; 
+						 margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Quindici 
+		 caratteri liberi</p></li>
+		<li class="p"><p style="font-family: Verdana, sans-serif; text-indent: -0.417in; 
+						 margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Dodici 
+		 caratteri liberi</p></li>
+		<li class="p"><p style="font-family: Verdana, sans-serif; text-indent: -0.417in; 
+						 margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Dodici 
+		 caratteri con formattazione numerica del campo (con filling di 
+		 zeri a sinistra).</p></li>
+	</ul></li>
+</ol>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">GESTIONE 
+ COORDINATE BANCARIE MULTIPLE: Se attivo consente di gestire a livello 
+ di fornitore più coordinate bancarie liberamente selezionabili dall'utente.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Gestione unità di misura aggiuntive</span>: 
+ Consente di aggiungere unità di misura supplementari alle tre già presenti 
+ sui prodotti (casella con segno di spunta).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Gestione unità di misura preferenziali</span>: 
+ Consente di impostare una unità di misura preferenziale in base all'area 
+ di utilizzo e/o al tipo di documento.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -40px; margin-left: 40px;"><span 
+	 style="font-family: Verdana, sans-serif;"><span style="text-transform: uppercase;">Gestione 
+ fattore di conversione: Indica come gestire il fattore di conversione</span>:</span></p>
+<ul style="list-style: disc;">
+	<li class="p" style="margin-left: -20px;"><p style="font-family: Verdana, sans-serif; 
+												 margin-left: 180px; text-indent: -120px; 
+												 margin-top: 1.5pt; margin-bottom: 1.5pt;">non 
+	 modificabile: indica che la modifica del fattore di conversione è 
+	 possibile solo dalle anagrafiche e se l'articolo non è mai stato utilizzato;</p></li>
+	<li class="p" style="margin-left: -20px;"><p style="margin-left: 180px; 
+												 text-indent: -120px; font-family: Verdana, sans-serif; 
+												 margin-top: 1.5pt; margin-bottom: 1.5pt;">modificabile 
+	 da..: indica che il fattore di conversione è modificabile anche se 
+	 l'articolo è stato utilizzato, ma è possibile definire se la modifica 
+	 è attiva solo dalle anagrafiche, solo dai documenti o da entrambe.</p></li>
+</ul>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">TIPO 
+ CONTROLLO ESENZIONE: Definisce il tipo di controllo da effettuare sui 
+ codici Iva inseriti nel campo &quot;Esenzione&quot; delle anagrafiche 
+ (clienti/fornitori/destinazioni) e dei documenti che hanno il campo Aliquota 
+ valorizzato. Valori ammessi:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="font-family: Verdana, sans-serif; text-indent: -0.417in; 
+						 margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Sia 
+		 su documenti che sulle anagrafiche</p></li>
+		<li class="p"><p style="font-family: Verdana, sans-serif; text-indent: -0.417in; 
+						 margin-left: 30pt; margin-top: 1.5pt; margin-bottom: 1.5pt;">Solo 
+		 sulle anagrafiche</p></li>
+		<li class="p"><p style="margin-left: 30pt; font-family: Verdana, sans-serif; 
+						 text-indent: -0.417in; margin-top: 1.5pt; margin-bottom: 1.5pt;">Ne 
+		 sui documenti ne sulle anagrafiche</p></li>
+	</ul></li>
+</ol>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Riallineamento importi di rigo 
+ su imponibile</span>: Se spuntato, indica all'applicazione in caso siano 
+ presenti degli sconti di testa, di effettuare un riallineamento degli 
+ importi nettissimi delle righe con il totale merce netto. Nel caso in 
+ cui il totale merce netto non corrisponda alla somma degli importi nettissimi 
+ del rigo del documento a causa di arrotondamenti, la differenza viene 
+ aggiunta all'importo nettissimo del primo rigo del documento.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Gestione prodotti equivalenti</span>: 
+ Se spuntato attiva la possibilità di utilizzare al posto di un prodotto 
+ altri prodotti definiti come suoi 'equivalenti'; la gestione è attiva 
+ a livello di documenti e movimenti di magazzino, tramite la finestra di 
+ analisi disponibilità.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Mostra messaggi da stati conti 
+ liberi</span>: Se spuntato saranno mostrati gli eventuali messaggi presenti 
+ sugli stati conti inseriti con codice da 1 a 6 se associati al conto.</p>
+</body>
+</html>

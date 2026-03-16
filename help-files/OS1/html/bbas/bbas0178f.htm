@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="06 3, 2014 9:58:17 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Controllo codice fiscale clienti/fornitori</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.11.1.1_13";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Servizi > Generali" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt;">Controllo 
+ codice fiscale clienti/fornitori</p>
+<p style="font-family: Verdana, Arial; font-weight: normal; font-size: 10pt;">La 
+ procedura effettua un controllo dei codici fiscali clienti/fornitori; 
+ il controllo viene effettuato su clienti, fornitori se è spuntato il flag 
+ Privato ed i campi &quot;data di nascita&quot;, &quot;Provincia di nascita&quot;, 
+ &quot;Comune di nascita&quot;, &quot;Sesso&quot; e &quot;Ragione sociale&quot; 
+ sono tutti compilati; per il percepente se &quot;Persona fisica&quot; 
+ anche il campo &quot;Dati aggiuntivi&quot;.</p>
+<p style="font-family: Verdana, Arial; font-weight: normal; font-size: 10pt;">Per 
+ calcolare il codice fiscale viene ricercato il nome e cognome utilizzando 
+ questo procedimento: se il campo &quot;Dati aggiuntivi&quot; è compilato 
+ viene assunto come nome (da usare se si ha più di un nome) e la ragione 
+ sociale come cognome, altrimenti nella ragione sociale viene cercato lo 
+ spazio più a destra la parte a sinistra è il cognome e la parte a destra 
+ il nome. Il codice del comune viene ricercato nella relativa tabella <a 
+	 href="bbas0179f.htm">Comuni</a> per descrizione e provincia. Non sono 
+ gestiti i casi di omocodia.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: center;"><img src="Images/bbas0178f_01.png" alt="" style=" border:none; width:100%; max-width:901px;" border="0" /></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">&#160;</p>
+<p>La finestra dei risultati evidenzia in rosso i codici fiscali che non 
+ risultano uguali al codice ricalcolato; tramite il doppio clic del mouse 
+ è possibile accedere alla relativa anagrafica.</p>
+<p>Tramite i tasti Anteprima e Stampa della toolbar è possibile effettuare 
+ la stampa di quanto visualizzato.</p>
+<p style="text-align: center;"><img src="Images/bbas0178f_02.png" alt="" style=" border:none; width:100%; max-width:901px;" border="0" /></p>
+</body>
+</html>

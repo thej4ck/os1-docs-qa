@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc146.js\"  name=\"Gestione prima nota\"><item name=\"Introduzione\" url=\"html/bmag/bmag0001f.htm\" /><item name=\"Dati generali\" url=\"html/bmag/bmag0001f_01.htm\" /><item name=\"Righe movimento\" url=\"html/bmag/bmag0001f_02.htm\" /></data>";

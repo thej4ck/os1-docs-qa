@@ -1,0 +1,201 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 29, 2009 5:18:49 PM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Configurazione esterna OS1Mobile</title>
+<link rel="StyleSheet" href="../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "..";
+gCommonRootRelPath = "..";
+gTopicId = "2.1_5";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazioni esterne" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../ehlpdhtm.js"></script>
+
+<h2>Configurazione esterna OS1Mobile</h2>
+<p>Per configurare un'azienda per gestire il riallineamento dei dati con 
+ dispositivi mobili tramite concentratore è necessario creare nella cartella 
+ <span style="font-weight: bold;">Custom</span> una cartella <span style="font-weight: bold;">Mobile</span> 
+ e copiare dalla cartella <span style="font-weight: bold;">Modelli\Mobile</span> 
+ il file '<span style="font-weight: bold;">DDDD_ReplicaConcentratoreConfig.ini</span>'.</p>
+<p>Il file copiato deve essere rinominato sostituendo il prefisso 'DDDD' 
+ con il codice ditta. Ad esempio: <span style="font-weight: bold;">DMOB_ReplicaConcentratoreConfig.ini</span>.</p>
+<p>Nel caso ci siano tabelle o campi personalizzati da gestire è necessario 
+ riportare nella stessa cartella <span style="font-weight: bold;">Custom\Mobile</span> 
+ anche il file script di creazione del database del concentratore (DBConcentratore.sql) 
+ opportunamente modificato per la creazione delle tabelle/campi personalizzati; 
+ inoltre se presenti tabelle personalizzate è necessario modificare anche 
+ il file <span style="font-weight: bold;">DDDD_ReplicaConcentratoreConfig.ini</span> 
+ per definire il metodo di scambio delle tabelle personalizzate.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Struttura del file di configurazione</p>
+<p>Il file ha parametri specifici e contiene anche delle righe di commento, 
+ precedute dal carattere '<span style="font-weight: bold;">;</span>' che 
+ spiegano dettagliatamente il significato ed i formati delle righe presenti.</p>
+<p>&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">[TabellaDispositivi]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; Struttura:</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 1.Tabella Concentratore= 
+ Nome tabella sul database Concentratore</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 2.Tabella OS1= Nome tabella 
+ sul database &#160;di OS1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCDispositivi=vFVDispositivi;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">[TabellaConfigurazioneWS]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; Struttura:</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 1.Tabella Concentratore</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 2.Function OS1= Function 
+ che ritorna il valore dal database di OS1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 3.Filtro ( Valori da 
+ ricercare composti da MODULO . IDMODULO . CHIAVE )</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">WSConfig=fn_LeggiConfigVar;SFVB.01.CartellaDati</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">[TabellaConfigurazione]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; Struttura:</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 1.Tabella Concentratore</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 2.Function OS1= Function 
+ che ritorna il valore dal database di OS1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 3.Filtro ( Valori da 
+ ricercare composti da MODULO . IDMODULO . CHIAVE )</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCConfigurazioni=fn_LeggiConfigVar;SFVB.01.TipoRigo,SFVB.01.TipoRigoOmaggio,SFVB.01.TipoRigoOmaggioIva,SFVB.01.TipoRigoEscImp,SFVB.01.TipoRigoCessione,SFVB.01.TipoRigoProdDesc,SFVB.01.TipoRigoResoMerce,SFVB.01.TipoRigoResoScarto,SFVB.01.IdPagamento,SFVB.01.IdListino,SFVB.01.IdDivisa,SFVB.01.NumDecimaliQta,SFVT.01.FlCaricoDisp,SFVR.01.GiorniDataConsegna,SFVB.01.CodiceClienteMagazzino,BBAS.01.FlNumScontiT,BBAS.01.FlNumScontiR,SFVB.01.FlVariazioneLotti,SFVB.01.FlGestioneGiriVisita,SFVT.01.FlStampaLotti,SFVB.01.NomeServer,SFVB.01.FlSceltaAutomezzo,SVVA.01.FlGesVarianti,SLOT.01.FlGesLotti,BBAS.01.FlTipoSconti,Ditta..RagioneSociale,Ditta..DatiAggiuntivi,Ditta..Indirizzo,Ditta..Indirizzo2,Ditta..IdCap,Ditta..Citta,Ditta..IdProvincia,Ditta..CodiceFiscale,Ditta..IdIso,Ditta..PartitaIva,Ditta..Telefono1,Ditta..Telefono2,Ditta..Telfax,Ditta..EMail,Ditta..SitoWeb</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">[ElencoTabelleIn]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; Struttura:</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 1.Tabella Concentratore= 
+ Nome tabella sul database Concentratore</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 2.Tabella OS1= Nome tabella 
+ sul database &#160;di OS1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 3.Chiave = Elenco campi 
+ chiave primaria separati da &quot;,&quot; - IdDispositivo escluso</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 4.Campi Esclusi = Elenco 
+ campi esclusi</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 5.Filtro = eventuale 
+ filtro da applicare</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCDocumentiT=FVTMPDocumentiT;KDocumentoT;KTrasferimento;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCDocumentiR=FVTMPDocumentiR;KDocumentoR;KTrasferimento;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCDocumentiD=FVTMPDocumentiD;KDocumentoD;KTrasferimento;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCIncassi=FVTMPIncassi;KIncasso;KTrasferimento;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCIncassiDoc=FVTMPIncassiDoc;KIncasso;KTrasferimento;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCClienti=FVTMPClienti;IdConto,IdDestinazione;KTrasferimento;IdContoTp='CN'</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">[SPOS1]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">;Struttura</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">;1.valore fisso SP</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">;2.SPOS1 = Nome Stored 
+ Procedure OS1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">SP1=spFV_ElaboraListiniCli</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">SP2=spFV_ElaboraFrequenti</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">[ElencoTabelleOut]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; Struttura:</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; &#160;&#160;TabellaConcentratore=TabellaOS1;TipoGestione;Chiave;CampiEsclusi;Filtro;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 1.Tabella Concentratore= 
+ Nome tabella sul database di transito / Concentratore</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 2.Tabella OS1 = Nome 
+ tabella/view corrispondente sul database di OS1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 3.Tipo Gestione:</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; &#160;&#160;&#160;&#160;1 
+ = Tentata Vendita</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; &#160;&#160;&#160;&#160;2 
+ = Raccolta Ordini</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; &#160;&#160;&#160;&#160;3 
+ = Entrambe</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 4.Modalità Aggioneamneto:</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; &#160;&#160;&#160;&#160;&#160;0 
+ = Gestione standard da programma</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; &#160;&#160;&#160;&#160;&#160;1 
+ = Allineamento OS1-&gt;Concentratore con Stored OS1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 5.Chiave = Elenco campi 
+ chiave primaria separati da &quot;,&quot; - IdDispositivo escluso</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 6.Campi Esclusi = Elenco 
+ campi esclusi</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 7.Filtro = eventuale 
+ filtro da applicare</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; Tabelle Generiche</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCAliquoteIva=AliquoteIva;3;0;IdIva;KTrasferimento;FlUtilizzo=0;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCCategorieFV=FVCategorie;3;0;IdCategoriaFV;;FlUtilizzo=0;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCTipiListino=TipiListino;3;0;IdListino;KTrasferimento;FlUtilizzo=0;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCZone=Zone;3;0;IdZona;KTrasferimento;FlUtilizzo=0;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCDivise=Divise;3;0;IdDivisa;KTrasferimento;FlUtilizzo=0;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCNazioni=Nazioni;3;0;IdNazione;KTrasferimento;FlUtilizzo=0;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCPagamenti=Pagamenti;3;0;IdPagamento;KTrasferimento;FlUtilizzo=0;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCMessaggi=fnFV_Messaggi([Agente],[GetDate]);3;0;KFVMessaggio;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCAutomezzi=FVAutomezzi;1;0;IdAutomezzo;KTrasferimento;FlUtilizzo=0;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCDocumentiElab=fnFV_DocumentiElab([Dispositivo]);3;0;FlTipoDocumento,Anno,Serie,Numero;;;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; Tabelle Articoli</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCArticoli=fnFV_Articoli([ListaArticoli]);3;0;IdProdotto;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCArticoliCF=fnFV_ArticoliCF([Agente],[ListaArticoli],[GetDate]);3;0;IdProdotto,IdContoTp,IdConto,KArtCF;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCArticoliGiacRO=fnFV_ArticoliGiacRO([ListaArticoli],[Agente]);2;0;IdProdotto,IdVariante;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCArticoliGiacTV=fnFV_ArticoliGiacTV([ListaArticoli],[Agente]);1;0;IdProdotto,IdVariante,IdLotto;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCArticoliVarianti=ArticoliVarianti;3;0;IdProdotto,IdVariante;KTrasferimento;FlUtilizzo=0;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCVarianti=Varianti;3;0;IdVariante;KTrasferimento;FlUtilizzo=0;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; Il quarto Parametro della 
+ fnFV_Frequenti rappresenta il numero di anni indietro rispetto ad oggi 
+ da cui effettuare la ricerca. Es.: Se oggi è il 10/11/2013 e il valore 
+ è 3 effettua una ricerca dal 10//11/2010 al 10/11/2013</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCFrequenti=fnFV_Frequenti([Agente],[ListaArticoli],[GetDate],2,[Dispositivo]);3;0;IdConto,IdDestinazione,IdProdotto,IdVariante;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCStorico=fnFV_Storico([Agente],[ListaArticoli],[GetDate],[Dispositivo]);3;0;KRigo,Numero,FlTipoDoc,IdVariante;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCSchemaDocT=fnFV_SchemaDocT([Agente],[GetDate]);3;0;KSchemaT;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCSchemaDocR=fnFV_SchemaDocR([Agente],[GetDate],[ListaArticoli]);3;0;KSchemaR;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; Tabelle Clenti</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCClienti=fnFV_Clienti([Agente],[GetDate]);3;0;IdContoTP,IdConto,IdDestinazione;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCClientiSaldi=fnFV_ClientiSaldi([Agente],[GetDate]);3;0;IdConto;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCScadenze=fnFV_Scadenze([Agente],[GetDate]);3;0;FlTipoOrigine,KRigo;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCGiriVisite=fnFV_GiriVisite([Agente]);3;0;IdGiroVisita;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCGiriVisiteD=fnFV_GiriVisiteD([Agente],[GetDate]);3;0;IdGiroVisita,NumSequenza;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCListini=fnFV_Listini([ListaArticoli],[GetDate]);3;0;IdListino,IdDivisa,IdProdotto;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCListiniCli=fnFV_ListiniCli([Agente],[ListaArticoli],[GetDate]);3;0;IdConto,IdCategoriaP,IdProdotto,Quantita;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCListiniOff=fnFV_ListiniOff([ListaArticoli],[GetDate]);3;0;IdProdotto,IdDivisa,QuantitaMin;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; Tabelle Dispositivi</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCCausali=fnFV_Causali([Agente]);3;0;FlTipoDocumento,IdCausale;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">FVCDocumentiProt=fnFV_DocumentiProt([Agente],[GetDate]);3;0;FlTipoDocumento,Anno,Serie;</p>
+</body>
+</html>

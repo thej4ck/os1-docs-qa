@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc1.js\"  name=\"SQL Avanzato\"><item name=\"Modifica SQL\" url=\"html/sstp/sstpModSql.htm\" /><item name=\"Definizione parametri\" url=\"html/sstp/sstp0001f_011.htm\" /><item name=\"Selezione campi\" url=\"html/sstp/sstp0001f_012.htm\" /></data>";

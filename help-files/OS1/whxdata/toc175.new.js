@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_55.htm"},{"type":"book","name":"Disposizioni","key":"toc176"},{"type":"book","name":"Scheda tecnica","key":"toc178"},{"type":"book","name":"Piano di produzione","key":"toc179"},{"type":"book","name":"Lancio in produzione","key":"toc182"},{"type":"book","name":"Versamenti","key":"toc183"},{"type":"book","name":"Conto lavoro","key":"toc184"},{"type":"book","name":"Magazzino","key":"toc201"},{"type":"book","name":"Consuntivazione","key":"toc204"},{"type":"book","name":"Schedulazione","key":"toc205"},{"type":"book","name":"Tabelle","key":"toc207"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

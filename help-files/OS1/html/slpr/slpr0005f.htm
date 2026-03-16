@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="11 8, 2005 10:12:06 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Generazione liste di prelievo</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.7.10.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Magazzino > Liste di prelievo" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; font-weight: bold; text-align: left;"><span>Generazione liste di prelievo</span></p>
+<p>Il programma effettua la generazione di liste di prelievo direttamente evadendo in maniera automatica, in relazione alle giacenze di magazzino, gli ordini clienti. La fase di evasione può essere diretta dall'utente ordinando gli ordini selezionati a piacimento o stabilendo a priori, sull'ordine, la priorità di evasione; tramite le preferenze dell'<a href="../bbas/bbas0051f_06.htm">anagrafica clienti</a> è possibile indicare la possibilità di effettuare evasioni parziali di ordine; quest'opzione può avere importanza in fase di evasione ordine perchè la procedura ignorerà, in caso di impossibilità all'evasione parziale, le righe ordini per cui la giacenza non sarà completamente sufficiente a coprire la quantità ordinata.</p>
+<p>Il programma si articola su tre finestre video. La prima, Parametri, consente la definizione dei parametri di selezione degli ordini da evadere.</p>
+<p style="text-align: center;"><img src="images/slpr0005f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CLIENTE: codice del cliente, presente in anagrafica clienti, da cui si vuole iniziare la selezione di analisi. Confermando a vuoto, la selezione inizia dal primo cliente valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CLIENTE: codice del cliente, presente in anagrafica clienti, con cui si vuole terminare la selezione di analisi. Confermando a vuoto, la selezione termina con l’ultimo cliente valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA RIFERIMENTO ORDINE: tre campi per contenere rispettivamente anno, causale e numero dell'ordine da cui si vuole iniziare la selezione. Confermando a vuoto, la selezione inizia dal primo ordine compatibile con gli altri parametri.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A RIFERIMENTO ORDINE: tre campi per contenere rispettivamente anno, causale e numero dell'ordine con cui si vuole concludere la selezione. Confermando a vuoto, la selezione termina con l’ultimo ordine compatibile con gli altri parametri.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA ORDINE: data dell'ordine da cui deve iniziare l’analisi degli ordini. Confermando a vuoto, l’analisi inizia con il primo ordine valido.</p>
+<p style="margin-left: 30pt; text-indent: -0.417in;">A DATA ORDINE: data dell'ordine con cui si desidera terminare l’analisi degli ordini. Confermando a vuoto, l’analisi si conclude con l'ultimo ordine valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA CONSEGNA: data di consegna da cui deve iniziare l’analisi degli ordini. Confermando a vuoto, l’analisi inizia con il primo ordine valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA CONSEGNA: data di consegna con cui terminare l’analisi degli ordini. Confermando a vuoto, l’analisi si conclude con l'ultimo ordine valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">AGENTE: codice dell'agente per cui si vuole effettuare l'analisi degli ordini. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NAZIONE: codice della nazione per cui si vuole effettuare l'analisi degli ordini. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ZONA: codice della zona per cui si vuole effettuare l'analisi degli ordini. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ZONA CONSEGNA: codice della zona di consegna per cui si vuole effettuare l'analisi degli ordini. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ATTIVITÀ: codice dell'attività per cui si vuole effettuare l'analisi degli ordini. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO RAGGRUPPAMENTO SELEZIONE: indica se e come deve essere effettuato il raggruppamento degli ordini selezionati per l'evasione durante la generazione delle liste di prelievo: per cliente, per cliente/destinazione, nessun raggruppamento oppure lista unica; quest'ultima opzione consente di generare un'unica lista di prelievo non intestata che contiene tutte le righe ordini selezionate.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE LISTA DI PRELIEVO: causale da utilizzare per la generazione. Il campo è obbligatorio.</p>
+<p style="margin-left: 0in;">&#160;</p>
+<p>Confermando tramite pressione del bottone Esegui, viene avviata la selezione e richiamata la finestra video Selezione Ordini, con le teste ordini già selezionate.</p>
+<p style="text-align: center;"><img src="images/slpr0005f_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>Gli ordini vengono presentati in ordine di Priorità e data consegna dal meno recente al più recente. E' possibile selezionare o deselezionare gli ordini con il doppio clic del mouse, il menù corrispondente al tasto destro del mouse oppure il tasto F12 o CTRL+F12 per la selezione di tutti gli ordini.</p>
+<p><img src="images/slpr0005f_08.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:70px;" align="left" border="0" />Il pulsante Simula consente la simulazione dell'elaborazione degli ordini selezionati e valorizza la relativa colonna percentuale di evadibilità, consentendo all'utente di decidere se cambiare l'ordinamento dei documenti per modificare i dati di generazione.</p>
+<p><img src="images/slpr0005f_06.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:70px;" align="left" border="0" />Il pulsante Ordina consente l'accesso alla finestra di ordinamento dalla quale è possibile spostare a piacimento gli ordini in modo da modificare l'ordine di evasione.</p>
+<p style="text-align: center;"><img src="images/slpr0005f_04.png" alt="" style=" border:none; margin-right:0px; margin-top:0px; margin-left:0px; margin-bottom:0px; width:100%; max-width:665px;" border="0" /></p>
+<p>&#160;</p>
+<p><img src="images/slpr0005f_07.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:70px;" align="left" border="0" />Il pulsante Elabora consente l'avvio dell'elaborazione delle righe degli ordini selezionati per la determinazione delle quantità da evadere in relazione alle giacenze di magazzino. la finestra video Selezione prodotti compare con i prodotti già selezionati.</p>
+<p style="text-align: center;"><img src="images/slpr0005f_03.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p>Le righe ordine vengono presentate in relazione alla selezione ordini precedente e selezionate quando la giacenza è sufficiente; vengono visualizzate le quantità ordinate, da evadere, in evasione e la giacenza già detratta della quantità utilizzata per l'evasione (in evasione), viene inoltre visualizzata la percentuale di evadibilità calcolata rapportando la quantità da evadere e la quantità in evasione. Le righe in rosso non sono selezionabili perchè con giacenza insufficiente; tuttavia annullando la selezione a righe precedenti, dello stesso prodotto, potrebbero diventare disponibili.</p>
+<p>E' possibile selezionare o deselezionare le righe con il doppio clic del mouse, il menù corrispondente al tasto destro del mouse oppure il tasto F11 o CTRL+F11 per la selezione di tutte le righe selezionabili.</p>
+<p><img src="images/slpr0005f_06.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:0px; margin-bottom:5px; width:100%; max-width:70px;" align="left" border="0" />Il pulsante Ordina consente l'accesso alla finestra di ordinamento dalla quale è possibile spostare a piacimento le righe in modo da modificare l'ordine di evasione, la selezione dei prodotti sarà azzerata e nuovamente effettuata in base al nuovo ordinamento.</p>
+<p style="text-align: center;"><img src="images/slpr0005f_05.png" alt="" style=" border:none; margin-right:0px; margin-top:0px; margin-left:0px; margin-bottom:0px; width:100%; max-width:788px;" border="0" /></p>
+<p>&#160;</p>
+<p>Al termine delle operazioni, quando viene premuto il tasto F10 oppure il pulsante Salva nella tool bar compare la finestra di conferma della generazione delle liste di prelievo. Al termine della registrazione, viene richiesto se si deve effettuare la stampa diretta delle liste di prelievo generate.</p>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="11 9, 2005 7:07:30 PM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Configurazione esterna eCommerce B2C</title>
+<link rel="StyleSheet" href="../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "..";
+gCommonRootRelPath = "..";
+gTopicId = "2.1_2";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazioni esterne" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../ehlpdhtm.js"></script>
+
+<h2>Configurazione esterna eCommerce B2C</h2>
+<p>Per configurare un'azienda per gestire il riallineamento dei dati con 
+ un sito web di eCommerce è necessario creare nella cartella <span style="font-weight: bold;">Custom</span> 
+ una cartella <span style="font-weight: bold;">eCommerce</span> e copiare 
+ dalla cartella <span style="font-weight: bold;">Modelli\eCommerce</span> 
+ il file '<span style="font-weight: bold;">B2C_ReplicaWebConfig.ini</span>'.</p>
+<p>Il file copiato deve essere rinominato sostituendo il prefisso 'B2C' 
+ con il codice ditta riportando 'B2C' alla fine del nome. Ad esempio: <span 
+	 style="font-weight: bold;">DWEB_ReplicaWebConfigB2C.ini</span><span>.</span></p>
+<p>Nella stessa cartella <span style="font-weight: bold;">Custom\eCommerce</span> 
+ deve essere presente anche il file di licenza generato tramite il programma 
+ XNSerie il cui nome deve essere dato dal codice della ditta seguito dal 
+ suffisso '_eCommerceB2C.licweb'. Ad esempio: <span style="font-weight: bold;">DWEB_eCommerceB2C.licweb</span>.</p>
+<p>&#160;</p>
+<p style="font-weight: bold;">Struttura del file di configurazione</p>
+<p>Il file ha parametri specifici e contiene anche delle righe di commento, 
+ precedute dal carattere '<span style="font-weight: bold;">;</span>' che 
+ spiegano dettagliatamente il significato ed i formati delle righe presenti.</p>
+<p>&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">[Modulo]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">Modulo=EB2C</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">[Immagini]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">TipiImg=.jpg</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">[ElencoTabelleOut]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; Struttura:</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; &#160;&#160;TabellaWeb=TabellaOS1;TipoGestione;Chiave;CampiEsclusi;Filtro;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 1.TabellaWeb = Nome tabella 
+ sul database di transito / Web</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 2.Tabella = Nome tabella/view 
+ corrispondente sul database di OS1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 3.TipoGestione:</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; &#160;&#160;&#160;&#160;&#160;0 
+ = Gestione standard OS1-&gt;Web</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; &#160;&#160;&#160;&#160;&#160;1 
+ = Allineamento OS1-&gt;Web con Stored OS1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; &#160;&#160;&#160;&#160;98 
+ = Allineamento OS1-&gt;Web (solo UtentiWebSub)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; &#160;&#160;&#160;&#160;99 
+ = Allineamento OS1-&gt;Web (solo configurazioni di OS1)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; &#160;&#160;&#160;100 
+ = Gestione standard Web&gt;Os1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 4.Chiave = Elenco campi 
+ chiave primaria separati da &quot;,&quot;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 5.CampiEsclusi = Elenco 
+ campi esclusi</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 6.Filtro = eventuale 
+ filtro da applicare</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECAliquoteIVA=AliquoteIVA;0;IdIva;;SV</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECArticoli=vB2CArticoli;0;IdProdotto;;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECArticoliCategorieWEB=vB2CArticoliCategorieWEB;0;IdProdotto,IdCategoria;;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECArticoliDocs=vB2CArticoliDocs;0;KDocumento,IdProdotto;;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECArticoliRel=vB2CArticoliRel;0;IdProdotto,IdProdottoRel;;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECCambi=spB2CCambi;1;IdDivisa;;SV</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECCategorieWEB=vB2CCategorieWEB;0;IdCategoria;;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECDescrLingua=vB2CDescrLingua;0;Tabella,Codice,IdLingua;;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECDivise=vB2CDivise;0;IdDivisa;;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECEsistenzeArt=spB2CEsistenzeArt;1;IdProdotto;;SV</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECImballi=Imballi;0;IdImballo;;FlUtilizzo=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECLingueWEB=LingueWEB;0;IdLinguaWEB;;FlUtilizzo=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECListini=vB2CListini;0;IdListino,IdDivisa;;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECListiniD=vB2CListiniD;0;KListino,IdProdotto,DataFine;;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECMarchi=Marchi;0;IdMarchio;;FlUtilizzo=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECNazioni=Nazioni;0;IdNazione;;FlUtilizzo=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECOfferteWEB=vB2COfferteWEB;0;IdProdotto,IdDivisa,DataFine,QuantitaMin;;SV</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECOrdiniStatoWEB=vB2COrdiniStatoWEB;0;KOrdineWeb;;SV</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECOrdiniROS1=vB2COrdiniCliR;0;KOrdiniCliR,IdVariante;;SV</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECOrdiniTOS1=vB2COrdiniCliT;0;KOrdiniCliT;;SV</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECPagamenti=vB2CPagamenti;0;IdPagamento;;SV</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECProvince=Province;0;IdProvincia;;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECTariffeSpedWEB=TariffeSpedWEB;0;IdZonaConsegna,FlTipoQuantita,Quantita;;FlUtilizzo=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECVarianti=vB2CVarianti;0;IdVariante;;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">ECVariantiArticoli=vB2CVariantiArticoli;0;IdVariante,IdProdotto;;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">WebConfig=EB2C01;99;IdConfigurazione;;BBAS01.FlNumScontiR,BBAS01.FlTipoSconti,BBAS03.IdDivisaEuro,BBAS03.IdNazioneDef,SVVA01.FlGesVarianti</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">&#160;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">[ElencoTabelleIn]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; Struttura:</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; &#160;&#160;FileImport=TabellaDB;TipoGestione;Chiave;TabellaOS1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 1.FileImport = Nome del 
+ file di import (senza numero davanti e senza estensione)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 2.Tabella = Nome tabella 
+ corrispondente sul database WEB</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 3.TipoGestione:</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; &#160;&#160;&#160;&#160;&#160;0 
+ = Gestione standard Seq-&gt;DBT</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; &#160;&#160;&#160;&#160;97 
+ = Gestione import Seq-&gt;DBT solo tabella WebStatistiche</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; &#160;&#160;&#160;&#160;98 
+ = Gestione import Seq-&gt;DBT solo tabella UtentiWebSub</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 4.Chiave = Elenco campi 
+ chiave primaria separati da &quot;,&quot;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">; 5.TabellaOS1 = Nome tabella 
+ corrispondente sul database OS1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">TblECOrdiniTWEB=ECOrdiniTWEB;0;KOrdineWeb;B2COrdiniT</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">TblECOrdiniRWEB=ECOrdiniRWEB;0;KOrdineWeb,IdProdotto,IdVariante;B2COrdiniR</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">TblECUtentiWEB=ECUtentiWEB;0;IdLogin;B2CUtenti</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">TblWebStatistiche=WebStatistiche;97;;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt;">&#160;</p>
+</body>
+</html>

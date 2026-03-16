@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 29, 2010 9:36:34 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Elaborazione valorizzazione FIFO</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.7.12.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Magazzino > F.I.F.O." />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt;">Elaborazione valorizzazione FIFO</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;"><span style="font-family: Verdana, sans-serif; font-size: 10pt;">Il programma esegue la valorizzazione FIFO; i dati elaborati vengono memorizzati nei campi corrispondenti della tabella FIFO. E’ possibile effettuare la elaborazione della valorizzazione FIFO utilizzando il calcolo valore secondo le modalità prevista dal FIFO continuo oppure a scatti. Tale funzionalità viene attivata attraverso un parametro presente nella configurazione. Le differenze fra i due metodi possono essere riepilogate secondo il seguente schema:</span></p>
+<ul style="list-style: disc;">
+<li class="p">
+<p>Calcolo "a scatti": &#160;viene effettuato il calcolo del valore sulla base della variazione della giacenza finale rispetto alla giacenza iniziale. Se la variazione è negativa (giacenza finale inferiore alla giacenza iniziale) il valore è dato dal valore delle scorte accantonate negli esercizi precedenti più recenti; se la variazione è positiva (la giacenza finale è superiore alla giacenza iniziale) il valore è dato dalla somma del valore delle scorte accantonate negli esercizi precedenti più recenti incrementato del valore della variazione in eccedenza (calcolato in base al prezzo medio di carico dell'esercizio stesso).</p>
+</li>
+<li class="p">
+<p>Calcolo "continuo": il valore della giacenza finale viene calcolato in base ai prezzi dei movimenti di carico del periodo elaborato. L’elaborazione viene effettuata andando a scalare in concorrenza dai movimenti di carico i movimenti di scarico, partendo dal meno recente. I movimenti che non sono stati completamente scalati rappresentano la quantità e il valore della scorta finale.</p>
+</li>
+</ul>
+<p>&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: center;"><img src="Images/bfif0001d_01.png" alt="" style=" border:none; width:100%; max-width:281px;" border="0" /></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify;">&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in;">DATA FINE ELABORAZIONE:data obbligatoria per determinare la data a cui si riferiscono le esistenze da esaminare. Viene proposta automaticamente dal programma.</p>
+</body>
+</html>

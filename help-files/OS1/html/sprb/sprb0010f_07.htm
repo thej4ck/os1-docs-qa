@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 16, 2016 5:02:56 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Gestione MPS - Pianificazione</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.3.1.0_8";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Piano di produzione > Gestione MPS" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; margin-top: 6pt; margin-bottom: 6pt; 
+	 font-weight: bold; font-size: 12pt;">Pianificazione</p>
+<p><img src="images/sprb0010f_7_01.png" alt="" style=" border:none; margin-left:0px; margin-top:0px; margin-bottom:5px; margin-right:5px; width:100%; max-width:78px;" align="left" border="0" />La funzione di pianificazione provvede a rendere 
+ definitivi (e quindi non più modificabili) gli ODP provvisori (e di conseguenza 
+ anche i relativi ODL) ed a rendere visibili in tutta l'applicazione gli 
+ impegni in produzione dei componenti (materiali e semilavorati) e gli 
+ ordinati a produzione dei composti (prodotti finiti e semilavorati). La 
+ pianificazione si può eseguire solo se il piano è valido.</p>
+<p>Viene proposta la data di fine elaborazione basandosi sui giorni presenti 
+ in configurazione, sono presenti dei limiti di selezione per consentire 
+ di visualizzare solo gli ODP di uno specifico cliente, prodotto o progetto, 
+ se gestito; è possibile includere, spuntando la relativa casella, anche 
+ gli ODP evasi, ma per cui non necessita produzione perchè già presenti 
+ in magazzino ed utilizzati; pianificare questo tipo di ODP non comporta 
+ l'avvio della produzione, ma soltanto il rendere definitivo l'utilizzo 
+ del prodotto. Se gestiti gli ordini aperti è possibile selezionare solo 
+ gli ODP derivanti da tali ordini tramite la casella &quot;Solo ordini 
+ aperti&quot;. Nel caso siano gestiti i progetti e si inserisca un codice 
+ prodotto è possibile includere nella selezione eventuali semilavorati 
+ associati al progetto del prodotto richiesto apponendo la spunta sul parametro 
+ &quot;Includi SL&quot;.</p>
+<p>Dalla funzione è possibile anche annullare la pianificazione di ODP 
+ già pianificati (a condizione che non siano stati già lanciati).</p>
+<p>Al termine della funzione di pianificazione è possibile ottenere il 
+ calcolo dei fabbisogni dei componenti (evidenziando le disponibilità negative 
+ nel tempo).</p>
+<p>Il calcolo dei fabbisogni può essere fatto anche su ODP provvisori.</p>
+<p>&#160;</p>
+<p style="text-align: center;"><img src="images/sprb0010f_7_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p><img src="images/sprb0010f_7_03.gif" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:348px;" align="right" border="0" />Nella parte bassa della 
+ finestra è presente la casella che consente di escludere gli ODP già in 
+ stato di pianificato, consentendo quindi una più semplice lettura degli 
+ ODP da pianificare e la casella che consente di nascondere gli ODP da 
+ non produrre, ovvero pianificati ma con la colonna Da produrre a zero, 
+ perchè già presenti in magazzino; sono inoltre presenti altre due caselle 
+ di spunta per indicare per quali ODP si vuole visualizzare il fabbisogno. 
+ Sono poi presenti i pulsanti per eseguire il calcolo dei fabbisogni, se 
+ gestito il progetto sulle RDA è possibile visualizzarli anche differenziati 
+ per progetto con l'apposito pulsante; c'è poi il pulsante Applica per 
+ eseguire effettivamente la Pianificazione o l'annullamento in base alla 
+ selezione degli ODP. Sulla griglia tramite il clic destro del mouse si 
+ accede al menù contestuale che contiene le funzionalità associate quali 
+ selezione e deselezione, singola o totale, stampa dell'ODP selezionato 
+ o di tutti gli ODP visualizzati. La casella &quot;Considera provvisori&quot; 
+ è utilizzata per il calcolo della disponibilità dei componenti selezionati; 
+ se spuntata vengono inclusi nel calcolo anche gli impegni dei componenti 
+ di ODP non pianificati, altrimenti considera solo gli impegni dei componenti 
+ relativi ai soli ODP pianificati (casella vuota).</p>
+<p>Premendo i pulsanti Fabbisogno o Applica si accede alla pagina dei Fabbisogni 
+ di cui riportiamo due esempi con la gestione dei progetti e generale; 
+ se si preme il pulsante Fabbisogni progetti, nella parte alta della finestra 
+ è presente un pannello che consente di modificare l'ordinamento dei dati 
+ visualizzati.</p>
+<p>Nella parte bassa sono presenti due caselle di spunta; una per visualizzare 
+ tutti i fabbisogni o solo quelli che necessitano di correttivi: per correttivi 
+ si intendono i materiali per cui è necessario effettuare approvvigionamento 
+ e l'altra per visualizzare anche gli eventuali fabbisogni di semilavorati, 
+ che altrimenti non vengono mostrati; è inoltre presente il pulsante Stampa 
+ per stampare quanto visualizzato.</p>
+<p style="font-weight: bold;">Fabbisogni progetti</p>
+<p style="text-align: center;"><img src="images/sprb0010f_7_04.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p style="text-align: left; font-weight: bold;">Fabbisogni pianificazione</p>
+<p style="text-align: center;"><img src="images/sprb0010f_7_05.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+</body>
+</html>

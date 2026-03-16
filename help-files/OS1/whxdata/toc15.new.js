@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_1061.htm"},{"type":"item","name":"Generazione effetti","url":"html/befc/befc0001f.htm"},{"type":"item","name":"Stampa situazione effetti","url":"html/befc/befc0002d.htm"},{"type":"item","name":"Elaborazione distinta effetti","url":"html/befc/befc0003f.htm"},{"type":"item","name":"Manutenzione distinta","url":"html/befc/befc0007f.htm"},{"type":"item","name":"Stampa distinta effetti","url":"html/befc/befc0004d.htm"},{"type":"item","name":"Contabilizzazione distinta effetti","url":"html/befc/befc0012d_C.htm"},{"type":"item","name":"RI.BA. magnetiche - Home Banking","url":"html/befc/befc0006f.htm"},{"type":"item","name":"Esito effetti","url":"html/befc/befc0010d.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

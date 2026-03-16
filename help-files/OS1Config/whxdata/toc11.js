@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc1.js\"  name=\"Partite aperte\"><item name=\"Introduzione\" url=\"html/index/index_8031.htm\" /><item name=\"Tipologie movimento scadenze\" url=\"html/bpcf/bpcf0100f.htm\" /></data>";

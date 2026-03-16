@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_90.htm"},{"type":"book","name":"Generali","key":"toc254"},{"type":"book","name":"Contabilità","key":"toc256"},{"type":"book","name":"Vendite","key":"toc267"},{"type":"book","name":"Parcelle","key":"toc273"},{"type":"book","name":"Ordini clienti","key":"toc274"},{"type":"book","name":"Ordini fornitori","key":"toc277"},{"type":"book","name":"Acquisti","key":"toc280"},{"type":"book","name":"Magazzino","key":"toc284"},{"type":"book","name":"Produzione","key":"toc290"},{"type":"book","name":"Integrazione Factotum","key":"toc297"},{"type":"book","name":"Esportazione dati","key":"toc299"},{"type":"book","name":"Importazione dati","key":"toc301"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

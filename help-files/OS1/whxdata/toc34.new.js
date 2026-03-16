@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_106920.htm"},{"type":"item","name":"Bilancio a sezioni divise","url":"html/bcge/bcge0015d_I.htm"},{"type":"item","name":"Bilancio IV Direttiva Cee","url":"html/bcge/bcge0025d_I.htm"},{"type":"item","name":"Dettaglio clienti/fornitori","url":"html/bcge/bcge0038d.htm"},{"type":"item","name":"Valorizzazione a prezzo medio","url":"html/bmag/bmag0011d_I.htm"},{"type":"item","name":"Valorizzazione LIFO","url":"html/blif/blif0002d_I.htm"},{"type":"item","name":"Valorizzazione FIFO","url":"html/bfif/bfif0002d_I.htm"},{"type":"item","name":"Stampa schede","url":"html/bcge/bcge0014d_I.htm"},{"type":"item","name":"Stampa riepilogo cespiti","url":"html/bces/bces0013d_i.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

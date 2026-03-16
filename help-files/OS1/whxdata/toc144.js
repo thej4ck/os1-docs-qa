@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc126.js\"  name=\"Tabelle\"><item name=\"Introduzione\" url=\"html/index/index_4091.htm\" /><item name=\"Causali Ddt\" url=\"html/bbas/bbas0045f.htm\" /><item name=\"Causali Fatture\" url=\"html/bbas/bbas0046f.htm\" /></data>";

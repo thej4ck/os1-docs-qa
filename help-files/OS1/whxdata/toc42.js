@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc4.js\"  name=\"OS1BoxFatture\"><item name=\"Introduzione\" url=\"html/index/index_1086.htm\" /></data>";

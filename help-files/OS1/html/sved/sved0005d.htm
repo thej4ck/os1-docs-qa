@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 22, 2015 11:54:37 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Generazione fatture</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.14.1_6";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > Vendita al dettaglio" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; font-weight: bold; text-align: left;"><strong><span style="font-weight: bold;">Generazione fatture</span></strong></p>
+<p>Il programma effettua la generazione delle ricevute/fatture fiscali o fatture di vendita, provvisoria o definitiva, utilizzando i dati dei documenti di vendita esistenti in archivio in base ai parametri inseriti dall’utente.</p>
+<p style="text-align: center;"><img src="Images/sved0005d_01.png" alt="" style=" border:none; width:100%; max-width:561px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO DOCUMENTO: definisce se si devono generare fatture fiscali, immediate o differite, ricevute fiscali o fatture di vendita. In base a questo campo sarà considerata una delle causali di ricevute/fatture fiscali o la causale di fattura di vendita presenti nelle causali dei movimenti di vendita.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SELEZIONE MANUALE MOVIMENTI: se si appone la spunta a questa casella, sarà compito dell'utente selezionare manualmente i movimenti da fatturare da un elenco tramite la seguente finestra che compare dopo la pressione del pulsante Esegui.</p>
+<p style="margin-left: 0.417in; text-align: center;"><img src="Images/sved0005d_05.png" alt="" style=" border:none; width:100%; max-width:736px;" border="0" /></p>
+<p style="margin-left: 0.417in;">La finestra presenta i movimenti che sarebbero da fatturare, già selezionati, in base ai parametri inseriti e consente di selezionare e annullare la selezione con il doppio clic del mouse o tramite un menù richiamato dal pulsante destro del mouse. Se sono presenti movimenti di tipo interno sarà attivo il campo '<span style="font-style: italic;">Tipo incasso</span>' con cui è possibile selezionare il tipo incasso definitivo per i movimenti interni.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO GENERAZIONE: definisce il tipo di operazione da compiere: provvisoria oppure definitiva. La generazione provvisoria può essere effettuata più volte e non aggiorna nessuna tabella, ma genera soltanto la stampa di un brogliaccio di fatturazione; la generazione definitiva aggiorna le tabelle e per annullarla è necessario seguire una specifica procedura ed è consigliabile contattare il servizio Assistenza.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CLIENTE: codice del cliente, presente in anagrafica clienti, da cui si vuole iniziare la selezione. Confermando a vuoto, la selezione inizia dal primo cliente valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CLIENTE: codice del cliente, presente in anagrafica clienti, con cui si vuole terminare la selezione. Confermando a vuoto, la selezione termina con l'ultimo cliente valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE VENDITA: codice della causale di vendita per cui si vuole effettuare la selezione. Confermando a vuoto vengono considerate valide tutte le causali. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale data del documento da cui deve iniziare l'elaborazione dei documenti relativamente ai precedenti parametri inseriti. Confermando a vuoto, la selezione inizia con il primo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale data del documento con cui si desidera terminare l’elaborazione dei documenti relativamente ai precedenti parametri inseriti. Confermando a vuoto, la selezione si conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SELEZIONE PER NUMERO DOCUMENTO: check box che abilita i campi sottostanti per effettuare la selezione dei documenti per numero (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ANNO/SERIE/DA NUMERO/A NUMERO: campi abilitati solo se la casella precedente è spuntata; consentono di specificare i limiti di selezione per anno, serie e numero dei documenti di vendita da considerare per la generazione delle ricevute/fatture fiscali.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-indent: -0.417in; margin-left: 30pt;">SPECIFICA PRIMO NUMERO FATTURA</span>: check box che abilita il campo successivo per specificare il numero con cui dovrà iniziare la fatturazione, casella con segno di spunta.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NUMERO FATTURA: campo abilitato solo se la casella precedente è spuntata; consente di inserire il numero con cui iniziare la fatturazione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE FATTURE: codice della causale, presente nella tabella causali ricevute/fatture fiscali, riferita alla causale dei movimenti di vendita, con cui si vuole effettuare la generazione delle ricevute/fatture fiscali. Confermando a vuoto non sarà effettuato nessun controllo sulle causali ricevute/fatture fiscali presenti nelle causali di vendita. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA FATTURAZIONE: indica la data con cui deve essere effettuata la fatturazione. Nel caso in cui questa data sia precedente a quella indicata nel campo &#160;"a data" saranno considerati solo i documenti fino alla data fatturazione.</p>
+<p>&#160;</p>
+<p>La pressione sul pulsante Esegui determina l'inizio dell'elaborazione dei documenti. Il risultato viene visualizzato nella pagina 'Risultati'.</p>
+<p style="margin-left: 0in; text-align: center;"><img src="Images/sved0005d_02.png" alt="" style=" border:none; width:100%; max-width:561px;" border="0" /></p>
+<p style="margin-left: 0in;"><img src="Images/sved0005d_04.png" alt="" style=" border:none; margin-bottom:0px; margin-left:0px; margin-right:7px; margin-top:0px; width:100%; max-width:83px;" align="left" border="0" />Nella pagina vengono visualizzati i risultati dell'elaborazione; qui vengono indicati i documenti generati, se si sono verificati errori o ci sono dati non corretti nei documenti elaborati, viene indicato in questa sezione. La pagina dei risultati può essere stampata utilizzando l'apposito pulsante Risultato.</p>
+<p style="margin-left: 0in;"><img src="Images/sved0005d_03.png" alt="" style=" border:none; margin-left:0px; margin-bottom:0px; margin-right:7px; margin-top:0px; width:100%; max-width:83px;" align="left" border="0" />Con il pulsante Fatture può essere eseguita direttamente la stampa dei documenti generati, se non ci sono stati errori; se la generazione è provvisoria, la stampa sarà annullata dalla dicitura "Fatturazione provvisoria".</p>
+</body>
+</html>

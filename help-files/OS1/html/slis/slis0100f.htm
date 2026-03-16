@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="02 18, 2013 3:34:38 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Definizioni listini</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.3.7.1.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Vendite > Listini > Tabelle" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-size: 12pt; font-weight: bold; text-align: left;"><strong><span style="font-weight: bold;">Definizioni listini</span></strong></p>
+<p>Il programma permette di definire le associazioni tra listino e divisa impostando i criteri di arrotondamento e le diciture da utilizzare nella manutenzione e nella stampa del listino.</p>
+<p>E' anche possibile, solo per i listini di vendita, creare i listini a partire da un listino di acquisto al quale vengono applicate in automatico percentuali o valori assoluti di incremento per determinare il prezzo; l’assegnazione può essere fatta per categoria merceologica, per categoria di vendita, per fornitore abituale o per singolo prodotto.</p>
+<p>L’aggiornamento dei listini di vendita collegati viene effettuato automaticamente alla variazione del prezzo di acquisto, da qualsiasi parte questo venga aggiornato (manutenzione listini, manutenzione prodotti, <a href="../bbas/DlgVarPrezziDoc.htm">variazione prezzi da documenti</a>).</p>
+<p style="text-align: center;"><img src="Images/slis0100f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CODICE: indica il codice della <a href="../bbas/bbas0030f.htm">tipologia del listino</a> di appartenenza. Sul campo sono attive le funzioni di ricerca (F9), sulla tabella tipologia listini solo se in inserimento, altrimenti sulla tabella stessa Definizione listini.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DIVISA: indica il codice della <a href="../bbas/bbas0009f.htm">divisa</a> da associare al codice del listino per generare la definizione del listino. Sul campo sono attive le funzioni di ricerca (F9), sulla tabella Divise.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO ARROTONDAMENTO: definisce il metodo di arrotondamento del listino-divisa: matematico, per eccesso o per difetto.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">VALORE ARROTONDAMENTO: definisce il valore da utilizzare per effettuare l'arrotondamento dei prezzi.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NOTE LISTINO: campo note relative al listino-divisa appena definito.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ORIGINE LISTINO: definisce gli eventuali criteri di aggiornamento del listino:</p>
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="margin-top: 0px; margin-bottom: 0px; margin-left: 0in;">Manuale: il listino deve essere inserito manualmente.</p>
+</li>
+<li class="p">
+<p style="margin-top: 0px; margin-bottom: 0px; margin-left: 0in;">Da listino: il listino deriva da un listino di acquisto, in questo caso sarà specificata l'associazione Listino/Divisa di origine nei campi successivi;</p>
+</li>
+<li class="p">
+<p style="margin-top: 0px; margin-bottom: 0px; margin-left: 0in;">Da listino speciale: il listino deriva da un listino speciale di un fornitore, in questo caso sarà specificata l'associazione Divisa/Fornitore di origine nei campi successivi;</p>
+</li>
+</ul>
+</li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">COPIA SCONTI: indica se in fase di aggiornamento/riallineamento listini devono essere copiati anche gli sconti oltre al prezzo (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MODALITÀ IVA: Definisce come considerare i prezzi, sia del listino di riferimento che del listino corrente, per quanto riguarda l'applicazione dell'aliquota IVA del prodotto in fase di aggiornamento. <span style="text-indent: -0.417in; margin-left: 30pt;">Sul listino di riferimento determina, se si tratta di un prezzo IVA compreso o meno, sul listino corrente determina se il prezzo deve essere comprensivo di IVA oppure no.</span></p>
+<ol style="list-style: disc;">
+<li style="list-style: none; display: inline;">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="margin-left: 0px;">Origine IVA esclusa - Destinazione IVA esclusa: il prezzo non è comprensivo di IVA sul listino di riferimento, né dovrà essere calcolata l'IVA del prodotto sul listino corrente.</p>
+</li>
+<li class="p">
+<p style="margin-left: 0px;">Origine IVA compresa - Destinazione IVA compresa: il prezzo è comprensivo di IVA sul listino di riferimento e sarà aggiunta l'IVA del prodotto anche sul listino corrente.</p>
+</li>
+<li class="p">
+<p style="margin-left: 0px;">Origine IVA compresa - Destinazione IVA esclusa: il prezzo è comprensivo di IVA sul listino di riferimento e non dovrà essere calcolata l'IVA del prodotto sul listino corrente.</p>
+</li>
+<li class="p">
+<p style="margin-left: 0px;">Origine IVA esclusa - Destinazione IVA compresa: il prezzo non è comprensivo di IVA sul listino di riferimento, ma dovrà essere calcolata l'IVA del prodotto sul listino corrente.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LISTINO DI RIFERIMENTO: valido solo per origine da listino: indicare il codice del listino di acquisto da cui deve essere generato il listino di vendita. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DIVISA DI RIFERIMENTO: indicare il codice della divisa relativa al listino oppure collegata al fornitore, in base all'origine del listino, da cui deve essere generato il listino di vendita. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FORNITORE: valido solo per origine da listino personalizzato: indicare il codice del fornitore dal cui listino speciale deve essere generato il listino di vendita. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p style="margin-left: 0in;">La parte inferiore contiene due pagine una per i Testi che contiene la definizione del titolo e delle note relative al listino appena definito, che compariranno in fase di stampa, l'altra attiva solo per i listini di vendita derivati che contiene le Regole di aggiornamento.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt; font-weight: bold;">Testi</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LINGUA: indica la lingua a cui si riferiscono il titolo e le note del listino.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TITOLO: definisce il titolo del listino, nella lingua selezionata, da utilizzare in fase di stampa.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NOTE DI TESTA: eventuali note, nella lingua selezionata, da utilizzare in fase di stampa e stampare prima del corpo del listino.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NOTE DI CODA: eventuali note, nella lingua selezionata, da utilizzare in fase di stampa e stampare dopo il corpo del listino.</p>
+<p>&#160;</p>
+<p style="margin-left: 0in; font-weight: bold;">Regole di aggiornamento</p>
+<p style="margin-left: 0in; font-weight: normal;">Le regole di aggiornamento intervengono al momento della generazione/aggiornamento del listino di vendita; è possibile apportare variazioni automatiche al prezzo di base in relazione alla categoria di vendita, alla categoria merceologica, al fornitore abituale del prodotto, al codice di un singolo prodotto oppure senza distinzioni, regola generica (attuabile inserendo nelle regole un rigo con “Tipo aggiornamento” impostato a “Tutti”), presenti nel listino origine. In presenza di più regole, viene prima effettuata la scansione per categoria vendita, categoria merceologica, fornitore abituale, prodotto e se nessuna regola è stata trovata viene applicata la regola generica.</p>
+<p style="margin-left: 0in; font-weight: normal;">Le variazioni possono essere a valore oppure in percentuale ed è possibile definire anche il criterio ed il valore di arrotondamento.</p>
+<p style="font-weight: bold;"><span style="font-weight: bold;">Nel caso in cui il listino di acquisto venga acquisito dal programma di importazione listini oppure vengano modificate le maggiorazioni applicate è possibile ricalcolare automaticamente tutti i listini di vendita collegati attraverso l’apposita funzione di <a href="slis0014d.htm" style="font-weight: bold;">Riallineamento listini</a>.</span></p>
+<p style="margin-left: 0in; text-align: center;"><img src="Images/slis0100f_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 10, 2016 5:36:10 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Generazione richieste di offerta a fornitori - Richiesta parametri</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.5.3.1.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Ordini fornitori > Richieste di offerta > Generazione richieste" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, sans-serif; margin-top: 6pt; 
+	 margin-bottom: 6pt; font-size: 12pt;">Richiesta parametri</p>
+<p>La richiesta parametri si diversifica a seconda che si utilizzi la <a 
+	 href="#Generazione da ordini clienti">generazione da ordini clienti</a>, 
+ la <a href="#Generazione da richieste di acquisto">generazione da richieste 
+ di acquisto</a> oppure la <a href="#Generazione da riferimento manuale">generazione 
+ manuale</a>; il campo tipo selezione determina il tipo di selezione dei 
+ dati per la generazione delle richieste di acquisto. Se non sono presenti 
+ i moduli necessari al funzionamento della procedura, sarà presente solo 
+ la selezione manuale; se è presente un solo modulo la scelta del tipo 
+ selezione sarà limitata, oltre alla selezione manuale, al solo modulo 
+ presente (ordini clienti o richieste di acquisto).</p>
+<p>&#160;</p>
+<p style="font-weight: bold;"><a name="Generazione da ordini clienti"></a>Generazione 
+ da ordini clienti</p>
+<p style="font-weight: normal;">Saranno analizzate le righe non descrittive 
+ di ordine ancora da evadere, che non abbiano già generato ordini fornitori, 
+ richieste di acquisto o richiesta di offerta in qualsiasi stato di esito.</p>
+<p style="text-align: center;"><img src="Images/soff0006f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CLIENTE: eventuale 
+ codice del cliente, presente in anagrafica clienti, da cui si vuole iniziare 
+ la selezione. Confermando a vuoto, la selezione inizia dal primo cliente 
+ valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CLIENTE: eventuale 
+ codice del cliente, presente in anagrafica clienti, con cui si vuole terminare 
+ la selezione. Confermando a vuoto, la selezione termina con l’ultimo cliente 
+ valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale 
+ data da cui deve iniziare l’analisi dei documenti relativamente ai precedenti 
+ parametri di selezione. Confermando a vuoto, l’analisi inizia con il primo 
+ documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale 
+ data con cui si desidera terminare l’analisi dei documenti relativamente 
+ ai precedenti parametri di selezione. Confermando a vuoto, l’analisi si 
+ conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ANNO: indica l'anno 
+ degli ordini a cui si vuole limitare la selezione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE: eventuale 
+ codice della Causale ordini a cui si vuole limitare la selezione. Sul 
+ campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NUMERO: indica il 
+ numero dell'ordine a cui si vuole limitare la selezione, in combinazione 
+ con anno e/o causale.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO FORNITORE: definisce 
+ il metodo di assegnazione del fornitore: valori possibili: preferenziali 
+ del prodotto, ultimo fornitore movimentato dal prodotto, manuale; il prodotto 
+ è riferito a quello presente sulle righe che saranno selezionate.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">RAGGRUPPA ORDINI CLIENTI: 
+ non considera l'ordine cliente come criterio di raggruppamento ed utilizza 
+ solo il fornitore (casella con segno di spunta), altrimenti utilizza oltre 
+ al fornitore anche l'ordine cliente come criterio di raggruppamento (casella 
+ vuota).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FORNITORE: in caso 
+ di tipo fornitore manuale, è il codice del fornitore per cui deve essere 
+ generata la richiesta, altrimenti viene utilizzato come filtro sull'elenco 
+ di fornitori elaborato in base al tipo (preferenziali o ultimo movimentato). 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PAGAMENTO: codice 
+ del pagamento da impostare sulle richieste che saranno generate; se viene 
+ lasciato vuoto sarà assegnato quello indicato sull'anagrafica del fornitore; 
+ il dato sarà comunque modificabile in fase di generazione. Sul campo sono 
+ attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE: codice della 
+ causale con cui sarà generata la richiesta, viene proposta quella definita 
+ in configurazione. Se viene lasciata vuota sarà assegnata quella indicata 
+ sull'anagrafica del fornitore. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LOTTO DI RIORDINO: 
+ definisce come gestire la quantità in relazione al lotto di riordino del 
+ prodotto:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">utilizzato 
+		 come minimo: la quantità non sarà mai inferiore al lotto di riordino 
+		 se diverso da zero;</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">utilizzato 
+		 come multiplo: la quantità sarà calcolata sempre come multiplo 
+		 (arrotondata per eccesso) del lotto di riordino se diverso da 
+		 zero;</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">non 
+		 utilizzato: non sarà mai utilizzato il lotto di riordino, né come 
+		 minimo né come multiplo.</p></li>
+	</ul></li>
+</ol>
+<p>&#160;</p>
+<p style="font-weight: bold;"><a name="Generazione da richieste di acquisto"></a>Generazione 
+ da richieste di acquisto</p>
+<p style="font-weight: normal;">Saranno analizzate le righe non descrittive 
+ di richiesta di acquisto che, in base alla relativa causale possano generare 
+ richieste di offerta, non abbiano già generato ordini fornitori o richiesta 
+ di offerta in qualsiasi stato di esito. Inoltre la generazione delle richieste 
+ di offerta non è utilizzabile da tutti gli utenti, ma solo da quelli che 
+ risultano il diretto responsabili dell'accettazione della richiesta oppure 
+ un utente appartenente all'ufficio acquisti.</p>
+<p style="text-align: center;"><img src="Images/soff0006f_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ANNO: indica l'anno 
+ delle richieste a cui si vuole limitare la selezione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE: eventuale 
+ codice della Causale richieste a cui si vuole limitare la selezione. Sul 
+ campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NUMERO: indica il 
+ numero della richiesta a cui si vuole limitare la selezione, in combinazione 
+ con anno e/o causale.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale 
+ data da cui deve iniziare l’analisi dei documenti relativamente ai precedenti 
+ parametri di selezione. Confermando a vuoto, l’analisi inizia con il primo 
+ documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale 
+ data con cui si desidera terminare l’analisi dei documenti relativamente 
+ ai precedenti parametri di selezione. Confermando a vuoto, l’analisi si 
+ conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PRODOTTO: eventuale 
+ codice del prodotto, a cui si vuole limitare la selezione.&#160;Sul campo 
+ sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CATEGORIA MERCEOLOGICA: 
+ eventuale codice della categoria merceologica, a cui si vuole limitare 
+ la selezione.&#160;Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO: eventuale 
+ codice del magazzino, a cui si vuole limitare la selezione.&#160;Sul campo 
+ sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">RICHIEDENTE: eventuale 
+ codice dell'utente che ha effettuato la richiesta di acquisto, a cui si 
+ vuole limitare la selezione.&#160;Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA CONSEGNA: eventuale 
+ data di consegna da cui deve iniziare l’analisi dei documenti relativamente 
+ ai precedenti parametri di selezione. Confermando a vuoto, l’analisi inizia 
+ con il primo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A CONSEGNA: eventuale 
+ data di consegna con cui si desidera terminare l’analisi dei documenti 
+ relativamente ai precedenti parametri di selezione. Confermando a vuoto, 
+ l’analisi si conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PROGETTO: presente 
+ solo se attiva la gestione progetti; codice del progetto, a cui si vuole 
+ limitare la selezione.&#160;Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p style="font-weight: bold;"><a name="Generazione da riferimento manuale"></a>Generazione 
+ da riferimento manuale</p>
+<p style="font-weight: normal;">Se è necessario generare delle richieste 
+ di offerta, ma non si hanno documenti di partenza è possibile utilizzare 
+ la generazione manuale; questa modalità consente, nella fase di Selezione, 
+ di inserire manualmente prodotto, quantità, consegna ed un riferimento 
+ testuale che permetterà la generazione di più richieste di offerta legate 
+ insieme a questo riferimento.</p>
+<p style="text-align: center;"><img src="Images/soff0006f_11.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO FORNITORE: definisce 
+ il metodo di assegnazione del fornitore: valori possibili: preferenziali 
+ del prodotto, ultimi movimentati per prodotto, manuale; il prodotto è 
+ riferito a quello presente sulle righe che saranno selezionate, o in caso 
+ do generazione manuale a quelli inseriti in fase di selezione.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: nel caso 
+ di selezione per ultimi fornitori movimentati per prodotto è possibile 
+ specificare la data di inizio ricerca relativa ai movimenti del prodotto; 
+ sarà proposta la data di sistema decrementata del numero dei giorni di 
+ ricerca presenti in configurazione richieste di offerta.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FORNITORE: in caso 
+ di tipo fornitore manuale, è il codice del fornitore per cui deve essere 
+ generata la richiesta, altrimenti viene utilizzato come filtro sull'elenco 
+ di fornitori elaborato in base al tipo (preferenziali o ultimo movimentato). 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PAGAMENTO: codice 
+ del pagamento da impostare sulle richieste che saranno generate; se viene 
+ lasciato vuoto sarà assegnato quello indicato sull'anagrafica del fornitore; 
+ il dato sarà comunque modificabile in fase di generazione. Sul campo sono 
+ attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE: codice della 
+ causale con cui sarà generata la richiesta, viene proposta quella definita 
+ in configurazione. Se viene lasciata vuota sarà assegnata quella indicata 
+ sull'anagrafica del fornitore. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LOTTO DI RIORDINO: 
+ definisce come gestire la quantità in relazione al lotto di riordino del 
+ prodotto:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">utilizzato 
+		 come minimo: la quantità non sarà mai inferiore al lotto di riordino 
+		 se diverso da zero;</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">utilizzato 
+		 come multiplo: la quantità sarà calcolata sempre come multiplo 
+		 (arrotondata per eccesso) del lotto di riordino se diverso da 
+		 zero;</p></li>
+		<li class="p"><p style="margin-left: 0in; margin-top: 3pt; margin-bottom: 3pt;">non 
+		 utilizzato: non sarà mai utilizzato il lotto di riordino, né come 
+		 minimo né come multiplo.</p></li>
+	</ul></li>
+</ol>
+<p>ESCLUDI RIFERIMENTI CHIUSI: Consente di non visualizzare i riferimenti 
+ manuali già accettati e/o rifiutati completamente (casella con segno di 
+ spunta).</p>
+<p>&#160;</p>
+<p>La pressione sul pulsante Esegui, oppure utilizzando il tasto funzione 
+ F10, determina l'avvio dell'elaborazione; se saranno trovati dati validi 
+ si passerà automaticamente alla pagina successiva per la selezione dei 
+ documenti.</p>
+</body>
+</html>

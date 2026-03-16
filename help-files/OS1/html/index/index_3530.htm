@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="02 7, 2013 12:42:21 PM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Avviamento richieste di offerta a fornitori</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+ <meta http-equiv="Content-Language" content="it-IT" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.5.3.0_1";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Ordini fornitori > Richieste di offerta" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt; text-align: left;"><span>Avviamento</span></p>
+<p>Il modulo Richieste di offerta a fornitore (di seguito RDO) risponde alle esigenze sia delle aziende commerciali sia di quelle manifatturiere che necessitano di uno strumento flessibile e pratico che consenta loro di tenere costantemente sotto controllo il flusso di informazioni legato a una richiesta di approvvigionamento; può essere considerato come punto di collegamento fra il modulo ordini clienti (azienda commerciale) o il modulo richieste di acquisto (azienda manifatturiera) e l’evasione della richiesta di approvvigionamento attraverso il modulo ordini fornitori.</p>
+<p>Le principali caratteristiche del modulo sono:</p>
+<ul style="list-style: disc;">
+<li class="p">
+<p>Integrazione con i moduli ordini clienti e richieste di acquisto: è possibile generare RDO sia dagli ordini clienti per i prodotti commercializzati sia dalle richieste di acquisto (tipicamente per i fabbisogni dei componenti utilizzati dalla produzione).</p>
+</li>
+<li class="p">
+<p>Integrazione con il modulo ordini a fornitori: la naturale “destinazione” della RDO è quella di generare ordine a fornitore.</p>
+</li>
+<li class="p">
+<p>Possibilità di generare RDO anche tramite inserimento manuale delle informazioni necessarie.</p>
+</li>
+<li class="p">
+<p>Gestione <a href="../soff/soff0100f.htm">Fornitori provvisori</a>: è possibile creare RDO e inviarle anche a fornitori potenziali, con i quali si opera per la prima volta.</p>
+</li>
+<li class="p">
+<p>Gestione <a href="../sbas/sbas0101f.htm">Articoli provvisori</a>: è possibile gestire articoli provvisori che non sono ancora presenti in anagrafica articoli ed emettere RDO per questi prodotti; per ogni prodotto provvisorio è possibile gestire anche <a href="../sbas/sbas0104f.htm">Listini provvisori</a>.</p>
+</li>
+<li class="p">
+<p>Gestire più fornitori abituali, oltre a quello già presente in anagrafica prodotti. Per ogni fornitore è possibile definire tempi e lotto di riordino.</p>
+</li>
+</ul>
+<p>Il modulo mette a disposizione le seguenti funzioni:</p>
+<ul style="list-style: disc;">
+<li class="p">
+<p>Generazione RDO: per ogni rigo del documento di origine (ordine cliente o richiesta di acquisto) viene generato una (o più) righe di RDO. La generazione può essere effettuata in base al fornitore abituale oppure all'ultimo movimentato. Fino a che non viene scelta la RDO da cui verrà generato l’ordine a fornitore è possibile emettere ulteriori RDO ad altri fornitori anche per documenti per i quali la RDO è già stata generata. Le righe RDO generate vengono raggruppate, in fase di salvataggio, per fornitore.</p>
+</li>
+<li class="p">
+<p>Gestione manuale della RDO attraverso la quale è possibile modificare le RDO emesse.</p>
+</li>
+<li class="p">
+<p>Esito RDO: al momento in cui l’azienda riceve da parte dei fornitori le risposte alle RDO può procedere alla registrazione delle informazioni ricevute. In questa fase è possibile:</p>
+</li>
+<li style="list-style: none; display: inline">
+<ul style="list-style: disc;">
+<li class="p">
+<p>Memorizzare le informazioni ricevute dal fornitore (prezzo, sconti e data di consegna).</p>
+</li>
+<li class="p">
+<p>Respingere la proposta del fornitore specificando anche la motivazione.</p>
+</li>
+<li class="p">
+<p>Marcare come “Respinta dal fornitore” la RDO nel caso in cui il fornitore non provveda a rispondere alla RDO.</p>
+</li>
+<li class="p">
+<p>Scegliere la proposta ritenuta più conveniente ed “approvarla”; questa operazione determina l’automatica evasione di tutte le RDO collegate (che vengono marcate come “respinte”); la RDO approvata può dare luogo all’ordine a fornitore.</p>
+</li>
+<li class="p">
+<p>Generare l’ordine fornitore: per le righe che sono state “approvate” è possibile generare contestualmente l’ordine a fornitore.</p>
+</li>
+</ul>
+</li>
+<li class="p">
+<p>Generazione “massiva” ordini a fornitori: sempre dalla procedura di esito impostando il filtro “Stato esito righe” ad “Approvato” vengono selezionate tutte le righe approvate per le quali non è stato generato ordine e quindi in un'unica operazione è possibile generare gli ordini a tutti fornitori.</p>
+</li>
+</ul>
+<p>&#160;</p>
+<table style="vertical-align: Center; border-left-style: Solid; border-left-width: 2px; border-right-style: Solid; border-right-width: 2px; border-top-style: Solid; border-top-width: 2px; border-bottom-style: Solid; border-bottom-width: 2px; margin-left: 2px; margin-right: 2px; left: 110px; top: 442px;" cellspacing="0" align="center">
+<col width="210" />
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="210">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../soff/soff0006f.htm">Generazione richieste</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="210">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../soff/soff0001f.htm">Gestione richieste</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="210">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../soff/soff0002d.htm">Stampa richieste</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="210">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../soff/soff0003f.htm">Analisi richieste</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-width: 1px; border-bottom-style: Solid;" width="210">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../soff/soff0007f.htm">Esito richieste</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-width: 1px; border-bottom-style: Solid;" width="210">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="../soff/soff0004f.htm">Saldo richieste</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="210">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="index_353020.htm">Listini</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="210">
+<ul style="list-style: disc;">
+<li class="p">
+<p><a href="index_353091.htm">Tabelle richieste</a></p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+</body>
+</html>

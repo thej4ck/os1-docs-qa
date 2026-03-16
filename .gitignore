@@ -5,6 +5,6 @@ __pycache__/
 data/
 *.db-shm
 *.db-wal
-help-files/
+# help-files/ included for Railway deploy (images for overlay)
 .venv/
 SCAO_allAdv_original.png

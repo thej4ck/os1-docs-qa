@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/bbas/bbas0050f.htm"},{"type":"item","name":"Dati generali","url":"html/bbas/bbas0050f_01.htm"},{"type":"item","name":"Dati aggiuntivi","url":"html/bbas/bbas0050f_02.htm"},{"type":"item","name":"Saldi","url":"html/bbas/bbas0050f_03.htm"},{"type":"item","name":"Contabilità analitica","url":"html/bbas/bbas0050f_04.htm"},{"type":"item","name":"Regimi contabilità speciali","url":"html/bbas/bbas0050f_05.htm"},{"type":"item","name":"Saldi in divisa","url":"html/bbas/bbas0050f_06.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

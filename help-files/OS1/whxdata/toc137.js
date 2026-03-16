@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc136.js\"  name=\"Tabelle\"><item name=\"Introduzione\" url=\"html/index/index_404091.htm\" /><item name=\"Definizioni listini\" url=\"html/slis/slis0100f.htm#bc-3\" /><item name=\"Cambi listini\" url=\"html/slis/slis0103f.htm#bc-3\" /></data>";

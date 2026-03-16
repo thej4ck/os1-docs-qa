@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="11 21, 2005 12:32:23 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Mastri</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.9.3.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Tabelle > Tabelle generali" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;">Mastri</p>
+<p style="text-align: justify; mso-bidi-font-family: Arial; font-family: Verdana, sans-serif; font-size: 10pt; line-height: Normal; margin-top: 6pt; margin-bottom: 6pt;">Ogni mastro prevede un codice di otto caratteri alfanumerici, a libera scelta dell’utente. È obbligatorio indicare, dopo il codice e la descrizione, la “classe” del mastro scegliendo fra Attività, Passività, Costi, Ricavi, Conti d’ordine attivi, Conti d’ordine passivi, Conti di servizio (Stato patrimoniale iniziale o Bilancio di apertura, Stato patrimoniale finale o Bilancio di Chiusura).</p>
+<p style="text-align: justify; mso-bidi-font-family: Arial; font-family: Verdana, sans-serif; font-size: 10pt; line-height: Normal; margin-top: 6pt; margin-bottom: 6pt;">È altresì necessario indicare, ove ne ricorra l’esigenza, specificare il “tipo mastro”. In particolare omettere l’indicazione di tipo mastro “Clienti Italia”, “Clienti estero”, “Fornitori Italia” e “Fornitori estero” in corrispondenza dei rispettivi mastri determina l’impossibilità di utilizzare tali mastri per il caricamento dei singoli clienti e fornitori.</p>
+<p style="text-align: justify; mso-bidi-font-family: Arial; font-family: Verdana, sans-serif; font-size: 10pt; line-height: Normal;">Prima di passare all'illustrazione dei vari campi, va ricordata la convenienza, per le aziende tenute a presentare il bilancio secondo la struttura della IV Direttiva CEE, di riclassificare i mastri indicando la corrispondente voce del Piano dei conti IV Direttiva CEE. Per tutti i mastri Economici e per la maggior parte dei mastri Patrimoniali la riclassificazione si ottiene inserendo il corrispondente codice del Piano dei Conti IV Direttiva CEE nel campo <i>“Conto IV Direttiva CEE Dare”</i>. Solo per taluni conti patrimoniali (Banche, Clienti, Fornitori, Debiti/crediti tributari e previdenziali, ecc) che vengono riclassificati in voci diverse nel bilancio IV Direttiva CEE a seconda del “segno” del saldo di fine esercizio, occorre compilare anche il campo <i>“Conto IV Direttiva CEE Avere”</i>. Ad esempio, i conti correnti bancari riferiscono alla voce attiva “Depositi bancari e postali” del bilancio a norma CEE se presentano un saldo dare, mentre riferiscono alla voce passiva “Debiti verso banche” se presentano un saldo avere. Occorre quindi che il codice delle corrispondenti voci venga coerentemente inserito nei due campi.</p>
+<p style="text-align: justify; mso-bidi-font-family: Arial; font-family: Verdana, sans-serif; font-size: 10pt; line-height: Normal;">Se la ditta utilizza un collegamento ad un <a href="#PDC esterno">piano dei conti esterno</a> sarà presente anche il codice del piano dei conti esterno specifico da associare al mastro affinché possa essere proposto automaticamente durante il caricamento dei sottoconti/clienti/fornitori.</p>
+<p style="text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt; mso-bidi-font-family: Arial; line-height: Normal;">Se la Ditta è configurata in contabilità <a href="#Semplificata">Semplificata o in contabilità Professionisti</a>, vengono disabilitati i campi relativi ai riferimenti alla IV Direttiva CEE per evidente inutilità di trattamento. Viceversa diventa rilevante, ai fini della produzione del Prospetto dei redditi, la riclassificazione in base alla nuova tabella Voci prospetto reddito. Pertanto, in tali configurazioni, nella manutenzione mastri si sostituiscono ai riferimenti IV Direttiva CEE i campi relativi al quadro e al rigo prospetto redditi, affinché possano essere proposti automaticamente durante il caricamento dei sottoconti/clienti/fornitori.</p>
+<p style="text-align: center; mso-bidi-font-family: Arial; font-family: Verdana, sans-serif; font-size: 10pt; line-height: Normal;"><img src="Images/bbas0001f_01.png" v:shapes="_x0000_i1025" alt="" border="0" style="width:100%; max-width:725px" /></p>
+<p style="text-align: justify; text-indent: -30; margin-left: 30; margin-right: 0; margin-top: 6; margin-bottom: 6; mso-bidi-font-family: Arial; font-family: Verdana, sans-serif; font-size: 10pt; line-height: Normal;">CODICE MASTRO: codice alfanumerico di otto caratteri, a libera scelta dell’utente. Sul campo sono attive le funzioni di ricerca (F9) sulla tabella stessa.</p>
+<p style="text-align: justify; text-indent: -30; margin-left: 30; margin-right: 0; margin-top: 6; margin-bottom: 6; mso-bidi-font-family: Arial; font-family: Verdana, sans-serif; font-size: 10pt; line-height: Normal;">DESCRIZIONE: campo alfanumerico di 50 caratteri per la descrizione del mastro.</p>
+<p style="text-align: justify; text-indent: -30; margin-left: 30; margin-right: 0; margin-top: 6; margin-bottom: 6; mso-bidi-font-family: Arial; font-family: Verdana, sans-serif; font-size: 10pt; line-height: Normal;">LIVELLO: indica il livello di appartenenza del mastro all'interno del piano dei conti. Il livello uno indica i mastri a cui devono essere collegati i sottoconti; i livelli superiori indicano mastri di riferimento come ad esempio Attività e Passività.</p>
+<p style="text-align: justify; text-indent: -30; margin-left: 30; margin-right: 0; margin-top: 6; margin-bottom: 6; mso-bidi-font-family: Arial; font-family: Verdana, sans-serif; font-size: 10pt; line-height: Normal;">NUMERO D’ORDINE IN STAMPA: <span style="font-family: Verdana, Arial;">indica il numero d'ordine valido per la stampa del piano dei conti e del bilancio a sezioni divise.</span></p>
+<p style="text-align: justify; text-indent: -30; margin-left: 30; margin-right: 0; margin-top: 6; margin-bottom: 6; mso-bidi-font-family: Arial; font-family: Verdana, sans-serif; font-size: 10pt; line-height: Normal;">RIFERIMENTO MASTRO: indica il mastro di appartenenza del mastro corrente, dovrà avere un livello superiore a quello indicato nel campo precedente.</p>
+<p style="text-align: justify; text-indent: -30; margin-left: 30; margin-right: 0; margin-top: 6; margin-bottom: 6; mso-bidi-font-family: Arial; font-family: Verdana, sans-serif; font-size: 10pt; line-height: Normal;">CLASSE: combo box per identificare la classe del conto. Valori possibili: Attività, Passività, Costi, Ricavi, Conti d'ordine attivi, Conti d’ordine passivi, Conti di servizio.</p>
+<p style="text-align: justify; text-indent: -30; margin-left: 30; margin-right: 0; margin-top: 6; margin-bottom: 6; mso-bidi-font-family: Arial; font-family: Verdana, sans-serif; font-size: 10pt; line-height: Normal;">TIPO MASTRO: combo box, significativo solo per i mastri patrimoniali,<span style="mso-spacerun: yes;">&#160;&#160;</span>per identificarne la tipologia. Valori possibili:</p>
+<table style="vertical-align: Center;" cellspacing="0" align="center">
+<col width="185" />
+<col width="426" />
+<tr style="vertical-align: middle;">
+<td style="border: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="185">
+<p>Normale</p>
+</td>
+<td style="border-top: Solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="426">
+<p>&#160;</p>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-left: solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="185">
+<p>Clienti Italia</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="426">
+<p style="line-height: 100%;">Solo per mastri clienti</p>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-left: solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="185">
+<p>Clienti estero</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="426">
+<p style="line-height: 100%;">Solo per mastri clienti</p>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-left: solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="185">
+<p>Consociate italia debitrici</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="426">
+<p style="line-height: 100%;">Solo per mastri clienti</p>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-left: solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="185">
+<p>Consociate estero debitrici</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="426">
+<p style="line-height: 100%;">Solo per mastri clienti</p>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-left: solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="185">
+<p>Fornitori italia</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="426">
+<p style="line-height: 100%;">Solo per mastri fornitori</p>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-left: solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="185">
+<p>Fornitori estero</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="426">
+<p style="line-height: 100%;">Solo per mastri fornitori</p>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-left: solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="185">
+<p>Consociate italia creditrici</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="426">
+<p style="line-height: 100%;">Solo per mastri fornitori</p>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-left: solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="185">
+<p>Consociate estero creditrici</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="426">
+<p style="line-height: 100%;">Solo per mastri fornitori</p>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-left: solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="185">
+<p>Banche</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="426">
+<p style="line-height: Normal;">Mastri banche, se interessa gestire la data di valuta</p>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-left: solid 1px #000000; border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="185">
+<p style="line-height: 100%; mso-bidi-font-family: Arial;">Cespiti</p>
+</td>
+<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; padding-right: 10px; padding-left: 10px;" width="426">
+<p style="line-height: Normal;">Mastri relativi ai cespiti, solo se attivo il modulo Gestione Cespiti</p>
+</td>
+</tr>
+</table>
+<p style="text-align: justify; text-indent: -30; margin-left: 30; margin-right: 0; margin-top: 6; margin-bottom: 6; mso-bidi-font-family: Arial; font-family: Verdana, sans-serif; font-size: 10pt; line-height: Normal;">RIFERIMENTO IV CEE DARE: codice alfanumerico di 8 caratteri, presente nella tabella dei Conti IV Direttiva CEE, che consente la riclassificazione del mastro nel bilancio a norma CEE. <span style="font-family: Verdana, Arial;">Sul campo sono attive</span> le funzioni di ricerca (F9) <span style="font-family: Verdana, Arial;">e manutenzione (CTRL+W) sulla tabella stessa.</span></p>
+<p style="text-align: justify; text-indent: -30; margin-left: 30; margin-right: 0; margin-top: 6; margin-bottom: 6; mso-bidi-font-family: Arial; font-family: Verdana, sans-serif; font-size: 10pt; line-height: Normal;">RIFERIMENTO IV CEE AVERE: codice alfanumerico di 8 caratteri presente nella tabella dei Conti IV Direttiva CEE La compilazione di questo campo è richiesta solo nel caso in cui il mastro in esame riferisca a voci diverse di bilancio IV Direttiva a seconda del segno del saldo. <span style="font-family: Verdana, Arial;">Sul campo sono attive</span> le funzioni di ricerca (F9) <span style="font-family: Verdana, Arial;">e manutenzione (CTRL+W) sulla tabella stessa.</span></p>
+<p style="text-align: justify; margin-bottom: 5.0pt; mso-bidi-font-family: Arial; font-family: Verdana, sans-serif; font-size: 10pt; line-height: Normal;">Si tenga presente che possono esistere più mastri clienti e più mastri fornitori. In particolare è opportuno che i “percipienti ritenute d’acconto”, se è attiva tale procedura, riepiloghino ad uno specifico mastro di tipo “fornitori Italia”, se italiani, o ad un mastro di tipo “fornitori estero” se non residenti.</p>
+<p style="text-align: justify; margin-bottom: 5.0pt; mso-bidi-font-family: Arial; font-family: Verdana, sans-serif; font-size: 10pt; line-height: Normal;">&#160;</p>
+<p style="text-align: justify; margin-bottom: 5.0pt; mso-bidi-font-family: Arial; font-family: Verdana, sans-serif; font-size: 10pt; line-height: Normal; font-weight: bold;"><a name="Semplificata" id="Semplificata"></a>Contabilità semplificata/professionisti</p>
+<p style="margin-bottom: 5.0pt; mso-bidi-font-family: Arial; line-height: Normal; text-indent: -0.417in; margin-left: 30pt;">QUADRO PROSPETTO REDDITO: codice alfanumerico di 3 caratteri per indicare il quadro del Prospetto del reddito in cui il saldo del conto in esame deve essere riepilogato. L’assenza del codice determina la mancata proposizione automatica all’atto della manutenzione delle anagrafiche sottoconti/clienti/fornitori. <span style="font-family: Verdana, Arial;">Sul campo sono attive</span> le funzioni di ricerca (F9) <span style="font-family: Verdana, Arial;">e manutenzione (CTRL+W) sulla tabella stessa.</span></p>
+<p style="margin-bottom: 5.0pt; mso-bidi-font-family: Arial; line-height: Normal; text-indent: -0.417in; margin-left: 30pt;">RIGO: codice numerico di 3 caratteri, correlato al valore del campo precedente, per indicare il rigo del Prospetto del reddito in cui il saldo del conto in esame deve essere riepilogato. L’assenza del codice determina la mancata proposizione automatica all’atto della manutenzione delle anagrafiche sottoconti/clienti/fornitori.</p>
+<p style="margin-bottom: 5.0pt; mso-bidi-font-family: Arial; line-height: Normal; text-indent: -0.417in; margin-left: 30pt;">SEZIONE REGISTRO CRONOLOGICO: Visualizzato e manutenibile solo se la Ditta è configurata in contabilità professionisti ordinaria. L’informazione, unitamente a Quadro Prospetto Reddito e Rigo, è funzionale fondamentalmente alle anagrafiche clienti e fornitori in cui queste informazioni, essenziali ai fini del trattamento sui registri e sul prospetto del reddito, non vengono visualizzate ma caricate per default in tabella. Definisce la sezione del registro cronologico in cui devono essere allocati gli importi relativi al sottoconto in esame. Valori ammessi: Nessuno; Conti finanziari; Conti economici; Altri conti</p>
+<p style="margin-bottom: 5.0pt; mso-bidi-font-family: Arial; line-height: Normal; text-indent: -0.417in; margin-left: 30pt;">&#160;</p>
+<p style="margin-bottom: 5.0pt; mso-bidi-font-family: Arial; line-height: Normal; text-indent: -0.417in; margin-left: 30pt; font-weight: bold;"><a name="PDC esterno"></a>Piano dei conti esterno</p>
+<p style="margin-bottom: 5.0pt; mso-bidi-font-family: Arial; line-height: Normal; text-indent: -0.417in; margin-left: 30pt;"><span style="font-family: Verdana, Arial;">CODICE PDC BILANCIO ESTERNO: codice che individua il conto del piano dei conti esterno da associare al mastro.</span> L’assenza del codice determina la mancata proposizione automatica all’atto della manutenzione delle anagrafiche sottoconti/clienti/fornitori. <span style="font-family: Verdana, Arial;">Sul campo sono attive</span> le funzioni di ricerca (F9) <span style="font-family: Verdana, Arial;">e manutenzione (CTRL+W) sulla tabella stessa.</span></p>
+</body>
+</html>

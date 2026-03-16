@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_208820.htm"},{"type":"item","name":"Clienti","url":"html/sfvb/sfvb0104f.htm"},{"type":"item","name":"Agenti","url":"html/sfvb/sfvb0105f.htm"},{"type":"item","name":"Liste articoli","url":"html/sfvb/sfvb0101f.htm"},{"type":"item","name":"Giri visita","url":"html/sfvb/sfvb0102f.htm"},{"type":"item","name":"Categorie","url":"html/sfvb/sfvb0103f.htm"},{"type":"item","name":"Gruppi clienti","url":"html/sfvb/sfvb0113f.htm"},{"type":"item","name":"Tipi immagini","url":"html/sfvb/sfvb0107f.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

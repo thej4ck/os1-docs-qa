@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_2065.htm"},{"type":"item","name":"Manutenzione dichiarazioni clienti","url":"html/bbas/bbas0148f_C.htm"},{"type":"item","name":"Stampa registro","url":"html/bbas/bbas0067d.htm"},{"type":"item","name":"Controllo dichiarazioni/documenti","url":"html/bbas/bbas0088f_C.htm"},{"type":"item","name":"Controllo copertura fatture","url":"html/bbas/bbas0091f_C.htm"},{"type":"item","name":"Gestione su documenti","url":"html/bbas/DlgSelLettIntento.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

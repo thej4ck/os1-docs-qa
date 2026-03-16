@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc1.js\"  name=\"Firma remota\"><item name=\"Introduzione\" url=\"html/index/index_8085.htm\" /><item name=\"Configurazione\" url=\"html/bfir/bfir0100f.htm\" /><item name=\"Utenti\" url=\"html/bfir/bfir0101f.htm\" /><item name=\"Tipi documento\" url=\"html/bfir/bfir0102f.htm\" /></data>";

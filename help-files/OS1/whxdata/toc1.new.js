@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"book","name":"Ambiente di lavoro","key":"toc2"},{"type":"book","name":"Contabilità","key":"toc4"},{"type":"book","name":"Vendite","key":"toc46"},{"type":"book","name":"Ordini clienti","key":"toc93"},{"type":"book","name":"Ordini fornitori","key":"toc113"},{"type":"book","name":"Acquisti","key":"toc126"},{"type":"book","name":"Magazzino","key":"toc145"},{"type":"book","name":"Produzione","key":"toc175"},{"type":"book","name":"Tabelle","key":"toc208"},{"type":"book","name":"Configurazioni","key":"toc223"},{"type":"book","name":"Servizi","key":"toc253"},{"type":"book","name":"Archiviazione","key":"toc303"},{"type":"book","name":"Funzionalità generali","key":"toc304"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

@@ -1,0 +1,269 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="09 23, 2008 11:33:20 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Manutenzione listini terzisti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.6.6.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Conto lavoro > Listini terzisti" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; font-weight: bold; 
+	 text-align: left;">Manutenzione listini terzisti</p>
+<p style="font-family: Verdana, Arial;">Per ogni terzista è possibile creare 
+ un listino prezzi delle lavorazioni (che in base alla configurazione del 
+ conto lavoro può essere gestito per scaglioni di quantità oppure no); 
+ in fase di creazione dell’ordine sulla riga verrà riportato tale prezzo 
+ come di quella specifica fase di lavorazione.</p>
+<p style="font-family: Verdana, Arial;">La manutenzione si struttura in 
+ due finestre (linguette), una prima che si utilizza per l'indicazione 
+ del fornitore e la selezione, secondo criteri specifici, dei prodotti 
+ da inserire o modificare; una seconda finestra per la vera e propria definizione 
+ della validità e manutenzione dei prezzi del listino stesso.</p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial; font-weight: bold;">Selezione</p>
+<p style="font-family: Verdana, Arial; text-align: center;"><img src="images/sclv0105f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FORNITORE: indica 
+ il codice del fornitore per cui si vuole effettuare la manutenzione dei 
+ prezzi. L'inserimento del campo è obbligatorio. Sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="margin-left: 30pt; text-indent: -0.417in;">DIVISA: indica il 
+ codice della divisa per cui si vuole effettuare la manutenzione dei prezzi. 
+ L'inserimento del campo è obbligatorio. Sul campo sono attive le funzioni 
+ di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA RIFERIMENTO: 
+ definisce la data, tramite cui ricercare i prezzi per il fornitore e la 
+ divisa inseriti in precedenza. Saranno disponibili per la manutenzione 
+ solo i prodotti le cui date di validità comprendono, come periodo, la 
+ data di riferimento.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">LISTINO CORRENTE: 
+ indica di utilizzare il listino corrente, quello valido alla data di sistema 
+ (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA PRODOTTO: eventuale 
+ codice dell'articolo, presente in anagrafica Prodotti, da cui si desidera 
+ iniziare la selezione. Confermando a vuoto, la selezione inizia con il 
+ primo prodotto valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A PRODOTTO: eventuale 
+ codice dell'articolo, presente in anagrafica Prodotti, con cui si desidera 
+ terminare la selezione. Confermando a vuoto, la selezione termina con 
+ l’ultimo valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CATEGORIA MERCEOLOGICA: 
+ eventuale codice della categoria merceologica, riferita ai prodotti, per 
+ cui effettuare la selezione.&#160;Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA FASE DI LAVORAZIONE: 
+ codice della fase di lavorazione da cui si intende iniziare la selezione; 
+ confermando a vuoto la selezione inizia dal primo codice valido. Sul campo 
+ sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A FASE DI LAVORAZIONE: 
+ codice della fase di lavorazione con cui si intende concludere la selezione; 
+ confermando a vuoto la selezione termina con l’ultimo codice valido. Sul 
+ campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA INIZIO VALIDITÀ: 
+ definisce la data di inizio validità da inserire sui prodotti aggiunti 
+ al listino.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA FINE VALIDITÀ: 
+ definisce la data di fine validità da inserire in automatico sui prodotti 
+ aggiunti al listino.</p>
+<p>&#160;</p>
+<p style="font-family: Verdana, Arial; font-weight: bold;">Manutenzione</p>
+<p style="font-family: Verdana, Arial; font-weight: bold;"><span style="font-weight: normal;">In 
+ questa sezione è possibile effettuare la manutenzione dei dati selezionati 
+ dal listino, inserire manualmente nuovi prodotti, variare il prezzo di 
+ prodotti esistenti e cancellarli.</span></p>
+<p style="font-family: Verdana, Arial; text-align: center;"><img src="images/sclv0105f_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">PRODOTTO: codice dell'articolo, 
+ presente in anagrafica Prodotti, a cui assegnare il prezzo del listino. 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">FASE: codice della 
+ fase, relativa al ciclo di lavorazione del prodotto, a cui assegnare il 
+ prezzo del listino. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="margin-left: 0in;"><span style="text-transform: uppercase;">è</span> 
+ possibile inserire nel listino del terzista la sola fase senza il prodotto; 
+ in questo caso è necessario indicare almeno l'unità di misura primaria, 
+ che viene proposta dalla fase se presente oppure dalla configurazione 
+ dai preferenziali. In assenza di prezzo per prodotto/fase viene ricercato 
+ il prezzo per la sola fase.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA INIZIO VALIDITÀ: 
+ definisce la data di inizio validità del prezzo per il prodotto/fase, 
+ campo obbligatorio, non modificabile.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DATA FINE VALIDITÀ: 
+ definisce la data di fine validità del prezzo per il prodotto/fase. Se 
+ non specificata s'intende sempre valido a partire dalla data inizio validità; 
+ il campo non è modificabile.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">unità 
+ di misura primaria</span>: necessaria solo per i prezzi relativi alla 
+ sola fase; in questo caso l'unità di misura specificata deve essere compatibile 
+ con i prodotti che saranno utilizzati con la fase, altrimenti il prezzo 
+ non sarà proposto.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;"><span style="text-transform: uppercase;">Scaglione 
+ di quantità</span>: il campo è presente solo se gestiti in configurazione 
+ del conto lavoro i listini a scaglioni di quantità; rappresenta la quantità 
+ fino a cui il prezzo è valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">COSTO UNITARIO UM1: 
+ prezzo relativo alla prima unità di misura del prodotto/fase nelle date 
+ di validità indicate.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">COSTO UNITARIO UM2: 
+ prezzo relativo alla seconda unità di misura del prodotto/fase nelle date 
+ di validità indicate.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">COSTO UNITARIO UM3: 
+ prezzo relativo alla terza unità di misura del prodotto/fase nelle date 
+ di validità indicate.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">COSTO FORFETTARIO: 
+ prezzo relativo alla lavorazione del prodotto/fase da applicare direttamente 
+ senza considerare la quantità e l'unità di misura, nelle date di validità 
+ indicate.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SCONTI O MAGGIORAZIONI: 
+ campi, abilitati o meno in relazione al numero sconti previsto in configurazione, 
+ per inserire una percentuale di sconto o maggiorazione relativa al prodotto 
+ nelle date di validità indicate.</p>
+<p style="margin-left: 0in;">&#160;</p>
+<p style="font-family: Verdana, Arial;">In questa fase, premendo il tasto 
+ destro del mouse<img src="images/sclv0105f_03.gif" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-bottom:0px; margin-top:5px; width:100%; max-width:101px;" align="right" border="0" /> compare un menù che consente di 
+ effettuare delle azioni riguardanti il listino attualmente in manutenzione. 
+ Tramite il menù è possibile aggiornare i prezzi dei prodotti, aggiungere 
+ nuovi prodotti oppure eliminare completamente il listino; in quest'ultimo 
+ caso, dopo la richiesta di conferma per l'eliminazione del listino, viene 
+ richiesto se effettuare il salvataggio definitivo (come se fosse stato 
+ premuto il pulsante Salva nella toolbar).</p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial; font-weight: bold;">Aggiornamento 
+ prodotti</p>
+<p style="font-family: Verdana, Arial; text-align: center;"><img src="images/sclv0105f_04.png" alt="" style=" border:none; width:100%; max-width:347px;" border="0" /></p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial;">La finestra di Aggiornamento richiede 
+ se effettuare un aggiornamento in percentuale oppure a valore, la relativa 
+ percentuale o valore e l'arrotondamento da applicare per aggiornare i 
+ prezzi. Il check box 'Non aggiornare prezzi modificati' definisce se l'aggiornamento 
+ deve riguardare anche i prodotti per cui è stato già modificato manualmente 
+ il prezzo.</p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial; font-weight: bold;">Generazione 
+ listini</p>
+<p style="font-family: Verdana, Arial;">La finestra di generazione listini 
+ consente di inserire nel listino attualmente visualizzato prodotti presi 
+ da altri listini o direttamente dai cicli di lavorazione.</p>
+<p style="font-family: Verdana, Arial; text-align: center;"><img src="images/sclv0105f_05.png" alt="" style=" border:none; width:100%; max-width:558px;" border="0" /></p>
+<p style="font-family: Verdana, Arial;">&#160;</p>
+<p style="font-family: Verdana, Arial; text-indent: -0.417in; margin-left: 0.417in;">TIPO 
+ GENERAZIONE: definisce il metodo di generazione dei nuovi dati nel listino. 
+ Valori possibili: da altro listino, da cicli di lavorazione.</p>
+<p style="font-family: Verdana, Arial; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="font-family: Verdana, Arial;">FORNITORE: attivo solo per generazione 
+ da altro listino; indica il codice del fornitore da cui effettuare la 
+ generazione. Sul campo sono attive le funzioni di ricerca (F9).</span></p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DIVISA: attivo 
+ solo per generazione da altro listino; indica il codice della divisa da 
+ cui si vuole effettuare la generazione, per il listino richiesto. Sul 
+ campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DATA RIFERIMENTO: 
+ attivo solo per generazione <span style="font-family: Verdana, Arial;">da 
+ altro</span> listino; definisce la data, tramite cui ricercare i prezzi 
+ all'interno dell'eventuale listino di base. Saranno elaborati solo i prodotti 
+ le cui date di validità comprendono, come periodo, la data di riferimento.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">VALIDITÀ DAL: definisce 
+ la data di inizio validità da inserire sui prodotti aggiunti al listino.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">VALIDITÀ AL: definisce 
+ la data di fine validità da inserire in automatico sui prodotti aggiunti 
+ al listino.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">DA PRODOTTO: eventuale 
+ codice dell'articolo, presente in anagrafica Prodotti, da cui si desidera 
+ iniziare la selezione. Confermando a vuoto, la selezione inizia con il 
+ primo prodotto valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">A PRODOTTO: eventuale 
+ codice dell'articolo, presente in anagrafica Prodotti, con cui si desidera 
+ terminare la selezione. Confermando a vuoto, la selezione termina con 
+ l’ultimo valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">FASE DI LAVORAZIONE: 
+ eventuale codice della fase di lavorazione, riferita al ciclo di lavorazione 
+ dei prodotti, per cui effettuare la selezione.&#160;Sul campo sono attive 
+ le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">CATEGORIA MERCEOLOGICA: 
+ eventuale codice della categoria merceologica, riferita ai prodotti, per 
+ cui effettuare la selezione.&#160;Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA FASE DI LAVORAZIONE: 
+ codice della fase di lavorazione da cui si intende iniziare la selezione; 
+ confermando a vuoto la selezione inizia dal primo codice valido. Sul campo 
+ sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A FASE DI LAVORAZIONE: 
+ codice della fase di lavorazione con cui si intende concludere la selezione; 
+ confermando a vuoto la selezione termina con l’ultimo codice valido. Sul 
+ campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">TIPO OPERAZIONE: 
+ definisce un'eventuale operazione da compiere sul prezzo del prodotto; 
+ valori possibili: nessuna, divisione per valore costante, moltiplicazione 
+ per valore costante, percentuale di incremento/decremento, valore assoluto.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">VALORE: indica 
+ il valore con cui effettuare l'operazione richiesta; è alternativo alla 
+ percentuale.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">PERCENTUALE: indica 
+ la percentuale con cui effettuare l'operazione richiesta; è alternativa 
+ al valore.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">COPIA SCONTI: attivo 
+ solo per generazione <span style="font-family: Verdana, Arial;">da altro</span> 
+ listino; definisce se copiare anche gli sconti (casella con segno di spunta) 
+ oppure no (casella vuota).</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">TIPO ARROTONDAMENTO: 
+ definisce il metodo di arrotondamento per il calcolo del prezzo: matematico, 
+ per eccesso o per difetto.</p>
+<p style="text-indent: -0.417in; margin-left: 0.417in;">VALORE ARROTONDAMENTO: 
+ definisce il valore da utilizzare per effettuare l'arrotondamento dei 
+ prezzi.</p>
+</body>
+</html>

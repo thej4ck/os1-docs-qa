@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="02 14, 2012 10:26:39 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Saldo ordini di produzione</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.8.3.1_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Produzione > Piano di produzione" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-size: 12pt; text-align: left; font-weight: bold;"><strong><span 
+	 style="font-weight: bold;">Saldo ordini</span></strong></p>
+<p>La funzione consente di chiudere ODP o singoli ODL che non verranno 
+ prodotti; è possibile agire sia sull’ODP 
+ (in questo caso verranno saldati tutti gli ODL ancora aperti) oppure a 
+ livello di ODL. Nel caso in cui l’ODL si riferisca a fasi esterne la procedura 
+ provvede ad aggiornare anche gli OT generati. Nel caso in cui l’operazione 
+ di saldo di una fase esterna sia effettuata dal programma di saldo ordini 
+ terzisti presente nel menù del modulo “Conto lavoro” viene automaticamente 
+ aggiornato anche l’ODL corrispondente. Il saldo dell’ordine diminuisce 
+ l’ordinato a produzione del composto (per la quantità ancora da produrre) 
+ e l’impegnato da produzione dei componenti (per la quantità ancora da 
+ utilizzare).</p>
+<p>Nei parametri, oltre normali limiti di selezione quali numero ODP e 
+ ODL, data ODP, prodotto ecc. viene richiesta l'unità produttiva con proposta 
+ l'unità produttiva di default valida per l'utente connesso ad OS1; è possibile 
+ solo scegliere l'unità produttiva, se gestite in configurazione le unità 
+ produttive multiple; è inoltre possibile, spuntando la casella &quot;Annullamento 
+ operazioni di saldo&quot; effettuare l'operazione di annullamento con 
+ le stesse caratteristiche descritte per il saldo.</p>
+<p style="text-align: center;"><img src="images/sprb0015f_01.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p>&#160;</p>
+<p>La pagina dei Risultati riporta in due griglie gli ODP (sopra) ed i 
+ relativi ODL (sotto) e per ognuno sono riportati i dati di base e le quantità 
+ da produrre, versate e residue.</p>
+<p style="text-align: center;"><img src="images/sprb0015f_02.png" alt="" style=" border:none; width:100%; max-width:961px;" border="0" /></p>
+<p><img src="images/sprb0015f_04.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:241px;" align="right" border="0" />Da questa pagina è possibile effettuare il saldo 
+ delle singole fasi dell'ODP (ODL) o dell'intero ODP con il doppio clic 
+ del mouse oppure tramite i menù contestuali accessibili tramite il tasto 
+ destro del mouse sulle relative griglie. Per quanto riguarda gli ODL è 
+ possibile saldare i singoli ODL, solo per quanto riguarda l'ultima fase 
+ è necessario che le fasi precedenti siano già chiuse o saldate; se si 
+ saldano tutte le fasi e poi si toglie il saldo ad una delle fasi precedenti 
+ l'ultima anche a questa sarà tolto il saldo.</p>
+<p>Per rendere effettivo la registrazione, è necessario confermare premendo 
+ il bottone Salva o il tasto funzione F10.<img src="images/sprb0015f_03.png" alt="" style=" border:none; margin-left:5px; margin-right:0px; margin-top:0px; margin-bottom:5px; width:100%; max-width:242px;" align="right" border="0" /></p>
+</body>
+</html>

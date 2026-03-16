@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="11 17, 2005 12:40:15 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Scarico magazzini progetti</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.7.8.0_12";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Magazzino > Gestione progetti/commesse" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, sans-serif; font-weight: bold; font-size: 12pt;">Scarico magazzini progetti</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: normal;"><span style="font-family: Verdana, sans-serif; font-size: 10pt; font-weight: normal;">La procedura</span> <span style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: normal;">analizza le giacenze di un determinato progetto e provvede a generare automaticamente i movimenti di scarico del progetto ed eventualmente ad aggiornare il progetto considerandolo chiuso.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: center;"><img src="images/scom0012d_01.png" alt="" style=" border:none; width:100%; max-width:625px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-weight: normal;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span><span style="font-family: Verdana, sans-serif; font-size: 10pt;">DA PROGETTO: eventuale codice del progetto, presente in anagrafica Progetti, da cui si desidera iniziare la selezione. Confermando a vuoto, la selezione inizia con il primo progetto valido. Sul campo è attiva la ricerca (F9) sull’anagrafica progetti.</span></span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">A PROGETTO: eventuale codice del progetto, presente in anagrafica Progetti, a cui si desidera terminare la selezione. Confermando a vuoto, la selezione termina con l’ultimo valido. Sul campo è attiva la ricerca (F9) sull’anagrafica progetti.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">DA CLIENTE: codice del cliente, presente in anagrafica, da cui si vuole iniziare la selezione. Confermando a vuoto, la selezione inizia dal primo cliente valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">A CLIENTE: codice del cliente, presente in anagrafica, con cui si vuole terminare la selezione. Confermando a vuoto, la selezione termina con l'ultimo cliente valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="font-family: Verdana, sans-serif; margin-right: 0in; margin-top: 6pt; margin-bottom: 6pt; text-align: justify; text-indent: -0.417in; margin-left: 0.417in; font-size: 10pt;">DATA ELABORAZIONE: Indicare la data con cui si desidera siano registrati i movimenti di magazzino generati dal programma.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">FINO A DATA: indica la data, relativa ai movimenti di magazzino, fino a cui devono essere analizzati i movimenti per determinare gli scarichi.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span style="font-family: Verdana, sans-serif;">CAUSALE: inserire la causale di magazzino idonea alla generazione dei movimenti di scarico progetti. Sul campo è attiva la ricerca (F9) sulla tabella Causali magazzino.</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">CHIUDI PROGETTO: definisce se oltre a generare i movimenti di scarico deve essere chiusi il progetto (casella con segno di spunta).</p>
+<p>&#160;</p>
+<p>La pressione sul pulsante Esegui inizia l'elaborazione e visualizza, nella pagina risultati, i progetti (riportati nella sezione superiore) ed i prodotti relativi (nella sezione inferiore). Per i prodotti viene riportato il magazzino e la quantità che sarà scaricata; in rosso saranno visualizzati eventuali prodotti con quantità negativa. Nella sezione superiore è possibile selezionare i progetti per cui generare i movimenti ed eventualmente da chiudere tramite il doppio clic del mouse, il tasto F11 oppure il menù del pulsante destro del mouse; è possibile selezionare tutti i progetti (F12) oppure deselezionare tutti i progetti (CTRL+F11).</p>
+<p>Utilizzando i bottoni Stampa e Anteprima della toolbar è possibile stampare un report dei dati selezionati; la pressione sul bottone Salva della toolbar, previa conferma, effettua la generazione dei movimenti e l'eventuale chiusura dei progetti selezionati.</p>
+<p style="text-align: center;"><img src="images/scom0012d_02.png" alt="" style=" border:none; width:100%; max-width:625px;" border="0" /></p>
+</body>
+</html>

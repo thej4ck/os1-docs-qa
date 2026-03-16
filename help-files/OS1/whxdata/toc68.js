@@ -1,0 +1,1 @@
+gXMLBuffer ="<?xml version=\"1.0\" encoding=\"utf-8\" ?><data  src=\"toc46.js\"  name=\"OS1BoxFatture\"><item name=\"Box Fatture\" url=\"html/index/index_2070.htm\" /><item name=\"Generazione documenti da fatture XML\" url=\"html/sbas/sbas0024d.htm\" /></data>";

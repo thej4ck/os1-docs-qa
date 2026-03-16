@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="09 12, 2008 5:13:55 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Ritenute di acconto</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.2.9.0_1";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Contabilità > Ritenute di acconto" />
+</head>
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 12pt; font-weight: bold;">Introduzione</p>
+<p style="text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt;">La procedura gestisce i rapporti fra l’azienda e i percipienti, per i quali l’azienda stessa costituisce sostituto d’imposta.</p>
+<p style="text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt;">Per la gestione dei versamenti delle ritenute sia a titolo IRPEF che INPS che INAIL il momento impositivo è dato dal pagamento della fattura/parcella del percipiente; in tale fase nasce il debito dell’azienda verso l’Erario.</p>
+<p style="text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt;">La registrazione del pagamento tuttavia è spesso legato ad un documento già registrato al cui interno sono contenuti tutti gli elementi necessari per il corretto calcolo delle ritenute da versare.</p>
+<p style="text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt;">L’applicazione tiene in debita considerazione tale aspetto e pertanto a livello di causali contabili sono previsti quattro casi distinti di movimentazione dell’archivio percipienti.</p>
+<p style="text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt;">&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: center;"><img src="Images/Index_1064_01.png" alt="" style=" border:none; width:100%; max-width:737px;" border="0" /></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; text-align: justify; font-family: Verdana, sans-serif; font-size: 10pt;">Registrazione di documento da pagare: il movimento nasce completo di estremi del documento, ma privo della data di pagamento al percipiente; pertanto non è valido ai fini IRPEF e INPS, e lo diventerà solo al momento del pagamento del percipiente. Ai fini della gestione partite è la registrazione di un documento.</p>
+<p style="text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt;">&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: center;"><img src="Images/Index_1064_02.png" alt="" style=" border:none; width:100%; max-width:737px;" border="0" /></p>
+<p style="text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt;">Registrazione di documento già pagato: è il caso in cui perviene la parcella definitiva. L’evento di per se non è significativo per i compensi a terzi, perché il rigo era nato al momento del pagamento anticipato del percipiente ed era completo ai fini della gestione. Tutt’al più la gestione di questo evento permette di compilare i campi numero documento e data documento, ma si tratta di un fatto del tutto irrilevante ai fini IRPEF, INPS e INAIL. &#160;</p>
+<p style="text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt;">&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt; text-align: center;"><img src="Images/Index_1064_03.png" alt="" style=" border:none; width:100%; max-width:737px;" border="0" /></p>
+<p style="text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt;">Pagamento posticipato: all’interno dell’archivio movimenti percipienti esiste già un movimento di registrazione documento. La fase di registrazione permette di visualizzare (modificandole) le informazioni già &#160;registrate e inserendo la data di pagamento. Ai fini della gestione partite si tratta di un pagamento fattura.</p>
+<p style="text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt;">&#160;</p>
+<p style="text-align: center;"><img src="Images/Index_1064_04.png" alt="" style=" border:none; width:100%; max-width:737px;" border="0" /></p>
+<p style="text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt;">Pagamento anticipato compenso: normalmente a seguito di una parcella pro forma; la registrazione nasce priva di estremi del documento, perché la parcella definitiva, ovviamente con diverso numero e data, perverrà in seguito; il rigo è invece valido a tutti gli effetti IRPEF, INPS e INAIL, perché contiene la data del pagamento al percipiente. Ai fini della gestione partite si tratta di un anticipo.</p>
+<p style="text-align: justify; margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; font-size: 10pt;">&#160;</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">I programmi di gestione sono raggruppati sotto la scelta Ritenute d'acconto del menù di Contabilità.</p>
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; text-align: justify; margin-top: 6pt; margin-bottom: 6pt;">&#160;</p>
+<table style="vertical-align: Center; border-left-style: Solid; border-left-width: 2px; border-right-style: Solid; border-right-width: 2px; border-top-style: Solid; border-top-width: 2px; border-bottom-style: Solid; border-bottom-width: 2px; margin-left: 2px; margin-right: 2px; left: 103px; top: 2342px;" cellspacing="0" align="center">
+<col width="263" />
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="263">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: Justify;"><a href="../brda/brda0001f.htm">Manutenzione movimenti</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="263">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: Justify;"><a href="../brda/brda0004d.htm">Stampa situazione movimenti</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="263">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: Justify;"><a href="../brda/brda0010f.htm">Stampa elenco</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="263">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: Justify;"><a href="../brda/brda0007d_c.htm">Stampa certificazioni</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-width: 1px; border-bottom-style: Solid;" width="263">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: Justify;"><a href="../brda/brda0007d_s.htm">Stampa schede nominative</a></p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: middle;">
+<td style="border-bottom-style: Solid; border-bottom-width: 1px;" width="263">
+<ul style="list-style: disc;">
+<li class="p">
+<p style="font-family: Verdana, sans-serif; font-size: 10pt; margin-top: 6pt; margin-bottom: 6pt; text-align: Justify;"><a href="index_106491.htm">Tabelle</a></p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_1068.htm"},{"type":"item","name":"Gestione distinta","url":"html/bafc/bafc0001f.htm"},{"type":"item","name":"Stampa distinta","url":"html/bafc/bafc0002d.htm"},{"type":"item","name":"Accensione anticipo","url":"html/bafc/bafc0003f_A.htm"},{"type":"item","name":"Rimborso anticipo","url":"html/bafc/bafc0003f_R.htm"},{"type":"item","name":"Elaborazione flusso XML - Home Banking","url":"html/bafc/bafc0005d.htm"},{"type":"item","name":"Situazione anticipi","url":"html/bafc/bafc0006f.htm"},{"type":"book","name":"Tabelle","key":"toc32"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

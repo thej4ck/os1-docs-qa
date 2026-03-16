@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="06 6, 2011 2:05:05 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Analisi movimenti magazzino</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.7.1.1_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Magazzino > Prima nota magazzino" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt;">Analisi 
+ movimenti</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;"><span style="font-family: Verdana, sans-serif; 
+													 font-size: 10pt;">Il 
+ programma effettua la visualizzazione dei movimenti di magazzino in base 
+ ai parametri inseriti dall’utente. Una volta visualizzati i movimenti, 
+ è possibile attivare la stampa della scheda o delle schede utilizzando 
+ il bottone Stampa della tool bar.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">È possibile visualizzare i 
+ movimenti relativi ad uno o più prodotti, ad un cliente o fornitore, limitandone 
+ la selezione entro due date indicate dall’utente, ad una specifica causale, 
+ ad uno specifico magazzino.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">Il programma si articola su 
+ due finestre video. La prima, Parametri, consente la definizione dei parametri 
+ di analisi.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: center;"><img src="Images/bmag0003f_01.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">DA 
+ PRODOTTO: eventuale codice dell'articolo, presente in anagrafica Prodotti, 
+ da cui si desidera iniziare la selezione dei &#160;movimenti di magazzino. 
+ Confermando a vuoto, la selezione inizia con il primo prodotto valido. 
+ Sul campo è attiva la ricerca (F9) sull’anagrafica prodotti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">A 
+ PRODOTTO: eventuale codice dell'articolo, presente in anagrafica Prodotti, 
+ a cui si desidera terminare la selezione dei &#160;movimenti di magazzino. 
+ Confermando a vuoto, la selezione termina con l’ultimo valido. Sul campo 
+ è attiva la ricerca (F9) sull’anagrafica prodotti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">DA 
+ DATA: eventuale data da cui deve iniziare l’analisi dei movimenti di magazzino 
+ per gli articoli precedentemente selezionati. Confermando a vuoto, l’analisi 
+ inizia con il primo movimento valido.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">A 
+ DATA: eventuale data con cui si desidera terminare l’analisi dei movimenti 
+ di magazzino per gli articoli precedentemente selezionati. Confermando 
+ a vuoto, l’analisi si conclude con l'ultimo movimento valido.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif;">DA PROGETTO: eventuale codice 
+ del progetto, presente in anagrafica Progetti, da cui si desidera iniziare 
+ la selezione dei &#160;movimenti. Confermando a vuoto, la selezione inizia 
+ con il primo progetto valido. Sul campo è attiva la ricerca (F9) sull’anagrafica 
+ progetti.</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;">A 
+ PROGETTO: eventuale codice del progetto, presente in anagrafica Progetti, 
+ a cui si desidera terminare la selezione dei &#160;movimenti. Confermando 
+ a vuoto, la selezione termina con l’ultimo valido. Sul campo è attiva 
+ la ricerca (F9) sull’anagrafica progetti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">CAUSALE: 
+ eventuale codice della causale di magazzino a cui si vuole restringere 
+ la selezione di analisi. Sul campo è attiva la ricerca (F9) sulla tabella 
+ Causali di magazzino.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO: 
+ eventuale codice del magazzino a cui si vuole restringere la selezione 
+ di analisi. Sul campo è attiva la ricerca (F9) sulla tabella Magazzini.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">CATEGORIA 
+ MERCEOLOGICA: eventuale codice della categoria merceologica a cui si vuole 
+ restringere la selezione di analisi. Sul campo è attiva la ricerca (F9) 
+ sulla tabella Categorie merceologiche.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; margin-left: 30pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in;">CLIENTE 
+ / FORNITORE: eventuale codice del cliente o fornitore a cui si vuole restringere 
+ la selezione di analisi. Sul campo è attiva la ricerca (F9) sull’anagrafica 
+ clienti - fornitori.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">FORNITORE 
+ ABITUALE: eventuale codice del fornitore abituale dei prodotti con cui</span> 
+ <span style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+		 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">si 
+ desidera effettuare la selezione dei prodotti. Sul campo è attiva la ricerca 
+ (F9) sull’anagrafica fornitori.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">ORDINAMENTO 
+ PER: combo box per definire i criteri di ordinamento. Valori ammessi: 
+ Per data; Per Magazzino/data; per Causale /data.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">TRATTA 
+ OBSOLETI: definisce come se includere nell'analisi anche gli articoli 
+ obsoleti: Si, No, Solo obsoleti.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="text-transform: uppercase;">Raggrupp. cli/for</span>: consente 
+ di effettuare il raggruppamento dei movimenti trattati in base al cliente/fornitore; 
+ è possibile raggruppare i movimenti sia per cliente-fornitore/prodotto 
+ che per prodotto/cliente-fornitore, oppure non effettuare nessun raggruppamento.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">SALDI PRECEDENTI: 
+ Definisce se effettuare il calcolo dei saldi precedenti, rispetto alla 
+ data di inizio analisi:</p>
+<ul style="list-style: disc;">
+	<ul style="list-style: disc;">
+		<ul style="list-style: disc;">
+			<li><p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 0pt; 
+					 margin-bottom: 0pt;">Nessuna gestione: non saranno 
+			 calcolati i saldi precedenti</p></li>
+			<li><p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 0pt; 
+					 margin-bottom: 0pt;">Solo prodotti movimentati: saranno 
+			 mostrati i saldi precedenti dei solo articoli che hanno movimenti 
+			 di magazzino nei limiti di analisi</p></li>
+			<li><p style="text-indent: -0.417in; margin-left: 30pt; margin-top: 0pt; 
+					 margin-bottom: 0pt;">Anche i prodotti non movimentati: 
+			 saranno mostrati i saldi precedenti di tutti i prodotti che 
+			 rientrano nei limiti di analisi anche se non movimentati.</p></li>
+		</ul>
+	</ul>
+</ul>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">INCLUDI 
+ ORDINI CLIENTI: check box per includere nell'analisi anche gli ordini 
+ clienti (casella con segno di spunta).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">INCLUDI 
+ ORDINI FORNITORI: check box per includere nell'analisi anche gli ordini 
+ fornitori (casella con segno di spunta).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">INCLUDI 
+ ORDINI A PRODUZIONE: check box per includere nell'analisi anche gli ordini 
+ relativi alla produzione (casella con segno di spunta).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">INCLUDI 
+ IMPEGNI DI PRODUZIONE: check box per includere nell'analisi anche gli 
+ impegni derivanti dalla produzione (casella con segno di spunta).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">VISUALIZZA 
+ QUANTITA' SECONDARIA: definisce se visualizzare la quantità secondaria 
+ del movimento di magazzino</span></p>
+<p>&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">Confermando tramite pressione 
+ del bottone Esegui, viene avviata la selezione e richiamata la finestra 
+ video Risultati. La finestra video è articolata su due sezioni: la sezione 
+ superiore elenca l’articolo o gli articoli selezionati, indicando per 
+ ciascuno di essi il codice, la descrizione, l’unità di misura e l’eventuale 
+ saldo iniziale (se richiesto).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">La sezione inferiore elenca 
+ invece i movimenti relativi all’articolo selezionato, che è quello contrassegnato 
+ dal segno freccia a destra del rigo nella sezione superiore; i movimenti 
+ relativi ad ordini ed impegni vengono presentati in colore diverso.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">Cliccando invece sui bottoni 
+ anteprima di stampa o stampa della tool bar, si avviano le relative funzioni.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: center;"><img src="Images/bmag0003f_02.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;"><span>Se è stato richiesto 
+ il raggruppamento per cliente/fornitore/prodotto sarà presente una terza 
+ griglia di testa che consente di visualizzare i movimenti dei prodotti 
+ per cliente/fornitore; anche la stampa riporterà tale raggruppamento.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: center;"><img src="Images/bmag0003f_03.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">Se è stato richiesto il raggruppamento 
+ per prodotto/cliente/fornitore sarà presente una terza griglia sotto quella 
+ dei prodotti che consente di visualizzare i movimenti dei clienti/fornitori 
+ dei prodotti; anche la stampa riporterà tale raggruppamento.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: center;"><img src="Images/bmag0003f_04.png" alt="" style=" border:none; width:100%; max-width:757px;" border="0" /></p>
+</body>
+</html>

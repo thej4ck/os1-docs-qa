@@ -1,0 +1,218 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 25, 2016 11:08:12 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Inventario matricole</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.7.7.0_6";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Magazzino > Gestione matricole" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-weight: bold; font-family: Verdana, Arial; font-size: 12pt;">Inventario 
+ matricole</p>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in;">La procedura 
+ consente di ottenere l'analisi e la stampa dell’inventario a quantità 
+ e a valore del magazzino mostrando per prodotto e relativo dettaglio se 
+ presente, le matricole collegate; è possibile analizzare il solo magazzino 
+ fasi oppure tutto il magazzino (inteso come magazzino fasi e magazzino 
+ generale).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: center;"><img src="Images/smat0005f_01.png" alt="" style=" border:none; width:100%; max-width:971px;" border="0" /></p>
+<p>&#160;</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -.417in; margin-left: 0.417in;"><span><span 
+	 style="font-family: Verdana, sans-serif;">TIPO INVENTARIO: definisce 
+ la tipologia dell'inventario: inventario completo, magazzino fasi e magazzino 
+ base, oppure inventario del solo magazzino fasi.</span></span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">DA DATA: 
+ eventuale data da cui deve iniziare l’analisi dei movimenti di magazzino. 
+ Confermando a vuoto, l’analisi inizia con il primo movimento valido.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">A 
+ DATA: eventuale data con cui si desidera terminare l’analisi dei movimenti 
+ di magazzino. Confermando a vuoto, l’analisi si conclude con l'ultimo 
+ movimento valido.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">DA 
+ PRODOTTO: eventuale codice dell'articolo, presente in anagrafica Prodotti, 
+ da cui si desidera iniziare la selezione dei &#160;movimenti di magazzino. 
+ Confermando a vuoto, la selezione inizia con il primo prodotto valido. 
+ Sul campo è attiva la ricerca (F9) sull’anagrafica prodotti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">A 
+ PRODOTTO: eventuale codice dell'articolo, presente in anagrafica Prodotti, 
+ a cui si desidera terminare la selezione dei &#160;movimenti di magazzino. 
+ Confermando a vuoto, la selezione termina con l’ultimo valido. Sul campo 
+ è attiva la ricerca (F9) sull’anagrafica prodotti.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">FASE: eventuale 
+ codice della fase di lavorazione, per cui si desidera effettuare la selezione 
+ di analisi. Confermando a vuoto, la selezione considera tutte le fasi 
+ di lavorazione. Sul campo sono attive le funzioni di ricerca (F9).</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;"><span>VARIANTE: 
+ eventuale codice della variante, per cui si desidera effettuare la selezione 
+ di analisi. Confermando a vuoto, la selezione considera tutte le varianti. 
+ Sul campo sono attive le funzioni di ricerca (F9).</span></span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span>UBICAZIONE: 
+ eventuale codice dell'ubicazione, per cui si desidera effettuare la selezione 
+ di analisi. Confermando a vuoto, la selezione considera tutte le ubicazioni. 
+ Sul campo sono attive le funzioni di ricerca (F9).</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span>LOTTO: 
+ eventuale codice del lotto, per cui si desidera effettuare la selezione 
+ di analisi. Confermando a vuoto, la selezione considera tutti i lotti. 
+ Sul campo sono attive le funzioni di ricerca (F9).</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -.417in; margin-left: 0.417in;">CATEGORIA 
+ MERCEOLOGICA: eventuale codice della categoria merceologica a cui si vuole 
+ restringere la selezione di analisi. Sul campo è attiva la ricerca (F9) 
+ sulla tabella Categorie merceologiche.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -.417in; margin-left: 0.417in;">MAGAZZINO: 
+ eventuale codice del magazzino a cui si vuole restringere la selezione 
+ di analisi. Confermando a vuoto, l’esistenza del prodotto si riferisce 
+ a tutti i magazzini. Sul campo è attiva la ricerca (F9) sulla tabella 
+ Magazzini.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -.417in; margin-left: 0.417in;"><span 
+	 style="font-family: Verdana, sans-serif;">TIPO QUANTITÀ: combo box 
+ per filtrare le esistenze negative. Valori ammessi: Tutte le esistenze; 
+ Esistenze diverse da 0; Solo esistenze negative.</span></p>
+<p style="font-family: Verdana, sans-serif; text-indent: -.417in; margin-left: 0.417in;">ORDINAMENTO 
+ PER: combo box per definire i criteri di ordinamento. Valori ammessi: 
+ Per prodotto; Per Magazzino</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">TIPOLOGIA 
+ PRODOTTI: combo box per definire la tipologia dei prodotti da elaborare. 
+ Valori ammessi: tutti, escluso prodotti fuori inventario, solo prodotti 
+ fuori inventario.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; margin-left: 30pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in;"><span 
+	 style="font-size: 10pt; font-family: Verdana, sans-serif;">ANALIZZA 
+ TUTTI I PRODOTTI: se la casella è spuntata vengono elaborati anche i prodotti 
+ che non sono gestiti a matricole, altrimenti solo quelli gestiti a matricole.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; margin-left: 30pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in;">STAMPA 
+ SINTETICA: definisce se effettuare la stampa del report in formato sintetico 
+ (casella con segno di spunta).</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -.417in; margin-left: 0.417in;">DETTAGLIO 
+ MAGAZZINI: check box per definire i criteri di visualizzazione in caso 
+ di presenza in più magazzini dello stesso prodotto. Valori ammessi: vuoto 
+ = visualizza il totale dei magazzini; spunta = visualizza analiticamente 
+ i singoli magazzini.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">TIPO 
+ MAGAZZINO: combo box per definire la tipologia di magazzino da elaborare. 
+ Valori ammessi: tutti, di proprietà, di terzi.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">STAMPA 
+ MAGAZZINI ESCLUSI: indica se nella selezione si desidera i magazzini normalmente 
+ esclusi dalla stampa dell’inventario. Valori ammessi: No, Si, Solo esclusi.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; margin-left: 30pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in;"><span><span 
+	 style="font-family: Verdana, sans-serif; font-size: 10pt;">STAMPA 
+ INTESTAZIONE: Indica se stampare una pagina con i criteri di selezione 
+ della stampa, l’operatore che l’ ha eseguita, la data e l’ora (casella 
+ con segno di spunta).</span></span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; margin-left: 30pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in;">STAMPA 
+ PREZZO: indica se si intende stampare oltre al valore anche il prezzo 
+ unitario dell’articolo; in questo caso sarà possibile selezionare solo 
+ uno fra i dei criteri di valutazione specificati di seguito.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">PREZZO 
+ MEDIO CARICO: abilita la stampa della colonna relativa al valore calcolato 
+ a prezzo medio di carico (casella con segno di spunta).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">PREZZO 
+ ULTIMO CARICO: abilita la stampa della colonna relativa al valore calcolato 
+ a prezzo ultimo carico (casella con segno di spunta).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;">COSTO 
+ DI MERCATO: abilita la stampa della colonna relativa al valore calcolato 
+ a costo di mercato (casella con segno di spunta).</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="margin-left: 0in;">APPLICA PREZZO PER MAGAZZINO: attivo solo 
+ se si sceglie di stampare il prezzo ed utilizzare il prezzo medio o costo 
+ ultimo: il prezzo in oggetto viene calcolato sul singolo magazzino e non 
+ generico per prodotto (casella con segno di spunta). &#160;In mancanza 
+ del prezzo medio/costo ultimo verrà utilizzato il prezzo medio/costo</span> 
+ <span style="margin-left: 30pt; text-indent: -0.417in;">ultimo complessivo 
+ dell'articolo.</span></p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">&#160;</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">Confermando tramite pressione 
+ del bottone Esegui, viene avviata la selezione e richiamata la finestra 
+ video Risultati. La finestra video è suddivisa in due griglie: nella griglia 
+ superiore vengono riportate le esistenze ed eventualmente il prezzo selezionato 
+ ed il relativo valore relativi alle combinazioni articolo/fase/variante/ubicazione/lotto 
+ (in base alle gestioni attive) selezionati in relazione ai criteri espressi; 
+ sotto è presente un pannello dove sono mostrate le descrizioni del prodotto/fase/variante 
+ (in base alle gestioni attive) attualmente selezionato in griglia. Per 
+ ogni rigo nella griglia inferiore vengono riportate le matricole <span 
+	 style="font-weight: bold;">in carico</span> con i relativi dati: stato 
+ prenotazione, data creazione, data scadenza e matricola del fornitore.</p>
+<p style="margin-top: 6pt; margin-bottom: 6pt; font-family: Verdana, sans-serif; 
+	 font-size: 10pt; text-align: justify;">Utilizzando i tasti funzione 
+ della <a href="../Ambiente/Ambiente_02.htm">toolbar</a> (anteprima di 
+ stampa o stampa), si avviano le relative funzioni.</p>
+<p style="margin-left: 0in; text-align: center;"><img src="Images/smat0005f_02.png" alt="" style=" border:none; width:100%; max-width:971px;" border="0" /></p>
+</body>
+</html>

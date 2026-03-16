@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_40.htm"},{"type":"book","name":"Richieste di acquisto","key":"toc127"},{"type":"book","name":"Documenti di trasporto","key":"toc129"},{"type":"book","name":"Fatturazione","key":"toc131"},{"type":"book","name":"Autofatture","key":"toc133"},{"type":"book","name":"Listini","key":"toc136"},{"type":"book","name":"Modello Intra","key":"toc138"},{"type":"book","name":"Dichiarazioni d'intento","key":"toc139"},{"type":"book","name":"OS1BoxFatture","key":"toc141"},{"type":"book","name":"Analisi ABC","key":"toc142"},{"type":"book","name":"Gestione RAEE","key":"toc143"},{"type":"book","name":"Tabelle","key":"toc144"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

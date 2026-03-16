@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_1066.htm"},{"type":"item","name":"Manutenzione movimenti","url":"html/bcan/bcan0001f.htm"},{"type":"item","name":"Lista movimenti","url":"html/bcan/bcan0002d.htm"},{"type":"item","name":"Analisi movimenti","url":"html/bcan/bcan0003f.htm"},{"type":"item","name":"Stampa situazione movimenti","url":"html/bcan/bcan0004d.htm"},{"type":"item","name":"Ripartizione movimenti transitori","url":"html/bcan/bcan0005d.htm"},{"type":"item","name":"Ribaltamento movimenti","url":"html/bcan/bcan0006d.htm"},{"type":"item","name":"Stampa situazione saldi mensile","url":"html/bcan/bcan0010d.htm"},{"type":"item","name":"Stampa bilancio","url":"html/bcan/bcan0008d.htm"},{"type":"book","name":"Tabelle","key":"toc24"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

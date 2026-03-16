@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="10 25, 2004 11:51:44 AM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+<meta name="topic-comment" content="" />
+<meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Stampa scadenzario consegne fornitori</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.5.2.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Ordini fornitori > Interrogazione ordini" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; text-align: left; font-weight: bold; 
+	 font-size: 12pt;"><strong><span style="font-weight: bold;">Stampa 
+ scadenzario consegne fornitori</span></strong></p>
+<p>Il programma, articolato su due finestre video, provvede alla stampa 
+ di scadenzari di consegna ordinati in base al tipo stampa selezionato 
+ dall’utente.</p>
+<p style="text-align: center;"><img src="Images/sorf0010d_01.png" alt="" style=" border:none; width:100%; max-width:617px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO STAMPA: combo 
+ box per definire il tipo di scadenzario desiderato. Valori ammessi: Per 
+ data; Per fornitore; Per prodotto.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA PRODOTTO: eventuale 
+ codice dell'articolo, presente in anagrafica Prodotti, da cui si desidera 
+ iniziare la selezione di analisi. Confermando a vuoto, la selezione inizia 
+ con il primo prodotto valido. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A PRODOTTO: eventuale 
+ codice dell'articolo, presente in anagrafica Prodotti, a cui si desidera 
+ terminare la selezione di analisi. Confermando a vuoto, la selezione termina 
+ con l’ultimo valido. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA FORNITORE: eventuale 
+ codice del fornitore, presente in anagrafica fornitori, da cui si vuole 
+ iniziare la selezione di analisi. Confermando a vuoto, la selezione inizia 
+ dal primo fornitore valido. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A FORNITORE: eventuale 
+ codice del fornitore, presente in anagrafica fornitori, con cui si vuole 
+ terminare la selezione di analisi. Confermando a vuoto, la selezione termina 
+ con l’ultimo fornitore valido. Sul campo sono attive le funzioni di ricerca 
+ (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO DATA: combo box 
+ per definire quale fra le date presenti sugli ordini deve essere assunta 
+ come criterio di analisi. Valori ammessi: Consegna; Ordine.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">DA DATA: eventuale 
+ data da cui deve iniziare l’analisi dei documenti relativamente ai precedenti 
+ parametri di selezione. Confermando a vuoto, l’analisi inizia con il primo 
+ documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">A DATA: eventuale 
+ data con cui si desidera terminare l’analisi dei documenti relativamente 
+ ai precedenti parametri di selezione. Confermando a vuoto, l’analisi si 
+ conclude con l'ultimo documento valido.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CAUSALE ORDINE: eventuale 
+ codice della Causale ordini a cui si vuole limitare la selezione di analisi. 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO ORDINAMENTO: 
+ combo box per definire le modalità di ordinamento in fase di stampa degli 
+ ordini selezionati. Valori ammessi: Per prodotto; Per fornitore.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA INTESTAZIONE: 
+ indica se deve essere stampata come prima pagina del report una pagina 
+ contenente tutte le informazioni inerenti i criteri di selezione specificati 
+ per il report stesso (casella con segno di spunta).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA TOTALI PER 
+ ...: definisce se effettuare la stampa dei totali per il campo indicato 
+ (casella con segno di spunta). Nel caso di scadenzario per data il check 
+ è relativo alla data, nel caso di scadenzario per prodotto è relativo 
+ al fornitore e nel caso di scadenzario per fornitore è relativo al prodotto.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA TOTALI PER 
+ ...: definisce se effettuare la stampa dei totali per il campo indicato 
+ (casella con segno di spunta). Nel caso di scadenzario per data il check 
+ è relativo al mese, nel caso di scadenzario per prodotto è relativo al 
+ prodotto e nel caso di scadenzario per fornitore è relativo al fornitore.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA TOTALE GENERALE: 
+ check box per definire se stampare il totale generale o meno. Valori ammessi: 
+ vuoto = no; spunta = si.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA NOTE ORDINE: 
+ check box per definire se stampare le note di ordine o meno. Valori ammessi: 
+ vuoto = no; spunta = si.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA NOTE DDT: check 
+ box per definire se stampare le note di Ddt o meno. Valori ammessi: vuoto 
+ = no; spunta = si.</p>
+<p style="text-indent: -.417in; margin-left: 30pt;">ORDINI SOSPESI: il 
+ campo è presente solo se è attiva la gestione degli ordini sospesi, consente 
+ di specificare se nell'analisi devono essere mostrati gli ordini sospesi; 
+ può assumere i valori di Includi sospesi, Solo sospesi, Escludi sospesi.</p>
+<p>&#160;</p>
+<p>Segue la seconda finestra video per l‘eventuale definizione di criteri 
+ avanzati di selezione:</p>
+<p style="text-align: center;"><img src="Images/sorf0010d_02.png" alt="" style=" border:none; width:100%; max-width:617px;" border="0" /></p>
+<p>&#160;</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CATEGORIA VENDITE: 
+ codice della categoria vendite a cui si intende limitare la selezione 
+ di analisi. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">CATEGORIA MERCEOLOGICA: 
+ codice della categoria merceologica a cui si intende limitare la selezione 
+ di analisi. Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO FORNITORE: combo 
+ box per definire quale tipologia di fornitore deve essere assunta come 
+ criterio di analisi. Valori ammessi: Tutti; Nazionali; Esteri.</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">NAZIONE: codice della 
+ categoria merceologica a cui si intende limitare la selezione di analisi. 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">ZONA: codice della 
+ zona a cui si intende limitare la selezione di analisi. Sul campo sono 
+ attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">MAGAZZINO: codice 
+ del magazzino prodotti a cui si intende limitare la selezione di analisi. 
+ Sul campo sono attive le funzioni di ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">TIPO ORDINI: codice 
+ della tipologia di ordine presente nelle causali ordini a cui si intende 
+ limitare la selezione di analisi. Sul campo sono attive le funzioni di 
+ ricerca (F9).</p>
+<p style="text-indent: -0.417in; margin-left: 30pt;">STAMPA VALORE: Se 
+ la casella è spuntata stampa anche l'importo nettissimo o il controvalore 
+ nettissimo nel caso di stampa dei totali.</p>
+</body>
+</html>

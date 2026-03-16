@@ -1,0 +1,329 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="06 13, 2009 1:01:29 PM" />
+<meta http-equiv="Content-Language" content="it-IT" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Acquisizione fatture da Box</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.6.8.0_2";
+</script>
+ <meta name="topic-breadcrumbs" content="OS1 Enterprise > Acquisti > OS1BoxFatture" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<p style="font-family: Verdana, Arial; font-size: 12pt; text-align: left; 
+	 font-weight: bold;">Acquisizione fatture da Box (acquisti/conto lavoro/prima 
+ nota contabile)</p>
+<p style="font-family: Verdana, sans-serif;">A livello di gestione documenti 
+ è stata introdotta la possibilità di acquisire una fattura nelle fatture 
+ di acquisto e nelle fatture terzisti, in alternativa è possibile acquisire 
+ i valori del documento direttamente in prima nota contabile quando si 
+ registra un movimento di fattura di acquisto. Per quanto riguarda le fatture 
+ di acquisto non sarà possibile acquisire direttamente la fattura in caso 
+ si vada ad evadere un Ddt, ma sarà possibile associare le righe del documento 
+ con le righe della fattura di acquisito per poterne assumere il prezzo.</p>
+<p style="font-family: Verdana, sans-serif;">&#160;</p>
+<p style="font-family: Verdana, sans-serif;"><span style="font-size: 10.0pt; 
+													 mso-bidi-font-size: 12.0pt; 
+													 mso-fareast-font-family: 'Times New Roman'; 
+													 mso-bidi-font-family: 'Times New Roman'; 
+													 mso-ansi-language: IT; 
+													 mso-fareast-language: IT; 
+													 mso-bidi-language: AR-SA;"><img src="Images/b_AcqFatPN.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:5px; margin-bottom:0px; width:100%; max-width:23px;" align="left" border="0" />In prima nota contabile, in fase di inserimento movimento, 
+ è possibile importare i documenti tramite l'apposito bottone</span><span 
+	 style="mso-spacerun: yes;">&#160;</span><span style="font-size: 10.0pt; 
+													 mso-bidi-font-size: 12.0pt; 
+													 mso-fareast-font-family: 'Times New Roman'; 
+													 mso-bidi-font-family: 'Times New Roman'; 
+													 mso-ansi-language: IT; 
+													 mso-fareast-language: IT; 
+													 mso-bidi-language: AR-SA;">che 
+ visualizza l’elenco dei documenti precedentemente importati tramite “OS1BoxFatture 
+ acquisti” ma non ancora importati in OS1.</span></p>
+<p style="font-family: Verdana, sans-serif;">&#160;</p>
+<p lang="it-IT" style="margin-left: 0in; margin-right: 0in; margin-top: 0pt; 
+	 margin-bottom: 0pt; line-height: Normal;"><span style="line-height: Normal;"><span><span 
+	 style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; mso-fareast-font-family: 'Times New Roman'; 
+	 mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: IT; 
+	 mso-bidi-language: AR-SA; font-family: Verdana, sans-serif;">N</span></span><span 
+	 style="font-size: 10.0pt; font-family: Verdana, sans-serif;">elle 
+ fatture di acquisto del ciclo passivo e del conto lavoro è possibile effettuare 
+ due tipologie di operazioni:</span></span></p>
+<p><span style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; mso-fareast-font-family: 'Times New Roman'; 
+		 mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: IT; 
+		 mso-fareast-language: IT; mso-bidi-language: AR-SA;"><img src="Images/b_AcqFatDoc.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:5px; margin-bottom:0px; width:100%; max-width:89px;" align="left" border="0" /></span></p>
+<p class="Corpo" lang="it-IT" style="mso-list: l0 level1 lfo1; font-size: 10.0pt; 
+	 margin-left: 0in; margin-right: 0in; margin-top: 0pt; margin-bottom: 0pt; 
+	 line-height: Normal;">Importazione fattura: tramite questa operazione 
+ è possibile importare la fattura acquisita senza evadere ordini/ddt. <span 
+	 style="mso-bidi-font-size: 12.0pt; mso-fareast-font-family: 'Times New Roman'; 
+	 mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: IT; 
+	 mso-bidi-language: AR-SA;">In fase di inserimento del documento fattura 
+ di acquisto o fattura terzista è possibile importare i documenti tramite 
+ l'apposito bottone presente nei dati generali del documento che visualizza 
+ l’elenco dei documenti precedentemente importati tramite “OS1BoxFatture 
+ acquisti” ma non ancora importati in OS1.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10.0pt; mso-bidi-font-size: 12.0pt; 
+	 mso-fareast-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman';"><span 
+	 style="mso-ansi-language: IT; mso-fareast-language: IT; mso-bidi-language: AR-SA;"><img src="Images/b_AcqFatDocRighe.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:5px; margin-bottom:0px; width:100%; max-width:77px;" align="left" border="0" /></span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10.0pt; mso-bidi-font-size: 12.0pt; 
+	 mso-fareast-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman';"><span 
+	 style="mso-ansi-language: IT; mso-fareast-language: IT; mso-bidi-language: AR-SA;">Assegnazione 
+ prezzi e sconti su fattura: tramite questa operazione è possibile evadere 
+ interattivamente ordini/ddt e successivamente assegnare prezzo e sconti 
+ dal file XML acquisito.</span></p>
+<p style="font-family: Verdana, sans-serif; font-size: 10.0pt; mso-bidi-font-size: 12.0pt;">&#160;</p>
+<p style="text-align: center;"><img src="Images/DlgAcquisizioneFatDaBoxF.png" alt="" style=" border:none; width:100%; max-width:774px;" border="0" /></p>
+<p class="Corpo" style="font-family: Verdana, sans-serif;"><span style="font-family: Verdana, sans-serif;"><span 
+	 style="font-size: 10.0pt;">L</span>a finestra richiamata dai documenti, 
+ se attiva la gestione lotti e/o matricole <span style="font-size: 10.0pt; 
+												 mso-bidi-font-size: 12.0pt; 
+												 mso-fareast-font-family: 'Times New Roman'; 
+												 mso-bidi-font-family: 'Times New Roman'; 
+												 mso-ansi-language: IT; 
+												 mso-fareast-language: IT; 
+												 mso-bidi-language: AR-SA;">e 
+ in caso di importazione di un documento con file arricchito AssoSoftware 
+ consente importare anche i lotti e le matricole se gestite sull’articolo 
+ importato nella fattura di acquisto, attivando le relative caselle di 
+ spunta vengono generati i codici lotti e matricole, se non presenti in 
+ anagrafica di OS1.</span></span></p>
+<p style="text-align: center;"><img src="Images/DlgAcquisizioneFatDaBoxF_BassoDoc.png" alt="" style=" border:none; width:100%; max-width:729px;" border="0" /></p>
+<p style="font-family: Verdana, sans-serif;">&#160;</p>
+<p class="Corpo" style="margin-left: 0cm;"><span style="font-size: 10.0pt;">Nell’elenco 
+ vengono visualizzati tutti i documenti non ancora importati per fornitore/numero/data 
+ documento, se indicati nella maschera di prima nota contabile o </span><span 
+	 style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; mso-fareast-font-family: 'Times New Roman'; 
+	 mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: IT; 
+	 mso-bidi-language: AR-SA;">nei dati di testa della fattura</span><span 
+	 style="font-size: 10.0pt;">, se tali dati non sono stati indicati, 
+ vengono visualizzati tutti i documenti da importare. Tramite il bottone&#160;è 
+ possibile visualizzare l’allegato della fattura se importato dal file 
+ XML, sarà possibile visualizzare gli allegati anche dopo aver selezionato 
+ la fattura tramite il bottone</span> <span style="font-size: 10.0pt;">&#160;presente 
+ nella sezione Iva del movimento contabile. </span><span style="font-size: 10.0pt; 
+														 mso-bidi-font-size: 12.0pt; 
+														 mso-fareast-font-family: 'Times New Roman'; 
+														 mso-bidi-font-family: 'Times New Roman'; 
+														 mso-ansi-language: IT; 
+														 mso-fareast-language: IT; 
+														 mso-bidi-language: AR-SA;">Nell’elenco 
+ vengono visualizzati con scritta rossa anche i documenti che in OS1BoxFatture 
+ Acquisti sono stati chiusi manualmente.</span></p>
+<p class="Corpo" style="margin-left: 0cm;"><span style="font-size: 10.0pt; 
+												 mso-bidi-font-size: 12.0pt; 
+												 mso-fareast-font-family: 'Times New Roman'; 
+												 mso-bidi-font-family: 'Times New Roman'; 
+												 mso-ansi-language: IT; 
+												 mso-fareast-language: IT; 
+												 mso-bidi-language: AR-SA;"><img src="Images/b_allegati.png" alt="" style=" border:none; margin-left:0px; margin-bottom:5px; margin-right:5px; margin-top:0px; width:100%; max-width:229px;" align="left" border="0" />Tramite il bottone</span><span style="font-size: 10.0pt; 
+												 mso-bidi-font-size: 12.0pt; 
+												 mso-fareast-font-family: 'Times New Roman'; 
+												 mso-bidi-font-family: 'Times New Roman'; 
+												 mso-ansi-language: IT; 
+												 mso-fareast-language: IT; 
+												 mso-bidi-language: AR-SA; 
+												 mso-spacerun: yes;">&#160;Allegati 
+ </span><span style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; mso-fareast-font-family: 'Times New Roman'; 
+				 mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: IT; 
+				 mso-fareast-language: IT; mso-bidi-language: AR-SA;">è 
+ possibile visualizzare l’allegato o gli allegati della fattura se importato 
+ dal file XML, altrimenti il bottone risulta disattivato; sarà possibile 
+ visualizzare gli allegati anche dopo aver selezionato la fattura tramite 
+ il bottone </span><img src="Images/b_AllegatiS.png" alt="" style=" border:none; width:100%; max-width:23px;" border="0" /><span style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; 
+											 mso-fareast-font-family: 'Times New Roman'; 
+											 mso-bidi-font-family: 'Times New Roman'; 
+											 mso-ansi-language: IT; mso-fareast-language: IT; 
+											 mso-bidi-language: AR-SA; 
+											 mso-spacerun: yes;"> </span><span 
+	 style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; mso-fareast-font-family: 'Times New Roman'; 
+	 mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: IT; mso-fareast-language: IT; 
+	 mso-bidi-language: AR-SA;">presente nei Dati generali del documento</span> 
+ e <span style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; mso-fareast-font-family: 'Times New Roman'; 
+		 mso-bidi-font-family: 'Times New Roman'; mso-ansi-language: IT; 
+		 mso-fareast-language: IT; mso-bidi-language: AR-SA;">nella sezione 
+ Iva del movimento contabile.</span></p>
+<p style="font-family: Verdana, sans-serif;">&#160;</p>
+<p>&#160;</p>
+<p class="Corpo" style="margin-left: 0cm; font-size: 10.0pt;">In prima 
+ nota contabile confermando l’acquisizione del documento vengono importati 
+ i dati della fattura, nel caso in cui per questo documento sia stata effettuata, 
+ oltre l'acquisizione, anche la fase di preparazione vengono importati 
+ tali dati, sia Iva che contabili, senza nessuna rielaborazione dei dati. 
+ Nel caso in cui la fattura sia stata solo acquisita da OS1BoxFatture Acquisti, 
+ vengono proposte le aliquote Iva e i conti contabili con lo stesso criterio 
+ indicato nella fase di preparazione sulla scheda operativa di OS1BoxFatture 
+ Acquisti.</p>
+<p class="Corpo" style="margin-left: 0cm; font-size: 10.0pt;">Nei documenti 
+ di acquisto/terzisti confermando l’acquisizione del documento vengono 
+ importati i dati della fattura.</p>
+<p class="Corpo" style="margin-left: 0cm;"><span style="font-size: 10.0pt; 
+												 font-family: Verdana, sans-serif;">In 
+ entrambi i casi Se si ricevono file XML che contengono le informazioni 
+ aggiuntive previste dallo standard AssoSoftware la preparazione della 
+ registrazione sarà sicuramente più completa, soprattutto per quanto riguarda 
+ le righe dei documenti. Per i dettagli si rimanda alla relativa scheda 
+ operativa.</span></p>
+<p class="MsoNormal" style="text-align: left;">La data del movimento contabile/documento 
+ non dovrebbe essere inferiore alla data di ricezione del file XML, in 
+ fase di salvataggio viene effettuato un controllo ed in caso di data non 
+ corretta, viene segnalato a video l’errore, riportando la data di ricezione; 
+ il controllo è configurabile tramite la configurazione di OS1BoxFatture 
+ Acquisti.</p>
+<p class="MsoNormal">Una volta importata la fattura in prima nota contabile 
+ o nelle fatture di acquisto o terzisti non sarà più presente nell’elenco 
+ delle fatture da importare.</p>
+<p class="MsoNormal">Se per il documento importato sono presenti allegati 
+ ed è gestita l’archiviazione con OS1FileStore, gli allegati verranno archiviati 
+ e collegati al movimento/documento al momento del salvataggio definitivo.</p>
+<p class="MsoNormal">&#160;</p>
+<p class="MsoNormal">Per i documenti è possibile utilizzare anche un'altra 
+ metodologia relativa alla casistica di evasione interattiva ordini/ddt 
+ che consente successivamente alla creazione delle righe di assegnare prezzo 
+ e sconti dal file XML acquisito. <span style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; 
+										 mso-fareast-font-family: 'Times New Roman'; 
+										 mso-bidi-font-family: 'Times New Roman'; 
+										 mso-ansi-language: IT; mso-fareast-language: IT; 
+										 mso-bidi-language: AR-SA;">In 
+ fase di inserimento del documento, dopo aver evaso il documento di origine, 
+ sulla maschera delle righe documenti si attiva il pulsante <img src="Images/b_AcqFatDocRighe.png" alt="" style=" border:none; width:100%; max-width:77px;" border="0" /> tramite cui viene visualizzato 
+ l’elenco dei documenti acquisiti in OS1BoxFatture Acquisti per l’intestatario 
+ del documento con lo stesso numero e data inseriti nei dati generali del 
+ documento; il funzionamento è analogo a quanto indicato in precedenza.</span></p>
+<p class="MsoNormal" style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt;"><span 
+	 style="mso-fareast-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; 
+	 mso-ansi-language: IT; mso-fareast-language: IT; mso-bidi-language: AR-SA;">Dopo 
+ aver selezionato il documento per l’associazione delle righe della fattura 
+ XML alle righe del documento generato</span> compare la seguente finestra:</p>
+<p class="MsoNormal" style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; 
+	 text-align: center;"><span style="mso-fareast-font-family: 'Times New Roman'; 
+								 mso-bidi-font-family: 'Times New Roman'; 
+								 mso-ansi-language: IT; mso-fareast-language: IT; 
+								 mso-bidi-language: AR-SA;"><img src="Images/DlgAssociazioneFatDaBoxF.png" alt="" style=" border:none; width:100%; max-width:765px;" border="0" /></span></p>
+<p class="MsoNormal" style="font-size: 10.0pt; mso-bidi-font-size: 12.0pt; 
+	 mso-fareast-font-family: 'Times New Roman'; mso-bidi-font-family: 'Times New Roman'; 
+	 mso-ansi-language: IT; mso-fareast-language: IT; mso-bidi-language: AR-SA;">&#160;</p>
+<p class="Corpo" style="margin-left: 0cm; font-size: 10.0pt;">La finestra 
+ è formata da tre sezioni:</p>
+<ul style="list-style: disc;">
+	<li><p class="Corpo" style="font-size: 10.0pt; mso-list: l0 level1 lfo1; 
+			 margin-left: 0px; margin-top: 3px; margin-bottom: 3px;">Righe 
+	 fattura XML: vengono visualizzate le righe della fattura acquisita 
+	 sul Box</p></li>
+	<li><p class="Corpo" style="font-size: 10.0pt; margin-left: 0px; margin-top: 3px; 
+			 margin-bottom: 3px;"><span style="text-indent: -18.0pt; mso-list: l0 level1 lfo1; 
+										 font-size: 10.0pt;">Righe documento 
+	 assegnate: la sezione contiene le righe del documento assegnate al 
+	 rigo della fattura su cui siamo posizionati nella sezione 1, nel caso 
+	 in cui gli articoli del documento coincidono con quelli della fattura 
+	 acquisita da OS1BoxFatture Acquisti, le righe vengono automaticamente 
+	 assegnate in tale sezione, per annullare l’associazione basta cliccare 
+	 sul rigo e il rigo viene spostato nella sezione delle righe da assegnare.</span></p></li>
+	<li><p class="Corpo" style="margin-left: 0px; margin-top: 3px; margin-bottom: 3px;"><span 
+	 style="text-indent: -18.0pt; mso-list: l0 level1 lfo1; font-size: 10.0pt; 
+	 font-family: Verdana, sans-serif;">Righe documento da assegnare: la 
+	 sezione contiene le righe del documento che non risultano assegnate, 
+	 per associarle al rigo della fattura XML su cui siamo posizionati 
+	 sopra basta cliccare sul rigo e la riga del documento viene spostato 
+	 nella sezione delle righe assegnate.</span></p></li>
+</ul>
+<p class="Corpo" style="margin-left: 0cm;">Effettuando l’assegnazione il 
+ rigo viene spostato nella sezione “Righe documento assegnate”: è possibile 
+ associare alle righe della fattura acquisita sul Box uno o più righe documenti.</p>
+<p class="Corpo" style="margin-left: 0cm;">Eseguendo e confermando l’associazione 
+ del documento vengono aggiornati i prezzi e gli sconti delle righe del 
+ documento.</p>
+<p class="Corpo" style="margin-left: 0cm;">Premendo il pulsante Prosegui 
+ senza effettuare nessuna assegnazione sarà possibile uscire dalla finestra 
+ senza che nessuna modifica venga fatta a livello del documento, ma mantenedo 
+ l'associazione al documento XML.</p>
+<p class="Corpo" style="margin-left: 0cm; mso-ansi-language: IT; mso-fareast-language: IT;">&#160;</p>
+<p class="Corpo" style="margin-left: 0cm;"><span style="mso-bidi-language: AR-SA;"><img src="Images/b_SpeseAcc.png" alt="" style=" border:none; margin-left:0px; margin-right:5px; margin-top:5px; margin-bottom:0px; width:100%; max-width:83px;" align="left" border="0" /></span>Se sulla fattura XML sono presenti righe relative 
+ a spese accessorie (tipo AC) sarà presente il pulsante mostrato a lato 
+ che consente di assegnare i valori delle spese accessorie ai campi spese 
+ presenti sulla testa del documento di OS1 tramite due modalità:</p>
+<ul style="list-style: disc;">
+	<ul style="list-style: disc;">
+		<ul style="list-style: disc;">
+			<li><p class="Corpo" style="margin-left: 0cm;">assegnazione 
+			 per importo: viene visualizzato il totale delle spese e i 
+			 4 campi relativi alle spese del documento; è possibile indicare 
+			 per ogni campo un importo fino al completamento del totale; 
+			 è attivo il doppio click sui campi spesa per impostare nel 
+			 campo il residuo da assegnare.</p></li>
+		</ul>
+	</ul>
+</ul>
+<p class="Corpo" style="margin-left: 0cm; text-align: center;"><img src="Images/DlgAssociazioneFatDaBoxF_001_01.png" alt="" style=" border:none; width:100%; max-width:651px;" border="0" /></p>
+<ul style="list-style: disc;">
+	<ul style="list-style: disc;">
+		<ul style="list-style: disc;">
+			<li><p class="Corpo" style="margin-left: 0cm;">assegnazione 
+			 per tipo: vengono visualizzate le righe relative alle spese 
+			 e per ogni rigo è possibile assegnare come destinazione la 
+			 singola spese del documento.</p></li>
+		</ul>
+	</ul>
+</ul>
+<p class="Corpo" style="margin-left: 0cm; text-align: center;"><img src="Images/DlgAssociazioneFatDaBoxF_001_02.png" alt="" style=" border:none; width:100%; max-width:651px;" border="0" /></p>
+<p class="Corpo" style="margin-left: 0cm;">Non è possibile utilizzare entrambe 
+ le modalità ed in entrambi i casi se non viene assegnato tutto l'importo 
+ relativo al totale delle spese viene dato un avviso e l'assegnazione delle 
+ spese non avviene. L'assegnazione delle spese non viene salvata di conseguenza 
+ se si accede nuovamente alla finestra di &quot;Associazione dati fattura 
+ XML&quot; l'assegnazione delle spese deve essere effettuata nuovamente. 
+ Alla chiusura della finestra principale con il pulsante Salva, se le spese 
+ sono state assegnate correttamente, i valori delle spese per come assegnate 
+ vengono inseriti nei relativi campi spesa del documento, che perdono gli 
+ eventuali valori già assegnati in precedenza.</p>
+</body>
+</html>

@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_1064.htm"},{"type":"item","name":"Manutenzione movimenti","url":"html/brda/brda0001f.htm"},{"type":"item","name":"Stampa situazione movimenti","url":"html/brda/brda0004d.htm"},{"type":"item","name":"Stampa elenco","url":"html/brda/brda0010f.htm"},{"type":"item","name":"Stampa certificazioni","url":"html/brda/brda0007d_c.htm"},{"type":"item","name":"Stampa schede nominative","url":"html/brda/brda0007d_s.htm"},{"type":"book","name":"Tabelle","key":"toc21"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

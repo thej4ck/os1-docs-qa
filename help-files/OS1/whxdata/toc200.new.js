@@ -1,0 +1,4 @@
+(function() {
+var toc =  [{"type":"item","name":"Introduzione","url":"html/index/index_555790.htm"},{"type":"item","name":"Causali ordini terzisti","url":"html/sclv/sclv0100f.htm"},{"type":"item","name":"Causali DDT terzisti","url":"html/sclv/sclv0101f.htm"},{"type":"item","name":"Causali fatture terzisti","url":"html/sclv/sclv0107f.htm"},{"type":"item","name":"Gruppi fasi","url":"html/sclv/sclv0102f.htm"},{"type":"item","name":"Fasi di lavorazione","url":"html/sclv/sclv0103f.htm"},{"type":"item","name":"Cicli di lavorazione","url":"html/sclv/sclv0104f.htm"}];
+window.rh.model.publish(rh.consts('KEY_TEMP_DATA'), toc, { sync:true });
+})();

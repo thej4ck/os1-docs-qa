@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 18, 2015 6:06:48 PM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Configurazione partite contabili</title>
+<link rel="StyleSheet" href="../../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "../..";
+gCommonRootRelPath = "../..";
+gTopicId = "1.1.1.2.0_12";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazione OS1 Enterprise > Generali > Configurazione moduli > Contabilità" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../../ehlpdhtm.js"></script>
+
+<h5>Configurazione partite contabili</h5>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 30pt;"><span 
+	 style="font-family: Verdana, sans-serif;"><span style="text-transform: uppercase;">T</span>IPO 
+ QUADRATURA: Indica il tipo di quadratura da applicare fra scadenze e il 
+ movimento contabile di riferimento; &#160;valori ammessi:</span></p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in;">Nessun 
+		 controllo: non esegue alcun controllo.</p></li>
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in;">Controllo 
+		 di quadratura non vincolante: in caso di non quadratura viene 
+		 fornito un messaggio di avviso.</p></li>
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0in;">Controllo 
+		 di quadratura vincolante: in caso di non quadratura viene fornito 
+		 un messaggio di errore e non è possibile uscire dalla registrazione 
+		 fino a che non quadra.</p></li>
+	</ul></li>
+</ol>
+<p style="font-family: Verdana, sans-serif; margin-left: 0in;">Utilizzato 
+ in prima nota contabile e manutenzione scadenze.</p>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">Tipo gestione cambio incassi/pagamenti</span>: 
+ Definisce come deve essere utilizzato il cambio specificato in fase di 
+ registrazione incasso/pagamento per la selezione delle partite contabili. 
+ I valori previsti sono:</p>
+<ol style="list-style: disc;">
+	<li style="list-style: none; display: inline;"><ul style="list-style: disc;">
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0px;">Cambio 
+		 in base alla data del movimento: in questo caso il cambio proposto 
+		 è quello, presente sulla tabella cambi, più vicino alla data del 
+		 movimento ed in base a questo cambio verrà determinata automaticamente 
+		 la differenza cambi.</p></li>
+		<li class="p"><p style="font-family: Verdana, sans-serif; margin-left: 0px;">Cambio 
+		 in base alle partite di chiusura movimento: il cambio impostato 
+		 nel movimento diventa filtro per la ricerca dei movimenti sul 
+		 conto valutario (il sistema considererà solo i movimenti uguali 
+		 al cambio selezionato). In questo caso non viene rilevata la differenza 
+		 cambi.</p></li>
+	</ul></li>
+</ol>
+<p style="font-family: Verdana, sans-serif; text-indent: -0.417in; margin-left: 0.417in;"><span 
+	 style="text-transform: uppercase;">Pagamento preferenziale</span>: 
+ Definisce il pagamento preferenziale utilizzato in fase di generazione 
+ nuova partita dal modulo delle partite contabili e in fase di creazione 
+ di partite contabili dalla prima nota contabile.</p>
+</body>
+</html>

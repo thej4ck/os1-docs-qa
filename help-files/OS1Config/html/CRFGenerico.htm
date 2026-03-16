@@ -1,0 +1,567 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="XHELPGenerator" content="Open Source Italia S.r.l." />
+<meta name="date" content="05 19, 2016 1:00:12 PM" />
+ <meta name="generator" content="Adobe RoboHelp 2017" />
+<title>Creazione modello interfaccia</title>
+<link rel="StyleSheet" href="../OS1_Help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+	origWidth = innerWidth;
+	origHeight = innerHeight;
+	onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
+<style type="text/css">
+<!--
+div.WebHelpPopupMenu { position:absolute;
+left:0px;
+top:0px;
+z-index:4;
+visibility:hidden; }
+p.WebHelpNavBar { text-align:right; }
+-->
+</style>
+
+<script type="text/javascript" src="../template/scripts/rh.min.js"></script>
+<script type="text/javascript" src="../template/scripts/common.min.js"></script>
+<script type="text/javascript" src="../template/scripts/topic.min.js"></script>
+<script type="text/javascript" src="../template/scripts/constants.js"></script>
+<script type="text/javascript" src="../template/scripts/utils.js"></script>
+<script type="text/javascript" src="../template/scripts/mhutils.js"></script>
+<script type="text/javascript" src="../template/scripts/mhlang.js"></script>
+<script type="text/javascript" src="../template/scripts/mhver.js"></script>
+<script type="text/javascript" src="../template/scripts/settings.js"></script>
+<script type="text/javascript" src="../template/scripts/XmlJsReader.js"></script>
+<script type="text/javascript" src="../template/scripts/loadparentdata.js"></script>
+<script type="text/javascript" src="../template/scripts/loadscreen.js"></script>
+<script type="text/javascript" src="../template/scripts/loadprojdata.js"></script>
+<script type="text/javascript" src="../template/scripts/mhtopic.js"></script>
+ <link rel="stylesheet" type="text/css" href="../template/styles/widgets.min.css">
+ <link rel="stylesheet" type="text/css" href="../template/styles/topic.min.css">
+<script type="text/javascript" >
+gRootRelPath = "..";
+gCommonRootRelPath = "..";
+gTopicId = "2.1.0_3";
+</script>
+ <meta name="topic-breadcrumbs" content="Configurazioni esterne > Registratori di cassa" />
+</head>
+
+<body style="color: #000000;">
+<script type="text/javascript" src="../ehlpdhtm.js"></script>
+
+<h3>Creazione modello interfaccia</h3>
+<p>Per creare una nuova interfaccia relativa ad un determinato CRF è necessario 
+ creare il file di interfaccia che deve essere inserito nella cartella 
+ CRF\ModCRF, è anche possibile personalizzare una interfaccia già esistente, 
+ senza modificarla direttamente, ma creando un file alternativo nella cartella 
+ Custom\CRF che deve essere nominato come NomePC_CRFMOD.cfg.</p>
+<p>Il file di interfaccia contiene le istruzioni relative all'invio dei 
+ comandi al CRF oppure alla procedura interprete che si occuperà di comunicarlo 
+ al CRF. Riportiamo come esempio il file di interfaccia relativo ai CRF 
+ Ditron:</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;"><span 
+	 style="font-size: 8pt; font-family: Verdana, sans-serif;">;Valori 
+ disponibili:</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;"><span 
+	 style="font-size: 8pt; font-family: Verdana, sans-serif;">; Quantita 
+ = quantità del rigo</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ Prezzo = prezzo del rigo</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ Reparto = reparto di vendita del CRF</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ Descrizione = descrizione del prodotto o del rigo descrittivo</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ DescrizioneD = descrizione per display (dimensione in base a LenDescrizioneDisplay)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ Valore = valore del rigo di vendita calcolato come prezzo*quantità</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ PercentualeSCMA = sconto/maggiorazione in percentuale rigo/corpo</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ ImportoSCMA = valore dello sconto/maggiorazione in percentuale rigo/corpo</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ ValoreSCMA = sconto/maggiorazione a valore rigo/corpo</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ CodFiscale = codice fiscale della singola vendita</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ TipoChiusura = Tipo report chiusura cassa</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ ImportoChi = Valore di chiusura per tipo</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ ImportoVis = Totale importo da visualizzare</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ TotDocChi = Valore del totale documento per chiusura</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ RestoChi = Valore del resto per chiusura</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ ChiusuraMista = Indicatore di chiusura con pagamento misto (0/1)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ NumTessera = Tessera: numero tessera cliente</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ PuntiC = Tessera: punti a credito</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ PuntiD = Tessera: punti a debito</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ PuntiS = Tessera: saldo punti</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ NumScontrinoRA = Numero scontrino di riferimento per reso/annullo (ZZZZNNNN)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ DataScontrinoRA = Data scontrino di riferimento per reso/annullo (GGMMAA)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ MatricolaRA = Matricola CRF per reso/annullo</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ NumScontrinoRAZ = Numero scontrino di riferimento per reso/annullo (ZZZZ)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ NumScontrinoRAN = Numero scontrino di riferimento per reso/annullo (NNNN)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ DataScontrinoRA4 = Data scontrino di riferimento per reso/annullo (GGMMAAAA)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ DataNoSepRA = Data scontrino di riferimento per reso/annullo senza separatori</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ DataNoSepRA4 = Data scontrino di riferimento per reso/annullo senza separatori 
+ anno 4 cifre</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ VONumero = Numero voucher</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ VOData = Data voucher</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ VOValore = Importo voucher</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ VODataScad = Data scadenza voucher</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ VOCliente = Cliente voucher</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ VOBarcode = Barcode voucher</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ VODivisa = Divisa voucher</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ VOImportoMin = Imposto minimo vendita voucher</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ VONumCassa = Numero cassa voucher</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ RiferID = Riferimento ID</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ RiferInt = Riferimento interno</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ CORNumero = Numero scontrino di riferimento per cortesia (ZZZZ-NNNN)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ CORData = Data scontrino di riferimento per cortesia (GG/MM/AA)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ CORMatricola = Matricola CRF scontrino di riferimento per cortesia</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ &#160;&#160;CodiceLotteria = Codice lotteria</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Il 
+ nome dei valori deve essere compreso tra i simboli [ ] per esempio [Quantita]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Costanti 
+ disponibili:</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ CR</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ LF</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ CRLF</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ PortaCOM = numero della porta seriale (es. 1)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ ParametriPortaCOM = parametri di connessione della porta seriale (es. 
+ 9600,N,8,1)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Il 
+ nome delle costanti deve essere compreso tra i simboli { } per esempio 
+ {CRLF}</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">[Generale]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">LenDescrizioni=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">LenDescrizioneDisplay=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">DescrizioniMaiuscole=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">AzzeraValoreChiusuraNegativa=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaRighePrezzoZero=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">[Formattazione]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Id=LunghezzaMassima 
+ (0=non significativo)|Sep. migliaia|Sep. decimali|numero decimali -1=Decimali 
+ qta -2=decimali prezzo -3=decimali valore|Senza segno 0=No 1=Si</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">Quantita=6||.|-1|0|</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">Prezzo=0||.|-2|1|</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">Valore=0||.|-3|1|</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ValoreSCMA=0||.|-3|1|</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ImportoSCMA=0||.|-3|0|</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">PercentualeSCMA=0||.|2|0|</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ImportoChi=0||.|-3|0|</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">TotDocChi=0||.|-3|0|</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">RestoChi=0||.|-3|0|</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ImportoVis=0||.|-3|0|</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">[SostituzioniTesto]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">S1='-`</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">[Sintassi]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">RigoVendita=VEND 
+ REP=[Reparto],QTY=[Quantita],PREZZO=[Prezzo],DES='[Descrizione]'</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">RigoStorno=VEND 
+ REP=[Reparto],QTY=[Quantita],PREZZO=[Prezzo],STORNO,DES='[Descrizione]'</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">RigoReso=VEND 
+ REP=[Reparto],QTY=[Quantita],PREZZO=[Prezzo],RESO,DES='[Descrizione]'</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">RigoDescrittivo=PRMSG 
+ RIGA='[Descrizione]'</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaOmaggioRigo=VEND 
+ REP=[Reparto], PRE=[Valore], DES='OMAGGIO [Descrizione], OMAGGIO</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">CodiceFiscale=INP 
+ NUM=2,TERM=35{CRLF}INP ALFA='[CodFiscale]',TERM=145</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ScontoValR=SCONTO 
+ VALORE=[ValoreSCMA]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">MaggiorValR=</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ScontoValT=SCONTO 
+ VALORE=[ValoreSCMA],SUBTOT</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">MaggiorValT=</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ScontoPercR=PERCA 
+ ALIQ=[PercentualeSCMA]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">MaggiorPercR=PERCA 
+ ALIQ=[PercentualeSCMA]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ScontoPercT=PERCA 
+ ALIQ=[PercentualeSCMA],SUBTOT</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">MaggiorPercT=PERCA 
+ ALIQ=[PercentualeSCMA],SUBTOT</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">DisplayChiusuraCli=</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">DisplayChiusuraOpe=</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ChiusuraCONNoImp=</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ChiusuraCON=CHIUS 
+ T=1,IMPORTO=[ImportoChi]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ChiusuraASS=CHIUS 
+ T=3,IMPORTO=[ImportoChi]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ChiusuraPOS=CHIUS 
+ T=5,IMPORTO=[ImportoChi]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ChiusuraCCR=CHIUS 
+ T=5,IMPORTO=[ImportoChi]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ChiusuraTIK=CHIUS 
+ T=14,IMPORTO=[ImportoChi]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ChiusuraCRE=CHIUS 
+ T=2,IMPORTO=[ImportoChi]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ChiusuraSAP=CHIUS 
+ T=30,IMPORTO=[ImportoChi]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ChiusuraBMU=CHIUS 
+ T=4,IMPORTO=[ImportoChi]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ChiusuraARR=CHIUS 
+ T=10,IMPORTO=[ImportoChi]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">DisplayCliente=VIS 
+ CLI1='[Descrizione]',CLI2='[Prezzo]'</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">DisplayClienteOperatore=VIS 
+ CLI1='[Descrizione]',CLI2='[Prezzo]',OPE1='[Descrizione]',OPE2='[Prezzo]'</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">DisplayImporto=VIS 
+ CLI1='[Descrizione]',CLI2='[ImportoVis]'</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ChiusuraCassa=CLEAR{CRLF}CHIAVE 
+ AZZ{CRLF}REPORT NUM=3{CRLF}CHIAVE REG{CRLF}CLEAR</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ChiusuraCassaFiscale=CLEAR{CRLF}CHIAVE 
+ AZZ{CRLF}AZZGIO TIPO=[TipoChiusura]{CRLF}CHIAVE REG{CRLF}CLEAR</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ApriCassetto=INP 
+ TERM=37</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ApriScontrino=</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ApriScontrinoCassetto=</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ChiudiScontrino=</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ChiudiScontrinoCassetto=</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">RiepilogoPunti=NOFIS 
+ APRI{CRLF}NOFIS RIGA=''{CRLF}NOFIS RIGA=' &#160;&#160;&#160;Riepilogo 
+ punti'{CRLF}NOFIS RIGA=''{CRLF}NOFIS RIGA=' Tessera [NumTessera]'{CRLF}NOFIS 
+ RIGA=''{CRLF}NOFIS RIGA=' Accredito corr..: [PuntiC]'{CRLF}NOFIS RIGA=' 
+ Addebito corr...: [PuntiD]'{CRLF}NOFIS RIGA=' -------------------------'{CRLF}NOFIS 
+ RIGA=' Saldo tessera...: [PuntiS]'{CRLF}NOFIS CHIUDI</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ApriScontrinoCortesia=NOFIS 
+ APRI{CRLF}NOFIS RIGA=''{CRLF}NOFIS RIGA=''{CRLF}NOFIS RIGA='* Stampa di 
+ cortesia *'{CRLF}NOFIS RIGA=''{CRLF}NOFIS RIGA=''</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ChiudiScontrinoCortesia=NOFIS 
+ RIGA=''{CRLF}NOFIS RIGA='-----------------------'{CRLF}NOFIS RIGA='Rif. 
+ [CORNumero] [CORData]'{CRLF}NOFIS RIGA='Matricola [CORMatricola]'{CRLF}NOFIS 
+ RIGA='-----------------------'{CRLF}NOFIS RIGA='VALIDO PER CAMBIO MERCE'{CRLF}NOFIS 
+ RIGA='-----------------------'{CRLF}NOFIS RIGA=''{CRLF}NOFIS CHIUDI</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">RigoCortesia=NOFIS 
+ RIGA='[Descrizione] X [Quantita]'</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ApriScontrinoReso=RESPRN{CRLF}SETP 
+ ABORTFILE=SI{CRLF}NOTACRED NUMSCO=[NumScontrinoRAN],ZNUMBER=[NumScontrinoRAZ],DATASCO=[DataNoSepRA],MATR='[MatricolaRA]'</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ApriScontrinoResoMatricola=RESPRN{CRLF}SETP 
+ ABORTFILE=SI{CRLF}NOTACRED NUMSCO=[NumScontrinoRAN],ZNUMBER=[NumScontrinoRAZ],DATASCO=[DataNoSepRA],MATR='[MatricolaRA]'</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ApriScontrinoResoLotteria=RESPRN{CRLF}SETP 
+ ABORTFILE=SI{CRLF}NOTACRED NUMSCO=[NumScontrinoRAN],ZNUMBER=[NumScontrinoRAZ],DATASCO=[DataNoSepRA],MATR='[MatricolaRA]'{CRLF}INP 
+ TERM=167{CRLF}INP ALFA='[CodiceLotteria]', TERM=145</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ApriScontrinoResoMatricolaLotteria=RESPRN{CRLF}SETP 
+ ABORTFILE=SI{CRLF}NOTACRED NUMSCO=[NumScontrinoRAN],ZNUMBER=[NumScontrinoRAZ],DATASCO=[DataNoSepRA],MATR='[MatricolaRA]'{CRLF}INP 
+ TERM=167{CRLF}INP ALFA='[CodiceLotteria]', TERM=145</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaRigoReso=VEND 
+ REP=[Reparto],QTY=[Quantita],PREZZO=[Prezzo],DES='[Descrizione]'</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaChiusuraReso=CHIUS</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ApriScontrinoAnnullo=RESPRN{CRLF}SETP 
+ ABORTFILE=SI{CRLF}DOCANNULLO NUMSCO=[NumScontrinoRAN],ZNUMBER=[NumScontrinoRAZ],DATASCO=[DataNoSepRA],MATR='[MatricolaRA]'</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ApriScontrinoAnnulloMatricola=RESPRN{CRLF}SETP 
+ ABORTFILE=SI{CRLF}DOCANNULLO NUMSCO=[NumScontrinoRAN],ZNUMBER=[NumScontrinoRAZ],DATASCO=[DataNoSepRA],MATR='[MatricolaRA]'</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ApriScontrinoAnnulloLotteria=RESPRN{CRLF}SETP 
+ ABORTFILE=SI{CRLF}DOCANNULLO NUMSCO=[NumScontrinoRAN],ZNUMBER=[NumScontrinoRAZ],DATASCO=[DataNoSepRA],MATR='[MatricolaRA]'{CRLF}INP 
+ TERM=167{CRLF}INP ALFA='[CodiceLotteria]', TERM=145</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ApriScontrinoAnnulloMatricolaLotteria=RESPRN{CRLF}SETP 
+ ABORTFILE=SI{CRLF}DOCANNULLO NUMSCO=[NumScontrinoRAN],ZNUMBER=[NumScontrinoRAZ],DATASCO=[DataNoSepRA],MATR='[MatricolaRA]'{CRLF}INP 
+ TERM=167{CRLF}INP ALFA='[CodiceLotteria]', TERM=145</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaRigoAnnullo=VEND 
+ REP=[Reparto],QTY=[Quantita],PREZZO=[Prezzo],DES='[Descrizione]'</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaChiusuraAnnullo=CHIUS</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ApriStampaVoucher=NOFIS 
+ APRI{CRLF}NOFIS RIGA=''{CRLF}NOFIS RIGA=''{CRLF}NOFIS RIGA=' &#160;&#160;Voucher 
+ n. [VONumero]'{CRLF}NOFIS RIGA=' &#160;&#160;del [VOData]'{CRLF}NOFIS 
+ RIGA=''{CRLF}NOFIS RIGA=' &#160;&#160;Importo: [VOValore]'{CRLF}NOFIS 
+ RIGA=''</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaScadenzaVoucher=NOFIS 
+ RIGA=' &#160;&#160;scadenza il [VODataScad]'{CRLF}NOFIS RIGA=''</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaClienteVoucher=NOFIS 
+ RIGA=' [VOCliente]'{CRLF}NOFIS RIGA=''</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaCodiceVoucher=NOFIS 
+ RIGA=' Codice: [VOBarcode]'{CRLF}NOFIS RIGA=''{CRLF}NOFIS RIGA='[VOBarcode]', 
+ BARCODE=1{CRLF}NOFIS RIGA=''</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaImportMinVoucher=NOFIS 
+ RIGA='---------------------------'{CRLF}NOFIS RIGA='**Valido per vendite 
+ di &#160;&#160;&#160;'{CRLF}NOFIS RIGA=' &#160;valore complessivo uguale'{CRLF}NOFIS 
+ RIGA=' &#160;o superiore a [VODivisa] [VOImportoMin]'</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaCassaVoucher=NOFIS 
+ RIGA='---------------------------'{CRLF}NOFIS RIGA=' &#160;&#160;&#160;&#160;&#160;Cassa 
+ [VONumCassa]'</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ChiudiStampaVoucher=NOFIS 
+ RIGA='---------------------------'{CRLF}NOFIS RIGA=''{CRLF}NOFIS CHIUDI</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaRifInterno=PRMSG 
+ RIGA='-------------------------'{CRLF}PRMSG RIGA=' Rif. ID [RiferID]'{CRLF}PRMSG 
+ RIGA=' Rif. Int. [RiferInt]'{CRLF}PRMSG RIGA='-------------------------'</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaCodLotteria=INP 
+ TERM=167{CRLF}INP ALFA='[CodiceLotteria]', TERM=145</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt;">&#160;</p>
+<p>La parte iniziale commentata dove le righe sono precedute dal carattere 
+ '<span style="font-weight: bold;">;</span>' riepiloga i valori e le costanti 
+ disponibili ed il loro utilizzo all'interno del file.</p>
+<p>La sezione <span style="font-weight: bold;">Generale</span> contiene 
+ informazioni relative all'intero modello come la dimensione delle descrizioni, 
+ se le descrizioni devono essere tutte maiuscole, se stampare i prezzi 
+ zero e se azzerare il valore negativo in chiusura (gli ultimi tre valori 
+ identificano con <span style="font-weight: bold;">0</span> il <span style="font-weight: bold;">No</span> 
+ e con <span style="font-weight: bold;">1</span> il <span style="font-weight: bold;">Si</span>).</p>
+<p>La sezione <span style="font-weight: bold;">Formattazione</span> riporta 
+ i valori che necessitano di formattazione ed include una riga (preceduta 
+ dal carattere '<span style="font-weight: bold;">;</span>') di istruzioni 
+ su come impostare il valore da formattare.</p>
+<p>La sezione <span style="font-weight: bold;">SostituzioniTesto</span> 
+ può essere utilizzata qualora all'interno delle descrizioni vi siano caratteri 
+ da sostituire perchè non gestiti dal CRF: le varie sostituzioni devono 
+ essere elencate progressivamente (S1, S2, Sn) e devono contenere il <span 
+	 style="font-weight: bold;">carattere da sostituire</span>, il carattere 
+ '-' ed il <span style="font-weight: bold;">carattere sostituto</span>.</p>
+<p>La sezione <span style="font-weight: bold;">Sintassi</span> contiene 
+ i comandi gestiti per ognuno dei quali si può specificare la sintassi: 
+ se la sintassi rimane vuota (ApriScontrino=) il comando sarà ignorato; 
+ la sintassi della riga deve contenere le istruzioni che quel particolare 
+ CRF, per cui stiamo facendo il modello, riceverà direttamente o tramite 
+ un programma interprete; i valori e le costanti sono riconoscibili dai 
+ qualificatori <span style="font-weight: bold;">[]</span> per i valori 
+ <span style="font-weight: bold;">{}</span> per le costanti. I comandi 
+ della sezione Sintassi, i valori, le costanti ed ogni altro elemento del 
+ file di modello vengono gestiti tramite il driver generico (OS1CRFGenerico.dll) 
+ di conseguenza non sarà possibile utilizzare una sintassi non prevista 
+ o un valore/costante non presente se non modificando tale libreria.</p>
+<p>Una volta creato il file di modello sarà comunque necessario configurare 
+ il file utente come descritto nel capitolo <a href="CRF.htm">Configurazione 
+ registratori di cassa</a>; per facilitare tale funzione è stato reso disponibile 
+ il file <span style="font-weight: bold;">Generico.cfg</span> presente 
+ nella cartella Modelli\CRF che contiene tutte le possibili tipologie di 
+ collegamento del CRF ad OS1 ed il collegamento alla dll <span style="font-weight: bold;">Modulo=OS1CRF_Generico</span>. 
+ Dalla sezione <span style="font-weight: bold;">CRF</span> sono presenti 
+ le normali righe di configurazione già citate nel capitolo di cui sopra; 
+ l'unica eccezione è il comando <span style="font-weight: bold;">Modello=NomeModello</span> 
+ che solitamente conteneva il modello del CRF oppure era vuoto; utilizzando 
+ il modulo <span style="font-size: 8pt; font-family: Verdana, sans-serif; 
+				 font-weight: bold;">OS1CRF_Generico</span> deve contenere 
+ il nome del file di interfaccia senza estensione (se creo l'interfaccia 
+ MioModello.crf la riga sarà Modello=MioModello).</p>
+<p>&#160;</p>
+<p>Riportiamo l'intero file come esempio:</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;"><span 
+	 style="font-size: 8pt; font-family: Verdana, sans-serif;">;CRF Generico</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;"><span 
+	 style="font-size: 8pt; font-family: Verdana, sans-serif;">[Config]</span></p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Per 
+ non stampare la descrizione o stampare una descrizione fissa togliere 
+ il commento ';' alla riga sottostante</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;StampaDescrizione=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Per 
+ stampare una descrizione fissa è obbligatorio impostare il parametro StampaDescrizione 
+ a 0 (StampaDescrizione=0)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;ed 
+ inserire una riga con chiave 'DicituraFissa=descrizione'. Se all'interno 
+ della descrizione è presente il valore _R</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;sarà 
+ stampato il numero del reparto del registratore di cassa a partire dalla 
+ posizione di _R. (vedi esempio sottostante)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;DicituraFissa=Reparto 
+ _R</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Le 
+ impostazioni che seguono sono tutte quelle previste dall'attuale versione, 
+ togliere il commento da quella desiderata</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Da 
+ utilizzare se presenti due monitor; per visualizzare i dati della vendita 
+ sul secondo monitor</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">DoppioDisplay=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;--------------&lt; 
+ Impostazioni per seriale con scrittura diretta sulla porta &gt;--------------------</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;TipoComunicazione=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Parametri=COM1:baud=9600 
+ parity=N data=8 stop=1 xon=on</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;--------------&lt; 
+ Impostazioni per seriale diretta senza scrittura sulla porta &gt;--------------------</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;TipoComunicazione=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Parametri=COM1:</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Per 
+ un corretto collegamento con la porta seriale è necessario eseguire all'avvio 
+ del sistema il comando:</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ MODE COM1: BAUD=9600/19200 PARITY=N DATA=8 STOP=1 xon=ON</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;--------------&lt; 
+ Impostazioni per utilizzo con programma esterno da eseguire &gt;--------------------</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;TipoComunicazione=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Parametri=C:\Scontrini\Scontrino.inp</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Path 
+ completa installazione procedura MultiDriver</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;PathPgmExe=C:\Programmi\Multidriver\MULTIDRIVER_APP.exe</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Consente 
+ di inserire una riga che riporta il numero delle righe del file scontrino 
+ a partire dalla riga indicata</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;ContaRighe=3</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;--------------&lt; 
+ Impostazioni per utilizzo con programma esterno in polling &gt;--------------------</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;TipoComunicazione=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Parametri=C:\Scontrini\Scontrino.</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;se 
+ il nome del file non presenta l'estensione vengono creati n file con estensione 
+ progressiva (.1, .2, .3 ecc.)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">Modulo=OS1CRF_Generico</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">[CRF]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">Modello=DitronZip</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Indica 
+ se il CRF determina in modo automatico l'arrotondamento per i pagamenti 
+ in contanti (0=No 1=Si default, 2=Si con invio totale vendita a zero se 
+ incasso senza resto)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ArrotondaAuto=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Indica 
+ se il CRF tratta gli arrotondamenti come sconto a pagare (0=No, 1=Si default)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ArrotondamentiSAP=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Indica 
+ se il CRF gestisce i buoni multiuso come sconto a pagare (0=No default, 
+ 1=Si)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">BuoniMultiusoSAP=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Indica 
+ se azzerare l'arrotondamento in caso di pagamento misto (0=No, 1=Si default)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">AzzeraArrotMisto=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Indica 
+ se azzerare l'arrotondamento in caso di utilizzo di voucher (0=No, 1=Si 
+ default)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">AzzeraArrotVoucher=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Abilita 
+ la stampa delle righe nello scontrino di annullamento</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">RTRigheAnn=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Abilitazione 
+ all'utilizzo dei comandi RT (0=non abilitato 1=abilitato) ----&lt; Valido 
+ per ElaExecute &gt;</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">CRF_RT=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Abilitazione 
+ alla stampa del codice fiscale sullo scontrino per i privati (0=non stampa 
+ 1=stampa prima del totale 2=Stampa dopo il totale)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaCodFiscale=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Stampa 
+ il codice della lotteria prima della chiusura (0=stampa prima delle righe 
+ di vendita 1=stampa dopo le righe di vendita)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">PosizioneCodiceLotteria=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Numero 
+ decimali gestiti su CRF</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">NumDecimali=2</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Parametri 
+ di impostazione della porta seriale</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ParametriCOM=1:9600,N,8,1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Abilitazione 
+ alla stampa delle righe descrittive (0=non stampa 1=stampa)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaRigheDSC=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Display 
+ cliente</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">DisplayCliente=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Display 
+ operatore</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">DisplayOperatore=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Definisce 
+ se inviare al display, se attivo, le info sulla chiusura del movimento 
+ (0=non invia &#160;1=invia solo se resto 0 &#160;2=invia sempre)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">DisplayChiusura=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Tempo 
+ di attesa in millisecondi per invio comandi singoli (display, cassetto, 
+ ecc.)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">MilliSecondiAttesa=100</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;ChiusuraCassa 
+ indica se attivare la funzione di chiusura 0=Non attiva altro valore attiva</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ e su alcuni modelli determina il tipo di report chiusura (1=Lungo 2=Breve 
+ 3=Medio compatibilmente con la cassa)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ChiusuraCassa=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;AperturaCassetto 
+ indica se attivare la funzione di apertura cassetto 0=Non attiva 1=Attiva</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">AperturaCassetto=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;AperturaCassettoAuto 
+ indica se attivare la funzione di apertura cassetto automatica all'inizio 
+ o al termine dello scontrino 0=Non attiva 1=Attiva al termine 2=Attiva 
+ all'inizio</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">AperturaCassettoAuto=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Definisce 
+ se e come stampare il riepilogo punti tessera sullo scontrino (0=non stampa 
+ altro valore attiva</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">; 
+ su alcuni modelli 1=appendice congiunta 2=appendice disgiunta)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaRiepilogoPunti=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Definisce 
+ se stampare le righe di cessione gratuita/Omaggio (0=non stampa &#160;1=stampa)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">TipoStampaCessioneGratuita=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Definisce 
+ se è consentita l'emissione di scontrini negativi</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ConsentiScontrinoNegativo=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Definisce 
+ se è consentito stampare sullo scontrino righe a valore zero</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaRigheValoreZero=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Definisce 
+ se è consentito stampare lo scontrino di cortesia ed il tipo di gestione 
+ (0=non gestito 1=Gestito automatico 2=Gestito con selezione righe)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ScontrinoCortesia=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Definisce 
+ se stampare sul CRF eventuali voucher/gift card presenti nella vendita, 
+ per cui è prevista la stampa (0=non stampare su CRF 1=stampare su CRF)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaVoucher=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Tempo 
+ di attesa in millisecondi per invio scontrino di cortesia in coda allo 
+ scontrino fiscale (0=Messaggio per avvio stampa)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">MilliSecondiTermineScontrino=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Definisce 
+ se stampare sullo scontrino di vendita i riferimenti al movimento interno 
+ (0=non stampa 1=stampa)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;La 
+ stampa viene effettuata come rigo descrittivo, se il CRF non supporta 
+ tali righe non abilitare il parametro</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">StampaRifInterni=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;Utilizzato 
+ se attiva la lotteria istantanea per indicare quando assegnare al movimento 
+ il codice lotteria 'AAAAAAAA' in caso di reso/annullamento</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">;(0=nessuna 
+ gestione 1=assegna sempre 2=assegna se matricola CRF diversa (le matricole 
+ di entrambe le casse (vendita e annullo/reso) devono essere specificate)</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ResoAnnulloLotteriaIstantanea=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">[Funzioni]</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">Reso=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">MultiScontiR=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">ScontoR=1</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">MaggiorazioneR=0</p>
+<p style="margin-top: 0pt; margin-bottom: 0pt; font-size: 8pt; font-family: Verdana, sans-serif;">SepDescrizione=0</p>
+</body>
+</html>
