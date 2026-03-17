@@ -344,7 +344,7 @@ function handleSubmit(e) {
 
             function processStream() {
                 reader.read().then(({ done, value }) => {
-                    if (done) { renderFinal(assistantMsg, fullText, sources, null, pendingScreenshots); return; }
+                    if (done) { clearInterval(thinkInterval); renderFinal(assistantMsg, fullText, sources, null, pendingScreenshots); return; }
                     buffer += decoder.decode(value, { stream: true });
                     const lines = buffer.split('\n'); buffer = lines.pop();
                     for (const line of lines) {
@@ -368,6 +368,7 @@ function handleSubmit(e) {
                                 pendingScreenshots = data.screenshots;
                             }
                             if (data.done) {
+                                clearInterval(thinkInterval);
                                 if (data.conversation_id && !conversationId) {
                                     conversationId = data.conversation_id;
                                     history.replaceState(null, '', `/chat?c=${conversationId}`);
@@ -385,7 +386,7 @@ function handleSubmit(e) {
             }
             processStream();
         })
-        .catch(() => { assistantMsg.content.innerHTML = '<p>Errore di connessione. Riprova.</p>'; enableInput(); });
+        .catch(() => { clearInterval(thinkInterval); assistantMsg.content.innerHTML = '<p>Errore di connessione. Riprova.</p>'; enableInput(); });
 
     function scheduleRender(el, text) {
         if (renderTimer) return;
