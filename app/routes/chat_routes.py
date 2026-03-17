@@ -144,7 +144,7 @@ async def ask(
         if daily_count >= domain_config["daily_limit"]:
             async def daily_limit_event():
                 yield {"data": json.dumps({
-                    "error": f"Hai raggiunto il limite giornaliero di {domain_config['daily_limit']} domande. Riprova domani.",
+                    "error": f"Limite giornaliero raggiunto: {daily_count}/{domain_config['daily_limit']} domande oggi. Riprova domani.",
                     "done": True,
                 })}
             return EventSourceResponse(daily_limit_event())
@@ -152,9 +152,11 @@ async def ask(
     # Check monthly limit
     allowed, usage_info = check_limit(user["id"])
     if not allowed:
+        used_k = round(usage_info["total_tokens"] / 1000)
+        limit_k = round(usage_info["limit"] / 1000)
         async def limit_event():
             yield {"data": json.dumps({
-                "error": "Hai raggiunto il limite mensile di utilizzo. Contatta l'amministratore.",
+                "error": f"Limite mensile di token raggiunto: {used_k}K/{limit_k}K token utilizzati questo mese. Contatta l'amministratore per aumentare il limite.",
                 "done": True,
             })}
         return EventSourceResponse(limit_event())
@@ -166,7 +168,7 @@ async def ask(
         if current_count >= max_msgs:
             async def msg_limit_event():
                 yield {"data": json.dumps({
-                    "error": f"Hai raggiunto il limite di {max_msgs} domande per questa conversazione. Apri una nuova chat.",
+                    "error": f"Limite conversazione raggiunto: {current_count}/{max_msgs} domande. Apri una nuova chat per continuare.",
                     "done": True,
                     "limit_reached": True,
                 })}
