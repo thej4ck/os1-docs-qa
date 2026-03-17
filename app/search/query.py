@@ -149,6 +149,34 @@ def init(index: SearchIndex):
     )
 
 
+# ── Allowed models with pricing ($/M tokens) ──
+ALLOWED_MODELS = {
+    "llama-3.1-8b-instant": {
+        "label": "Llama 3.1 8B Instant",
+        "input_price": 0.05,
+        "output_price": 0.08,
+        "context_window": 131_072,
+    },
+    "llama-3.3-70b-versatile": {
+        "label": "Llama 3.3 70B Versatile",
+        "input_price": 0.59,
+        "output_price": 0.79,
+        "context_window": 131_072,
+    },
+    "openai/gpt-oss-120b": {
+        "label": "GPT-OSS 120B",
+        "input_price": 0.15,
+        "output_price": 0.60,
+        "context_window": 131_072,
+    },
+    "openai/gpt-oss-20b": {
+        "label": "GPT-OSS 20B",
+        "input_price": 0.075,
+        "output_price": 0.30,
+        "context_window": 131_072,
+    },
+}
+
 CONTEXT_PRESETS = {
     "conservative": 5_000,
     "normal": 15_000,
@@ -208,27 +236,28 @@ def build_context(docs: list[dict]) -> str:
 
 
 def _get_model(deep: bool = False) -> str:
-    """Get model name from app_settings. Uses deep_model for Approfondisci."""
+    """Get model name from app_settings. Validates against ALLOWED_MODELS."""
+    default = "llama-3.1-8b-instant"
     try:
         from app.db import get_conn
         if deep:
             row = get_conn().execute("SELECT value FROM app_settings WHERE key = 'groq_deep_model'").fetchone()
-            if row and row["value"]:
+            if row and row["value"] and row["value"] in ALLOWED_MODELS:
                 return row["value"]
         row = get_conn().execute("SELECT value FROM app_settings WHERE key = 'groq_model'").fetchone()
-        if row and row["value"]:
+        if row and row["value"] and row["value"] in ALLOWED_MODELS:
             return row["value"]
     except Exception:
         pass
-    return "llama-3.1-8b-instant"
+    return default
 
 
 def _calculate_cost(prompt_tokens: int, completion_tokens: int, deep: bool = False) -> float:
-    if deep:
-        return (prompt_tokens * settings.groq_deep_input_price / 1_000_000) + \
-               (completion_tokens * settings.groq_deep_output_price / 1_000_000)
-    return (prompt_tokens * settings.groq_input_price / 1_000_000) + \
-           (completion_tokens * settings.groq_output_price / 1_000_000)
+    """Calculate cost based on the model's pricing from ALLOWED_MODELS."""
+    model_id = _get_model(deep=deep)
+    model_info = ALLOWED_MODELS.get(model_id, ALLOWED_MODELS["llama-3.1-8b-instant"])
+    return (prompt_tokens * model_info["input_price"] / 1_000_000) + \
+           (completion_tokens * model_info["output_price"] / 1_000_000)
 
 
 async def ask_stream(

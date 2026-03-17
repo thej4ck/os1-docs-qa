@@ -47,20 +47,28 @@
 
     <form method="post" action="/admin/settings">
         <h3 class="section-title">Modello LLM</h3>
-        <p class="section-desc">Configurazione del modello di intelligenza artificiale usato per le risposte.</p>
+        <p class="section-desc">Configurazione del modello di intelligenza artificiale usato per le risposte. I costi sono calcolati automaticamente in base al modello selezionato.</p>
         <div class="settings-card">
             <div class="setting-row">
                 <label class="setting-label" for="groq_model">Modello standard</label>
                 <div style="flex:1;">
-                    <input type="text" id="groq_model" name="groq_model" class="setting-input" value="{{ settings.groq_model }}">
-                    <div class="setting-hint">Usato per le risposte normali. Es: llama-3.1-8b-instant ($0.05/M input)</div>
+                    <select id="groq_model" name="groq_model" class="setting-input" style="width:auto;" onchange="updateModelHint(this,'hint-standard')">
+                        {% for model_id, info in allowed_models.items() %}
+                        <option value="{{ model_id }}" {% if settings.groq_model == model_id %}selected{% endif %}>{{ info.label }} — ${{ info.input_price }}/{{ info.output_price }} per M token</option>
+                        {% endfor %}
+                    </select>
+                    <div class="setting-hint" id="hint-standard">Usato per le risposte normali.</div>
                 </div>
             </div>
             <div class="setting-row">
                 <label class="setting-label" for="groq_deep_model">Modello Approfondisci</label>
                 <div style="flex:1;">
-                    <input type="text" id="groq_deep_model" name="groq_deep_model" class="setting-input" value="{{ settings.groq_deep_model }}">
-                    <div class="setting-hint">Usato per "Approfondisci" (più costoso). Es: llama-3.3-70b-versatile ($0.59/M input)</div>
+                    <select id="groq_deep_model" name="groq_deep_model" class="setting-input" style="width:auto;">
+                        {% for model_id, info in allowed_models.items() %}
+                        <option value="{{ model_id }}" {% if settings.groq_deep_model == model_id %}selected{% endif %}>{{ info.label }} — ${{ info.input_price }}/{{ info.output_price }} per M token</option>
+                        {% endfor %}
+                    </select>
+                    <div class="setting-hint">Usato per "Approfondisci" (consigliato un modello più capace).</div>
                 </div>
             </div>
         </div>

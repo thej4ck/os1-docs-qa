@@ -7,6 +7,11 @@
         <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
     </svg>
 </button>
+<button class="docs-toggle-btn" id="email-btn" aria-label="Invia via email" title="Invia chat via email" onclick="emailChat()" style="display:none;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">
+        <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+    </svg>
+</button>
 <button class="docs-toggle-btn" id="docs-toggle" aria-label="Documenti">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
@@ -351,6 +356,7 @@ function handleSubmit(e) {
                                     conversationId = data.conversation_id;
                                     history.replaceState(null, '', `/chat?c=${conversationId}`);
                                     addToSidebar(conversationId, question.slice(0, 60));
+                                    updateEmailBtn();
                                 }
                                 if (data.msg_count !== undefined) { msgCount = data.msg_count; maxMessages = data.max_messages || maxMessages; updateCounter(); }
                                 renderFinal(assistantMsg, fullText, sources, data.message_id || null, pendingScreenshots);
@@ -518,6 +524,32 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDocOver
 fetch('/api/announcement').then(r => { if (r.ok && r.status !== 204) return r.json(); }).then(data => {
     if (data && data.text) { const b = document.getElementById('announcement'); b.textContent = data.text; b.classList.add('visible'); }
 }).catch(() => {});
+
+// ── Email chat ──
+const emailBtn = document.getElementById('email-btn');
+function updateEmailBtn() { if (emailBtn) emailBtn.style.display = conversationId ? 'flex' : 'none'; }
+updateEmailBtn();
+
+async function emailChat() {
+    if (!conversationId || emailBtn.disabled) return;
+    emailBtn.disabled = true;
+    emailBtn.style.opacity = '0.4';
+    try {
+        const r = await fetch(`/api/conversations/${conversationId}/email`, { method: 'POST' });
+        const data = await r.json();
+        if (data.ok) showToast('Email inviata!');
+        else showToast(data.error || 'Errore nell\'invio', true);
+    } catch { showToast('Errore di connessione', true); }
+    finally { emailBtn.disabled = false; emailBtn.style.opacity = '1'; }
+}
+
+function showToast(msg, isError) {
+    const t = document.createElement('div');
+    t.textContent = msg;
+    t.style.cssText = `position:fixed;bottom:24px;left:50%;transform:translateX(-50%);padding:10px 20px;border-radius:8px;font-size:14px;font-weight:500;z-index:9999;animation:msgIn 0.3s ease;color:#fff;background:${isError ? '#DC2626' : '#16A34A'};box-shadow:0 4px 12px rgba(0,0,0,0.15);`;
+    document.body.appendChild(t);
+    setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity 0.3s'; setTimeout(() => t.remove(), 300); }, 3000);
+}
 
 // ── Render markdown in history ──
 document.querySelectorAll('.msg-assistant .msg-content').forEach(el => { el.innerHTML = marked.parse(convertScreenshotMarkers(el.textContent)); });

@@ -295,11 +295,13 @@ async def settings_page(request: Request):
     if not admin:
         return RedirectResponse(url="/login", status_code=302)
 
+    from app.search.query import ALLOWED_MODELS
     return _templates().TemplateResponse("admin/announcement.html", {
         "request": request,
         "email": admin["email"],
         "is_admin": True,
         "settings": _get_all_settings(),
+        "allowed_models": ALLOWED_MODELS,
     })
 
 
@@ -317,9 +319,17 @@ async def save_settings(request: Request):
     if preset not in ("conservative", "normal", "aggressive"):
         preset = "normal"
 
+    from app.search.query import ALLOWED_MODELS
+    groq_model = str(form.get("groq_model", "")).strip()
+    groq_deep_model = str(form.get("groq_deep_model", "")).strip()
+    if groq_model not in ALLOWED_MODELS:
+        groq_model = "llama-3.1-8b-instant"
+    if groq_deep_model not in ALLOWED_MODELS:
+        groq_deep_model = "llama-3.3-70b-versatile"
+
     settings_map = {
-        "groq_model": str(form.get("groq_model", "")).strip(),
-        "groq_deep_model": str(form.get("groq_deep_model", "")).strip(),
+        "groq_model": groq_model,
+        "groq_deep_model": groq_deep_model,
         "otp_sender_name": str(form.get("otp_sender_name", "")).strip(),
         "otp_sender_email": str(form.get("otp_sender_email", "")).strip(),
         "allowed_emails": str(form.get("allowed_emails", "")).strip(),
