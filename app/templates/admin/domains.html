@@ -61,12 +61,12 @@
             <input type="text" name="pattern" placeholder="*@dominio.it" required style="width:200px;">
         </div>
         <div>
-            <label>Limite giorno</label><br>
-            <input type="number" name="daily_limit" value="50" min="1">
+            <label>Domande/giorno</label><br>
+            <input type="number" name="daily_limit" value="50" min="0" placeholder="0 = illimitato">
         </div>
         <div>
             <label>Limite token/mese</label><br>
-            <input type="number" name="monthly_token_limit" value="500000" min="1000" step="1000">
+            <input type="number" name="monthly_token_limit" value="500000" min="0" step="1000" placeholder="0 = illimitato">
         </div>
         <div style="padding-top:16px;">
             <button type="submit" class="btn-sm btn-save">Aggiungi</button>
@@ -78,7 +78,7 @@
         <thead>
             <tr>
                 <th>Pattern</th>
-                <th>Limite/giorno</th>
+                <th>Domande/giorno</th>
                 <th>Token/mese</th>
                 <th>Attivo</th>
                 <th>Azioni</th>
@@ -89,8 +89,8 @@
             <tr>
                 <form method="post" action="/admin/domains/{{ d.id }}/update">
                 <td><span class="pattern-tag">{{ d.pattern }}</span></td>
-                <td><input type="number" name="daily_limit" value="{{ d.daily_limit }}" min="1"></td>
-                <td><input type="number" name="monthly_token_limit" value="{{ d.monthly_token_limit }}" min="1000" step="1000"></td>
+                <td><input type="number" name="daily_limit" value="{{ d.daily_limit }}" min="0" placeholder="0 = illimitato"></td>
+                <td><input type="number" name="monthly_token_limit" value="{{ d.monthly_token_limit }}" min="0" step="1000" placeholder="0 = illimitato"></td>
                 <td>
                     <label class="toggle-switch">
                         <input type="checkbox" name="enabled" {% if d.enabled %}checked{% endif %}>
