@@ -42,9 +42,10 @@ def check_limit(user_id: int) -> tuple[bool, dict]:
 
     usage["total_tokens"] = total_tokens
     usage["limit"] = limit
-    usage["remaining"] = max(0, limit - total_tokens)
+    usage["remaining"] = max(0, limit - total_tokens) if limit > 0 else float("inf")
 
-    return total_tokens < limit, usage
+    # 0 = unlimited
+    return (limit == 0 or total_tokens < limit), usage
 
 
 def get_all_usage(month: str | None = None) -> list[dict]:

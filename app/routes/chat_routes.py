@@ -136,27 +136,27 @@ async def ask(
             status_code=429,
         )
 
-    # Daily limit per domain
+    # Daily limit per domain (0 = unlimited)
     from app.models.domain import get_domain_for_email, get_daily_question_count
     domain_config = get_domain_for_email(user["email"])
-    if domain_config:
+    if domain_config and domain_config["daily_limit"] > 0:
         daily_count = get_daily_question_count(user["id"])
         if daily_count >= domain_config["daily_limit"]:
             async def daily_limit_event():
                 yield {"data": json.dumps({
-                    "error": f"Limite giornaliero raggiunto: {daily_count}/{domain_config['daily_limit']} domande oggi. Riprova domani.",
+                    "error": f"Hai esaurito le domande di oggi ({daily_count}/{domain_config['daily_limit']} domande giornaliere). Il contatore si azzera a mezzanotte.",
                     "done": True,
                 })}
             return EventSourceResponse(daily_limit_event())
 
-    # Check monthly limit
+    # Monthly token limit (0 = unlimited)
     allowed, usage_info = check_limit(user["id"])
-    if not allowed:
+    if not allowed and usage_info["limit"] > 0:
         used_k = round(usage_info["total_tokens"] / 1000)
         limit_k = round(usage_info["limit"] / 1000)
         async def limit_event():
             yield {"data": json.dumps({
-                "error": f"Limite mensile di token raggiunto: {used_k}K/{limit_k}K token utilizzati questo mese. Contatta l'amministratore per aumentare il limite.",
+                "error": f"Hai esaurito i token mensili ({used_k}K/{limit_k}K token consumati a {datetime.now().strftime('%B %Y')}). Contatta l'amministratore per aumentare il limite.",
                 "done": True,
             })}
         return EventSourceResponse(limit_event())
@@ -168,7 +168,7 @@ async def ask(
         if current_count >= max_msgs:
             async def msg_limit_event():
                 yield {"data": json.dumps({
-                    "error": f"Limite conversazione raggiunto: {current_count}/{max_msgs} domande. Apri una nuova chat per continuare.",
+                    "error": f"Questa conversazione ha raggiunto il limite di {max_msgs} domande. Apri una nuova chat per continuare.",
                     "done": True,
                     "limit_reached": True,
                 })}
