@@ -149,17 +149,20 @@ async def ask(
                 })}
             return EventSourceResponse(daily_limit_event())
 
-    # Monthly token limit (0 = unlimited)
-    allowed, usage_info = check_limit(user["id"])
-    if not allowed and usage_info["limit"] > 0:
-        used_k = round(usage_info["total_tokens"] / 1000)
-        limit_k = round(usage_info["limit"] / 1000)
-        async def limit_event():
-            yield {"data": json.dumps({
-                "error": f"Hai esaurito i token mensili ({used_k}K/{limit_k}K token consumati a {datetime.now().strftime('%B %Y')}). Contatta l'amministratore per aumentare il limite.",
-                "done": True,
-            })}
-        return EventSourceResponse(limit_event())
+    # Monthly token limit — domain setting overrides user limit
+    # If domain has monthly_token_limit = 0, skip user-level check
+    domain_monthly_unlimited = domain_config and domain_config.get("monthly_token_limit", 0) == 0
+    if not domain_monthly_unlimited:
+        allowed, usage_info = check_limit(user["id"])
+        if not allowed and usage_info["limit"] > 0:
+            used_k = round(usage_info["total_tokens"] / 1000)
+            limit_k = round(usage_info["limit"] / 1000)
+            async def limit_event():
+                yield {"data": json.dumps({
+                    "error": f"Hai esaurito i token mensili ({used_k}K/{limit_k}K token consumati questo mese). Contatta l'amministratore per aumentare il limite.",
+                    "done": True,
+                })}
+            return EventSourceResponse(limit_event())
 
     # Check message limit per conversation
     max_msgs = get_max_messages_setting()

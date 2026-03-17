@@ -91,7 +91,7 @@
             <div class="info-label">Limite mensile</div>
             <div class="info-value">{{ "{:,}".format(limit) }} token</div>
             <form class="limit-form" method="post" action="/admin/users/{{ user.email }}/limit">
-                <input type="number" name="limit" class="form-input" value="{{ user.monthly_token_limit or '' }}" placeholder="Default: {{ "{:,}".format(limit) }}">
+                <input type="number" name="limit" class="form-input" min="0" value="{{ user.monthly_token_limit if user.monthly_token_limit is not none else '' }}" placeholder="Vuoto = default, 0 = illimitato">
                 <button type="submit" class="btn-primary" style="padding:6px 12px;font-size:0.8125rem;">Salva</button>
             </form>
         </div>
