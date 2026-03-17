@@ -63,10 +63,10 @@
                     <h2>Ciao! Come posso aiutarti?</h2>
                     <p>Chiedi qualsiasi cosa sulla documentazione del gestionale OS1.</p>
                     <div class="suggestion-chips">
-                        <button class="suggestion-chip" type="button" onclick="askSuggestion(this)">Come si emette una fattura di vendita?</button>
-                        <button class="suggestion-chip" type="button" onclick="askSuggestion(this)">Come registro un pagamento fornitore?</button>
-                        <button class="suggestion-chip" type="button" onclick="askSuggestion(this)">Come faccio un carico di magazzino?</button>
-                        <button class="suggestion-chip" type="button" onclick="askSuggestion(this)">Come creo un nuovo articolo in anagrafica?</button>
+                        <button class="suggestion-chip" type="button" onclick="askSuggestion(this)"><span class="chip-icon">📄</span> Come si emette una fattura di vendita?</button>
+                        <button class="suggestion-chip" type="button" onclick="askSuggestion(this)"><span class="chip-icon">💰</span> Come registro un pagamento fornitore?</button>
+                        <button class="suggestion-chip" type="button" onclick="askSuggestion(this)"><span class="chip-icon">📦</span> Come faccio un carico di magazzino?</button>
+                        <button class="suggestion-chip" type="button" onclick="askSuggestion(this)"><span class="chip-icon">📋</span> Come creo un nuovo articolo in anagrafica?</button>
                     </div>
                 </div>
                 {% endif %}
@@ -88,6 +88,11 @@
 
                 <div id="scroll-anchor"></div>
             </div>
+            <button class="scroll-fab" id="scroll-fab" onclick="scrollToBottom()" aria-label="Vai in fondo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
+                </svg>
+            </button>
 
             <div class="chat-input-wrap">
                 <div class="limit-banner" id="limit-banner">
@@ -287,7 +292,12 @@ document.getElementById('docs-toggle').addEventListener('click', () => {
 });
 
 // ── Suggestions ──
-function askSuggestion(el) { questionEl.value = el.textContent; handleSubmit(new Event('submit')); }
+function askSuggestion(el) {
+    // Get text without the icon span
+    const icon = el.querySelector('.chip-icon');
+    questionEl.value = icon ? el.textContent.replace(icon.textContent, '').trim() : el.textContent;
+    handleSubmit(new Event('submit'));
+}
 
 // ── Textarea auto-resize ──
 questionEl.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = Math.min(this.scrollHeight, 120) + 'px'; });
@@ -305,8 +315,13 @@ function handleSubmit(e) {
     const userMsg = createMsg('user');
     userMsg.content.textContent = question;
     const assistantMsg = createMsg('assistant');
-    assistantMsg.content.innerHTML = '<div class="thinking-dots"><span></span><span></span><span></span></div>';
+    assistantMsg.content.innerHTML = '<div class="thinking-bar"><div class="thinking-bar-line"></div><span class="thinking-bar-text" id="think-timer">0s</span></div>';
     scrollToBottom();
+    const thinkStart = Date.now();
+    const thinkInterval = setInterval(() => {
+        const el = document.getElementById('think-timer');
+        if (el) el.textContent = Math.round((Date.now() - thinkStart) / 1000) + 's';
+    }, 1000);
 
     questionEl.value = ''; questionEl.style.height = 'auto';
     questionEl.disabled = true; sendBtn.disabled = true;
@@ -337,12 +352,13 @@ function handleSubmit(e) {
                         try {
                             const data = JSON.parse(line.slice(6));
                             if (data.error) {
+                                clearInterval(thinkInterval);
                                 assistantMsg.content.innerHTML = `<p>${escapeHtml(data.error)}</p>`;
                                 if (data.limit_reached) { msgCount = maxMessages; updateCounter(); }
                                 enableInput(); return;
                             }
                             if (data.token) {
-                                if (firstToken) { assistantMsg.content.innerHTML = ''; firstToken = false; }
+                                if (firstToken) { clearInterval(thinkInterval); assistantMsg.content.innerHTML = ''; firstToken = false; }
                                 fullText += data.token;
                                 scheduleRender(assistantMsg.content, fullText);
                             }
@@ -518,7 +534,12 @@ function openDocOverlay(sourceFile, title) {
     }).catch(() => { document.getElementById('doc-overlay-body').innerHTML = '<p style="color:var(--c-text-secondary);">Errore nel caricamento.</p>'; });
 }
 function closeDocOverlay() { document.getElementById('doc-overlay').classList.remove('active'); document.body.style.overflow = ''; }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDocOverlay(); });
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        if (document.getElementById('doc-overlay').classList.contains('active')) closeDocOverlay();
+        else closeSidebar();
+    }
+});
 
 // ── Announcement ──
 fetch('/api/announcement').then(r => { if (r.ok && r.status !== 204) return r.json(); }).then(data => {
@@ -537,19 +558,49 @@ async function emailChat() {
     try {
         const r = await fetch(`/api/conversations/${conversationId}/email`, { method: 'POST' });
         const data = await r.json();
-        if (data.ok) showToast('Email inviata!');
-        else showToast(data.error || 'Errore nell\'invio', true);
-    } catch { showToast('Errore di connessione', true); }
+        if (data.ok) showToast('Email inviata!', 'success');
+        else showToast(data.error || 'Errore nell\'invio', 'error');
+    } catch { showToast('Errore di connessione', 'error'); }
     finally { emailBtn.disabled = false; emailBtn.style.opacity = '1'; }
 }
 
-function showToast(msg, isError) {
-    const t = document.createElement('div');
-    t.textContent = msg;
-    t.style.cssText = `position:fixed;bottom:24px;left:50%;transform:translateX(-50%);padding:10px 20px;border-radius:8px;font-size:14px;font-weight:500;z-index:9999;animation:msgIn 0.3s ease;color:#fff;background:${isError ? '#DC2626' : '#16A34A'};box-shadow:0 4px 12px rgba(0,0,0,0.15);`;
-    document.body.appendChild(t);
-    setTimeout(() => { t.style.opacity = '0'; t.style.transition = 'opacity 0.3s'; setTimeout(() => t.remove(), 300); }, 3000);
+// ── Scroll-to-bottom FAB ──
+const scrollFab = document.getElementById('scroll-fab');
+messagesEl.addEventListener('scroll', () => {
+    const distFromBottom = messagesEl.scrollHeight - messagesEl.scrollTop - messagesEl.clientHeight;
+    scrollFab.classList.toggle('visible', distFromBottom > 200);
+});
+
+// ── Sidebar toggle rotation ──
+const sidebarToggleBtn = document.getElementById('sidebar-toggle');
+function updateToggleRotation() {
+    sidebarToggleBtn.classList.toggle('rotated', sidebarEl.classList.contains('collapsed'));
 }
+updateToggleRotation();
+new MutationObserver(updateToggleRotation).observe(sidebarEl, { attributes: true, attributeFilter: ['class'] });
+
+// ── Focus trap in doc overlay ──
+document.getElementById('doc-overlay').addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const overlay = document.getElementById('doc-overlay-card') || document.querySelector('.doc-overlay-card');
+    if (!overlay) return;
+    const focusable = overlay.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (focusable.length === 0) return;
+    const first = focusable[0], last = focusable[focusable.length - 1];
+    if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last.focus(); } }
+    else { if (document.activeElement === last) { e.preventDefault(); first.focus(); } }
+});
+
+// ── Keyboard shortcuts ──
+document.addEventListener('keydown', e => {
+    // Ctrl+N: new chat (only when not typing)
+    if ((e.ctrlKey || e.metaKey) && e.key === 'n' && document.activeElement !== questionEl) {
+        e.preventDefault(); newChat();
+    }
+});
+
+// ── Auto-focus input ──
+if (!questionEl.disabled) questionEl.focus();
 
 // ── Render markdown in history ──
 document.querySelectorAll('.msg-assistant .msg-content').forEach(el => { el.innerHTML = marked.parse(convertScreenshotMarkers(el.textContent)); });
