@@ -42,6 +42,7 @@
         <a href="/admin/users">Utenti</a>
         <a href="/admin/usage">Consumi</a>
         <a href="/admin/domains">Domini</a>
+        <a href="/admin/costs">Costi</a>
         <a href="/admin/announcement" class="active">Impostazioni</a>
     </nav>
 
@@ -113,6 +114,17 @@
                         <option value="aggressive" {% if settings.context_preset == 'aggressive' %}selected{% endif %}>Aggressivo — 40.000 parole (~55K token)</option>
                     </select>
                     <div class="setting-hint">Con "Approfondisci" il budget raddoppia. Il modello ha 128K token di context window.</div>
+                </div>
+            </div>
+            <div class="setting-row">
+                <label class="setting-label" for="reranking_enabled">Reranking LLM</label>
+                <div style="flex:1;">
+                    <label style="display:flex;align-items:center;gap:.5rem;cursor:pointer;">
+                        <input type="checkbox" id="reranking_enabled" name="reranking_enabled" value="on"
+                               {% if settings.reranking_enabled == '1' %}checked{% endif %}>
+                        Abilita reranking dei risultati
+                    </label>
+                    <div class="setting-hint">Usa un modello leggero (8B) per filtrare i documenti irrilevanti prima di inviarli al modello principale. Costo aggiuntivo trascurabile (~$0.0001/query).</div>
                 </div>
             </div>
         </div>

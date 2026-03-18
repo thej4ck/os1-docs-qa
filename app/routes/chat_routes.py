@@ -199,32 +199,25 @@ async def ask(
     async def event_generator():
         full_response = []
         sources = []
+        screenshots = []
         usage_data = None
 
         is_deep = deep == "true"
-        async for token, token_sources, token_usage in query_module.ask_stream(
+        async for token, token_sources, token_meta in query_module.ask_stream(
             question, history=llm_history, deep=is_deep
         ):
             if token_sources:
                 sources = token_sources
-            if token_usage:
-                usage_data = token_usage
+            if token_meta and "screenshots" in token_meta:
+                screenshots = token_meta["screenshots"]
+            if token_meta and "prompt_tokens" in token_meta:
+                usage_data = token_meta
             if token:
                 full_response.append(token)
                 yield {"data": json.dumps({"token": token})}
 
-        # Send sources + screenshots
+        # Send sources + screenshots (extracted during retrieval, no duplicate call)
         if sources:
-            # Extract screenshot URLs from retrieved documents for frontend rendering
-            import re as _re
-            screenshots = []
-            for doc in query_module.retrieve_with_budget(question, deep=is_deep)[:5]:
-                for m in _re.finditer(r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]', doc["content"]):
-                    screenshots.append({"desc": m.group(1), "url": m.group(2)})
-                    if len(screenshots) >= 3:
-                        break
-                if len(screenshots) >= 3:
-                    break
             src_data = {"sources": sources}
             if screenshots:
                 src_data["screenshots"] = screenshots
@@ -240,6 +233,10 @@ async def ask(
                 prompt_tokens=usage_data["prompt_tokens"] if usage_data else None,
                 completion_tokens=usage_data["completion_tokens"] if usage_data else None,
                 cost_usd=usage_data["cost_usd"] if usage_data else None,
+                model=usage_data.get("model") if usage_data else None,
+                rerank_tokens=usage_data.get("rerank_tokens") if usage_data else None,
+                rerank_cost_usd=usage_data.get("rerank_cost_usd") if usage_data else None,
+                rerank_model=usage_data.get("rerank_model") if usage_data else None,
             )
 
         # Signal completion with metadata

@@ -198,12 +198,24 @@ def _get_context_budget(deep: bool = False) -> int:
     return budget * 2 if deep else budget
 
 
-def retrieve_with_budget(question: str, deep: bool = False) -> list[dict]:
-    """Search FTS5 and return docs up to the word budget."""
+async def retrieve_with_budget(
+    question: str, deep: bool = False
+) -> tuple[list[dict], dict | None]:
+    """Search FTS5, optionally rerank, return docs up to word budget.
+
+    Returns (selected_docs, rerank_usage_or_None).
+    """
     if _index is None:
-        return []
+        return [], None
     max_words = _get_context_budget(deep)
     candidates = _index.search(question, limit=50)
+
+    # LLM reranking (if enabled and client available)
+    rerank_usage = None
+    if _client and len(candidates) > 5 and _is_reranking_enabled():
+        from app.search.rerank import rerank
+        candidates, rerank_usage = await rerank(question, candidates[:20], _client)
+
     selected = []
     word_count = 0
     for doc in candidates:
@@ -212,7 +224,21 @@ def retrieve_with_budget(question: str, deep: bool = False) -> list[dict]:
             break
         selected.append(doc)
         word_count += doc_words
-    return selected
+    return selected, rerank_usage
+
+
+def _is_reranking_enabled() -> bool:
+    """Check admin setting for reranking toggle."""
+    try:
+        from app.db import get_conn
+        row = get_conn().execute(
+            "SELECT value FROM app_settings WHERE key = 'reranking_enabled'"
+        ).fetchone()
+        if row:
+            return row["value"] == "1"
+    except Exception:
+        pass
+    return True  # enabled by default
 
 
 def build_context(docs: list[dict]) -> str:
@@ -275,8 +301,21 @@ async def ask_stream(
         yield "Errore: servizio non configurato.", [], None
         return
 
-    docs = retrieve_with_budget(question, deep=deep)
+    import re as _re
+
+    docs, rerank_usage = await retrieve_with_budget(question, deep=deep)
     sources = [{"title": d["title"], "source_file": d["source_file"]} for d in docs]
+
+    # Extract screenshots from retrieved docs (avoids a second retrieval call)
+    screenshots = []
+    for doc in docs[:5]:
+        for m in _re.finditer(r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]', doc["content"]):
+            screenshots.append({"desc": m.group(1), "url": m.group(2)})
+            if len(screenshots) >= 3:
+                break
+        if len(screenshots) >= 3:
+            break
+
     context = build_context(docs)
 
     prompt = SYSTEM_PROMPT
@@ -304,8 +343,9 @@ async def ask_stream(
     usage_data = None
 
     try:
+        model_id = _get_model(deep=deep)
         stream = await _client.chat.completions.create(
-            model=_get_model(deep=deep),
+            model=model_id,
             messages=messages,
             stream=True,
             stream_options={"include_usage": True},
@@ -325,15 +365,21 @@ async def ask_stream(
                         chunk.usage.completion_tokens,
                         deep=deep,
                     ),
+                    "model": model_id,
                 }
 
             delta = chunk.choices[0].delta if chunk.choices else None
             if delta and delta.content:
                 if first:
-                    yield delta.content, sources, None
+                    yield delta.content, sources, {"screenshots": screenshots}
                     first = False
                 else:
                     yield delta.content, [], None
+
+        # Merge rerank usage into final usage data
+        if usage_data and rerank_usage:
+            usage_data.update(rerank_usage)
+            usage_data["cost_usd"] += rerank_usage.get("rerank_cost_usd", 0)
 
         # Final yield with usage data
         yield "", [], usage_data

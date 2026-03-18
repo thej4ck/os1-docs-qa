@@ -179,6 +179,49 @@ async def export_usage(request: Request, month: str | None = None):
     )
 
 
+# ── Costs ──
+
+@router.get("/costs", response_class=HTMLResponse)
+async def costs_page(request: Request, period: str = "month"):
+    admin = _require_admin(request)
+    if not admin:
+        return RedirectResponse(url="/login", status_code=302)
+
+    from datetime import datetime, timedelta
+    now = datetime.utcnow()
+    if period == "today":
+        start = now.strftime("%Y-%m-%d")
+        end = (now + timedelta(days=1)).strftime("%Y-%m-%d")
+        label = f"Oggi ({now.strftime('%d/%m/%Y')})"
+    elif period == "week":
+        start = (now - timedelta(days=7)).strftime("%Y-%m-%d")
+        end = (now + timedelta(days=1)).strftime("%Y-%m-%d")
+        label = "Ultimi 7 giorni"
+    elif period == "year":
+        start = f"{now.year}-01-01"
+        end = (now + timedelta(days=1)).strftime("%Y-%m-%d")
+        label = f"Anno {now.year}"
+    else:  # month (default)
+        period = "month"
+        start = now.strftime("%Y-%m-01")
+        end = (now + timedelta(days=1)).strftime("%Y-%m-%d")
+        label = now.strftime("%B %Y")
+
+    from app.models.usage import get_cost_summary, get_cost_by_model, get_cost_by_day, get_cost_by_user
+
+    return _templates().TemplateResponse("admin/costs.html", {
+        "request": request,
+        "email": admin["email"],
+        "is_admin": True,
+        "period": period,
+        "period_label": label,
+        "summary": get_cost_summary(start, end),
+        "by_model": get_cost_by_model(start, end),
+        "by_day": get_cost_by_day(start, end),
+        "by_user": get_cost_by_user(start, end),
+    })
+
+
 # ── Conversations ──
 
 @router.get("/conversations/{conv_id}", response_class=HTMLResponse)
@@ -284,6 +327,7 @@ def _get_all_settings() -> dict:
         "otp_sender_email": _get_setting("otp_sender_email", "noreply@ai.scao.it"),
         "allowed_emails": _get_setting("allowed_emails", app_settings.allowed_emails),
         "context_preset": _get_setting("context_preset", "normal"),
+        "reranking_enabled": _get_setting("reranking_enabled", "1"),
         "max_messages": get_max_messages_setting(),
         "announcement": _get_setting("announcement", ""),
     }
@@ -334,6 +378,7 @@ async def save_settings(request: Request):
         "otp_sender_email": str(form.get("otp_sender_email", "")).strip(),
         "allowed_emails": str(form.get("allowed_emails", "")).strip(),
         "context_preset": preset,
+        "reranking_enabled": "1" if form.get("reranking_enabled") else "0",
         "max_messages_per_conversation": str(max(1, min(int(form.get("max_messages_per_conversation", 20)), 200))),
         "announcement": str(form.get("announcement", "")).strip(),
     }

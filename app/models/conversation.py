@@ -72,14 +72,21 @@ def add_message(
     prompt_tokens: int | None = None,
     completion_tokens: int | None = None,
     cost_usd: float | None = None,
+    model: str | None = None,
+    rerank_tokens: int | None = None,
+    rerank_cost_usd: float | None = None,
+    rerank_model: str | None = None,
 ) -> int:
     """Add a message and update conversation timestamp. Returns message ID."""
     conn = get_conn()
     cur = conn.execute(
-        "INSERT INTO messages (conversation_id, role, content, sources, prompt_tokens, completion_tokens, cost_usd) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO messages (conversation_id, role, content, sources, "
+        "prompt_tokens, completion_tokens, cost_usd, model, "
+        "rerank_tokens, rerank_cost_usd, rerank_model) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         (conv_id, role, content, json.dumps(sources) if sources else None,
-         prompt_tokens, completion_tokens, cost_usd),
+         prompt_tokens, completion_tokens, cost_usd, model,
+         rerank_tokens, rerank_cost_usd, rerank_model),
     )
     conn.execute(
         "UPDATE conversations SET updated_at = strftime('%Y-%m-%dT%H:%M:%SZ', 'now') WHERE id = ?",

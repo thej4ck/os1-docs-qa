@@ -97,6 +97,89 @@ def get_domain_usage(month: str | None = None) -> list[dict]:
     return [dict(r) for r in rows]
 
 
+def get_cost_by_model(start_date: str, end_date: str) -> list[dict]:
+    """Cost breakdown by model for a date range."""
+    rows = get_conn().execute(
+        "SELECT "
+        "  COALESCE(m.model, 'sconosciuto') AS model, "
+        "  COUNT(*) AS requests, "
+        "  COALESCE(SUM(m.prompt_tokens), 0) AS prompt_tokens, "
+        "  COALESCE(SUM(m.completion_tokens), 0) AS completion_tokens, "
+        "  COALESCE(SUM(m.cost_usd), 0) AS cost_usd, "
+        "  COALESCE(SUM(m.rerank_tokens), 0) AS rerank_tokens, "
+        "  COALESCE(SUM(m.rerank_cost_usd), 0) AS rerank_cost_usd "
+        "FROM messages m "
+        "WHERE m.role = 'assistant' AND m.created_at >= ? AND m.created_at < ? "
+        "GROUP BY COALESCE(m.model, 'sconosciuto') "
+        "ORDER BY cost_usd DESC",
+        (start_date, end_date),
+    ).fetchall()
+    return [dict(r) for r in rows]
+
+
+def get_cost_by_day(start_date: str, end_date: str) -> list[dict]:
+    """Daily cost totals for a date range."""
+    rows = get_conn().execute(
+        "SELECT "
+        "  DATE(m.created_at) AS day, "
+        "  COUNT(*) AS requests, "
+        "  COALESCE(SUM(m.prompt_tokens), 0) + COALESCE(SUM(m.completion_tokens), 0) AS tokens, "
+        "  COALESCE(SUM(m.cost_usd), 0) AS cost_usd "
+        "FROM messages m "
+        "WHERE m.role = 'assistant' AND m.created_at >= ? AND m.created_at < ? "
+        "GROUP BY DATE(m.created_at) "
+        "ORDER BY day DESC",
+        (start_date, end_date),
+    ).fetchall()
+    return [dict(r) for r in rows]
+
+
+def get_cost_by_user(start_date: str, end_date: str, limit: int = 20) -> list[dict]:
+    """Top users by cost for a date range."""
+    rows = get_conn().execute(
+        "SELECT "
+        "  u.email, "
+        "  SUBSTR(u.email, INSTR(u.email, '@') + 1) AS domain, "
+        "  COUNT(*) AS requests, "
+        "  COALESCE(SUM(m.prompt_tokens), 0) + COALESCE(SUM(m.completion_tokens), 0) AS tokens, "
+        "  COALESCE(SUM(m.cost_usd), 0) AS cost_usd "
+        "FROM messages m "
+        "JOIN conversations c ON c.id = m.conversation_id "
+        "JOIN users u ON u.id = c.user_id "
+        "WHERE m.role = 'assistant' AND m.created_at >= ? AND m.created_at < ? "
+        "GROUP BY u.id "
+        "ORDER BY cost_usd DESC "
+        "LIMIT ?",
+        (start_date, end_date, limit),
+    ).fetchall()
+    return [dict(r) for r in rows]
+
+
+def get_cost_summary(start_date: str, end_date: str) -> dict:
+    """Aggregate cost summary for a date range."""
+    row = get_conn().execute(
+        "SELECT "
+        "  COUNT(*) AS requests, "
+        "  COALESCE(SUM(m.prompt_tokens), 0) AS prompt_tokens, "
+        "  COALESCE(SUM(m.completion_tokens), 0) AS completion_tokens, "
+        "  COALESCE(SUM(m.cost_usd), 0) AS cost_usd, "
+        "  COALESCE(SUM(m.rerank_tokens), 0) AS rerank_tokens, "
+        "  COALESCE(SUM(m.rerank_cost_usd), 0) AS rerank_cost_usd "
+        "FROM messages m "
+        "WHERE m.role = 'assistant' AND m.created_at >= ? AND m.created_at < ?",
+        (start_date, end_date),
+    ).fetchone()
+    d = dict(row) if row else {
+        "requests": 0, "prompt_tokens": 0, "completion_tokens": 0,
+        "cost_usd": 0.0, "rerank_tokens": 0, "rerank_cost_usd": 0.0,
+    }
+    if d["requests"] > 0:
+        d["avg_cost"] = d["cost_usd"] / d["requests"]
+    else:
+        d["avg_cost"] = 0.0
+    return d
+
+
 def get_recent_questions(limit: int = 50) -> list[dict]:
     """Get recent questions across all users (admin dashboard)."""
     rows = get_conn().execute(

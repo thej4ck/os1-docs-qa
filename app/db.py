@@ -104,3 +104,22 @@ def _create_schema():
         GROUP BY u.id, strftime('%Y-%m', m.created_at);
     """)
     _conn.commit()
+    _migrate()
+
+
+def _migrate():
+    """Additive migrations — safe to run repeatedly."""
+    assert _conn is not None
+    existing = {
+        row[1] for row in _conn.execute("PRAGMA table_info(messages)").fetchall()
+    }
+    new_columns = [
+        ("model", "TEXT"),
+        ("rerank_tokens", "INTEGER"),
+        ("rerank_cost_usd", "REAL"),
+        ("rerank_model", "TEXT"),
+    ]
+    for col_name, col_type in new_columns:
+        if col_name not in existing:
+            _conn.execute(f"ALTER TABLE messages ADD COLUMN {col_name} {col_type}")
+    _conn.commit()

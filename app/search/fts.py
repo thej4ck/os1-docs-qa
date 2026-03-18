@@ -4,6 +4,37 @@ import sqlite3
 from pathlib import Path
 from typing import Optional
 
+# Italian stopwords — articles, prepositions, conjunctions, pronouns, common verbs.
+# Intentionally excludes short terms that could be OS1 module codes or technical terms.
+ITALIAN_STOPWORDS = frozenset({
+    # Articles
+    "il", "lo", "la", "i", "gli", "le", "l", "un", "uno", "una",
+    # Prepositions
+    "di", "a", "da", "in", "con", "su", "per", "tra", "fra",
+    # Articulated prepositions
+    "del", "dello", "della", "dei", "degli", "delle",
+    "al", "allo", "alla", "ai", "agli", "alle",
+    "dal", "dallo", "dalla", "dai", "dagli", "dalle",
+    "nel", "nello", "nella", "nei", "negli", "nelle",
+    "sul", "sullo", "sulla", "sui", "sugli", "sulle",
+    # Conjunctions
+    "e", "o", "ma", "che", "se", "come", "quando", "anche", "dove",
+    # Pronouns / determiners
+    "mi", "ti", "si", "ci", "vi", "ne", "me", "te", "lui", "lei",
+    "noi", "voi", "loro", "questo", "questa", "questi", "queste",
+    "quello", "quella", "quelli", "quelle", "quale", "quali",
+    # Common auxiliary/copula verbs
+    "è", "sono", "ha", "hanno", "essere", "avere",
+    "sia", "può", "fare", "fatto", "viene",
+    # Frequent functional words
+    "non", "più", "già", "ancora", "solo", "ogni", "tutto", "tutti",
+    "dopo", "prima", "altro", "altri", "altra", "altre",
+    "molto", "poco", "tanto", "quanto", "così", "però",
+})
+
+# Minimum results for AND before falling back to OR
+_MIN_AND_RESULTS = 3
+
 
 class SearchIndex:
     """Read/write wrapper around SQLite FTS5."""
@@ -76,18 +107,32 @@ class SearchIndex:
     def search(
         self, query: str, limit: int = 10, doc_type: Optional[str] = None
     ) -> list[dict]:
-        """BM25-ranked full-text search. Returns list of dicts with doc fields + rank."""
-        # Escape FTS5 special characters and build query
-        fts_query = self._prepare_query(query)
-        if not fts_query:
+        """BM25-ranked full-text search with AND-first, OR-fallback strategy."""
+        tokens = self._clean_tokens(query)
+        if not tokens:
             return []
 
+        # Try AND (all terms must match) first
+        and_query = " AND ".join(tokens)
+        results = self._execute_search(and_query, limit, doc_type)
+
+        # Fall back to OR if AND returns too few results
+        if len(results) < _MIN_AND_RESULTS and len(tokens) > 1:
+            or_query = " OR ".join(tokens)
+            results = self._execute_search(or_query, limit, doc_type)
+
+        return results
+
+    def _execute_search(
+        self, fts_query: str, limit: int, doc_type: Optional[str] = None
+    ) -> list[dict]:
+        """Run a single FTS5 MATCH query with title-boosted BM25 ranking."""
         if doc_type:
             sql = """
                 SELECT d.id, d.source_file, d.module, d.doc_type, d.title,
                        snippet(docs_fts, 1, '<b>', '</b>', '...', 40) AS snippet,
                        d.content,
-                       rank
+                       bm25(docs_fts, 10.0, 1.0) AS rank
                 FROM docs_fts
                 JOIN documents d ON d.id = docs_fts.rowid
                 WHERE docs_fts MATCH ?
@@ -101,7 +146,7 @@ class SearchIndex:
                 SELECT d.id, d.source_file, d.module, d.doc_type, d.title,
                        snippet(docs_fts, 1, '<b>', '</b>', '...', 40) AS snippet,
                        d.content,
-                       rank
+                       bm25(docs_fts, 10.0, 1.0) AS rank
                 FROM docs_fts
                 JOIN documents d ON d.id = docs_fts.rowid
                 WHERE docs_fts MATCH ?
@@ -112,25 +157,27 @@ class SearchIndex:
 
         return [dict(row) for row in rows]
 
-    def _prepare_query(self, query: str) -> str:
-        """Turn user query into an FTS5 query.
+    def _clean_tokens(self, query: str) -> list[str]:
+        """Tokenize query, remove stopwords, quote for FTS5 safety."""
+        raw_tokens = query.strip().split()
+        if not raw_tokens:
+            return []
 
-        Strategy: split into tokens, join with OR so any matching term scores.
-        Tokens with special FTS5 chars are quoted.
-        """
-        tokens = query.strip().split()
-        if not tokens:
-            return ""
-        # Quote each token to avoid FTS5 syntax errors
         safe = []
-        for t in tokens:
-            # Remove chars that break FTS5 syntax
-            cleaned = t.strip('"\'(){}[]<>*^~')
-            if cleaned:
+        for t in raw_tokens:
+            cleaned = t.strip('"\'(){}[]<>*^~?!.,;:').lower()
+            if cleaned and cleaned not in ITALIAN_STOPWORDS:
                 safe.append(f'"{cleaned}"')
+
+        # If all tokens were stopwords, fall back to original tokens
         if not safe:
-            return ""
-        return " OR ".join(safe)
+            safe = []
+            for t in raw_tokens:
+                cleaned = t.strip('"\'(){}[]<>*^~')
+                if cleaned:
+                    safe.append(f'"{cleaned}"')
+
+        return safe
 
     def count(self) -> int:
         row = self.conn.execute("SELECT COUNT(*) FROM documents").fetchone()

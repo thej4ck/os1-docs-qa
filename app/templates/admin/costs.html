@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+{% block title %}Costi — Admin OS1 Docs{% endblock %}
+
+{% block nav_right %}
+<span class="header-email">{{ email }}</span>
+<a href="/chat" class="btn-logout">Chat</a>
+<a href="/logout" class="btn-logout">Esci</a>
+{% endblock %}
+
+{% block head %}
+<style>
+    .admin-nav { display: flex; gap: var(--sp-2); margin-bottom: var(--sp-6); flex-wrap: wrap; }
+    .admin-nav a {
+        font-size: 0.8125rem; font-weight: 500; padding: 6px 14px;
+        border-radius: var(--r-full); color: var(--c-text-secondary);
+        border: 1px solid var(--c-border); transition: all 150ms ease; text-decoration: none;
+    }
+    .admin-nav a:hover { background: var(--c-surface-alt); color: var(--c-text); text-decoration: none; }
+    .admin-nav a.active { background: var(--c-brand); color: white; border-color: var(--c-brand); }
+    .admin-wrap { padding: var(--sp-6) 0; }
+    .admin-table {
+        width: 100%; border-collapse: collapse; font-size: 0.875rem;
+        background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md); overflow: hidden;
+    }
+    .admin-table th {
+        text-align: left; padding: var(--sp-3) var(--sp-4); font-size: 0.75rem; font-weight: 600;
+        color: var(--c-text-secondary); background: var(--c-surface-alt); border-bottom: 1px solid var(--c-border);
+        text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .admin-table td { padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--c-border); }
+    .admin-table tr:last-child td { border-bottom: none; }
+    .admin-table tr:hover td { background: var(--c-surface-alt); }
+    .admin-table tfoot td { font-weight: 600; background: var(--c-surface-alt); }
+    .num { font-family: 'DM Sans', sans-serif; font-weight: 600; }
+    .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-4); flex-wrap: wrap; gap: var(--sp-3); }
+    .top-bar h3 { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; margin: 0; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--sp-4); margin-bottom: var(--sp-8); }
+    .kpi-card {
+        background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md);
+        padding: var(--sp-5); box-shadow: var(--c-shadow-sm);
+    }
+    .kpi-label { font-size: 0.75rem; font-weight: 600; color: var(--c-text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--sp-1); }
+    .kpi-value { font-family: 'DM Sans', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--c-text); }
+    .kpi-sub { font-size: 0.75rem; color: var(--c-text-tertiary); margin-top: 2px; }
+    .period-nav { display: flex; gap: var(--sp-2); margin-bottom: var(--sp-6); }
+    .period-nav a {
+        font-size: 0.8125rem; padding: 4px 12px; border-radius: var(--r-sm);
+        color: var(--c-text-secondary); text-decoration: none; border: 1px solid var(--c-border);
+    }
+    .period-nav a:hover { background: var(--c-surface-alt); }
+    .period-nav a.active { background: var(--c-text); color: var(--c-surface); border-color: var(--c-text); }
+    .section-title { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; margin: var(--sp-6) 0 var(--sp-3); }
+    .text-right { text-align: right; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container admin-wrap">
+    <nav class="admin-nav">
+        <a href="/admin">Dashboard</a>
+        <a href="/admin/users">Utenti</a>
+        <a href="/admin/usage">Consumi</a>
+        <a href="/admin/domains">Domini</a>
+        <a href="/admin/costs" class="active">Costi</a>
+        <a href="/admin/announcement">Impostazioni</a>
+    </nav>
+
+    <div class="period-nav">
+        <a href="/admin/costs?period=today" {% if period == 'today' %}class="active"{% endif %}>Oggi</a>
+        <a href="/admin/costs?period=week" {% if period == 'week' %}class="active"{% endif %}>7 giorni</a>
+        <a href="/admin/costs?period=month" {% if period == 'month' %}class="active"{% endif %}>Mese</a>
+        <a href="/admin/costs?period=year" {% if period == 'year' %}class="active"{% endif %}>Anno</a>
+    </div>
+
+    <!-- KPI Summary -->
+    <div class="kpi-grid">
+        <div class="kpi-card">
+            <div class="kpi-label">Costo totale</div>
+            <div class="kpi-value">${{ "%.4f"|format(summary.cost_usd) }}</div>
+            <div class="kpi-sub">{{ period_label }}</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Richieste</div>
+            <div class="kpi-value">{{ summary.requests }}</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Token totali</div>
+            <div class="kpi-value">{{ "{:,}".format(summary.prompt_tokens + summary.completion_tokens)|replace(",", ".") }}</div>
+            <div class="kpi-sub">{{ "{:,}".format(summary.prompt_tokens)|replace(",", ".") }} in / {{ "{:,}".format(summary.completion_tokens)|replace(",", ".") }} out</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Costo medio</div>
+            <div class="kpi-value">${{ "%.5f"|format(summary.avg_cost) }}</div>
+            <div class="kpi-sub">per richiesta</div>
+        </div>
+        {% if summary.rerank_tokens > 0 %}
+        <div class="kpi-card">
+            <div class="kpi-label">Reranking</div>
+            <div class="kpi-value">${{ "%.5f"|format(summary.rerank_cost_usd) }}</div>
+            <div class="kpi-sub">{{ "{:,}".format(summary.rerank_tokens)|replace(",", ".") }} token</div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- By Model -->
+    <h3 class="section-title">Breakdown per modello</h3>
+    {% if by_model %}
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Modello</th>
+                <th class="text-right">Richieste</th>
+                <th class="text-right">Token Input</th>
+                <th class="text-right">Token Output</th>
+                <th class="text-right">Costo LLM</th>
+                <th class="text-right">Costo Rerank</th>
+                <th class="text-right">Totale</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in by_model %}
+            <tr>
+                <td><code>{{ row.model }}</code></td>
+                <td class="text-right num">{{ row.requests }}</td>
+                <td class="text-right num">{{ "{:,}".format(row.prompt_tokens)|replace(",", ".") }}</td>
+                <td class="text-right num">{{ "{:,}".format(row.completion_tokens)|replace(",", ".") }}</td>
+                <td class="text-right num">${{ "%.4f"|format(row.cost_usd - row.rerank_cost_usd) }}</td>
+                <td class="text-right num">${{ "%.5f"|format(row.rerank_cost_usd) }}</td>
+                <td class="text-right num">${{ "%.4f"|format(row.cost_usd) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p style="color:var(--c-text-tertiary);font-size:0.875rem;">Nessun dato per il periodo selezionato.</p>
+    {% endif %}
+
+    <!-- By Day -->
+    <h3 class="section-title">Andamento giornaliero</h3>
+    {% if by_day %}
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th class="text-right">Richieste</th>
+                <th class="text-right">Token</th>
+                <th class="text-right">Costo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in by_day %}
+            <tr>
+                <td>{{ row.day }}</td>
+                <td class="text-right num">{{ row.requests }}</td>
+                <td class="text-right num">{{ "{:,}".format(row.tokens)|replace(",", ".") }}</td>
+                <td class="text-right num">${{ "%.4f"|format(row.cost_usd) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p style="color:var(--c-text-tertiary);font-size:0.875rem;">Nessun dato per il periodo selezionato.</p>
+    {% endif %}
+
+    <!-- By User -->
+    <h3 class="section-title">Top utenti per costo</h3>
+    {% if by_user %}
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Utente</th>
+                <th>Dominio</th>
+                <th class="text-right">Richieste</th>
+                <th class="text-right">Token</th>
+                <th class="text-right">Costo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in by_user %}
+            <tr>
+                <td>{{ row.email }}</td>
+                <td>{{ row.domain }}</td>
+                <td class="text-right num">{{ row.requests }}</td>
+                <td class="text-right num">{{ "{:,}".format(row.tokens)|replace(",", ".") }}</td>
+                <td class="text-right num">${{ "%.4f"|format(row.cost_usd) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p style="color:var(--c-text-tertiary);font-size:0.875rem;">Nessun dato per il periodo selezionato.</p>
+    {% endif %}
+</div>
+{% endblock %}
