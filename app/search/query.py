@@ -241,6 +241,11 @@ def _is_reranking_enabled() -> bool:
     return True  # enabled by default
 
 
+def _is_logo(url: str) -> bool:
+    """Filter out the OSItalia logo that appears in nearly every document."""
+    return "img_003" in url
+
+
 def build_context(docs: list[dict]) -> str:
     """Build a context string from retrieved documents."""
     import re
@@ -251,9 +256,10 @@ def build_context(docs: list[dict]) -> str:
         title = doc["title"] or "Senza titolo"
         content = doc["content"]
         parts.append(f"--- Documento {i}: {title} (file: {source}) ---\n{content}")
-        # Collect screenshots
+        # Collect screenshots (skip logo)
         for m in re.finditer(r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]', content):
-            screenshots.append(f"- ![{m.group(1)}]({m.group(2)}) (da Documento {i})")
+            if not _is_logo(m.group(2)):
+                screenshots.append(f"- ![{m.group(1)}]({m.group(2)}) (da Documento {i})")
     ctx = "\n\n".join(parts)
     if screenshots:
         ctx += "\n\n--- SCREENSHOT DISPONIBILI (usa la sintassi markdown esatta per includerli) ---\n"
@@ -306,11 +312,12 @@ async def ask_stream(
     docs, rerank_usage = await retrieve_with_budget(question, deep=deep)
     sources = [{"title": d["title"], "source_file": d["source_file"]} for d in docs]
 
-    # Extract screenshots from retrieved docs (avoids a second retrieval call)
+    # Extract screenshots from retrieved docs (avoids a second retrieval call, skip logo)
     screenshots = []
     for doc in docs[:5]:
         for m in _re.finditer(r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]', doc["content"]):
-            screenshots.append({"desc": m.group(1), "url": m.group(2)})
+            if not _is_logo(m.group(2)):
+                screenshots.append({"desc": m.group(1), "url": m.group(2)})
             if len(screenshots) >= 3:
                 break
         if len(screenshots) >= 3:
