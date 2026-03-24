@@ -93,14 +93,13 @@ def _create_schema():
             u.id AS user_id,
             u.email,
             strftime('%Y-%m', m.created_at) AS month,
-            COALESCE(SUM(m.prompt_tokens), 0) AS total_prompt_tokens,
-            COALESCE(SUM(m.completion_tokens), 0) AS total_completion_tokens,
-            COALESCE(SUM(m.cost_usd), 0) AS total_cost_usd,
+            COALESCE(SUM(CASE WHEN m.role = 'assistant' THEN m.prompt_tokens ELSE 0 END), 0) AS total_prompt_tokens,
+            COALESCE(SUM(CASE WHEN m.role = 'assistant' THEN m.completion_tokens ELSE 0 END), 0) AS total_completion_tokens,
+            COALESCE(SUM(CASE WHEN m.role = 'assistant' THEN m.cost_usd ELSE 0 END), 0) AS total_cost_usd,
             COUNT(CASE WHEN m.role = 'user' THEN 1 END) AS total_questions
         FROM messages m
         JOIN conversations c ON c.id = m.conversation_id
         JOIN users u ON u.id = c.user_id
-        WHERE m.role = 'assistant'
         GROUP BY u.id, strftime('%Y-%m', m.created_at);
     """)
     _conn.commit()
@@ -140,5 +139,23 @@ def _migrate():
     for col_name, col_type in fb_new_columns:
         if col_name not in fb_existing:
             _conn.execute(f"ALTER TABLE feedback ADD COLUMN {col_name} {col_type}")
+
+    # Recreate monthly_usage view (fix: question count was always 0)
+    _conn.execute("DROP VIEW IF EXISTS monthly_usage")
+    _conn.execute("""
+        CREATE VIEW monthly_usage AS
+        SELECT
+            u.id AS user_id,
+            u.email,
+            strftime('%Y-%m', m.created_at) AS month,
+            COALESCE(SUM(CASE WHEN m.role = 'assistant' THEN m.prompt_tokens ELSE 0 END), 0) AS total_prompt_tokens,
+            COALESCE(SUM(CASE WHEN m.role = 'assistant' THEN m.completion_tokens ELSE 0 END), 0) AS total_completion_tokens,
+            COALESCE(SUM(CASE WHEN m.role = 'assistant' THEN m.cost_usd ELSE 0 END), 0) AS total_cost_usd,
+            COUNT(CASE WHEN m.role = 'user' THEN 1 END) AS total_questions
+        FROM messages m
+        JOIN conversations c ON c.id = m.conversation_id
+        JOIN users u ON u.id = c.user_id
+        GROUP BY u.id, strftime('%Y-%m', m.created_at)
+    """)
 
     _conn.commit()
