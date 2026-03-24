@@ -326,6 +326,10 @@ def extract_pdf_images(doc, output_dir: Path, skip_xrefs: set) -> dict:
                 if w < 10 or h < 10:
                     skip_xrefs.add(xref)
                     continue
+                # Skip logo-like banners on ANY page (wide + short)
+                if w > 300 and h < 120:
+                    skip_xrefs.add(xref)
+                    continue
                 counter += 1
                 filename = f"img_{counter:03d}.webp"
                 filepath = output_dir / filename
@@ -872,8 +876,10 @@ def ingest_pdf_schede(index: SearchIndex, schede_dir: Path, repo: Path, images_o
         # 2. Identify logos to skip
         logo_xrefs = identify_logo_xref(doc)
 
-        # 3. Extract images as WebP
+        # 3. Extract images as WebP (clean dir to remove orphans from previous builds)
         img_dir = images_out_dir / sanitize_dirname(pdf_file.name)
+        if img_dir.exists():
+            shutil.rmtree(img_dir)
         img_dir.mkdir(parents=True, exist_ok=True)
         xref_map = extract_pdf_images(doc, img_dir, logo_xrefs)
 

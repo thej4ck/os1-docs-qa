@@ -241,9 +241,35 @@ def _is_reranking_enabled() -> bool:
     return True  # enabled by default
 
 
+_logo_cache: dict[str, bool] = {}
+
 def _is_logo(url: str) -> bool:
-    """Filter out the OSItalia logo that appears in nearly every document."""
-    return "img_003" in url
+    """Filter out logo-like banner images (wide and short)."""
+    if url in _logo_cache:
+        return _logo_cache[url]
+    # Try to check actual image dimensions from help-files
+    try:
+        from pathlib import Path
+        from PIL import Image
+        # URL like /help-files/BBAS/Anag_Clienti/img_003.webp
+        rel = url.lstrip("/")
+        candidates = [
+            Path(__file__).parent.parent.parent / rel,  # dev
+            Path("/app") / rel,                          # prod
+        ]
+        for p in candidates:
+            if p.exists():
+                with Image.open(p) as img:
+                    w, h = img.size
+                result = w > 300 and h < 120
+                _logo_cache[url] = result
+                return result
+    except Exception:
+        pass
+    # Fallback: known logo pattern
+    result = "img_003" in url
+    _logo_cache[url] = result
+    return result
 
 
 def build_context(docs: list[dict]) -> str:
