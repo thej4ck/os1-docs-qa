@@ -308,6 +308,90 @@ async def delete_domain_route(request: Request, domain_id: int):
     return RedirectResponse(url="/admin/domains", status_code=302)
 
 
+# ── Feedback ──
+
+@router.get("/feedback", response_class=HTMLResponse)
+async def feedback_page(
+    request: Request,
+    category: str = "",
+    date_from: str = "",
+    date_to: str = "",
+):
+    admin = _require_admin(request)
+    if not admin:
+        return RedirectResponse(url="/login", status_code=302)
+
+    from app.db import get_conn
+    conn = get_conn()
+
+    conditions = []
+    params = []
+    if category:
+        conditions.append("f.category = ?")
+        params.append(category)
+    if date_from:
+        conditions.append("f.created_at >= ?")
+        params.append(date_from)
+    if date_to:
+        conditions.append("f.created_at <= ?")
+        params.append(date_to + "T23:59:59Z")
+
+    where = ("WHERE " + " AND ".join(conditions)) if conditions else ""
+
+    feedbacks = conn.execute(f"""
+        SELECT f.*, u.email
+        FROM feedback f
+        JOIN messages m ON m.id = f.message_id
+        JOIN conversations c ON c.id = m.conversation_id
+        JOIN users u ON u.id = c.user_id
+        {where}
+        ORDER BY f.created_at DESC
+        LIMIT 200
+    """, params).fetchall()
+    feedbacks = [dict(r) for r in feedbacks]
+
+    # KPIs
+    total = conn.execute("SELECT COUNT(*) as cnt FROM feedback").fetchone()["cnt"]
+    positive = conn.execute("SELECT COUNT(*) as cnt FROM feedback WHERE rating = 1").fetchone()["cnt"]
+    negative = conn.execute("SELECT COUNT(*) as cnt FROM feedback WHERE rating = -1").fetchone()["cnt"]
+
+    cat_rows = conn.execute("""
+        SELECT category, COUNT(*) as cnt FROM feedback
+        WHERE rating = -1 AND category IS NOT NULL AND category != ''
+        GROUP BY category ORDER BY cnt DESC
+    """).fetchall()
+    category_breakdown = [dict(r) for r in cat_rows]
+
+    trend = conn.execute("""
+        SELECT date(created_at) as day,
+               SUM(CASE WHEN rating = 1 THEN 1 ELSE 0 END) as pos,
+               SUM(CASE WHEN rating = -1 THEN 1 ELSE 0 END) as neg
+        FROM feedback
+        WHERE created_at >= date('now', '-30 days')
+        GROUP BY date(created_at)
+        ORDER BY day
+    """).fetchall()
+    trend = [dict(r) for r in trend]
+
+    pct_positive = round(positive / total * 100, 1) if total > 0 else 0
+
+    return _templates().TemplateResponse("admin/feedback.html", {
+        "request": request,
+        "email": admin["email"],
+        "is_admin": True,
+        "feedbacks": feedbacks,
+        "total": total,
+        "positive": positive,
+        "negative": negative,
+        "pct_positive": pct_positive,
+        "category_breakdown": category_breakdown,
+        "trend": trend,
+        "filter_category": category,
+        "filter_date_from": date_from,
+        "filter_date_to": date_to,
+    })
+
+
 # ── Settings ──
 
 def _get_setting(key: str, default: str = "") -> str:

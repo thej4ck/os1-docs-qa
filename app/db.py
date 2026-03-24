@@ -122,4 +122,23 @@ def _migrate():
     for col_name, col_type in new_columns:
         if col_name not in existing:
             _conn.execute(f"ALTER TABLE messages ADD COLUMN {col_name} {col_type}")
+
+    # Feedback table migrations
+    fb_existing = {
+        row[1] for row in _conn.execute("PRAGMA table_info(feedback)").fetchall()
+    }
+    fb_new_columns = [
+        ("category", "TEXT"),           # wrong|incomplete|irrelevant|outdated|unclear
+        ("comment", "TEXT"),            # free text, max 500 chars
+        ("query", "TEXT"),              # the user's question
+        ("response_preview", "TEXT"),   # first ~200 chars of AI response
+        ("chunks_used", "TEXT"),        # JSON array of chunk sources
+        ("conversation_length", "INTEGER"),  # message count in conversation
+        ("model", "TEXT"),              # Groq model that answered
+        ("search_scores", "TEXT"),      # JSON BM25 scores (reserved)
+    ]
+    for col_name, col_type in fb_new_columns:
+        if col_name not in fb_existing:
+            _conn.execute(f"ALTER TABLE feedback ADD COLUMN {col_name} {col_type}")
+
     _conn.commit()

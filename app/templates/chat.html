@@ -498,13 +498,89 @@ function enableInput() {
 }
 
 // ── Feedback ──
+const FEEDBACK_CATEGORIES = [
+    {id: 'wrong', label: 'Risposta errata'},
+    {id: 'incomplete', label: 'Incompleta'},
+    {id: 'irrelevant', label: 'Non pertinente'},
+    {id: 'outdated', label: 'Obsoleta'},
+    {id: 'unclear', label: 'Poco chiara'},
+];
+
 function sendFeedback(messageId, rating, btn) {
     const fd = new FormData(); fd.append('rating', rating);
     fetch(`/api/feedback/${messageId}`, { method: 'POST', body: fd }).then(r => {
         if (r.ok) {
-            btn.parentElement.querySelectorAll('.feedback-btn').forEach(b => { b.classList.remove('active-up','active-down'); b.style.pointerEvents = 'none'; });
+            btn.parentElement.querySelectorAll('.feedback-btn').forEach(b => {
+                b.classList.remove('active-up','active-down'); b.style.pointerEvents = 'none';
+            });
             btn.classList.add(rating === 1 ? 'active-up' : 'active-down');
+            showFeedbackForm(messageId, rating, btn.parentElement);
         }
+    });
+}
+
+function showFeedbackForm(messageId, rating, container) {
+    const existing = container.parentElement.querySelector('.feedback-form');
+    if (existing) existing.remove();
+
+    const form = document.createElement('div');
+    form.className = 'feedback-form';
+
+    let chipsHtml = '';
+    if (rating === -1) {
+        chipsHtml = `<div class="feedback-chips">${
+            FEEDBACK_CATEGORIES.map(c =>
+                `<button class="feedback-chip" data-cat="${c.id}">${c.label}</button>`
+            ).join('')
+        }</div>`;
+    }
+
+    form.innerHTML = `
+        ${chipsHtml}
+        <textarea class="feedback-comment" placeholder="${rating === 1
+            ? 'Vuoi aggiungere un commento? (opzionale)'
+            : 'Descrivi il problema... (opzionale)'
+        }" maxlength="500"></textarea>
+        <div class="feedback-charcount"><span>0</span>/500</div>
+        <div class="feedback-actions">
+            <button class="feedback-cancel" onclick="this.closest('.feedback-form').remove()">Annulla</button>
+            <button class="feedback-submit" onclick="submitFeedbackDetail(${messageId},${rating},this)">Invia</button>
+        </div>
+    `;
+    container.parentElement.appendChild(form);
+
+    form.querySelectorAll('.feedback-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            form.querySelectorAll('.feedback-chip').forEach(c => c.classList.remove('selected'));
+            chip.classList.add('selected');
+        });
+    });
+
+    const ta = form.querySelector('.feedback-comment');
+    const counter = form.querySelector('.feedback-charcount span');
+    ta.addEventListener('input', () => { counter.textContent = ta.value.length; });
+    ta.focus();
+}
+
+function submitFeedbackDetail(messageId, rating, btn) {
+    const form = btn.closest('.feedback-form');
+    const selectedChip = form.querySelector('.feedback-chip.selected');
+    const category = selectedChip ? selectedChip.dataset.cat : '';
+    const comment = form.querySelector('.feedback-comment').value.trim();
+
+    if (!category && !comment) { form.remove(); return; }
+
+    const fd = new FormData();
+    fd.append('rating', rating);
+    fd.append('category', category);
+    fd.append('comment', comment);
+
+    btn.disabled = true; btn.textContent = '...';
+    fetch(`/api/feedback/${messageId}`, { method: 'POST', body: fd }).then(r => {
+        if (r.ok) {
+            form.innerHTML = '<div style="font-size:0.75rem;color:var(--c-text-tertiary);padding:var(--sp-1);">Grazie per il feedback!</div>';
+            setTimeout(() => form.remove(), 2000);
+        } else { btn.disabled = false; btn.textContent = 'Invia'; }
     });
 }
 

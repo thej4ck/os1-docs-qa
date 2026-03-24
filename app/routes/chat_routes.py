@@ -309,28 +309,63 @@ async def api_export_conversation(request: Request, conv_id: str):
 
 # ── Feedback ──
 
+FEEDBACK_CATEGORIES = {"wrong", "incomplete", "irrelevant", "outdated", "unclear"}
+
 @router.post("/api/feedback/{message_id}")
-async def api_feedback(request: Request, message_id: int, rating: int = Form(...)):
+async def api_feedback(
+    request: Request,
+    message_id: int,
+    rating: int = Form(...),
+    category: str = Form(default=""),
+    comment: str = Form(default=""),
+):
     user = _get_user(request)
     if not user:
         return JSONResponse({"error": "Non autenticato."}, status_code=401)
     if rating not in (-1, 1):
         return JSONResponse({"error": "Rating non valido."}, status_code=400)
 
+    category = category.strip() if category else None
+    if category and category not in FEEDBACK_CATEGORIES:
+        category = None
+    comment = comment.strip()[:500] if comment else None
+
     from app.db import get_conn
     conn = get_conn()
-    # Verify ownership through conversation
+
+    # Verify ownership + get context
     row = conn.execute(
-        "SELECT m.id FROM messages m JOIN conversations c ON c.id = m.conversation_id "
+        "SELECT m.id, m.content, m.sources, m.model, m.conversation_id "
+        "FROM messages m JOIN conversations c ON c.id = m.conversation_id "
         "WHERE m.id = ? AND c.user_id = ?",
         (message_id, user["id"]),
     ).fetchone()
     if not row:
         return JSONResponse({"error": "Messaggio non trovato."}, status_code=404)
 
+    # Get the user question (previous user message)
+    user_msg = conn.execute(
+        "SELECT content FROM messages "
+        "WHERE conversation_id = ? AND role = 'user' AND id < ? "
+        "ORDER BY id DESC LIMIT 1",
+        (row["conversation_id"], message_id),
+    ).fetchone()
+
+    conv_length = conn.execute(
+        "SELECT COUNT(*) as cnt FROM messages WHERE conversation_id = ?",
+        (row["conversation_id"],),
+    ).fetchone()["cnt"]
+
+    query_text = user_msg["content"] if user_msg else None
+    response_preview = row["content"][:200] if row["content"] else None
+
     conn.execute(
-        "INSERT OR REPLACE INTO feedback (message_id, rating) VALUES (?, ?)",
-        (message_id, rating),
+        "INSERT OR REPLACE INTO feedback "
+        "(message_id, rating, category, comment, query, response_preview, "
+        "chunks_used, conversation_length, model, search_scores) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        (message_id, rating, category, comment, query_text,
+         response_preview, row["sources"], conv_length, row["model"], None),
     )
     conn.commit()
     return JSONResponse({"ok": True})
