@@ -6,6 +6,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Bust cache on each deploy
+ARG RAILWAY_GIT_COMMIT_SHA
 # App code
 COPY . .
 
