@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -61,3 +62,10 @@ from app.routes.admin_routes import router as admin_router
 app.include_router(auth_router)
 app.include_router(chat_router)
 app.include_router(admin_router)
+
+
+@app.get("/healthz")
+async def healthcheck():
+    """Railway healthcheck endpoint."""
+    from app.version import VERSION, BUILD
+    return JSONResponse({"status": "ok", "version": VERSION, "build": BUILD})
