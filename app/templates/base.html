@@ -437,12 +437,13 @@
             padding: 6px 10px; border-radius: var(--r-full); color: #16A34A;
             cursor: pointer; transition: all 180ms ease; background: #F0FDF4;
             border: 1.5px solid #BBF7D0; display: flex; align-items: center; gap: 4px;
-            font-size: 0.7rem; font-weight: 500; animation: pulse-feedback 2s ease-in-out 1s 2;
+            font-size: 0.7rem; font-weight: 500; animation: pulse-feedback 2s ease-in-out 0.5s infinite;
         }
         .feedback-btn:last-child { color: var(--c-error); background: var(--c-error-bg); border-color: #FECACA; }
         .feedback-btn:hover { transform: scale(1.1); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .feedback-btn.active-up { color: #fff; background: #16A34A; border-color: #16A34A; animation: none; }
-        .feedback-btn.active-down { color: #fff; background: var(--c-error); border-color: var(--c-error); animation: none; }
+        .feedback-btn.active-up { color: #fff; background: #16A34A; border-color: #16A34A; animation: none; transform: scale(1); }
+        .feedback-btn.active-down { color: #fff; background: var(--c-error); border-color: var(--c-error); animation: none; transform: scale(1); }
+        .feedback-btn[style*="pointer-events"] { animation: none; }
         .feedback-btn svg { width: 14px; height: 14px; }
         [data-theme="dark"] .feedback-btn { background: rgba(22,163,74,0.1); border-color: rgba(22,163,74,0.3); }
         [data-theme="dark"] .feedback-btn:last-child { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.3); }
