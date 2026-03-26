@@ -511,11 +511,24 @@
         .suggestion-chip .chip-icon {
             font-size: 1.1em; flex-shrink: 0; margin-top: 1px;
         }
-        /* Disambiguation chips */
-        .disambig-options { display: flex; flex-wrap: wrap; gap: 8px; }
-        .disambig-chip { font-size: 0.8125rem; padding: 10px 14px; }
-        .disambig-all { border-style: dashed; opacity: 0.7; }
-        .disambig-all:hover { opacity: 1; }
+        /* Disambiguation */
+        .disambig-container { }
+        .disambig-header { font-size: 0.9rem; margin-bottom: var(--sp-2); color: var(--c-text); }
+        .disambig-question { font-size: 0.85rem; color: var(--c-text-secondary); margin-bottom: var(--sp-3); line-height: 1.5; }
+        .disambig-options { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: var(--sp-3); }
+        .disambig-chip {
+            font-size: 0.8125rem; padding: 10px 16px; border-radius: var(--r-md);
+            border: 1.5px solid var(--c-border); background: var(--c-surface);
+            color: var(--c-text); cursor: pointer; transition: all 180ms ease;
+            display: flex; align-items: center; gap: 8px; font-weight: 500;
+        }
+        .disambig-chip:hover { border-color: var(--c-brand); color: var(--c-brand); background: var(--c-brand-light); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(226,35,26,0.08); }
+        .disambig-icon { font-size: 1.1em; }
+        .disambig-skip {
+            font-size: 0.75rem; color: var(--c-text-tertiary); background: none;
+            border: none; cursor: pointer; padding: 4px 0; transition: color 150ms;
+        }
+        .disambig-skip:hover { color: var(--c-brand); }
 
         /* ═══════════════ Chat Input ═══════════════ */
         .chat-input-wrap { padding: var(--sp-3) 0 var(--sp-4); }

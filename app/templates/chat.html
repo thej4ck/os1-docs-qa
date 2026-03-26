@@ -512,14 +512,18 @@ function enableInput() {
 
 // ── Disambiguation ──
 function renderDisambiguation(msgParts, data, originalQuestion) {
-    let html = `<p style="margin-bottom:12px;">${escapeHtml(data.question)}</p>`;
+    let html = '<div class="disambig-container">';
+    html += '<div class="disambig-header">🔍 <strong>Posso aiutarti meglio se mi specifichi l\'area</strong></div>';
+    html += `<p class="disambig-question">${escapeHtml(data.question)}</p>`;
     html += '<div class="disambig-options">';
-    data.options.forEach(opt => {
+    data.options.forEach((opt, i) => {
         const topic = escapeHtml(opt.topic || '');
         const keywords = escapeHtml(opt.keywords || '');
-        html += `<button class="suggestion-chip disambig-chip" onclick="submitWithTopic('${escapeHtml(originalQuestion)}','${topic}','${keywords}')">${escapeHtml(opt.label)}</button>`;
+        const icons = ['📋', '📦', '💰', '🏭', '📊'];
+        html += `<button class="disambig-chip" onclick="submitWithTopic('${escapeHtml(originalQuestion)}','${topic}','${keywords}')"><span class="disambig-icon">${icons[i] || '📄'}</span> ${escapeHtml(opt.label)}</button>`;
     });
-    html += `<button class="suggestion-chip disambig-chip disambig-all" onclick="submitWithTopic('${escapeHtml(originalQuestion)}','','')">Cerca in tutte le aree</button>`;
+    html += '</div>';
+    html += `<button class="disambig-skip" onclick="submitWithTopic('${escapeHtml(originalQuestion)}','','')">Oppure cerca in tutte le aree →</button>`;
     html += '</div>';
     msgParts.content.innerHTML = html;
     enableInput();
