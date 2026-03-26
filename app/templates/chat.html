@@ -499,8 +499,8 @@ function renderFinal(msgParts, text, sources, messageId, screenshots) {
     // Feedback buttons
     if (messageId) {
         const fb = document.createElement('div'); fb.className = 'msg-feedback';
-        fb.innerHTML = `<button class="feedback-btn" onclick="sendFeedback(${messageId},1,this)">${SVG_THUMB_UP}</button>
-            <button class="feedback-btn" onclick="sendFeedback(${messageId},-1,this)">${SVG_THUMB_DOWN}</button>`;
+        fb.innerHTML = `<button class="feedback-btn" onclick="sendFeedback(${messageId},1,this)">${SVG_THUMB_UP} Utile</button>
+            <button class="feedback-btn" onclick="sendFeedback(${messageId},-1,this)">${SVG_THUMB_DOWN} Non utile</button>`;
         msgParts.body.appendChild(fb);
     }
     enableInput(); scrollToBottom();

@@ -431,16 +431,21 @@
         @keyframes thinkSlide { 0% { left: -50%; } 100% { left: 100%; } }
 
         /* ═══════════════ Feedback ═══════════════ */
-        .msg-feedback { display: flex; gap: var(--sp-1); margin-top: var(--sp-2); }
+        @keyframes pulse-feedback { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+        .msg-feedback { display: flex; gap: var(--sp-2); margin-top: var(--sp-3); }
         .feedback-btn {
-            padding: 3px 6px; border-radius: var(--r-sm); color: var(--c-text-tertiary);
-            cursor: pointer; transition: all 120ms ease; background: none; border: none;
-            display: flex; align-items: center;
+            padding: 6px 10px; border-radius: var(--r-full); color: #16A34A;
+            cursor: pointer; transition: all 180ms ease; background: #F0FDF4;
+            border: 1.5px solid #BBF7D0; display: flex; align-items: center; gap: 4px;
+            font-size: 0.7rem; font-weight: 500; animation: pulse-feedback 2s ease-in-out 1s 2;
         }
-        .feedback-btn:hover { color: var(--c-text-secondary); background: var(--c-surface-alt); }
-        .feedback-btn.active-up { color: #16A34A; background: #F0FDF4; }
-        .feedback-btn.active-down { color: var(--c-error); background: var(--c-error-bg); }
+        .feedback-btn:last-child { color: var(--c-error); background: var(--c-error-bg); border-color: #FECACA; }
+        .feedback-btn:hover { transform: scale(1.1); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .feedback-btn.active-up { color: #fff; background: #16A34A; border-color: #16A34A; animation: none; }
+        .feedback-btn.active-down { color: #fff; background: var(--c-error); border-color: var(--c-error); animation: none; }
         .feedback-btn svg { width: 14px; height: 14px; }
+        [data-theme="dark"] .feedback-btn { background: rgba(22,163,74,0.1); border-color: rgba(22,163,74,0.3); }
+        [data-theme="dark"] .feedback-btn:last-child { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.3); }
 
         /* Feedback detail form */
         .feedback-form {
