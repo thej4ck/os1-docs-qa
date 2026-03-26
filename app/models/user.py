@@ -56,6 +56,12 @@ def set_user_limit(email: str, limit: int | None):
     get_conn().commit()
 
 
+def mark_onboarding_completed(user_id: int):
+    conn = get_conn()
+    conn.execute("UPDATE users SET onboarding_completed = 1 WHERE id = ?", (user_id,))
+    conn.commit()
+
+
 def _matches_admin_pattern(email: str) -> bool:
     patterns = [p.strip().lower() for p in settings.admin_emails.split(",") if p.strip()]
     email_lower = email.lower()

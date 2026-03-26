@@ -140,6 +140,13 @@ def _migrate():
         if col_name not in fb_existing:
             _conn.execute(f"ALTER TABLE feedback ADD COLUMN {col_name} {col_type}")
 
+    # Users table migrations
+    user_existing = {
+        row[1] for row in _conn.execute("PRAGMA table_info(users)").fetchall()
+    }
+    if "onboarding_completed" not in user_existing:
+        _conn.execute("ALTER TABLE users ADD COLUMN onboarding_completed INTEGER DEFAULT 0")
+
     # Recreate monthly_usage view (fix: question count was always 0)
     _conn.execute("DROP VIEW IF EXISTS monthly_usage")
     _conn.execute("""

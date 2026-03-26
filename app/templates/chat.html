@@ -26,6 +26,74 @@
 {% block content %}
 <div class="announcement-banner" id="announcement"></div>
 
+{% if show_onboarding %}
+<div class="onboarding-overlay" id="onboarding">
+    <div class="onboarding-card">
+        <button class="onboarding-skip" onclick="completeOnboarding()">Salta ✕</button>
+
+        <div class="onboarding-step active" data-step="1">
+            <img src="/static/img/logo-lg.png" alt="SCAO" class="onboarding-logo">
+            <div class="onboarding-title">Benvenuto in OS1 AI Docs</div>
+            <div class="onboarding-subtitle">Il tuo assistente intelligente per la documentazione del gestionale OS1. Ti guiderà passo passo nell'uso del sistema.</div>
+            <div class="onboarding-dots"><span class="onboarding-dot active"></span><span class="onboarding-dot"></span><span class="onboarding-dot"></span><span class="onboarding-dot"></span></div>
+            <button class="onboarding-btn onboarding-btn-primary" onclick="onboardingNext()">Iniziamo →</button>
+        </div>
+
+        <div class="onboarding-step" data-step="2">
+            <div class="onboarding-title">Come funziona</div>
+            <div class="onboarding-features">
+                <div class="onboarding-feature"><span class="onboarding-feature-icon">💬</span><div class="onboarding-feature-text"><strong>Fai una domanda</strong> in linguaggio naturale, come faresti con un collega</div></div>
+                <div class="onboarding-feature"><span class="onboarding-feature-icon">🔍</span><div class="onboarding-feature-text"><strong>Ricerca automatica</strong> tra migliaia di documenti, schede operative e tabelle OS1</div></div>
+                <div class="onboarding-feature"><span class="onboarding-feature-icon">🤖</span><div class="onboarding-feature-text"><strong>Risposta guidata</strong> con procedure passo-passo, screenshot e fonti verificabili</div></div>
+            </div>
+            <div class="onboarding-dots"><span class="onboarding-dot"></span><span class="onboarding-dot active"></span><span class="onboarding-dot"></span><span class="onboarding-dot"></span></div>
+            <button class="onboarding-btn onboarding-btn-primary" onclick="onboardingNext()">Avanti →</button>
+            <div class="onboarding-nav"><button class="onboarding-back" onclick="onboardingPrev()">← Indietro</button><span></span></div>
+        </div>
+
+        <div class="onboarding-step" data-step="3">
+            <div class="onboarding-title">Suggerimenti</div>
+            <div class="onboarding-features">
+                <div class="onboarding-feature"><span class="onboarding-feature-icon">📄</span><div class="onboarding-feature-text"><strong>Clicca le fonti</strong> nella risposta per aprire il documento originale</div></div>
+                <div class="onboarding-feature"><span class="onboarding-feature-icon">🔎</span><div class="onboarding-feature-text"><strong>Approfondisci</strong> con un click per risposte più dettagliate</div></div>
+                <div class="onboarding-feature"><span class="onboarding-feature-icon">👍</span><div class="onboarding-feature-text"><strong>Dai feedback</strong> alle risposte per aiutarci a migliorare il servizio</div></div>
+                <div class="onboarding-feature"><span class="onboarding-feature-icon">🌙</span><div class="onboarding-feature-text"><strong>Tema scuro</strong> disponibile dal toggle in alto a destra</div></div>
+            </div>
+            <div class="onboarding-dots"><span class="onboarding-dot"></span><span class="onboarding-dot"></span><span class="onboarding-dot active"></span><span class="onboarding-dot"></span></div>
+            <button class="onboarding-btn onboarding-btn-primary" onclick="onboardingNext()">Avanti →</button>
+            <div class="onboarding-nav"><button class="onboarding-back" onclick="onboardingPrev()">← Indietro</button><span></span></div>
+        </div>
+
+        <div class="onboarding-step" data-step="4">
+            <div class="onboarding-title">Prima di iniziare</div>
+            <div class="onboarding-warning">⚠️ Questo servizio utilizza <strong>intelligenza artificiale</strong> per generare le risposte. Non inserire dati personali, sensibili o riservati dell'azienda nelle domande.</div>
+            <label class="onboarding-checkbox"><input type="checkbox" id="onboarding-accept" onchange="document.getElementById('onboarding-start').disabled = !this.checked"> Ho letto e compreso l'avviso</label>
+            <div class="onboarding-dots"><span class="onboarding-dot"></span><span class="onboarding-dot"></span><span class="onboarding-dot"></span><span class="onboarding-dot active"></span></div>
+            <button class="onboarding-btn onboarding-btn-primary" id="onboarding-start" disabled onclick="completeOnboarding()">Inizia a usare OS1 AI Docs</button>
+            <div class="onboarding-nav"><button class="onboarding-back" onclick="onboardingPrev()">← Indietro</button><span></span></div>
+        </div>
+    </div>
+</div>
+<script>
+let onboardingStep = 1;
+function onboardingGo(step) {
+    onboardingStep = step;
+    document.querySelectorAll('.onboarding-step').forEach(s => s.classList.remove('active'));
+    document.querySelector(`.onboarding-step[data-step="${step}"]`).classList.add('active');
+}
+function onboardingNext() { if (onboardingStep < 4) onboardingGo(onboardingStep + 1); }
+function onboardingPrev() { if (onboardingStep > 1) onboardingGo(onboardingStep - 1); }
+function completeOnboarding() {
+    fetch('/api/onboarding/complete', { method: 'POST' }).then(() => {
+        const overlay = document.getElementById('onboarding');
+        overlay.style.opacity = '0';
+        overlay.style.transition = 'opacity 300ms';
+        setTimeout(() => overlay.remove(), 300);
+    });
+}
+</script>
+{% endif %}
+
 <div class="chat-layout">
     <!-- Left sidebar: conversations -->
     <aside class="chat-sidebar" id="sidebar">

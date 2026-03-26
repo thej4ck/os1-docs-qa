@@ -109,6 +109,7 @@ async def chat_page(request: Request, c: str | None = None):
         "max_messages": max_messages,
         "last_sources": last_sources,
         "app_version": f"v{VERSION} build {BUILD} ({BUILD_DATE})",
+        "show_onboarding": not user.get("onboarding_completed", 0),
     })
 
 
@@ -383,6 +384,18 @@ async def api_feedback(
          response_preview, row["sources"], conv_length, row["model"], None),
     )
     conn.commit()
+    return JSONResponse({"ok": True})
+
+
+# ── Onboarding ──
+
+@router.post("/api/onboarding/complete")
+async def complete_onboarding(request: Request):
+    user = _get_user(request)
+    if not user:
+        return JSONResponse({"error": "Non autenticato."}, status_code=401)
+    from app.models.user import mark_onboarding_completed
+    mark_onboarding_completed(user["id"])
     return JSONResponse({"ok": True})
 
 
