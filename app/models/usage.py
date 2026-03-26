@@ -101,7 +101,7 @@ def get_cost_by_model(start_date: str, end_date: str) -> list[dict]:
     """Cost breakdown by model for a date range."""
     rows = get_conn().execute(
         "SELECT "
-        "  COALESCE(m.model, 'sconosciuto') AS model, "
+        "  COALESCE(NULLIF(m.model, ''), 'llama-3.1-8b-instant') AS model, "
         "  COUNT(*) AS requests, "
         "  COALESCE(SUM(m.prompt_tokens), 0) AS prompt_tokens, "
         "  COALESCE(SUM(m.completion_tokens), 0) AS completion_tokens, "
@@ -110,7 +110,7 @@ def get_cost_by_model(start_date: str, end_date: str) -> list[dict]:
         "  COALESCE(SUM(m.rerank_cost_usd), 0) AS rerank_cost_usd "
         "FROM messages m "
         "WHERE m.role = 'assistant' AND m.created_at >= ? AND m.created_at < ? "
-        "GROUP BY COALESCE(m.model, 'sconosciuto') "
+        "GROUP BY COALESCE(NULLIF(m.model, ''), 'llama-3.1-8b-instant') "
         "ORDER BY cost_usd DESC",
         (start_date, end_date),
     ).fetchall()
