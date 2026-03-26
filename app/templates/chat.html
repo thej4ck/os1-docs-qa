@@ -403,7 +403,7 @@ function handleSubmit(e) {
 
     function scheduleRender(el, text) {
         if (renderTimer) return;
-        renderTimer = setTimeout(() => { el.innerHTML = marked.parse(convertScreenshotMarkers(text)); scrollToBottom(); renderTimer = null; }, 60);
+        renderTimer = setTimeout(() => { el.innerHTML = marked.parse(convertScreenshotMarkers(text)); renderTimer = null; }, 60);
     }
     return false;
 }
@@ -503,7 +503,7 @@ function renderFinal(msgParts, text, sources, messageId, screenshots) {
             <button class="feedback-btn" onclick="sendFeedback(${messageId},-1,this)">${SVG_THUMB_DOWN} Non utile</button>`;
         msgParts.body.appendChild(fb);
     }
-    enableInput(); scrollToBottom();
+    enableInput();
 }
 
 function enableInput() {
