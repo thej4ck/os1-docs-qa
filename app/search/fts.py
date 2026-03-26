@@ -105,7 +105,8 @@ class SearchIndex:
         self.conn.commit()
 
     def search(
-        self, query: str, limit: int = 10, doc_type: Optional[str] = None
+        self, query: str, limit: int = 10, doc_type: Optional[str] = None,
+        topic_filter: Optional[str] = None,
     ) -> list[dict]:
         """BM25-ranked full-text search with AND-first, OR-fallback strategy."""
         tokens = self._clean_tokens(query)
@@ -114,47 +115,45 @@ class SearchIndex:
 
         # Try AND (all terms must match) first
         and_query = " AND ".join(tokens)
-        results = self._execute_search(and_query, limit, doc_type)
+        results = self._execute_search(and_query, limit, doc_type, topic_filter)
 
         # Fall back to OR if AND returns too few results
         if len(results) < _MIN_AND_RESULTS and len(tokens) > 1:
             or_query = " OR ".join(tokens)
-            results = self._execute_search(or_query, limit, doc_type)
+            results = self._execute_search(or_query, limit, doc_type, topic_filter)
 
         return results
 
     def _execute_search(
-        self, fts_query: str, limit: int, doc_type: Optional[str] = None
+        self, fts_query: str, limit: int, doc_type: Optional[str] = None,
+        topic_filter: Optional[str] = None,
     ) -> list[dict]:
         """Run a single FTS5 MATCH query with title-boosted BM25 ranking."""
-        if doc_type:
-            sql = """
-                SELECT d.id, d.source_file, d.module, d.doc_type, d.title,
-                       snippet(docs_fts, 1, '<b>', '</b>', '...', 40) AS snippet,
-                       d.content,
-                       bm25(docs_fts, 10.0, 1.0) AS rank
-                FROM docs_fts
-                JOIN documents d ON d.id = docs_fts.rowid
-                WHERE docs_fts MATCH ?
-                  AND d.doc_type = ?
-                ORDER BY rank
-                LIMIT ?
-            """
-            rows = self.conn.execute(sql, (fts_query, doc_type, limit)).fetchall()
-        else:
-            sql = """
-                SELECT d.id, d.source_file, d.module, d.doc_type, d.title,
-                       snippet(docs_fts, 1, '<b>', '</b>', '...', 40) AS snippet,
-                       d.content,
-                       bm25(docs_fts, 10.0, 1.0) AS rank
-                FROM docs_fts
-                JOIN documents d ON d.id = docs_fts.rowid
-                WHERE docs_fts MATCH ?
-                ORDER BY rank
-                LIMIT ?
-            """
-            rows = self.conn.execute(sql, (fts_query, limit)).fetchall()
+        base_sql = """
+            SELECT d.id, d.source_file, d.module, d.doc_type, d.title,
+                   snippet(docs_fts, 1, '<b>', '</b>', '...', 40) AS snippet,
+                   d.content,
+                   bm25(docs_fts, 10.0, 1.0) AS rank
+            FROM docs_fts
+            JOIN documents d ON d.id = docs_fts.rowid
+            WHERE docs_fts MATCH ?
+        """
+        params: list = [fts_query]
 
+        if doc_type:
+            base_sql += " AND d.doc_type = ?"
+            params.append(doc_type)
+
+        if topic_filter:
+            # Match topic in source_file path OR module field
+            base_sql += " AND (REPLACE(d.source_file, '\\', '/') LIKE ? OR d.module = ?)"
+            params.append(f"%/{topic_filter}/%")
+            params.append(topic_filter)
+
+        base_sql += " ORDER BY rank LIMIT ?"
+        params.append(limit)
+
+        rows = self.conn.execute(base_sql, params).fetchall()
         return [dict(row) for row in rows]
 
     def _clean_tokens(self, query: str) -> list[str]:

@@ -335,6 +335,10 @@ function handleSubmit(e) {
         formData.append('deep', 'true');
         questionEl.dataset.deep = '';
     }
+    if (questionEl.dataset.topicFilter) {
+        formData.append('topic', questionEl.dataset.topicFilter);
+        delete questionEl.dataset.topicFilter;
+    }
 
     fetch('/api/ask', { method: 'POST', body: formData })
         .then(response => {
@@ -356,6 +360,15 @@ function handleSubmit(e) {
                                 assistantMsg.content.innerHTML = `<p>${escapeHtml(data.error)}</p>`;
                                 if (data.limit_reached) { msgCount = maxMessages; updateCounter(); }
                                 enableInput(); return;
+                            }
+                            if (data.disambiguation) {
+                                clearInterval(thinkInterval);
+                                conversationId = data.conversation_id;
+                                history.replaceState(null, '', `/chat?c=${conversationId}`);
+                                addToSidebar(conversationId, question.slice(0, 60));
+                                updateEmailBtn();
+                                renderDisambiguation(assistantMsg, data, question);
+                                return;
                             }
                             if (data.token) {
                                 if (firstToken) { clearInterval(thinkInterval); assistantMsg.content.innerHTML = ''; firstToken = false; }
@@ -495,6 +508,28 @@ function renderFinal(msgParts, text, sources, messageId, screenshots) {
 
 function enableInput() {
     if (msgCount < maxMessages) { questionEl.disabled = false; sendBtn.disabled = false; questionEl.focus(); }
+}
+
+// ── Disambiguation ──
+function renderDisambiguation(msgParts, data, originalQuestion) {
+    let html = `<p style="margin-bottom:12px;">${escapeHtml(data.question)}</p>`;
+    html += '<div class="disambig-options">';
+    data.options.forEach(opt => {
+        const topic = escapeHtml(opt.topic || '');
+        const keywords = escapeHtml(opt.keywords || '');
+        html += `<button class="suggestion-chip disambig-chip" onclick="submitWithTopic('${escapeHtml(originalQuestion)}','${topic}','${keywords}')">${escapeHtml(opt.label)}</button>`;
+    });
+    html += `<button class="suggestion-chip disambig-chip disambig-all" onclick="submitWithTopic('${escapeHtml(originalQuestion)}','','')">Cerca in tutte le aree</button>`;
+    html += '</div>';
+    msgParts.content.innerHTML = html;
+    enableInput();
+    scrollToBottom();
+}
+
+function submitWithTopic(question, topic, keywords) {
+    questionEl.value = keywords ? question + ' ' + keywords : question;
+    if (topic) questionEl.dataset.topicFilter = topic;
+    handleSubmit(new Event('submit'));
 }
 
 // ── Feedback ──

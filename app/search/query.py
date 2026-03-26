@@ -198,8 +198,38 @@ def _get_context_budget(deep: bool = False) -> int:
     return budget * 2 if deep else budget
 
 
+async def check_disambiguation(
+    question: str, is_first_message: bool
+) -> dict | None:
+    """Check if query needs disambiguation. Returns options dict or None."""
+    if _index is None or not is_first_message:
+        return None
+
+    from app.search.disambiguate import analyze_ambiguity, ask_disambiguation
+
+    candidates = _index.search(question, limit=20)
+    result = analyze_ambiguity(question, candidates, is_first_message)
+    if not result:
+        return None
+
+    # Use LLM to generate natural disambiguation question
+    if _client:
+        llm_result = await ask_disambiguation(question, result["areas"], _client)
+        if llm_result:
+            return llm_result
+
+    # Fallback (no client)
+    return {
+        "question": "Ho trovato risultati in diverse aree. Di quale ti interessa?",
+        "options": [
+            {"label": a["label"], "topic": a["topic"], "keywords": ""}
+            for a in result["areas"][:4]
+        ],
+    }
+
+
 async def retrieve_with_budget(
-    question: str, deep: bool = False
+    question: str, deep: bool = False, topic_filter: str | None = None,
 ) -> tuple[list[dict], dict | None]:
     """Search FTS5, optionally rerank, return docs up to word budget.
 
@@ -208,7 +238,11 @@ async def retrieve_with_budget(
     if _index is None:
         return [], None
     max_words = _get_context_budget(deep)
-    candidates = _index.search(question, limit=50)
+    candidates = _index.search(question, limit=50, topic_filter=topic_filter)
+
+    # If topic filter yielded too few results, fall back to unfiltered
+    if topic_filter and len(candidates) < 3:
+        candidates = _index.search(question, limit=50)
 
     # LLM reranking (if enabled and client available)
     rerank_usage = None
@@ -322,6 +356,7 @@ async def ask_stream(
     question: str,
     history: list[dict] | None = None,
     deep: bool = False,
+    topic_filter: str | None = None,
 ) -> AsyncIterator[tuple[str, list[dict], dict | None]]:
     """Retrieve context, call Groq, and yield (token, sources, usage) tuples.
 
@@ -335,7 +370,7 @@ async def ask_stream(
 
     import re as _re
 
-    docs, rerank_usage = await retrieve_with_budget(question, deep=deep)
+    docs, rerank_usage = await retrieve_with_budget(question, deep=deep, topic_filter=topic_filter)
     sources = [{"title": d["title"], "source_file": d["source_file"]} for d in docs]
 
     # Extract screenshots from retrieved docs (avoids a second retrieval call, skip logo)

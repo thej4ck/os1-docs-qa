@@ -120,6 +120,7 @@ async def ask(
     question: str = Form(...),
     conversation_id: str = Form(default=""),
     deep: str = Form(default=""),
+    topic: str = Form(default=""),
 ):
     user = _get_user(request)
     if not user:
@@ -189,6 +190,20 @@ async def ask(
         if not conv:
             return JSONResponse({"error": "Conversazione non trovata."}, status_code=404)
 
+    # Disambiguation check (only for first message in new conversations, no topic already selected)
+    topic_filter = topic.strip() if topic else None
+    if is_new_conv and not topic_filter:
+        disambig = await query_module.check_disambiguation(question, is_first_message=True)
+        if disambig:
+            async def disambig_event():
+                yield {"data": json.dumps({
+                    "disambiguation": True,
+                    "question": disambig["question"],
+                    "options": disambig["options"],
+                    "conversation_id": conv_id,
+                })}
+            return EventSourceResponse(disambig_event())
+
     # Save user message
     add_message(conv_id, "user", question)
 
@@ -204,7 +219,7 @@ async def ask(
 
         is_deep = deep == "true"
         async for token, token_sources, token_meta in query_module.ask_stream(
-            question, history=llm_history, deep=is_deep
+            question, history=llm_history, deep=is_deep, topic_filter=topic_filter
         ):
             if token_sources:
                 sources = token_sources

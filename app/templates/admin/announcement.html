@@ -128,6 +128,18 @@
                     <div class="setting-hint">Usa un modello leggero (8B) per filtrare i documenti irrilevanti prima di inviarli al modello principale. Costo aggiuntivo trascurabile (~$0.0001/query).</div>
                 </div>
             </div>
+            <div class="setting-row">
+                <label class="setting-label" for="disambig_dominance_threshold">Soglia disambiguazione</label>
+                <div style="flex:1;">
+                    <div style="display:flex;align-items:center;gap:.5rem;">
+                        <input type="number" id="disambig_dominance_threshold" name="disambig_dominance_threshold"
+                               class="setting-input" style="width:80px;"
+                               value="{{ settings.disambig_dominance_threshold }}" min="30" max="100">
+                        <span>%</span>
+                    </div>
+                    <div class="setting-hint">Se nessuna area tematica domina oltre questa soglia nei risultati di ricerca, il sistema chiede chiarimento all'utente. Valori bassi = più disambiguazioni, valori alti = meno. Default: 70%.</div>
+                </div>
+            </div>
         </div>
 
         <h3 class="section-title">Annuncio</h3>

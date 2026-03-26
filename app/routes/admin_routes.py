@@ -412,6 +412,7 @@ def _get_all_settings() -> dict:
         "allowed_emails": _get_setting("allowed_emails", app_settings.allowed_emails),
         "context_preset": _get_setting("context_preset", "normal"),
         "reranking_enabled": _get_setting("reranking_enabled", "1"),
+        "disambig_dominance_threshold": _get_setting("disambig_dominance_threshold", "70"),
         "max_messages": get_max_messages_setting(),
         "announcement": _get_setting("announcement", ""),
     }
@@ -463,6 +464,7 @@ async def save_settings(request: Request):
         "allowed_emails": str(form.get("allowed_emails", "")).strip(),
         "context_preset": preset,
         "reranking_enabled": "1" if form.get("reranking_enabled") else "0",
+        "disambig_dominance_threshold": str(max(30, min(int(form.get("disambig_dominance_threshold", 70)), 100))),
         "max_messages_per_conversation": str(max(1, min(int(form.get("max_messages_per_conversation", 20)), 200))),
         "announcement": str(form.get("announcement", "")).strip(),
     }
