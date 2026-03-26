@@ -529,6 +529,13 @@
             border: none; cursor: pointer; padding: 4px 0; transition: color 150ms;
         }
         .disambig-skip:hover { color: var(--c-brand); }
+        /* Clickable source links in chat */
+        .source-link {
+            color: var(--c-brand); text-decoration: none; font-style: italic;
+            cursor: pointer; border-bottom: 1px dashed var(--c-brand);
+            transition: all 150ms; padding-bottom: 1px;
+        }
+        .source-link:hover { border-bottom-style: solid; opacity: 0.8; }
 
         /* ═══════════════ Chat Input ═══════════════ */
         .chat-input-wrap { padding: var(--sp-3) 0 var(--sp-4); }
