@@ -481,16 +481,20 @@ function renderFinal(msgParts, text, sources, messageId, screenshots) {
     if (text) msgParts.content.innerHTML = marked.parse(convertScreenshotMarkers(text));
 
     // Make "Fonte:" references clickable — open doc overlay on click
-    msgParts.content.querySelectorAll('p, em, li').forEach(el => {
-        if (!el.textContent.includes('Fonte')) return;
+    msgParts.content.querySelectorAll('p').forEach(el => {
+        const txt = el.textContent;
+        if (!txt.includes('Fonte:') && !txt.includes('Fonte ')) return;
+        // Match: optional emoji + optional <em> + Fonte: Title (filepath) + optional </em>
         el.innerHTML = el.innerHTML.replace(
-            /📄\s*(?:<em>)?Fonte[:\s]*(.+?)\s*\(([^)]+)\)(?:<\/em>)?/g,
+            /(?:📄\s*)?(?:<em>)?\s*Fonte\s*[:–—-]\s*(.+?)\s*\(([^)]+)\)\s*(?:<\/em>)?/g,
             (match, title, file) => {
-                const src = sources.find(s => s.source_file && (s.source_file.includes(file.trim()) || file.trim().includes(s.source_file)));
-                const sourceFile = src ? src.source_file : file.trim();
-                const safeTitle = title.trim().replace(/'/g, "\\'");
-                const safeFile = sourceFile.replace(/'/g, "\\'");
-                return `<a href="#" class="source-link" onclick="event.preventDefault();openDocOverlay('${safeFile}','${safeTitle}')">📄 ${title.trim()}</a>`;
+                const cleanFile = file.trim().replace(/\\/g, '/');
+                const src = sources.find(s => {
+                    const sf = (s.source_file || '').replace(/\\/g, '/');
+                    return sf && (sf.includes(cleanFile) || cleanFile.includes(sf));
+                });
+                const sourceFile = src ? src.source_file : cleanFile;
+                return `<a href="#" class="source-link" onclick="event.preventDefault();openDocOverlay(decodeURIComponent('${encodeURIComponent(sourceFile)}'),decodeURIComponent('${encodeURIComponent(title.trim())}'))">📄 ${title.trim()}</a>`;
             }
         );
     });
