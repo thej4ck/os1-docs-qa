@@ -326,8 +326,8 @@ def extract_pdf_images(doc, output_dir: Path, skip_xrefs: set) -> dict:
                 if w < 10 or h < 10:
                     skip_xrefs.add(xref)
                     continue
-                # Skip logo-like banners on ANY page (wide + short)
-                if w > 300 and h < 120:
+                # Skip logo-like banners on ANY page (wide + short, ratio > 3:1)
+                if w > 150 and h < 120 and w / h > 3:
                     skip_xrefs.add(xref)
                     continue
                 counter += 1
@@ -367,9 +367,17 @@ def build_pdf_content(doc, skip_xrefs: set, xref_map: dict, img_base_url: str,
 
         for b in blocks:
             y = b["bbox"][1]
-            # Skip header/footer regions
-            if y < 85 or y > page_height - 40:
+            # Skip header/footer regions (logo + copyright + page numbers)
+            if y < 100 or y > page_height - 60:
                 continue
+
+            # Skip copyright/page-number lines on all pages
+            if "lines" in b:
+                block_text = " ".join(
+                    s["text"] for line in b["lines"] for s in line["spans"]
+                ).strip()
+                if re.match(r"(?i)copyright\s*©|©\s*open\s*source|pagina\s+\d+\s+di\s+\d+", block_text):
+                    continue
 
             # On page 0, skip the metadata area (before first real 18pt+ heading)
             if page_num == 0 and not found_first_heading:
