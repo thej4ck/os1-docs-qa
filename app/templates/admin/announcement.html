@@ -13,7 +13,7 @@
     .admin-nav a { font-size: 0.8125rem; font-weight: 500; padding: 6px 14px; border-radius: var(--r-full); color: var(--c-text-secondary); border: 1px solid var(--c-border); transition: all 150ms ease; text-decoration: none; }
     .admin-nav a:hover { background: var(--c-surface-alt); color: var(--c-text); text-decoration: none; }
     .admin-nav a.active { background: var(--c-brand); color: white; border-color: var(--c-brand); }
-    .admin-wrap { padding: var(--sp-6) 0; max-width: 600px; }
+    .admin-wrap { padding: var(--sp-6) 0; max-width: 800px; }
     .section-title { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: var(--sp-3); margin-top: var(--sp-8); color: var(--c-text); }
     .section-title:first-of-type { margin-top: 0; }
     .section-desc { font-size: 0.8125rem; color: var(--c-text-secondary); margin-bottom: var(--sp-4); }
@@ -31,6 +31,10 @@
     .setting-hint { font-size: 0.6875rem; color: var(--c-text-tertiary); margin-top: 2px; }
     .settings-actions { margin-top: var(--sp-4); }
     textarea.setting-input { min-height: 70px; resize: vertical; font-family: inherit; }
+    textarea.setting-input.prompt-editor { min-height: 300px; font-family: 'JetBrains Mono', 'Source Code Pro', monospace; font-size: 0.75rem; line-height: 1.5; white-space: pre-wrap; }
+    .prompt-actions { display: flex; gap: var(--sp-2); margin-top: var(--sp-2); }
+    .btn-reset-prompt { font-size: 0.75rem; padding: 4px 10px; border-radius: var(--r-sm); border: 1px solid var(--c-border); background: var(--c-surface); color: var(--c-text-secondary); cursor: pointer; transition: all 150ms ease; }
+    .btn-reset-prompt:hover { border-color: var(--c-brand); color: var(--c-brand); }
     @media (max-width: 640px) { .setting-row { flex-direction: column; align-items: stretch; } .setting-label { min-width: auto; } }
 </style>
 {% endblock %}
@@ -142,6 +146,29 @@
             </div>
         </div>
 
+        <h3 class="section-title">Prompt di sistema</h3>
+        <p class="section-desc">Prompt inviati al modello LLM. Lascia vuoto per usare il prompt predefinito. Il pulsante "Ripristina default" ricarica il testo originale nel campo (salva per confermare).</p>
+        <div class="settings-card">
+            <div class="setting-row" style="flex-direction:column;align-items:stretch;">
+                <label class="setting-label" for="system_prompt">Prompt base</label>
+                <textarea id="system_prompt" name="system_prompt" class="setting-input prompt-editor"
+                    placeholder="Lascia vuoto per usare il prompt predefinito...">{{ settings.system_prompt }}</textarea>
+                <div class="prompt-actions">
+                    <button type="button" class="btn-reset-prompt" onclick="resetPrompt('system_prompt')">Ripristina default</button>
+                    <button type="button" class="btn-reset-prompt" onclick="document.getElementById('system_prompt').value=''">Svuota (usa default)</button>
+                </div>
+            </div>
+            <div class="setting-row" style="flex-direction:column;align-items:stretch;margin-top:var(--sp-4);">
+                <label class="setting-label" for="deep_addendum">Addendum approfondimento</label>
+                <textarea id="deep_addendum" name="deep_addendum" class="setting-input prompt-editor" style="min-height:150px;"
+                    placeholder="Lascia vuoto per usare il testo predefinito...">{{ settings.deep_addendum }}</textarea>
+                <div class="prompt-actions">
+                    <button type="button" class="btn-reset-prompt" onclick="resetPrompt('deep_addendum')">Ripristina default</button>
+                    <button type="button" class="btn-reset-prompt" onclick="document.getElementById('deep_addendum').value=''">Svuota (usa default)</button>
+                </div>
+            </div>
+        </div>
+
         <h3 class="section-title">Annuncio</h3>
         <p class="section-desc">Banner visibile a tutti gli utenti in cima alla chat. Lascia vuoto per nascondere.</p>
         <div class="settings-card">
@@ -155,4 +182,16 @@
         </div>
     </form>
 </div>
+
+<script>
+const DEFAULT_PROMPTS = {
+    system_prompt: {{ default_system_prompt | tojson }},
+    deep_addendum: {{ default_deep_addendum | tojson }},
+};
+function resetPrompt(id) {
+    if (confirm('Ripristinare il prompt predefinito? Il testo corrente verrà sostituito.')) {
+        document.getElementById(id).value = DEFAULT_PROMPTS[id];
+    }
+}
+</script>
 {% endblock %}

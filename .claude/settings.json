@@ -23,7 +23,8 @@
       "Bash(sed 's/.*\\\\.//')",
       "Bash(find d:/dev/os1-docs-qa/help-files/OS1Config/ -name *.webp)",
       "Bash(find d:/dev/os1-docs-qa/help-files/OS1Config/ -name *.png)",
-      "Bash(pkill -f 'uvicorn app.main')"
+      "Bash(pkill -f 'uvicorn app.main')",
+      "Read(//d/dev/os1-docs-qa/**)"
     ]
   }
 }

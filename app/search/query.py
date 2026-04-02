@@ -7,7 +7,7 @@ from openai import AsyncOpenAI
 from app.config import settings
 from app.search.fts import SearchIndex
 
-SYSTEM_PROMPT = """\
+DEFAULT_SYSTEM_PROMPT = """\
 Sei l'assistente documentazione di OS1, il gestionale ERP di OSItalia.
 Guidi utenti — anche poco esperti — nell'uso del gestionale con risposte chiare, \
 visive e curate nella formattazione. Rispondi SOLO in base al contesto documentale fornito, in italiano.
@@ -134,7 +134,15 @@ Inserisci lo screenshot SUBITO DOPO il paragrafo che descrive quella schermata.
 Se il contesto contiene screenshot pertinenti e non li includi, la risposta è incompleta.
 Massimo 2-3 screenshot per risposta. Non includere screenshot generici o non pertinenti.
 
-Se non trovi la risposta nel contesto, dillo e suggerisci termini alternativi da cercare.
+## Quando NON hai la risposta (CRITICO)
+Se il contesto documentale NON contiene una risposta chiara e specifica alla domanda:
+- **NON inventare** procedure, passaggi o informazioni generiche
+- **NON riempire** con testo vago che ripete la domanda senza rispondere
+- Dì chiaramente: "La documentazione disponibile non contiene informazioni specifiche su questo aspetto."
+- Se hai informazioni parziali, indica cosa hai trovato e cosa manca
+- Suggerisci termini alternativi da cercare o di verificare con il supporto tecnico OSItalia
+
+È MOLTO meglio una risposta breve e onesta che una risposta lunga e inventata.
 
 ## Suggerimenti di follow-up
 Alla fine di ogni risposta, aggiungi una sezione:
@@ -144,6 +152,38 @@ Alla fine di ogni risposta, aggiungi una sezione:
 - Domanda suggerita 3
 
 Le domande devono essere specifiche, correlate al tema, e utili per approfondire."""
+
+DEFAULT_DEEP_ADDENDUM = """\
+## MODALITÀ APPROFONDIMENTO
+Stai rispondendo in modalità approfondita. Hai a disposizione più contesto documentale.
+- Sii ESAUSTIVO: elenca TUTTI gli elementi, campi, tabelle pertinenti, non solo i principali.
+- Fornisci dettagli tecnici completi: nomi esatti di tabelle DB, campi, relazioni.
+- Usa tabelle Markdown per strutturare elenchi lunghi.
+- Se il contesto include molti documenti, sintetizzali tutti, non solo i primi.
+- Non tralasciare informazioni: l'utente ha chiesto esplicitamente di approfondire."""
+
+
+def _get_prompt_setting(key: str, default: str) -> str:
+    """Get a prompt from app_settings, falling back to default."""
+    try:
+        from app.db import get_conn
+        row = get_conn().execute(
+            "SELECT value FROM app_settings WHERE key = ?", (key,)
+        ).fetchone()
+        if row and row["value"].strip():
+            return row["value"]
+    except Exception:
+        pass
+    return default
+
+
+def get_system_prompt(deep: bool = False) -> str:
+    """Return the system prompt, optionally with deep addendum."""
+    prompt = _get_prompt_setting("system_prompt", DEFAULT_SYSTEM_PROMPT)
+    if deep:
+        addendum = _get_prompt_setting("deep_addendum", DEFAULT_DEEP_ADDENDUM)
+        prompt += "\n\n" + addendum
+    return prompt
 
 # Shared index instance — set by main.py at startup
 _index: SearchIndex | None = None
@@ -396,15 +436,7 @@ async def ask_stream(
 
     context = build_context(docs)
 
-    prompt = SYSTEM_PROMPT
-    if deep:
-        prompt += "\n\n## MODALITÀ APPROFONDIMENTO\n" \
-            "Stai rispondendo in modalità approfondita. Hai a disposizione più contesto documentale.\n" \
-            "- Sii ESAUSTIVO: elenca TUTTI gli elementi, campi, tabelle pertinenti, non solo i principali.\n" \
-            "- Fornisci dettagli tecnici completi: nomi esatti di tabelle DB, campi, relazioni.\n" \
-            "- Usa tabelle Markdown per strutturare elenchi lunghi.\n" \
-            "- Se il contesto include molti documenti, sintetizzali tutti, non solo i primi.\n" \
-            "- Non tralasciare informazioni: l'utente ha chiesto esplicitamente di approfondire."
+    prompt = get_system_prompt(deep=deep)
 
     messages = [{"role": "system", "content": prompt}]
     if history:

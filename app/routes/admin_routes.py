@@ -415,6 +415,8 @@ def _get_all_settings() -> dict:
         "disambig_dominance_threshold": _get_setting("disambig_dominance_threshold", "70"),
         "max_messages": get_max_messages_setting(),
         "announcement": _get_setting("announcement", ""),
+        "system_prompt": _get_setting("system_prompt", ""),
+        "deep_addendum": _get_setting("deep_addendum", ""),
     }
 
 
@@ -424,13 +426,15 @@ async def settings_page(request: Request):
     if not admin:
         return RedirectResponse(url="/login", status_code=302)
 
-    from app.search.query import ALLOWED_MODELS
+    from app.search.query import ALLOWED_MODELS, DEFAULT_SYSTEM_PROMPT, DEFAULT_DEEP_ADDENDUM
     return _templates().TemplateResponse("admin/announcement.html", {
         "request": request,
         "email": admin["email"],
         "is_admin": True,
         "settings": _get_all_settings(),
         "allowed_models": ALLOWED_MODELS,
+        "default_system_prompt": DEFAULT_SYSTEM_PROMPT,
+        "default_deep_addendum": DEFAULT_DEEP_ADDENDUM,
     })
 
 
@@ -467,6 +471,8 @@ async def save_settings(request: Request):
         "disambig_dominance_threshold": str(max(30, min(int(form.get("disambig_dominance_threshold", 70)), 100))),
         "max_messages_per_conversation": str(max(1, min(int(form.get("max_messages_per_conversation", 20)), 200))),
         "announcement": str(form.get("announcement", "")).strip(),
+        "system_prompt": str(form.get("system_prompt", "")).strip(),
+        "deep_addendum": str(form.get("deep_addendum", "")).strip(),
     }
 
     for key, value in settings_map.items():
