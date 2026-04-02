@@ -164,6 +164,18 @@ function completeOnboarding() {
             </button>
 
             <div class="chat-input-wrap">
+                <div class="deep-banner" id="deep-banner" style="display:none;">
+                    <div class="deep-banner-content">
+                        <span class="deep-banner-text">Risposta imprecisa o incompleta?</span>
+                        <button type="button" class="deep-banner-btn" id="deep-banner-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0;">
+                                <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                            </svg>
+                            Riprova con modello avanzato
+                        </button>
+                        <button type="button" class="deep-banner-close" onclick="hideDeepBanner()" aria-label="Chiudi">&times;</button>
+                    </div>
+                </div>
                 <div class="limit-banner" id="limit-banner">
                     Hai raggiunto il limite di domande per questa conversazione.
                     <a href="/chat">Apri una nuova chat</a>
@@ -281,6 +293,22 @@ function createMsg(role) {
     return { msg, body, content };
 }
 
+// ── Deep banner ──
+function showDeepBanner(question) {
+    const banner = document.getElementById('deep-banner');
+    const btn = document.getElementById('deep-banner-btn');
+    banner.style.display = '';
+    btn.onclick = () => {
+        hideDeepBanner();
+        questionEl.value = question;
+        questionEl.dataset.deep = 'true';
+        handleSubmit(new Event('submit'));
+    };
+}
+function hideDeepBanner() {
+    document.getElementById('deep-banner').style.display = 'none';
+}
+
 // ── Docs panel ──
 function updateDocsPanel(sources) {
     const list = document.getElementById('docs-list');
@@ -377,6 +405,8 @@ function handleSubmit(e) {
     e.preventDefault();
     const question = questionEl.value.trim();
     if (!question || msgCount >= maxMessages) return false;
+
+    hideDeepBanner();
 
     if (welcomeEl) { welcomeEl.classList.add('hiding'); setTimeout(() => welcomeEl.remove(), 300); }
     closeSidebar();
@@ -555,23 +585,12 @@ function renderFinal(msgParts, text, sources, messageId, screenshots) {
         msgParts.msg.appendChild(panel);
     }
 
-    // Always show action chips (Approfondisci + suggestions)
+    // Suggestion chips (without Approfondisci — that's now in the deep banner)
     const lastQuestion = questionEl.dataset.lastQuestion || '';
-    if (lastQuestion || suggestions.length > 0) {
+    if (suggestions.length > 0) {
         const chipsDiv = document.createElement('div');
         chipsDiv.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;';
 
-        // "Approfondisci" — always shown
-        if (lastQuestion) {
-            const deepBtn = document.createElement('button');
-            deepBtn.className = 'suggestion-chip';
-            deepBtn.style.cssText = 'border-color:var(--c-brand);color:var(--c-brand);font-weight:600;';
-            deepBtn.textContent = '🔍 Approfondisci';
-            deepBtn.onclick = () => { questionEl.value = lastQuestion; questionEl.dataset.deep = 'true'; handleSubmit(new Event('submit')); };
-            chipsDiv.appendChild(deepBtn);
-        }
-
-        // Suggestion chips from LLM
         suggestions.slice(0, 3).forEach(s => {
             const chip = document.createElement('button');
             chip.className = 'suggestion-chip';
@@ -582,6 +601,13 @@ function renderFinal(msgParts, text, sources, messageId, screenshots) {
         });
 
         msgParts.body.appendChild(chipsDiv);
+    }
+
+    // Show persistent "deep" banner above input (only for non-deep responses)
+    if (lastQuestion && questionEl.dataset.deep !== 'true') {
+        showDeepBanner(lastQuestion);
+    } else {
+        hideDeepBanner();
     }
 
     // Feedback buttons

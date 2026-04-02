@@ -643,6 +643,40 @@
         }
         .msg-counter.warn { color: #D97706; }
         .msg-counter.danger { color: var(--c-error); }
+        .deep-banner {
+            margin-bottom: var(--sp-2);
+            animation: deepBannerIn 300ms ease;
+        }
+        @keyframes deepBannerIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .deep-banner-content {
+            display: flex; align-items: center; gap: var(--sp-3);
+            padding: 8px 12px;
+            background: var(--c-surface-alt); border: 1px solid var(--c-border);
+            border-radius: var(--r-md); font-size: 0.8125rem;
+        }
+        .deep-banner-text { color: var(--c-text-secondary); white-space: nowrap; }
+        .deep-banner-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 6px 14px; border-radius: var(--r-full);
+            background: var(--c-brand); color: #fff; border: none;
+            font-size: 0.8125rem; font-weight: 600; cursor: pointer;
+            transition: all 150ms ease; white-space: nowrap;
+        }
+        .deep-banner-btn:hover { background: var(--c-brand-dark, #c41d16); box-shadow: 0 2px 8px rgba(226,35,26,0.25); }
+        .deep-banner-close {
+            margin-left: auto; background: none; border: none;
+            color: var(--c-text-tertiary); font-size: 1.2rem; cursor: pointer;
+            padding: 0 4px; line-height: 1;
+        }
+        .deep-banner-close:hover { color: var(--c-text); }
+        @media (max-width: 640px) {
+            .deep-banner-content { flex-wrap: wrap; }
+            .deep-banner-text { width: 100%; }
+        }
+
         .limit-banner {
             text-align: center; padding: var(--sp-3) var(--sp-4);
             background: var(--c-brand-light); color: var(--c-brand);

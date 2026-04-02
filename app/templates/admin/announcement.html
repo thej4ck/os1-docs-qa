@@ -35,6 +35,20 @@
     .prompt-actions { display: flex; gap: var(--sp-2); margin-top: var(--sp-2); }
     .btn-reset-prompt { font-size: 0.75rem; padding: 4px 10px; border-radius: var(--r-sm); border: 1px solid var(--c-border); background: var(--c-surface); color: var(--c-text-secondary); cursor: pointer; transition: all 150ms ease; }
     .btn-reset-prompt:hover { border-color: var(--c-brand); color: var(--c-brand); }
+    .prompt-default-details { margin-bottom: var(--sp-2); }
+    .prompt-default-details summary {
+        font-size: 0.75rem; color: var(--c-text-tertiary); cursor: pointer;
+        user-select: none; padding: 4px 0;
+    }
+    .prompt-default-details summary:hover { color: var(--c-text-secondary); }
+    .prompt-default-preview {
+        font-family: 'JetBrains Mono', 'Source Code Pro', monospace;
+        font-size: 0.6875rem; line-height: 1.5;
+        background: var(--c-surface-alt); border: 1px solid var(--c-border);
+        border-radius: var(--r-sm); padding: var(--sp-3);
+        max-height: 300px; overflow-y: auto; white-space: pre-wrap;
+        color: var(--c-text-secondary); margin-top: var(--sp-2);
+    }
     @media (max-width: 640px) { .setting-row { flex-direction: column; align-items: stretch; } .setting-label { min-width: auto; } }
 </style>
 {% endblock %}
@@ -147,23 +161,31 @@
         </div>
 
         <h3 class="section-title">Prompt di sistema</h3>
-        <p class="section-desc">Prompt inviati al modello LLM. Lascia vuoto per usare il prompt predefinito. Il pulsante "Ripristina default" ricarica il testo originale nel campo (salva per confermare).</p>
+        <p class="section-desc">Prompt inviati al modello LLM. Lascia vuoto per usare il prompt predefinito. Clicca "Mostra default" per vedere il testo attualmente in uso come fallback.</p>
         <div class="settings-card">
             <div class="setting-row" style="flex-direction:column;align-items:stretch;">
                 <label class="setting-label" for="system_prompt">Prompt base</label>
+                <details class="prompt-default-details">
+                    <summary>Mostra prompt predefinito</summary>
+                    <pre class="prompt-default-preview">{{ default_system_prompt }}</pre>
+                </details>
                 <textarea id="system_prompt" name="system_prompt" class="setting-input prompt-editor"
-                    placeholder="Lascia vuoto per usare il prompt predefinito...">{{ settings.system_prompt }}</textarea>
+                    placeholder="Lascia vuoto per usare il prompt predefinito mostrato sopra...">{{ settings.system_prompt }}</textarea>
                 <div class="prompt-actions">
-                    <button type="button" class="btn-reset-prompt" onclick="resetPrompt('system_prompt')">Ripristina default</button>
+                    <button type="button" class="btn-reset-prompt" onclick="resetPrompt('system_prompt')">Copia default nel campo</button>
                     <button type="button" class="btn-reset-prompt" onclick="document.getElementById('system_prompt').value=''">Svuota (usa default)</button>
                 </div>
             </div>
             <div class="setting-row" style="flex-direction:column;align-items:stretch;margin-top:var(--sp-4);">
                 <label class="setting-label" for="deep_addendum">Addendum approfondimento</label>
+                <details class="prompt-default-details">
+                    <summary>Mostra testo predefinito</summary>
+                    <pre class="prompt-default-preview">{{ default_deep_addendum }}</pre>
+                </details>
                 <textarea id="deep_addendum" name="deep_addendum" class="setting-input prompt-editor" style="min-height:150px;"
-                    placeholder="Lascia vuoto per usare il testo predefinito...">{{ settings.deep_addendum }}</textarea>
+                    placeholder="Lascia vuoto per usare il testo predefinito mostrato sopra...">{{ settings.deep_addendum }}</textarea>
                 <div class="prompt-actions">
-                    <button type="button" class="btn-reset-prompt" onclick="resetPrompt('deep_addendum')">Ripristina default</button>
+                    <button type="button" class="btn-reset-prompt" onclick="resetPrompt('deep_addendum')">Copia default nel campo</button>
                     <button type="button" class="btn-reset-prompt" onclick="document.getElementById('deep_addendum').value=''">Svuota (usa default)</button>
                 </div>
             </div>

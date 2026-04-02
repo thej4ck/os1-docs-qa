@@ -105,7 +105,7 @@ Strati:
 - Codice in inglese, UI in italiano
 - Groq via client `openai` (AsyncOpenAI) → `api.groq.com/openai/v1`
 - `searchdata/search.db` committato nel repo (rigenerabile), `data/app.db` MAI committato (volume)
-- Incrementare `BUILD` in `app/version.py` ad ogni deploy
+- Incrementare `BUILD` e aggiornare `BUILD_DATE` in `app/version.py` ad **ogni commit** (non solo deploy)
 
 ## Chunking
 I chunk devono essere GRANDI (file interi). Ogni file HTML del help OS1 è già un concetto coerente.
