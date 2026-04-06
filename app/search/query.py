@@ -444,7 +444,19 @@ async def ask_stream(
         if reasoning_effort:
             create_kwargs["reasoning_effort"] = reasoning_effort
 
-        stream = await _client.chat.completions.create(**create_kwargs)
+        import time as _time
+        import asyncio as _aio
+        _t0 = _time.monotonic()
+        try:
+            stream = await _aio.wait_for(
+                _client.chat.completions.create(**create_kwargs),
+                timeout=30.0,
+            )
+        except _aio.TimeoutError:
+            print(f"[ask_stream] Groq API timeout after 30s", flush=True)
+            yield "Errore: timeout nella connessione al modello. Riprova.", [], None
+            return
+        print(f"[ask_stream] Groq stream opened in {_time.monotonic()-_t0:.1f}s", flush=True)
 
         first = True
         async for chunk in stream:
@@ -471,6 +483,7 @@ async def ask_stream(
             delta = chunk.choices[0].delta if chunk.choices else None
             if delta and delta.content:
                 if first:
+                    print(f"[ask_stream] First token at {_time.monotonic()-_t0:.1f}s", flush=True)
                     yield delta.content, sources, {"screenshots": screenshots}
                     first = False
                 else:
@@ -482,6 +495,7 @@ async def ask_stream(
             usage_data["cost_usd"] += rerank_usage.get("rerank_cost_usd", 0)
 
         # Final yield with usage data
+        print(f"[ask_stream] Stream complete at {_time.monotonic()-_t0:.1f}s usage={usage_data}", flush=True)
         yield "", [], usage_data
 
     except Exception as e:
