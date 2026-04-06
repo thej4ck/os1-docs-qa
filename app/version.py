@@ -1,3 +1,3 @@
 VERSION = "1.0.0"
-BUILD = 31  # Increment on each commit
+BUILD = 32  # Increment on each commit
 BUILD_DATE = "2026-04-06"

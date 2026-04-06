@@ -148,6 +148,21 @@ def _migrate():
     if "onboarding_completed" not in user_existing:
         _conn.execute("ALTER TABLE users ADD COLUMN onboarding_completed INTEGER DEFAULT 0")
 
+    # Migrate old model keys to new reasoning_effort variants
+    _model_renames = {
+        "openai/gpt-oss-120b": "openai/gpt-oss-120b:medium",
+        "openai/gpt-oss-20b": "openai/gpt-oss-20b:medium",
+    }
+    for setting_key in ("groq_model", "groq_deep_model"):
+        row = _conn.execute(
+            "SELECT value FROM app_settings WHERE key = ?", (setting_key,)
+        ).fetchone()
+        if row and row[0] in _model_renames:
+            _conn.execute(
+                "UPDATE app_settings SET value = ? WHERE key = ?",
+                (_model_renames[row[0]], setting_key),
+            )
+
     # Recreate monthly_usage view (fix: question count was always 0)
     _conn.execute("DROP VIEW IF EXISTS monthly_usage")
     _conn.execute("""
