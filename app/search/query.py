@@ -90,13 +90,14 @@ def _get_prompt_setting(key: str, default: str) -> str:
     return default
 
 
-def get_system_prompt(deep: bool = False) -> str:
-    """Return the system prompt, optionally with deep addendum."""
-    prompt = _get_prompt_setting("system_prompt", DEFAULT_SYSTEM_PROMPT)
-    if deep:
-        addendum = _get_prompt_setting("deep_addendum", DEFAULT_DEEP_ADDENDUM)
-        prompt += "\n\n" + addendum
-    return prompt
+def get_system_prompt() -> str:
+    """Return the system prompt (always the same for cache-friendly prefix)."""
+    return _get_prompt_setting("system_prompt", DEFAULT_SYSTEM_PROMPT)
+
+
+def get_deep_addendum() -> str:
+    """Return the deep addendum text (appended to user message, not system prompt)."""
+    return _get_prompt_setting("deep_addendum", DEFAULT_DEEP_ADDENDUM)
 
 # Shared index instance — set by main.py at startup
 _index: SearchIndex | None = None
@@ -353,11 +354,18 @@ def _get_model(deep: bool = False) -> tuple[str, str | None]:
     return default, None
 
 
-def _calculate_cost(prompt_tokens: int, completion_tokens: int, config_key: str) -> float:
-    """Calculate cost based on the model's pricing from ALLOWED_MODELS."""
+def _calculate_cost(prompt_tokens: int, completion_tokens: int, config_key: str,
+                    cached_tokens: int = 0) -> float:
+    """Calculate cost based on the model's pricing from ALLOWED_MODELS.
+
+    Cached tokens get a 50% discount on input price (Groq prompt caching).
+    """
     model_info = ALLOWED_MODELS.get(config_key, ALLOWED_MODELS["llama-3.1-8b-instant"])
-    return (prompt_tokens * model_info["input_price"] / 1_000_000) + \
-           (completion_tokens * model_info["output_price"] / 1_000_000)
+    input_price = model_info["input_price"] / 1_000_000
+    non_cached = prompt_tokens - cached_tokens
+    input_cost = (non_cached * input_price) + (cached_tokens * input_price * 0.5)
+    output_cost = completion_tokens * model_info["output_price"] / 1_000_000
+    return input_cost + output_cost
 
 
 async def ask_stream(
@@ -394,7 +402,8 @@ async def ask_stream(
 
     context = build_context(docs)
 
-    prompt = get_system_prompt(deep=deep)
+    # System prompt is always identical (cache-friendly prefix for Groq prompt caching)
+    prompt = get_system_prompt()
 
     messages = [{"role": "system", "content": prompt}]
     if history:
@@ -405,7 +414,8 @@ async def ask_stream(
         f"Contesto documentale:\n\n{context}\n\n---\n\nDomanda dell'utente: {question}"
     )
     if deep:
-        user_message += "\n\n(Modalità approfondimento: rispondi nel modo più completo possibile)"
+        addendum = get_deep_addendum()
+        user_message += f"\n\n---\n\n{addendum}"
     messages.append({"role": "user", "content": user_message})
 
     usage_data = None
@@ -437,13 +447,20 @@ async def ask_stream(
         async for chunk in stream:
             # Capture usage from the final chunk
             if hasattr(chunk, "usage") and chunk.usage is not None:
+                # Extract cached_tokens from prompt_tokens_details (Groq prompt caching)
+                cached = 0
+                details = getattr(chunk.usage, "prompt_tokens_details", None)
+                if details:
+                    cached = getattr(details, "cached_tokens", 0) or 0
                 usage_data = {
                     "prompt_tokens": chunk.usage.prompt_tokens,
                     "completion_tokens": chunk.usage.completion_tokens,
+                    "cached_tokens": cached,
                     "cost_usd": _calculate_cost(
                         chunk.usage.prompt_tokens,
                         chunk.usage.completion_tokens,
                         config_key,
+                        cached_tokens=cached,
                     ),
                     "model": model_id,
                 }

@@ -114,6 +114,7 @@ def _migrate():
     }
     new_columns = [
         ("model", "TEXT"),
+        ("cached_tokens", "INTEGER"),
         ("rerank_tokens", "INTEGER"),
         ("rerank_cost_usd", "REAL"),
         ("rerank_model", "TEXT"),

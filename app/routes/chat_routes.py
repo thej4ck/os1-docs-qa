@@ -250,6 +250,7 @@ async def ask(
                 completion_tokens=usage_data["completion_tokens"] if usage_data else None,
                 cost_usd=usage_data["cost_usd"] if usage_data else None,
                 model=usage_data.get("model") if usage_data else None,
+                cached_tokens=usage_data.get("cached_tokens") if usage_data else None,
                 rerank_tokens=usage_data.get("rerank_tokens") if usage_data else None,
                 rerank_cost_usd=usage_data.get("rerank_cost_usd") if usage_data else None,
                 rerank_model=usage_data.get("rerank_model") if usage_data else None,

@@ -73,6 +73,7 @@ def add_message(
     completion_tokens: int | None = None,
     cost_usd: float | None = None,
     model: str | None = None,
+    cached_tokens: int | None = None,
     rerank_tokens: int | None = None,
     rerank_cost_usd: float | None = None,
     rerank_model: str | None = None,
@@ -81,11 +82,11 @@ def add_message(
     conn = get_conn()
     cur = conn.execute(
         "INSERT INTO messages (conversation_id, role, content, sources, "
-        "prompt_tokens, completion_tokens, cost_usd, model, "
+        "prompt_tokens, completion_tokens, cost_usd, model, cached_tokens, "
         "rerank_tokens, rerank_cost_usd, rerank_model) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         (conv_id, role, content, json.dumps(sources) if sources else None,
-         prompt_tokens, completion_tokens, cost_usd, model,
+         prompt_tokens, completion_tokens, cost_usd, model, cached_tokens,
          rerank_tokens, rerank_cost_usd, rerank_model),
     )
     conn.execute(
