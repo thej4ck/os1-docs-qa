@@ -1,5 +1,6 @@
 """Retrieval + Groq LLM streaming for Q&A."""
 
+import logging
 from collections.abc import AsyncIterator
 
 from openai import AsyncOpenAI
@@ -430,6 +431,11 @@ async def ask_stream(
             model_id,
         )
 
+        import logging
+        _log = logging.getLogger("os1docs.query")
+        _log.info("ask_stream: model=%s effort=%s deep=%s config_key=%s msg_count=%d",
+                   model_id, reasoning_effort, deep, config_key, len(messages))
+
         create_kwargs: dict = dict(
             model=model_id,
             messages=messages,
@@ -482,4 +488,6 @@ async def ask_stream(
         yield "", [], usage_data
 
     except Exception as e:
+        _log = logging.getLogger("os1docs.query")
+        _log.error("ask_stream error: %s", e, exc_info=True)
         yield f"Errore nella generazione della risposta: {e}", [], None
