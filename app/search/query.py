@@ -126,14 +126,50 @@ ALLOWED_MODELS = {
         "output_price": 0.79,
         "context_window": 131_072,
     },
-    "openai/gpt-oss-120b": {
-        "label": "GPT-OSS 120B",
+    "openai/gpt-oss-120b:low": {
+        "label": "GPT-OSS 120B (Low Effort)",
+        "model_id": "openai/gpt-oss-120b",
+        "reasoning_effort": "low",
         "input_price": 0.15,
         "output_price": 0.60,
         "context_window": 131_072,
     },
-    "openai/gpt-oss-20b": {
-        "label": "GPT-OSS 20B",
+    "openai/gpt-oss-120b:medium": {
+        "label": "GPT-OSS 120B (Medium Effort)",
+        "model_id": "openai/gpt-oss-120b",
+        "reasoning_effort": "medium",
+        "input_price": 0.15,
+        "output_price": 0.60,
+        "context_window": 131_072,
+    },
+    "openai/gpt-oss-120b:high": {
+        "label": "GPT-OSS 120B (High Effort)",
+        "model_id": "openai/gpt-oss-120b",
+        "reasoning_effort": "high",
+        "input_price": 0.15,
+        "output_price": 0.60,
+        "context_window": 131_072,
+    },
+    "openai/gpt-oss-20b:low": {
+        "label": "GPT-OSS 20B (Low Effort)",
+        "model_id": "openai/gpt-oss-20b",
+        "reasoning_effort": "low",
+        "input_price": 0.075,
+        "output_price": 0.30,
+        "context_window": 131_072,
+    },
+    "openai/gpt-oss-20b:medium": {
+        "label": "GPT-OSS 20B (Medium Effort)",
+        "model_id": "openai/gpt-oss-20b",
+        "reasoning_effort": "medium",
+        "input_price": 0.075,
+        "output_price": 0.30,
+        "context_window": 131_072,
+    },
+    "openai/gpt-oss-20b:high": {
+        "label": "GPT-OSS 20B (High Effort)",
+        "model_id": "openai/gpt-oss-20b",
+        "reasoning_effort": "high",
         "input_price": 0.075,
         "output_price": 0.30,
         "context_window": 131_072,
@@ -290,27 +326,36 @@ def build_context(docs: list[dict]) -> str:
     return ctx
 
 
-def _get_model(deep: bool = False) -> str:
-    """Get model name from app_settings. Validates against ALLOWED_MODELS."""
+def _get_model(deep: bool = False) -> tuple[str, str | None]:
+    """Get model name and optional reasoning_effort from app_settings.
+
+    Returns (api_model_id, reasoning_effort_or_None).
+    The config key (e.g. "openai/gpt-oss-120b:high") may differ from the
+    actual API model id ("openai/gpt-oss-120b").
+    """
     default = "llama-3.1-8b-instant"
+    config_key = default
     try:
         from app.db import get_conn
         if deep:
             row = get_conn().execute("SELECT value FROM app_settings WHERE key = 'groq_deep_model'").fetchone()
             if row and row["value"] and row["value"] in ALLOWED_MODELS:
-                return row["value"]
+                config_key = row["value"]
+                info = ALLOWED_MODELS[config_key]
+                return info.get("model_id", config_key), info.get("reasoning_effort")
         row = get_conn().execute("SELECT value FROM app_settings WHERE key = 'groq_model'").fetchone()
         if row and row["value"] and row["value"] in ALLOWED_MODELS:
-            return row["value"]
+            config_key = row["value"]
+            info = ALLOWED_MODELS[config_key]
+            return info.get("model_id", config_key), info.get("reasoning_effort")
     except Exception:
         pass
-    return default
+    return default, None
 
 
-def _calculate_cost(prompt_tokens: int, completion_tokens: int, deep: bool = False) -> float:
+def _calculate_cost(prompt_tokens: int, completion_tokens: int, config_key: str) -> float:
     """Calculate cost based on the model's pricing from ALLOWED_MODELS."""
-    model_id = _get_model(deep=deep)
-    model_info = ALLOWED_MODELS.get(model_id, ALLOWED_MODELS["llama-3.1-8b-instant"])
+    model_info = ALLOWED_MODELS.get(config_key, ALLOWED_MODELS["llama-3.1-8b-instant"])
     return (prompt_tokens * model_info["input_price"] / 1_000_000) + \
            (completion_tokens * model_info["output_price"] / 1_000_000)
 
@@ -366,8 +411,16 @@ async def ask_stream(
     usage_data = None
 
     try:
-        model_id = _get_model(deep=deep)
-        stream = await _client.chat.completions.create(
+        model_id, reasoning_effort = _get_model(deep=deep)
+        # Find the config key for cost calculation
+        config_key = next(
+            (k for k, v in ALLOWED_MODELS.items()
+             if v.get("model_id", k) == model_id
+             and v.get("reasoning_effort") == reasoning_effort),
+            model_id,
+        )
+
+        create_kwargs: dict = dict(
             model=model_id,
             messages=messages,
             stream=True,
@@ -375,6 +428,10 @@ async def ask_stream(
             temperature=0.2,
             max_tokens=2048,
         )
+        if reasoning_effort:
+            create_kwargs["reasoning_effort"] = reasoning_effort
+
+        stream = await _client.chat.completions.create(**create_kwargs)
 
         first = True
         async for chunk in stream:
@@ -386,7 +443,7 @@ async def ask_stream(
                     "cost_usd": _calculate_cost(
                         chunk.usage.prompt_tokens,
                         chunk.usage.completion_tokens,
-                        deep=deep,
+                        config_key,
                     ),
                     "model": model_id,
                 }
