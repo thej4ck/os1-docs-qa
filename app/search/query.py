@@ -443,6 +443,7 @@ async def ask_stream(
         )
         if reasoning_effort:
             create_kwargs["reasoning_effort"] = reasoning_effort
+            create_kwargs["extra_body"] = {"include_reasoning": False}
 
         import time as _time
         import asyncio as _aio
