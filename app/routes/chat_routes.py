@@ -10,7 +10,7 @@ import markdown as md
 import resend
 
 from fastapi import APIRouter, Request, Form, Query
-from fastapi.responses import HTMLResponse, JSONResponse, PlainTextResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, JSONResponse, PlainTextResponse, RedirectResponse, Response
 from sse_starlette.sse import EventSourceResponse
 
 from app.auth.session import get_session_email
@@ -421,7 +421,6 @@ async def get_doc(request: Request, file: str = Query(...)):
 
     # If preprocessed HTML is available (built during indexing), serve it
     if row["html_content"]:
-        from fastapi.responses import Response
         payload = json.dumps({
             "title": row["title"] or file,
             "html": row["html_content"],
@@ -448,7 +447,7 @@ async def get_announcement(request: Request):
     ).fetchone()
     if row and row["value"]:
         return JSONResponse({"text": row["value"]})
-    return JSONResponse(None, status_code=204)
+    return Response(status_code=204)
 
 
 # ── Email chat ──
