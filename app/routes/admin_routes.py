@@ -410,6 +410,8 @@ def _get_all_settings() -> dict:
         "otp_sender_name": _get_setting("otp_sender_name", "OS1 Docs"),
         "otp_sender_email": _get_setting("otp_sender_email", "noreply@ai.scao.it"),
         "allowed_emails": _get_setting("allowed_emails", app_settings.allowed_emails),
+        "max_output_tokens": _get_setting("max_output_tokens", "2048"),
+        "max_completion_tokens": _get_setting("max_completion_tokens", "4096"),
         "context_preset": _get_setting("context_preset", "normal"),
         "reranking_enabled": _get_setting("reranking_enabled", "1"),
         "disambig_dominance_threshold": _get_setting("disambig_dominance_threshold", "70"),
@@ -460,9 +462,14 @@ async def save_settings(request: Request):
     if groq_deep_model not in ALLOWED_MODELS:
         groq_deep_model = "llama-3.3-70b-versatile"
 
+    max_output_tokens = str(max(256, min(int(form.get("max_output_tokens", 2048)), 8192)))
+    max_completion_tokens = str(max(256, min(int(form.get("max_completion_tokens", 4096)), 16384)))
+
     settings_map = {
         "groq_model": groq_model,
         "groq_deep_model": groq_deep_model,
+        "max_output_tokens": max_output_tokens,
+        "max_completion_tokens": max_completion_tokens,
         "otp_sender_name": str(form.get("otp_sender_name", "")).strip(),
         "otp_sender_email": str(form.get("otp_sender_email", "")).strip(),
         "allowed_emails": str(form.get("allowed_emails", "")).strip(),

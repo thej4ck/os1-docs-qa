@@ -91,6 +91,20 @@
                     <div class="setting-hint">Usato per "Approfondisci" (consigliato un modello più capace).</div>
                 </div>
             </div>
+            <div class="setting-row">
+                <label class="setting-label" for="max_output_tokens">Max output tokens</label>
+                <div style="flex:1;">
+                    <input type="number" id="max_output_tokens" name="max_output_tokens" class="setting-input" style="width:120px;" value="{{ settings.max_output_tokens }}" min="256" max="8192" step="256">
+                    <div class="setting-hint">Limite token di risposta per modelli standard (256–8192).</div>
+                </div>
+            </div>
+            <div class="setting-row">
+                <label class="setting-label" for="max_completion_tokens">Max completion tokens (reasoning)</label>
+                <div style="flex:1;">
+                    <input type="number" id="max_completion_tokens" name="max_completion_tokens" class="setting-input" style="width:120px;" value="{{ settings.max_completion_tokens }}" min="256" max="16384" step="256">
+                    <div class="setting-hint">Limite token per modelli reasoning GPT-OSS (include reasoning + risposta, 256–16384).</div>
+                </div>
+            </div>
         </div>
 
         <h3 class="section-title">Email OTP</h3>

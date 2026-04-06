@@ -355,6 +355,20 @@ def _get_model(deep: bool = False) -> tuple[str, str | None]:
     return default, None
 
 
+def _get_token_limit(key: str, default: int) -> int:
+    """Get max token limit from app_settings."""
+    try:
+        from app.db import get_conn
+        row = get_conn().execute(
+            "SELECT value FROM app_settings WHERE key = ?", (key,)
+        ).fetchone()
+        if row and row["value"]:
+            return max(256, int(row["value"]))
+    except Exception:
+        pass
+    return default
+
+
 def _calculate_cost(prompt_tokens: int, completion_tokens: int, config_key: str,
                     cached_tokens: int = 0) -> float:
     """Calculate cost based on the model's pricing from ALLOWED_MODELS.
@@ -439,11 +453,13 @@ async def ask_stream(
             stream=True,
             stream_options={"include_usage": True},
             temperature=0.2,
-            max_tokens=2048,
         )
         if reasoning_effort:
             create_kwargs["reasoning_effort"] = reasoning_effort
             create_kwargs["extra_body"] = {"include_reasoning": False}
+            create_kwargs["max_completion_tokens"] = _get_token_limit("max_completion_tokens", 4096)
+        else:
+            create_kwargs["max_tokens"] = _get_token_limit("max_output_tokens", 2048)
 
         import time as _time
         import asyncio as _aio
