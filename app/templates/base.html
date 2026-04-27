@@ -124,10 +124,11 @@
         /* Theme toggle button */
         .theme-toggle {
             background: none; border: none; color: var(--c-text-secondary);
-            padding: 4px; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; border-radius: var(--r-full); transition: color 150ms ease;
+            width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; border-radius: var(--r-sm);
+            transition: background 120ms ease, color 120ms ease;
         }
-        .theme-toggle:hover { color: var(--c-text); }
+        .theme-toggle:hover { color: var(--c-text); background: var(--c-surface-alt); }
         .theme-toggle svg { width: 18px; height: 18px; }
         .theme-toggle .icon-sun { display: none; }
         .theme-toggle .icon-moon { display: block; }
@@ -148,21 +149,32 @@
         }
         .app-header-inner {
             display: flex; align-items: center; justify-content: space-between;
-            height: 100%; max-width: 1200px; margin: 0 auto; padding: 0 var(--sp-4);
+            height: 100%; width: 100%; padding: 0 var(--sp-5); gap: var(--sp-4);
+        }
+        .header-left { display: flex; align-items: center; gap: var(--sp-2); min-width: 0; }
+        .header-right { display: flex; align-items: center; gap: var(--sp-2); flex-shrink: 0; }
+        .header-divider {
+            width: 1px; height: 22px; background: var(--c-border);
+            margin: 0 var(--sp-1); flex-shrink: 0;
         }
         .brand {
             display: flex; align-items: center; gap: var(--sp-3);
             font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1.0625rem;
             color: var(--c-text); text-decoration: none; letter-spacing: -0.02em;
+            padding: 4px var(--sp-2); border-radius: var(--r-sm);
+            transition: background 120ms ease;
         }
-        .brand:hover { text-decoration: none; color: var(--c-text); }
+        .brand:hover { text-decoration: none; color: var(--c-text); background: var(--c-surface-alt); }
         .brand-logo { height: 20px; width: auto; }
-        .header-right { display: flex; align-items: center; gap: var(--sp-3); }
-        .header-email { font-size: 0.8125rem; color: var(--c-text-secondary); font-weight: 500; }
+        .header-email {
+            font-size: 0.8125rem; color: var(--c-text-secondary); font-weight: 500;
+            padding: 0 var(--sp-2); white-space: nowrap;
+            overflow: hidden; text-overflow: ellipsis; max-width: 240px;
+        }
         .btn-logout {
             font-size: 0.8125rem; font-weight: 500; color: var(--c-text-secondary);
             padding: 5px 14px; border: 1px solid var(--c-border); border-radius: var(--r-full);
-            transition: all 150ms ease; text-decoration: none;
+            transition: all 150ms ease; text-decoration: none; white-space: nowrap;
         }
         .btn-logout:hover { color: var(--c-text); border-color: var(--c-border-input); background: var(--c-surface-alt); text-decoration: none; }
 
@@ -299,10 +311,13 @@
             font-size: 0.8125rem; color: var(--c-text-tertiary); line-height: 1.5;
         }
         .docs-toggle-btn {
-            display: flex; background: none; border: none; color: var(--c-text-secondary);
-            padding: 4px; position: relative; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            background: none; border: none; color: var(--c-text-secondary);
+            width: 36px; height: 36px; border-radius: var(--r-sm);
+            position: relative; cursor: pointer;
+            transition: background 120ms ease, color 120ms ease;
         }
-        .docs-toggle-btn:hover { color: var(--c-text); }
+        .docs-toggle-btn:hover { color: var(--c-text); background: var(--c-surface-alt); }
         .docs-badge {
             position: absolute; top: -2px; right: -2px;
             width: 16px; height: 16px; border-radius: 50%;
@@ -827,8 +842,13 @@
         @keyframes overlayIn { from { opacity: 0; transform: scale(0.98) translateY(6px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
         /* ═══════════════ Responsive ═══════════════ */
-        .sidebar-toggle { display: flex; background: none; border: none; color: var(--c-text-secondary); padding: 4px; cursor: pointer; }
-        .sidebar-toggle:hover { color: var(--c-text); }
+        .sidebar-toggle {
+            display: flex; align-items: center; justify-content: center;
+            background: none; border: none; color: var(--c-text-secondary);
+            width: 36px; height: 36px; border-radius: var(--r-sm); cursor: pointer;
+            transition: background 120ms ease, color 120ms ease;
+        }
+        .sidebar-toggle:hover { color: var(--c-text); background: var(--c-surface-alt); }
         .sidebar-backdrop {
             display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.3);
             z-index: 150; opacity: 0; transition: opacity 0.2s ease;
@@ -854,7 +874,8 @@
             .msg-body { max-width: calc(100% - 44px); }
             .msg-avatar { width: 28px; height: 28px; }
             .msg-avatar svg { width: 13px; height: 13px; }
-            .header-email { display: none; }
+            .header-email, .header-divider { display: none; }
+            .app-header-inner { padding: 0 var(--sp-3); }
             .suggestion-chips { grid-template-columns: 1fr; }
             .suggestion-chip { white-space: normal; }
             .welcome { padding: var(--sp-8) var(--sp-3); }
@@ -877,10 +898,13 @@
 <body>
     <header class="app-header">
         <div class="app-header-inner">
-            <a href="/chat" class="brand">
-                <img src="/static/img/logo.png" alt="SCAO" class="brand-logo">
-                <span>OS1 Docs</span>
-            </a>
+            <div class="header-left">
+                {% block nav_left %}{% endblock %}
+                <a href="/chat" class="brand">
+                    <img src="/static/img/logo.png" alt="SCAO" class="brand-logo">
+                    <span>OS1 Docs</span>
+                </a>
+            </div>
             <div class="header-right">
                 {% block nav_right %}{% endblock %}
                 <button class="theme-toggle" id="theme-toggle" aria-label="Cambia tema">
