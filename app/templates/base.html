@@ -166,6 +166,24 @@
         }
         .brand:hover { text-decoration: none; color: var(--c-text); background: var(--c-surface-alt); }
         .brand-logo { height: 20px; width: auto; }
+        .beta-badge {
+            display: inline-flex; align-items: center;
+            font-family: 'DM Sans', sans-serif; font-size: 0.625rem; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            padding: 2px 6px; border-radius: var(--r-sm);
+            background: var(--c-brand-light); color: var(--c-brand);
+            border: 1px solid var(--c-brand-surface);
+            line-height: 1;
+        }
+        .beta-badge-lg {
+            display: inline-flex; align-items: center;
+            font-family: 'DM Sans', sans-serif; font-size: 0.6875rem; font-weight: 700;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            padding: 3px 8px; border-radius: var(--r-sm);
+            background: var(--c-brand-light); color: var(--c-brand);
+            border: 1px solid var(--c-brand-surface);
+            line-height: 1; vertical-align: middle; margin-left: 8px;
+        }
         .header-email {
             font-size: 0.8125rem; color: var(--c-text-secondary); font-weight: 500;
             padding: 0 var(--sp-2); white-space: nowrap;
@@ -903,6 +921,7 @@
                 <a href="/chat" class="brand">
                     <img src="/static/img/logo.png" alt="SCAO" class="brand-logo">
                     <span>OS1 Docs</span>
+                    <span class="beta-badge" title="Prodotto in fase BETA">Beta</span>
                 </a>
             </div>
             <div class="header-right">

@@ -37,8 +37,8 @@
 
         <div class="onboarding-step active" data-step="1">
             <img src="/static/img/logo-lg.png" alt="SCAO" class="onboarding-logo">
-            <div class="onboarding-title">Benvenuto in OS1 AI Docs</div>
-            <div class="onboarding-subtitle">Il tuo assistente intelligente per la documentazione del gestionale OS1. Ti guiderà passo passo nell'uso del sistema.</div>
+            <div class="onboarding-title">Benvenuto in OS1 AI Docs<span class="beta-badge-lg">Beta</span></div>
+            <div class="onboarding-subtitle">Il tuo assistente intelligente per la documentazione del gestionale OS1. Ti guiderà passo passo nell'uso del sistema.<br><strong style="color:var(--c-brand);">Prodotto in fase BETA</strong> — funzionalità in evoluzione, feedback molto utile.</div>
             <div class="onboarding-dots"><span class="onboarding-dot active"></span><span class="onboarding-dot"></span><span class="onboarding-dot"></span><span class="onboarding-dot"></span></div>
             <button class="onboarding-btn onboarding-btn-primary" onclick="onboardingNext()">Iniziamo →</button>
         </div>
@@ -132,8 +132,8 @@ function completeOnboarding() {
                 {% if not messages %}
                 <div class="welcome" id="welcome">
                     <img src="/static/img/logo-lg.png" alt="SCAO" class="welcome-logo">
-                    <h2>Ciao! Come posso aiutarti?</h2>
-                    <p>Chiedi qualsiasi cosa sulla documentazione del gestionale OS1.</p>
+                    <h2>Ciao! Come posso aiutarti?<span class="beta-badge-lg">Beta</span></h2>
+                    <p>Chiedi qualsiasi cosa sulla documentazione del gestionale OS1.<br><span style="font-size:0.8125rem;color:var(--c-text-tertiary);">Prodotto in fase BETA — funzionalità in evoluzione.</span></p>
                     <div class="suggestion-chips" style="margin-top:var(--sp-5);">
                         <button class="suggestion-chip" type="button" onclick="askSuggestion(this)"><span class="chip-icon">📄</span> Come si emette una fattura di vendita?</button>
                         <button class="suggestion-chip" type="button" onclick="askSuggestion(this)"><span class="chip-icon">💰</span> Come registro un pagamento fornitore?</button>
