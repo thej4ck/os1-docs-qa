@@ -544,6 +544,59 @@
         .suggestion-chip .chip-icon {
             font-size: 1.1em; flex-shrink: 0; margin-top: 1px;
         }
+
+        /* ═══════════════ Welcome Tips ═══════════════ */
+        .welcome-tips {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: var(--sp-3); max-width: 720px; width: 100%;
+            margin-top: var(--sp-6); text-align: left;
+        }
+        .tip-card {
+            display: flex; gap: var(--sp-3);
+            padding: var(--sp-4); background: var(--c-surface);
+            border: 1px solid var(--c-border); border-radius: var(--r-md);
+            transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+        }
+        .tip-card:hover {
+            border-color: var(--c-brand-surface); box-shadow: 0 4px 12px rgba(226,35,26,0.06);
+            transform: translateY(-1px);
+        }
+        .tip-icon {
+            font-size: 1.4rem; line-height: 1; flex-shrink: 0;
+            width: 36px; height: 36px; border-radius: var(--r-sm);
+            background: var(--c-brand-light); display: flex;
+            align-items: center; justify-content: center;
+        }
+        .tip-body { flex: 1; min-width: 0; }
+        .tip-title {
+            font-family: 'DM Sans', sans-serif; font-weight: 600;
+            font-size: 0.875rem; color: var(--c-text); margin-bottom: 4px;
+            line-height: 1.3;
+        }
+        .tip-text {
+            font-size: 0.8125rem; color: var(--c-text-secondary);
+            line-height: 1.5;
+        }
+        .tip-text strong { color: var(--c-text); font-weight: 600; }
+        .tip-example {
+            display: flex; flex-direction: column; gap: 3px;
+            margin-top: var(--sp-2); padding-top: var(--sp-2);
+            border-top: 1px dashed var(--c-border);
+            font-size: 0.75rem; line-height: 1.4;
+        }
+        .ex-bad { color: var(--c-text-tertiary); font-style: italic; }
+        .ex-good { color: var(--c-brand); font-weight: 500; }
+        .welcome p.welcome-warning {
+            font-size: 0.8125rem; color: var(--c-text-secondary);
+            max-width: 720px; margin: var(--sp-5) auto 0;
+            line-height: 1.6; padding: var(--sp-3) var(--sp-4);
+            background: var(--c-surface-alt); border-radius: var(--r-md);
+            border: 1px solid var(--c-border); text-align: center;
+        }
+        .welcome p.welcome-warning strong { color: var(--c-text); font-weight: 600; }
+        @media (max-width: 768px) {
+            .welcome-tips { grid-template-columns: 1fr; }
+        }
         /* Disambiguation */
         .disambig-container { }
         .disambig-header { font-size: 0.9rem; margin-bottom: var(--sp-2); color: var(--c-text); }

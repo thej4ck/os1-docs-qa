@@ -133,14 +133,63 @@ function completeOnboarding() {
                 <div class="welcome" id="welcome">
                     <img src="/static/img/logo-lg.png" alt="SCAO" class="welcome-logo">
                     <h2>Ciao! Come posso aiutarti?<span class="beta-badge-lg">Beta</span></h2>
-                    <p>Chiedi qualsiasi cosa sulla documentazione del gestionale OS1.<br><span style="font-size:0.8125rem;color:var(--c-text-tertiary);">Prodotto in fase BETA — funzionalità in evoluzione.</span></p>
-                    <div class="suggestion-chips" style="margin-top:var(--sp-5);">
-                        <button class="suggestion-chip" type="button" onclick="askSuggestion(this)"><span class="chip-icon">📄</span> Come si emette una fattura di vendita?</button>
-                        <button class="suggestion-chip" type="button" onclick="askSuggestion(this)"><span class="chip-icon">💰</span> Come registro un pagamento fornitore?</button>
-                        <button class="suggestion-chip" type="button" onclick="askSuggestion(this)"><span class="chip-icon">📦</span> Come faccio un carico di magazzino?</button>
-                        <button class="suggestion-chip" type="button" onclick="askSuggestion(this)"><span class="chip-icon">📋</span> Come creo un nuovo articolo in anagrafica?</button>
+                    <p>Sono il tuo assistente sulla documentazione del gestionale OS1.<br><span style="font-size:0.8125rem;color:var(--c-text-tertiary);">Per ricevere risposte precise, segui i suggerimenti qui sotto.</span></p>
+
+                    <div class="welcome-tips">
+                        <div class="tip-card">
+                            <div class="tip-icon">🎯</div>
+                            <div class="tip-body">
+                                <div class="tip-title">Indica sempre il modulo o l'ambito</div>
+                                <div class="tip-text">Specifica l'area OS1 a cui ti riferisci (vendite, magazzino, contabilità, produzione...). Lo stesso termine può avere significati diversi tra moduli.</div>
+                                <div class="tip-example">
+                                    <span class="ex-bad">✗ "Come faccio un documento?"</span>
+                                    <span class="ex-good">✓ "Come emetto una fattura immediata di vendita a un cliente?"</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tip-card">
+                            <div class="tip-icon">🔍</div>
+                            <div class="tip-body">
+                                <div class="tip-title">Sii specifico, evita domande generiche</div>
+                                <div class="tip-text">Più dettagli fornisci, più la risposta sarà mirata. Includi azione, oggetto e contesto.</div>
+                                <div class="tip-example">
+                                    <span class="ex-bad">✗ "Come funziona la contabilità?"</span>
+                                    <span class="ex-good">✓ "Come gestisco una nota di credito a cliente in prima nota?"</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tip-card">
+                            <div class="tip-icon">📋</div>
+                            <div class="tip-body">
+                                <div class="tip-title">Specifica il tipo di risposta che vuoi</div>
+                                <div class="tip-text">Puoi chiedere una <strong>guida passo-passo</strong>, una <strong>risposta sintetica</strong>, un <strong>elenco di campi</strong>, una <strong>tabella riassuntiva</strong> o un <strong>esempio pratico</strong>.</div>
+                                <div class="tip-example">
+                                    <span class="ex-good">✓ "Spiegami passo-passo come creare un nuovo articolo in anagrafica"</span>
+                                    <span class="ex-good">✓ "Quali campi compilare nell'anagrafica fornitori?"</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tip-card">
+                            <div class="tip-icon">💬</div>
+                            <div class="tip-body">
+                                <div class="tip-title">Una chat = un argomento</div>
+                                <div class="tip-text">La cronologia viene usata come contesto. Apri una <strong>nuova chat</strong> per ogni argomento diverso: mescolare temi peggiora la qualità delle risposte.</div>
+                            </div>
+                        </div>
+
+                        <div class="tip-card">
+                            <div class="tip-icon">🔁</div>
+                            <div class="tip-body">
+                                <div class="tip-title">Affina la risposta con domande di follow-up</div>
+                                <div class="tip-text">Se la risposta non è chiara o completa, chiedi un approfondimento ("dammi più dettagli su...", "fammi un esempio", "come gestisco il caso di..."). Usa il pulsante "Riprova con modello avanzato" per risposte più accurate.</div>
+                            </div>
+                        </div>
                     </div>
-                    <p style="font-size:0.8rem;color:var(--c-text-secondary);max-width:480px;margin:var(--sp-5) auto 0;line-height:1.6;padding:var(--sp-3) var(--sp-4);background:var(--c-surface-alt);border-radius:var(--r-md);border:1px solid var(--c-border);">💡 <strong>Consiglio:</strong> apri una nuova chat per ogni argomento diverso. La cronologia della conversazione viene usata come contesto, quindi mescolare temi riduce la qualità delle risposte.<br><br>⚠️ Questo servizio utilizza intelligenza artificiale. Non inserire dati personali, sensibili o riservati nelle domande.</p>
+
+                    <p class="welcome-warning">⚠️ Questo servizio utilizza intelligenza artificiale. <strong>Verifica sempre</strong> le informazioni e non inserire dati personali, sensibili o riservati nelle domande.</p>
                 </div>
                 {% endif %}
 

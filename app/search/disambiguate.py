@@ -60,6 +60,17 @@ MIN_TOPIC_AREAS = 3
 MAX_OPTIONS = 5
 DEFAULT_DOMINANCE_THRESHOLD = 70  # percent
 
+# Discriminator terms: if present in query, disambig is redundant.
+# User has already specified the area (vendita vs acquisto, cliente vs fornitore).
+EXPLICIT_DISCRIMINATORS = {
+    "vendita", "vendite", "venduto",
+    "cliente", "clienti",
+    "attivo", "attiva", "attive", "attivi",  # ciclo attivo
+    "acquisto", "acquisti", "acquistato",
+    "fornitore", "fornitori",
+    "passivo", "passiva", "passive", "passivi",  # ciclo passivo
+}
+
 
 def extract_topic(doc: dict) -> str:
     """Derive a human-readable business area from a document's metadata."""
@@ -117,10 +128,16 @@ def analyze_ambiguity(
 
     # Check query length (after stopword removal)
     tokens = [
-        t.lower() for t in query.strip().split()
+        t.lower().strip("?!.,;:") for t in query.strip().split()
         if t.lower().strip("?!.,;:") not in ITALIAN_STOPWORDS
     ]
     if len(tokens) > MAX_QUERY_WORDS:
+        return None
+
+    # Skip disambig if query explicitly contains discriminator term
+    # (vendita/acquisto, cliente/fornitore, attivo/passivo).
+    # In that case user has already specified the area — BM25 ranking handles it.
+    if any(t in EXPLICIT_DISCRIMINATORS for t in tokens):
         return None
 
     if len(candidates) < MIN_TOPIC_AREAS:
