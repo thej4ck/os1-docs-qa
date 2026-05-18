@@ -5,6 +5,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 
 from app.auth.otp import generate_otp, verify_otp, is_email_allowed, send_otp_email
 from app.auth.session import create_session, clear_session, get_session_email
+from app.config import settings
 from app.models.user import get_or_create_user, update_last_login
 
 router = APIRouter()
@@ -13,6 +14,15 @@ router = APIRouter()
 def _templates():
     from app.main import templates
     return templates
+
+
+def _login_and_redirect(email: str) -> RedirectResponse:
+    """Establish the user session and redirect to chat."""
+    get_or_create_user(email)
+    update_last_login(email)
+    response = RedirectResponse(url="/chat", status_code=302)
+    create_session(response, email)
+    return response
 
 
 @router.get("/login", response_class=HTMLResponse)
@@ -30,6 +40,11 @@ async def login_submit(request: Request, email: str = Form(...)):
         return _templates().TemplateResponse(
             "login.html", {"request": request, "error": "Email non autorizzata."}
         )
+
+    # Dev/local bypass: no OTP, log in immediately on email submit.
+    if not settings.production:
+        print(f"[auth] DEV bypass login: {email} (PRODUCTION=false)", flush=True)
+        return _login_and_redirect(email)
 
     code = generate_otp(email)
     success = send_otp_email(email, code)
@@ -49,11 +64,7 @@ async def verify_submit(request: Request, email: str = Form(...), code: str = Fo
     code = code.strip()
 
     if verify_otp(email, code):
-        get_or_create_user(email)
-        update_last_login(email)
-        response = RedirectResponse(url="/chat", status_code=302)
-        create_session(response, email)
-        return response
+        return _login_and_redirect(email)
 
     return _templates().TemplateResponse(
         "verify.html", {"request": request, "email": email, "error": "Codice non valido o scaduto."}

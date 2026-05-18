@@ -126,31 +126,51 @@ class SearchIndex:
         topic_filter: Optional[str] = None,
     ) -> list[dict]:
         """BM25-ranked full-text search with AND-first, OR-fallback strategy."""
+        return self._search(query, limit, doc_type, topic_filter, ids_only=False)
+
+    def search_ids(
+        self, query: str, limit: int = 10, topic_filter: Optional[str] = None,
+    ) -> list[int]:
+        """BM25-ranked search returning only doc ids (no content/snippet fetch).
+
+        Used by the hybrid retriever, which needs ranked ids for fusion and
+        fetches full rows only for the small fused set.
+        """
+        return self._search(query, limit, None, topic_filter, ids_only=True)
+
+    def _search(
+        self, query: str, limit: int, doc_type: Optional[str],
+        topic_filter: Optional[str], ids_only: bool,
+    ):
         tokens = self._clean_tokens(query)
         if not tokens:
             return []
 
         # Try AND (all terms must match) first
         and_query = " AND ".join(tokens)
-        results = self._execute_search(and_query, limit, doc_type, topic_filter)
+        results = self._execute_search(and_query, limit, doc_type, topic_filter, ids_only)
 
         # Fall back to OR if AND returns too few results
         if len(results) < _MIN_AND_RESULTS and len(tokens) > 1:
             or_query = " OR ".join(tokens)
-            results = self._execute_search(or_query, limit, doc_type, topic_filter)
+            results = self._execute_search(or_query, limit, doc_type, topic_filter, ids_only)
 
         return results
 
     def _execute_search(
         self, fts_query: str, limit: int, doc_type: Optional[str] = None,
-        topic_filter: Optional[str] = None,
-    ) -> list[dict]:
+        topic_filter: Optional[str] = None, ids_only: bool = False,
+    ):
         """Run a single FTS5 MATCH query with title-boosted BM25 ranking."""
-        base_sql = """
-            SELECT d.id, d.source_file, d.module, d.doc_type, d.title,
+        if ids_only:
+            select = "SELECT d.id"
+        else:
+            select = """SELECT d.id, d.source_file, d.module, d.doc_type, d.title,
                    snippet(docs_fts, 1, '<b>', '</b>', '...', 40) AS snippet,
                    d.content,
-                   bm25(docs_fts, 10.0, 1.0) AS rank
+                   bm25(docs_fts, 10.0, 1.0) AS rank"""
+        base_sql = f"""
+            {select}
             FROM docs_fts
             JOIN documents d ON d.id = docs_fts.rowid
             WHERE docs_fts MATCH ?
@@ -167,10 +187,12 @@ class SearchIndex:
             params.append(f"%/{topic_filter}/%")
             params.append(topic_filter)
 
-        base_sql += " ORDER BY rank LIMIT ?"
+        base_sql += " ORDER BY bm25(docs_fts, 10.0, 1.0) LIMIT ?"
         params.append(limit)
 
         rows = self.conn.execute(base_sql, params).fetchall()
+        if ids_only:
+            return [row[0] for row in rows]
         return [dict(row) for row in rows]
 
     def _clean_tokens(self, query: str) -> list[str]:

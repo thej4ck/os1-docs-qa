@@ -273,6 +273,29 @@ async def ask(
     return EventSourceResponse(event_generator())
 
 
+# ── Retrieval observability (LOCAL/DEV ONLY) ──
+
+@router.get("/api/debug/retrieve")
+async def api_debug_retrieve(
+    request: Request,
+    q: str = Query(..., min_length=1),
+    deep: bool = Query(False),
+    topic: str | None = Query(None),
+):
+    """Inspect every stage of the retrieval pipeline for a query.
+
+    Disabled in production (404). Returns BM25 / semantic / fused /
+    post-signal / selected rankings so retrieval misses are debuggable.
+    """
+    if settings.production:
+        return JSONResponse({"error": "not found"}, status_code=404)
+    user = _get_user(request)
+    if not user:
+        return JSONResponse({"error": "Non autenticato."}, status_code=401)
+    trace = await query_module.trace_retrieve(q, deep=deep, topic_filter=topic)
+    return JSONResponse(trace)
+
+
 # ── Conversation API ──
 
 @router.get("/api/conversations")

@@ -92,22 +92,28 @@ def adaptive_weights(query: str) -> tuple[float, float]:
     return 0.9, 1.15         # natural language → favor semantic
 
 
-def identifier_stems(query: str) -> set[str]:
+def _stem_words(words: list[str], stemmer) -> set[str]:
+    """Drop short/stopword tokens, then stem (or pass through if no stemmer)."""
+    ws = [w for w in words if len(w) >= 3 and w not in ITALIAN_STOPWORDS]
+    return set(stemmer.stemWords(ws)) if stemmer else set(ws)
+
+
+def _content_stems(text: str, stemmer) -> set[str]:
+    """Stem set of free text (title/body). Stopwords dropped."""
+    return _stem_words([w.lower() for w in _tokens(text)], stemmer)
+
+
+def identifier_stems(query: str, stemmer=None) -> set[str]:
     """Content-word stems of the query (stopwords dropped, identifiers split)."""
-    stems: set[str] = set()
-    stemmer = _get_stemmer()
-    raw = []
+    if stemmer is None:
+        stemmer = _get_stemmer()
+    raw: list[str] = []
     for t in _tokens(query):
         if _looks_technical(t):
             raw.extend(split_identifier(t))
         else:
             raw.append(t.lower())
-    words = [w for w in raw if len(w) >= 3 and w not in ITALIAN_STOPWORDS]
-    if stemmer:
-        stems.update(stemmer.stemWords(words))
-    else:
-        stems.update(words)
-    return stems
+    return _stem_words(raw, stemmer)
 
 
 _OPERATIONAL_HINTS = {
@@ -116,7 +122,7 @@ _OPERATIONAL_HINTS = {
 }
 
 
-def rescore(query: str, docs: list[dict], limit: int | None = None) -> list[dict]:
+def rescore(query: str, docs: list[dict]) -> list[dict]:
     """Re-order RRF-fused docs with domain signals. Stable for ties.
 
     `docs` are dict rows (id, source_file, module, doc_type, title, content)
@@ -125,7 +131,8 @@ def rescore(query: str, docs: list[dict], limit: int | None = None) -> list[dict
     if not docs:
         return docs
 
-    q_stems = identifier_stems(query)
+    stemmer = _get_stemmer()
+    q_stems = identifier_stems(query, stemmer)
     q_tokens = {t.lower() for t in _tokens(query)}
     technical = is_technical_query(query)
     q_lower = query.lower()
@@ -152,7 +159,6 @@ def rescore(query: str, docs: list[dict], limit: int | None = None) -> list[dict
         title = (d.get("title") or "")
         content = d.get("content") or ""
         doc_type = (d.get("doc_type") or "")
-        title_l = title.lower()
 
         # ── Definition boost ──
         if doc_type in ("table-def", "schema"):
@@ -166,16 +172,8 @@ def rescore(query: str, docs: list[dict], limit: int | None = None) -> list[dict
 
         # ── Identifier-stem overlap (title weighs more) ──
         if q_stems:
-            stemmer = _get_stemmer()
-            t_words = [w.lower() for w in _tokens(title)
-                       if len(w) >= 3 and w.lower() not in ITALIAN_STOPWORDS]
-            c_words = [w.lower() for w in _tokens(content[:1500])
-                       if len(w) >= 3 and w.lower() not in ITALIAN_STOPWORDS]
-            if stemmer:
-                t_stems = set(stemmer.stemWords(t_words))
-                c_stems = set(stemmer.stemWords(c_words))
-            else:
-                t_stems, c_stems = set(t_words), set(c_words)
+            t_stems = _content_stems(title, stemmer)
+            c_stems = _content_stems(content[:1500], stemmer)
             delta += 0.15 * len(q_stems & t_stems)
             delta += 0.04 * len(q_stems & c_stems)
 
@@ -199,5 +197,4 @@ def rescore(query: str, docs: list[dict], limit: int | None = None) -> list[dict
         scored.append((score + delta, pos, d))
 
     scored.sort(key=lambda x: (-x[0], x[1]))  # stable on original fused order
-    out = [d for _, _, d in scored]
-    return out[:limit] if limit else out
+    return [d for _, _, d in scored]

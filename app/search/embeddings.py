@@ -20,15 +20,15 @@ logger = logging.getLogger(__name__)
 class EmbeddingIndex:
     """Static-embedding semantic index loaded from search.db."""
 
-    def __init__(self, db_path: str, model_path: str):
+    def __init__(self, index, model_path: str):
         self._model = None
         self._ids = None        # np.ndarray[int64] (n,)
         self._matrix = None     # np.ndarray[float32] (n, dim)
         self.ready = False
         self.status = "not initialized"
-        self._load(db_path, model_path)
+        self._load(index, model_path)
 
-    def _load(self, db_path: str, model_path: str):
+    def _load(self, index, model_path: str):
         if not Path(model_path).is_dir():
             self.status = f"model dir missing: {model_path}"
             logger.warning("EmbeddingIndex disabled: %s", self.status)
@@ -37,15 +37,9 @@ class EmbeddingIndex:
             import numpy as np  # noqa: F401
             from model2vec import StaticModel
 
-            from app.search.fts import SearchIndex
-
             self._model = StaticModel.from_pretrained(model_path, normalize=True)
 
-            idx = SearchIndex(db_path, read_only=True)
-            try:
-                ids, matrix = idx.load_embedding_matrix()
-            finally:
-                idx.close()
+            ids, matrix = index.load_embedding_matrix()
 
             if ids is None or matrix is None or len(ids) == 0:
                 self.status = "no embeddings in DB (run build_index --embeddings-only)"

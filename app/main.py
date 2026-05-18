@@ -29,7 +29,7 @@ async def lifespan(app: FastAPI):
     # BM25-only if the model dir or embeddings are missing.
     if settings.hybrid_enabled:
         from app.search.embeddings import EmbeddingIndex
-        emb = EmbeddingIndex(db_path, settings.static_model_path)
+        emb = EmbeddingIndex(index, settings.static_model_path)
         query_module.init_embeddings(emb)
         print(f"Embedding index: {emb.status}")
     else:
