@@ -948,6 +948,68 @@ def ingest_pdf_schede(index: SearchIndex, schede_dir: Path, repo: Path, images_o
 
 
 # ---------------------------------------------------------------------------
+# Semantic embeddings (model2vec) — LOCAL/BUILD ONLY
+# ---------------------------------------------------------------------------
+
+def add_embeddings(index: SearchIndex, model_path: str, batch_size: int = 256) -> int:
+    """Encode every document with the distilled static model and store vectors.
+
+    Vectors are L2-normalized so runtime cosine == dot product. Runs locally
+    pre-push; Railway only reads the resulting BLOBs.
+    """
+    import time
+
+    import numpy as np
+    from model2vec import StaticModel
+
+    if not Path(model_path).is_dir():
+        print(f"  ERROR: static model not found: {model_path}")
+        print(f"         Run scripts/distill_model.py first.")
+        sys.exit(1)
+
+    model = StaticModel.from_pretrained(model_path, normalize=True)
+
+    docs = list(index.iter_documents_for_embedding())
+    if not docs:
+        print("  No documents to embed.")
+        return 0
+
+    ids = [d[0] for d in docs]
+    texts = [(f"{d[1]}\n{d[2]}" if d[1] else d[2]) for d in docs]
+
+    t0 = time.monotonic()
+    vecs = model.encode(
+        texts,
+        batch_size=batch_size,
+        show_progress_bar=True,
+        use_multiprocessing=True,
+    ).astype(np.float32)
+
+    # Belt-and-braces L2 normalization (StaticModel(normalize=True) already does
+    # this, but guarantee it regardless of model config).
+    norms = np.linalg.norm(vecs, axis=1, keepdims=True)
+    norms[norms == 0] = 1.0
+    vecs = vecs / norms
+
+    dim = vecs.shape[1]
+    index.clear_embeddings()
+    for doc_id, vec in zip(ids, vecs):
+        index.store_embedding(doc_id, vec.tobytes())
+
+    model_name = Path(model_path).name
+    index.set_embedding_meta("model", model_name)
+    index.set_embedding_meta("dim", str(dim))
+    index.set_embedding_meta("count", str(len(ids)))
+    index.set_embedding_meta(
+        "built_at", time.strftime("%Y-%m-%dT%H:%M:%S")
+    )
+    index.commit()
+
+    print(f"  Embedded {len(ids)} docs (dim={dim}) in {time.monotonic()-t0:.1f}s")
+    return len(ids)
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
@@ -963,7 +1025,34 @@ def main():
         default=str(Path(__file__).resolve().parent.parent / "searchdata" / "search.db"),
         help="Path to the output SQLite database",
     )
+    parser.add_argument(
+        "--static-model",
+        default=str(Path(__file__).resolve().parent.parent / "searchdata" / "static_model"),
+        help="Path to the distilled model2vec directory (for embeddings)",
+    )
+    parser.add_argument(
+        "--skip-embeddings", action="store_true",
+        help="Build the FTS index only; do not compute semantic embeddings",
+    )
+    parser.add_argument(
+        "--embeddings-only", action="store_true",
+        help="Only (re)compute embeddings on an existing DB; skip FTS rebuild",
+    )
     args = parser.parse_args()
+
+    # ── Embeddings-only mode: don't touch the FTS index ──
+    if args.embeddings_only:
+        if not Path(args.db).exists():
+            print(f"ERROR: database not found: {args.db}. Run a full build first.")
+            sys.exit(1)
+        print(f"Database:   {args.db}")
+        print(f"Static model: {args.static_model}")
+        print("\nEmbeddings-only mode (FTS index untouched)\n")
+        index = SearchIndex(args.db)
+        n = add_embeddings(index, args.static_model)
+        index.close()
+        print(f"\nDone. {n} embeddings stored.")
+        return
 
     repo = Path(args.repo)
     if not repo.is_dir():
@@ -1022,6 +1111,14 @@ def main():
     total = index.count()
     print(f"\n{'='*40}")
     print(f"TOTAL:                {total:>5} chunks indexed")
+
+    # Semantic embeddings (local/build only)
+    if args.skip_embeddings:
+        print("Embeddings:           skipped (--skip-embeddings)")
+    else:
+        print("Computing semantic embeddings...")
+        add_embeddings(index, args.static_model)
+
     print(f"Database size:        {Path(args.db).stat().st_size / 1024 / 1024:.1f} MB")
 
     index.close()

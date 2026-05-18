@@ -103,6 +103,7 @@ def get_deep_addendum() -> str:
 # Shared index instance — set by main.py at startup
 _index: SearchIndex | None = None
 _client: AsyncOpenAI | None = None
+_emb = None  # app.search.embeddings.EmbeddingIndex | None
 
 
 def init(index: SearchIndex):
@@ -112,6 +113,16 @@ def init(index: SearchIndex):
         api_key=settings.groq_api_key,
         base_url="https://api.groq.com/openai/v1",
     )
+
+
+def init_embeddings(emb) -> None:
+    """Register the semantic index (set by main.py lifespan). Optional."""
+    global _emb
+    _emb = emb
+
+
+def embeddings_ready() -> bool:
+    return bool(settings.hybrid_enabled and _emb is not None and _emb.ready)
 
 
 # ── Allowed models with pricing ($/M tokens) ──
@@ -229,23 +240,67 @@ async def check_disambiguation(
     }
 
 
+def _matches_topic(doc: dict, topic_filter: str) -> bool:
+    src = (doc.get("source_file") or "").replace("\\", "/")
+    return f"/{topic_filter}/" in src or (doc.get("module") or "") == topic_filter
+
+
+async def _hybrid_candidates(
+    question: str, topic_filter: str | None,
+) -> list[dict]:
+    """BM25 ∪ semantic → RRF → signal rerank. Falls back to BM25-only."""
+    bm25 = _index.search(question, limit=80, topic_filter=topic_filter)
+    if topic_filter and len(bm25) < 3:
+        bm25 = _index.search(question, limit=80)
+        topic_filter = None  # fallback widened, mirror legacy behavior
+
+    if not embeddings_ready():
+        return bm25  # graceful degradation: pure BM25 (legacy path)
+
+    import asyncio
+
+    from app.search import signals
+    from app.search.fusion import rrf_fuse
+
+    bm25_ids = [d["id"] for d in bm25]
+    try:
+        dense = await asyncio.to_thread(_emb.search, question, 80)
+    except Exception as e:  # pragma: no cover - defensive
+        print(f"[hybrid] semantic search failed, BM25-only: {e}", flush=True)
+        return bm25
+    dense_ids = [doc_id for doc_id, _ in dense]
+
+    w_lex, w_sem = signals.adaptive_weights(question)
+    fused_ids = rrf_fuse(
+        bm25_ids, dense_ids, k=60, limit=80,
+        w_lexical=w_lex, w_semantic=w_sem,
+    )
+    if not fused_ids:
+        return bm25
+
+    docs = _index.get_documents_by_ids(fused_ids)
+    if topic_filter:
+        on_topic = [d for d in docs if _matches_topic(d, topic_filter)]
+        if len(on_topic) >= 3:
+            docs = on_topic
+
+    return signals.rescore(question, docs, limit=50)
+
+
 async def retrieve_with_budget(
     question: str, deep: bool = False, topic_filter: str | None = None,
 ) -> tuple[list[dict], dict | None]:
-    """Search FTS5, optionally rerank, return docs up to word budget.
+    """Hybrid retrieve (BM25 ∪ semantic, RRF, signal rerank), optional LLM
+    rerank, then trim to the word budget.
 
     Returns (selected_docs, rerank_usage_or_None).
     """
     if _index is None:
         return [], None
     max_words = _get_context_budget(deep)
-    candidates = _index.search(question, limit=50, topic_filter=topic_filter)
+    candidates = await _hybrid_candidates(question, topic_filter)
 
-    # If topic filter yielded too few results, fall back to unfiltered
-    if topic_filter and len(candidates) < 3:
-        candidates = _index.search(question, limit=50)
-
-    # LLM reranking (if enabled and client available)
+    # Optional LLM reranking (admin toggle, default OFF — hybrid is already strong)
     rerank_usage = None
     if _client and len(candidates) > 5 and _is_reranking_enabled():
         from app.search.rerank import rerank
@@ -263,7 +318,12 @@ async def retrieve_with_budget(
 
 
 def _is_reranking_enabled() -> bool:
-    """Check admin setting for reranking toggle."""
+    """Check admin setting for the optional LLM rerank.
+
+    Default OFF: hybrid retrieval (BM25 + semantic + signal rerank) is already
+    strong and free. The LLM rerank stays available as an admin toggle for
+    hard cases.
+    """
     try:
         from app.db import get_conn
         row = get_conn().execute(
@@ -273,7 +333,7 @@ def _is_reranking_enabled() -> bool:
             return row["value"] == "1"
     except Exception:
         pass
-    return True  # enabled by default
+    return False  # disabled by default
 
 
 _logo_cache: dict[str, bool] = {}

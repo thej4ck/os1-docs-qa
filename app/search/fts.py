@@ -1,6 +1,11 @@
-"""SQLite FTS5 wrapper for document indexing and BM25 search."""
+"""SQLite FTS5 wrapper for document indexing and BM25 search.
+
+Also stores per-document semantic embeddings (model2vec) in a separate
+`embeddings` table so the FTS-critical insert path stays untouched.
+"""
 
 import sqlite3
+from collections.abc import Iterator
 from pathlib import Path
 from typing import Optional
 
@@ -83,6 +88,18 @@ class SearchIndex:
                 INSERT INTO docs_fts(docs_fts, rowid, title, content)
                 VALUES ('delete', old.id, old.title, old.content);
             END;
+
+            -- Semantic embeddings (model2vec). Separate table: the FTS triggers
+            -- above insert explicit columns, so they are unaffected by this.
+            CREATE TABLE IF NOT EXISTS embeddings (
+                doc_id INTEGER PRIMARY KEY,
+                vec    BLOB NOT NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS embedding_meta (
+                key   TEXT PRIMARY KEY,
+                value TEXT NOT NULL
+            );
         """)
         self.conn.commit()
 
@@ -182,6 +199,84 @@ class SearchIndex:
         row = self.conn.execute("SELECT COUNT(*) FROM documents").fetchone()
         return row[0]
 
+    # ── Semantic embeddings ──────────────────────────────────────────────
+
+    def iter_documents_for_embedding(self) -> Iterator[tuple[int, str, str]]:
+        """Yield (id, title, content) for every document, ordered by id."""
+        cur = self.conn.execute(
+            "SELECT id, title, content FROM documents ORDER BY id"
+        )
+        for row in cur:
+            yield row["id"], row["title"] or "", row["content"]
+
+    def store_embedding(self, doc_id: int, blob: bytes):
+        """Upsert one document's embedding (float32 little-endian bytes)."""
+        self.conn.execute(
+            "INSERT OR REPLACE INTO embeddings (doc_id, vec) VALUES (?, ?)",
+            (doc_id, blob),
+        )
+
+    def clear_embeddings(self):
+        self.conn.execute("DELETE FROM embeddings")
+
+    def set_embedding_meta(self, key: str, value: str):
+        self.conn.execute(
+            "INSERT OR REPLACE INTO embedding_meta (key, value) VALUES (?, ?)",
+            (key, str(value)),
+        )
+
+    def get_embedding_meta(self, key: str) -> Optional[str]:
+        try:
+            row = self.conn.execute(
+                "SELECT value FROM embedding_meta WHERE key = ?", (key,)
+            ).fetchone()
+        except sqlite3.OperationalError:
+            return None
+        return row["value"] if row else None
+
+    def embedding_count(self) -> int:
+        try:
+            row = self.conn.execute("SELECT COUNT(*) FROM embeddings").fetchone()
+        except sqlite3.OperationalError:
+            return 0
+        return row[0]
+
+    def load_embedding_matrix(self):
+        """Load all embeddings into (ids, matrix) numpy arrays.
+
+        Returns (np.ndarray[int64] (n,), np.ndarray[float32] (n, dim)) or
+        (None, None) if there are no embeddings. Vectors are stored already
+        L2-normalized at build time.
+        """
+        import numpy as np
+
+        dim_str = self.get_embedding_meta("dim")
+        rows = self.conn.execute(
+            "SELECT doc_id, vec FROM embeddings ORDER BY doc_id"
+        ).fetchall()
+        if not rows:
+            return None, None
+        dim = int(dim_str) if dim_str else len(rows[0]["vec"]) // 4
+        ids = np.empty(len(rows), dtype=np.int64)
+        mat = np.empty((len(rows), dim), dtype=np.float32)
+        for i, row in enumerate(rows):
+            ids[i] = row["doc_id"]
+            mat[i] = np.frombuffer(row["vec"], dtype=np.float32, count=dim)
+        return ids, mat
+
+    def get_documents_by_ids(self, ids: list[int]) -> list[dict]:
+        """Fetch full document rows for a list of ids, preserving id order."""
+        if not ids:
+            return []
+        placeholders = ",".join("?" * len(ids))
+        rows = self.conn.execute(
+            f"SELECT id, source_file, module, doc_type, title, content "
+            f"FROM documents WHERE id IN ({placeholders})",
+            ids,
+        ).fetchall()
+        by_id = {row["id"]: dict(row) for row in rows}
+        return [by_id[i] for i in ids if i in by_id]
+
     def rebuild(self):
         """Drop all data and recreate the schema."""
         cur = self.conn.cursor()
@@ -190,6 +285,8 @@ class SearchIndex:
             DROP TRIGGER IF EXISTS docs_ad;
             DROP TABLE IF EXISTS docs_fts;
             DROP TABLE IF EXISTS documents;
+            DROP TABLE IF EXISTS embeddings;
+            DROP TABLE IF EXISTS embedding_meta;
         """)
         self.conn.commit()
         self._create_schema()

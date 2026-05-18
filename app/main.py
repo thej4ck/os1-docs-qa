@@ -25,6 +25,16 @@ async def lifespan(app: FastAPI):
     query_module.init(index)
     print(f"Search index loaded: {index.count()} documents")
 
+    # Semantic index (model2vec) for hybrid retrieval. Optional: degrades to
+    # BM25-only if the model dir or embeddings are missing.
+    if settings.hybrid_enabled:
+        from app.search.embeddings import EmbeddingIndex
+        emb = EmbeddingIndex(db_path, settings.static_model_path)
+        query_module.init_embeddings(emb)
+        print(f"Embedding index: {emb.status}")
+    else:
+        print("Embedding index: disabled (hybrid_enabled=False)")
+
     # Open app database (users, conversations, usage)
     app_db.init(settings.app_db_path)
     print(f"App database loaded: {settings.app_db_path}")

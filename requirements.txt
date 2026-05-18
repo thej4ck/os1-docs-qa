@@ -11,6 +11,12 @@ beautifulsoup4>=4.12
 pydantic-settings>=2.4
 resend>=2.0
 markdown>=3.6
-# Build-only (scripts/build_index.py)
+# Semantic search runtime (model2vec is numpy-only — NO torch in the image)
+model2vec>=0.3
+numpy>=1.26
+snowballstemmer>=2.2
+# Build-only (scripts/build_index.py, scripts/distill_model.py).
+# Distillation also needs:  pip install "model2vec[distill]"  (torch/transformers)
+# — run locally pre-push only, NEVER installed on Railway.
 PyMuPDF>=1.24
 Pillow>=10.0
