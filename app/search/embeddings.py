@@ -12,7 +12,15 @@ False and the caller falls back to BM25-only.
 from __future__ import annotations
 
 import logging
+import os
 from pathlib import Path
+
+# The distilled model is a committed local directory — never reach the
+# HuggingFace Hub. This kills startup outbound packets (telemetry / version
+# checks) so Railway serverless can sleep, and speeds up cold start.
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
+os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+os.environ.setdefault("HF_HUB_DISABLE_TELEMETRY", "1")
 
 logger = logging.getLogger(__name__)
 
