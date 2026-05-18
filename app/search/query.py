@@ -1,5 +1,6 @@
 """Retrieval + Groq LLM streaming for Q&A."""
 
+import asyncio
 import logging
 from collections.abc import AsyncIterator
 
@@ -103,6 +104,7 @@ def get_deep_addendum() -> str:
 # Shared index instance — set by main.py at startup
 _index: SearchIndex | None = None
 _client: AsyncOpenAI | None = None
+_emb = None  # app.search.embeddings.EmbeddingIndex | None
 
 
 def init(index: SearchIndex):
@@ -112,6 +114,16 @@ def init(index: SearchIndex):
         api_key=settings.groq_api_key,
         base_url="https://api.groq.com/openai/v1",
     )
+
+
+def init_embeddings(emb) -> None:
+    """Register the semantic index (set by main.py lifespan). Optional."""
+    global _emb
+    _emb = emb
+
+
+def embeddings_ready() -> bool:
+    return bool(settings.hybrid_enabled and _emb is not None and _emb.ready)
 
 
 # ── Allowed models with pricing ($/M tokens) ──
@@ -229,29 +241,113 @@ async def check_disambiguation(
     }
 
 
-async def retrieve_with_budget(
-    question: str, deep: bool = False, topic_filter: str | None = None,
-) -> tuple[list[dict], dict | None]:
-    """Search FTS5, optionally rerank, return docs up to word budget.
+def _matches_topic(doc: dict, topic_filter: str) -> bool:
+    src = (doc.get("source_file") or "").replace("\\", "/")
+    return f"/{topic_filter}/" in src or (doc.get("module") or "") == topic_filter
 
-    Returns (selected_docs, rerank_usage_or_None).
+
+def _snap(docs: list[dict], scores: dict | None = None, n: int = 20) -> list[dict]:
+    """Compact stage snapshot for the debug trace."""
+    out = []
+    for rank, d in enumerate(docs[:n], 1):
+        row = {
+            "rank": rank,
+            "id": d.get("id"),
+            "doc_type": d.get("doc_type"),
+            "title": (d.get("title") or "")[:70],
+            "source": (d.get("source_file") or "").replace("\\", "/"),
+        }
+        if scores is not None and d.get("id") in scores:
+            row["score"] = round(scores[d["id"]], 4)
+        out.append(row)
+    return out
+
+
+async def _safe_dense(question: str, limit: int):
+    """Semantic search off the event loop; returns results or the exception."""
+    try:
+        return await asyncio.to_thread(_emb.search, question, limit)
+    except Exception as e:  # graceful degradation to BM25-only
+        return e
+
+
+async def _hybrid_candidates(
+    question: str, topic_filter: str | None, trace: dict | None = None,
+) -> list[dict]:
+    """BM25 ∪ semantic → RRF → signal rerank. Falls back to BM25-only.
+
+    If `trace` (a dict) is passed, every stage is recorded into it.
+    BM25 and semantic legs run concurrently off the event loop.
     """
-    if _index is None:
-        return [], None
-    max_words = _get_context_budget(deep)
-    candidates = _index.search(question, limit=50, topic_filter=topic_filter)
+    from app.search import signals
+    from app.search.fusion import rrf_fuse
 
-    # If topic filter yielded too few results, fall back to unfiltered
-    if topic_filter and len(candidates) < 3:
-        candidates = _index.search(question, limit=50)
+    hybrid = embeddings_ready()
+    if hybrid:
+        bm25_ids, dense = await asyncio.gather(
+            asyncio.to_thread(_index.search_ids, question, 80, topic_filter),
+            _safe_dense(question, 80),
+        )
+    else:
+        bm25_ids = await asyncio.to_thread(_index.search_ids, question, 80, topic_filter)
+        dense = None
 
-    # LLM reranking (if enabled and client available)
-    rerank_usage = None
-    if _client and len(candidates) > 5 and _is_reranking_enabled():
-        from app.search.rerank import rerank
-        candidates, rerank_usage = await rerank(question, candidates[:20], _client)
+    if topic_filter and len(bm25_ids) < 3:
+        bm25_ids = await asyncio.to_thread(_index.search_ids, question, 80, None)
+        topic_filter = None  # widened fallback
 
-    selected = []
+    def _bm25_only(reason: str) -> list[dict]:
+        if trace is not None:
+            trace["mode"] = reason
+        return _index.get_documents_by_ids(bm25_ids)
+
+    if trace is not None:
+        trace["topic_filter"] = topic_filter
+        trace["bm25"] = _snap(_index.get_documents_by_ids(bm25_ids[:20]))
+
+    if not hybrid:
+        return _bm25_only("bm25-only (semantic not ready)")
+    if isinstance(dense, Exception):
+        print(f"[hybrid] semantic search failed, BM25-only: {dense}", flush=True)
+        return _bm25_only(f"bm25-only (semantic error: {dense})")
+
+    dense_ids = [doc_id for doc_id, _ in dense]
+    w_lex, w_sem = signals.adaptive_weights(question)
+    fused_ids = rrf_fuse(
+        bm25_ids, dense_ids, k=60, limit=50,
+        w_lexical=w_lex, w_semantic=w_sem,
+    )
+
+    if trace is not None:
+        trace["mode"] = "hybrid"
+        trace["technical_query"] = signals.is_technical_query(question)
+        trace["weights"] = {"lexical": w_lex, "semantic": w_sem}
+        trace["query_stems"] = sorted(signals.identifier_stems(question))
+        dense_score = {doc_id: sc for doc_id, sc in dense}
+        trace["semantic"] = _snap(
+            _index.get_documents_by_ids(dense_ids[:20]), dense_score
+        )
+
+    if not fused_ids:
+        return _bm25_only("bm25-only (empty fusion)")
+
+    docs = _index.get_documents_by_ids(fused_ids)
+    if trace is not None:
+        trace["fused"] = _snap(docs)
+    if topic_filter:
+        on_topic = [d for d in docs if _matches_topic(d, topic_filter)]
+        if len(on_topic) >= 3:
+            docs = on_topic
+
+    reranked = signals.rescore(question, docs)
+    if trace is not None:
+        trace["after_signals"] = _snap(reranked)
+    return reranked
+
+
+def _trim_to_budget(candidates: list[dict], max_words: int) -> tuple[list[dict], int]:
+    """Greedily take docs until the word budget is exceeded (always keep ≥1)."""
+    selected: list[dict] = []
     word_count = 0
     for doc in candidates:
         doc_words = len(doc["content"].split())
@@ -259,11 +355,86 @@ async def retrieve_with_budget(
             break
         selected.append(doc)
         word_count += doc_words
+    return selected, word_count
+
+
+async def _run_pipeline(
+    question: str, deep: bool, topic_filter: str | None, trace: dict | None = None,
+) -> tuple[list[dict], dict | None]:
+    """Shared retrieve path: candidates → optional LLM rerank → budget trim.
+
+    Used by both retrieve_with_budget (prod) and trace_retrieve (debug); the
+    optional `trace` records each stage without forking the pipeline.
+    """
+    if _index is None:
+        return [], None
+    max_words = _get_context_budget(deep)
+    candidates = await _hybrid_candidates(question, topic_filter, trace=trace)
+
+    rerank_usage = None
+    rerank_applied = False
+    would_rerank = bool(_client and len(candidates) > 5 and _is_reranking_enabled())
+    if would_rerank and trace is None:
+        # Paid Groq call — never run it from the debug trace (untracked spend).
+        from app.search.rerank import rerank
+        candidates, rerank_usage = await rerank(question, candidates[:20], _client)
+        rerank_applied = True
+    if trace is not None:
+        trace["llm_rerank_enabled"] = would_rerank
+        trace["llm_rerank_applied"] = False  # trace never executes the paid rerank
+        trace["llm_rerank_note"] = (
+            "skipped in trace (would run in prod)" if would_rerank else "disabled"
+        )
+
+    selected, word_count = _trim_to_budget(candidates, max_words)
+    if trace is not None:
+        snaps = _snap(selected, n=50)
+        trace["selected"] = [
+            {**row, "words": len(selected[i]["content"].split())}
+            for i, row in enumerate(snaps)
+        ]
+        trace["selected_count"] = len(selected)
+        trace["selected_words"] = word_count
     return selected, rerank_usage
 
 
+async def retrieve_with_budget(
+    question: str, deep: bool = False, topic_filter: str | None = None,
+) -> tuple[list[dict], dict | None]:
+    """Hybrid retrieve (BM25 ∪ semantic, RRF, signal rerank), optional LLM
+    rerank, then trim to the word budget.
+
+    Returns (selected_docs, rerank_usage_or_None).
+    """
+    return await _run_pipeline(question, deep, topic_filter)
+
+
+async def trace_retrieve(
+    question: str, deep: bool = False, topic_filter: str | None = None,
+) -> dict:
+    """Run the full retrieve pipeline and return a structured trace (debug)."""
+    trace: dict = {
+        "query": question,
+        "deep": deep,
+        "hybrid_enabled": settings.hybrid_enabled,
+        "embeddings_ready": embeddings_ready(),
+        "rerank_llm_enabled": _is_reranking_enabled(),
+        "context_budget_words": _get_context_budget(deep),
+    }
+    if _index is None:
+        trace["error"] = "index not initialized"
+        return trace
+    await _run_pipeline(question, deep, topic_filter, trace=trace)
+    return trace
+
+
 def _is_reranking_enabled() -> bool:
-    """Check admin setting for reranking toggle."""
+    """Check admin setting for the optional LLM rerank.
+
+    Default OFF: hybrid retrieval (BM25 + semantic + signal rerank) is already
+    strong and free. The LLM rerank stays available as an admin toggle for
+    hard cases.
+    """
     try:
         from app.db import get_conn
         row = get_conn().execute(
@@ -273,7 +444,7 @@ def _is_reranking_enabled() -> bool:
             return row["value"] == "1"
     except Exception:
         pass
-    return True  # enabled by default
+    return False  # disabled by default
 
 
 _logo_cache: dict[str, bool] = {}

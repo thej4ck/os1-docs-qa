@@ -1,6 +1,11 @@
-"""SQLite FTS5 wrapper for document indexing and BM25 search."""
+"""SQLite FTS5 wrapper for document indexing and BM25 search.
+
+Also stores per-document semantic embeddings (model2vec) in a separate
+`embeddings` table so the FTS-critical insert path stays untouched.
+"""
 
 import sqlite3
+from collections.abc import Iterator
 from pathlib import Path
 from typing import Optional
 
@@ -83,6 +88,18 @@ class SearchIndex:
                 INSERT INTO docs_fts(docs_fts, rowid, title, content)
                 VALUES ('delete', old.id, old.title, old.content);
             END;
+
+            -- Semantic embeddings (model2vec). Separate table: the FTS triggers
+            -- above insert explicit columns, so they are unaffected by this.
+            CREATE TABLE IF NOT EXISTS embeddings (
+                doc_id INTEGER PRIMARY KEY,
+                vec    BLOB NOT NULL
+            );
+
+            CREATE TABLE IF NOT EXISTS embedding_meta (
+                key   TEXT PRIMARY KEY,
+                value TEXT NOT NULL
+            );
         """)
         self.conn.commit()
 
@@ -109,31 +126,51 @@ class SearchIndex:
         topic_filter: Optional[str] = None,
     ) -> list[dict]:
         """BM25-ranked full-text search with AND-first, OR-fallback strategy."""
+        return self._search(query, limit, doc_type, topic_filter, ids_only=False)
+
+    def search_ids(
+        self, query: str, limit: int = 10, topic_filter: Optional[str] = None,
+    ) -> list[int]:
+        """BM25-ranked search returning only doc ids (no content/snippet fetch).
+
+        Used by the hybrid retriever, which needs ranked ids for fusion and
+        fetches full rows only for the small fused set.
+        """
+        return self._search(query, limit, None, topic_filter, ids_only=True)
+
+    def _search(
+        self, query: str, limit: int, doc_type: Optional[str],
+        topic_filter: Optional[str], ids_only: bool,
+    ):
         tokens = self._clean_tokens(query)
         if not tokens:
             return []
 
         # Try AND (all terms must match) first
         and_query = " AND ".join(tokens)
-        results = self._execute_search(and_query, limit, doc_type, topic_filter)
+        results = self._execute_search(and_query, limit, doc_type, topic_filter, ids_only)
 
         # Fall back to OR if AND returns too few results
         if len(results) < _MIN_AND_RESULTS and len(tokens) > 1:
             or_query = " OR ".join(tokens)
-            results = self._execute_search(or_query, limit, doc_type, topic_filter)
+            results = self._execute_search(or_query, limit, doc_type, topic_filter, ids_only)
 
         return results
 
     def _execute_search(
         self, fts_query: str, limit: int, doc_type: Optional[str] = None,
-        topic_filter: Optional[str] = None,
-    ) -> list[dict]:
+        topic_filter: Optional[str] = None, ids_only: bool = False,
+    ):
         """Run a single FTS5 MATCH query with title-boosted BM25 ranking."""
-        base_sql = """
-            SELECT d.id, d.source_file, d.module, d.doc_type, d.title,
+        if ids_only:
+            select = "SELECT d.id"
+        else:
+            select = """SELECT d.id, d.source_file, d.module, d.doc_type, d.title,
                    snippet(docs_fts, 1, '<b>', '</b>', '...', 40) AS snippet,
                    d.content,
-                   bm25(docs_fts, 10.0, 1.0) AS rank
+                   bm25(docs_fts, 10.0, 1.0) AS rank"""
+        base_sql = f"""
+            {select}
             FROM docs_fts
             JOIN documents d ON d.id = docs_fts.rowid
             WHERE docs_fts MATCH ?
@@ -150,10 +187,12 @@ class SearchIndex:
             params.append(f"%/{topic_filter}/%")
             params.append(topic_filter)
 
-        base_sql += " ORDER BY rank LIMIT ?"
+        base_sql += " ORDER BY bm25(docs_fts, 10.0, 1.0) LIMIT ?"
         params.append(limit)
 
         rows = self.conn.execute(base_sql, params).fetchall()
+        if ids_only:
+            return [row[0] for row in rows]
         return [dict(row) for row in rows]
 
     def _clean_tokens(self, query: str) -> list[str]:
@@ -182,6 +221,84 @@ class SearchIndex:
         row = self.conn.execute("SELECT COUNT(*) FROM documents").fetchone()
         return row[0]
 
+    # ── Semantic embeddings ──────────────────────────────────────────────
+
+    def iter_documents_for_embedding(self) -> Iterator[tuple[int, str, str]]:
+        """Yield (id, title, content) for every document, ordered by id."""
+        cur = self.conn.execute(
+            "SELECT id, title, content FROM documents ORDER BY id"
+        )
+        for row in cur:
+            yield row["id"], row["title"] or "", row["content"]
+
+    def store_embedding(self, doc_id: int, blob: bytes):
+        """Upsert one document's embedding (float32 little-endian bytes)."""
+        self.conn.execute(
+            "INSERT OR REPLACE INTO embeddings (doc_id, vec) VALUES (?, ?)",
+            (doc_id, blob),
+        )
+
+    def clear_embeddings(self):
+        self.conn.execute("DELETE FROM embeddings")
+
+    def set_embedding_meta(self, key: str, value: str):
+        self.conn.execute(
+            "INSERT OR REPLACE INTO embedding_meta (key, value) VALUES (?, ?)",
+            (key, str(value)),
+        )
+
+    def get_embedding_meta(self, key: str) -> Optional[str]:
+        try:
+            row = self.conn.execute(
+                "SELECT value FROM embedding_meta WHERE key = ?", (key,)
+            ).fetchone()
+        except sqlite3.OperationalError:
+            return None
+        return row["value"] if row else None
+
+    def embedding_count(self) -> int:
+        try:
+            row = self.conn.execute("SELECT COUNT(*) FROM embeddings").fetchone()
+        except sqlite3.OperationalError:
+            return 0
+        return row[0]
+
+    def load_embedding_matrix(self):
+        """Load all embeddings into (ids, matrix) numpy arrays.
+
+        Returns (np.ndarray[int64] (n,), np.ndarray[float32] (n, dim)) or
+        (None, None) if there are no embeddings. Vectors are stored already
+        L2-normalized at build time.
+        """
+        import numpy as np
+
+        dim_str = self.get_embedding_meta("dim")
+        rows = self.conn.execute(
+            "SELECT doc_id, vec FROM embeddings ORDER BY doc_id"
+        ).fetchall()
+        if not rows:
+            return None, None
+        dim = int(dim_str) if dim_str else len(rows[0]["vec"]) // 4
+        ids = np.empty(len(rows), dtype=np.int64)
+        mat = np.empty((len(rows), dim), dtype=np.float32)
+        for i, row in enumerate(rows):
+            ids[i] = row["doc_id"]
+            mat[i] = np.frombuffer(row["vec"], dtype=np.float32, count=dim)
+        return ids, mat
+
+    def get_documents_by_ids(self, ids: list[int]) -> list[dict]:
+        """Fetch full document rows for a list of ids, preserving id order."""
+        if not ids:
+            return []
+        placeholders = ",".join("?" * len(ids))
+        rows = self.conn.execute(
+            f"SELECT id, source_file, module, doc_type, title, content "
+            f"FROM documents WHERE id IN ({placeholders})",
+            ids,
+        ).fetchall()
+        by_id = {row["id"]: dict(row) for row in rows}
+        return [by_id[i] for i in ids if i in by_id]
+
     def rebuild(self):
         """Drop all data and recreate the schema."""
         cur = self.conn.cursor()
@@ -190,6 +307,8 @@ class SearchIndex:
             DROP TRIGGER IF EXISTS docs_ad;
             DROP TABLE IF EXISTS docs_fts;
             DROP TABLE IF EXISTS documents;
+            DROP TABLE IF EXISTS embeddings;
+            DROP TABLE IF EXISTS embedding_meta;
         """)
         self.conn.commit()
         self._create_schema()

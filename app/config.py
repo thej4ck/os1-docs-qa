@@ -14,6 +14,8 @@ class Settings(BaseSettings):
     production: bool = False          # True in cloud: enables Secure cookies, trusts proxy headers
     base_url: str = ""                 # Public URL (e.g., https://os1docs.ai.scao.it) for CORS/redirects
     docs_repo_path: str = "../os1-documentation/Claude Code Playground"
+    static_model_path: str = "searchdata/static_model"  # distilled model2vec dir (semantic search)
+    hybrid_enabled: bool = True        # BM25 + semantic fusion; False = BM25-only fallback
     # Pricing is now driven dynamically by ALLOWED_MODELS in app/search/query.py
 
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8"}
