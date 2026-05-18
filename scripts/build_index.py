@@ -978,11 +978,13 @@ def add_embeddings(index: SearchIndex, model_path: str, batch_size: int = 256) -
     texts = [(f"{d[1]}\n{d[2]}" if d[1] else d[2]) for d in docs]
 
     t0 = time.monotonic()
+    # No multiprocessing: ~3790 short texts encode in <1s single-process, and
+    # a pool can leave orphaned workers if the build is interrupted.
     vecs = model.encode(
         texts,
         batch_size=batch_size,
         show_progress_bar=True,
-        use_multiprocessing=True,
+        use_multiprocessing=False,
     ).astype(np.float32)
 
     # Belt-and-braces L2 normalization (StaticModel(normalize=True) already does
