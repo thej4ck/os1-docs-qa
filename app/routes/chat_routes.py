@@ -21,7 +21,8 @@ from app.models.conversation import (
     get_messages, get_messages_for_llm, add_message, update_title,
     delete_conversation, count_user_messages, get_max_messages_setting,
 )
-from app.models.usage import check_limit
+from app.models.usage import check_limit, get_monthly_usage, get_domain_usage, get_current_month
+from app.models.domain import get_domain_for_email
 from app.search import query as query_module
 from app.version import VERSION, BUILD, BUILD_DATE
 
@@ -43,6 +44,13 @@ def _check_rate_limit(email: str) -> bool:
         return False
     _rate_limits[email].append(now)
     return True
+
+
+def _sse_error(message: str, **extra) -> EventSourceResponse:
+    """Single-event SSE error response used by ask() limit gates."""
+    async def gen():
+        yield {"data": json.dumps({"error": message, "done": True, **extra})}
+    return EventSourceResponse(gen())
 
 
 def _templates():
@@ -139,45 +147,51 @@ async def ask(
         )
 
     # Daily limit per domain (0 = unlimited)
-    from app.models.domain import get_domain_for_email, get_daily_question_count
+    from app.models.domain import get_daily_question_count
     domain_config = get_domain_for_email(user["email"])
     if domain_config and domain_config["daily_limit"] > 0:
         daily_count = get_daily_question_count(user["id"])
         if daily_count >= domain_config["daily_limit"]:
-            async def daily_limit_event():
-                yield {"data": json.dumps({
-                    "error": f"Hai esaurito le domande di oggi ({daily_count}/{domain_config['daily_limit']} domande giornaliere). Il contatore si azzera a mezzanotte.",
-                    "done": True,
-                })}
-            return EventSourceResponse(daily_limit_event())
+            return _sse_error(
+                f"Hai esaurito le domande di oggi ({daily_count}/{domain_config['daily_limit']} "
+                f"domande giornaliere). Il contatore si azzera a mezzanotte."
+            )
+
+    # Single monthly aggregate (monthly_usage view) — reused for both the
+    # request-count gate and the token gate, avoiding a second COUNT query.
+    allowed, usage_info = check_limit(user["id"])
+
+    # Monthly request limit per domain (commercial tier; 0 = unlimited)
+    if domain_config and domain_config["monthly_request_limit"] > 0:
+        monthly_count = usage_info["total_questions"]
+        if monthly_count >= domain_config["monthly_request_limit"]:
+            return _sse_error(
+                f"Limite mensile di richieste del piano {domain_config['tier']} raggiunto "
+                f"({monthly_count}/{domain_config['monthly_request_limit']}). "
+                f"Contatta il rivenditore per l'upgrade."
+            )
 
     # Monthly token limit — domain setting overrides user limit
     # If domain has monthly_token_limit = 0, skip user-level check
     domain_monthly_unlimited = domain_config and domain_config.get("monthly_token_limit", 0) == 0
-    if not domain_monthly_unlimited:
-        allowed, usage_info = check_limit(user["id"])
-        if not allowed and usage_info["limit"] > 0:
-            used_k = round(usage_info["total_tokens"] / 1000)
-            limit_k = round(usage_info["limit"] / 1000)
-            async def limit_event():
-                yield {"data": json.dumps({
-                    "error": f"Hai esaurito i token mensili ({used_k}K/{limit_k}K token consumati questo mese). Contatta l'amministratore per aumentare il limite.",
-                    "done": True,
-                })}
-            return EventSourceResponse(limit_event())
+    if not domain_monthly_unlimited and not allowed and usage_info["limit"] > 0:
+        used_k = round(usage_info["total_tokens"] / 1000)
+        limit_k = round(usage_info["limit"] / 1000)
+        return _sse_error(
+            f"Hai esaurito i token mensili ({used_k}K/{limit_k}K token consumati questo mese). "
+            f"Contatta l'amministratore per aumentare il limite."
+        )
 
     # Check message limit per conversation
     max_msgs = get_max_messages_setting()
     if conversation_id:
         current_count = count_user_messages(conversation_id)
         if current_count >= max_msgs:
-            async def msg_limit_event():
-                yield {"data": json.dumps({
-                    "error": f"Questa conversazione ha raggiunto il limite di {max_msgs} domande. Apri una nuova chat per continuare.",
-                    "done": True,
-                    "limit_reached": True,
-                })}
-            return EventSourceResponse(msg_limit_event())
+            return _sse_error(
+                f"Questa conversazione ha raggiunto il limite di {max_msgs} domande. "
+                f"Apri una nuova chat per continuare.",
+                limit_reached=True,
+            )
 
     # Get or create conversation
     conv_id = conversation_id or None
@@ -421,6 +435,42 @@ async def complete_onboarding(request: Request):
     from app.models.user import mark_onboarding_completed
     mark_onboarding_completed(user["id"])
     return JSONResponse({"ok": True})
+
+
+# ── Usage status bar ──
+
+@router.get("/api/usage/summary")
+async def usage_summary(request: Request):
+    user = _get_user(request)
+    if not user:
+        return JSONResponse({"error": "Non autenticato."}, status_code=401)
+
+    month = get_current_month()
+    u = get_monthly_usage(user["id"], month)
+    user_tokens = u["total_prompt_tokens"] + u["total_completion_tokens"]
+    _, lim = check_limit(user["id"])
+
+    email = user["email"]
+    domain = email.split("@", 1)[1] if "@" in email else ""
+    company = {"domain": domain, "questions": 0, "tokens": 0, "token_limit": 0}
+    for d in get_domain_usage(month):
+        if d["domain"] == domain:
+            company["questions"] = d["total_questions"]
+            company["tokens"] = d["total_prompt_tokens"] + d["total_completion_tokens"]
+            break
+    dom_cfg = get_domain_for_email(email)
+    if dom_cfg:
+        company["token_limit"] = dom_cfg.get("monthly_token_limit") or 0
+
+    return JSONResponse({
+        "month": month,
+        "user": {
+            "questions": u["total_questions"],
+            "tokens": user_tokens,
+            "token_limit": lim.get("limit") or 0,
+        },
+        "company": company,
+    })
 
 
 # ── Document viewer ──

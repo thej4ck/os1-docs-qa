@@ -9,14 +9,6 @@
 
 {% block head %}
 <style>
-    .admin-nav { display: flex; gap: var(--sp-2); margin-bottom: var(--sp-6); flex-wrap: wrap; }
-    .admin-nav a {
-        font-size: 0.8125rem; font-weight: 500; padding: 6px 14px;
-        border-radius: var(--r-full); color: var(--c-text-secondary);
-        border: 1px solid var(--c-border); transition: all 150ms ease; text-decoration: none;
-    }
-    .admin-nav a:hover { background: var(--c-surface-alt); color: var(--c-text); text-decoration: none; }
-    .admin-nav a.active { background: var(--c-brand); color: white; border-color: var(--c-brand); }
     .admin-table {
         width: 100%; border-collapse: collapse; font-size: 0.875rem;
         background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md); overflow: hidden;
@@ -40,15 +32,7 @@
 
 {% block content %}
 <div class="container admin-wrap">
-    <nav class="admin-nav">
-        <a href="/admin">Dashboard</a>
-        <a href="/admin/users" class="active">Utenti</a>
-        <a href="/admin/usage">Consumi</a>
-        <a href="/admin/domains">Domini</a>
-        <a href="/admin/costs">Costi</a>
-        <a href="/admin/feedback">Feedback</a>
-        <a href="/admin/announcement">Impostazioni</a>
-    </nav>
+    {% include "admin/_nav.html" %}
 
     <table class="admin-table">
         <thead>

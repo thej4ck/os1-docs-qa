@@ -9,14 +9,6 @@
 
 {% block head %}
 <style>
-    .admin-nav { display: flex; gap: var(--sp-2); margin-bottom: var(--sp-6); flex-wrap: wrap; }
-    .admin-nav a {
-        font-size: 0.8125rem; font-weight: 500; padding: 6px 14px;
-        border-radius: var(--r-full); color: var(--c-text-secondary);
-        border: 1px solid var(--c-border); transition: all 150ms ease; text-decoration: none;
-    }
-    .admin-nav a:hover { background: var(--c-surface-alt); color: var(--c-text); text-decoration: none; }
-    .admin-nav a.active { background: var(--c-brand); color: white; border-color: var(--c-brand); }
     .admin-wrap { padding: var(--sp-6) 0; }
     .user-header { margin-bottom: var(--sp-6); }
     .user-header h1 { font-size: 1.25rem; margin-bottom: var(--sp-1); }
@@ -30,7 +22,7 @@
     .info-value { font-family: 'DM Sans', sans-serif; font-size: 1.125rem; font-weight: 600; }
     .progress-bar { height: 6px; background: var(--c-surface-alt); border-radius: 3px; margin-top: var(--sp-2); overflow: hidden; }
     .progress-fill { height: 100%; border-radius: 3px; background: var(--c-brand); transition: width 0.3s ease; }
-    .progress-fill.warn { background: #F59E0B; }
+    .progress-fill.warn { background: var(--c-warning); }
     .progress-fill.danger { background: var(--c-error); }
     .limit-form { display: flex; gap: var(--sp-2); align-items: center; margin-top: var(--sp-3); }
     .limit-form input { width: 140px; padding: 6px 10px; font-size: 0.8125rem; }
@@ -54,15 +46,7 @@
 
 {% block content %}
 <div class="container admin-wrap">
-    <nav class="admin-nav">
-        <a href="/admin">Dashboard</a>
-        <a href="/admin/users" class="active">Utenti</a>
-        <a href="/admin/usage">Consumi</a>
-        <a href="/admin/domains">Domini</a>
-        <a href="/admin/costs">Costi</a>
-        <a href="/admin/feedback">Feedback</a>
-        <a href="/admin/announcement">Impostazioni</a>
-    </nav>
+    {% include "admin/_nav.html" %}
 
     <div class="user-header">
         <h1>{{ user.email }}</h1>

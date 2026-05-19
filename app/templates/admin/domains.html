@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Domini — Admin OS1 Docs{% endblock %}
 
+{% macro mtok(v) %}{{ '%g'|format(v / 1000000)|replace('.', ',') }}M{% endmacro %}
+
 {% block nav_right %}
 <span class="header-email">{{ email }}</span>
 <a href="/chat" class="btn-logout">Chat</a>
@@ -9,10 +11,6 @@
 
 {% block head %}
 <style>
-    .admin-nav { display: flex; gap: var(--sp-2); margin-bottom: var(--sp-6); flex-wrap: wrap; }
-    .admin-nav a { font-size: 0.8125rem; font-weight: 500; padding: 6px 14px; border-radius: var(--r-full); color: var(--c-text-secondary); border: 1px solid var(--c-border); transition: all 150ms ease; text-decoration: none; }
-    .admin-nav a:hover { background: var(--c-surface-alt); color: var(--c-text); text-decoration: none; }
-    .admin-nav a.active { background: var(--c-brand); color: white; border-color: var(--c-brand); }
     .admin-wrap { padding: var(--sp-6) 0; }
     .admin-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md); overflow: hidden; }
     .admin-table th { text-align: left; padding: var(--sp-3) var(--sp-3); font-size: 0.75rem; font-weight: 600; color: var(--c-text-secondary); background: var(--c-surface-alt); border-bottom: 1px solid var(--c-border); text-transform: uppercase; letter-spacing: 0.04em; }
@@ -22,6 +20,9 @@
     .admin-table input[type="number"]:focus { border-color: var(--c-brand); outline: none; }
     .admin-table input[type="text"] { width: 180px; padding: 5px 8px; font-size: 0.8125rem; border: 1px solid var(--c-border-input); border-radius: var(--r-sm); }
     .admin-table input[type="text"]:focus { border-color: var(--c-brand); outline: none; }
+    select.tier-select { padding: 5px 8px; font-size: 0.8125rem; border: 1px solid var(--c-border-input); border-radius: var(--r-sm); background: var(--c-surface); color: var(--c-text); cursor: pointer; }
+    select.tier-select:focus { border-color: var(--c-brand); outline: none; }
+    .limit-ro { font-family: 'DM Sans', sans-serif; font-weight: 600; color: var(--c-text-secondary); white-space: nowrap; }
     .toggle-switch { position: relative; display: inline-block; width: 36px; height: 20px; }
     .toggle-switch input { opacity: 0; width: 0; height: 0; }
     .toggle-slider { position: absolute; cursor: pointer; inset: 0; background: var(--c-border); border-radius: 20px; transition: 0.2s; }
@@ -39,22 +40,14 @@
     .num { font-family: 'DM Sans', sans-serif; font-weight: 600; }
     .pattern-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.8125rem; color: var(--c-brand); }
     .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; }
-    .status-dot.on { background: #16A34A; }
+    .status-dot.on { background: var(--c-success); }
     .status-dot.off { background: var(--c-text-tertiary); }
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="container admin-wrap">
-    <nav class="admin-nav">
-        <a href="/admin">Dashboard</a>
-        <a href="/admin/users">Utenti</a>
-        <a href="/admin/usage">Consumi</a>
-        <a href="/admin/domains" class="active">Domini</a>
-        <a href="/admin/costs">Costi</a>
-        <a href="/admin/feedback">Feedback</a>
-        <a href="/admin/announcement">Impostazioni</a>
-    </nav>
+    {% include "admin/_nav.html" %}
 
     <h3 class="section-title">Aggiungi dominio</h3>
     <form class="add-form" method="post" action="/admin/domains/add">
@@ -63,12 +56,14 @@
             <input type="text" name="pattern" placeholder="*@dominio.it" required style="width:200px;">
         </div>
         <div>
-            <label>Domande/giorno</label><br>
-            <input type="number" name="daily_limit" value="50" min="0" placeholder="0 = illimitato">
-        </div>
-        <div>
-            <label>Limite token/mese</label><br>
-            <input type="number" name="monthly_token_limit" value="500000" min="0" step="1000" placeholder="0 = illimitato">
+            <label>Livello</label><br>
+            <select name="tier" class="tier-select">
+                {% for name, p in tier_presets.items() %}
+                <option value="{{ name }}" {% if name == default_tier %}selected{% endif %}>
+                    {{ name }} — {{ p.monthly_request_limit }} richieste/mese · {{ mtok(p.monthly_token_limit) }} token
+                </option>
+                {% endfor %}
+            </select>
         </div>
         <div style="padding-top:16px;">
             <button type="submit" class="btn-sm btn-save">Aggiungi</button>
@@ -80,7 +75,8 @@
         <thead>
             <tr>
                 <th>Pattern</th>
-                <th>Domande/giorno</th>
+                <th>Livello</th>
+                <th>Richieste/mese</th>
                 <th>Token/mese</th>
                 <th>Attivo</th>
                 <th>Azioni</th>
@@ -91,8 +87,15 @@
             <tr>
                 <form method="post" action="/admin/domains/{{ d.id }}/update">
                 <td><span class="pattern-tag">{{ d.pattern }}</span></td>
-                <td><input type="number" name="daily_limit" value="{{ d.daily_limit }}" min="0" placeholder="0 = illimitato"></td>
-                <td><input type="number" name="monthly_token_limit" value="{{ d.monthly_token_limit }}" min="0" step="1000" placeholder="0 = illimitato"></td>
+                <td>
+                    <select name="tier" class="tier-select">
+                        {% for name in tier_presets.keys() %}
+                        <option value="{{ name }}" {% if name == d.tier %}selected{% endif %}>{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td><span class="limit-ro">{% if d.monthly_request_limit %}{{ d.monthly_request_limit }}{% else %}illimitato{% endif %}</span></td>
+                <td><span class="limit-ro">{% if d.monthly_token_limit %}{{ mtok(d.monthly_token_limit) }}{% else %}illimitato{% endif %}</span></td>
                 <td>
                     <label class="toggle-switch">
                         <input type="checkbox" name="enabled" {% if d.enabled %}checked{% endif %}>
@@ -109,7 +112,7 @@
             </tr>
             {% endfor %}
             {% if not domains %}
-            <tr><td colspan="5" style="text-align:center;color:var(--c-text-tertiary);padding:var(--sp-8);">Nessun dominio configurato. Aggiungi il primo.</td></tr>
+            <tr><td colspan="6" style="text-align:center;color:var(--c-text-tertiary);padding:var(--sp-8);">Nessun dominio configurato. Aggiungi il primo.</td></tr>
             {% endif %}
         </tbody>
     </table>
