@@ -1,9 +1,15 @@
 """User CRUD operations."""
 
 import fnmatch
+import secrets
 
 from app.config import settings
 from app.db import get_conn
+
+
+def _gen_access_token() -> str:
+    """Generate a long, URL-safe random token for passwordless access."""
+    return secrets.token_urlsafe(24)
 
 
 def get_or_create_user(email: str) -> dict:
@@ -15,12 +21,56 @@ def get_or_create_user(email: str) -> dict:
 
     is_admin = _matches_admin_pattern(email)
     conn.execute(
-        "INSERT INTO users (email, is_admin) VALUES (?, ?)",
-        (email, int(is_admin)),
+        "INSERT INTO users (email, is_admin, access_token) VALUES (?, ?, ?)",
+        (email, int(is_admin), _gen_access_token()),
     )
     conn.commit()
     row = conn.execute("SELECT * FROM users WHERE email = ?", (email,)).fetchone()
     return dict(row)
+
+
+def ensure_access_token(email: str) -> str | None:
+    """Return the user's personal access token, generating one if missing."""
+    conn = get_conn()
+    row = conn.execute(
+        "SELECT access_token FROM users WHERE email = ?", (email,)
+    ).fetchone()
+    if not row:
+        return None
+    token = row["access_token"]
+    if token:
+        return token
+    token = _gen_access_token()
+    conn.execute(
+        "UPDATE users SET access_token = ? WHERE email = ?", (token, email)
+    )
+    conn.commit()
+    return token
+
+
+def regenerate_access_token(email: str) -> str | None:
+    """Rotate the user's access token, invalidating the previous one."""
+    conn = get_conn()
+    if not conn.execute(
+        "SELECT 1 FROM users WHERE email = ?", (email,)
+    ).fetchone():
+        return None
+    token = _gen_access_token()
+    conn.execute(
+        "UPDATE users SET access_token = ? WHERE email = ?", (token, email)
+    )
+    conn.commit()
+    return token
+
+
+def get_user_by_access_token(token: str) -> dict | None:
+    """Resolve a user from a personal access token (constant-effort lookup)."""
+    if not token or not token.strip():
+        return None
+    row = get_conn().execute(
+        "SELECT * FROM users WHERE access_token = ?", (token.strip(),)
+    ).fetchone()
+    return dict(row) if row else None
 
 
 def get_user_by_email(email: str) -> dict | None:

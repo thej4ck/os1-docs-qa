@@ -1,12 +1,18 @@
 """Authentication routes: login, OTP verification, logout."""
 
 from fastapi import APIRouter, Request, Form
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 
 from app.auth.otp import generate_otp, verify_otp, is_email_allowed, send_otp_email
 from app.auth.session import create_session, clear_session, get_session_email
 from app.config import settings
-from app.models.user import get_or_create_user, update_last_login
+from app.models.user import (
+    get_or_create_user,
+    update_last_login,
+    ensure_access_token,
+    regenerate_access_token,
+    get_user_by_access_token,
+)
 
 router = APIRouter()
 
@@ -76,3 +82,52 @@ async def logout(request: Request):
     response = RedirectResponse(url="/login", status_code=302)
     clear_session(response)
     return response
+
+
+# ── Passwordless access via personal token (for OS1 embedded webview) ──
+
+def _public_base(request: Request) -> str:
+    """Absolute base URL: configured BASE_URL, else inferred from the request."""
+    if settings.base_url:
+        return settings.base_url.rstrip("/")
+    return str(request.base_url).rstrip("/")
+
+
+def _access_url(request: Request, token: str) -> str:
+    return f"{_public_base(request)}/login/token?t={token}"
+
+
+@router.get("/login/token")
+async def login_with_token(request: Request, t: str = ""):
+    """Establish a session from a personal access token, then strip the token
+    from the URL by redirecting to a clean /chat (token never stays in the
+    address bar or browser history beyond this single redirect)."""
+    user = get_user_by_access_token(t)
+    if not user:
+        return RedirectResponse(url="/login", status_code=302)
+    update_last_login(user["email"])
+    response = RedirectResponse(url="/chat", status_code=302)
+    create_session(response, user["email"])
+    return response
+
+
+@router.get("/api/access-token")
+async def get_access_token(request: Request):
+    email = get_session_email(request)
+    if not email:
+        return JSONResponse({"error": "Non autenticato."}, status_code=401)
+    token = ensure_access_token(email)
+    if not token:
+        return JSONResponse({"error": "Utente non trovato."}, status_code=404)
+    return JSONResponse({"url": _access_url(request, token)})
+
+
+@router.post("/api/access-token/regenerate")
+async def regenerate_access_token_route(request: Request):
+    email = get_session_email(request)
+    if not email:
+        return JSONResponse({"error": "Non autenticato."}, status_code=401)
+    token = regenerate_access_token(email)
+    if not token:
+        return JSONResponse({"error": "Utente non trovato."}, status_code=404)
+    return JSONResponse({"url": _access_url(request, token)})

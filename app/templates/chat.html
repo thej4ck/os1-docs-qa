@@ -21,8 +21,12 @@
     </svg>
     <span class="docs-badge" id="docs-badge">0</span>
 </button>
+<div class="usage-meter" id="usage-meter" hidden title="">
+    <div class="usage-meter-track"><div class="usage-meter-fill" id="usage-meter-fill"></div></div>
+    <span class="usage-meter-label" id="usage-meter-label"></span>
+</div>
 <span class="header-divider"></span>
-<span class="header-email" title="{{ email }}">{{ email }}</span>
+<button class="header-email header-email-btn" id="access-link-btn" title="Accesso rapido da OS1 — clicca per il link" onclick="openAccessModal()">{{ email }} <span aria-hidden="true">🔑</span></button>
 {% if is_admin %}<a href="/admin" class="btn-logout" style="border-color: var(--c-brand); color: var(--c-brand);">Admin</a>{% endif %}
 <a href="/logout" class="btn-logout">Esci</a>
 {% endblock %}
@@ -33,47 +37,27 @@
 {% if show_onboarding %}
 <div class="onboarding-overlay" id="onboarding">
     <div class="onboarding-card">
-        <button class="onboarding-skip" onclick="completeOnboarding()">Salta ✕</button>
+        <button class="onboarding-skip" onclick="completeOnboarding()">Salta introduzione</button>
 
         <div class="onboarding-step active" data-step="1">
             <img src="/static/img/logo-lg.png" alt="SCAO" class="onboarding-logo">
-            <div class="onboarding-title">Benvenuto in OS1 AI Docs<span class="beta-badge-lg">Beta</span></div>
-            <div class="onboarding-subtitle">Il tuo assistente intelligente per la documentazione del gestionale OS1. Ti guiderà passo passo nell'uso del sistema.<br><strong style="color:var(--c-brand);">Prodotto in fase BETA</strong> — funzionalità in evoluzione, feedback molto utile.</div>
-            <div class="onboarding-dots"><span class="onboarding-dot active"></span><span class="onboarding-dot"></span><span class="onboarding-dot"></span><span class="onboarding-dot"></span></div>
-            <button class="onboarding-btn onboarding-btn-primary" onclick="onboardingNext()">Iniziamo →</button>
+            <div class="onboarding-title">Benvenuta in OS1 Docs<span class="beta-badge-lg">Beta</span></div>
+            <div class="onboarding-subtitle">Fai una domanda sul gestionale OS1 e ricevi una risposta presa dal manuale ufficiale, con il documento di origine sempre indicato. È in versione Beta: ogni segnalazione ci aiuta a migliorarlo.</div>
+            <div class="onboarding-features">
+                <div class="onboarding-feature"><span class="onboarding-feature-icon">💬</span><div class="onboarding-feature-text"><strong>Scrivi come parli</strong> — fai la domanda con parole tue.</div></div>
+                <div class="onboarding-feature"><span class="onboarding-feature-icon">📄</span><div class="onboarding-feature-text"><strong>Risposte dal manuale</strong> — ogni risposta cita il documento OS1.</div></div>
+                <div class="onboarding-feature"><span class="onboarding-feature-icon">👍</span><div class="onboarding-feature-text"><strong>Dicci com'è andata</strong> — basta un clic su "Utile" / "Non utile".</div></div>
+            </div>
+            <div class="onboarding-dots"><span class="onboarding-dot active"></span><span class="onboarding-dot"></span></div>
+            <button class="onboarding-btn onboarding-btn-primary" onclick="onboardingNext()">Avanti →</button>
         </div>
 
         <div class="onboarding-step" data-step="2">
-            <div class="onboarding-title">Come funziona</div>
-            <div class="onboarding-features">
-                <div class="onboarding-feature"><span class="onboarding-feature-icon">💬</span><div class="onboarding-feature-text"><strong>Fai una domanda</strong> in linguaggio naturale, come faresti con un collega</div></div>
-                <div class="onboarding-feature"><span class="onboarding-feature-icon">🔍</span><div class="onboarding-feature-text"><strong>Ricerca automatica</strong> tra migliaia di documenti, schede operative e tabelle OS1</div></div>
-                <div class="onboarding-feature"><span class="onboarding-feature-icon">🤖</span><div class="onboarding-feature-text"><strong>Risposta guidata</strong> con procedure passo-passo, screenshot e fonti verificabili</div></div>
-            </div>
-            <div class="onboarding-dots"><span class="onboarding-dot"></span><span class="onboarding-dot active"></span><span class="onboarding-dot"></span><span class="onboarding-dot"></span></div>
-            <button class="onboarding-btn onboarding-btn-primary" onclick="onboardingNext()">Avanti →</button>
-            <div class="onboarding-nav"><button class="onboarding-back" onclick="onboardingPrev()">← Indietro</button><span></span></div>
-        </div>
-
-        <div class="onboarding-step" data-step="3">
-            <div class="onboarding-title">Suggerimenti</div>
-            <div class="onboarding-features">
-                <div class="onboarding-feature"><span class="onboarding-feature-icon">📄</span><div class="onboarding-feature-text"><strong>Clicca le fonti</strong> nella risposta per aprire il documento originale</div></div>
-                <div class="onboarding-feature"><span class="onboarding-feature-icon">🔎</span><div class="onboarding-feature-text"><strong>Approfondisci</strong> con un click per risposte più dettagliate</div></div>
-                <div class="onboarding-feature"><span class="onboarding-feature-icon">👍</span><div class="onboarding-feature-text"><strong>Dai feedback</strong> alle risposte per aiutarci a migliorare il servizio</div></div>
-                <div class="onboarding-feature"><span class="onboarding-feature-icon">🌙</span><div class="onboarding-feature-text"><strong>Tema scuro</strong> disponibile dal toggle in alto a destra</div></div>
-            </div>
-            <div class="onboarding-dots"><span class="onboarding-dot"></span><span class="onboarding-dot"></span><span class="onboarding-dot active"></span><span class="onboarding-dot"></span></div>
-            <button class="onboarding-btn onboarding-btn-primary" onclick="onboardingNext()">Avanti →</button>
-            <div class="onboarding-nav"><button class="onboarding-back" onclick="onboardingPrev()">← Indietro</button><span></span></div>
-        </div>
-
-        <div class="onboarding-step" data-step="4">
-            <div class="onboarding-title">Prima di iniziare</div>
-            <div class="onboarding-warning">⚠️ Questo servizio utilizza <strong>intelligenza artificiale</strong> per generare le risposte. Non inserire dati personali, sensibili o riservati dell'azienda nelle domande.</div>
-            <label class="onboarding-checkbox"><input type="checkbox" id="onboarding-accept" onchange="document.getElementById('onboarding-start').disabled = !this.checked"> Ho letto e compreso l'avviso</label>
-            <div class="onboarding-dots"><span class="onboarding-dot"></span><span class="onboarding-dot"></span><span class="onboarding-dot"></span><span class="onboarding-dot active"></span></div>
-            <button class="onboarding-btn onboarding-btn-primary" id="onboarding-start" disabled onclick="completeOnboarding()">Inizia a usare OS1 AI Docs</button>
+            <div class="onboarding-title">Una nota prima di iniziare</div>
+            <div class="onboarding-warning">Le risposte sono generate da un'intelligenza artificiale a partire dal manuale OS1. Sono un valido aiuto, ma per operazioni delicate conviene sempre dare un'occhiata al documento citato. Non scrivere nelle domande dati personali o riservati.</div>
+            <label class="onboarding-checkbox"><input type="checkbox" id="onboarding-accept" onchange="document.getElementById('onboarding-start').disabled = !this.checked"> Ho capito, iniziamo</label>
+            <div class="onboarding-dots"><span class="onboarding-dot"></span><span class="onboarding-dot active"></span></div>
+            <button class="onboarding-btn onboarding-btn-primary" id="onboarding-start" disabled onclick="completeOnboarding()">Inizia</button>
             <div class="onboarding-nav"><button class="onboarding-back" onclick="onboardingPrev()">← Indietro</button><span></span></div>
         </div>
     </div>
@@ -85,7 +69,7 @@ function onboardingGo(step) {
     document.querySelectorAll('.onboarding-step').forEach(s => s.classList.remove('active'));
     document.querySelector(`.onboarding-step[data-step="${step}"]`).classList.add('active');
 }
-function onboardingNext() { if (onboardingStep < 4) onboardingGo(onboardingStep + 1); }
+function onboardingNext() { if (onboardingStep < 2) onboardingGo(onboardingStep + 1); }
 function onboardingPrev() { if (onboardingStep > 1) onboardingGo(onboardingStep - 1); }
 function completeOnboarding() {
     fetch('/api/onboarding/complete', { method: 'POST' }).then(() => {
@@ -109,7 +93,13 @@ function completeOnboarding() {
                 Nuova chat
             </button>
         </div>
+        <div class="sidebar-search">
+            <input type="search" id="sidebar-search-input" placeholder="Cerca nelle conversazioni…"
+                   aria-label="Cerca nelle conversazioni" autocomplete="off"
+                   oninput="filterConversations(this.value)">
+        </div>
         <div class="sidebar-list" id="sidebar-list">
+            <div class="list-noresult" id="sidebar-noresult" style="display:none;">Nessuna conversazione trovata</div>
             {% for conv in conversations %}
             <a class="sidebar-item {% if conv.id == conversation_id %}active{% endif %}" href="/chat?c={{ conv.id }}" data-id="{{ conv.id }}">
                 <span class="sidebar-item-title">{{ conv.title or 'Nuova conversazione' }}</span>
@@ -132,64 +122,29 @@ function completeOnboarding() {
                 {% if not messages %}
                 <div class="welcome" id="welcome">
                     <img src="/static/img/logo-lg.png" alt="SCAO" class="welcome-logo">
-                    <h2>Ciao! Come posso aiutarti?<span class="beta-badge-lg">Beta</span></h2>
-                    <p>Sono il tuo assistente sulla documentazione del gestionale OS1.<br><span style="font-size:0.8125rem;color:var(--c-text-tertiary);">Per ricevere risposte precise, segui i suggerimenti qui sotto.</span></p>
+                    <h2>Ciao, come posso aiutarti con OS1?<span class="beta-badge-lg">Beta</span></h2>
+                    <p>Scrivimi una domanda come la faresti a un collega. Cerco la risposta nel manuale ufficiale di OS1 e ti indico sempre il documento da cui arriva.</p>
 
-                    <div class="welcome-tips">
-                        <div class="tip-card">
-                            <div class="tip-icon">🎯</div>
-                            <div class="tip-body">
-                                <div class="tip-title">Indica sempre il modulo o l'ambito</div>
-                                <div class="tip-text">Specifica l'area OS1 a cui ti riferisci (vendite, magazzino, contabilità, produzione...). Lo stesso termine può avere significati diversi tra moduli.</div>
-                                <div class="tip-example">
-                                    <span class="ex-bad">✗ "Come faccio un documento?"</span>
-                                    <span class="ex-good">✓ "Come emetto una fattura immediata di vendita a un cliente?"</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tip-card">
-                            <div class="tip-icon">🔍</div>
-                            <div class="tip-body">
-                                <div class="tip-title">Sii specifico, evita domande generiche</div>
-                                <div class="tip-text">Più dettagli fornisci, più la risposta sarà mirata. Includi azione, oggetto e contesto.</div>
-                                <div class="tip-example">
-                                    <span class="ex-bad">✗ "Come funziona la contabilità?"</span>
-                                    <span class="ex-good">✓ "Come gestisco una nota di credito a cliente in prima nota?"</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tip-card">
-                            <div class="tip-icon">📋</div>
-                            <div class="tip-body">
-                                <div class="tip-title">Specifica il tipo di risposta che vuoi</div>
-                                <div class="tip-text">Puoi chiedere una <strong>guida passo-passo</strong>, una <strong>risposta sintetica</strong>, un <strong>elenco di campi</strong>, una <strong>tabella riassuntiva</strong> o un <strong>esempio pratico</strong>.</div>
-                                <div class="tip-example">
-                                    <span class="ex-good">✓ "Spiegami passo-passo come creare un nuovo articolo in anagrafica"</span>
-                                    <span class="ex-good">✓ "Quali campi compilare nell'anagrafica fornitori?"</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tip-card">
-                            <div class="tip-icon">💬</div>
-                            <div class="tip-body">
-                                <div class="tip-title">Una chat = un argomento</div>
-                                <div class="tip-text">La cronologia viene usata come contesto. Apri una <strong>nuova chat</strong> per ogni argomento diverso: mescolare temi peggiora la qualità delle risposte.</div>
-                            </div>
-                        </div>
-
-                        <div class="tip-card">
-                            <div class="tip-icon">🔁</div>
-                            <div class="tip-body">
-                                <div class="tip-title">Affina la risposta con domande di follow-up</div>
-                                <div class="tip-text">Se la risposta non è chiara o completa, chiedi un approfondimento ("dammi più dettagli su...", "fammi un esempio", "come gestisco il caso di..."). Usa il pulsante "Riprova con modello avanzato" per risposte più accurate.</div>
-                            </div>
-                        </div>
+                    <div class="welcome-starters-label">Prova con una di queste:</div>
+                    <div class="suggestion-chips">
+                        <button class="suggestion-chip" onclick="askSuggestion(this)"><span class="chip-icon">🧾</span>Come emetto una fattura immediata di vendita a un cliente?</button>
+                        <button class="suggestion-chip" onclick="askSuggestion(this)"><span class="chip-icon">📒</span>Come registro una fattura fornitore in prima nota?</button>
+                        <button class="suggestion-chip" onclick="askSuggestion(this)"><span class="chip-icon">📦</span>Come carico la merce in magazzino da una bolla di arrivo?</button>
+                        <button class="suggestion-chip" onclick="askSuggestion(this)"><span class="chip-icon">🛒</span>Come inserisco un nuovo ordine cliente?</button>
+                        <button class="suggestion-chip" onclick="askSuggestion(this)"><span class="chip-icon">👤</span>Come creo l'anagrafica di un nuovo cliente?</button>
+                        <button class="suggestion-chip" onclick="askSuggestion(this)"><span class="chip-icon">📊</span>Come stampo il registro IVA delle vendite?</button>
                     </div>
 
-                    <p class="welcome-warning">⚠️ Questo servizio utilizza intelligenza artificiale. <strong>Verifica sempre</strong> le informazioni e non inserire dati personali, sensibili o riservati nelle domande.</p>
+                    <details class="welcome-tips-toggle">
+                        <summary>Vuoi risposte più precise? Apri i consigli</summary>
+                        <div class="welcome-tips-body">
+                            <div><span>🎯</span> Di' sempre l'area OS1 (vendite, magazzino, contabilità…).</div>
+                            <div><span>🔍</span> Sii specifico: azione + oggetto (es. "nota di credito a cliente in prima nota").</div>
+                            <div><span>💬</span> Una chat = un argomento; per un tema nuovo apri una nuova chat.</div>
+                        </div>
+                    </details>
+
+                    <p class="welcome-warning">🛡️ Le risposte arrivano dal manuale ufficiale OS1 e citano sempre il documento di origine, così puoi verificare con un clic. Per sicurezza non scrivere dati personali o riservati.</p>
                 </div>
                 {% endif %}
 
@@ -219,12 +174,12 @@ function completeOnboarding() {
             <div class="chat-input-wrap">
                 <div class="deep-banner" id="deep-banner" style="display:none;">
                     <div class="deep-banner-content">
-                        <span class="deep-banner-text">Risposta imprecisa o incompleta?</span>
+                        <span class="deep-banner-text">La risposta non ti convince?</span>
                         <button type="button" class="deep-banner-btn" id="deep-banner-btn">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0;">
                                 <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
                             </svg>
-                            Riprova con modello avanzato
+                            Cerca una risposta più approfondita
                         </button>
                         <button type="button" class="deep-banner-close" onclick="hideDeepBanner()" aria-label="Chiudi">&times;</button>
                     </div>
@@ -246,8 +201,9 @@ function completeOnboarding() {
                         </button>
                     </div>
                 </form>
+                <div class="usage-bar" id="usage-bar" hidden></div>
                 <div class="chat-input-footer">
-                    <span class="chat-input-hint">OS1 Docs usa l'IA per rispondere. Verifica sempre le informazioni. · {{ app_version }}</span>
+                    <span class="chat-input-hint">Risposte basate sul manuale OS1 · controlla sempre il documento citato · {{ app_version }}</span>
                     <span class="msg-counter" id="msg-counter"></span>
                 </div>
             </div>
@@ -257,10 +213,16 @@ function completeOnboarding() {
     <!-- Right sidebar: documents -->
     <aside class="docs-panel" id="docs-panel">
         <div class="docs-panel-header">
-            📄 Documenti <span id="docs-count"></span>
+            📄 Documenti ufficiali OS1 <span id="docs-count"></span>
+        </div>
+        <div class="docs-search" id="docs-search" style="display:none;">
+            <input type="search" id="docs-search-input" placeholder="Filtra i documenti mostrati…"
+                   aria-label="Filtra i documenti mostrati" autocomplete="off"
+                   oninput="filterDocs(this.value)">
         </div>
         <div class="docs-panel-list" id="docs-list">
-            <div class="docs-empty" id="docs-empty">Fai una domanda per vedere i documenti correlati.</div>
+            <div class="docs-empty" id="docs-empty">Qui compaiono i documenti del manuale OS1 usati per la risposta.</div>
+            <div class="list-noresult" id="docs-noresult" style="display:none;">Nessun documento corrisponde</div>
         </div>
     </aside>
 </div>
@@ -279,6 +241,22 @@ function completeOnboarding() {
         </div>
         <div class="doc-overlay-body" id="doc-overlay-body"></div>
         <div class="doc-overlay-source" id="doc-overlay-source"></div>
+    </div>
+</div>
+
+<!-- Access link modal -->
+<div class="access-modal-backdrop" id="access-modal" onclick="if(event.target===this)closeAccessModal()">
+    <div class="access-modal" role="dialog" aria-modal="true" aria-labelledby="access-modal-title">
+        <h3 id="access-modal-title">🔑 Accesso rapido da OS1</h3>
+        <p>Salva questo indirizzo come pagina di sfondo in OS1: chi lo apre entra automaticamente con il tuo account, senza inserire email né codice. È personale: non condividerlo.</p>
+        <div class="access-url-row">
+            <input class="access-url-input" id="access-url-input" readonly value="Caricamento…" onclick="this.select()">
+            <button class="btn-primary" type="button" onclick="copyAccessUrl()">Copia</button>
+        </div>
+        <div class="access-modal-actions">
+            <button class="access-regen" type="button" onclick="regenAccessUrl()">Rigenera link (invalida il precedente)</button>
+            <button class="btn-logout" type="button" onclick="closeAccessModal()">Chiudi</button>
+        </div>
     </div>
 </div>
 
@@ -323,6 +301,50 @@ function updateCounter() {
     }
 }
 updateCounter();
+
+// ── Monthly usage status bar ──
+function fmtTok(n) {
+    n = n || 0;
+    if (n >= 1000000) return (n / 1000000).toFixed(1).replace('.0', '') + 'M';
+    if (n >= 1000) return Math.round(n / 1000) + 'k';
+    return String(n);
+}
+function updateUsage() {
+    const bar = document.getElementById('usage-bar');
+    if (!bar) return;
+    fetch('/api/usage/summary').then(r => r.ok ? r.json() : null).then(d => {
+        if (!d || d.error) return;
+        const uTok = d.user.token_limit > 0
+            ? `${fmtTok(d.user.tokens)}/${fmtTok(d.user.token_limit)}`
+            : fmtTok(d.user.tokens);
+        const cTok = d.company.token_limit > 0
+            ? `${fmtTok(d.company.tokens)}/${fmtTok(d.company.token_limit)}`
+            : fmtTok(d.company.tokens);
+        bar.innerHTML =
+            `<span class="usage-month">Mese ${d.month}</span>` +
+            `<span class="usage-seg"><b>Tu</b> ${d.user.questions} richieste · ${uTok} token</span>` +
+            `<span class="usage-seg"><b>${d.company.domain || 'Azienda'}</b> ${d.company.questions} richieste · ${cTok} token</span>`;
+        bar.hidden = false;
+
+        // Discreet header meter — % of monthly token limit
+        const meter = document.getElementById('usage-meter');
+        let pct = -1, who = '';
+        if (d.user.token_limit > 0) { pct = d.user.tokens / d.user.token_limit * 100; who = 'Tu'; }
+        else if (d.company.token_limit > 0) { pct = d.company.tokens / d.company.token_limit * 100; who = d.company.domain || 'Azienda'; }
+        if (pct < 0) { meter.hidden = true; return; }
+        pct = Math.min(100, Math.max(0, pct));
+        const fill = document.getElementById('usage-meter-fill');
+        fill.style.width = pct.toFixed(1) + '%';
+        meter.classList.toggle('warn', pct >= 80 && pct < 100);
+        meter.classList.toggle('danger', pct >= 100);
+        document.getElementById('usage-meter-label').textContent = Math.round(pct) + '%';
+        meter.title = `Uso mensile ${d.month} — ${who}: ${Math.round(pct)}% del limite token\n` +
+            `Tu: ${d.user.questions} richieste · ${uTok} token\n` +
+            `${d.company.domain || 'Azienda'}: ${d.company.questions} richieste · ${cTok} token`;
+        meter.hidden = false;
+    }).catch(() => {});
+}
+updateUsage();
 
 // ── Helpers ──
 function scrollToBottom() { scrollAnchor.scrollIntoView({ behavior: 'smooth', block: 'end' }); }
@@ -372,10 +394,14 @@ function updateDocsPanel(sources) {
     if (!sources || sources.length === 0) return;
 
     if (empty) empty.style.display = 'none';
-    list.innerHTML = '';
+    list.querySelectorAll('.doc-card').forEach(c => c.remove());
     countEl.textContent = `(${sources.length})`;
     badge.textContent = sources.length;
     badge.style.display = 'flex';
+    document.getElementById('docs-search').style.display = '';
+    const dsi = document.getElementById('docs-search-input');
+    if (dsi) dsi.value = '';
+    document.getElementById('docs-noresult').style.display = 'none';
 
     sources.forEach(s => {
         const card = document.createElement('div');
@@ -409,6 +435,34 @@ function addToSidebar(convId, title) {
     list.prepend(a);
 }
 
+// ── Client-side filters ──
+function filterConversations(q) {
+    q = (q || '').trim().toLowerCase();
+    let visible = 0;
+    document.querySelectorAll('#sidebar-list .sidebar-item').forEach(item => {
+        const t = (item.querySelector('.sidebar-item-title')?.textContent || '').toLowerCase();
+        const show = !q || t.includes(q);
+        item.style.display = show ? '' : 'none';
+        if (show) visible++;
+    });
+    const empty = document.querySelector('#sidebar-list .sidebar-empty');
+    if (empty) empty.style.display = q ? 'none' : '';
+    document.getElementById('sidebar-noresult').style.display =
+        (q && visible === 0) ? '' : 'none';
+}
+
+function filterDocs(q) {
+    q = (q || '').trim().toLowerCase();
+    let visible = 0;
+    document.querySelectorAll('#docs-list .doc-card').forEach(card => {
+        const show = !q || card.textContent.toLowerCase().includes(q);
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+    });
+    document.getElementById('docs-noresult').style.display =
+        (q && visible === 0) ? '' : 'none';
+}
+
 // Sidebar toggles (desktop: collapse, mobile: slide)
 const sidebarEl = document.getElementById('sidebar');
 const docsEl = document.getElementById('docs-panel');
@@ -417,7 +471,7 @@ const isTablet = () => window.innerWidth <= 1024;
 
 // Restore collapsed state from localStorage
 if (localStorage.getItem('sidebar-collapsed') === '1' && !isMobile()) sidebarEl.classList.add('collapsed');
-if (localStorage.getItem('docs-collapsed') === '1' && !isTablet()) docsEl.classList.add('collapsed');
+if (localStorage.getItem('docs-collapsed') !== '0' && !isTablet()) docsEl.classList.add('collapsed');
 
 document.getElementById('sidebar-toggle').addEventListener('click', () => {
     if (isMobile()) {
@@ -467,7 +521,7 @@ function handleSubmit(e) {
     const userMsg = createMsg('user');
     userMsg.content.textContent = question;
     const assistantMsg = createMsg('assistant');
-    assistantMsg.content.innerHTML = '<div class="thinking-bar"><div class="thinking-bar-line"></div><span class="thinking-bar-text" id="think-timer">0s</span></div>';
+    assistantMsg.content.innerHTML = '<div class="thinking-bar"><div class="thinking-bar-line"></div><span class="thinking-bar-text">Sto cercando nel manuale OS1… <span id="think-timer">0s</span></span></div>';
     scrollToBottom();
     const thinkStart = Date.now();
     const thinkInterval = setInterval(() => {
@@ -509,8 +563,12 @@ function handleSubmit(e) {
                             const data = JSON.parse(line.slice(6));
                             if (data.error) {
                                 clearInterval(thinkInterval);
-                                assistantMsg.content.innerHTML = `<p>${escapeHtml(data.error)}</p>`;
-                                if (data.limit_reached) { msgCount = maxMessages; updateCounter(); }
+                                if (data.limit_reached) {
+                                    assistantMsg.content.innerHTML = `<p>${escapeHtml(data.error)}</p>`;
+                                    msgCount = maxMessages; updateCounter();
+                                } else {
+                                    assistantMsg.content.innerHTML = `<p>${escapeHtml(data.error)}</p>` + retryButtonHtml();
+                                }
                                 enableInput(); return;
                             }
                             if (data.disambiguation) {
@@ -541,6 +599,7 @@ function handleSubmit(e) {
                                     updateEmailBtn();
                                 }
                                 if (data.msg_count !== undefined) { msgCount = data.msg_count; maxMessages = data.max_messages || maxMessages; updateCounter(); }
+                                updateUsage();
                                 renderFinal(assistantMsg, fullText, sources, data.message_id || null, pendingScreenshots);
                                 return;
                             }
@@ -551,7 +610,7 @@ function handleSubmit(e) {
             }
             processStream();
         })
-        .catch(() => { clearInterval(thinkInterval); assistantMsg.content.innerHTML = '<p>Errore di connessione. Riprova.</p>'; enableInput(); });
+        .catch(() => { clearInterval(thinkInterval); assistantMsg.content.innerHTML = '<p>Non sono riuscita a contattare il server. Controlla la connessione e riprova.</p>' + retryButtonHtml(); enableInput(); });
 
     function scheduleRender(el, text) {
         if (renderTimer) return;
@@ -641,8 +700,13 @@ function renderFinal(msgParts, text, sources, messageId, screenshots) {
     // Suggestion chips (without Approfondisci — that's now in the deep banner)
     const lastQuestion = questionEl.dataset.lastQuestion || '';
     if (suggestions.length > 0) {
+        const chipsLabel = document.createElement('div');
+        chipsLabel.textContent = 'Potrebbe interessarti anche:';
+        chipsLabel.style.cssText = 'font-size:0.8125rem;color:var(--c-text-secondary);font-weight:600;margin-top:14px;';
+        msgParts.body.appendChild(chipsLabel);
+
         const chipsDiv = document.createElement('div');
-        chipsDiv.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;';
+        chipsDiv.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;';
 
         suggestions.slice(0, 3).forEach(s => {
             const chip = document.createElement('button');
@@ -663,6 +727,25 @@ function renderFinal(msgParts, text, sources, messageId, screenshots) {
         hideDeepBanner();
     }
 
+    // Copy / print actions (only when there is an answer)
+    if (text) {
+        const actions = document.createElement('div');
+        actions.className = 'msg-actions';
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'msg-action-btn';
+        copyBtn.type = 'button';
+        copyBtn.textContent = 'Copia';
+        copyBtn.onclick = () => copyAnswer(msgParts.content);
+        const printBtn = document.createElement('button');
+        printBtn.className = 'msg-action-btn';
+        printBtn.type = 'button';
+        printBtn.textContent = 'Stampa';
+        printBtn.onclick = () => window.print();
+        actions.appendChild(copyBtn);
+        actions.appendChild(printBtn);
+        msgParts.body.appendChild(actions);
+    }
+
     // Feedback buttons
     if (messageId) {
         const fb = document.createElement('div'); fb.className = 'msg-feedback';
@@ -677,10 +760,94 @@ function enableInput() {
     if (msgCount < maxMessages) { questionEl.disabled = false; sendBtn.disabled = false; questionEl.focus(); }
 }
 
+// ── Retry after error ──
+function retryButtonHtml() {
+    return '<div style="margin-top:10px;"><button class="deep-banner-btn" onclick="retryLast(this)">Riprova</button></div>';
+}
+function retryLast(btn) {
+    const q = questionEl.dataset.lastQuestion;
+    if (!q || msgCount >= maxMessages) return;
+    const msg = btn.closest('.msg');
+    if (msg) {
+        const prev = msg.previousElementSibling;
+        if (prev && prev.classList.contains('msg-user')) prev.remove();
+        msg.remove();
+    }
+    questionEl.value = q;
+    handleSubmit(new Event('submit'));
+}
+
+// ── Copy answer ──
+function copyAnswer(contentEl) {
+    const txt = contentEl.innerText.trim();
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(txt)
+            .then(() => showToast('Risposta copiata', 'success'))
+            .catch(() => fallbackCopy(contentEl));
+    } else {
+        fallbackCopy(contentEl);
+    }
+}
+function fallbackCopy(contentEl) {
+    const range = document.createRange();
+    range.selectNodeContents(contentEl);
+    const sel = window.getSelection();
+    sel.removeAllRanges(); sel.addRange(range);
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    sel.removeAllRanges();
+    showToast(ok ? 'Risposta copiata' : 'Seleziona il testo e premi Ctrl+C per copiare', ok ? 'success' : 'info');
+}
+
+// ── Access link modal ──
+const accessModal = document.getElementById('access-modal');
+const accessInput = document.getElementById('access-url-input');
+
+function openAccessModal() {
+    accessModal.classList.add('active');
+    accessInput.value = 'Caricamento…';
+    fetch('/api/access-token')
+        .then(r => r.json())
+        .then(data => { accessInput.value = data.url || 'Errore'; })
+        .catch(() => { accessInput.value = 'Errore di connessione'; });
+}
+function closeAccessModal() { accessModal.classList.remove('active'); }
+
+function copyAccessUrl() {
+    const url = accessInput.value;
+    if (!url || url.startsWith('Caricamento') || url.startsWith('Errore')) return;
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(url)
+            .then(() => showToast('Link copiato', 'success'))
+            .catch(() => { accessInput.select(); showToast('Premi Ctrl+C per copiare', 'info'); });
+    } else {
+        accessInput.select();
+        let ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) {}
+        showToast(ok ? 'Link copiato' : 'Premi Ctrl+C per copiare', ok ? 'success' : 'info');
+    }
+}
+
+function regenAccessUrl() {
+    if (!confirm('Rigenerare il link? Il link salvato in precedenza smetterà di funzionare.')) return;
+    accessInput.value = 'Caricamento…';
+    fetch('/api/access-token/regenerate', { method: 'POST' })
+        .then(r => r.json())
+        .then(data => {
+            accessInput.value = data.url || 'Errore';
+            if (data.url) showToast('Nuovo link generato', 'success');
+        })
+        .catch(() => { accessInput.value = 'Errore di connessione'; });
+}
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && accessModal.classList.contains('active')) closeAccessModal();
+});
+
 // ── Disambiguation ──
 function renderDisambiguation(msgParts, data, originalQuestion) {
     let html = '<div class="disambig-container">';
-    html += '<div class="disambig-header">🔍 <strong>Posso aiutarti meglio se mi specifichi l\'area</strong></div>';
+    html += '<div class="disambig-header">🔍 <strong>Per darti la risposta giusta, di che ambito si tratta?</strong></div>';
     html += `<p class="disambig-question">${escapeHtml(data.question)}</p>`;
     html += '<div class="disambig-options">';
     data.options.forEach((opt, i) => {
@@ -690,7 +857,7 @@ function renderDisambiguation(msgParts, data, originalQuestion) {
         html += `<button class="disambig-chip" onclick="submitWithTopic('${escapeHtml(originalQuestion)}','${topic}','${keywords}')"><span class="disambig-icon">${icons[i] || '📄'}</span> ${escapeHtml(opt.label)}</button>`;
     });
     html += '</div>';
-    html += `<button class="disambig-skip" onclick="submitWithTopic('${escapeHtml(originalQuestion)}','','')">Oppure cerca in tutte le aree →</button>`;
+    html += `<button class="disambig-skip" onclick="submitWithTopic('${escapeHtml(originalQuestion)}','','')">Non sono sicura, cerca ovunque</button>`;
     html += '</div>';
     msgParts.content.innerHTML = html;
     enableInput();
@@ -705,11 +872,11 @@ function submitWithTopic(question, topic, keywords) {
 
 // ── Feedback ──
 const FEEDBACK_CATEGORIES = [
-    {id: 'wrong', label: 'Risposta errata'},
-    {id: 'incomplete', label: 'Incompleta'},
-    {id: 'irrelevant', label: 'Non pertinente'},
-    {id: 'outdated', label: 'Obsoleta'},
-    {id: 'unclear', label: 'Poco chiara'},
+    {id: 'wrong', label: 'Non è corretta'},
+    {id: 'incomplete', label: 'Manca qualcosa'},
+    {id: 'irrelevant', label: 'Non c\'entra con la domanda'},
+    {id: 'outdated', label: 'Sembra superata'},
+    {id: 'unclear', label: 'Difficile da capire'},
 ];
 
 function sendFeedback(messageId, rating, btn) {
@@ -784,7 +951,7 @@ function submitFeedbackDetail(messageId, rating, btn) {
     btn.disabled = true; btn.textContent = '...';
     fetch(`/api/feedback/${messageId}`, { method: 'POST', body: fd }).then(r => {
         if (r.ok) {
-            form.innerHTML = '<div style="font-size:0.75rem;color:var(--c-text-tertiary);padding:var(--sp-1);">Grazie per il feedback!</div>';
+            form.innerHTML = '<div style="font-size:0.75rem;color:var(--c-text-tertiary);padding:var(--sp-1);">Grazie, ci aiuti a migliorare.</div>';
             setTimeout(() => form.remove(), 2000);
         } else { btn.disabled = false; btn.textContent = 'Invia'; }
     });
@@ -794,7 +961,7 @@ function submitFeedbackDetail(messageId, rating, btn) {
 function openDocOverlay(sourceFile, title) {
     const overlay = document.getElementById('doc-overlay');
     document.getElementById('doc-overlay-title').textContent = title || sourceFile;
-    document.getElementById('doc-overlay-body').innerHTML = '<div class="thinking-dots"><span></span><span></span><span></span></div>';
+    document.getElementById('doc-overlay-body').innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;gap:var(--sp-3);padding:var(--sp-8) 0;"><div class="thinking-dots"><span></span><span></span><span></span></div><span style="font-size:0.875rem;color:var(--c-text-tertiary);">Sto aprendo il documento…</span></div>';
     document.getElementById('doc-overlay-source').textContent = '';
     overlay.classList.add('active'); document.body.style.overflow = 'hidden';
     fetch(`/api/doc?file=${encodeURIComponent(sourceFile)}`).then(r => r.json()).then(data => {
