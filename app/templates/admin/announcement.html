@@ -9,10 +9,6 @@
 
 {% block head %}
 <style>
-    .admin-nav { display: flex; gap: var(--sp-2); margin-bottom: var(--sp-6); flex-wrap: wrap; }
-    .admin-nav a { font-size: 0.8125rem; font-weight: 500; padding: 6px 14px; border-radius: var(--r-full); color: var(--c-text-secondary); border: 1px solid var(--c-border); transition: all 150ms ease; text-decoration: none; }
-    .admin-nav a:hover { background: var(--c-surface-alt); color: var(--c-text); text-decoration: none; }
-    .admin-nav a.active { background: var(--c-brand); color: white; border-color: var(--c-brand); }
     .admin-wrap { padding: var(--sp-6) 0; max-width: 800px; }
     .section-title { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: var(--sp-3); margin-top: var(--sp-8); color: var(--c-text); }
     .section-title:first-of-type { margin-top: 0; }
@@ -27,7 +23,7 @@
     .setting-row:last-child { margin-bottom: 0; }
     .setting-label { font-size: 0.8125rem; font-weight: 500; min-width: 180px; flex-shrink: 0; }
     .setting-input { flex: 1; padding: 8px 10px; font-size: 0.875rem; border: 1.5px solid var(--c-border-input); border-radius: var(--r-sm); background: var(--c-surface); }
-    .setting-input:focus { border-color: var(--c-brand); box-shadow: 0 0 0 3px rgba(226,35,26,0.1); outline: none; }
+    .setting-input:focus { border-color: var(--c-brand); box-shadow: 0 0 0 3px var(--c-brand-light); outline: none; }
     .setting-hint { font-size: 0.6875rem; color: var(--c-text-tertiary); margin-top: 2px; }
     .settings-actions { margin-top: var(--sp-4); }
     textarea.setting-input { min-height: 70px; resize: vertical; font-family: inherit; }
@@ -55,15 +51,7 @@
 
 {% block content %}
 <div class="container admin-wrap">
-    <nav class="admin-nav">
-        <a href="/admin">Dashboard</a>
-        <a href="/admin/users">Utenti</a>
-        <a href="/admin/usage">Consumi</a>
-        <a href="/admin/domains">Domini</a>
-        <a href="/admin/costs">Costi</a>
-        <a href="/admin/feedback">Feedback</a>
-        <a href="/admin/announcement" class="active">Impostazioni</a>
-    </nav>
+    {% include "admin/_nav.html" %}
 
     <form method="post" action="/admin/settings">
         <h3 class="section-title">Modello LLM</h3>

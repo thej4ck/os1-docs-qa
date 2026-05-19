@@ -82,6 +82,9 @@ def _create_schema():
         CREATE TABLE IF NOT EXISTS allowed_domains (
             id          INTEGER PRIMARY KEY AUTOINCREMENT,
             pattern     TEXT NOT NULL UNIQUE,
+            -- tier/monthly_request_limit defaults mirror domain.DEFAULT_TIER + TIER_PRESETS['BASE']
+            tier        TEXT NOT NULL DEFAULT 'BASE',
+            monthly_request_limit INTEGER NOT NULL DEFAULT 100,
             daily_limit INTEGER NOT NULL DEFAULT 50,
             monthly_token_limit INTEGER NOT NULL DEFAULT 500000,
             enabled     INTEGER NOT NULL DEFAULT 1,
@@ -147,6 +150,28 @@ def _migrate():
     }
     if "onboarding_completed" not in user_existing:
         _conn.execute("ALTER TABLE users ADD COLUMN onboarding_completed INTEGER DEFAULT 0")
+    if "access_token" not in user_existing:
+        _conn.execute("ALTER TABLE users ADD COLUMN access_token TEXT")
+        _conn.execute(
+            "CREATE UNIQUE INDEX IF NOT EXISTS idx_users_access_token "
+            "ON users(access_token) WHERE access_token IS NOT NULL"
+        )
+
+    # Allowed_domains tier migration (additive, idempotent).
+    # No mass UPDATE: pre-existing domains keep their custom
+    # daily_limit/monthly_token_limit; only the column defaults apply.
+    dom_existing = {
+        row[1] for row in _conn.execute("PRAGMA table_info(allowed_domains)").fetchall()
+    }
+    if "tier" not in dom_existing:
+        _conn.execute(
+            "ALTER TABLE allowed_domains ADD COLUMN tier TEXT NOT NULL DEFAULT 'BASE'"
+        )
+    if "monthly_request_limit" not in dom_existing:
+        _conn.execute(
+            "ALTER TABLE allowed_domains ADD COLUMN monthly_request_limit "
+            "INTEGER NOT NULL DEFAULT 100"
+        )
 
     # Migrate old model keys to new reasoning_effort variants
     _model_renames = {

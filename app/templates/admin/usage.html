@@ -9,14 +9,6 @@
 
 {% block head %}
 <style>
-    .admin-nav { display: flex; gap: var(--sp-2); margin-bottom: var(--sp-6); flex-wrap: wrap; }
-    .admin-nav a {
-        font-size: 0.8125rem; font-weight: 500; padding: 6px 14px;
-        border-radius: var(--r-full); color: var(--c-text-secondary);
-        border: 1px solid var(--c-border); transition: all 150ms ease; text-decoration: none;
-    }
-    .admin-nav a:hover { background: var(--c-surface-alt); color: var(--c-text); text-decoration: none; }
-    .admin-nav a.active { background: var(--c-brand); color: white; border-color: var(--c-brand); }
     .admin-wrap { padding: var(--sp-6) 0; }
     .admin-table {
         width: 100%; border-collapse: collapse; font-size: 0.875rem;
@@ -40,15 +32,7 @@
 
 {% block content %}
 <div class="container admin-wrap">
-    <nav class="admin-nav">
-        <a href="/admin">Dashboard</a>
-        <a href="/admin/users">Utenti</a>
-        <a href="/admin/usage" class="active">Consumi</a>
-        <a href="/admin/domains">Domini</a>
-        <a href="/admin/costs">Costi</a>
-        <a href="/admin/feedback">Feedback</a>
-        <a href="/admin/announcement">Impostazioni</a>
-    </nav>
+    {% include "admin/_nav.html" %}
 
     <div class="top-bar">
         <h3>Consumi {{ month }}</h3>

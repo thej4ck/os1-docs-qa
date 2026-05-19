@@ -2,6 +2,21 @@
 
 from app.db import get_conn
 
+# Usage tier presets — single source of truth for the commercial model.
+# The contractual measure is monthly requests; the monthly token limit is a
+# cost-protection ceiling. 0 means unlimited but presets never use 0.
+TIER_PRESETS = {
+    "BASE":  {"monthly_request_limit": 100, "monthly_token_limit": 2_500_000},
+    "PLUS":  {"monthly_request_limit": 300, "monthly_token_limit": 7_000_000},
+    "POWER": {"monthly_request_limit": 800, "monthly_token_limit": 18_000_000},
+}
+DEFAULT_TIER = "BASE"
+
+
+def _normalize_tier(tier: str) -> str:
+    """Clamp any input to a known tier. Single owner of tier validation."""
+    return tier if tier in TIER_PRESETS else DEFAULT_TIER
+
 
 def list_domains() -> list[dict]:
     rows = get_conn().execute(
@@ -17,21 +32,53 @@ def get_domain(domain_id: int) -> dict | None:
     return dict(row) if row else None
 
 
-def add_domain(pattern: str, daily_limit: int = 50, monthly_token_limit: int = 500_000) -> int:
+def add_domain(pattern: str, tier: str = DEFAULT_TIER) -> int:
+    """Insert a domain applying the given tier preset.
+
+    daily_limit is set to 0 (unlimited): the commercial measure is the monthly
+    request count; burst is covered by the per-minute rate limit.
+    """
+    tier = _normalize_tier(tier)
+    preset = TIER_PRESETS[tier]
     conn = get_conn()
     cur = conn.execute(
-        "INSERT INTO allowed_domains (pattern, daily_limit, monthly_token_limit) VALUES (?, ?, ?)",
-        (pattern.strip().lower(), daily_limit, monthly_token_limit),
+        "INSERT INTO allowed_domains "
+        "(pattern, tier, monthly_request_limit, monthly_token_limit, daily_limit) "
+        "VALUES (?, ?, ?, ?, 0)",
+        (
+            pattern.strip().lower(),
+            tier,
+            preset["monthly_request_limit"],
+            preset["monthly_token_limit"],
+        ),
     )
     conn.commit()
     return cur.lastrowid
 
 
-def update_domain(domain_id: int, daily_limit: int, monthly_token_limit: int, enabled: bool):
+def apply_tier(domain_id: int, tier: str):
+    """Atomically apply a tier preset to an existing domain."""
+    tier = _normalize_tier(tier)
+    preset = TIER_PRESETS[tier]
     conn = get_conn()
     conn.execute(
-        "UPDATE allowed_domains SET daily_limit = ?, monthly_token_limit = ?, enabled = ? WHERE id = ?",
-        (daily_limit, monthly_token_limit, int(enabled), domain_id),
+        "UPDATE allowed_domains SET tier = ?, monthly_request_limit = ?, "
+        "monthly_token_limit = ?, daily_limit = 0 WHERE id = ?",
+        (
+            tier,
+            preset["monthly_request_limit"],
+            preset["monthly_token_limit"],
+            domain_id,
+        ),
+    )
+    conn.commit()
+
+
+def set_domain_enabled(domain_id: int, enabled: bool):
+    conn = get_conn()
+    conn.execute(
+        "UPDATE allowed_domains SET enabled = ? WHERE id = ?",
+        (int(enabled), domain_id),
     )
     conn.commit()
 

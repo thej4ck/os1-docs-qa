@@ -9,14 +9,6 @@
 
 {% block head %}
 <style>
-    .admin-nav { display: flex; gap: var(--sp-2); margin-bottom: var(--sp-6); flex-wrap: wrap; }
-    .admin-nav a {
-        font-size: 0.8125rem; font-weight: 500; padding: 6px 14px;
-        border-radius: var(--r-full); color: var(--c-text-secondary);
-        border: 1px solid var(--c-border); transition: all 150ms ease; text-decoration: none;
-    }
-    .admin-nav a:hover { background: var(--c-surface-alt); color: var(--c-text); text-decoration: none; }
-    .admin-nav a.active { background: var(--c-brand); color: white; border-color: var(--c-brand); }
     .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--sp-4); margin-bottom: var(--sp-8); }
     .kpi-card {
         background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md);
@@ -64,7 +56,7 @@
         display: inline-block; font-size: 0.6875rem; padding: 2px 8px; border-radius: var(--r-full);
         font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em;
     }
-    .badge-pos { background: #F0FDF4; color: #16A34A; }
+    .badge-pos { background: var(--c-success-bg); color: var(--c-success); }
     .badge-neg { background: var(--c-error-bg); color: var(--c-error); }
     .badge-cat {
         background: var(--c-surface-alt); color: var(--c-text-secondary);
@@ -80,15 +72,7 @@
 
 {% block content %}
 <div class="container admin-wrap">
-    <nav class="admin-nav">
-        <a href="/admin">Dashboard</a>
-        <a href="/admin/users">Utenti</a>
-        <a href="/admin/usage">Consumi</a>
-        <a href="/admin/domains">Domini</a>
-        <a href="/admin/costs">Costi</a>
-        <a href="/admin/feedback" class="active">Feedback</a>
-        <a href="/admin/announcement">Impostazioni</a>
-    </nav>
+    {% include "admin/_nav.html" %}
 
     <!-- KPIs -->
     <div class="kpi-grid">

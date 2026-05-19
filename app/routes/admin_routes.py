@@ -13,7 +13,15 @@ from app.models.usage import (
     get_all_usage, get_usage_summary, get_monthly_usage,
     get_domain_usage, get_recent_questions, get_current_month,
 )
-from app.models.domain import list_domains, add_domain, update_domain, delete_domain
+from app.models.domain import (
+    list_domains,
+    add_domain,
+    delete_domain,
+    apply_tier,
+    set_domain_enabled,
+    TIER_PRESETS,
+    DEFAULT_TIER,
+)
 
 router = APIRouter(prefix="/admin")
 
@@ -259,6 +267,8 @@ async def domains_page(request: Request):
         "email": admin["email"],
         "is_admin": True,
         "domains": domains,
+        "tier_presets": TIER_PRESETS,
+        "default_tier": DEFAULT_TIER,
     })
 
 
@@ -266,8 +276,7 @@ async def domains_page(request: Request):
 async def add_domain_route(
     request: Request,
     pattern: str = Form(...),
-    daily_limit: int = Form(default=50),
-    monthly_token_limit: int = Form(default=500000),
+    tier: str = Form(default=DEFAULT_TIER),
 ):
     admin = _require_admin(request)
     if not admin:
@@ -276,7 +285,7 @@ async def add_domain_route(
     pattern = pattern.strip().lower()
     if pattern:
         try:
-            add_domain(pattern, daily_limit, monthly_token_limit)
+            add_domain(pattern, tier=tier)  # add_domain normalizes the tier
         except Exception:
             pass  # duplicate pattern, ignore
     return RedirectResponse(url="/admin/domains", status_code=302)
@@ -286,15 +295,15 @@ async def add_domain_route(
 async def update_domain_route(
     request: Request,
     domain_id: int,
-    daily_limit: int = Form(...),
-    monthly_token_limit: int = Form(...),
+    tier: str = Form(...),
     enabled: str = Form(default=""),
 ):
     admin = _require_admin(request)
     if not admin:
         return RedirectResponse(url="/login", status_code=302)
 
-    update_domain(domain_id, daily_limit, monthly_token_limit, enabled == "on")
+    apply_tier(domain_id, tier)  # apply_tier normalizes the tier
+    set_domain_enabled(domain_id, enabled == "on")
     return RedirectResponse(url="/admin/domains", status_code=302)
 
 
