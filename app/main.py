@@ -68,8 +68,10 @@ templates = Jinja2Templates(directory=str(templates_dir))
 from app.routes.chat_routes import router as chat_router
 from app.routes.auth_routes import router as auth_router
 from app.routes.admin_routes import router as admin_router
+from app.routes.signup_routes import router as signup_router
 
 app.include_router(auth_router)
+app.include_router(signup_router)
 app.include_router(chat_router)
 app.include_router(admin_router)
 

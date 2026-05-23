@@ -173,6 +173,24 @@ def _migrate():
             "INTEGER NOT NULL DEFAULT 100"
         )
 
+    # Freemium / autoprovisioning columns (additive)
+    freemium_cols = [
+        ("expires_at", "TEXT"),
+        ("company_name", "TEXT"),
+        ("vat_number", "TEXT"),
+        ("contact_first_name", "TEXT"),
+        ("contact_last_name", "TEXT"),
+        ("contact_email", "TEXT"),
+        ("welcome_sent", "INTEGER DEFAULT 0"),
+        ("expiry_reminder_sent", "INTEGER DEFAULT 0"),
+        ("downgrade_notice_sent", "INTEGER DEFAULT 0"),
+    ]
+    for col_name, col_type in freemium_cols:
+        if col_name not in dom_existing:
+            _conn.execute(
+                f"ALTER TABLE allowed_domains ADD COLUMN {col_name} {col_type}"
+            )
+
     # Migrate old model keys to new reasoning_effort variants
     _model_renames = {
         "openai/gpt-oss-120b": "openai/gpt-oss-120b:medium",

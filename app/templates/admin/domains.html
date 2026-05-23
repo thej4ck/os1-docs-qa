@@ -75,7 +75,10 @@
         <thead>
             <tr>
                 <th>Pattern</th>
+                <th>Azienda</th>
+                <th>P.IVA</th>
                 <th>Livello</th>
+                <th>Scadenza</th>
                 <th>Richieste/mese</th>
                 <th>Token/mese</th>
                 <th>Attivo</th>
@@ -86,13 +89,21 @@
             {% for d in domains %}
             <tr>
                 <form method="post" action="/admin/domains/{{ d.id }}/update">
-                <td><span class="pattern-tag">{{ d.pattern }}</span></td>
+                <td>
+                    <span class="pattern-tag">{{ d.pattern }}</span>
+                    {% if d.contact_email %}<div style="font-size:.7rem;color:var(--c-text-tertiary);">{{ d.contact_email }}</div>{% endif %}
+                </td>
+                <td style="max-width:160px;">{{ d.company_name or '—' }}</td>
+                <td>{{ d.vat_number or '—' }}</td>
                 <td>
                     <select name="tier" class="tier-select">
                         {% for name in tier_presets.keys() %}
                         <option value="{{ name }}" {% if name == d.tier %}selected{% endif %}>{{ name }}</option>
                         {% endfor %}
                     </select>
+                </td>
+                <td>
+                    <input type="date" name="expires_date" value="{{ (d.expires_at[:10] if d.expires_at else '') }}" style="font-size:.75rem;padding:4px 6px;">
                 </td>
                 <td><span class="limit-ro">{% if d.monthly_request_limit %}{{ d.monthly_request_limit }}{% else %}illimitato{% endif %}</span></td>
                 <td><span class="limit-ro">{% if d.monthly_token_limit %}{{ mtok(d.monthly_token_limit) }}{% else %}illimitato{% endif %}</span></td>
@@ -112,7 +123,7 @@
             </tr>
             {% endfor %}
             {% if not domains %}
-            <tr><td colspan="6" style="text-align:center;color:var(--c-text-tertiary);padding:var(--sp-8);">Nessun dominio configurato. Aggiungi il primo.</td></tr>
+            <tr><td colspan="9" style="text-align:center;color:var(--c-text-tertiary);padding:var(--sp-8);">Nessun dominio configurato. Aggiungi il primo.</td></tr>
             {% endif %}
         </tbody>
     </table>

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %}Prova gratuita — OS1 Docs{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+    <div class="auth-card auth-card-wide">
+        <div class="auth-header">
+            <img src="/static/img/logo-lg.png" alt="SCAO" class="auth-logo">
+            <h1>Prova OS1 Docs<span class="beta-badge-lg">30 giorni</span></h1>
+            <p>Compila il modulo: attiveremo subito una prova gratuita per tutto il tuo dominio aziendale.</p>
+        </div>
+
+        {% if error %}
+        <div class="alert-error" role="alert">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <div>{{ error }}</div>
+        </div>
+        {% endif %}
+
+        <form method="post" action="/signup">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="first_name">Nome</label>
+                    <input type="text" id="first_name" name="first_name" class="form-input"
+                           value="{{ first_name }}" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Cognome</label>
+                    <input type="text" id="last_name" name="last_name" class="form-input"
+                           value="{{ last_name }}" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email aziendale</label>
+                <input type="email" id="email" name="email" class="form-input"
+                       value="{{ email }}" placeholder="nome@azienda.it" required>
+                <div class="form-hint">Non sono ammesse email personali (gmail, yahoo, hotmail, outlook, libero, ...). Tutti i colleghi con lo stesso dominio potranno accedere.</div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="company_name">Ragione sociale</label>
+                    <input type="text" id="company_name" name="company_name" class="form-input"
+                           value="{{ company_name }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="vat_number">P.IVA</label>
+                    <input type="text" id="vat_number" name="vat_number" class="form-input"
+                           value="{{ vat_number }}" pattern="[0-9]{11}" maxlength="11"
+                           placeholder="11 cifre" required>
+                </div>
+            </div>
+
+            <label class="form-checkbox">
+                <input type="checkbox" name="gdpr" value="on" required>
+                <span>Accetto il trattamento dei miei dati ai sensi del <strong>GDPR (Reg. UE 2016/679)</strong> per finalità connesse all'erogazione del servizio e a eventuali contatti commerciali da SCAO Informatica.</span>
+            </label>
+
+            <button type="submit" class="btn-primary btn-full">Attiva prova gratuita</button>
+        </form>
+
+        <div class="auth-alt">
+            <span>Hai già un account?</span>
+            <a href="/login" class="auth-alt-link">Accedi →</a>
+        </div>
+    </div>
+</div>
+<style>
+.auth-card-wide { max-width: 520px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); }
+.form-hint { font-size: 0.75rem; color: var(--c-text-tertiary); margin-top: 4px; line-height: 1.4; }
+.form-checkbox {
+    display: flex; gap: 10px; align-items: flex-start;
+    font-size: 0.8125rem; color: var(--c-text-secondary); line-height: 1.5;
+    margin: var(--sp-4) 0 var(--sp-4); cursor: pointer;
+}
+.form-checkbox input { margin-top: 3px; flex-shrink: 0; }
+.auth-alt {
+    margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--c-border);
+    text-align: center; font-size: 0.875rem; color: var(--c-text-secondary);
+}
+.auth-alt-link {
+    display: inline-block; margin-left: 6px; color: var(--c-brand);
+    font-weight: 600; text-decoration: none;
+}
+.auth-alt-link:hover { text-decoration: underline; }
+@media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
+</style>
+{% endblock %}

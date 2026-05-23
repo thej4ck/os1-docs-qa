@@ -3,11 +3,21 @@
 from fastapi import APIRouter, Request, Form
 from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 
-from app.auth.otp import generate_otp, verify_otp, is_email_allowed, send_otp_email
-from app.auth.session import create_session, clear_session, get_session_email
+from app.auth.otp import (
+    generate_otp,
+    is_email_allowed,
+    send_otp_email,
+    verify_cooldown_remaining,
+    verify_otp,
+)
+from app.auth.session import (
+    clear_session,
+    create_session,
+    get_session_email,
+    login_and_redirect,
+)
 from app.config import settings
 from app.models.user import (
-    get_or_create_user,
     update_last_login,
     ensure_access_token,
     regenerate_access_token,
@@ -20,15 +30,6 @@ router = APIRouter()
 def _templates():
     from app.main import templates
     return templates
-
-
-def _login_and_redirect(email: str) -> RedirectResponse:
-    """Establish the user session and redirect to chat."""
-    get_or_create_user(email)
-    update_last_login(email)
-    response = RedirectResponse(url="/chat", status_code=302)
-    create_session(response, email)
-    return response
 
 
 @router.get("/login", response_class=HTMLResponse)
@@ -50,7 +51,7 @@ async def login_submit(request: Request, email: str = Form(...)):
     # Dev/local bypass: no OTP, log in immediately on email submit.
     if not settings.production:
         print(f"[auth] DEV bypass login: {email} (PRODUCTION=false)", flush=True)
-        return _login_and_redirect(email)
+        return login_and_redirect(email)
 
     code = generate_otp(email)
     success = send_otp_email(email, code)
@@ -69,8 +70,18 @@ async def verify_submit(request: Request, email: str = Form(...), code: str = Fo
     email = email.strip().lower()
     code = code.strip()
 
+    wait = verify_cooldown_remaining(email)
+    if wait > 0:
+        return _templates().TemplateResponse(
+            "verify.html",
+            {
+                "request": request, "email": email,
+                "error": f"Troppi tentativi. Riprova tra {wait} secondi.",
+            },
+        )
+
     if verify_otp(email, code):
-        return _login_and_redirect(email)
+        return login_and_redirect(email)
 
     return _templates().TemplateResponse(
         "verify.html", {"request": request, "email": email, "error": "Codice non valido o scaduto."}

@@ -35,6 +35,22 @@
             </div>
             <button type="submit" class="btn-primary btn-full">Continua</button>
         </form>
+
+        <div class="auth-alt">
+            <span>Non hai ancora un account?</span>
+            <a href="/signup" class="auth-alt-link">Prova gratis 30 giorni →</a>
+        </div>
     </div>
 </div>
+<style>
+.auth-alt {
+    margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--c-border);
+    text-align: center; font-size: 0.875rem; color: var(--c-text-secondary);
+}
+.auth-alt-link {
+    display: inline-block; margin-left: 6px; color: var(--c-brand);
+    font-weight: 600; text-decoration: none;
+}
+.auth-alt-link:hover { text-decoration: underline; }
+</style>
 {% endblock %}

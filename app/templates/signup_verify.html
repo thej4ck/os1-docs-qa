@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Verifica email — OS1 Docs{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+    <div class="auth-card">
+        <div class="auth-header">
+            <img src="/static/img/logo-lg.png" alt="SCAO" class="auth-logo">
+            <h1>Verifica la tua email</h1>
+            <p>Abbiamo inviato un codice a 6 cifre a <strong>{{ email }}</strong>. Inseriscilo per completare l'attivazione della prova.</p>
+        </div>
+
+        {% if error %}
+        <div class="alert-error" role="alert">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <div>{{ error }}</div>
+        </div>
+        {% endif %}
+
+        <form method="post" action="/signup/verify">
+            <input type="hidden" name="first_name" value="{{ first_name }}">
+            <input type="hidden" name="last_name" value="{{ last_name }}">
+            <input type="hidden" name="email" value="{{ email }}">
+            <input type="hidden" name="company_name" value="{{ company_name }}">
+            <input type="hidden" name="vat_number" value="{{ vat_number }}">
+
+            <div class="form-group">
+                <label for="code">Codice di verifica</label>
+                <input type="text" id="code" name="code" class="form-input otp-input"
+                       pattern="[0-9]{6}" maxlength="6" inputmode="numeric"
+                       placeholder="123456" required autofocus autocomplete="one-time-code">
+                <div class="form-hint">Il codice scade dopo 5 minuti.</div>
+            </div>
+
+            <button type="submit" class="btn-primary btn-full">Conferma e attiva prova</button>
+        </form>
+
+        <div class="auth-alt">
+            <a href="/signup" class="auth-alt-link">← Torna al modulo</a>
+        </div>
+    </div>
+</div>
+<style>
+.otp-input {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 1.5rem; letter-spacing: 8px; text-align: center;
+}
+.form-hint { font-size: 0.75rem; color: var(--c-text-tertiary); margin-top: 4px; }
+.auth-alt {
+    margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--c-border);
+    text-align: center; font-size: 0.875rem; color: var(--c-text-secondary);
+}
+.auth-alt-link {
+    display: inline-block; color: var(--c-brand);
+    font-weight: 600; text-decoration: none;
+}
+.auth-alt-link:hover { text-decoration: underline; }
+</style>
+{% endblock %}

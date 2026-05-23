@@ -45,3 +45,14 @@ def get_session_email(request: Request) -> Optional[str]:
 def clear_session(response: Response):
     """Delete the session cookie."""
     response.delete_cookie(key=COOKIE_NAME)
+
+
+def login_and_redirect(email: str, url: str = "/chat"):
+    """Create the user (if missing), update last_login, set session cookie, redirect."""
+    from fastapi.responses import RedirectResponse
+    from app.models.user import get_or_create_user, update_last_login
+    get_or_create_user(email)
+    update_last_login(email)
+    response = RedirectResponse(url=url, status_code=302)
+    create_session(response, email)
+    return response

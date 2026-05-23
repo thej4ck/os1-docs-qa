@@ -1,38 +1,66 @@
 """OTP generation, validation, and email sending."""
 
-import random
+import secrets
 import time
-from typing import Optional
 
-import resend
-
+from app.auth.email_sender import send_email
 from app.config import settings
 
 # In-memory OTP store: {email: (otp_code, expires_at)}
 _otp_store: dict[str, tuple[str, float]] = {}
+# Anti-brute-force state per email
+_verify_cooldown: dict[str, float] = {}   # email -> earliest next-attempt epoch
+_verify_fails: dict[str, int] = {}        # email -> consecutive failures
 
 OTP_TTL = 300  # 5 minutes
+VERIFY_COOLDOWN_SEC = 10
+MAX_VERIFY_FAILS = 5
 
 
 def generate_otp(email: str) -> str:
-    """Generate a 6-digit OTP and store it."""
-    code = f"{random.randint(0, 999999):06d}"
+    """Generate a 6-digit OTP and store it. Uses cryptographic randomness."""
+    code = f"{secrets.randbelow(1_000_000):06d}"
     _otp_store[email] = (code, time.time() + OTP_TTL)
+    _verify_fails.pop(email, None)
+    _verify_cooldown.pop(email, None)
     return code
 
 
+def verify_cooldown_remaining(email: str) -> int:
+    """Seconds left until the next /verify attempt is allowed for `email`, or 0."""
+    next_at = _verify_cooldown.get(email, 0.0)
+    remaining = next_at - time.time()
+    return max(0, int(remaining + 0.999))  # ceil
+
+
 def verify_otp(email: str, code: str) -> bool:
-    """Verify an OTP code. Consumes it on success."""
+    """Verify an OTP code. Consumes on success.
+
+    Anti-brute-force: each failed attempt sets a `VERIFY_COOLDOWN_SEC` window
+    before the next attempt is even considered. After `MAX_VERIFY_FAILS`
+    consecutive failures the OTP is invalidated and the user must request
+    a new code.
+    """
+    if verify_cooldown_remaining(email) > 0:
+        return False
     entry = _otp_store.get(email)
     if not entry:
         return False
     stored_code, expires_at = entry
     if time.time() > expires_at:
         _otp_store.pop(email, None)
+        _verify_fails.pop(email, None)
         return False
-    if stored_code != code:
+    if not secrets.compare_digest(stored_code, code):
+        fails = _verify_fails.get(email, 0) + 1
+        _verify_fails[email] = fails
+        _verify_cooldown[email] = time.time() + VERIFY_COOLDOWN_SEC
+        if fails >= MAX_VERIFY_FAILS:
+            _otp_store.pop(email, None)
         return False
     _otp_store.pop(email, None)
+    _verify_fails.pop(email, None)
+    _verify_cooldown.pop(email, None)
     return True
 
 
@@ -40,9 +68,10 @@ def is_email_allowed(email: str) -> bool:
     """Check if an email matches allowed_domains table or fallback to config."""
     try:
         from app.models.domain import is_email_allowed_by_domains
-        # If there are domains in the DB, use those
         from app.db import get_conn
-        count = get_conn().execute("SELECT COUNT(*) as c FROM allowed_domains").fetchone()
+        count = get_conn().execute(
+            "SELECT COUNT(*) as c FROM allowed_domains"
+        ).fetchone()
         if count and count["c"] > 0:
             return is_email_allowed_by_domains(email)
     except Exception:
@@ -61,44 +90,17 @@ def is_email_allowed(email: str) -> bool:
     return False
 
 
-def _get_sender() -> str:
-    """Get OTP email sender from app_settings or default."""
-    name = "OS1 Docs"
-    email_addr = "noreply@ai.scao.it"
-    try:
-        from app.db import get_conn
-        conn = get_conn()
-        row = conn.execute("SELECT value FROM app_settings WHERE key = 'otp_sender_name'").fetchone()
-        if row and row["value"]:
-            name = row["value"]
-        row = conn.execute("SELECT value FROM app_settings WHERE key = 'otp_sender_email'").fetchone()
-        if row and row["value"]:
-            email_addr = row["value"]
-    except Exception:
-        pass
-    return f"{name} <{email_addr}>"
-
-
 def send_otp_email(email: str, code: str) -> bool:
-    """Send OTP via Resend. Returns True on success."""
-    if not settings.resend_api_key:
-        print(f"[DEV MODE] OTP for {email}: {code}", flush=True)
-        return True
-
-    resend.api_key = settings.resend_api_key
-    try:
-        resend.Emails.send({
-            "from": _get_sender(),
-            "to": [email],
-            "subject": f"Codice di accesso OS1 Docs: {code}",
-            "html": (
-                f"<p>Il tuo codice di accesso a OS1 Docs è:</p>"
-                f"<h1 style='letter-spacing: 8px; font-size: 36px;'>{code}</h1>"
-                f"<p>Il codice scade tra 5 minuti.</p>"
-                f"<p>Se non hai richiesto questo codice, ignora questa email.</p>"
-            ),
-        })
-        return True
-    except Exception as e:
-        print(f"Failed to send OTP email: {e}")
-        return False
+    """Send OTP via Resend with SCAO branding. Returns True on success."""
+    from app.auth.email_templates import wrap_customer
+    body = f"""\
+<p style="font-size:15px;line-height:1.6;margin:0 0 20px;color:#1d1d1f;">
+  Il codice di accesso per OS1 Docs è:
+</p>
+<div style="text-align:center;margin:24px 0;">
+  <div style="display:inline-block;background:#f5f5f7;border-radius:8px;padding:18px 32px;font-family:'JetBrains Mono','Courier New',monospace;font-size:36px;letter-spacing:10px;font-weight:600;color:#E2231A;">{code}</div>
+</div>
+<p style="font-size:14px;line-height:1.6;color:#6e6e73;margin:0 0 8px;">Il codice è valido per 5 minuti.</p>
+<p style="font-size:13px;line-height:1.6;color:#6e6e73;margin:0;">Se non ha richiesto questo codice può ignorare l'email.</p>"""
+    html = wrap_customer("Codice di accesso", body, signature=True, footer=False)
+    return send_email(email, f"Codice di accesso OS1 Docs: {code}", html)

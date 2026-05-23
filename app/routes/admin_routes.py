@@ -20,6 +20,7 @@ from app.models.domain import (
     delete_domain,
     apply_tier,
     set_domain_enabled,
+    update_domain_metadata,
     TIER_PRESETS,
     DEFAULT_TIER,
 )
@@ -297,6 +298,7 @@ async def update_domain_route(
     domain_id: int,
     tier: str = Form(...),
     enabled: str = Form(default=""),
+    expires_date: str = Form(default=""),
 ):
     admin = _require_admin(request)
     if not admin:
@@ -304,6 +306,20 @@ async def update_domain_route(
 
     apply_tier(domain_id, tier)  # apply_tier normalizes the tier
     set_domain_enabled(domain_id, enabled == "on")
+
+    # Admin can extend / clear trial expiry. Empty string clears it.
+    expires_date = expires_date.strip()
+    if expires_date:
+        update_domain_metadata(domain_id, expires_at=f"{expires_date}T23:59:59Z")
+    else:
+        # Explicit clear: write NULL directly (update_domain_metadata skips None).
+        from app.db import get_conn
+        conn = get_conn()
+        conn.execute(
+            "UPDATE allowed_domains SET expires_at = NULL WHERE id = ?",
+            (domain_id,),
+        )
+        conn.commit()
     return RedirectResponse(url="/admin/domains", status_code=302)
 
 
@@ -403,10 +419,7 @@ async def feedback_page(
 
 # ── Settings ──
 
-def _get_setting(key: str, default: str = "") -> str:
-    from app.db import get_conn
-    row = get_conn().execute("SELECT value FROM app_settings WHERE key = ?", (key,)).fetchone()
-    return row["value"] if row else default
+from app.models.settings import get_setting as _get_setting  # re-export for templates
 
 
 def _get_all_settings() -> dict:
@@ -428,6 +441,9 @@ def _get_all_settings() -> dict:
         "announcement": _get_setting("announcement", ""),
         "system_prompt": _get_setting("system_prompt", ""),
         "deep_addendum": _get_setting("deep_addendum", ""),
+        "admin_notification_email": _get_setting("admin_notification_email", ""),
+        "trial_duration_days": _get_setting("trial_duration_days", "30"),
+        "extra_blocked_email_domains": _get_setting("extra_blocked_email_domains", ""),
     }
 
 
@@ -489,6 +505,9 @@ async def save_settings(request: Request):
         "announcement": str(form.get("announcement", "")).strip(),
         "system_prompt": str(form.get("system_prompt", "")).strip(),
         "deep_addendum": str(form.get("deep_addendum", "")).strip(),
+        "admin_notification_email": str(form.get("admin_notification_email", "")).strip(),
+        "trial_duration_days": str(max(1, min(int(form.get("trial_duration_days", 30) or 30), 365))),
+        "extra_blocked_email_domains": str(form.get("extra_blocked_email_domains", "")).strip(),
     }
 
     for key, value in settings_map.items():

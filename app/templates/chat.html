@@ -34,6 +34,112 @@
 {% block content %}
 <div class="announcement-banner" id="announcement"></div>
 
+{% if trial_info %}
+<div class="trial-banner trial-banner-{{ trial_info.tier|lower }}" id="trial-banner">
+    <div class="trial-banner-text">
+        {% if trial_info.tier == 'TRIAL' %}
+            <strong>Prova gratuita attiva</strong>
+            {% if trial_info.days_left is not none %}
+                — {{ trial_info.days_left }} giorn{% if trial_info.days_left == 1 %}o{% else %}i{% endif %} rimanent{% if trial_info.days_left == 1 %}e{% else %}i{% endif %}
+                {% if trial_info.expires_at %}(scadenza {{ trial_info.expires_at }}){% endif %}
+            {% endif %}
+        {% else %}
+            <strong>Piano FREE</strong> — limiti ridotti (5 domande/mese, max 2 al giorno)
+        {% endif %}
+    </div>
+    <button class="trial-banner-cta" onclick="requestUpgrade()">Richiedi attivazione abbonamento</button>
+</div>
+<div class="upgrade-modal" id="upgrade-modal" hidden>
+    <div class="upgrade-modal-card">
+        <h3>Richiedi attivazione abbonamento</h3>
+        <p>Confermi l'invio della richiesta? Il nostro team commerciale ti ricontatterà via email all'indirizzo <strong>{{ email }}</strong>.</p>
+        <div class="upgrade-modal-actions">
+            <button class="btn-upgrade-cancel" onclick="closeUpgrade()">Annulla</button>
+            <button class="btn-upgrade-confirm" id="btn-upgrade-confirm" onclick="confirmUpgrade()">Invia richiesta</button>
+        </div>
+    </div>
+</div>
+<style>
+.trial-banner {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4);
+    padding: 10px 20px; font-size: 0.875rem;
+    background: linear-gradient(90deg, #E2231A 0%, #c41610 100%);
+    color: #fff; flex-wrap: wrap;
+}
+.trial-banner-free { background: linear-gradient(90deg, #6e6e73 0%, #4a4a4f 100%); }
+.trial-banner-text { line-height: 1.4; }
+.trial-banner-cta {
+    background: #fff; color: #c41610; border: none; padding: 7px 16px;
+    border-radius: 999px; font-size: 0.8125rem; font-weight: 600; cursor: pointer;
+    font-family: inherit; transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.trial-banner-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+.trial-banner-free .trial-banner-cta { color: #1d1d1f; }
+.upgrade-modal {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+    display: flex; align-items: center; justify-content: center; z-index: 1000;
+    padding: var(--sp-4);
+}
+.upgrade-modal[hidden] { display: none; }
+.upgrade-modal-card {
+    background: var(--c-surface); border-radius: var(--r-md);
+    padding: var(--sp-6); max-width: 440px; width: 100%;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+.upgrade-modal-card h3 { margin: 0 0 var(--sp-3); font-size: 1.125rem; font-family: 'DM Sans', sans-serif; }
+.upgrade-modal-card p { margin: 0 0 var(--sp-5); font-size: 0.9375rem; color: var(--c-text-secondary); line-height: 1.5; }
+.upgrade-modal-actions { display: flex; gap: var(--sp-2); justify-content: flex-end; }
+.btn-upgrade-cancel, .btn-upgrade-confirm {
+    padding: 8px 18px; border-radius: var(--r-sm); font-size: 0.875rem; cursor: pointer;
+    font-weight: 500; border: 1px solid var(--c-border); font-family: inherit;
+}
+.btn-upgrade-cancel { background: var(--c-surface); color: var(--c-text-secondary); }
+.btn-upgrade-cancel:hover { color: var(--c-text); }
+.btn-upgrade-confirm { background: var(--c-brand); color: #fff; border-color: var(--c-brand); }
+.btn-upgrade-confirm:hover { background: var(--c-brand-hover); }
+.btn-upgrade-confirm:disabled { opacity: 0.6; cursor: not-allowed; }
+.toast-upgrade {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: #1d1d1f; color: #fff; padding: 12px 22px; border-radius: 999px;
+    font-size: 0.875rem; z-index: 1100; box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    animation: toast-in 200ms ease;
+}
+.toast-upgrade.error { background: #c41610; }
+@keyframes toast-in { from { opacity: 0; transform: translate(-50%, 8px); } to { opacity: 1; transform: translate(-50%, 0); } }
+</style>
+<script>
+function requestUpgrade() { document.getElementById('upgrade-modal').hidden = false; }
+function closeUpgrade() { document.getElementById('upgrade-modal').hidden = true; }
+function showUpgradeToast(text, isError) {
+    const t = document.createElement('div');
+    t.className = 'toast-upgrade' + (isError ? ' error' : '');
+    t.textContent = text;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 4000);
+}
+async function confirmUpgrade() {
+    const btn = document.getElementById('btn-upgrade-confirm');
+    btn.disabled = true;
+    btn.textContent = 'Invio in corso…';
+    try {
+        const res = await fetch('/api/request-upgrade', { method: 'POST' });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.ok) {
+            showUpgradeToast('Richiesta inviata. Ti ricontatteremo presto.');
+        } else {
+            showUpgradeToast(data.error || 'Invio non riuscito. Riprova.', true);
+        }
+    } catch (e) {
+        showUpgradeToast('Errore di rete. Riprova.', true);
+    } finally {
+        closeUpgrade();
+        btn.disabled = false;
+        btn.textContent = 'Invia richiesta';
+    }
+}
+</script>
+{% endif %}
+
 {% if show_onboarding %}
 <div class="onboarding-overlay" id="onboarding">
     <div class="onboarding-card">

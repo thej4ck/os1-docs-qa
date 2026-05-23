@@ -193,6 +193,30 @@
             </div>
         </div>
 
+        <h3 class="section-title">Iscrizioni &amp; Trial</h3>
+        <p class="section-desc">Gestione self-signup, scadenza prova gratuita e blocklist email personali.</p>
+        <div class="settings-card">
+            <div class="setting-row">
+                <label class="setting-label" for="admin_notification_email">Email notifiche interne</label>
+                <div style="flex:1;">
+                    <input type="text" id="admin_notification_email" name="admin_notification_email" class="setting-input" value="{{ settings.admin_notification_email }}" placeholder="es. commerciale@scao.it">
+                    <div class="setting-hint">Destinatario delle notifiche su nuove iscrizioni, scadenze trial e richieste di upgrade. Lascia vuoto per disabilitare le notifiche.</div>
+                </div>
+            </div>
+            <div class="setting-row">
+                <label class="setting-label" for="trial_duration_days">Durata trial (giorni)</label>
+                <div style="flex:1;">
+                    <input type="number" id="trial_duration_days" name="trial_duration_days" class="setting-input" style="width:120px;" value="{{ settings.trial_duration_days }}" min="1" max="365">
+                    <div class="setting-hint">Numero di giorni di prova gratuita per i nuovi domini. Default 30.</div>
+                </div>
+            </div>
+            <div class="setting-row" style="flex-direction:column;align-items:stretch;">
+                <label class="setting-label" for="extra_blocked_email_domains">Blocklist aggiuntiva (CSV)</label>
+                <textarea id="extra_blocked_email_domains" name="extra_blocked_email_domains" class="setting-input" placeholder="es. mailinator.com, tempmail.com">{{ settings.extra_blocked_email_domains }}</textarea>
+                <div class="setting-hint">Domini email aggiuntivi da bloccare in self-signup, oltre alla lista hardcoded (gmail, yahoo, hotmail, outlook, libero, ...). Separati da virgola.</div>
+            </div>
+        </div>
+
         <h3 class="section-title">Annuncio</h3>
         <p class="section-desc">Banner visibile a tutti gli utenti in cima alla chat. Lascia vuoto per nascondere.</p>
         <div class="settings-card">

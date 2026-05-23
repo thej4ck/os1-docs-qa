@@ -9,7 +9,7 @@ from datetime import datetime
 import markdown as md
 import resend
 
-from fastapi import APIRouter, Request, Form, Query
+from fastapi import APIRouter, BackgroundTasks, Request, Form, Query
 from fastapi.responses import HTMLResponse, JSONResponse, PlainTextResponse, RedirectResponse, Response
 from sse_starlette.sse import EventSourceResponse
 
@@ -22,7 +22,7 @@ from app.models.conversation import (
     delete_conversation, count_user_messages, get_max_messages_setting,
 )
 from app.models.usage import check_limit, get_monthly_usage, get_domain_usage, get_current_month
-from app.models.domain import get_domain_for_email
+from app.models.domain import get_domain_for_email, get_trial_banner_info
 from app.search import query as query_module
 from app.version import VERSION, BUILD, BUILD_DATE
 
@@ -106,6 +106,8 @@ async def chat_page(request: Request, c: str | None = None):
 
     conversations = list_conversations(user["id"])
 
+    trial_info = get_trial_banner_info(get_domain_for_email(user["email"]))
+
     return _templates().TemplateResponse("chat.html", {
         "request": request,
         "email": user["email"],
@@ -118,7 +120,37 @@ async def chat_page(request: Request, c: str | None = None):
         "last_sources": last_sources,
         "app_version": f"v{VERSION} build {BUILD} ({BUILD_DATE})",
         "show_onboarding": not user.get("onboarding_completed", 0),
+        "trial_info": trial_info,
     })
+
+
+@router.post("/api/request-upgrade")
+async def request_upgrade(request: Request, background_tasks: BackgroundTasks):
+    user = _get_user(request)
+    if not user:
+        return JSONResponse({"error": "Non autenticato."}, status_code=401)
+
+    domain_cfg = get_domain_for_email(user["email"])
+    if not domain_cfg:
+        return JSONResponse({"error": "Dominio non riconosciuto."}, status_code=400)
+
+    from app.auth.email_sender import get_admin_notification_email, send_email
+    from app.auth.email_templates import admin_upgrade_request
+
+    admin_to = get_admin_notification_email()
+    if not admin_to:
+        return JSONResponse(
+            {"error": "Servizio non configurato. Scrivi a info@scao.it."},
+            status_code=503,
+        )
+
+    subj, html = admin_upgrade_request(
+        user_email=user["email"],
+        domain=domain_cfg,
+        current_tier=domain_cfg.get("tier", "—"),
+    )
+    background_tasks.add_task(send_email, admin_to, subj, html)
+    return JSONResponse({"ok": True})
 
 
 # ── Streaming Q&A ──
