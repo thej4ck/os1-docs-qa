@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 
 from app.config import settings
 from app.db import get_conn
+from app.models.domain import get_domain_for_email
 
 
 def get_current_month() -> str:
@@ -29,16 +30,31 @@ def get_monthly_usage(user_id: int, month: str | None = None) -> dict:
     }
 
 
-def check_limit(user_id: int) -> tuple[bool, dict]:
+def resolve_user_token_limit(user_id: int, domain_config: dict | None = None) -> int:
+    """Effective monthly token ceiling.
+
+    Hierarchy: user override → domain tier → env default. 0 = unlimited.
+    Pass `domain_config` to skip a redundant domain lookup when the caller already has it.
+    """
+    row = get_conn().execute(
+        "SELECT email, monthly_token_limit FROM users WHERE id = ?", (user_id,)
+    ).fetchone()
+    if not row:
+        return settings.default_monthly_token_limit
+    if row["monthly_token_limit"] is not None:
+        return row["monthly_token_limit"]
+    dom = domain_config if domain_config is not None else get_domain_for_email(row["email"])
+    if dom and dom.get("monthly_token_limit") is not None:
+        return dom["monthly_token_limit"]
+    return settings.default_monthly_token_limit
+
+
+def check_limit(user_id: int, domain_config: dict | None = None) -> tuple[bool, dict]:
     """Check if user is within monthly limit. Returns (allowed, usage_info)."""
     usage = get_monthly_usage(user_id)
     total_tokens = usage["total_prompt_tokens"] + usage["total_completion_tokens"]
 
-    # Get per-user limit or fall back to global default
-    row = get_conn().execute(
-        "SELECT monthly_token_limit FROM users WHERE id = ?", (user_id,)
-    ).fetchone()
-    limit = row["monthly_token_limit"] if row and row["monthly_token_limit"] is not None else settings.default_monthly_token_limit
+    limit = resolve_user_token_limit(user_id, domain_config)
 
     usage["total_tokens"] = total_tokens
     usage["limit"] = limit

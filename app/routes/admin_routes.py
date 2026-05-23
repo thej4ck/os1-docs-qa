@@ -12,6 +12,7 @@ from app.models.conversation import list_conversations, get_conversation_any, ge
 from app.models.usage import (
     get_all_usage, get_usage_summary, get_monthly_usage,
     get_domain_usage, get_recent_questions, get_current_month,
+    resolve_user_token_limit,
 )
 from app.models.domain import (
     list_domains,
@@ -110,8 +111,7 @@ async def user_detail(request: Request, user_email: str):
     usage = get_monthly_usage(user["id"], month)
     conversations = list_conversations(user["id"])
 
-    from app.config import settings
-    limit = user["monthly_token_limit"] if user["monthly_token_limit"] is not None else settings.default_monthly_token_limit
+    limit = resolve_user_token_limit(user["id"])
 
     return _templates().TemplateResponse("admin/user_detail.html", {
         "request": request,

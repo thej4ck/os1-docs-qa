@@ -159,7 +159,7 @@ async def ask(
 
     # Single monthly aggregate (monthly_usage view) — reused for both the
     # request-count gate and the token gate, avoiding a second COUNT query.
-    allowed, usage_info = check_limit(user["id"])
+    allowed, usage_info = check_limit(user["id"], domain_config)
 
     # Monthly request limit per domain (commercial tier; 0 = unlimited)
     if domain_config and domain_config["monthly_request_limit"] > 0:
@@ -171,10 +171,7 @@ async def ask(
                 f"Contatta il rivenditore per l'upgrade."
             )
 
-    # Monthly token limit — domain setting overrides user limit
-    # If domain has monthly_token_limit = 0, skip user-level check
-    domain_monthly_unlimited = domain_config and domain_config.get("monthly_token_limit", 0) == 0
-    if not domain_monthly_unlimited and not allowed and usage_info["limit"] > 0:
+    if not allowed and usage_info["limit"] > 0:
         used_k = round(usage_info["total_tokens"] / 1000)
         limit_k = round(usage_info["limit"] / 1000)
         return _sse_error(
