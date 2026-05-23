@@ -37,15 +37,20 @@
 {% if trial_info %}
 <div class="trial-banner trial-banner-{{ trial_info.tier|lower }}" id="trial-banner">
     <div class="trial-banner-text">
-        {% if trial_info.tier == 'TRIAL' %}
-            <strong>Prova gratuita attiva</strong>
-            {% if trial_info.days_left is not none %}
-                — {{ trial_info.days_left }} giorn{% if trial_info.days_left == 1 %}o{% else %}i{% endif %} rimanent{% if trial_info.days_left == 1 %}e{% else %}i{% endif %}
-                {% if trial_info.expires_at %}(scadenza {{ trial_info.expires_at }}){% endif %}
+        <div class="trial-banner-line1">
+            {% if trial_info.tier == 'TRIAL' %}
+                <strong>Prova gratuita attiva</strong>
+                {% if trial_info.days_left is not none %}
+                    — {{ trial_info.days_left }} giorn{% if trial_info.days_left == 1 %}o{% else %}i{% endif %} rimanent{% if trial_info.days_left == 1 %}e{% else %}i{% endif %}
+                    {% if trial_info.expires_at %}(scadenza {{ trial_info.expires_at }}){% endif %}
+                {% endif %}
+            {% else %}
+                <strong>Piano FREE</strong> — limiti ridotti (5 domande/mese, max 2 al giorno)
             {% endif %}
-        {% else %}
-            <strong>Piano FREE</strong> — limiti ridotti (5 domande/mese, max 2 al giorno)
-        {% endif %}
+        </div>
+        <div class="trial-banner-line2">
+            Licenza per azienda (tutto il dominio, nessun costo per utente) — <strong>pochi euro al mese</strong>, in promozione lancio fino al termine della Beta.
+        </div>
     </div>
     <button class="trial-banner-cta" onclick="requestUpgrade()">Richiedi attivazione abbonamento</button>
 </div>
@@ -68,6 +73,9 @@
 }
 .trial-banner-free { background: linear-gradient(90deg, #6e6e73 0%, #4a4a4f 100%); }
 .trial-banner-text { line-height: 1.4; }
+.trial-banner-line1 { font-size: 0.875rem; }
+.trial-banner-line2 { font-size: 0.75rem; opacity: 0.92; margin-top: 2px; }
+.trial-banner-line2 strong { font-weight: 600; }
 .trial-banner-cta {
     background: #fff; color: #c41610; border: none; padding: 7px 16px;
     border-radius: 999px; font-size: 0.8125rem; font-weight: 600; cursor: pointer;
