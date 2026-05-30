@@ -426,7 +426,8 @@ def _get_all_settings() -> dict:
     """Get all admin-configurable settings with defaults."""
     from app.models.conversation import get_max_messages_setting
     from app.config import settings as app_settings
-    return {
+    from app.search.agents import AGENT_ORDER
+    data = {
         "groq_model": _get_setting("groq_model", "llama-3.1-8b-instant"),
         "groq_deep_model": _get_setting("groq_deep_model", "llama-3.3-70b-versatile"),
         "otp_sender_name": _get_setting("otp_sender_name", "OS1 Docs"),
@@ -441,10 +442,15 @@ def _get_all_settings() -> dict:
         "announcement": _get_setting("announcement", ""),
         "system_prompt": _get_setting("system_prompt", ""),
         "deep_addendum": _get_setting("deep_addendum", ""),
+        "core_system_prompt": _get_setting("core_system_prompt", ""),
         "admin_notification_email": _get_setting("admin_notification_email", ""),
         "trial_duration_days": _get_setting("trial_duration_days", "30"),
         "extra_blocked_email_domains": _get_setting("extra_blocked_email_domains", ""),
     }
+    for aid in AGENT_ORDER:
+        data[f"agent_prompt_{aid}"] = _get_setting(f"agent_prompt_{aid}", "")
+        data[f"agent_role_{aid}"] = _get_setting(f"agent_role_{aid}", "")
+    return data
 
 
 @router.get("/announcement", response_class=HTMLResponse)
@@ -453,7 +459,23 @@ async def settings_page(request: Request):
     if not admin:
         return RedirectResponse(url="/login", status_code=302)
 
-    from app.search.query import ALLOWED_MODELS, DEFAULT_SYSTEM_PROMPT, DEFAULT_DEEP_ADDENDUM
+    from app.search.query import (
+        ALLOWED_MODELS, DEFAULT_SYSTEM_PROMPT, DEFAULT_DEEP_ADDENDUM,
+        CORE_SYSTEM_PROMPT, STYLE_STANDARD_DEFAULT,
+    )
+    from app.search.agents import AGENTS, AGENT_ORDER, check_prompt_coherence, _get_prompt_setting
+
+    core_effective = _get_prompt_setting("core_system_prompt", CORE_SYSTEM_PROMPT)
+    agent_defaults = [
+        {
+            "id": aid,
+            "label": AGENTS[aid]["label"],
+            "emoji": AGENTS[aid]["emoji"],
+            "default_style": AGENTS[aid]["style"],
+            "default_role": AGENTS[aid]["role"],
+        }
+        for aid in AGENT_ORDER
+    ]
     return _templates().TemplateResponse("admin/announcement.html", {
         "request": request,
         "email": admin["email"],
@@ -462,6 +484,10 @@ async def settings_page(request: Request):
         "allowed_models": ALLOWED_MODELS,
         "default_system_prompt": DEFAULT_SYSTEM_PROMPT,
         "default_deep_addendum": DEFAULT_DEEP_ADDENDUM,
+        "default_core_system_prompt": CORE_SYSTEM_PROMPT,
+        "default_style_standard": STYLE_STANDARD_DEFAULT,
+        "agent_defaults": agent_defaults,
+        "coherence_warnings": check_prompt_coherence(core_effective),
     })
 
 
@@ -505,10 +531,16 @@ async def save_settings(request: Request):
         "announcement": str(form.get("announcement", "")).strip(),
         "system_prompt": str(form.get("system_prompt", "")).strip(),
         "deep_addendum": str(form.get("deep_addendum", "")).strip(),
+        "core_system_prompt": str(form.get("core_system_prompt", "")).strip(),
         "admin_notification_email": str(form.get("admin_notification_email", "")).strip(),
         "trial_duration_days": str(max(1, min(int(form.get("trial_duration_days", 30) or 30), 365))),
         "extra_blocked_email_domains": str(form.get("extra_blocked_email_domains", "")).strip(),
     }
+
+    from app.search.agents import AGENT_ORDER
+    for aid in AGENT_ORDER:
+        settings_map[f"agent_prompt_{aid}"] = str(form.get(f"agent_prompt_{aid}", "")).strip()
+        settings_map[f"agent_role_{aid}"] = str(form.get(f"agent_role_{aid}", "")).strip()
 
     for key, value in settings_map.items():
         conn.execute(

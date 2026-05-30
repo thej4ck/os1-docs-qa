@@ -89,12 +89,14 @@ async def chat_page(request: Request, c: str | None = None):
     msg_count = 0
     max_messages = get_max_messages_setting()
     last_sources = []
+    active_agent_id = None
     if c:
         conv = get_conversation(c, user["id"])
         if conv:
             conversation_id = c
             messages = get_messages(c)
             msg_count = count_user_messages(c)
+            active_agent_id = get_conversation_agent(c)
             # Get sources from last assistant message for docs panel
             for m in reversed(messages):
                 if m["role"] == "assistant" and m.get("sources"):
@@ -107,6 +109,11 @@ async def chat_page(request: Request, c: str | None = None):
     conversations = list_conversations(user["id"])
 
     trial_info = get_trial_banner_info(get_domain_for_email(user["email"]))
+
+    from app.search.agents import list_agents_public, get_agent_public
+
+    # Conversazione attiva = ha già messaggi: l'esperto è bloccato (no picker).
+    is_active_conversation = bool(messages)
 
     return _templates().TemplateResponse("chat.html", {
         "request": request,
@@ -121,6 +128,9 @@ async def chat_page(request: Request, c: str | None = None):
         "app_version": f"v{VERSION} build {BUILD} ({BUILD_DATE})",
         "show_onboarding": not user.get("onboarding_completed", 0),
         "trial_info": trial_info,
+        "agents": list_agents_public(),
+        "is_active_conversation": is_active_conversation,
+        "active_agent": get_agent_public(active_agent_id),
     })
 
 
@@ -162,6 +172,7 @@ async def ask(
     conversation_id: str = Form(default=""),
     deep: str = Form(default=""),
     topic: str = Form(default=""),
+    agent: str = Form(default=""),
 ):
     user = _get_user(request)
     if not user:
@@ -234,6 +245,12 @@ async def ask(
         if not conv:
             return JSONResponse({"error": "Conversazione non trovata."}, status_code=404)
 
+    # Esperto selezionato manualmente dall'UI (vuoto/ignoto = default generico)
+    from app.search.agents import get_agent
+    selected_agent = get_agent(agent.strip())
+    active_agent = selected_agent["id"] if selected_agent else None
+    user_role = "amministratore" if user.get("is_admin") else "utente"
+
     # Disambiguation check (only for first message in new conversations, no topic already selected)
     topic_filter = topic.strip() if topic else None
     if is_new_conv and not topic_filter:
@@ -263,7 +280,8 @@ async def ask(
 
         is_deep = deep == "true"
         async for token, token_sources, token_meta in query_module.ask_stream(
-            question, history=llm_history, deep=is_deep, topic_filter=topic_filter
+            question, history=llm_history, deep=is_deep, topic_filter=topic_filter,
+            agent_id=active_agent, user_role=user_role,
         ):
             if token_sources:
                 sources = token_sources
@@ -297,6 +315,7 @@ async def ask(
                 rerank_tokens=usage_data.get("rerank_tokens") if usage_data else None,
                 rerank_cost_usd=usage_data.get("rerank_cost_usd") if usage_data else None,
                 rerank_model=usage_data.get("rerank_model") if usage_data else None,
+                agent=active_agent,
             )
 
         # Signal completion with metadata

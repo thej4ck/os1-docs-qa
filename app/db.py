@@ -121,6 +121,7 @@ def _migrate():
         ("rerank_tokens", "INTEGER"),
         ("rerank_cost_usd", "REAL"),
         ("rerank_model", "TEXT"),
+        ("agent", "TEXT"),  # esperto che ha risposto (NULL = default generico)
     ]
     for col_name, col_type in new_columns:
         if col_name not in existing:

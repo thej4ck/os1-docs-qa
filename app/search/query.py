@@ -9,15 +9,35 @@ from openai import AsyncOpenAI
 from app.config import settings
 from app.search.fts import SearchIndex
 
-DEFAULT_SYSTEM_PROMPT = """\
+# ── Prompt a due livelli ──
+# CORE = solo grounding (condiviso, invariante). NON deve contenere regole di
+# formato/lunghezza/struttura: quelle stanno nel blocco "stile" di ogni esperto,
+# così il prompt base non può mai contraddire l'assistant prompt.
+CORE_SYSTEM_PROMPT = """\
 Sei l'assistente documentazione di OS1, il gestionale ERP di OSItalia. \
 Rispondi SOLO in base al contesto documentale fornito, in italiano.
 
-# Regole fondamentali
+# Regole non negoziabili (valide per ogni modalità)
+
+- **NON inventare**: se il contesto non contiene la risposta, dillo. Meglio breve e onesto che lungo e inventato.
+- **Cita la fonte**: indica sempre il documento da cui prendi le informazioni con `📄 *Fonte: nome-documento (file.htm)*`.
+- Non iniziare con "Certo!" e non ripetere la domanda dell'utente.
+
+# Screenshot
+
+Nel contesto: `[Screenshot: descrizione | url]` → includili con `![descrizione](url)` subito dopo il paragrafo pertinente. Max 2-3, solo se rilevanti.
+
+# Se non hai la risposta
+
+Dì: "La documentazione disponibile non copre questo aspetto." \
+Indica cosa hai trovato di parziale e suggerisci termini alternativi o di contattare il supporto OSItalia."""
+
+# STILE STANDARD = formato dell'assistente generico (default, nessun esperto scelto).
+STYLE_STANDARD_DEFAULT = """\
+# Stile di risposta
 
 1. **Risposta diretta PRIMA di tutto**: rispondi alla domanda in 1-3 righe, POI dettaglia.
-2. **NON inventare**: se il contesto non contiene la risposta, dillo. Meglio breve e onesto che lungo e inventato.
-3. **Solo emoji codificate**: 📌 titolo, 📍 percorso, ⚠️ warning, 💡 tip, ℹ️ nota, ✅ obbligatorio, 📄 fonte.
+2. **Solo emoji codificate**: 📌 titolo, 📍 percorso, ⚠️ warning, 💡 tip, ℹ️ nota, ✅ obbligatorio, 📄 fonte.
 
 # Schema di risposta
 
@@ -48,8 +68,6 @@ Se un passaggio coinvolge una maschera, inserisci tabella campi:
 
 ---
 
-📄 *Fonte: nome-documento (file.htm)*
-
 ### Per saperne di più
 - 3 domande suggerite specifiche e correlate
 
@@ -57,16 +75,10 @@ Se un passaggio coinvolge una maschera, inserisci tabella campi:
 
 - `###` per sezioni (mai h1/h2). **Grassetto** per campi/pulsanti/azioni. `Codice` solo per nomi tecnici DB.
 - Paragrafi max 3 righe, poi spezza con elenco o callout. Mai muri di testo.
-- Non iniziare con "Certo!", non ripetere la domanda, non usare emoji fuori dalla lista.
+- Non usare emoji fuori dalla lista codificata."""
 
-# Screenshot
-
-Nel contesto: `[Screenshot: descrizione | url]` → includili con `![descrizione](url)` subito dopo il paragrafo pertinente. Max 2-3, solo se rilevanti.
-
-# Se non hai la risposta
-
-Dì: "La documentazione disponibile non copre questo aspetto." \
-Indica cosa hai trovato di parziale e suggerisci termini alternativi o di contattare il supporto OSItalia."""
+# Back-compat: prompt completo = CORE + stile standard.
+DEFAULT_SYSTEM_PROMPT = CORE_SYSTEM_PROMPT + "\n\n" + STYLE_STANDARD_DEFAULT
 
 DEFAULT_DEEP_ADDENDUM = """\
 ## MODALITÀ APPROFONDIMENTO
@@ -281,19 +293,26 @@ async def _hybrid_candidates(
     """
     from app.search import signals
     from app.search.fusion import rrf_fuse
+    from app.search.expand import expand_terms
+
+    # Espansione terminologica deterministica (usata solo nel ramo OR-fallback
+    # di BM25). La leg dense resta sulla query originale: assorbe già le parafrasi.
+    expansion = expand_terms(question)
+    if trace is not None and expansion:
+        trace["expanded_terms"] = expansion
 
     hybrid = embeddings_ready()
     if hybrid:
         bm25_ids, dense = await asyncio.gather(
-            asyncio.to_thread(_index.search_ids, question, 80, topic_filter),
+            asyncio.to_thread(_index.search_ids, question, 80, topic_filter, expansion),
             _safe_dense(question, 80),
         )
     else:
-        bm25_ids = await asyncio.to_thread(_index.search_ids, question, 80, topic_filter)
+        bm25_ids = await asyncio.to_thread(_index.search_ids, question, 80, topic_filter, expansion)
         dense = None
 
     if topic_filter and len(bm25_ids) < 3:
-        bm25_ids = await asyncio.to_thread(_index.search_ids, question, 80, None)
+        bm25_ids = await asyncio.to_thread(_index.search_ids, question, 80, None, expansion)
         topic_filter = None  # widened fallback
 
     def _bm25_only(reason: str) -> list[dict]:
@@ -559,6 +578,8 @@ async def ask_stream(
     history: list[dict] | None = None,
     deep: bool = False,
     topic_filter: str | None = None,
+    agent_id: str | None = None,
+    user_role: str | None = None,
 ) -> AsyncIterator[tuple[str, list[dict], dict | None]]:
     """Retrieve context, call Groq, and yield (token, sources, usage) tuples.
 
@@ -588,8 +609,10 @@ async def ask_stream(
 
     context = build_context(docs)
 
-    # System prompt is always identical (cache-friendly prefix for Groq prompt caching)
-    prompt = get_system_prompt()
+    # System prompt = CORE (grounding) + STILE (esperto scelto o standard).
+    # Il default (agent_id None) usa lo stile standard -> prefisso cache-friendly.
+    from app.search.agents import build_system_prompt, is_brief_agent
+    prompt = build_system_prompt(agent_id, module=topic_filter, role=user_role)
 
     messages = [{"role": "system", "content": prompt}]
     if history:
@@ -599,7 +622,9 @@ async def ask_stream(
     user_message = (
         f"Contesto documentale:\n\n{context}\n\n---\n\nDomanda dell'utente: {question}"
     )
-    if deep:
+    # Deep soppresso sugli esperti a risposta breve (es. Virgilio): l'addendum
+    # "sii esaustivo" contraddirebbe il cap di lunghezza della persona.
+    if deep and not is_brief_agent(agent_id):
         addendum = get_deep_addendum()
         user_message += f"\n\n---\n\n{addendum}"
     messages.append({"role": "user", "content": user_message})

@@ -123,36 +123,45 @@ class SearchIndex:
 
     def search(
         self, query: str, limit: int = 10, doc_type: Optional[str] = None,
-        topic_filter: Optional[str] = None,
+        topic_filter: Optional[str] = None, expansion: Optional[list[str]] = None,
     ) -> list[dict]:
         """BM25-ranked full-text search with AND-first, OR-fallback strategy."""
-        return self._search(query, limit, doc_type, topic_filter, ids_only=False)
+        return self._search(query, limit, doc_type, topic_filter, ids_only=False,
+                            expansion=expansion)
 
     def search_ids(
         self, query: str, limit: int = 10, topic_filter: Optional[str] = None,
+        expansion: Optional[list[str]] = None,
     ) -> list[int]:
         """BM25-ranked search returning only doc ids (no content/snippet fetch).
 
         Used by the hybrid retriever, which needs ranked ids for fusion and
         fetches full rows only for the small fused set.
         """
-        return self._search(query, limit, None, topic_filter, ids_only=True)
+        return self._search(query, limit, None, topic_filter, ids_only=True,
+                            expansion=expansion)
 
     def _search(
         self, query: str, limit: int, doc_type: Optional[str],
         topic_filter: Optional[str], ids_only: bool,
+        expansion: Optional[list[str]] = None,
     ):
         tokens = self._clean_tokens(query)
         if not tokens:
             return []
 
-        # Try AND (all terms must match) first
+        # Try AND (all terms must match) first — original terms only, no drift.
         and_query = " AND ".join(tokens)
         results = self._execute_search(and_query, limit, doc_type, topic_filter, ids_only)
 
-        # Fall back to OR if AND returns too few results
-        if len(results) < _MIN_AND_RESULTS and len(tokens) > 1:
-            or_query = " OR ".join(tokens)
+        # Fall back to OR if AND returns too few results. Synonyms enter ONLY
+        # here: well-formed queries keep their vocabulary; low-recall queries
+        # get the curated ERP synonyms (each a quoted FTS phrase) ORed in.
+        if len(results) < _MIN_AND_RESULTS and (len(tokens) > 1 or expansion):
+            or_terms = list(tokens)
+            if expansion:
+                or_terms += [f'"{s}"' for s in expansion]
+            or_query = " OR ".join(or_terms)
             results = self._execute_search(or_query, limit, doc_type, topic_filter, ids_only)
 
         return results

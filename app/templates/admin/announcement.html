@@ -165,11 +165,31 @@
         <h3 class="section-title">Prompt di sistema</h3>
         <p class="section-desc">Prompt inviati al modello LLM. Lascia vuoto per usare il prompt predefinito. Clicca "Mostra default" per vedere il testo attualmente in uso come fallback.</p>
         <div class="settings-card">
+            {% if coherence_warnings %}
+            <div class="setting-row" style="flex-direction:column;align-items:stretch;background:var(--c-brand-light);border-left:3px solid var(--c-brand);padding:10px 12px;border-radius:var(--r-sm);">
+                <strong>⚠️ Possibile conflitto nel prompt CORE</strong>
+                <div class="setting-hint">Il CORE sembra imporre regole di formato/struttura: spostale nello stile dei singoli esperti, altrimenti contraddice gli assistant prompt. Frammenti: {% for w in coherence_warnings %}<code>…{{ w }}…</code>{% if not loop.last %}, {% endif %}{% endfor %}</div>
+            </div>
+            {% endif %}
             <div class="setting-row" style="flex-direction:column;align-items:stretch;">
-                <label class="setting-label" for="system_prompt">Prompt base</label>
+                <label class="setting-label" for="core_system_prompt">Prompt CORE — grounding condiviso</label>
                 <details class="prompt-default-details">
                     <summary>Mostra prompt predefinito</summary>
-                    <pre class="prompt-default-preview">{{ default_system_prompt }}</pre>
+                    <pre class="prompt-default-preview">{{ default_core_system_prompt }}</pre>
+                </details>
+                <textarea id="core_system_prompt" name="core_system_prompt" class="setting-input prompt-editor" style="min-height:180px;"
+                    placeholder="Lascia vuoto per usare il default mostrato sopra...">{{ settings.core_system_prompt }}</textarea>
+                <div class="setting-hint"><strong>Solo grounding</strong> (rispondi dal contesto, non inventare, fonti, screenshot). NON scrivere regole di formato/lunghezza/struttura: le definisce ogni esperto.</div>
+                <div class="prompt-actions">
+                    <button type="button" class="btn-reset-prompt" onclick="resetPrompt('core_system_prompt')">Copia default nel campo</button>
+                    <button type="button" class="btn-reset-prompt" onclick="document.getElementById('core_system_prompt').value=''">Svuota (usa default)</button>
+                </div>
+            </div>
+            <div class="setting-row" style="flex-direction:column;align-items:stretch;margin-top:var(--sp-4);">
+                <label class="setting-label" for="system_prompt">Stile risposta — assistente Standard</label>
+                <details class="prompt-default-details">
+                    <summary>Mostra stile predefinito</summary>
+                    <pre class="prompt-default-preview">{{ default_style_standard }}</pre>
                 </details>
                 <textarea id="system_prompt" name="system_prompt" class="setting-input prompt-editor"
                     placeholder="Lascia vuoto per usare il prompt predefinito mostrato sopra...">{{ settings.system_prompt }}</textarea>
@@ -191,6 +211,23 @@
                     <button type="button" class="btn-reset-prompt" onclick="document.getElementById('deep_addendum').value=''">Svuota (usa default)</button>
                 </div>
             </div>
+            {% for a in agent_defaults %}
+            <div class="setting-row" style="flex-direction:column;align-items:stretch;margin-top:var(--sp-4);">
+                <label class="setting-label" for="agent_prompt_{{ a.id }}">{{ a.emoji }} Esperto «{{ a.label }}» — stile</label>
+                <details class="prompt-default-details">
+                    <summary>Mostra stile predefinito</summary>
+                    <pre class="prompt-default-preview">{{ a.default_style }}</pre>
+                </details>
+                <textarea id="agent_prompt_{{ a.id }}" name="agent_prompt_{{ a.id }}" class="setting-input prompt-editor" style="min-height:140px;"
+                    placeholder="Lascia vuoto per usare lo stile predefinito...">{{ settings['agent_prompt_' ~ a.id] }}</textarea>
+                <label class="setting-label" for="agent_role_{{ a.id }}" style="margin-top:var(--sp-2);">Descrizione card (compare sotto il nome)</label>
+                <textarea id="agent_role_{{ a.id }}" name="agent_role_{{ a.id }}" class="setting-input" placeholder="{{ a.default_role }}">{{ settings['agent_role_' ~ a.id] }}</textarea>
+                <div class="prompt-actions">
+                    <button type="button" class="btn-reset-prompt" onclick="document.getElementById('agent_prompt_{{ a.id }}').value=''">Svuota stile</button>
+                    <button type="button" class="btn-reset-prompt" onclick="document.getElementById('agent_role_{{ a.id }}').value=''">Svuota descrizione</button>
+                </div>
+            </div>
+            {% endfor %}
         </div>
 
         <h3 class="section-title">Iscrizioni &amp; Trial</h3>
@@ -233,8 +270,9 @@
 
 <script>
 const DEFAULT_PROMPTS = {
-    system_prompt: {{ default_system_prompt | tojson }},
+    system_prompt: {{ default_style_standard | tojson }},
     deep_addendum: {{ default_deep_addendum | tojson }},
+    core_system_prompt: {{ default_core_system_prompt | tojson }},
 };
 function resetPrompt(id) {
     if (confirm('Ripristinare il prompt predefinito? Il testo corrente verrà sostituito.')) {

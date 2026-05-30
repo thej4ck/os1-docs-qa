@@ -44,6 +44,17 @@ def get_conversation_any(conv_id: str) -> dict | None:
     return dict(row) if row else None
 
 
+def get_conversation_agent(conv_id: str) -> str | None:
+    """Esperto attivo della conversazione: primo `agent` non-null tra i messaggi
+    assistant. None = assistente Standard. Usato per lockare l'esperto su reload."""
+    row = get_conn().execute(
+        "SELECT agent FROM messages WHERE conversation_id = ? AND role = 'assistant' "
+        "AND agent IS NOT NULL ORDER BY created_at LIMIT 1",
+        (conv_id,),
+    ).fetchone()
+    return row["agent"] if row else None
+
+
 def get_messages(conv_id: str, limit: int | None = None) -> list[dict]:
     if limit:
         rows = get_conn().execute(
@@ -77,17 +88,18 @@ def add_message(
     rerank_tokens: int | None = None,
     rerank_cost_usd: float | None = None,
     rerank_model: str | None = None,
+    agent: str | None = None,
 ) -> int:
     """Add a message and update conversation timestamp. Returns message ID."""
     conn = get_conn()
     cur = conn.execute(
         "INSERT INTO messages (conversation_id, role, content, sources, "
         "prompt_tokens, completion_tokens, cost_usd, model, cached_tokens, "
-        "rerank_tokens, rerank_cost_usd, rerank_model) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "rerank_tokens, rerank_cost_usd, rerank_model, agent) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         (conv_id, role, content, json.dumps(sources) if sources else None,
          prompt_tokens, completion_tokens, cost_usd, model, cached_tokens,
-         rerank_tokens, rerank_cost_usd, rerank_model),
+         rerank_tokens, rerank_cost_usd, rerank_model, agent),
     )
     conn.execute(
         "UPDATE conversations SET updated_at = strftime('%Y-%m-%dT%H:%M:%SZ', 'now') WHERE id = ?",

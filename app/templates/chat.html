@@ -10,6 +10,7 @@
 {% endblock %}
 
 {% block nav_right %}
+<span class="agent-badge" id="agent-badge" title="Esperto attivo in questa conversazione"{% if not is_active_conversation %} hidden{% endif %}>{% if active_agent %}<img class="agent-badge-avatar" src="{{ active_agent.avatar }}" alt=""><span>{{ active_agent.display_name }}</span>{% else %}Standard{% endif %}</span>
 <button class="docs-toggle-btn" id="email-btn" aria-label="Invia via email" title="Invia chat via email" onclick="emailChat()" style="display:none;">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">
         <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
@@ -230,37 +231,9 @@ function completeOnboarding() {
     <div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
 
     <!-- Center: chat -->
-    <div class="chat-panel">
+    <div class="chat-panel{% if not is_active_conversation %} state-empty{% endif %}" id="chat-panel">
         <div class="chat-wrap">
             <div class="chat-messages" id="messages">
-                {% if not messages %}
-                <div class="welcome" id="welcome">
-                    <img src="/static/img/logo-lg.png" alt="SCAO" class="welcome-logo">
-                    <h2>Ciao, come posso aiutarti con OS1?<span class="beta-badge-lg">Beta</span></h2>
-                    <p>Scrivimi una domanda come la faresti a un collega. Cerco la risposta nel manuale ufficiale di OS1 e ti indico sempre il documento da cui arriva.</p>
-
-                    <div class="welcome-starters-label">Prova con una di queste:</div>
-                    <div class="suggestion-chips">
-                        <button class="suggestion-chip" onclick="askSuggestion(this)"><span class="chip-icon">🧾</span>Come emetto una fattura immediata di vendita a un cliente?</button>
-                        <button class="suggestion-chip" onclick="askSuggestion(this)"><span class="chip-icon">📒</span>Come registro una fattura fornitore in prima nota?</button>
-                        <button class="suggestion-chip" onclick="askSuggestion(this)"><span class="chip-icon">📦</span>Come carico la merce in magazzino da una bolla di arrivo?</button>
-                        <button class="suggestion-chip" onclick="askSuggestion(this)"><span class="chip-icon">🛒</span>Come inserisco un nuovo ordine cliente?</button>
-                        <button class="suggestion-chip" onclick="askSuggestion(this)"><span class="chip-icon">👤</span>Come creo l'anagrafica di un nuovo cliente?</button>
-                        <button class="suggestion-chip" onclick="askSuggestion(this)"><span class="chip-icon">📊</span>Come stampo il registro IVA delle vendite?</button>
-                    </div>
-
-                    <details class="welcome-tips-toggle">
-                        <summary>Vuoi risposte più precise? Apri i consigli</summary>
-                        <div class="welcome-tips-body">
-                            <div><span>🎯</span> Di' sempre l'area OS1 (vendite, magazzino, contabilità…).</div>
-                            <div><span>🔍</span> Sii specifico: azione + oggetto (es. "nota di credito a cliente in prima nota").</div>
-                            <div><span>💬</span> Una chat = un argomento; per un tema nuovo apri una nuova chat.</div>
-                        </div>
-                    </details>
-
-                    <p class="welcome-warning">🛡️ Le risposte arrivano dal manuale ufficiale OS1 e citano sempre il documento di origine, così puoi verificare con un clic. Per sicurezza non scrivere dati personali o riservati.</p>
-                </div>
-                {% endif %}
 
                 {% for msg in messages %}
                 <div class="msg msg-{{ msg.role }}">
@@ -302,6 +275,55 @@ function completeOnboarding() {
                     Hai raggiunto il limite di domande per questa conversazione.
                     <a href="/chat">Apri una nuova chat</a>
                 </div>
+                {% if not is_active_conversation %}
+                <div class="center-hero" id="center-hero">
+                    <h2 class="center-hero-title">Ciao, con chi vuoi parlare di OS1?</h2>
+                    <p class="center-hero-sub">Scegli un esperto, poi scrivi la tua domanda.</p>
+                    <div class="agent-picker" id="agent-picker" role="radiogroup" aria-label="Scegli un esperto">
+                        {% for a in agents %}
+                        <button type="button" class="agent-card" data-agent="{{ a.id }}"
+                                data-name="{{ a.display_name }}" data-avatar="{{ a.avatar }}"
+                                role="radio" aria-checked="false" onclick="selectAgent('{{ a.id }}')">
+                            <span class="agent-card-avatar">
+                                <img class="agent-card-img" src="{{ a.avatar }}" alt=""
+                                     onerror="this.style.display='none';this.parentElement.querySelector('.agent-card-emoji').hidden=false">
+                                <span class="agent-card-emoji" hidden>{{ a.emoji }}</span>
+                            </span>
+                            <span class="agent-card-name">{{ a.display_name }} <span class="agent-card-tagline">— {{ a.tagline }}</span></span>
+                            <span class="agent-card-role">{{ a.role }}</span>
+                        </button>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                <script>
+                    function selectAgent(id) {
+                        if (id) { localStorage.setItem('os1-agent', id); }
+                        else { localStorage.removeItem('os1-agent'); }
+                        document.querySelectorAll('#agent-picker .agent-card').forEach(function (c) {
+                            var on = (c.dataset.agent || '') === (id || '');
+                            c.classList.toggle('agent-card--active', on);
+                            c.setAttribute('aria-checked', on ? 'true' : 'false');
+                        });
+                    }
+                    function lockAgentBadge() {
+                        var badge = document.getElementById('agent-badge');
+                        if (!badge) return;
+                        var id = localStorage.getItem('os1-agent') || '';
+                        var card = id ? document.querySelector('#agent-picker .agent-card[data-agent="' + id + '"]') : null;
+                        if (card) {
+                            badge.innerHTML = '<img class="agent-badge-avatar" src="' + card.dataset.avatar + '" alt="">' +
+                                              '<span>' + card.dataset.name + '</span>';
+                        } else { badge.textContent = 'Standard'; }
+                        badge.hidden = false;
+                    }
+                    (function () {
+                        var restore = function () { selectAgent(localStorage.getItem('os1-agent') || ''); };
+                        if (document.readyState === 'loading') {
+                            document.addEventListener('DOMContentLoaded', restore);
+                        } else { restore(); }
+                    })();
+                </script>
                 <form id="ask-form" onsubmit="return handleSubmit(event)">
                     <div class="chat-input-bar">
                         <textarea id="question" name="question" rows="1"
@@ -383,7 +405,6 @@ let maxMessages = {{ max_messages }};
 const messagesEl = document.getElementById('messages');
 const questionEl = document.getElementById('question');
 const sendBtn = document.getElementById('send-btn');
-const welcomeEl = document.getElementById('welcome');
 const scrollAnchor = document.getElementById('scroll-anchor');
 const counterEl = document.getElementById('msg-counter');
 const limitBanner = document.getElementById('limit-banner');
@@ -609,13 +630,6 @@ document.getElementById('docs-toggle').addEventListener('click', () => {
     }
 });
 
-// ── Suggestions ──
-function askSuggestion(el) {
-    // Get text without the icon span
-    const icon = el.querySelector('.chip-icon');
-    questionEl.value = icon ? el.textContent.replace(icon.textContent, '').trim() : el.textContent;
-    handleSubmit(new Event('submit'));
-}
 
 // ── Textarea auto-resize ──
 questionEl.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = Math.min(this.scrollHeight, 120) + 'px'; });
@@ -629,7 +643,14 @@ function handleSubmit(e) {
 
     hideDeepBanner();
 
-    if (welcomeEl) { welcomeEl.classList.add('hiding'); setTimeout(() => welcomeEl.remove(), 300); }
+    // Primo invio: blocca l'esperto e passa al layout conversazione.
+    var panel = document.getElementById('chat-panel');
+    if (panel && panel.classList.contains('state-empty')) {
+        lockAgentBadge();
+        var hero = document.getElementById('center-hero');
+        if (hero) { hero.classList.add('hiding'); setTimeout(function () { hero.remove(); }, 300); }
+        panel.classList.remove('state-empty');
+    }
     closeSidebar();
 
     const userMsg = createMsg('user');
@@ -659,6 +680,8 @@ function handleSubmit(e) {
         formData.append('topic', questionEl.dataset.topicFilter);
         delete questionEl.dataset.topicFilter;
     }
+    const selectedAgent = localStorage.getItem('os1-agent') || '';
+    if (selectedAgent) formData.append('agent', selectedAgent);
 
     fetch('/api/ask', { method: 'POST', body: formData })
         .then(response => {

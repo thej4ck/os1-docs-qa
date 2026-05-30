@@ -43,15 +43,16 @@ async def login_page(request: Request):
 @router.post("/login", response_class=HTMLResponse)
 async def login_submit(request: Request, email: str = Form(...)):
     email = email.strip().lower()
+
+    # Dev/local bypass: no OTP, qualunque email (disattivato in produzione).
+    if not settings.production:
+        print(f"[auth] DEV bypass login: {email} (PRODUCTION=false)", flush=True)
+        return login_and_redirect(email)
+
     if not is_email_allowed(email):
         return _templates().TemplateResponse(
             "login.html", {"request": request, "error": "Email non autorizzata."}
         )
-
-    # Dev/local bypass: no OTP, log in immediately on email submit.
-    if not settings.production:
-        print(f"[auth] DEV bypass login: {email} (PRODUCTION=false)", flush=True)
-        return login_and_redirect(email)
 
     code = generate_otp(email)
     success = send_otp_email(email, code)
