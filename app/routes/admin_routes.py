@@ -7,6 +7,7 @@ from fastapi import APIRouter, Request, Form
 from fastapi.responses import HTMLResponse, RedirectResponse, StreamingResponse, JSONResponse
 
 from app.auth.session import get_session_email
+from app.version import PRODUCT_NAME
 from app.models.user import get_user_by_email, is_admin, list_users, set_user_limit
 from app.models.conversation import list_conversations, get_conversation_any, get_messages
 from app.models.usage import (
@@ -430,7 +431,7 @@ def _get_all_settings() -> dict:
     data = {
         "groq_model": _get_setting("groq_model", "llama-3.1-8b-instant"),
         "groq_deep_model": _get_setting("groq_deep_model", "llama-3.3-70b-versatile"),
-        "otp_sender_name": _get_setting("otp_sender_name", "OS1 Docs"),
+        "otp_sender_name": _get_setting("otp_sender_name", PRODUCT_NAME),
         "otp_sender_email": _get_setting("otp_sender_email", "noreply@ai.scao.it"),
         "allowed_emails": _get_setting("allowed_emails", app_settings.allowed_emails),
         "max_output_tokens": _get_setting("max_output_tokens", "2048"),

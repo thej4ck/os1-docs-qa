@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}OS1 Docs{% endblock %}</title>
+    <title>{% block title %}OS1 Virgilio{% endblock %}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -297,6 +297,15 @@
         .auth-header h1 { font-size: 1.375rem; margin-bottom: var(--sp-2); color: var(--c-text); }
         .auth-header p { font-size: 0.9375rem; color: var(--c-text-secondary); line-height: 1.5; }
         .auth-header strong { color: var(--c-text); font-weight: 600; }
+        .auth-alt {
+            margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--c-border);
+            text-align: center; font-size: 0.875rem; color: var(--c-text-secondary);
+        }
+        .auth-alt-link {
+            display: inline-block; margin-left: 6px; color: var(--c-brand);
+            font-weight: 600; text-decoration: none;
+        }
+        .auth-alt-link:hover { text-decoration: underline; }
 
         /* ═══════════════ Forms ═══════════════ */
         .form-group { margin-bottom: var(--sp-5); }
@@ -1216,7 +1225,7 @@
                 {% block nav_left %}{% endblock %}
                 <a href="/chat" class="brand">
                     <img src="/static/img/logo.png" alt="SCAO" class="brand-logo">
-                    <span>OS1 Docs</span>
+                    <span>OS1 Virgilio</span>
                     <span class="beta-badge" title="Prodotto in fase BETA">Beta</span>
                 </a>
             </div>

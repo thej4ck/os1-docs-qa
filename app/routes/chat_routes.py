@@ -15,6 +15,7 @@ from sse_starlette.sse import EventSourceResponse
 
 from app.auth.session import get_session_email
 from app.config import settings
+from app.version import PRODUCT_NAME
 from app.models.user import get_user_by_email, get_or_create_user
 from app.models.conversation import (
     create_conversation, list_conversations, get_conversation,
@@ -400,7 +401,7 @@ async def api_export_conversation(request: Request, conv_id: str):
     messages = get_messages(conv_id)
     lines = [f"# {conv['title'] or 'Conversazione'}\n"]
     for m in messages:
-        role_label = "Tu" if m["role"] == "user" else "OS1 Docs"
+        role_label = "Tu" if m["role"] == "user" else PRODUCT_NAME
         lines.append(f"## {role_label}\n{m['content']}\n")
     return PlainTextResponse(
         "\n".join(lines),
@@ -745,7 +746,7 @@ async def email_conversation(request: Request, conv_id: str):
         resend.Emails.send({
             "from": _get_sender(),
             "to": [user["email"]],
-            "subject": f"Chat OS1 Docs: {title}",
+            "subject": f"Chat {PRODUCT_NAME}: {title}",
             "html": html,
         })
     except Exception as e:

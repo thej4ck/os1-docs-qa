@@ -4,6 +4,7 @@ import resend
 
 from app.config import settings
 from app.models.settings import get_int_setting, get_setting
+from app.version import PRODUCT_NAME
 
 DEFAULT_TRIAL_DAYS = 30
 MAX_TRIAL_DAYS = 365
@@ -11,7 +12,7 @@ MAX_TRIAL_DAYS = 365
 
 def _get_sender() -> str:
     """Get email sender 'Name <email>' from app_settings or default."""
-    name = get_setting("otp_sender_name", "OS1 Docs")
+    name = get_setting("otp_sender_name", PRODUCT_NAME)
     email_addr = get_setting("otp_sender_email", "noreply@ai.scao.it")
     return f"{name} <{email_addr}>"
 

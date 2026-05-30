@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% block title %}Prova gratuita — OS1 Docs{% endblock %}
+{% block title %}Prova gratuita — OS1 Virgilio{% endblock %}
 
 {% block content %}
 <div class="auth-page">
     <div class="auth-card auth-card-wide">
         <div class="auth-header">
             <img src="/static/img/logo-lg.png" alt="SCAO" class="auth-logo">
-            <h1>Prova OS1 Docs<span class="beta-badge-lg">30 giorni</span></h1>
+            <h1>Prova OS1 Virgilio<span class="beta-badge-lg">30 giorni</span></h1>
             <p>Compila il modulo: attiveremo subito una prova gratuita per tutto il tuo dominio aziendale.</p>
         </div>
 
@@ -78,15 +78,6 @@
     margin: var(--sp-4) 0 var(--sp-4); cursor: pointer;
 }
 .form-checkbox input { margin-top: 3px; flex-shrink: 0; }
-.auth-alt {
-    margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--c-border);
-    text-align: center; font-size: 0.875rem; color: var(--c-text-secondary);
-}
-.auth-alt-link {
-    display: inline-block; margin-left: 6px; color: var(--c-brand);
-    font-weight: 600; text-decoration: none;
-}
-.auth-alt-link:hover { text-decoration: underline; }
 @media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
 </style>
 {% endblock %}

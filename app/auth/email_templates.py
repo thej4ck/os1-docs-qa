@@ -6,6 +6,7 @@ notifications are stripped to essentials.
 
 from html import escape
 
+from app.version import PRODUCT_NAME
 from app.models.domain import (
     TIER_PRESETS,
     TIER_FREE,
@@ -23,7 +24,7 @@ _CARD = "#ffffff"
 _COMPANY = "SCAO Informatica S.r.l."
 _COMPANY_TAGLINE = "Ingegneri della digitalizzazione della produzione industriale — dal 1977"
 _COMPANY_WEB = "https://www.scao.it"
-_PRODUCT = "OS1 Docs Q&A"
+_PRODUCT = PRODUCT_NAME
 _PRODUCT_HTML = escape(_PRODUCT)  # use this inside HTML markup
 
 
@@ -270,7 +271,7 @@ def _safe(value) -> str:
 
 def admin_new_signup(domain: dict) -> tuple[str, str]:
     company = domain.get("company_name") or domain["pattern"]
-    subject = f"[OS1 Docs] Nuova iscrizione TRIAL: {company}"
+    subject = f"[{_PRODUCT}] Nuova iscrizione TRIAL: {company}"
     referente = f"{domain.get('contact_first_name') or ''} {domain.get('contact_last_name') or ''}".strip()
     body = _kv_table([
         ("Azienda", f"<strong>{_safe(domain.get('company_name'))}</strong>"),
@@ -287,7 +288,7 @@ def admin_upgrade_request(
     *, user_email: str, domain: dict, current_tier: str
 ) -> tuple[str, str]:
     company = domain.get("company_name") or domain["pattern"]
-    subject = f"[OS1 Docs] Richiesta upgrade abbonamento: {company}"
+    subject = f"[{_PRODUCT}] Richiesta upgrade abbonamento: {company}"
     referente = f"{domain.get('contact_first_name') or ''} {domain.get('contact_last_name') or ''}".strip()
     body = _kv_table([
         ("Richiedente", f"<strong>{_safe(user_email)}</strong>"),
@@ -303,7 +304,7 @@ def admin_upgrade_request(
 
 
 def admin_trial_expired(domain: dict) -> tuple[str, str]:
-    subject = f"[OS1 Docs] Trial scaduta — downgrade FREE: {domain['pattern']}"
+    subject = f"[{_PRODUCT}] Trial scaduta — downgrade FREE: {domain['pattern']}"
     body = _kv_table([
         ("Azienda", _safe(domain.get("company_name"))),
         ("P.IVA", _safe(domain.get("vat_number"))),

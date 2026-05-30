@@ -1,56 +1,311 @@
 {% extends "base.html" %}
-{% block title %}Accedi — OS1 Docs{% endblock %}
+{% block title %}Accedi — OS1 Virgilio{% endblock %}
 
 {% block content %}
-<div class="auth-page">
-    <div class="auth-card">
-        <div class="auth-header">
-            <img src="/static/img/logo-lg.png" alt="SCAO" class="auth-logo">
-            <h1>Accedi a OS1 Docs<span class="beta-badge-lg">Beta</span></h1>
-            <p>Inserisci la tua email per ricevere il codice di accesso.</p>
-            <p style="margin-top: 8px; font-size: 0.8125rem; color: var(--c-text-tertiary);">Prodotto in fase BETA — funzionalità in evoluzione.</p>
-        </div>
+<div class="vg-landing">
 
-        {% if error %}
-        <div class="alert-error" role="alert">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-            </svg>
-            <div>
-                {{ error }}
-                {% if "non autorizzata" in error|lower %}
-                <div style="margin-top: 6px; font-size: 0.8125rem; color: var(--c-text-secondary);">
-                    Se non hai accesso, scrivi a <a href="mailto:amministrazione@scao.it" style="pointer-events: auto;">amministrazione@scao.it</a>
+    <!-- ══ HERO: login protagonista, primo schermo ══ -->
+    <section class="vg-hero">
+        <div class="vg-hero-inner">
+            <figure class="vg-portrait">
+                <img src="/static/img/virgilio.png" alt="Virgilio, la tua guida dentro OS1" width="184" height="184" decoding="async">
+            </figure>
+
+            <h1 class="vg-name">OS1 Virgilio</h1>
+            <p class="vg-tagline">la tua guida dentro OS1</p>
+
+            <div class="auth-card vg-card">
+                {% if error %}
+                <div class="alert-error" role="alert">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                    <div>
+                        {{ error }}
+                        {% if "non autorizzata" in error|lower %}
+                        <div style="margin-top: 6px; font-size: 0.8125rem; color: var(--c-text-secondary);">
+                            Se non hai accesso, scrivi a <a href="mailto:amministrazione@scao.it" style="pointer-events: auto;">amministrazione@scao.it</a>
+                        </div>
+                        {% endif %}
+                    </div>
                 </div>
                 {% endif %}
+
+                <form method="post" action="/login">
+                    <div class="form-group">
+                        <label for="email">Accedi con la tua email</label>
+                        <input type="email" id="email" name="email" class="form-input"
+                               placeholder="nome@azienda.it" required autofocus>
+                    </div>
+                    <button type="submit" class="btn-primary btn-full">Continua</button>
+                </form>
+
+                <div class="auth-alt">
+                    <span>Non hai ancora un account?</span>
+                    <a href="/signup" class="auth-alt-link">Prova gratis 30 giorni →</a>
+                </div>
+            </div>
+
+            <a href="#vg-claim" class="vg-scroll-cue" aria-label="Scopri di più">
+                <span>Scopri perché</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- ══ CLAIM DI FONDO ══ -->
+    <section class="vg-section vg-claim-section" id="vg-claim">
+        <p class="vg-claim-lead">
+            In azienda il sapere su come si usa il gestionale vive nella testa di
+            una o due persone.
+        </p>
+        <p class="vg-claim-big">
+            OS1 Virgilio lo rende <strong>di tutti</strong> — subito, a chiunque,
+            a qualsiasi ora.
+        </p>
+    </section>
+
+    <!-- ══ QUANDO TI SERVE: gli 8 problemi (massima + spiegazione) ══ -->
+    <section class="vg-section">
+        <h2 class="vg-h2">Quando ti serve Virgilio</h2>
+        <p class="vg-sub">Non serve quando tutto fila liscio. Serve nel momento del dubbio.</p>
+
+        <div class="vg-grid">
+            <article class="vg-prob">
+                <blockquote>«La procedura che fai due volte l’anno non si impara: si chiede. E io rispondo sempre allo stesso modo.»</blockquote>
+                <p>Chiusure, inventari, casi fiscali particolari: rari e urgenti. Te li ripete identici, ogni volta.</p>
+            </article>
+            <article class="vg-prob">
+                <blockquote>«Al primo giorno nessuno sa muoversi. C’è chi domanda — e chi resta fermo.»</blockquote>
+                <p>Il neoassunto impara da solo, senza rubare ore al collega esperto.</p>
+            </article>
+            <article class="vg-prob">
+                <blockquote>«Il sapere che vive in una sola testa è il sapere che un giorno non troverai più.»</blockquote>
+                <p>Ferie, malattia, dimissioni: l’operatività non dipende più da una sola persona.</p>
+            </article>
+            <article class="vg-prob">
+                <blockquote>«Quando un esperto se ne va, porta con sé ciò che nessuno ha scritto. Io non vado da nessuna parte.»</blockquote>
+                <p>Il know-how su OS1 resta in azienda, non nella busta paga di chi cambia lavoro.</p>
+            </article>
+            <article class="vg-prob">
+                <blockquote>«Non è il dubbio a fermare il lavoro. È l’attesa di una risposta.»</blockquote>
+                <p>Risposta immediata: la fattura, la spedizione, la chiusura non aspettano il tecnico.</p>
+            </article>
+            <article class="vg-prob">
+                <blockquote>«Le scadenze non guardano l’orario dell’assistenza. Nemmeno io.»</blockquote>
+                <p>Sera, sabato, fine mese: la risposta c’è quando ti serve, non quando apre il rivenditore.</p>
+            </article>
+            <article class="vg-prob">
+                <blockquote>«Sbagliare una procedura costa più che chiederla. Chiedimi prima.»</blockquote>
+                <p>Risposte prese dalla documentazione ufficiale OS1: procedura giusta al primo colpo.</p>
+            </article>
+            <article class="vg-prob">
+                <blockquote>«Paghi tutto OS1 e ne usi un quarto: il resto aspetta solo che tu lo chieda.»</blockquote>
+                <p>Scopri le funzioni che già paghi e non sapevi di avere.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- ══ I QUATTRO ESPERTI ══ -->
+    <section class="vg-section">
+        <h2 class="vg-h2">Quattro esperti, una sola guida</h2>
+        <p class="vg-sub">Scegli chi ti risponde, a seconda di cosa ti serve.</p>
+
+        <div class="vg-experts">
+            <div class="vg-expert">
+                <img src="/static/img/agents/virgilio.png" alt="Virgilio" loading="lazy" decoding="async" width="120" height="120">
+                <h3>Virgilio <span>l’esperto</span></h3>
+                <p>Spiega concetti e significati: cosa vuol dire un termine, come funziona un processo.</p>
+            </div>
+            <div class="vg-expert">
+                <img src="/static/img/agents/pilota.png" alt="Pilota" loading="lazy" decoding="async" width="120" height="120">
+                <h3>Pilota <span>la guida</span></h3>
+                <p>Ti guida passo-passo nelle operazioni concrete in OS1.</p>
+            </div>
+            <div class="vg-expert">
+                <img src="/static/img/agents/doc.png" alt="Doc" loading="lazy" decoding="async" width="120" height="120">
+                <h3>Doc <span>il tecnico</span></h3>
+                <p>Diagnostica errori e blocchi: trova la causa con te, con calma.</p>
+            </div>
+            <div class="vg-expert">
+                <img src="/static/img/agents/stella.png" alt="Stella" loading="lazy" decoding="async" width="120" height="120">
+                <h3>Stella <span>la tutor</span></h3>
+                <p>Per chi inizia: spiega tutto con calma e analogie, senza dare nulla per scontato.</p>
             </div>
         </div>
-        {% endif %}
+    </section>
 
-        <form method="post" action="/login">
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" class="form-input"
-                       placeholder="nome@azienda.it" required autofocus>
-            </div>
-            <button type="submit" class="btn-primary btn-full">Continua</button>
-        </form>
-
-        <div class="auth-alt">
-            <span>Non hai ancora un account?</span>
-            <a href="/signup" class="auth-alt-link">Prova gratis 30 giorni →</a>
+    <!-- ══ CTA FINALE ══ -->
+    <section class="vg-cta">
+        <h2>Pronto a chiedere a Virgilio?</h2>
+        <p>Attiva una prova gratuita per tutto il tuo dominio aziendale.</p>
+        <div class="vg-cta-actions">
+            <a href="/signup" class="btn-primary">Prova gratis 30 giorni</a>
+            <a href="#email" class="vg-cta-login">Ho già un account → accedi</a>
         </div>
-    </div>
+    </section>
+
 </div>
+
 <style>
-.auth-alt {
-    margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--c-border);
-    text-align: center; font-size: 0.875rem; color: var(--c-text-secondary);
+.vg-landing { width: 100%; }
+
+/* ── HERO ── */
+.vg-hero {
+    padding: 32px 24px 24px;
+    position: relative;
+    background:
+        radial-gradient(120% 90% at 50% 0%, rgba(226,35,26,0.06) 0%, transparent 60%),
+        var(--c-bg);
 }
-.auth-alt-link {
-    display: inline-block; margin-left: 6px; color: var(--c-brand);
-    font-weight: 600; text-decoration: none;
+.vg-hero-inner {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    text-align: center;
+    animation: vg-rise 700ms cubic-bezier(.16,1,.3,1) both;
 }
-.auth-alt-link:hover { text-decoration: underline; }
+@keyframes vg-rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.vg-portrait {
+    margin: 0 auto 22px;
+    width: 184px;
+    height: 184px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--c-brand);
+    box-shadow: 0 18px 48px rgba(0,0,0,0.18), 0 0 0 8px rgba(226,35,26,0.06);
+    background: var(--c-bg);
+}
+.vg-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.vg-name {
+    font-family: var(--font-serif);
+    font-size: 2.5rem; font-weight: 700; letter-spacing: -0.02em;
+    margin: 0; color: var(--c-text);
+}
+.vg-tagline {
+    font-size: 1.05rem; font-style: italic; color: var(--c-brand);
+    margin: 4px 0 28px; letter-spacing: 0.01em;
+}
+
+.vg-card { text-align: left; }
+
+/* scroll cue */
+.vg-scroll-cue {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    margin: 22px auto 0;
+    color: var(--c-text-tertiary); text-decoration: none;
+    font-size: 0.8rem; letter-spacing: 0.04em;
+}
+.vg-scroll-cue svg { width: 22px; height: 22px; animation: vg-bounce 1.8s ease-in-out infinite; }
+.vg-scroll-cue:hover { color: var(--c-brand); }
+@keyframes vg-bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+/* ── SECTIONS ── */
+.vg-section {
+    max-width: 1000px; margin: 0 auto;
+    padding: 84px 24px;
+    border-top: 1px solid var(--c-border);
+}
+.vg-h2 {
+    font-family: var(--font-serif);
+    font-size: 1.9rem; font-weight: 700; letter-spacing: -0.01em;
+    text-align: center; margin: 0 0 8px; color: var(--c-text);
+}
+.vg-sub {
+    text-align: center; color: var(--c-text-secondary);
+    font-size: 1.05rem; margin: 0 0 44px;
+}
+
+/* claim */
+.vg-claim-section { text-align: center; max-width: 760px; padding: 48px 24px 72px; }
+.vg-claim-lead {
+    font-family: var(--font-serif);
+    font-size: 1.5rem; line-height: 1.5; font-weight: 500;
+    color: var(--c-text-secondary); margin: 0 0 16px;
+}
+.vg-claim-big {
+    font-family: var(--font-serif);
+    font-size: 1.7rem; line-height: 1.4; font-weight: 600;
+    color: var(--c-text); margin: 0;
+}
+.vg-claim-big strong { color: var(--c-brand); }
+
+/* problem cards */
+.vg-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px;
+}
+.vg-prob {
+    background: var(--c-bg-secondary, var(--c-bg));
+    border: 1px solid var(--c-border); border-radius: 14px;
+    padding: 24px 26px;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+.vg-prob:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+.vg-prob blockquote {
+    margin: 0 0 12px; padding: 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic; font-size: 1.08rem; line-height: 1.5;
+    color: var(--c-text); position: relative; padding-left: 16px;
+    border-left: 3px solid var(--c-brand);
+}
+.vg-prob p { margin: 0; color: var(--c-text-secondary); font-size: 0.95rem; line-height: 1.55; }
+
+/* experts */
+.vg-experts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; }
+.vg-expert { text-align: center; }
+.vg-expert img {
+    display: block;
+    width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--c-border); margin: 0 auto 14px;
+    background: var(--c-bg);
+}
+.vg-expert h3 {
+    font-family: var(--font-serif);
+    font-size: 1.1rem; margin: 0 0 6px; color: var(--c-text);
+}
+.vg-expert h3 span {
+    display: block; font-size: 0.82rem; font-weight: 500;
+    font-style: italic; color: var(--c-brand);
+}
+.vg-expert p { margin: 0; font-size: 0.9rem; color: var(--c-text-secondary); line-height: 1.5; }
+
+/* CTA */
+.vg-cta {
+    text-align: center; padding: 84px 24px 100px;
+    border-top: 1px solid var(--c-border);
+    background: radial-gradient(120% 100% at 50% 100%, rgba(226,35,26,0.06) 0%, transparent 60%);
+}
+.vg-cta h2 {
+    font-family: var(--font-serif);
+    font-size: 1.9rem; font-weight: 700; margin: 0 0 8px; color: var(--c-text);
+}
+.vg-cta p { color: var(--c-text-secondary); font-size: 1.05rem; margin: 0 0 28px; }
+.vg-cta-actions { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.vg-cta .btn-primary { display: inline-block; width: auto; padding: 14px 36px; text-decoration: none; }
+.vg-cta-login { color: var(--c-brand); font-weight: 600; text-decoration: none; font-size: 0.95rem; }
+.vg-cta-login:hover { text-decoration: underline; }
+
+/* ── Responsive ── */
+@media (max-width: 760px) {
+    .vg-grid { grid-template-columns: 1fr; }
+    .vg-experts { grid-template-columns: repeat(2, 1fr); }
+    .vg-name { font-size: 2.1rem; }
+    .vg-claim-lead { font-size: 1.25rem; }
+    .vg-claim-big { font-size: 1.5rem; }
+    .vg-h2 { font-size: 1.6rem; }
+    .vg-portrait { width: 152px; height: 152px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .vg-hero-inner { animation: none; }
+    .vg-scroll-cue svg { animation: none; }
+}
 </style>
+
 {% endblock %}

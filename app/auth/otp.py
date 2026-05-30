@@ -5,6 +5,7 @@ import time
 
 from app.auth.email_sender import send_email
 from app.config import settings
+from app.version import PRODUCT_NAME
 
 # In-memory OTP store: {email: (otp_code, expires_at)}
 _otp_store: dict[str, tuple[str, float]] = {}
@@ -95,7 +96,7 @@ def send_otp_email(email: str, code: str) -> bool:
     from app.auth.email_templates import wrap_customer
     body = f"""\
 <p style="font-size:15px;line-height:1.6;margin:0 0 20px;color:#1d1d1f;">
-  Il codice di accesso per OS1 Docs è:
+  Il codice di accesso per {PRODUCT_NAME} è:
 </p>
 <div style="text-align:center;margin:24px 0;">
   <div style="display:inline-block;background:#f5f5f7;border-radius:8px;padding:18px 32px;font-family:'JetBrains Mono','Courier New',monospace;font-size:36px;letter-spacing:10px;font-weight:600;color:#E2231A;">{code}</div>
@@ -103,4 +104,4 @@ def send_otp_email(email: str, code: str) -> bool:
 <p style="font-size:14px;line-height:1.6;color:#6e6e73;margin:0 0 8px;">Il codice è valido per 5 minuti.</p>
 <p style="font-size:13px;line-height:1.6;color:#6e6e73;margin:0;">Se non ha richiesto questo codice può ignorare l'email.</p>"""
     html = wrap_customer("Codice di accesso", body, signature=True, footer=False)
-    return send_email(email, f"Codice di accesso OS1 Docs: {code}", html)
+    return send_email(email, f"Codice di accesso {PRODUCT_NAME}: {code}", html)
