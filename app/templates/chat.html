@@ -450,9 +450,24 @@ const limitBanner = document.getElementById('limit-banner');
 
 marked.setOptions({ breaks: true, gfm: true });
 
-function convertScreenshotMarkers(text) {
-    // Convert [Screenshot: desc | url] to ![desc](url) before markdown parsing
-    return text.replace(/\[Screenshot:\s*([^|]+?)\s*\|\s*([^\]]+?)\s*\]/g, '![$1]($2)');
+function convertCitationMarkers(text) {
+    // Normalize gpt-oss quirks (narrow/no-break spaces) and turn citation markers
+    // [Dn] / 【Dn】 / (Dn) — ASCII or fullwidth — into a markdown-safe sentinel.
+    return text
+        .replace(/[  ]/g, ' ')
+        .replace(/[\[【]\s*D\s*(\d+)\s*[\]】]/gi, '§CITE$1§');
+}
+
+function cleanAnswerMedia(text) {
+    // Carousel-only: drop inline images (duplicate of the bottom carousel) and
+    // any leftover [Screenshot: …] markers coming from the context.
+    return text
+        .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+        .replace(/\[Screenshot:[^\]]*\]/gi, '');
+}
+
+function preprocessAnswer(text) {
+    return convertCitationMarkers(cleanAnswerMedia(text));
 }
 
 // ── SVGs ──
@@ -791,7 +806,7 @@ function handleSubmit(e) {
 
     function scheduleRender(el, text) {
         if (renderTimer) return;
-        renderTimer = setTimeout(() => { el.innerHTML = marked.parse(convertScreenshotMarkers(text)); renderTimer = null; }, 60);
+        renderTimer = setTimeout(() => { el.innerHTML = marked.parse(preprocessAnswer(text)); renderTimer = null; }, 60);
     }
     return false;
 }
@@ -816,15 +831,21 @@ function resolveSource(sources, cleanFile, cleanTitle) {
     return src || null;
 }
 
-// Replace deterministic [Dn] citation markers with clickable source links.
-// [Dn] maps to sources[n-1] (same order as the LLM context) — no fuzzy matching.
-function linkCitations(contentEl, sources) {
-    if (!sources || !sources.length) return;
-    contentEl.innerHTML = contentEl.innerHTML.replace(/\[D(\d+)\]/g, (m, n) => {
-        const s = sources[parseInt(n, 10) - 1];
-        if (!s) return '';   // out-of-range marker → drop
+// Build an <a> that opens the doc overlay. Shared by citation chips and the
+// legacy "Fonte:" links so the openDocOverlay call is constructed in one place.
+function sourceLinkHtml(sourceFile, docTitle, innerHtml, cssClass, titleAttr) {
+    const ta = titleAttr ? ` title="${titleAttr.replace(/"/g, '&quot;')}"` : '';
+    return `<a href="#" class="${cssClass}"${ta} onclick="event.preventDefault();openDocOverlay(decodeURIComponent('${encodeURIComponent(sourceFile)}'),decodeURIComponent('${encodeURIComponent(docTitle)}'))">${innerHtml}</a>`;
+}
+
+// Replace §CITEn§ sentinels (from convertCitationMarkers) with compact
+// superscript citation chips. n maps to sources[n-1] (LLM context order).
+function hydrateCitations(contentEl, sources) {
+    contentEl.innerHTML = contentEl.innerHTML.replace(/§CITE(\d+)§/g, (m, n) => {
+        const s = sources && sources[parseInt(n, 10) - 1];
+        if (!s) return '';   // out-of-range / no sources → drop marker (no broken link)
         const t = (s.title || 'Documento').trim();
-        return `<a href="#" class="source-link" onclick="event.preventDefault();openDocOverlay(decodeURIComponent('${encodeURIComponent(s.source_file)}'),decodeURIComponent('${encodeURIComponent(t)}'))">📄 ${t}</a>`;
+        return sourceLinkHtml(s.source_file, t, n, 'cite-link', t);
     });
 }
 
@@ -840,17 +861,17 @@ function linkFonteParagraphs(contentEl, sources) {
                 const cleanFile = file.trim().replace(/^file:\s*/i, '').replace(/\\/g, '/');
                 const src = resolveSource(sources, cleanFile, cleanTitle);
                 if (!src) return match;
-                return `<a href="#" class="source-link" onclick="event.preventDefault();openDocOverlay(decodeURIComponent('${encodeURIComponent(src.source_file)}'),decodeURIComponent('${encodeURIComponent(cleanTitle)}'))">📄 ${cleanTitle}</a>`;
+                return sourceLinkHtml(src.source_file, cleanTitle, '📄 ' + cleanTitle, 'source-link');
             }
         );
     });
 }
 
 function renderFinal(msgParts, text, sources, messageId, screenshots) {
-    if (text) msgParts.content.innerHTML = marked.parse(convertScreenshotMarkers(text));
+    if (text) msgParts.content.innerHTML = marked.parse(preprocessAnswer(text));
 
     // Resolve citations: [Dn] markers (primary, deterministic) + legacy "Fonte:" text (fallback)
-    linkCitations(msgParts.content, sources);
+    hydrateCitations(msgParts.content, sources);
     linkFonteParagraphs(msgParts.content, sources);
 
     // Extract suggestions from LLM response (if "Per saperne di più" section exists)
@@ -1267,11 +1288,11 @@ if (!questionEl.disabled) questionEl.focus();
 document.querySelectorAll('.msg-assistant').forEach(msgEl => {
     const el = msgEl.querySelector('.msg-content');
     if (!el) return;
-    el.innerHTML = marked.parse(convertScreenshotMarkers(el.textContent));
+    el.innerHTML = marked.parse(preprocessAnswer(el.textContent));
     let srcs = [];
     const sj = msgEl.querySelector('.msg-sources');
     if (sj) { try { srcs = JSON.parse(sj.textContent) || []; } catch (e) {} }
-    linkCitations(el, srcs);
+    hydrateCitations(el, srcs);
     linkFonteParagraphs(el, srcs);
 });
 

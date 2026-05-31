@@ -771,6 +771,15 @@
             font-size: 0.85em;
         }
         .source-link:hover { border-bottom-color: var(--c-brand); }
+        /* Inline citation chip (superscript, Perplexity-style) */
+        .cite-link {
+            vertical-align: super; font-size: 0.7em; font-weight: 700;
+            color: var(--c-brand); text-decoration: none; cursor: pointer;
+            background: var(--c-brand-surface); border-radius: var(--r-sm);
+            padding: 0 4px; margin: 0 1px; line-height: 1;
+            transition: background 150ms ease, color 150ms ease;
+        }
+        .cite-link:hover { background: var(--c-brand); color: #fff; }
         /* Onboarding overlay */
         .onboarding-overlay {
             position: fixed; inset: 0; z-index: 9999;
