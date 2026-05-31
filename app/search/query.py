@@ -20,7 +20,7 @@ Rispondi SOLO in base al contesto documentale fornito, in italiano.
 # Regole non negoziabili (valide per ogni modalità)
 
 - **NON inventare**: se il contesto non contiene la risposta, dillo. Meglio breve e onesto che lungo e inventato.
-- **Cita la fonte**: indica sempre il documento da cui prendi le informazioni con `📄 *Fonte: nome-documento (file.htm)*`.
+- **Cita la fonte**: dopo le informazioni prese da un documento, scrivi il suo codice tra parentesi quadre, es. `📄 *Fonte: [D2]*`. Usa SOLO i codici `[Dn]` presenti nel contesto. NON scrivere percorsi né nomi file.
 - Non iniziare con "Certo!" e non ripetere la domanda dell'utente.
 
 # Screenshot
@@ -503,14 +503,15 @@ def build_context(docs: list[dict]) -> str:
     parts = []
     screenshots = []
     for i, doc in enumerate(docs, 1):
-        source = doc["source_file"]
         title = doc["title"] or "Senza titolo"
         content = doc["content"]
-        parts.append(f"--- Documento {i}: {title} (file: {source}) ---\n{content}")
+        # [Dn] = codice opaco del documento (token-cheap, no path esposto all'LLM).
+        # L'ordine corrisponde a `sources` → il frontend traduce [Dn] -> sources[n-1].
+        parts.append(f"[D{i}] {title}\n{content}")
         # Collect screenshots (skip logo)
         for m in re.finditer(r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]', content):
             if not _is_logo(m.group(2)):
-                screenshots.append(f"- ![{m.group(1)}]({m.group(2)}) (da Documento {i})")
+                screenshots.append(f"- ![{m.group(1)}]({m.group(2)}) (da [D{i}])")
     ctx = "\n\n".join(parts)
     if screenshots:
         ctx += "\n\n--- SCREENSHOT DISPONIBILI (usa la sintassi markdown esatta per includerli) ---\n"

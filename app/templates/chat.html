@@ -235,6 +235,20 @@ function completeOnboarding() {
         <div class="chat-wrap">
             <div class="chat-messages" id="messages">
 
+                {% if is_active_conversation and active_agent %}
+                <div class="chat-interlocutor" id="chat-interlocutor">
+                    <span class="chat-interlocutor-avatar">
+                        <img src="{{ active_agent.avatar }}" alt=""
+                             onerror="this.style.display='none';this.parentElement.querySelector('.chat-interlocutor-emoji').hidden=false">
+                        <span class="chat-interlocutor-emoji" hidden>{{ active_agent.emoji }}</span>
+                    </span>
+                    <span class="chat-interlocutor-text">
+                        <span class="chat-interlocutor-tagline">{{ active_agent.tagline }}</span>
+                        <span class="chat-interlocutor-name">{{ active_agent.display_name }}</span>
+                    </span>
+                </div>
+                {% endif %}
+
                 {% for msg in messages %}
                 <div class="msg msg-{{ msg.role }}">
                     <div class="msg-avatar" aria-hidden="true">
@@ -246,6 +260,9 @@ function completeOnboarding() {
                     </div>
                     <div class="msg-body">
                         <div class="msg-content">{{ msg.content }}</div>
+                        {% if msg.role == 'assistant' and msg.sources %}
+                        <script type="application/json" class="msg-sources">{{ msg.sources | safe }}</script>
+                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}
@@ -283,6 +300,7 @@ function completeOnboarding() {
                         {% for a in agents %}
                         <button type="button" class="agent-card" data-agent="{{ a.id }}"
                                 data-name="{{ a.display_name }}" data-avatar="{{ a.avatar }}"
+                                data-tagline="{{ a.tagline }}"
                                 role="radio" aria-checked="false" onclick="selectAgent('{{ a.id }}')">
                             <span class="agent-card-avatar">
                                 <img class="agent-card-img" src="{{ a.avatar }}" alt=""
@@ -306,16 +324,37 @@ function completeOnboarding() {
                             c.setAttribute('aria-checked', on ? 'true' : 'false');
                         });
                     }
+                    function getSelectedAgentCard() {
+                        var id = localStorage.getItem('os1-agent') || '';
+                        return id ? document.querySelector('#agent-picker .agent-card[data-agent="' + id + '"]') : null;
+                    }
                     function lockAgentBadge() {
                         var badge = document.getElementById('agent-badge');
                         if (!badge) return;
-                        var id = localStorage.getItem('os1-agent') || '';
-                        var card = id ? document.querySelector('#agent-picker .agent-card[data-agent="' + id + '"]') : null;
+                        var card = getSelectedAgentCard();
                         if (card) {
                             badge.innerHTML = '<img class="agent-badge-avatar" src="' + card.dataset.avatar + '" alt="">' +
                                               '<span>' + card.dataset.name + '</span>';
                         } else { badge.textContent = 'Standard'; }
                         badge.hidden = false;
+                    }
+                    function renderInterlocutor() {
+                        var host = document.getElementById('messages');
+                        if (!host) return;
+                        var card = getSelectedAgentCard();
+                        var el = document.getElementById('chat-interlocutor');
+                        if (!card) { if (el) el.remove(); return; }
+                        if (!el) {
+                            el = document.createElement('div');
+                            el.className = 'chat-interlocutor';
+                            el.id = 'chat-interlocutor';
+                            host.insertBefore(el, host.firstChild);
+                        }
+                        el.innerHTML =
+                            '<span class="chat-interlocutor-avatar"><img src="' + card.dataset.avatar + '" alt="" onerror="this.style.display=\'none\'"></span>' +
+                            '<span class="chat-interlocutor-text">' +
+                            '<span class="chat-interlocutor-tagline">' + (card.dataset.tagline || '') + '</span>' +
+                            '<span class="chat-interlocutor-name">' + (card.dataset.name || '') + '</span></span>';
                     }
                     (function () {
                         var restore = function () { selectAgent(localStorage.getItem('os1-agent') || ''); };
@@ -647,6 +686,7 @@ function handleSubmit(e) {
     var panel = document.getElementById('chat-panel');
     if (panel && panel.classList.contains('state-empty')) {
         lockAgentBadge();
+        renderInterlocutor();
         var hero = document.getElementById('center-hero');
         if (hero) { hero.classList.add('hiding'); setTimeout(function () { hero.remove(); }, 300); }
         panel.classList.remove('state-empty');
@@ -756,27 +796,62 @@ function handleSubmit(e) {
     return false;
 }
 
-function renderFinal(msgParts, text, sources, messageId, screenshots) {
-    if (text) msgParts.content.innerHTML = marked.parse(convertScreenshotMarkers(text));
+// Resolve a "Fonte:" citation to a retrieved source. LLM citation formats are
+// inconsistent (basename, "Documento N", back/forward-slash paths), so match by
+// file path first, then fall back to the document title (reliably reproduced).
+function resolveSource(sources, cleanFile, cleanTitle) {
+    if (!sources || !sources.length) return null;
+    const norm = s => (s || '').replace(/\\/g, '/').toLowerCase();
+    const f = norm(cleanFile), t = (cleanTitle || '').toLowerCase().trim();
+    let src = sources.find(s => {
+        const sf = norm(s.source_file);
+        return sf && f && (sf.endsWith(f) || sf.includes('/' + f) || (f.length > 6 && sf.includes(f)));
+    });
+    if (!src && t.length > 3) {
+        src = sources.find(s => {
+            const st = (s.title || '').trim().toLowerCase();
+            return st && (st === t || st.includes(t) || t.includes(st));
+        });
+    }
+    return src || null;
+}
 
-    // Make "Fonte:" references clickable — open doc overlay on click
-    msgParts.content.querySelectorAll('p').forEach(el => {
+// Replace deterministic [Dn] citation markers with clickable source links.
+// [Dn] maps to sources[n-1] (same order as the LLM context) — no fuzzy matching.
+function linkCitations(contentEl, sources) {
+    if (!sources || !sources.length) return;
+    contentEl.innerHTML = contentEl.innerHTML.replace(/\[D(\d+)\]/g, (m, n) => {
+        const s = sources[parseInt(n, 10) - 1];
+        if (!s) return '';   // out-of-range marker → drop
+        const t = (s.title || 'Documento').trim();
+        return `<a href="#" class="source-link" onclick="event.preventDefault();openDocOverlay(decodeURIComponent('${encodeURIComponent(s.source_file)}'),decodeURIComponent('${encodeURIComponent(t)}'))">📄 ${t}</a>`;
+    });
+}
+
+// Legacy fallback: make textual "Fonte: Title (path)" citations clickable.
+function linkFonteParagraphs(contentEl, sources) {
+    contentEl.querySelectorAll('p').forEach(el => {
         const txt = el.textContent;
         if (!txt.includes('Fonte:') && !txt.includes('Fonte ')) return;
-        // Match: optional emoji + optional <em> + Fonte: Title (filepath) + optional </em>
         el.innerHTML = el.innerHTML.replace(
             /(?:📄\s*)?(?:<em>)?\s*Fonte\s*[:–—-]\s*(.+?)\s*\(([^)]+)\)\s*(?:<\/em>)?/g,
             (match, title, file) => {
-                const cleanFile = file.trim().replace(/\\/g, '/');
-                const src = sources.find(s => {
-                    const sf = (s.source_file || '').replace(/\\/g, '/');
-                    return sf && (sf.includes(cleanFile) || cleanFile.includes(sf));
-                });
-                const sourceFile = src ? src.source_file : cleanFile;
-                return `<a href="#" class="source-link" onclick="event.preventDefault();openDocOverlay(decodeURIComponent('${encodeURIComponent(sourceFile)}'),decodeURIComponent('${encodeURIComponent(title.trim())}'))">📄 ${title.trim()}</a>`;
+                const cleanTitle = title.trim().replace(/^[“"'\s]+|[”"'\s]+$/g, '');
+                const cleanFile = file.trim().replace(/^file:\s*/i, '').replace(/\\/g, '/');
+                const src = resolveSource(sources, cleanFile, cleanTitle);
+                if (!src) return match;
+                return `<a href="#" class="source-link" onclick="event.preventDefault();openDocOverlay(decodeURIComponent('${encodeURIComponent(src.source_file)}'),decodeURIComponent('${encodeURIComponent(cleanTitle)}'))">📄 ${cleanTitle}</a>`;
             }
         );
     });
+}
+
+function renderFinal(msgParts, text, sources, messageId, screenshots) {
+    if (text) msgParts.content.innerHTML = marked.parse(convertScreenshotMarkers(text));
+
+    // Resolve citations: [Dn] markers (primary, deterministic) + legacy "Fonte:" text (fallback)
+    linkCitations(msgParts.content, sources);
+    linkFonteParagraphs(msgParts.content, sources);
 
     // Extract suggestions from LLM response (if "Per saperne di più" section exists)
     const suggestions = [];
@@ -829,9 +904,8 @@ function renderFinal(msgParts, text, sources, messageId, screenshots) {
             wrap.appendChild(label);
             panel.appendChild(wrap);
         });
-        // Append to the .msg element (parent of .msg-body)
-        msgParts.msg.classList.add('has-screenshots-msg');
-        msgParts.msg.appendChild(panel);
+        // Append below the answer, inside the message column (carousel)
+        msgParts.body.appendChild(panel);
     }
 
     // Suggestion chips (without Approfondisci — that's now in the deep banner)
@@ -1190,7 +1264,16 @@ document.addEventListener('keydown', e => {
 if (!questionEl.disabled) questionEl.focus();
 
 // ── Render markdown in history ──
-document.querySelectorAll('.msg-assistant .msg-content').forEach(el => { el.innerHTML = marked.parse(convertScreenshotMarkers(el.textContent)); });
+document.querySelectorAll('.msg-assistant').forEach(msgEl => {
+    const el = msgEl.querySelector('.msg-content');
+    if (!el) return;
+    el.innerHTML = marked.parse(convertScreenshotMarkers(el.textContent));
+    let srcs = [];
+    const sj = msgEl.querySelector('.msg-sources');
+    if (sj) { try { srcs = JSON.parse(sj.textContent) || []; } catch (e) {} }
+    linkCitations(el, srcs);
+    linkFonteParagraphs(el, srcs);
+});
 
 // ── Load sources from saved conversation ──
 {% if last_sources %}

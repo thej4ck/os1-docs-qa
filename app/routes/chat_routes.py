@@ -533,10 +533,27 @@ async def get_doc(request: Request, file: str = Query(...)):
     if query_module._index is None:
         return JSONResponse({"error": "Indice non disponibile."}, status_code=503)
 
-    row = query_module._index.conn.execute(
-        "SELECT title, content, source_file, doc_type, html_content FROM documents WHERE source_file = ? LIMIT 1",
-        (file,),
+    conn = query_module._index.conn
+    cols = "title, content, source_file, doc_type, html_content"
+    row = conn.execute(
+        f"SELECT {cols} FROM documents WHERE source_file = ? LIMIT 1", (file,)
     ).fetchone()
+
+    # Tolerant fallbacks: source_file format is inconsistent (back/forward slash)
+    # and inline citations may pass only a basename.
+    if not row:
+        norm = file.replace("\\", "/")
+        row = conn.execute(
+            f"SELECT {cols} FROM documents WHERE REPLACE(source_file, '\\', '/') = ? LIMIT 1",
+            (norm,),
+        ).fetchone()
+    if not row:
+        base = file.replace("\\", "/").rstrip("/").split("/")[-1]
+        if base:
+            row = conn.execute(
+                f"SELECT {cols} FROM documents WHERE source_file LIKE ? LIMIT 1",
+                ("%" + base,),
+            ).fetchone()
 
     if not row:
         return JSONResponse({"error": "Documento non trovato."})
