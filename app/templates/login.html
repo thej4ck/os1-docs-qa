@@ -7,12 +7,23 @@
     <!-- ══ HERO: login protagonista, primo schermo ══ -->
     <section class="vg-hero">
         <div class="vg-hero-inner">
-            <figure class="vg-portrait">
-                <img src="/static/img/virgilio.png" alt="Virgilio, la tua guida dentro OS1" width="184" height="184" decoding="async">
-            </figure>
+            <span class="vg-kicker vg-kicker-hero">Assistenti documentali OS1</span>
 
-            <h1 class="vg-name">OS1 Virgilio</h1>
-            <p class="vg-tagline">la tua guida dentro OS1</p>
+            <div class="vg-hero-figure">
+                <figure class="vg-portrait">
+                    <img src="/static/img/virgilio.png" alt="Virgilio, la tua guida dentro OS1" width="184" height="184" decoding="async">
+                </figure>
+                <div class="vg-team" aria-label="Virgilio e il suo team">
+                    <img src="/static/img/agents/pilota.png" alt="Pilota" loading="lazy" decoding="async" width="58" height="58">
+                    <img src="/static/img/agents/doc.png" alt="Doc" loading="lazy" decoding="async" width="58" height="58">
+                    <img src="/static/img/agents/stella.png" alt="Stella" loading="lazy" decoding="async" width="58" height="58">
+                </div>
+            </div>
+
+            <h1 class="vg-name">Virgilio &amp; Co.</h1>
+            <p class="vg-tagline">le tue guide dentro OS1</p>
+            <p class="vg-rotator" id="vg-rotator">La procedura che fai due volte l’anno te la ripetiamo identica, ogni volta.</p>
+            <span class="vg-masthead-rule" aria-hidden="true"></span>
 
             <div class="auth-card vg-card">
                 {% if error %}
@@ -56,7 +67,8 @@
     </section>
 
     <!-- ══ CLAIM DI FONDO ══ -->
-    <section class="vg-section vg-claim-section" id="vg-claim">
+    <section class="vg-section vg-claim-section vg-reveal" id="vg-claim">
+        <span class="vg-kicker">Il problema</span>
         <p class="vg-claim-lead">
             In azienda il sapere su come si usa il gestionale vive nella testa di
             una o due persone.
@@ -69,39 +81,42 @@
 
     <!-- ══ QUANDO TI SERVE: gli 8 problemi (massima + spiegazione) ══ -->
     <section class="vg-section">
-        <h2 class="vg-h2">Quando ti serve Virgilio</h2>
-        <p class="vg-sub">Non serve quando tutto fila liscio. Serve nel momento del dubbio.</p>
+        <div class="vg-section-head vg-reveal">
+            <span class="vg-kicker">Quando serve</span>
+            <h2 class="vg-h2">Quando ti serve Virgilio</h2>
+            <p class="vg-sub">Non serve quando tutto fila liscio. Serve nel momento del dubbio.</p>
+        </div>
 
         <div class="vg-grid">
-            <article class="vg-prob">
+            <article class="vg-prob vg-reveal">
                 <blockquote>«La procedura che fai due volte l’anno non si impara: si chiede. E io rispondo sempre allo stesso modo.»</blockquote>
                 <p>Chiusure, inventari, casi fiscali particolari: rari e urgenti. Te li ripete identici, ogni volta.</p>
             </article>
-            <article class="vg-prob">
+            <article class="vg-prob vg-reveal">
                 <blockquote>«Al primo giorno nessuno sa muoversi. C’è chi domanda — e chi resta fermo.»</blockquote>
                 <p>Il neoassunto impara da solo, senza rubare ore al collega esperto.</p>
             </article>
-            <article class="vg-prob">
+            <article class="vg-prob vg-reveal">
                 <blockquote>«Il sapere che vive in una sola testa è il sapere che un giorno non troverai più.»</blockquote>
                 <p>Ferie, malattia, dimissioni: l’operatività non dipende più da una sola persona.</p>
             </article>
-            <article class="vg-prob">
+            <article class="vg-prob vg-reveal">
                 <blockquote>«Quando un esperto se ne va, porta con sé ciò che nessuno ha scritto. Io non vado da nessuna parte.»</blockquote>
                 <p>Il know-how su OS1 resta in azienda, non nella busta paga di chi cambia lavoro.</p>
             </article>
-            <article class="vg-prob">
+            <article class="vg-prob vg-reveal">
                 <blockquote>«Non è il dubbio a fermare il lavoro. È l’attesa di una risposta.»</blockquote>
                 <p>Risposta immediata: la fattura, la spedizione, la chiusura non aspettano il tecnico.</p>
             </article>
-            <article class="vg-prob">
+            <article class="vg-prob vg-reveal">
                 <blockquote>«Le scadenze non guardano l’orario dell’assistenza. Nemmeno io.»</blockquote>
                 <p>Sera, sabato, fine mese: la risposta c’è quando ti serve, non quando apre il rivenditore.</p>
             </article>
-            <article class="vg-prob">
+            <article class="vg-prob vg-reveal">
                 <blockquote>«Sbagliare una procedura costa più che chiederla. Chiedimi prima.»</blockquote>
                 <p>Risposte prese dalla documentazione ufficiale OS1: procedura giusta al primo colpo.</p>
             </article>
-            <article class="vg-prob">
+            <article class="vg-prob vg-reveal">
                 <blockquote>«Paghi tutto OS1 e ne usi un quarto: il resto aspetta solo che tu lo chieda.»</blockquote>
                 <p>Scopri le funzioni che già paghi e non sapevi di avere.</p>
             </article>
@@ -110,35 +125,43 @@
 
     <!-- ══ I QUATTRO ESPERTI ══ -->
     <section class="vg-section">
-        <h2 class="vg-h2">Quattro esperti, una sola guida</h2>
-        <p class="vg-sub">Scegli chi ti risponde, a seconda di cosa ti serve.</p>
+        <div class="vg-section-head vg-reveal">
+            <span class="vg-kicker">Le quattro voci</span>
+            <h2 class="vg-h2">Quattro esperti, una sola guida</h2>
+            <p class="vg-sub">Scegli chi ti risponde, a seconda di cosa ti serve.</p>
+        </div>
 
         <div class="vg-experts">
-            <div class="vg-expert">
+            <div class="vg-expert vg-reveal">
+                <span class="vg-expert-role">l’esperto</span>
                 <img src="/static/img/agents/virgilio.png" alt="Virgilio" loading="lazy" decoding="async" width="120" height="120">
-                <h3>Virgilio <span>l’esperto</span></h3>
+                <h3>Virgilio</h3>
                 <p>Spiega concetti e significati: cosa vuol dire un termine, come funziona un processo.</p>
             </div>
-            <div class="vg-expert">
+            <div class="vg-expert vg-reveal">
+                <span class="vg-expert-role">la guida</span>
                 <img src="/static/img/agents/pilota.png" alt="Pilota" loading="lazy" decoding="async" width="120" height="120">
-                <h3>Pilota <span>la guida</span></h3>
+                <h3>Pilota</h3>
                 <p>Ti guida passo-passo nelle operazioni concrete in OS1.</p>
             </div>
-            <div class="vg-expert">
+            <div class="vg-expert vg-reveal">
+                <span class="vg-expert-role">il tecnico</span>
                 <img src="/static/img/agents/doc.png" alt="Doc" loading="lazy" decoding="async" width="120" height="120">
-                <h3>Doc <span>il tecnico</span></h3>
+                <h3>Doc</h3>
                 <p>Diagnostica errori e blocchi: trova la causa con te, con calma.</p>
             </div>
-            <div class="vg-expert">
+            <div class="vg-expert vg-reveal">
+                <span class="vg-expert-role">la tutor</span>
                 <img src="/static/img/agents/stella.png" alt="Stella" loading="lazy" decoding="async" width="120" height="120">
-                <h3>Stella <span>la tutor</span></h3>
+                <h3>Stella</h3>
                 <p>Per chi inizia: spiega tutto con calma e analogie, senza dare nulla per scontato.</p>
             </div>
         </div>
     </section>
 
     <!-- ══ CTA FINALE ══ -->
-    <section class="vg-cta">
+    <section class="vg-cta vg-reveal">
+        <span class="vg-kicker">Inizia ora</span>
         <h2>Pronto a chiedere a Virgilio?</h2>
         <p>Attiva una prova gratuita per tutto il tuo dominio aziendale.</p>
         <div class="vg-cta-actions">
@@ -147,61 +170,152 @@
         </div>
     </section>
 
+    <!-- ══ DISCLAIMER AI ACT ══ -->
+    <section class="vg-ai-notice vg-reveal">
+        <div class="vg-ai-notice-inner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            <div>
+                <h4>Strumenti di intelligenza artificiale</h4>
+                <p>Virgilio, Pilota, Doc e Stella sono <strong>assistenti basati su intelligenza artificiale</strong>. Le risposte sono generate automaticamente a partire dalla documentazione ufficiale OS1 e possono contenere errori o imprecisioni: verifica sempre le informazioni prima di agire su operazioni critiche. In conformità al <strong>Regolamento UE 2024/1689 (AI Act)</strong>, ti informiamo che stai interagendo con un sistema di intelligenza artificiale.</p>
+            </div>
+        </div>
+    </section>
+
 </div>
 
 <style>
-.vg-landing { width: 100%; }
+/* ════════════════════════════════════════════════════
+   OS1 VIRGILIO — landing "dossier editoriale"
+   Carta calda · filo rosso SCAO · serif Fraunces
+   Tutto via token: light + dark adattivi.
+   ════════════════════════════════════════════════════ */
+.vg-landing {
+    --font-display: 'Fraunces', 'Source Serif 4', Georgia, serif;
+    --vg-r: 16px;
+    --vg-lift: 0 1px 2px rgba(33,29,23,0.04), 0 12px 32px -8px rgba(33,29,23,0.16);
+    --vg-lift-hi: 0 2px 4px rgba(33,29,23,0.05), 0 26px 56px -14px rgba(33,29,23,0.26);
+    position: relative;
+    width: 100%;
+    isolation: isolate;
+}
+[data-theme="dark"] .vg-landing {
+    --vg-lift: 0 1px 2px rgba(0,0,0,0.4), 0 16px 40px -10px rgba(0,0,0,0.6);
+    --vg-lift-hi: 0 2px 6px rgba(0,0,0,0.5), 0 30px 64px -14px rgba(0,0,0,0.7);
+}
+
+/* grana carta — atmosfera, profondità */
+.vg-landing::before {
+    content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.035;
+}
+[data-theme="dark"] .vg-landing::before { opacity: 0.06; }
+
+/* ── Kicker editoriale (occhiello) ── */
+.vg-kicker {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.6875rem; font-weight: 700;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--c-brand);
+    padding-left: 26px; position: relative; margin-bottom: var(--sp-3);
+}
+.vg-kicker::before {
+    content: ''; position: absolute; left: 0; top: 50%;
+    width: 18px; height: 2px; background: var(--c-brand); transform: translateY(-50%);
+}
+.vg-kicker-hero { padding-left: 0; margin-bottom: 20px; color: var(--c-text-tertiary); }
+.vg-kicker-hero::before { display: none; }
 
 /* ── HERO ── */
 .vg-hero {
-    padding: 32px 24px 24px;
+    padding: 56px 24px 28px;
     position: relative;
     background:
-        radial-gradient(120% 90% at 50% 0%, rgba(226,35,26,0.06) 0%, transparent 60%),
-        var(--c-bg);
+        radial-gradient(130% 80% at 50% -10%, var(--c-brand-light) 0%, transparent 55%),
+        radial-gradient(100% 60% at 50% 0%, var(--c-surface) 0%, transparent 70%);
 }
 .vg-hero-inner {
-    width: 100%;
-    max-width: 440px;
-    margin: 0 auto;
-    text-align: center;
-    animation: vg-rise 700ms cubic-bezier(.16,1,.3,1) both;
+    width: 100%; max-width: 460px; margin: 0 auto; text-align: center;
+    animation: vg-rise 800ms cubic-bezier(.16,1,.3,1) both;
 }
 @keyframes vg-rise {
-    from { opacity: 0; transform: translateY(16px); }
+    from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
+.vg-hero-figure { position: relative; display: block; width: fit-content; margin: 0 auto 30px; }
 .vg-portrait {
-    margin: 0 auto 22px;
-    width: 184px;
-    height: 184px;
-    border-radius: 50%;
-    overflow: hidden;
+    margin: 0;
+    width: 188px; height: 188px; border-radius: 50%;
+    overflow: hidden; position: relative;
     border: 3px solid var(--c-brand);
-    box-shadow: 0 18px 48px rgba(0,0,0,0.18), 0 0 0 8px rgba(226,35,26,0.06);
-    background: var(--c-bg);
+    box-shadow: 0 24px 60px -18px rgba(226,35,26,0.45), 0 0 0 10px var(--c-brand-light);
+    background: var(--c-surface);
 }
 .vg-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
+/* il team — i 3 colleghi a fianco di Virgilio */
+.vg-team {
+    position: absolute; top: 50%; right: -30px; transform: translateY(-50%);
+    display: flex; flex-direction: column;
+}
+.vg-team img {
+    width: 58px; height: 58px; border-radius: 50%; object-fit: cover;
+    border: 3px solid var(--c-bg);
+    box-shadow: 0 8px 18px -6px rgba(0,0,0,0.45);
+    background: var(--c-surface-alt);
+    margin-top: -12px;
+    transition: transform .2s ease;
+}
+.vg-team img:first-child { margin-top: 0; }
+.vg-team img:hover { transform: scale(1.08); }
+
 .vg-name {
-    font-family: var(--font-serif);
-    font-size: 2.5rem; font-weight: 700; letter-spacing: -0.02em;
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    font-size: clamp(2.6rem, 7vw, 3.4rem); font-weight: 600;
+    letter-spacing: -0.025em; line-height: 1;
     margin: 0; color: var(--c-text);
 }
 .vg-tagline {
-    font-size: 1.05rem; font-style: italic; color: var(--c-brand);
-    margin: 4px 0 28px; letter-spacing: 0.01em;
+    font-family: var(--font-display);
+    font-size: 1.1rem; font-style: italic; font-weight: 500;
+    color: var(--c-brand); margin: 8px 0 0; letter-spacing: 0.01em;
+}
+.vg-masthead-rule {
+    display: block; width: 56px; height: 2px; margin: 22px auto 30px;
+    background: var(--c-brand); opacity: 0.85;
 }
 
-.vg-card { text-align: left; }
+/* claim a rotazione sotto la tagline */
+.vg-rotator {
+    font-family: var(--font-sans);
+    font-size: 1.02rem; line-height: 1.5; font-weight: 400;
+    color: var(--c-text-secondary);
+    max-width: 440px; margin: 16px auto 0; min-height: 3.1em;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    opacity: 1; transition: opacity 700ms ease;
+}
+.vg-rotator.is-fading { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .vg-rotator { transition: none; } }
+
+.vg-card {
+    text-align: left;
+    margin-inline: auto;
+    border-radius: var(--vg-r);
+    box-shadow: var(--vg-lift);
+}
 
 /* scroll cue */
 .vg-scroll-cue {
-    display: flex; flex-direction: column; align-items: center; gap: 2px;
-    margin: 22px auto 0;
+    display: inline-flex; flex-direction: column; align-items: center; gap: 2px;
+    margin: 28px auto 0;
     color: var(--c-text-tertiary); text-decoration: none;
-    font-size: 0.8rem; letter-spacing: 0.04em;
+    font-family: var(--font-sans);
+    font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
 }
 .vg-scroll-cue svg { width: 22px; height: 22px; animation: vg-bounce 1.8s ease-in-out infinite; }
 .vg-scroll-cue:hover { color: var(--c-brand); }
@@ -209,103 +323,249 @@
 
 /* ── SECTIONS ── */
 .vg-section {
-    max-width: 1000px; margin: 0 auto;
-    padding: 84px 24px;
-    border-top: 1px solid var(--c-border);
+    max-width: 1040px; margin: 0 auto;
+    padding: 96px 24px;
+    position: relative;
+}
+.vg-section + .vg-section::before,
+.vg-claim-section::before {
+    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 64px; height: 3px; background: var(--c-brand); border-radius: 3px; opacity: 0.9;
+}
+.vg-section-head { text-align: center; margin-bottom: 52px; }
+.vg-section-head .vg-kicker { padding-left: 0; }
+.vg-section-head .vg-kicker::before {
+    left: 50%; transform: translate(-50%, -50%); top: -10px; width: 22px;
 }
 .vg-h2 {
-    font-family: var(--font-serif);
-    font-size: 1.9rem; font-weight: 700; letter-spacing: -0.01em;
-    text-align: center; margin: 0 0 8px; color: var(--c-text);
+    font-family: var(--font-display); font-optical-sizing: auto;
+    font-size: clamp(1.8rem, 4vw, 2.3rem); font-weight: 600; letter-spacing: -0.02em;
+    margin: 6px 0 10px; color: var(--c-text); line-height: 1.1;
 }
 .vg-sub {
-    text-align: center; color: var(--c-text-secondary);
-    font-size: 1.05rem; margin: 0 0 44px;
+    color: var(--c-text-secondary); font-size: 1.05rem; margin: 0; line-height: 1.5;
+    max-width: 540px; margin-inline: auto;
 }
 
-/* claim */
-.vg-claim-section { text-align: center; max-width: 760px; padding: 48px 24px 72px; }
+/* claim — pull-quote editoriale */
+.vg-claim-section { text-align: center; max-width: 820px; padding: 84px 24px; }
+.vg-claim-section .vg-kicker { padding-left: 0; margin-bottom: 28px; }
+.vg-claim-section .vg-kicker::before {
+    left: 50%; transform: translate(-50%, -50%); top: -10px; width: 22px;
+}
 .vg-claim-lead {
-    font-family: var(--font-serif);
-    font-size: 1.5rem; line-height: 1.5; font-weight: 500;
-    color: var(--c-text-secondary); margin: 0 0 16px;
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 3vw, 1.6rem); line-height: 1.5; font-weight: 400; font-style: italic;
+    color: var(--c-text-secondary); margin: 0 0 18px;
 }
 .vg-claim-big {
-    font-family: var(--font-serif);
-    font-size: 1.7rem; line-height: 1.4; font-weight: 600;
-    color: var(--c-text); margin: 0;
+    font-family: var(--font-display); font-optical-sizing: auto;
+    font-size: clamp(1.6rem, 4.4vw, 2.2rem); line-height: 1.32; font-weight: 600;
+    letter-spacing: -0.015em; color: var(--c-text); margin: 0;
 }
-.vg-claim-big strong { color: var(--c-brand); }
+.vg-claim-big strong { color: var(--c-brand); font-weight: 600; }
 
-/* problem cards */
+/* problem cards — indice del manuale (01..08) */
 .vg-grid {
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px;
+    counter-reset: vgprob;
 }
 .vg-prob {
-    background: var(--c-bg-secondary, var(--c-bg));
-    border: 1px solid var(--c-border); border-radius: 14px;
-    padding: 24px 26px;
-    transition: transform .2s ease, box-shadow .2s ease;
+    position: relative; overflow: hidden;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border); border-radius: var(--vg-r);
+    padding: 30px 28px 26px;
+    box-shadow: var(--vg-lift);
+    transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s ease;
 }
-.vg-prob:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+.vg-prob::before {
+    counter-increment: vgprob;
+    content: counter(vgprob, decimal-leading-zero);
+    position: absolute; top: 10px; right: 18px;
+    font-family: var(--font-display); font-weight: 600; font-size: 3.4rem;
+    line-height: 1; color: var(--c-text); opacity: 0.06; pointer-events: none;
+    transition: color .25s ease, opacity .25s ease;
+}
+.vg-prob:hover { transform: translateY(-4px); box-shadow: var(--vg-lift-hi); }
+.vg-prob:hover::before { color: var(--c-brand); opacity: 0.16; }
 .vg-prob blockquote {
-    margin: 0 0 12px; padding: 0;
-    font-family: Georgia, 'Times New Roman', serif;
-    font-style: italic; font-size: 1.08rem; line-height: 1.5;
-    color: var(--c-text); position: relative; padding-left: 16px;
+    margin: 0 0 14px; padding: 0 0 0 18px; position: relative;
+    font-family: var(--font-display);
+    font-style: italic; font-weight: 400;
+    font-size: 1.12rem; line-height: 1.5; color: var(--c-text);
     border-left: 3px solid var(--c-brand);
 }
-.vg-prob p { margin: 0; color: var(--c-text-secondary); font-size: 0.95rem; line-height: 1.55; }
+.vg-prob p { margin: 0; color: var(--c-text-secondary); font-size: 0.95rem; line-height: 1.6; }
 
 /* experts */
-.vg-experts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; }
-.vg-expert { text-align: center; }
+.vg-experts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.vg-expert {
+    position: relative; text-align: center;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border); border-radius: var(--vg-r);
+    padding: 30px 20px 26px;
+    box-shadow: var(--vg-lift);
+    transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s ease;
+}
+.vg-expert::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--c-brand); border-radius: var(--vg-r) var(--vg-r) 0 0;
+    transform: scaleX(0); transform-origin: center; transition: transform .25s ease;
+}
+.vg-expert:hover { transform: translateY(-4px); box-shadow: var(--vg-lift-hi); }
+.vg-expert:hover::after { transform: scaleX(1); }
+.vg-expert-role {
+    display: block; font-family: var(--font-sans);
+    font-size: 0.625rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--c-brand); margin-bottom: 14px;
+}
 .vg-expert img {
-    display: block;
-    width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
-    border: 2px solid var(--c-border); margin: 0 auto 14px;
-    background: var(--c-bg);
+    display: block; width: 116px; height: 116px; border-radius: 50%; object-fit: cover;
+    border: 1px solid var(--c-border); margin: 0 auto 16px;
+    background: var(--c-surface-alt);
+    box-shadow: 0 8px 22px -8px rgba(33,29,23,0.3);
 }
 .vg-expert h3 {
-    font-family: var(--font-serif);
-    font-size: 1.1rem; margin: 0 0 6px; color: var(--c-text);
+    font-family: var(--font-display); font-optical-sizing: auto;
+    font-size: 1.2rem; font-weight: 600; margin: 0 0 8px; color: var(--c-text);
 }
-.vg-expert h3 span {
-    display: block; font-size: 0.82rem; font-weight: 500;
-    font-style: italic; color: var(--c-brand);
-}
-.vg-expert p { margin: 0; font-size: 0.9rem; color: var(--c-text-secondary); line-height: 1.5; }
+.vg-expert p { margin: 0; font-size: 0.9rem; color: var(--c-text-secondary); line-height: 1.55; }
 
 /* CTA */
 .vg-cta {
-    text-align: center; padding: 84px 24px 100px;
-    border-top: 1px solid var(--c-border);
-    background: radial-gradient(120% 100% at 50% 100%, rgba(226,35,26,0.06) 0%, transparent 60%);
+    position: relative; text-align: center; padding: 100px 24px 116px;
+    background: radial-gradient(120% 120% at 50% 120%, var(--c-brand-light) 0%, transparent 55%);
+}
+.vg-cta::before {
+    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 64px; height: 3px; background: var(--c-brand); border-radius: 3px;
+}
+.vg-cta .vg-kicker { padding-left: 0; margin-bottom: 22px; }
+.vg-cta .vg-kicker::before {
+    left: 50%; transform: translate(-50%, -50%); top: -10px; width: 22px;
 }
 .vg-cta h2 {
-    font-family: var(--font-serif);
-    font-size: 1.9rem; font-weight: 700; margin: 0 0 8px; color: var(--c-text);
+    font-family: var(--font-display); font-optical-sizing: auto;
+    font-size: clamp(1.9rem, 4.4vw, 2.5rem); font-weight: 600; letter-spacing: -0.02em;
+    margin: 0 0 10px; color: var(--c-text);
 }
-.vg-cta p { color: var(--c-text-secondary); font-size: 1.05rem; margin: 0 0 28px; }
-.vg-cta-actions { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-.vg-cta .btn-primary { display: inline-block; width: auto; padding: 14px 36px; text-decoration: none; }
-.vg-cta-login { color: var(--c-brand); font-weight: 600; text-decoration: none; font-size: 0.95rem; }
+.vg-cta p { color: var(--c-text-secondary); font-size: 1.08rem; margin: 0 0 32px; }
+.vg-cta-actions { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.vg-cta .btn-primary {
+    display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;
+    font-size: 1rem; border-radius: var(--vg-r);
+    box-shadow: 0 14px 30px -10px rgba(226,35,26,0.5);
+}
+.vg-cta-login {
+    font-family: var(--font-sans);
+    color: var(--c-brand); font-weight: 600; text-decoration: none; font-size: 0.9375rem;
+}
 .vg-cta-login:hover { text-decoration: underline; }
+
+/* ── disclaimer AI Act ── */
+.vg-ai-notice {
+    max-width: 820px; margin: 0 auto; padding: 8px 24px 72px;
+}
+.vg-ai-notice-inner {
+    display: flex; gap: 18px; align-items: flex-start; text-align: left;
+    border: 1px solid var(--c-border); border-radius: var(--vg-r);
+    background: var(--c-surface); box-shadow: var(--vg-lift);
+    padding: 26px 30px;
+}
+.vg-ai-notice svg {
+    width: 28px; height: 28px; color: var(--c-brand);
+    flex-shrink: 0; margin-top: 2px;
+}
+.vg-ai-notice h4 {
+    font-family: var(--font-display); font-optical-sizing: auto;
+    font-size: 1.1rem; font-weight: 600; color: var(--c-text); margin: 0 0 7px;
+}
+.vg-ai-notice p {
+    font-size: 0.975rem; line-height: 1.65; color: var(--c-text-secondary); margin: 0;
+}
+.vg-ai-notice strong { color: var(--c-text); font-weight: 600; }
+
+/* ── reveal on scroll ── */
+.vg-reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+.vg-reveal.is-visible { opacity: 1; transform: none; }
+.vg-grid .vg-prob:nth-child(2n) { transition-delay: .08s; }
+.vg-experts .vg-expert:nth-child(2) { transition-delay: .07s; }
+.vg-experts .vg-expert:nth-child(3) { transition-delay: .14s; }
+.vg-experts .vg-expert:nth-child(4) { transition-delay: .21s; }
 
 /* ── Responsive ── */
 @media (max-width: 760px) {
     .vg-grid { grid-template-columns: 1fr; }
     .vg-experts { grid-template-columns: repeat(2, 1fr); }
-    .vg-name { font-size: 2.1rem; }
-    .vg-claim-lead { font-size: 1.25rem; }
-    .vg-claim-big { font-size: 1.5rem; }
-    .vg-h2 { font-size: 1.6rem; }
-    .vg-portrait { width: 152px; height: 152px; }
+    .vg-section { padding: 72px 20px; }
+    .vg-portrait { width: 156px; height: 156px; }
+    .vg-team { right: -16px; }
+    .vg-team img { width: 46px; height: 46px; margin-top: -10px; }
+    .vg-ai-notice-inner { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
 }
 @media (prefers-reduced-motion: reduce) {
     .vg-hero-inner { animation: none; }
     .vg-scroll-cue svg { animation: none; }
+    .vg-reveal { opacity: 1; transform: none; transition: none; }
 }
 </style>
+
+<script>
+/* ── rotazione claim sotto la tagline ── */
+(function () {
+    var el = document.getElementById('vg-rotator');
+    if (!el) return;
+    var claims = [
+        "La procedura che fai due volte l’anno te la ripetiamo identica, ogni volta.",
+        "Il neoassunto impara da solo, senza rubare ore al collega esperto.",
+        "Ferie, malattia, dimissioni: l’operatività non dipende più da una sola persona.",
+        "Il know-how su OS1 resta in azienda, non nella busta paga di chi se ne va.",
+        "Non è il dubbio a fermare il lavoro: è l’attesa di una risposta.",
+        "Sera, sabato, fine mese: rispondiamo quando ti serve, non quando apre l’assistenza.",
+        "Sbagliare una procedura costa più che chiederla. Chiedici prima.",
+        "Paghi tutto OS1 e ne usi un quarto: ti mostriamo il resto.",
+        "La risposta giusta arriva dalla documentazione ufficiale, non dai sentito dire.",
+        "Niente più «chiedi a chi sa»: la risposta è qui, per tutti.",
+        "Dalla domanda alla procedura in pochi secondi, senza aprire dieci manuali.",
+        "Chiusura di bilancio? Ti accompagniamo passo dopo passo.",
+        "Fatture, note di credito, registri: la regola giusta al primo colpo.",
+        "Carico, scarico, inventari di magazzino: ogni gesto al posto giusto.",
+        "L’errore a video non ti blocca: ne troviamo insieme la causa.",
+        "Un solo posto dove cercare, invece di mille cartelle e vecchie email.",
+        "Formazione continua, senza corsi e senza fermare il lavoro.",
+        "Le scadenze fiscali non aspettano. Nemmeno noi.",
+        "Meno ticket all’assistenza, più autonomia per il tuo team.",
+        "Conosciamo OS1 a memoria, così tu non devi."
+    ];
+    var i = 0;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setInterval(function () {
+        i = (i + 1) % claims.length;
+        if (reduce) { el.textContent = claims[i]; return; }
+        el.classList.add('is-fading');
+        setTimeout(function () {
+            el.textContent = claims[i];
+            el.classList.remove('is-fading');
+        }, 700);
+    }, 9000);
+})();
+
+(function () {
+    var els = document.querySelectorAll('.vg-reveal');
+    if (!('IntersectionObserver' in window) || !els.length) {
+        els.forEach(function (e) { e.classList.add('is-visible'); });
+        return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    els.forEach(function (e) { io.observe(e); });
+})();
+</script>
 
 {% endblock %}
