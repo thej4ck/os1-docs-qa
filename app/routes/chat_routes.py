@@ -21,6 +21,7 @@ from app.models.conversation import (
     create_conversation, list_conversations, get_conversation,
     get_messages, get_messages_for_llm, add_message, update_title,
     delete_conversation, count_user_messages, get_max_messages_setting,
+    get_conversation_agent,
 )
 from app.models.usage import check_limit, get_monthly_usage, get_domain_usage, get_current_month
 from app.models.domain import get_domain_for_email, get_trial_banner_info
