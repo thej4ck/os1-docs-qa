@@ -156,7 +156,7 @@
                                {% if settings.suppress_reasoning == '1' %}checked{% endif %}>
                         Invia <code>include_reasoning: false</code> a Groq
                     </label>
-                    <div class="setting-hint">⚠️ <strong>Lascia DISATTIVO.</strong> Sui modelli gpt-oss (formato harmony) sopprimere il reasoning fa chiudere il canale finale in anticipo → <code>finish_reason=stop</code> a metà risposta (troncamenti). Tenendolo off il reasoning viene scartato a valle senza tagli. Attiva solo per rollback diagnostico.</div>
+                    <div class="setting-hint">⚠️ <strong>Lascia DISATTIVO.</strong> Sopprimere il reasoning non serve (a effort basso è ~100 token, costo nullo) e su Groq può far comparire reasoning/output spurio nella risposta. Tenendolo off il reasoning viene scartato a valle in modo pulito. <strong>Nota:</strong> il troncamento delle risposte NON dipendeva da questo flag (era una race di rendering, risolta in build 66). Attiva solo per rollback diagnostico.</div>
                 </div>
             </div>
             <div class="setting-row">
