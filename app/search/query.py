@@ -474,6 +474,26 @@ def _is_reranking_enabled() -> bool:
     return False  # disabled by default
 
 
+def _is_reasoning_suppressed() -> bool:
+    """Admin toggle per ri-attivare include_reasoning=False (comportamento legacy).
+
+    Default OFF: sopprimere il canale reasoning su gpt-oss (formato harmony) fa
+    chiudere a Groq il canale finale in anticipo → finish_reason=stop a metà
+    risposta. Tenendolo OFF il reasoning arriva in un campo separato e viene
+    scartato (leggiamo solo delta.content). Toggle per rollback senza deploy.
+    """
+    try:
+        from app.db import get_conn
+        row = get_conn().execute(
+            "SELECT value FROM app_settings WHERE key = 'suppress_reasoning'"
+        ).fetchone()
+        if row:
+            return row["value"] == "1"
+    except Exception:
+        pass
+    return False  # non sopprimere = comportamento corretto
+
+
 _logo_cache: dict[str, bool] = {}
 
 def _is_logo(url: str) -> bool:
@@ -661,7 +681,12 @@ async def ask_stream(
         )
         if reasoning_effort:
             create_kwargs["reasoning_effort"] = reasoning_effort
-            create_kwargs["extra_body"] = {"include_reasoning": False}
+            # gpt-oss (harmony): NON sopprimere il reasoning di default — farlo
+            # chiude il canale finale in anticipo (finish_reason=stop a metà
+            # risposta). Il reasoning arriva in un campo separato e viene scartato
+            # (yieldiamo solo delta.content). Soppressione solo se admin opta in.
+            if _is_reasoning_suppressed():
+                create_kwargs["extra_body"] = {"include_reasoning": False}
             create_kwargs["max_completion_tokens"] = _get_token_limit("max_completion_tokens", 4096)
         else:
             create_kwargs["max_tokens"] = _get_token_limit("max_output_tokens", 2048)

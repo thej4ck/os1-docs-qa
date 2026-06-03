@@ -1,5 +1,5 @@
 VERSION = "2.1.0"
-BUILD = 64  # Increment on each commit
+BUILD = 65  # Increment on each commit
 BUILD_DATE = "2026-06-03"
 
 PRODUCT_NAME = "OS1 Virgilio"  # nome prodotto user-facing (single source of truth)
