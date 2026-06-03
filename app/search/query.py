@@ -613,19 +613,20 @@ def remap_citations(text: str, docs: list[dict]) -> tuple[str, dict]:
             dfu[x] = dfu.get(x, 0) + 1
         for x in bi:
             dfb[x] = dfb.get(x, 0) + 1
-
-    def _idf(df: dict, x) -> float:  # raro → alto
-        return log(1.0 + n_docs / (1 + df.get(x, 0)))
+    # IDF per termine, calcolato una volta sola (raro → alto). Le intersezioni più
+    # in basso pescano solo termini presenti in qualche doc → chiavi sempre note.
+    idfu = {x: log(1.0 + n_docs / (1 + c)) for x, c in dfu.items()}
+    idfb = {x: log(1.0 + n_docs / (1 + c)) for x, c in dfb.items()}
 
     # Decisione guidata dai BIGRAMMI: il doc citato sbagliato è spesso topicamente
     # adiacente (condivide "magazzino", "quantità", "nota") ma NON la frase esatta
     # ("quantità secondaria"). Lo score sui soli bigrammi isola questo segnale;
     # gli unigrammi servono solo come grounding di topic del best.
     def bscore(cb: set, idx: int) -> float:
-        return sum(_idf(dfb, x) for x in cb & feats[idx][1])
+        return sum(idfb[x] for x in cb & feats[idx][1])
 
     def uscore(cu: set, idx: int) -> float:
-        return sum(_idf(dfu, x) for x in cu & feats[idx][0])
+        return sum(idfu[x] for x in cu & feats[idx][0])
 
     # Aggrega il contesto di TUTTE le occorrenze di ogni [Dn]: lo stesso numero
     # può comparire con frase ricca (es. "...quantità secondaria... [D2]") e come
@@ -662,11 +663,10 @@ def remap_citations(text: str, docs: list[dict]) -> tuple[str, dict]:
         return text, {}
 
     corrected = _CITE_MARKER_RE.sub(
-        lambda m: f"[D{remap[int(m.group(1))]}]"
-        if int(m.group(1)) in remap else m.group(0),
+        lambda m: f"[D{remap[n]}]" if (n := int(m.group(1))) in remap else m.group(0),
         text,
     )
-    return corrected, {str(k): v for k, v in remap.items()}
+    return corrected, remap
 
 
 def _get_model(deep: bool = False) -> tuple[str, str | None]:
@@ -747,15 +747,27 @@ async def ask_stream(
     docs, rerank_usage = await retrieve_with_budget(question, deep=deep, topic_filter=topic_filter)
     sources = [{"title": d["title"], "source_file": d["source_file"]} for d in docs]
 
-    # Extract screenshots from retrieved docs (avoids a second retrieval call, skip logo)
+    # Extract screenshots from retrieved docs (avoids a second retrieval call, skip logo).
+    # Ordered by doc relevance (docs already ranked), deduped by url; each screenshot
+    # carries its source doc so the UI can open it like a sidebar doc click.
+    MAX_SCREENSHOTS = 12
     screenshots = []
-    for doc in docs[:5]:
+    _seen_urls = set()
+    for doc in docs:
         for m in _re.finditer(r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]', doc["content"]):
-            if not _is_logo(m.group(2)):
-                screenshots.append({"desc": m.group(1), "url": m.group(2)})
-            if len(screenshots) >= 3:
+            url = m.group(2)
+            if _is_logo(url) or url in _seen_urls:
+                continue
+            _seen_urls.add(url)
+            screenshots.append({
+                "desc": m.group(1),
+                "url": url,
+                "source_file": doc["source_file"],
+                "title": doc["title"],
+            })
+            if len(screenshots) >= MAX_SCREENSHOTS:
                 break
-        if len(screenshots) >= 3:
+        if len(screenshots) >= MAX_SCREENSHOTS:
             break
 
     context = build_context(docs)
@@ -889,13 +901,14 @@ async def ask_stream(
         answer = "".join(answer_parts)
         corrected, cite_remap = remap_citations(answer, docs)
         if usage_data is not None and cite_remap:
-            usage_data["citation_remap"] = cite_remap
+            usage_data["citation_remap"] = cite_remap  # piccolo dict, solo diagnostica
             print(f"[ask_stream] citation remap applied: {cite_remap}", flush=True)
 
-        # Final yield with usage data (log compatto: corrected_answer escluso)
         print(f"[ask_stream] Stream complete at {_time.monotonic()-_t0:.1f}s finish={finish_reason} usage={usage_data}", flush=True)
-        if usage_data is not None and cite_remap and corrected != answer:
-            usage_data["corrected_answer"] = corrected
+        # corrected_answer su un canale meta dedicato (non dentro usage_data): il
+        # corpo riscritto non inquina l'accounting né viaggia in done.usage.
+        if cite_remap:
+            yield "", [], {"corrected_answer": corrected}
         yield "", [], usage_data
 
     except Exception as e:

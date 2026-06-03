@@ -279,6 +279,7 @@ async def ask(
         sources = []
         screenshots = []
         usage_data = None
+        corrected_answer = None  # testo con citazioni [Dn] rimappate (canale meta)
 
         is_deep = deep == "true"
         async for token, token_sources, token_meta in query_module.ask_stream(
@@ -289,6 +290,8 @@ async def ask(
                 sources = token_sources
             if token_meta and "screenshots" in token_meta:
                 screenshots = token_meta["screenshots"]
+            if token_meta and "corrected_answer" in token_meta:
+                corrected_answer = token_meta["corrected_answer"]
             if token_meta and "prompt_tokens" in token_meta:
                 usage_data = token_meta
             if token:
@@ -302,11 +305,9 @@ async def ask(
                 src_data["screenshots"] = screenshots
             yield {"data": json.dumps(src_data)}
 
-        # Save assistant message with usage.
-        # corrected_answer (citazioni [Dn] rimappate) sostituisce il testo grezzo
-        # se presente. pop(): evita di rispedirlo dentro done_data["usage"].
-        corrected_answer = usage_data.pop("corrected_answer", None) if usage_data else None
-        assistant_text = corrected_answer if corrected_answer else "".join(full_response)
+        # Save assistant message. corrected_answer (citazioni [Dn] rimappate dal
+        # backend) sostituisce il testo grezzo se presente.
+        assistant_text = corrected_answer or "".join(full_response)
         msg_id = None
         if assistant_text:
             msg_id = add_message(
