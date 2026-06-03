@@ -561,20 +561,66 @@
         .msg-screenshots::-webkit-scrollbar-track { background: transparent; }
         .msg-screenshots::-webkit-scrollbar-thumb { background: var(--c-border); border-radius: 3px; }
         .screenshot-thumb {
-            flex: 0 0 auto; width: 220px; scroll-snap-align: start;
-            cursor: zoom-in; border: 1px solid var(--c-border); border-radius: 8px;
+            flex: 0 0 auto; width: 148px; scroll-snap-align: start; position: relative;
+            cursor: pointer; border: 1px solid var(--c-border); border-radius: 8px;
             overflow: hidden; background: var(--c-surface-alt);
             transition: box-shadow 0.15s ease, transform 0.15s ease;
         }
         .screenshot-thumb:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.2); transform: translateY(-2px); }
-        .screenshot-thumb img { display: block; width: 100%; height: 150px; object-fit: cover; object-position: top left; }
-        .screenshot-label { display: block; padding: 5px 8px; font-size: 0.75rem; color: var(--c-text-secondary); text-align: center; border-top: 1px solid var(--c-border); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .screenshot-thumb img { display: block; width: 100%; height: 92px; object-fit: cover; object-position: top left; }
+        .screenshot-label { display: block; padding: 5px 8px; font-size: 0.72rem; color: var(--c-text-secondary); text-align: center; border-top: 1px solid var(--c-border); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .screenshot-more {
+            position: absolute; top: 0; left: 0; right: 0; height: 92px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(0,0,0,0.55); color: #fff; font-size: 1.35rem; font-weight: 700;
+            backdrop-filter: blur(1px); pointer-events: none;
+        }
         .img-lightbox {
             position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.85); display: flex; flex-direction: column;
             align-items: center; justify-content: center; cursor: pointer; backdrop-filter: blur(6px);
         }
         .img-lightbox img { max-width: 90vw; max-height: 85vh; border-radius: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
         .img-lightbox-caption { color: #fff; margin-top: 12px; font-size: 0.9rem; text-align: center; }
+
+        /* ═══════════════ Image gallery (navigable) ═══════════════ */
+        .gallery-overlay {
+            position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.9);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            cursor: zoom-out; backdrop-filter: blur(6px);
+        }
+        .gallery-stage {
+            display: flex; flex-direction: column; align-items: center; gap: 12px;
+            max-width: 92vw; max-height: 88vh; cursor: default;
+        }
+        .gallery-img { max-width: 88vw; max-height: 66vh; border-radius: 8px; box-shadow: 0 8px 32px rgba(0,0,0,0.5); background: #fff; }
+        .gallery-caption { color: #fff; font-size: 0.9rem; text-align: center; max-width: 80vw; }
+        .gallery-actions { display: flex; align-items: center; gap: 16px; }
+        .gallery-counter { color: rgba(255,255,255,0.7); font-size: 0.8rem; }
+        .gallery-source-btn {
+            background: var(--c-brand); color: #fff; border: none; border-radius: 6px;
+            padding: 8px 16px; font-size: 0.85rem; font-weight: 600; cursor: pointer;
+        }
+        .gallery-source-btn:hover { filter: brightness(1.1); }
+        .gallery-close {
+            position: absolute; top: 16px; right: 20px; background: transparent; border: none;
+            color: #fff; font-size: 1.8rem; line-height: 1; cursor: pointer; opacity: 0.8;
+        }
+        .gallery-close:hover { opacity: 1; }
+        .gallery-nav {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.12); border: none; color: #fff;
+            font-size: 2.4rem; line-height: 1; width: 54px; height: 72px; cursor: pointer; border-radius: 8px;
+        }
+        .gallery-nav:hover { background: rgba(255,255,255,0.25); }
+        .gallery-prev { left: 24px; }
+        .gallery-next { right: 24px; }
+        .gallery-strip { display: flex; gap: 8px; margin-top: 16px; max-width: 92vw; overflow-x: auto; padding-bottom: 6px; }
+        .gallery-strip-thumb {
+            width: 64px; height: 46px; object-fit: cover; border-radius: 4px; cursor: pointer;
+            opacity: 0.5; border: 2px solid transparent; flex: 0 0 auto; background: var(--c-surface-alt);
+        }
+        .gallery-strip-thumb.active { opacity: 1; border-color: var(--c-brand); }
+        .gallery-strip-thumb:hover { opacity: 0.85; }
 
         /* ═══════════════ Thinking indicator ═══════════════ */
         .thinking-dots { display: flex; gap: 5px; padding: 6px 0; align-items: center; }

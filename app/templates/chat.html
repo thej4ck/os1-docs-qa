@@ -912,32 +912,35 @@ function renderFinal(msgParts, text, sources, messageId, screenshots, wasDeep, t
         }
     }
 
-    // Inject screenshots as separate panel to the right of the message
+    // Relevant-image gallery: show up to 3 small thumbs; clicking any opens the
+    // full navigable gallery of ALL images, from where the source doc can be opened.
     if (screenshots && screenshots.length > 0) {
         const panel = document.createElement('div');
         panel.className = 'msg-screenshots';
-        screenshots.forEach(s => {
+        const preview = screenshots.slice(0, 3);
+        preview.forEach((s, i) => {
             const wrap = document.createElement('div');
             wrap.className = 'screenshot-thumb';
             wrap.title = s.desc;
+            wrap.onclick = () => openGallery(screenshots, i);
             const img = document.createElement('img');
             img.src = s.url;
             img.alt = s.desc;
-            img.onclick = () => {
-                const lb = document.createElement('div');
-                lb.className = 'img-lightbox';
-                lb.innerHTML = `<img src="${s.url}" alt="${s.desc}"><div class="img-lightbox-caption">${s.desc}</div>`;
-                lb.onclick = () => lb.remove();
-                document.body.appendChild(lb);
-            };
+            wrap.appendChild(img);
             const label = document.createElement('span');
             label.className = 'screenshot-label';
             label.textContent = s.desc;
-            wrap.appendChild(img);
             wrap.appendChild(label);
+            // Badge the count of hidden images on the last visible thumb
+            if (i === preview.length - 1 && screenshots.length > preview.length) {
+                const more = document.createElement('div');
+                more.className = 'screenshot-more';
+                more.textContent = `+${screenshots.length - preview.length}`;
+                wrap.appendChild(more);
+            }
             panel.appendChild(wrap);
         });
-        // Append below the answer, inside the message column (carousel)
+        // Append below the answer, inside the message column
         msgParts.body.appendChild(panel);
     }
 
@@ -1251,6 +1254,77 @@ function submitFeedbackDetail(messageId, rating, btn) {
 }
 
 // ── Document Overlay ──
+// Full-screen navigable image gallery. Opens at startIndex; lets the user step
+// through ALL images and open the document that contains the current image.
+function openGallery(images, startIndex) {
+    if (!images || !images.length) return;
+    let idx = startIndex || 0;
+    const lb = document.createElement('div');
+    lb.className = 'gallery-overlay';
+    lb.innerHTML = `
+        <button class="gallery-close" title="Chiudi">✕</button>
+        <button class="gallery-nav gallery-prev" title="Precedente">‹</button>
+        <div class="gallery-stage">
+            <img class="gallery-img" alt="">
+            <div class="gallery-caption"></div>
+            <div class="gallery-actions">
+                <span class="gallery-counter"></span>
+                <button class="gallery-source-btn" type="button">Apri documento</button>
+            </div>
+        </div>
+        <button class="gallery-nav gallery-next" title="Successiva">›</button>
+        <div class="gallery-strip"></div>`;
+    const imgEl = lb.querySelector('.gallery-img');
+    const capEl = lb.querySelector('.gallery-caption');
+    const cntEl = lb.querySelector('.gallery-counter');
+    const srcBtn = lb.querySelector('.gallery-source-btn');
+    const strip = lb.querySelector('.gallery-strip');
+    const single = images.length <= 1;
+
+    if (single) {
+        lb.querySelector('.gallery-prev').style.display = 'none';
+        lb.querySelector('.gallery-next').style.display = 'none';
+        strip.style.display = 'none';
+    } else {
+        images.forEach((s, i) => {
+            const t = document.createElement('img');
+            t.src = s.url; t.alt = s.desc; t.className = 'gallery-strip-thumb';
+            t.onclick = (e) => { e.stopPropagation(); show(i); };
+            strip.appendChild(t);
+        });
+    }
+
+    function show(i) {
+        idx = (i + images.length) % images.length;
+        const s = images[idx];
+        imgEl.src = s.url; imgEl.alt = s.desc;
+        capEl.textContent = s.desc || '';
+        cntEl.textContent = `${idx + 1} / ${images.length}`;
+        if (s.source_file) {
+            srcBtn.style.display = '';
+            srcBtn.title = s.title || s.source_file;
+            srcBtn.onclick = (e) => { e.stopPropagation(); close(); openDocOverlay(s.source_file, s.title); };
+        } else {
+            srcBtn.style.display = 'none';
+        }
+        if (!single) strip.querySelectorAll('.gallery-strip-thumb').forEach((el, j) => el.classList.toggle('active', j === idx));
+    }
+    function close() { lb.remove(); document.removeEventListener('keydown', onKey); }
+    function onKey(e) {
+        if (e.key === 'Escape') close();
+        else if (e.key === 'ArrowLeft') show(idx - 1);
+        else if (e.key === 'ArrowRight') show(idx + 1);
+    }
+    lb.querySelector('.gallery-close').onclick = (e) => { e.stopPropagation(); close(); };
+    lb.querySelector('.gallery-prev').onclick = (e) => { e.stopPropagation(); show(idx - 1); };
+    lb.querySelector('.gallery-next').onclick = (e) => { e.stopPropagation(); show(idx + 1); };
+    lb.querySelector('.gallery-stage').onclick = (e) => e.stopPropagation();
+    lb.onclick = () => close();
+    document.addEventListener('keydown', onKey);
+    document.body.appendChild(lb);
+    show(idx);
+}
+
 function openDocOverlay(sourceFile, title) {
     const overlay = document.getElementById('doc-overlay');
     document.getElementById('doc-overlay-title').textContent = title || sourceFile;
@@ -1279,6 +1353,7 @@ function openDocOverlay(sourceFile, title) {
 function closeDocOverlay() { document.getElementById('doc-overlay').classList.remove('active'); document.body.style.overflow = ''; }
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
+        if (document.querySelector('.gallery-overlay')) return;  // gallery handles its own Escape
         if (document.getElementById('doc-overlay').classList.contains('active')) closeDocOverlay();
         else closeSidebar();
     }
