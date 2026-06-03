@@ -205,8 +205,14 @@ ALLOWED_MODELS = {
 CONTEXT_PRESETS = {
     "conservative": 5_000,
     "normal": 15_000,
-    "aggressive": 40_000,
+    "aggressive": 30_000,
 }
+
+# Budget in PAROLE (non token). Tetto di sicurezza: anche dopo il moltiplicatore
+# deep, il contesto non deve mai saturare la context window del modello (128K
+# token). 60K parole ≈ 95-108K token, lasciando margine per system prompt,
+# history e completamento.
+_MAX_CONTEXT_WORDS = 60_000
 
 
 def _get_context_budget(deep: bool = False) -> int:
@@ -220,7 +226,9 @@ def _get_context_budget(deep: bool = False) -> int:
     except Exception:
         pass
     budget = CONTEXT_PRESETS[preset]
-    return budget * 2 if deep else budget
+    if deep:
+        return min(int(budget * 2.5), _MAX_CONTEXT_WORDS)
+    return budget
 
 
 async def check_disambiguation(
@@ -673,6 +681,7 @@ async def ask_stream(
         print(f"[ask_stream] Groq stream opened in {_time.monotonic()-_t0:.1f}s", flush=True)
 
         first = True
+        finish_reason = None
         async for chunk in stream:
             # Capture usage from the final chunk
             if hasattr(chunk, "usage") and chunk.usage is not None:
@@ -681,9 +690,17 @@ async def ask_stream(
                 details = getattr(chunk.usage, "prompt_tokens_details", None)
                 if details:
                     cached = getattr(details, "cached_tokens", 0) or 0
+                # reasoning_tokens: chain-of-thought nascosto, fatturato DENTRO
+                # completion_tokens. Su una risposta breve troncata è il ladro di
+                # budget — lo esponiamo per diagnosticare i tagli per lunghezza.
+                reasoning = 0
+                cdetails = getattr(chunk.usage, "completion_tokens_details", None)
+                if cdetails:
+                    reasoning = getattr(cdetails, "reasoning_tokens", 0) or 0
                 usage_data = {
                     "prompt_tokens": chunk.usage.prompt_tokens,
                     "completion_tokens": chunk.usage.completion_tokens,
+                    "reasoning_tokens": reasoning,
                     "cached_tokens": cached,
                     "cost_usd": _calculate_cost(
                         chunk.usage.prompt_tokens,
@@ -694,6 +711,8 @@ async def ask_stream(
                     "model": model_id,
                 }
 
+            if chunk.choices and chunk.choices[0].finish_reason:
+                finish_reason = chunk.choices[0].finish_reason
             delta = chunk.choices[0].delta if chunk.choices else None
             if delta and delta.content:
                 if first:
@@ -708,8 +727,15 @@ async def ask_stream(
             usage_data.update(rerank_usage)
             usage_data["cost_usd"] += rerank_usage.get("rerank_cost_usd", 0)
 
+        # Flag length-cutoff così la UI può offrire "Continua". Diagnosi: se la
+        # risposta visibile è breve ma truncated=True, confronta reasoning_tokens
+        # con completion_tokens — se il reasoning ~= il cap, è la CoT nascosta ad
+        # aver saturato il budget (abbassa l'effort o alza max_completion_tokens).
+        if usage_data is not None:
+            usage_data["truncated"] = (finish_reason == "length")
+
         # Final yield with usage data
-        print(f"[ask_stream] Stream complete at {_time.monotonic()-_t0:.1f}s usage={usage_data}", flush=True)
+        print(f"[ask_stream] Stream complete at {_time.monotonic()-_t0:.1f}s finish={finish_reason} usage={usage_data}", flush=True)
         yield "", [], usage_data
 
     except Exception as e:

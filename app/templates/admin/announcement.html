@@ -130,11 +130,11 @@
                 <label class="setting-label" for="context_preset">Preset contesto</label>
                 <div style="flex:1;">
                     <select id="context_preset" name="context_preset" class="setting-input" style="width:auto;">
-                        <option value="conservative" {% if settings.context_preset == 'conservative' %}selected{% endif %}>Conservativo — 5.000 parole (~7K token)</option>
-                        <option value="normal" {% if settings.context_preset == 'normal' or not settings.context_preset %}selected{% endif %}>Normale — 15.000 parole (~20K token)</option>
-                        <option value="aggressive" {% if settings.context_preset == 'aggressive' %}selected{% endif %}>Aggressivo — 40.000 parole (~55K token)</option>
+                        <option value="conservative" {% if settings.context_preset == 'conservative' %}selected{% endif %}>Conservativo — 5.000 parole (~8K token)</option>
+                        <option value="normal" {% if settings.context_preset == 'normal' or not settings.context_preset %}selected{% endif %}>Normale — 15.000 parole (~24K token)</option>
+                        <option value="aggressive" {% if settings.context_preset == 'aggressive' %}selected{% endif %}>Aggressivo — 30.000 parole (~48K token)</option>
                     </select>
-                    <div class="setting-hint">Con "Approfondisci" il budget raddoppia. Il modello ha 128K token di context window.</div>
+                    <div class="setting-hint"><strong>Il budget è in PAROLE</strong> (non token): 1 parola ≈ 1,5-1,8 token in italiano. Con "Approfondisci" il budget viene <strong>moltiplicato per 2,5</strong>, con tetto di sicurezza a 60.000 parole per non sforare la context window (128K token) del modello.</div>
                 </div>
             </div>
             <div class="setting-row">

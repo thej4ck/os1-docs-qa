@@ -558,10 +558,17 @@ function createMsg(role) {
 }
 
 // ── Deep banner ──
-function showDeepBanner(question) {
+function showDeepBanner(question, prominent = false) {
     const banner = document.getElementById('deep-banner');
     const btn = document.getElementById('deep-banner-btn');
+    const txt = banner.querySelector('.deep-banner-text');
     banner.style.display = '';
+    banner.classList.toggle('prominent', prominent);
+    if (txt) {
+        txt.textContent = prominent
+            ? 'Questa domanda richiede più contesto del solito.'
+            : 'La risposta non ti convince?';
+    }
     btn.onclick = () => {
         hideDeepBanner();
         questionEl.value = question;
@@ -570,7 +577,9 @@ function showDeepBanner(question) {
     };
 }
 function hideDeepBanner() {
-    document.getElementById('deep-banner').style.display = 'none';
+    const banner = document.getElementById('deep-banner');
+    banner.style.display = 'none';
+    banner.classList.remove('prominent');
 }
 
 // ── Docs panel ──
@@ -727,7 +736,8 @@ function handleSubmit(e) {
     const formData = new FormData();
     formData.append('question', question);
     if (conversationId) formData.append('conversation_id', conversationId);
-    if (questionEl.dataset.deep === 'true') {
+    const isDeep = questionEl.dataset.deep === 'true';
+    if (isDeep) {
         formData.append('deep', 'true');
         questionEl.dataset.deep = '';
     }
@@ -746,7 +756,7 @@ function handleSubmit(e) {
 
             function processStream() {
                 reader.read().then(({ done, value }) => {
-                    if (done) { clearInterval(thinkInterval); renderFinal(assistantMsg, fullText, sources, null, pendingScreenshots); return; }
+                    if (done) { clearInterval(thinkInterval); renderFinal(assistantMsg, fullText, sources, null, pendingScreenshots, isDeep, false); return; }
                     buffer += decoder.decode(value, { stream: true });
                     const lines = buffer.split('\n'); buffer = lines.pop();
                     for (const line of lines) {
@@ -792,7 +802,7 @@ function handleSubmit(e) {
                                 }
                                 if (data.msg_count !== undefined) { msgCount = data.msg_count; maxMessages = data.max_messages || maxMessages; updateCounter(); }
                                 updateUsage();
-                                renderFinal(assistantMsg, fullText, sources, data.message_id || null, pendingScreenshots);
+                                renderFinal(assistantMsg, fullText, sources, data.message_id || null, pendingScreenshots, isDeep, !!(data.usage && data.usage.truncated));
                                 return;
                             }
                         } catch (e) {}
@@ -867,7 +877,7 @@ function linkFonteParagraphs(contentEl, sources) {
     });
 }
 
-function renderFinal(msgParts, text, sources, messageId, screenshots) {
+function renderFinal(msgParts, text, sources, messageId, screenshots, wasDeep, truncated) {
     if (text) msgParts.content.innerHTML = marked.parse(preprocessAnswer(text));
 
     // Resolve citations: [Dn] markers (primary, deterministic) + legacy "Fonte:" text (fallback)
@@ -952,9 +962,24 @@ function renderFinal(msgParts, text, sources, messageId, screenshots) {
         msgParts.body.appendChild(chipsDiv);
     }
 
-    // Show persistent "deep" banner above input (only for non-deep responses)
-    if (lastQuestion && questionEl.dataset.deep !== 'true') {
-        showDeepBanner(lastQuestion);
+    // Risposta tagliata per limite token (finish_reason="length"): avviso +
+    // "Continua" che chiede al modello di proseguire da dove si è interrotto.
+    if (truncated && text) {
+        const warn = document.createElement('div');
+        warn.className = 'truncate-warn';
+        warn.innerHTML = '<span class="truncate-warn-icon">⚠️</span>'
+            + '<span class="truncate-warn-text">Risposta interrotta per limite di lunghezza.</span>'
+            + '<button type="button" class="deep-banner-btn truncate-continue" onclick="continueTruncated(this)">Continua</button>';
+        msgParts.body.appendChild(warn);
+    }
+
+    // Banner "Approfondisci" sopra l'input (solo per risposte non-deep e non
+    // troncate — se troncata la CTA prioritaria è "Continua", non l'approfondimento).
+    // Se la risposta segnala che la documentazione non copre la domanda, il
+    // banner diventa PROMINENTE per spingere attivamente la ricerca approfondita.
+    if (lastQuestion && !wasDeep && !truncated) {
+        const notCovered = /non copre|documentazione[^.]{0,40}non (copre|contiene|riporta)|non (è|e) (coperto|trattato|presente)/i.test(text || '');
+        showDeepBanner(lastQuestion, notCovered);
     } else {
         hideDeepBanner();
     }
@@ -1006,6 +1031,16 @@ function retryLast(btn) {
         msg.remove();
     }
     questionEl.value = q;
+    handleSubmit(new Event('submit'));
+}
+
+// ── Continua una risposta troncata ──
+// La risposta tagliata è già nello storico (assistant message): chiediamo al
+// modello di proseguire. Disabilita il bottone per evitare doppi invii.
+function continueTruncated(btn) {
+    if (msgCount >= maxMessages) return;
+    btn.disabled = true;
+    questionEl.value = 'Prosegui la risposta precedente esattamente da dove si è interrotta, senza ripetere quanto già scritto.';
     handleSubmit(new Event('submit'));
 }
 
