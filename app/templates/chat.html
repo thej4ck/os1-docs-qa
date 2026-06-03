@@ -558,17 +558,12 @@ function createMsg(role) {
 }
 
 // ── Deep banner ──
-function showDeepBanner(question, prominent = false) {
+function showDeepBanner(question) {
     const banner = document.getElementById('deep-banner');
     const btn = document.getElementById('deep-banner-btn');
     const txt = banner.querySelector('.deep-banner-text');
     banner.style.display = '';
-    banner.classList.toggle('prominent', prominent);
-    if (txt) {
-        txt.textContent = prominent
-            ? 'Questa domanda richiede più contesto del solito.'
-            : 'La risposta non ti convince?';
-    }
+    if (txt) txt.textContent = 'La risposta non ti convince?';
     btn.onclick = () => {
         hideDeepBanner();
         questionEl.value = question;
@@ -577,9 +572,7 @@ function showDeepBanner(question, prominent = false) {
     };
 }
 function hideDeepBanner() {
-    const banner = document.getElementById('deep-banner');
-    banner.style.display = 'none';
-    banner.classList.remove('prominent');
+    document.getElementById('deep-banner').style.display = 'none';
 }
 
 // ── Docs panel ──
@@ -981,13 +974,23 @@ function renderFinal(msgParts, text, sources, messageId, screenshots, wasDeep, t
         msgParts.body.appendChild(warn);
     }
 
-    // Banner "Approfondisci" sopra l'input (solo per risposte non-deep e non
-    // troncate — se troncata la CTA prioritaria è "Continua", non l'approfondimento).
-    // Se la risposta segnala che la documentazione non copre la domanda, il
-    // banner diventa PROMINENTE per spingere attivamente la ricerca approfondita.
-    if (lastQuestion && !wasDeep && !truncated) {
-        const notCovered = /non copre|documentazione[^.]{0,40}non (copre|contiene|riporta)|non (è|e) (coperto|trattato|presente)/i.test(text || '');
-        showDeepBanner(lastQuestion, notCovered);
+    // CTA "Approfondisci".
+    // - Se la documentazione risulta insufficiente: riquadro EVIDENTE subito
+    //   SOTTO la risposta (inline), con testo che giustifica l'approfondimento.
+    // - Altrimenti: banner passivo sopra l'input ("La risposta non ti convince?").
+    const notCovered = !!text && /non copre|documentazione[^.]{0,40}non (copre|contiene|riporta)|non (è|e) (coperto|trattato|present|sufficient)|informazioni (insufficient|non sufficient)/i.test(text);
+    if (lastQuestion && !wasDeep && !truncated && notCovered) {
+        const box = document.createElement('div');
+        box.className = 'deep-inline';
+        box.innerHTML = '<span class="deep-inline-icon">💡</span>'
+            + '<div class="deep-inline-body">'
+            + '<div class="deep-inline-text">La documentazione disponibile potrebbe non bastare a questa domanda. È possibile chiedere un\'<strong>analisi approfondita</strong> per migliorare la risposta in caso di informazioni insufficienti.</div>'
+            + '<button type="button" class="deep-banner-btn deep-inline-btn" onclick="requestDeepAnalysis(this)">Cerca una risposta più approfondita</button>'
+            + '</div>';
+        msgParts.body.appendChild(box);
+        hideDeepBanner();
+    } else if (lastQuestion && !wasDeep && !truncated) {
+        showDeepBanner(lastQuestion);
     } else {
         hideDeepBanner();
     }
@@ -1049,6 +1052,18 @@ function continueTruncated(btn) {
     if (msgCount >= maxMessages) return;
     btn.disabled = true;
     questionEl.value = 'Prosegui la risposta precedente esattamente da dove si è interrotta, senza ripetere quanto già scritto.';
+    handleSubmit(new Event('submit'));
+}
+
+// ── Richiedi analisi approfondita (dal riquadro inline "doc insufficiente") ──
+// Ripropone la stessa domanda in modalità deep (più contesto + modello capace).
+function requestDeepAnalysis(btn) {
+    if (msgCount >= maxMessages) return;
+    const q = questionEl.dataset.lastQuestion;
+    if (!q) return;
+    btn.disabled = true;
+    questionEl.value = q;
+    questionEl.dataset.deep = 'true';
     handleSubmit(new Event('submit'));
 }
 
