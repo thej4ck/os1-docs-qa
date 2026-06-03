@@ -115,18 +115,23 @@ I chunk devono essere GRANDI (file interi). Ogni file HTML del help OS1 è già 
 
 ## Troubleshooting noto
 
-### Risposte troncate a metà frase (gpt-oss)
-**Sintomo**: la risposta si taglia mid-frase / mid-parola, anche quando è breve.
+### Risposte troncate a metà frase/parola in coda
+**Sintomo**: la risposta visibile si taglia mid-parola in fondo (es. "...assistenza tecn"), con QUALSIASI modello (gpt-oss E llama).
 
-**Diagnosi via log** — riga `[ask_stream] Stream complete ... finish=<reason> usage={...}`:
-- `finish=stop` + `completion_tokens` basso (es. 483) + `truncated=False` → **NON è il cap token**. `max_completion_tokens` è innocente: il modello termina da solo.
-- `finish=length` + `completion_tokens` ≈ cap → quello sì è limite token → alza `max_completion_tokens`.
+**CAUSA VERA ACCERTATA (giu 2026, build 66) — RACE DI RENDERING FRONTEND.** NON è Groq, NON è il modello, NON è il cap token. Provato con test Groq diretti + esecuzione di `ask_stream`:
+- Groq ritorna sempre `finish=stop` con risposta COMPLETA e chiusura pulita (mai `length`, mai mid-parola).
+- `ask_stream` (backend) restituisce testo completo, `truncated=False`.
+- Il taglio è model-agnostic → era nel frontend [app/templates/chat.html](app/templates/chat.html): `scheduleRender` faceva throttle a 60ms catturando `fullText`; un timer pendente scattava DOPO `renderFinal` e **sovrascriveva il testo completo con la cattura stale** → taglio mid-parola in coda.
 
-**Causa accertata (giu 2026, build 64)**: gpt-oss su Groq con `extra_body={"include_reasoning": False}` in [app/search/query.py](app/search/query.py) `ask_stream`. Il formato harmony di gpt-oss usa canali (analysis/final); sopprimere il reasoning fa chiudere a Groq il **canale finale prematuramente** → `finish_reason=stop` a metà risposta. Riprodotto in prod: `finish=stop`, `completion_tokens=483`, `reasoning_tokens=84`.
+**Fix (build 66)**: (1) cancella `renderTimer` prima di `renderFinal` ai due call-site; (2) `scheduleRender` renderizza sempre `fullText` live, mai una cattura.
 
-**Fix implementato (build 65)**: di default NON si invia più `include_reasoning: False`. Il reasoning arriva in un campo separato e viene scartato (yieldiamo solo `delta.content`). Toggle admin `suppress_reasoning` (Impostazioni → "Sopprimi reasoning (legacy)", default OFF) per rollback senza deploy. NON serve toccare i budget token.
+**Depistaggi scartati lungo la strada** (NON erano la causa, ma le modifiche restano valide):
+- `include_reasoning: False` su gpt-oss/harmony (build 65) → rimosso di default, allungava un po' la risposta ma il taglio mid-parola restava (anche su llama) → non era questo. Toggle admin `suppress_reasoning` (default OFF) per rollback.
+- Budget token / `max_completion_tokens` → mai raggiunto (`finish` sempre `stop`, mai `length`).
 
-**Strumenti diagnostici già in piedi**: `ask_stream` logga `finish_reason` + `reasoning_tokens`; `usage.truncated` (solo `finish==length`) è esposto alla UI con badge "Risposta interrotta" + bottone Continua.
+**Diagnosi via log** — `[ask_stream] Stream complete ... finish=<reason>`:
+- `finish=stop` + risposta visibile monca → guardare il FRONTEND (race di render), non il modello.
+- `finish=length` + `completion_tokens` ≈ cap → quello sì è limite token → alza `max_completion_tokens`. `usage.truncated` (solo `finish==length`) attiva il badge "Risposta interrotta" + Continua (raro).
 
 ### Railway CLI
 Progetto `doc-os1-ai`, env `production`, service `os1-docs-qa` (URL `https://os1.ai.scao.it`). Log: `railway logs -d --lines N`.

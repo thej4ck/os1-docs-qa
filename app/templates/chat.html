@@ -756,7 +756,7 @@ function handleSubmit(e) {
 
             function processStream() {
                 reader.read().then(({ done, value }) => {
-                    if (done) { clearInterval(thinkInterval); renderFinal(assistantMsg, fullText, sources, null, pendingScreenshots, isDeep, false); return; }
+                    if (done) { clearInterval(thinkInterval); if (renderTimer) { clearTimeout(renderTimer); renderTimer = null; } renderFinal(assistantMsg, fullText, sources, null, pendingScreenshots, isDeep, false); return; }
                     buffer += decoder.decode(value, { stream: true });
                     const lines = buffer.split('\n'); buffer = lines.pop();
                     for (const line of lines) {
@@ -785,7 +785,7 @@ function handleSubmit(e) {
                             if (data.token) {
                                 if (firstToken) { clearInterval(thinkInterval); assistantMsg.content.innerHTML = ''; firstToken = false; }
                                 fullText += data.token;
-                                scheduleRender(assistantMsg.content, fullText);
+                                scheduleRender(assistantMsg.content);
                             }
                             if (data.sources && data.sources.length > 0) { sources = data.sources; updateDocsPanel(sources); }
                             if (data.screenshots && data.screenshots.length > 0) {
@@ -802,6 +802,10 @@ function handleSubmit(e) {
                                 }
                                 if (data.msg_count !== undefined) { msgCount = data.msg_count; maxMessages = data.max_messages || maxMessages; updateCounter(); }
                                 updateUsage();
+                                // Cancella il render throttled pendente: altrimenti il suo
+                                // setTimeout scatta DOPO renderFinal e sovrascrive il testo
+                                // completo con la cattura stale → taglio mid-parola in coda.
+                                if (renderTimer) { clearTimeout(renderTimer); renderTimer = null; }
                                 renderFinal(assistantMsg, fullText, sources, data.message_id || null, pendingScreenshots, isDeep, !!(data.usage && data.usage.truncated));
                                 return;
                             }
@@ -814,9 +818,11 @@ function handleSubmit(e) {
         })
         .catch(() => { clearInterval(thinkInterval); assistantMsg.content.innerHTML = '<p>Non sono riuscita a contattare il server. Controlla la connessione e riprova.</p>' + retryButtonHtml(); enableInput(); });
 
-    function scheduleRender(el, text) {
+    function scheduleRender(el) {
+        // Renderizza sempre fullText LIVE (non una cattura): se il timer scatta
+        // in ritardo mostra comunque il testo più aggiornato, mai uno stale.
         if (renderTimer) return;
-        renderTimer = setTimeout(() => { el.innerHTML = marked.parse(preprocessAnswer(text)); renderTimer = null; }, 60);
+        renderTimer = setTimeout(() => { el.innerHTML = marked.parse(preprocessAnswer(fullText)); renderTimer = null; }, 60);
     }
     return false;
 }
@@ -964,6 +970,8 @@ function renderFinal(msgParts, text, sources, messageId, screenshots, wasDeep, t
 
     // Risposta tagliata per limite token (finish_reason="length"): avviso +
     // "Continua" che chiede al modello di proseguire da dove si è interrotto.
+    // NB: raro dopo build 65 (gpt-oss chiude con finish=stop, non length) —
+    // rete di sicurezza per tagli reali da cap, non dead UI.
     if (truncated && text) {
         const warn = document.createElement('div');
         warn.className = 'truncate-warn';

@@ -208,10 +208,12 @@ CONTEXT_PRESETS = {
     "aggressive": 30_000,
 }
 
-# Budget in PAROLE (non token). Tetto di sicurezza: anche dopo il moltiplicatore
-# deep, il contesto non deve mai saturare la context window del modello (128K
-# token). 60K parole ≈ 95-108K token, lasciando margine per system prompt,
-# history e completamento.
+# Budget in PAROLE (non token). "Approfondisci" moltiplica il budget base per
+# _DEEP_BUDGET_MULTIPLIER, poi _MAX_CONTEXT_WORDS fa da tetto di sicurezza: anche
+# dopo il moltiplicatore il contesto non deve mai saturare la context window del
+# modello (128K token). 60K parole ≈ 95-108K token, lasciando margine per system
+# prompt, history e completamento.
+_DEEP_BUDGET_MULTIPLIER = 2.5
 _MAX_CONTEXT_WORDS = 60_000
 
 
@@ -227,7 +229,7 @@ def _get_context_budget(deep: bool = False) -> int:
         pass
     budget = CONTEXT_PRESETS[preset]
     if deep:
-        return min(int(budget * 2.5), _MAX_CONTEXT_WORDS)
+        return min(int(budget * _DEEP_BUDGET_MULTIPLIER), _MAX_CONTEXT_WORDS)
     return budget
 
 
@@ -481,17 +483,12 @@ def _is_reasoning_suppressed() -> bool:
     chiudere a Groq il canale finale in anticipo → finish_reason=stop a metà
     risposta. Tenendolo OFF il reasoning arriva in un campo separato e viene
     scartato (leggiamo solo delta.content). Toggle per rollback senza deploy.
+
+    TODO: rimuovere questo toggle e il ramo include_reasoning=False una volta
+    confermata stabile la build 65 in prod (1-2 release).
     """
-    try:
-        from app.db import get_conn
-        row = get_conn().execute(
-            "SELECT value FROM app_settings WHERE key = 'suppress_reasoning'"
-        ).fetchone()
-        if row:
-            return row["value"] == "1"
-    except Exception:
-        pass
-    return False  # non sopprimere = comportamento corretto
+    from app.models.settings import get_setting
+    return get_setting("suppress_reasoning", "0") == "1"
 
 
 _logo_cache: dict[str, bool] = {}
@@ -715,9 +712,8 @@ async def ask_stream(
                 details = getattr(chunk.usage, "prompt_tokens_details", None)
                 if details:
                     cached = getattr(details, "cached_tokens", 0) or 0
-                # reasoning_tokens: chain-of-thought nascosto, fatturato DENTRO
-                # completion_tokens. Su una risposta breve troncata è il ladro di
-                # budget — lo esponiamo per diagnosticare i tagli per lunghezza.
+                # reasoning_tokens: chain-of-thought fatturato DENTRO
+                # completion_tokens. Incluso nel log usage per diagnosi (non persistito).
                 reasoning = 0
                 cdetails = getattr(chunk.usage, "completion_tokens_details", None)
                 if cdetails:
@@ -752,10 +748,10 @@ async def ask_stream(
             usage_data.update(rerank_usage)
             usage_data["cost_usd"] += rerank_usage.get("rerank_cost_usd", 0)
 
-        # Flag length-cutoff così la UI può offrire "Continua". Diagnosi: se la
-        # risposta visibile è breve ma truncated=True, confronta reasoning_tokens
-        # con completion_tokens — se il reasoning ~= il cap, è la CoT nascosta ad
-        # aver saturato il budget (abbassa l'effort o alza max_completion_tokens).
+        # True solo su finish_reason=="length" (cap token raggiunto) → la UI offre
+        # "Continua". Raro dopo build 65: gpt-oss ora chiude con finish=stop, non
+        # length. Resta come rete di sicurezza per tagli reali da cap. Diagnosi
+        # completa in CLAUDE.md → Troubleshooting.
         if usage_data is not None:
             usage_data["truncated"] = (finish_reason == "length")
 
