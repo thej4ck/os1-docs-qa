@@ -119,7 +119,7 @@ def add_domain_trial(
     pattern: str,
     *,
     company_name: str,
-    vat_number: str,
+    vat_number: str = "",
     contact_first_name: str,
     contact_last_name: str,
     contact_email: str,

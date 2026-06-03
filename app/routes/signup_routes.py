@@ -27,8 +27,6 @@ from app.models.domain import (
 router = APIRouter()
 
 _EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
-# IT-only P.IVA (11 digits). EU formats not supported yet.
-_VAT_RE = re.compile(r"^[0-9]{11}$")
 
 
 def _templates():
@@ -44,7 +42,6 @@ def _render_signup(request: Request, **ctx):
         "last_name": "",
         "email": "",
         "company_name": "",
-        "vat_number": "",
     }
     base.update(ctx)
     return _templates().TemplateResponse("signup.html", base)
@@ -68,30 +65,23 @@ async def signup_submit(
     last_name: str = Form(...),
     email: str = Form(...),
     company_name: str = Form(...),
-    vat_number: str = Form(...),
     gdpr: str = Form(""),
 ):
     first_name = first_name.strip()
     last_name = last_name.strip()
     email = email.strip().lower()
     company_name = company_name.strip()
-    vat_number = vat_number.strip()
 
     form_ctx = dict(
         first_name=first_name, last_name=last_name, email=email,
-        company_name=company_name, vat_number=vat_number,
+        company_name=company_name,
     )
 
-    if not (first_name and last_name and email and company_name and vat_number):
+    if not (first_name and last_name and email and company_name):
         return _render_signup(request, error="Compila tutti i campi.", **form_ctx)
 
     if not _EMAIL_RE.match(email):
         return _render_signup(request, error="Email non valida.", **form_ctx)
-
-    if not _VAT_RE.match(vat_number):
-        return _render_signup(
-            request, error="P.IVA non valida (11 cifre numeriche).", **form_ctx
-        )
 
     if gdpr != "on":
         return _render_signup(
@@ -140,19 +130,17 @@ async def signup_verify(
     last_name: str = Form(...),
     email: str = Form(...),
     company_name: str = Form(...),
-    vat_number: str = Form(...),
     code: str = Form(...),
 ):
     first_name = first_name.strip()
     last_name = last_name.strip()
     email = email.strip().lower()
     company_name = company_name.strip()
-    vat_number = vat_number.strip()
     code = code.strip()
 
     form_ctx = dict(
         first_name=first_name, last_name=last_name, email=email,
-        company_name=company_name, vat_number=vat_number,
+        company_name=company_name,
     )
 
     wait = verify_cooldown_remaining(email)
@@ -181,7 +169,6 @@ async def signup_verify(
     domain_id = add_domain_trial(
         pattern=pattern,
         company_name=company_name,
-        vat_number=vat_number,
         contact_first_name=first_name,
         contact_last_name=last_name,
         contact_email=email,

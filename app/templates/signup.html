@@ -40,18 +40,10 @@
                 <div class="form-hint">Non sono ammesse email personali (gmail, yahoo, hotmail, outlook, libero, ...). Tutti i colleghi con lo stesso dominio potranno accedere.</div>
             </div>
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="company_name">Ragione sociale</label>
-                    <input type="text" id="company_name" name="company_name" class="form-input"
-                           value="{{ company_name }}" required>
-                </div>
-                <div class="form-group">
-                    <label for="vat_number">P.IVA</label>
-                    <input type="text" id="vat_number" name="vat_number" class="form-input"
-                           value="{{ vat_number }}" pattern="[0-9]{11}" maxlength="11"
-                           placeholder="11 cifre" required>
-                </div>
+            <div class="form-group">
+                <label for="company_name">Ragione sociale</label>
+                <input type="text" id="company_name" name="company_name" class="form-input"
+                       value="{{ company_name }}" required>
             </div>
 
             <label class="form-checkbox">
