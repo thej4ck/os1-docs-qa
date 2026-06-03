@@ -2,12 +2,14 @@
 
 import asyncio
 import logging
+import re
 from collections.abc import AsyncIterator
+from math import log
 
 from openai import AsyncOpenAI
 
 from app.config import settings
-from app.search.fts import SearchIndex
+from app.search.fts import SearchIndex, ITALIAN_STOPWORDS
 
 # ── Prompt a due livelli ──
 # CORE = solo grounding (condiviso, invariante). NON deve contenere regole di
@@ -544,6 +546,129 @@ def build_context(docs: list[dict]) -> str:
     return ctx
 
 
+# ── Citation remap (fix misattribuzione [Dn] dell'LLM) ──
+# Con molti chunk in contesto (modalità deep) il modello aggancia il fatto giusto
+# ma può sbagliare l'indice [Dn], puntando a un documento che non regge la frase.
+# Correzione deterministica: overlap lessicale IDF-pesato (unigrammi + bigrammi)
+# tra la frase citata e il contenuto dei chunk. I bigrammi sono il segnale chiave:
+# il bigramma "quantità secondaria" distingue il doc giusto da uno che parla solo
+# di "quantità" generica. L'IDF abbatte i termini comuni ("magazzino"); il peso
+# extra sui bigrammi premia la presenza della frase esatta.
+_CITE_MARKER_RE = re.compile(r"[\[【]\s*D\s*(\d+)\s*[\]】]")
+# Confini di "frase/cella" per isolare l'affermazione attorno al marcatore.
+_CLAIM_BOUND_RE = re.compile(r"[.\n!?;:|]")
+# Soglia: rimappa solo se il chunk citato ha < RATIO del supporto-bigrammi del
+# best (validato su dati reali: bug ~0.23-0.29, citazione corretta ~1.0).
+_REMAP_RATIO = 0.40
+
+
+def _features(text: str) -> tuple[set[str], set[tuple[str, str]]]:
+    """(unigrammi, bigrammi) significativi: token ≥4 char, no stopword."""
+    toks = [
+        w for w in re.split(r"\W+", text.lower(), flags=re.UNICODE)
+        if len(w) >= 4 and w not in ITALIAN_STOPWORDS
+    ]
+    return set(toks), set(zip(toks, toks[1:]))
+
+
+def _claim_around(text: str, pos: int) -> str:
+    """Estrae la porzione di testo (frase o cella tabella) attorno a `pos`."""
+    left = 0
+    for m in _CLAIM_BOUND_RE.finditer(text, 0, pos):
+        left = m.end()
+    rm = _CLAIM_BOUND_RE.search(text, pos)
+    right = rm.start() if rm else len(text)
+    return text[left:right]
+
+
+def remap_citations(text: str, docs: list[dict]) -> tuple[str, dict]:
+    """Corregge le citazioni [Dn] mal attribuite dall'LLM.
+
+    Se [Dn] cita un chunk che NON contiene la frase distintiva dell'affermazione
+    (es. il bigramma "quantità secondaria") mentre un altro file la contiene,
+    riscrive [Dn] → [Dm]. Conservativo: rimappa solo se il best condivide ≥2
+    bigrammi e ≥2 unigrammi col claim, sta in un FILE diverso dal citato, e il
+    citato ha < _REMAP_RATIO del supporto-bigrammi del best. Così le citazioni
+    corrette (anche parafrasate) e gli scambi tra sezioni dello stesso PDF
+    restano intatti.
+
+    Ritorna (testo eventualmente riscritto, {n_originale: n_nuovo} per il log).
+    """
+    if not text or len(docs) < 2:
+        return text, {}
+    feats = [_features(d.get("content", "")) for d in docs]
+    # Fonte base (senza #sezione-N) per ogni doc: il remap si fa solo TRA file
+    # diversi. Citare la sezione sbagliata dello stesso PDF è minore (l'utente apre
+    # comunque il documento giusto); puntare a un file del tutto diverso è il bug.
+    bases = [
+        (d.get("source_file") or "").split("#")[0].replace("\\", "/").lower()
+        for d in docs
+    ]
+    n_docs = len(feats)
+
+    dfu: dict[str, int] = {}
+    dfb: dict[tuple[str, str], int] = {}
+    for uni, bi in feats:
+        for x in uni:
+            dfu[x] = dfu.get(x, 0) + 1
+        for x in bi:
+            dfb[x] = dfb.get(x, 0) + 1
+
+    def _idf(df: dict, x) -> float:  # raro → alto
+        return log(1.0 + n_docs / (1 + df.get(x, 0)))
+
+    # Decisione guidata dai BIGRAMMI: il doc citato sbagliato è spesso topicamente
+    # adiacente (condivide "magazzino", "quantità", "nota") ma NON la frase esatta
+    # ("quantità secondaria"). Lo score sui soli bigrammi isola questo segnale;
+    # gli unigrammi servono solo come grounding di topic del best.
+    def bscore(cb: set, idx: int) -> float:
+        return sum(_idf(dfb, x) for x in cb & feats[idx][1])
+
+    def uscore(cu: set, idx: int) -> float:
+        return sum(_idf(dfu, x) for x in cu & feats[idx][0])
+
+    # Aggrega il contesto di TUTTE le occorrenze di ogni [Dn]: lo stesso numero
+    # può comparire con frase ricca (es. "...quantità secondaria... [D2]") e come
+    # codice nudo nella tabella riferimenti (| 2 | ... |, isolato dai '|'). La
+    # decisione di remap si prende una volta per numero e si applica a tutte le
+    # occorrenze → niente incoerenze tra le citazioni.
+    claims: dict[int, tuple[set, set]] = {}
+    for m in _CITE_MARKER_RE.finditer(text):
+        n = int(m.group(1))
+        cu, cb = _features(_claim_around(text, m.start()))
+        u, b = claims.get(n, (set(), set()))
+        claims[n] = (u | cu, b | cb)
+
+    remap: dict[int, int] = {}
+    for n, (cu, cb) in claims.items():
+        idx = n - 1
+        if not (0 <= idx < n_docs) or len(cu) < 2:
+            continue
+        sb = [bscore(cb, i) for i in range(n_docs)]
+        best = max(range(n_docs), key=lambda i: (sb[i], uscore(cu, i)))
+        if best == idx or sb[best] <= 0:
+            continue
+        # Solo cross-documento: niente churn tra sezioni dello stesso file.
+        if bases[best] and bases[best] == bases[idx]:
+            continue
+        # Evidenza forte sul best: ≥2 bigrammi (frase) e ≥2 unigrammi (topic) in
+        # comune col claim → niente remap su segnale debole/casuale.
+        if len(cb & feats[best][1]) < 2 or len(cu & feats[best][0]) < 2:
+            continue
+        if sb[idx] < _REMAP_RATIO * sb[best]:
+            remap[n] = best + 1
+
+    if not remap:
+        return text, {}
+
+    corrected = _CITE_MARKER_RE.sub(
+        lambda m: f"[D{remap[int(m.group(1))]}]"
+        if int(m.group(1)) in remap else m.group(0),
+        text,
+    )
+    return corrected, {str(k): v for k, v in remap.items()}
+
+
 def _get_model(deep: bool = False) -> tuple[str, str | None]:
     """Get model name and optional reasoning_effort from app_settings.
 
@@ -704,6 +829,7 @@ async def ask_stream(
 
         first = True
         finish_reason = None
+        answer_parts: list[str] = []
         async for chunk in stream:
             # Capture usage from the final chunk
             if hasattr(chunk, "usage") and chunk.usage is not None:
@@ -736,6 +862,7 @@ async def ask_stream(
                 finish_reason = chunk.choices[0].finish_reason
             delta = chunk.choices[0].delta if chunk.choices else None
             if delta and delta.content:
+                answer_parts.append(delta.content)
                 if first:
                     print(f"[ask_stream] First token at {_time.monotonic()-_t0:.1f}s", flush=True)
                     yield delta.content, sources, {"screenshots": screenshots}
@@ -755,8 +882,20 @@ async def ask_stream(
         if usage_data is not None:
             usage_data["truncated"] = (finish_reason == "length")
 
-        # Final yield with usage data
+        # Citation remap: corregge i marcatori [Dn] mal attribuiti dall'LLM
+        # confrontando ogni frase citata col contenuto dei chunk recuperati.
+        # `corrected_answer` (testo riscritto) viaggia nel meta finale; chat_routes
+        # lo usa per salvataggio + evento done, poi lo rimuove da `usage`.
+        answer = "".join(answer_parts)
+        corrected, cite_remap = remap_citations(answer, docs)
+        if usage_data is not None and cite_remap:
+            usage_data["citation_remap"] = cite_remap
+            print(f"[ask_stream] citation remap applied: {cite_remap}", flush=True)
+
+        # Final yield with usage data (log compatto: corrected_answer escluso)
         print(f"[ask_stream] Stream complete at {_time.monotonic()-_t0:.1f}s finish={finish_reason} usage={usage_data}", flush=True)
+        if usage_data is not None and cite_remap and corrected != answer:
+            usage_data["corrected_answer"] = corrected
         yield "", [], usage_data
 
     except Exception as e:

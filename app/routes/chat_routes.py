@@ -302,8 +302,11 @@ async def ask(
                 src_data["screenshots"] = screenshots
             yield {"data": json.dumps(src_data)}
 
-        # Save assistant message with usage
-        assistant_text = "".join(full_response)
+        # Save assistant message with usage.
+        # corrected_answer (citazioni [Dn] rimappate) sostituisce il testo grezzo
+        # se presente. pop(): evita di rispedirlo dentro done_data["usage"].
+        corrected_answer = usage_data.pop("corrected_answer", None) if usage_data else None
+        assistant_text = corrected_answer if corrected_answer else "".join(full_response)
         msg_id = None
         if assistant_text:
             msg_id = add_message(
@@ -332,6 +335,10 @@ async def ask(
             done_data["message_id"] = msg_id
         if usage_data:
             done_data["usage"] = usage_data
+        # Testo con citazioni rimappate: il frontend ri-renderizza con questo per
+        # allineare i chip [Dn] al documento corretto anche nella vista live.
+        if corrected_answer:
+            done_data["corrected_text"] = corrected_answer
         yield {"data": json.dumps(done_data)}
 
     return EventSourceResponse(event_generator())

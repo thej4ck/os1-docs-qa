@@ -799,6 +799,9 @@ function handleSubmit(e) {
                                 // setTimeout scatta DOPO renderFinal e sovrascrive il testo
                                 // completo con la cattura stale → taglio mid-parola in coda.
                                 if (renderTimer) { clearTimeout(renderTimer); renderTimer = null; }
+                                // Citazioni [Dn] rimappate lato server: ri-renderizza
+                                // dal testo corretto così i chip puntano al doc giusto.
+                                if (data.corrected_text) fullText = data.corrected_text;
                                 renderFinal(assistantMsg, fullText, sources, data.message_id || null, pendingScreenshots, isDeep, !!(data.usage && data.usage.truncated));
                                 return;
                             }
