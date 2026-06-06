@@ -2,11 +2,6 @@
 
 import json
 import re
-import time
-from collections import defaultdict
-from datetime import datetime
-
-import resend
 
 from fastapi import APIRouter, BackgroundTasks, Request, Form, Query
 from fastapi.responses import HTMLResponse, JSONResponse, PlainTextResponse, RedirectResponse, Response
@@ -27,7 +22,6 @@ from app.models.domain import get_domain_for_email, get_trial_banner_info
 from app.models.share import create_share
 from app.auth.email_sender import send_email, get_trial_duration_days
 from app.auth.email_templates import share_answer
-from app.util.email_md import md_to_html as _md_to_html, escape_html as _escape
 from app.util.ratelimit import allow
 from app.util.validation import EMAIL_RE
 from app.search import query as query_module
@@ -590,155 +584,6 @@ async def get_announcement(request: Request):
     if row and row["value"]:
         return JSONResponse({"text": row["value"]})
     return Response(status_code=204)
-
-
-# ── Email chat ──
-
-EMAIL_RATE_LIMIT_MAX = 3
-_email_rate_limits: dict[str, list[float]] = defaultdict(list)
-
-
-def _check_email_rate_limit(email: str) -> bool:
-    now = time.time()
-    timestamps = _email_rate_limits[email]
-    _email_rate_limits[email] = [t for t in timestamps if now - t < RATE_LIMIT_WINDOW]
-    if len(_email_rate_limits[email]) >= EMAIL_RATE_LIMIT_MAX:
-        return False
-    _email_rate_limits[email].append(now)
-    return True
-
-
-def _get_sender() -> str:
-    """Get email sender from app_settings or default."""
-    name = "OS1 AI Docs"
-    email_addr = "noreply@ai.scao.it"
-    try:
-        from app.db import get_conn
-        conn = get_conn()
-        row = conn.execute("SELECT value FROM app_settings WHERE key = 'otp_sender_name'").fetchone()
-        if row and row["value"]:
-            name = row["value"]
-        row = conn.execute("SELECT value FROM app_settings WHERE key = 'otp_sender_email'").fetchone()
-        if row and row["value"]:
-            email_addr = row["value"]
-    except Exception:
-        pass
-    return f"{name} <{email_addr}>"
-
-
-def _build_email_html(conv: dict, messages: list[dict], user_email: str) -> str:
-    """Build a professional HTML email for the conversation."""
-    base_url = settings.base_url.rstrip("/") if settings.base_url else "https://os1docs.ai.scao.it"
-    logo_url = f"{base_url}/static/img/logo.png"
-    title = conv.get("title") or "Conversazione"
-    conv_date = conv.get("created_at", "")[:10] if conv.get("created_at") else ""
-
-    # Build message blocks
-    msg_blocks = []
-    for m in messages:
-        if m["role"] == "user":
-            msg_blocks.append(f'''
-            <div style="margin-bottom:16px;">
-                <div style="font-size:12px;font-weight:600;color:#6B7280;margin-bottom:4px;">Tu</div>
-                <div style="background:#E2231A;color:#ffffff;padding:12px 16px;border-radius:10px;border-bottom-right-radius:4px;font-size:15px;line-height:1.6;">
-                    {_escape(m["content"])}
-                </div>
-            </div>''')
-        else:
-            html_content = _md_to_html(m["content"], base_url)
-            msg_blocks.append(f'''
-            <div style="margin-bottom:16px;">
-                <div style="font-size:12px;font-weight:600;color:#6B7280;margin-bottom:4px;">OS1 AI Docs</div>
-                <div style="background:#FFFFFF;border:1px solid #E5E7EB;padding:12px 16px;border-radius:10px;border-bottom-left-radius:4px;font-size:15px;line-height:1.65;color:#2D2D2D;">
-                    {html_content}
-                </div>
-            </div>''')
-
-    messages_html = "\n".join(msg_blocks)
-    now = datetime.now().strftime("%d/%m/%Y alle %H:%M")
-
-    return f'''<!DOCTYPE html>
-<html lang="it">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#F7F8FA;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;">
-<div style="max-width:640px;margin:0 auto;padding:24px 16px;">
-
-    <!-- Header -->
-    <div style="text-align:center;padding:24px 0 16px;">
-        <img src="{logo_url}" alt="SCAO" style="height:24px;width:auto;margin:0 auto 12px;display:block;">
-        <div style="font-size:20px;font-weight:700;color:#2D2D2D;letter-spacing:-0.02em;">OS1 AI Docs</div>
-        <div style="font-size:13px;color:#6B7280;margin-top:2px;">SCAO Informatica &mdash; Assistente documentazione OS1</div>
-    </div>
-    <div style="height:3px;background:#E2231A;border-radius:2px;margin-bottom:20px;"></div>
-
-    <!-- Conversation title -->
-    <div style="margin-bottom:16px;">
-        <div style="font-size:16px;font-weight:600;color:#2D2D2D;">{_escape(title)}</div>
-        <div style="font-size:12px;color:#9CA3AF;margin-top:2px;">{conv_date}</div>
-    </div>
-
-    <!-- AI Disclaimer -->
-    <div style="background:#F0F2F5;border:1px solid #E5E7EB;border-radius:8px;padding:12px 16px;margin-bottom:20px;font-size:12px;line-height:1.5;color:#6B7280;">
-        Questo contenuto è stato generato da <strong style="color:#2D2D2D;">OS1 AI Docs</strong>, un assistente basato su intelligenza artificiale per la documentazione del gestionale OS1. Le informazioni fornite sono indicative e potrebbero non essere completamente accurate. Si consiglia di verificare sempre i dati con la documentazione ufficiale.
-    </div>
-
-    <!-- Messages -->
-    {messages_html}
-
-    <!-- Footer -->
-    <div style="border-top:1px solid #E5E7EB;margin-top:24px;padding-top:16px;text-align:center;">
-        <div style="font-size:13px;font-weight:600;color:#2D2D2D;">OS1 AI Docs &mdash; SCAO Informatica</div>
-        <div style="font-size:12px;color:#9CA3AF;margin-top:4px;">Inviato il {now}</div>
-        <div style="font-size:12px;color:#9CA3AF;margin-top:2px;">
-            <a href="{base_url}/login" style="color:#E2231A;text-decoration:none;">Accedi a OS1 AI Docs</a>
-        </div>
-        <div style="font-size:11px;color:#9CA3AF;margin-top:8px;">
-            Questa email è stata inviata su richiesta di {_escape(user_email)}
-        </div>
-    </div>
-
-</div>
-</body>
-</html>'''
-
-
-@router.post("/api/conversations/{conv_id}/email")
-async def email_conversation(request: Request, conv_id: str):
-    user = _get_user(request)
-    if not user:
-        return JSONResponse({"error": "Non autenticato."}, status_code=401)
-
-    if not _check_email_rate_limit(user["email"]):
-        return JSONResponse({"error": "Troppe richieste. Attendi un minuto."}, status_code=429)
-
-    conv = get_conversation(conv_id, user["id"])
-    if not conv:
-        return JSONResponse({"error": "Conversazione non trovata."}, status_code=404)
-
-    messages = get_messages(conv_id)
-    if not messages:
-        return JSONResponse({"error": "Nessun messaggio da inviare."}, status_code=400)
-
-    html = _build_email_html(conv, messages, user["email"])
-    title = conv.get("title") or "Conversazione"
-
-    if not settings.resend_api_key:
-        print(f"[DEV MODE] Email chat per {user['email']}: {title}", flush=True)
-        return JSONResponse({"ok": True, "dev": True})
-
-    resend.api_key = settings.resend_api_key
-    try:
-        resend.Emails.send({
-            "from": _get_sender(),
-            "to": [user["email"]],
-            "subject": f"Chat {PRODUCT_NAME}: {title}",
-            "html": html,
-        })
-    except Exception as e:
-        print(f"Failed to send chat email: {e}", flush=True)
-        return JSONResponse({"error": "Errore nell'invio dell'email."}, status_code=500)
-
-    return JSONResponse({"ok": True})
 
 
 # ── Share a single answer with an external recipient ──

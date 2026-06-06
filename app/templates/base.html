@@ -1252,7 +1252,17 @@
             }
             .msg { max-width: 100% !important; page-break-inside: avoid; }
             .msg-assistant .msg-content { border: none !important; box-shadow: none !important; }
+            .msg-avatar { display: none !important; }
             body { background: #fff !important; }
+            /* Tipografia stampa: corpo 12px, interlinea leggibile (non enorme) */
+            .chat-messages, .msg, .msg-content,
+            .msg-content p, .msg-content li, .msg-content td, .msg-content th {
+                font-size: 12px !important; line-height: 1.5 !important;
+            }
+            .msg-content h1 { font-size: 16px !important; line-height: 1.3 !important; }
+            .msg-content h2 { font-size: 14px !important; line-height: 1.3 !important; }
+            .msg-content h3, .msg-content h4 { font-size: 13px !important; line-height: 1.35 !important; }
+            .msg-content pre, .msg-content code { font-size: 11px !important; line-height: 1.45 !important; }
         }
 
         .sr-only {
