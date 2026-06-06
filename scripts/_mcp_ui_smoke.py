@@ -40,4 +40,12 @@ with TestClient(app) as client:
     c = client.get("/chat")
     check("button hidden when off", "mcp-connect-btn" not in c.text)
 
+    print("Self-revoke (/api/mcp/revoke-mine):")
+    from app.models import oauth as ost
+    ost.store_token("uitok-access", "access", "cid-test", "admin@aiwonder.it", ["docs:read"], None)
+    check("token active before", ost.active_count_for_subject("admin@aiwonder.it") >= 1)
+    rr = client.post("/api/mcp/revoke-mine")
+    check("endpoint 200 + revoked>=1", rr.status_code == 200 and rr.json().get("revoked", 0) >= 1)
+    check("none active after", ost.active_count_for_subject("admin@aiwonder.it") == 0)
+
 print("M-UI OK")
