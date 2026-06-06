@@ -15,6 +15,7 @@ from app import db as app_db
 
 from fastmcp.utilities.lifespan import combine_lifespans
 from app.mcp.server import build_mcp
+from app.mcp.auth import build_mcp_auth
 
 
 @asynccontextmanager
@@ -50,7 +51,7 @@ async def lifespan(app: FastAPI):
 
 # MCP server (retrieval-only). http_app(path="/") mounted under /mcp; its
 # session-manager lifespan is combined with the app lifespan so it initializes.
-mcp = build_mcp(auth=None)
+mcp = build_mcp(auth=build_mcp_auth())  # None se MCP_AUTH_ENABLED=false (no-auth, dev)
 mcp_app = mcp.http_app(path="/")
 
 app = FastAPI(title="OS1 Docs Q&A", lifespan=combine_lifespans(lifespan, mcp_app.lifespan))

@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     docs_repo_path: str = "../os1-documentation/Claude Code Playground"
     static_model_path: str = "searchdata/static_model"  # distilled model2vec dir (semantic search)
     hybrid_enabled: bool = True        # BM25 + semantic fusion; False = BM25-only fallback
+    mcp_auth_enabled: bool = False     # True = /mcp richiede Bearer = access_token utente (M2, gate dev/CLI). claude.ai/ChatGPT richiedono OAuth (M3)
     # Pricing is now driven dynamically by ALLOWED_MODELS in app/search/query.py
 
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8"}

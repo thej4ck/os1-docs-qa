@@ -87,7 +87,8 @@ senza doppio-init). Espone **solo retrieval** (costo Groq zero), schema canonico
 - `search(query)` → `{"results":[{id,title,url}]}` — riusa `query.mcp_search()` (= `_hybrid_candidates`, **NO LLM/budget/rerank a pagamento**).
 - `fetch(id)` → `{id,title,text,url,metadata}` — `query.mcp_fetch()` → `SearchIndex.get_document()` (match slash-tolerant come `/api/doc`). `id` = `source_file`.
 - `app/mcp/tools.py` `_doc_url()` usa `settings.base_url` per URL citabili.
-- **Auth (roadmap)**: M1 **no-auth** (solo Inspector/dev — NON per prod) → M2 bearer `StaticTokenVerifier`/`access_token` (solo Claude Code/API) → M3 **OAuth 2.1 AS autonomo** che riusa l'OTP. NB: claude.ai + ChatGPT richiedono OAuth+PKCE; static bearer NON accettato nelle UI connettori. IdP esterni esclusi (prodotto venduto apertamente → IdP non prevedibile).
+- **Auth**: flag `MCP_AUTH_ENABLED` (env, default `false`). OFF = `/mcp` **no-auth** (solo dev/Inspector — NON per prod). ON = **Bearer = `access_token` utente** via `OS1TokenVerifier` ([app/mcp/auth.py](app/mcp/auth.py)) → mappa a utente OS1; copre Claude **Code** (`--header`), Messages API, Inspector. NB: le UI connettori di **claude.ai + ChatGPT** richiedono **OAuth 2.1 + PKCE** (static bearer NON accettato) → **M3**: AS autonomo che riusa l'OTP (IdP esterni esclusi: prodotto venduto apertamente → IdP non prevedibile).
+- **Endpoint**: reale `/mcp/`; `/mcp` fa 307→`/mcp/` (i client conformi httpx/Claude/ChatGPT preservano l'auth same-origin).
 - **Dep**: `fastmcp>=3.4,<4` (pulls mcp/authlib/cryptography/pyjwt). **`starlette` portato a `>=1.0.1`** (richiesto da fastmcp 3.4.1+; chiude anche **CVE-2026-48710**). `fastapi` resta `0.135.1`.
 
 ### Retrieval ibrido (`app/search/`)
