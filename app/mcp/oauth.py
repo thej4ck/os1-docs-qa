@@ -25,11 +25,12 @@ from mcp.server.auth.settings import ClientRegistrationOptions, RevocationOption
 from mcp.shared.auth import OAuthClientInformationFull, OAuthToken
 
 from app.config import settings
+from app.mcp import MCP_SCOPES as SCOPES
+from app.mcp.auth import gate_token_by_domain
 from app.models import oauth as store
 
 ACCESS_TTL = 3600              # 1h
 REFRESH_TTL = 30 * 24 * 3600   # 30d
-SCOPES = ["docs:read"]
 LOGIN_PATH = "/mcp-login"      # root-level (the /mcp mount would shadow /mcp/login)
 
 
@@ -122,13 +123,7 @@ class OS1OAuthProvider(OAuthProvider):
         )
 
     async def verify_token(self, token: str) -> AccessToken | None:
-        at = await self.load_access_token(token)
-        if at is None:
-            return None
-        from app.models.domain import is_mcp_enabled_for_email
-        if at.subject and not is_mcp_enabled_for_email(at.subject):
-            return None  # MCP disabilitato per il dominio
-        return at
+        return gate_token_by_domain(await self.load_access_token(token))
 
     async def revoke_token(self, token) -> None:
         store.revoke_token(token.token)

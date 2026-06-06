@@ -16,7 +16,20 @@ a valid token whose user-domain has MCP disabled is rejected.
 from fastmcp.server.auth import AccessToken, TokenVerifier
 
 from app.config import settings
+from app.mcp import MCP_SCOPES
 from app.models.user import get_user_by_access_token
+
+
+def gate_token_by_domain(at: AccessToken | None) -> AccessToken | None:
+    """Single enforcement point for the per-domain MCP gate (bearer + oauth).
+
+    Rejects a resolved token whose user-domain has MCP disabled. The email is
+    `subject` (oauth) or `client_id` (bearer)."""
+    if at is None:
+        return None
+    from app.models.domain import is_mcp_enabled_for_email
+    email = at.subject or at.client_id
+    return at if (email and is_mcp_enabled_for_email(email)) else None
 
 
 class OS1TokenVerifier(TokenVerifier):
@@ -26,13 +39,8 @@ class OS1TokenVerifier(TokenVerifier):
         user = get_user_by_access_token(token)
         if not user:
             return None
-        from app.models.domain import is_mcp_enabled_for_email
-        if not is_mcp_enabled_for_email(user["email"]):
-            return None  # MCP disabilitato per il dominio
-        return AccessToken(
-            token=token,
-            client_id=user["email"],
-            scopes=["docs:read"],
+        return gate_token_by_domain(
+            AccessToken(token=token, client_id=user["email"], scopes=MCP_SCOPES)
         )
 
 
