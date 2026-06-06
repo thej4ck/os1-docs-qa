@@ -37,7 +37,14 @@ async def login_page(request: Request):
     email = get_session_email(request)
     if email:
         return RedirectResponse(url="/chat", status_code=302)
-    return _templates().TemplateResponse(request, "login.html", {"request": request, "error": None})
+    from app.config import settings as _cfg
+    from app.models.settings import get_bool_setting
+    _base = _cfg.base_url.rstrip("/") if _cfg.base_url else str(request.base_url).rstrip("/")
+    return _templates().TemplateResponse(request, "login.html", {
+        "request": request, "error": None,
+        "mcp_enabled": get_bool_setting("mcp_enabled", _cfg.production),
+        "mcp_url": f"{_base}/mcp",
+    })
 
 
 @router.post("/login", response_class=HTMLResponse)
