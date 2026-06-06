@@ -30,7 +30,13 @@ class OS1TokenVerifier(TokenVerifier):
 
 
 def build_mcp_auth():
-    """Return the MCP auth provider for the current config, or None (no-auth)."""
-    if not settings.mcp_auth_enabled:
-        return None
-    return OS1TokenVerifier(base_url=settings.base_url or None)
+    """Return the MCP auth provider for the current config, or None (no-auth).
+
+    Priority: OAuth 2.1 (M3, claude.ai/ChatGPT) > static bearer (M2, dev/CLI) > none.
+    """
+    if settings.mcp_oauth_enabled:
+        from app.mcp.oauth import build_oauth_provider
+        return build_oauth_provider()
+    if settings.mcp_auth_enabled:
+        return OS1TokenVerifier(base_url=settings.base_url or None)
+    return None

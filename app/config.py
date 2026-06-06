@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     static_model_path: str = "searchdata/static_model"  # distilled model2vec dir (semantic search)
     hybrid_enabled: bool = True        # BM25 + semantic fusion; False = BM25-only fallback
     mcp_auth_enabled: bool = False     # True = /mcp richiede Bearer = access_token utente (M2, gate dev/CLI). claude.ai/ChatGPT richiedono OAuth (M3)
+    mcp_oauth_enabled: bool = False    # True = /mcp protetto da OAuth 2.1 AS autonomo (M3, claude.ai/ChatGPT). Ha priorità su mcp_auth_enabled
     # Pricing is now driven dynamically by ALLOWED_MODELS in app/search/query.py
 
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8"}

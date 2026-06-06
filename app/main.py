@@ -51,11 +51,19 @@ async def lifespan(app: FastAPI):
 
 # MCP server (retrieval-only). http_app(path="/") mounted under /mcp; its
 # session-manager lifespan is combined with the app lifespan so it initializes.
-mcp = build_mcp(auth=build_mcp_auth())  # None se MCP_AUTH_ENABLED=false (no-auth, dev)
+mcp_auth = build_mcp_auth()  # OAuth provider (M3) | bearer verifier (M2) | None (dev)
+mcp = build_mcp(auth=mcp_auth)
 mcp_app = mcp.http_app(path="/")
 
 app = FastAPI(title="OS1 Docs Q&A", lifespan=combine_lifespans(lifespan, mcp_app.lifespan))
 app.mount("/mcp", mcp_app)  # Streamable HTTP endpoint at /mcp
+
+# OAuth discovery (.well-known) must live at the DOMAIN ROOT (RFC 8414/9728);
+# the /mcp mount can't host it. Mount the provider's well-known routes at root.
+from fastmcp.server.auth import OAuthProvider as _OAuthProvider  # noqa: E402
+if isinstance(mcp_auth, _OAuthProvider):
+    for _wk in mcp_auth.get_well_known_routes():
+        app.router.routes.insert(0, _wk)
 
 # Static files
 static_dir = Path(__file__).parent.parent / "static"
@@ -79,11 +87,13 @@ from app.routes.chat_routes import router as chat_router
 from app.routes.auth_routes import router as auth_router
 from app.routes.admin_routes import router as admin_router
 from app.routes.signup_routes import router as signup_router
+from app.routes.mcp_auth_routes import router as mcp_auth_router
 
 app.include_router(auth_router)
 app.include_router(signup_router)
 app.include_router(chat_router)
 app.include_router(admin_router)
+app.include_router(mcp_auth_router)
 
 
 @app.get("/healthz")

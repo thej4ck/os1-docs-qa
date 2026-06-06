@@ -1,9 +1,9 @@
 fastapi==0.135.1
-starlette>=1.0.1    # floor sicurezza: CVE-2026-48710 (Host header → path poisoning) affligge <=1.0.0. Non exact-pin: best practice FastAPI è lasciar gestire starlette a fastapi
+starlette>=1.0.1,<2   # Starlette 1.x (migrazione su main, build 75). Chiude CVE-2026-48710
 uvicorn[standard]>=0.30
 jinja2==3.1.6
 sse-starlette>=2.0
-fastmcp>=3.4,<4   # MCP server (retrieval-only). Richiede starlette>=1.0.1. Pulls mcp, authlib, cryptography, pyjwt
+fastmcp>=3.4,<4   # MCP server (retrieval-only). Con starlette 1.x ok 3.4.2. Pulls mcp, authlib, cryptography, pyjwt
 python-multipart>=0.0.9
 openai>=1.40
 itsdangerous>=2.2
