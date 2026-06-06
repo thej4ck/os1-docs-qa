@@ -93,6 +93,7 @@ senza doppio-init). Espone **solo retrieval** (costo Groq zero), schema canonico
   - `MCP_AUTH_ENABLED` (default `false`) → **Bearer = `access_token` utente** via `OS1TokenVerifier` → mappa a utente OS1. Solo dev/CLI: Claude **Code** (`--header`), Messages API, Inspector. NON le UI connettori.
   - `off` → `/mcp` **no-auth** (solo dev/Inspector — NON per prod).
 - **Master switch (LIVE)**: setting `mcp_enabled` (admin `/admin/mcp`) → middleware ASGI `_MCPMasterGate` ([main.py](app/main.py)) fa rispondere **503** a `/mcp*`+`/mcp-login` se off. Effetto **immediato (no riavvio)**. Default **on in prod** (senza env), off in dev.
+- **Rate-limit per-IP** (stesso `_MCPMasterGate`, → 429): DCR `/mcp/register` 10/h, `/mcp-login` 20/min, tool/`authorize`/`token` 120/min. Sliding-window in `app/util/ratelimit.py` (`allow(key, max, window)`), condiviso anche da `/api/ask` ([chat_routes.py](app/routes/chat_routes.py)). In-memory single-process.
 - **Gate per-dominio**: `allowed_domains.mcp_enabled` (toggle in `/admin/domains`) → `is_mcp_enabled_for_email` ([models/domain.py](app/models/domain.py)) nega l'auth (verify_token + `/mcp-login`) agli utenti di un dominio con MCP off.
 - **Admin** `/admin/mcp`: stato/endpoint, master, modalità auth, lista **client OAuth** (revoca) e **token attivi** (revoca). Modello `app/models/oauth.py`.
 - **Endpoint**: reale `/mcp/`; `/mcp` fa 307→`/mcp/` (i client conformi httpx/Claude/ChatGPT preservano l'auth same-origin).

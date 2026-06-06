@@ -33,19 +33,12 @@ router = APIRouter()
 MAX_LLM_HISTORY = 10  # messages sent to LLM for context
 RATE_LIMIT_WINDOW = 60  # seconds
 RATE_LIMIT_MAX = 10  # max requests per window
-_rate_limits: dict[str, list[float]] = defaultdict(list)
 
 
 def _check_rate_limit(email: str) -> bool:
     """Returns True if request is allowed, False if rate limited."""
-    now = time.time()
-    timestamps = _rate_limits[email]
-    # Purge old entries
-    _rate_limits[email] = [t for t in timestamps if now - t < RATE_LIMIT_WINDOW]
-    if len(_rate_limits[email]) >= RATE_LIMIT_MAX:
-        return False
-    _rate_limits[email].append(now)
-    return True
+    from app.util.ratelimit import allow
+    return allow(f"ask:{email}", RATE_LIMIT_MAX, RATE_LIMIT_WINDOW)
 
 
 def _sse_error(message: str, **extra) -> EventSourceResponse:

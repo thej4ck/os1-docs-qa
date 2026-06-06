@@ -49,10 +49,21 @@ async def lifespan(app: FastAPI):
     index.close()
 
 
+def _client_ip(scope) -> str:
+    for k, v in scope.get("headers", []):
+        if k == b"x-forwarded-for":
+            return v.decode("latin-1").split(",")[0].strip()
+    client = scope.get("client")
+    return client[0] if client else "?"
+
+
 class _MCPMasterGate:
-    """Pure-ASGI master switch for MCP. When the admin setting `mcp_enabled` is
-    off, `/mcp*` and `/mcp-login` return 503 (LIVE, no restart needed). Plain
-    pass-through otherwise — must NOT buffer (the MCP transport streams)."""
+    """Pure-ASGI gate for the MCP endpoints (`/mcp*`, `/mcp-login`):
+
+    1. Master switch — when the admin setting `mcp_enabled` is off, return 503
+       (LIVE, no restart). 2. Per-IP rate limit (DCR `/register` strict; login
+       moderate; tools generous). Plain pass-through otherwise — must NOT buffer
+       (the MCP transport streams)."""
 
     def __init__(self, app):
         self.app = app
@@ -61,11 +72,21 @@ class _MCPMasterGate:
         if scope.get("type") == "http":
             path = scope.get("path", "")
             if path == "/mcp" or path.startswith("/mcp/") or path.startswith("/mcp-login"):
+                from starlette.responses import JSONResponse as _JR
                 from app.models.settings import get_setting
-                default = "1" if settings.production else "0"
-                if get_setting("mcp_enabled", default) != "1":
-                    from starlette.responses import JSONResponse as _JR
+                if get_setting("mcp_enabled", "1" if settings.production else "0") != "1":
                     await _JR({"error": "MCP non abilitato"}, status_code=503)(scope, receive, send)
+                    return
+                from app.util.ratelimit import allow
+                ip = _client_ip(scope)
+                if path.startswith("/mcp/register"):       # DCR — anti-flood
+                    ok = allow(f"mcp-reg:{ip}", 10, 3600)
+                elif path.startswith("/mcp-login"):         # OTP login page
+                    ok = allow(f"mcp-login:{ip}", 20, 60)
+                else:                                       # search/fetch/authorize/token
+                    ok = allow(f"mcp:{ip}", 120, 60)
+                if not ok:
+                    await _JR({"error": "Troppe richieste."}, status_code=429)(scope, receive, send)
                     return
         await self.app(scope, receive, send)
 
