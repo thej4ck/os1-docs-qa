@@ -117,7 +117,7 @@ async def chat_page(request: Request, c: str | None = None):
     # Conversazione attiva = ha già messaggi: l'esperto è bloccato (no picker).
     is_active_conversation = bool(messages)
 
-    return _templates().TemplateResponse("chat.html", {
+    return _templates().TemplateResponse(request, "chat.html", {
         "request": request,
         "email": user["email"],
         "is_admin": bool(user["is_admin"]),

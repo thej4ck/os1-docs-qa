@@ -44,13 +44,13 @@ def _render_signup(request: Request, **ctx):
         "company_name": "",
     }
     base.update(ctx)
-    return _templates().TemplateResponse("signup.html", base)
+    return _templates().TemplateResponse(request, "signup.html", base)
 
 
 def _render_verify(request: Request, **ctx):
     base = {"request": request, "error": None}
     base.update(ctx)
-    return _templates().TemplateResponse("signup_verify.html", base)
+    return _templates().TemplateResponse(request, "signup_verify.html", base)
 
 
 @router.get("/signup", response_class=HTMLResponse)

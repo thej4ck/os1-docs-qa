@@ -1,5 +1,5 @@
 fastapi==0.135.1
-starlette==0.52.1
+starlette>=1.0.1,<2   # >=1.0.1 chiude CVE-2026-48710 (Host header path poisoning). fastapi 0.135.1 dichiara starlette>=0.46 (no cap) → accetta 1.x
 uvicorn[standard]>=0.30
 jinja2==3.1.6
 sse-starlette>=2.0

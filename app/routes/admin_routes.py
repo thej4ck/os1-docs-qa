@@ -59,7 +59,7 @@ async def dashboard(request: Request):
     users = list_users()
     recent = get_recent_questions(30)
 
-    return _templates().TemplateResponse("admin/dashboard.html", {
+    return _templates().TemplateResponse(request, "admin/dashboard.html", {
         "request": request,
         "email": admin["email"],
         "is_admin": True,
@@ -90,7 +90,7 @@ async def users_page(request: Request):
         user["tokens"] = u.get("total_prompt_tokens", 0) + u.get("total_completion_tokens", 0)
         user["cost"] = u.get("total_cost_usd", 0.0)
 
-    return _templates().TemplateResponse("admin/users.html", {
+    return _templates().TemplateResponse(request, "admin/users.html", {
         "request": request,
         "email": admin["email"],
         "is_admin": True,
@@ -115,7 +115,7 @@ async def user_detail(request: Request, user_email: str):
 
     limit = resolve_user_token_limit(user["id"])
 
-    return _templates().TemplateResponse("admin/user_detail.html", {
+    return _templates().TemplateResponse(request, "admin/user_detail.html", {
         "request": request,
         "email": admin["email"],
         "is_admin": True,
@@ -151,7 +151,7 @@ async def usage_page(request: Request, month: str | None = None):
     summary = get_usage_summary(month)
     domain_list = get_domain_usage(month)
 
-    return _templates().TemplateResponse("admin/usage.html", {
+    return _templates().TemplateResponse(request, "admin/usage.html", {
         "request": request,
         "email": admin["email"],
         "is_admin": True,
@@ -219,7 +219,7 @@ async def costs_page(request: Request, period: str = "month"):
 
     from app.models.usage import get_cost_summary, get_cost_by_model, get_cost_by_day, get_cost_by_user
 
-    return _templates().TemplateResponse("admin/costs.html", {
+    return _templates().TemplateResponse(request, "admin/costs.html", {
         "request": request,
         "email": admin["email"],
         "is_admin": True,
@@ -246,7 +246,7 @@ async def view_conversation(request: Request, conv_id: str):
 
     messages = get_messages(conv_id)
 
-    return _templates().TemplateResponse("admin/conversation.html", {
+    return _templates().TemplateResponse(request, "admin/conversation.html", {
         "request": request,
         "email": admin["email"],
         "is_admin": True,
@@ -264,7 +264,7 @@ async def domains_page(request: Request):
         return RedirectResponse(url="/login", status_code=302)
 
     domains = list_domains()
-    return _templates().TemplateResponse("admin/domains.html", {
+    return _templates().TemplateResponse(request, "admin/domains.html", {
         "request": request,
         "email": admin["email"],
         "is_admin": True,
@@ -401,7 +401,7 @@ async def feedback_page(
 
     pct_positive = round(positive / total * 100, 1) if total > 0 else 0
 
-    return _templates().TemplateResponse("admin/feedback.html", {
+    return _templates().TemplateResponse(request, "admin/feedback.html", {
         "request": request,
         "email": admin["email"],
         "is_admin": True,
@@ -478,7 +478,7 @@ async def settings_page(request: Request):
         }
         for aid in AGENT_ORDER
     ]
-    return _templates().TemplateResponse("admin/announcement.html", {
+    return _templates().TemplateResponse(request, "admin/announcement.html", {
         "request": request,
         "email": admin["email"],
         "is_admin": True,

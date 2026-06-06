@@ -37,7 +37,7 @@ async def login_page(request: Request):
     email = get_session_email(request)
     if email:
         return RedirectResponse(url="/chat", status_code=302)
-    return _templates().TemplateResponse("login.html", {"request": request, "error": None})
+    return _templates().TemplateResponse(request, "login.html", {"request": request, "error": None})
 
 
 @router.post("/login", response_class=HTMLResponse)
@@ -51,18 +51,18 @@ async def login_submit(request: Request, email: str = Form(...)):
 
     if not is_email_allowed(email):
         return _templates().TemplateResponse(
-            "login.html", {"request": request, "error": "Email non autorizzata."}
+            request, "login.html", {"request": request, "error": "Email non autorizzata."}
         )
 
     code = generate_otp(email)
     success = send_otp_email(email, code)
     if not success:
         return _templates().TemplateResponse(
-            "login.html", {"request": request, "error": "Errore nell'invio dell'email. Riprova."}
+            request, "login.html", {"request": request, "error": "Errore nell'invio dell'email. Riprova."}
         )
 
     return _templates().TemplateResponse(
-        "verify.html", {"request": request, "email": email, "error": None}
+        request, "verify.html", {"request": request, "email": email, "error": None}
     )
 
 
@@ -74,6 +74,7 @@ async def verify_submit(request: Request, email: str = Form(...), code: str = Fo
     wait = verify_cooldown_remaining(email)
     if wait > 0:
         return _templates().TemplateResponse(
+            request,
             "verify.html",
             {
                 "request": request, "email": email,
@@ -85,7 +86,7 @@ async def verify_submit(request: Request, email: str = Form(...), code: str = Fo
         return login_and_redirect(email)
 
     return _templates().TemplateResponse(
-        "verify.html", {"request": request, "email": email, "error": "Codice non valido o scaduto."}
+        request, "verify.html", {"request": request, "email": email, "error": "Codice non valido o scaduto."}
     )
 
 
