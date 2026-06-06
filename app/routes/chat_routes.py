@@ -564,6 +564,16 @@ async def get_doc(request: Request, file: str = Query(...)):
     })
 
 
+@router.post("/api/mcp/revoke-mine")
+async def revoke_my_mcp(request: Request):
+    """User self-service: revoke ALL my active MCP tokens (disconnect connectors)."""
+    email = get_session_email(request)
+    if not email:
+        return JSONResponse({"error": "Non autenticato."}, status_code=401)
+    from app.models import oauth as oauth_store
+    return JSONResponse({"revoked": oauth_store.revoke_by_subject(email)})
+
+
 # ── Announcements ──
 
 @router.get("/api/announcement")

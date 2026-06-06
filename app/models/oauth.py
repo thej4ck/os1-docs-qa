@@ -215,3 +215,20 @@ def counts() -> dict:
     clients = c.execute("SELECT COUNT(*) FROM oauth_clients").fetchone()[0]
     active = c.execute("SELECT COUNT(*) FROM oauth_tokens WHERE revoked = 0").fetchone()[0]
     return {"clients": clients, "active_tokens": active}
+
+
+def revoke_by_subject(subject: str) -> int:
+    """Revoke ALL active tokens for a user (email). Returns how many revoked.
+    Used by the user-facing self-revoke (disconnect my MCP connectors)."""
+    c = get_conn()
+    cur = c.execute(
+        "UPDATE oauth_tokens SET revoked = 1 WHERE subject = ? AND revoked = 0", (subject,)
+    )
+    c.commit()
+    return cur.rowcount
+
+
+def active_count_for_subject(subject: str) -> int:
+    return get_conn().execute(
+        "SELECT COUNT(*) FROM oauth_tokens WHERE subject = ? AND revoked = 0", (subject,)
+    ).fetchone()[0]

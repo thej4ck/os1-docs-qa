@@ -468,6 +468,10 @@ function completeOnboarding() {
             <p>Qualunque client che supporta server MCP remoti con OAuth: usa lo stesso indirizzo.</p>
         </div>
         <p class="mcp-hint">Poi chiedi all'assistente qualcosa su OS1 (in italiano): userà la documentazione ufficiale e citerà le fonti.</p>
+        <div class="mcp-revoke">
+            <button class="mcp-revoke-btn" type="button" onclick="revokeMyMcp()">Scollega i miei connettori</button>
+            <span class="mcp-revoke-hint">Invalida i collegamenti MCP attivi del tuo account: i client dovranno ricollegarsi.</span>
+        </div>
         <div class="access-modal-actions">
             <button class="btn-logout" type="button" onclick="closeMcpModal()">Chiudi</button>
         </div>
@@ -485,11 +489,22 @@ function completeOnboarding() {
 .mcp-steps li { font-size: .9rem; color: var(--c-text); line-height: 1.55; margin-bottom: 4px; }
 .mcp-steps p { font-size: .9rem; color: var(--c-text-secondary); margin: 0; }
 .mcp-hint { font-size: .85rem; color: var(--c-text-tertiary); margin: 14px 0 0; line-height: 1.5; }
+.mcp-revoke { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--c-border); display: flex; flex-direction: column; gap: 4px; }
+.mcp-revoke-btn { align-self: flex-start; font-size: .8rem; font-weight: 600; color: var(--c-error); background: var(--c-error-bg); border: 1px solid var(--c-error-border); border-radius: var(--r-sm); padding: 6px 12px; cursor: pointer; }
+.mcp-revoke-btn:hover { background: var(--c-error); color: #fff; }
+.mcp-revoke-hint { font-size: .75rem; color: var(--c-text-tertiary); }
 </style>
 <script>
 function openMcpModal(){ document.getElementById('mcp-modal').hidden = false; }
 function closeMcpModal(){ document.getElementById('mcp-modal').hidden = true; }
 function copyMcpUrl(){ var i=document.getElementById('mcp-url-input'); i.select(); if(navigator.clipboard){navigator.clipboard.writeText(i.value);} var b=event.target, t=b.textContent; b.textContent='Copiato'; setTimeout(function(){b.textContent=t;},1200); }
+function revokeMyMcp(){
+    if(!confirm('Scollegare tutti i tuoi connettori MCP? I client (Claude/ChatGPT) dovranno ricollegarsi.')) return;
+    fetch('/api/mcp/revoke-mine', {method:'POST'})
+        .then(function(r){ return r.json(); })
+        .then(function(d){ showToast('Scollegati ' + (d.revoked || 0) + ' collegamenti MCP'); closeMcpModal(); })
+        .catch(function(){ showToast('Errore nella disconnessione', 'error'); });
+}
 </script>
 {% endif %}
 
