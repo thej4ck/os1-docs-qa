@@ -8,7 +8,7 @@ Chat con **retrieval ibrido BM25 + semantico (model2vec)** e LLM (Groq), 4 esper
 auth OTP + access-token, **self-signup freemium con tier**, backoffice admin, tracking costi, dark/light theme.
 
 - `app/version.py` è single source of truth: `VERSION`, `BUILD`, `BUILD_DATE`, `PRODUCT_NAME = "OS1 Virgilio"`.
-- Stato attuale: VERSION `2.1.0`, BUILD `68`.
+- Stato attuale: VERSION `2.1.0`, BUILD `73`.
 
 ## Comandi sviluppo
 ```bash
@@ -79,6 +79,16 @@ Strati:
 - `app/auth/email_sender.py` + `email_templates.py` — invio via Resend (console in dev), template welcome/trial/admin.
 - `app/db.py` — singleton app.db, schema + migrazioni additive.
 - `app/models/` — user, conversation, usage, **domain** (tier+trial, ~370), settings (KV).
+
+### Server MCP (`app/mcp/`) — retrieval-only
+Server **MCP remoto** (FastMCP, Streamable HTTP) montato su **`/mcp`** in [main.py](app/main.py) via
+`mcp.http_app(path="/")` + `combine_lifespans` (il session-manager FastMCP gira insieme al lifespan esistente,
+senza doppio-init). Espone **solo retrieval** (costo Groq zero), schema canonico ChatGPT Deep Research (digerito anche da Claude):
+- `search(query)` → `{"results":[{id,title,url}]}` — riusa `query.mcp_search()` (= `_hybrid_candidates`, **NO LLM/budget/rerank a pagamento**).
+- `fetch(id)` → `{id,title,text,url,metadata}` — `query.mcp_fetch()` → `SearchIndex.get_document()` (match slash-tolerant come `/api/doc`). `id` = `source_file`.
+- `app/mcp/tools.py` `_doc_url()` usa `settings.base_url` per URL citabili.
+- **Auth (roadmap)**: M1 **no-auth** (solo Inspector/dev — NON per prod) → M2 bearer `StaticTokenVerifier`/`access_token` (solo Claude Code/API) → M3 **OAuth 2.1 AS autonomo** che riusa l'OTP. NB: claude.ai + ChatGPT richiedono OAuth+PKCE; static bearer NON accettato nelle UI connettori. IdP esterni esclusi (prodotto venduto apertamente → IdP non prevedibile).
+- **Dep**: `fastmcp>=3.4,<4` (pulls mcp/authlib/cryptography/pyjwt). **`starlette` portato a `>=1.0.1`** (richiesto da fastmcp 3.4.1+; chiude anche **CVE-2026-48710**). `fastapi` resta `0.135.1`.
 
 ### Retrieval ibrido (`app/search/`)
 - `query.py` (~860) — **orchestratore**. `ask_stream()` async generator: disambigua → candidati ibridi → budget → context → streaming → cost. Contiene `ALLOWED_MODELS`, `CONTEXT_PRESETS`, prompt CORE, deep mode, remap citazioni, screenshot.

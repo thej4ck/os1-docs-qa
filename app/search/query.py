@@ -916,3 +916,26 @@ async def ask_stream(
         print(f"[ask_stream] ERROR: {e}", flush=True)
         traceback.print_exc()
         yield f"Errore nella generazione della risposta: {e}", [], None
+
+
+# ── MCP retrieval (server MCP remoto: tool search/fetch) ──
+# Retrieval puro, SENZA LLM / budget / rerank a pagamento. Riusa la pipeline
+# ibrida BM25 ∪ semantic → RRF → signals.rescore.
+
+async def mcp_search(question: str, limit: int = 10) -> list[dict]:
+    """Hybrid retrieval per il tool MCP `search`. Niente LLM, niente rerank.
+
+    Ritorna fino a `limit` doc dict (id, source_file, module, doc_type, title,
+    content), ordinati best-first. Lista vuota se l'indice non è pronto.
+    """
+    if _index is None:
+        return []
+    candidates = await _hybrid_candidates(question, topic_filter=None)
+    return candidates[:limit]
+
+
+def mcp_fetch(source_file: str) -> dict | None:
+    """Documento completo per il tool MCP `fetch`, dato il source_file."""
+    if _index is None:
+        return None
+    return _index.get_document(source_file)

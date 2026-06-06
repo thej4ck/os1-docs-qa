@@ -308,6 +308,31 @@ class SearchIndex:
         by_id = {row["id"]: dict(row) for row in rows}
         return [by_id[i] for i in ids if i in by_id]
 
+    def get_document(self, source_file: str) -> dict | None:
+        """Fetch one document by source_file, tolerant to slash format / basename.
+
+        Mirrors the /api/doc viewer fallback chain (source_file is stored
+        inconsistently — back/forward slash): exact → slash-normalized → basename.
+        """
+        cols = "id, source_file, module, doc_type, title, content, html_content"
+        row = self.conn.execute(
+            f"SELECT {cols} FROM documents WHERE source_file = ? LIMIT 1", (source_file,)
+        ).fetchone()
+        if not row:
+            norm = source_file.replace("\\", "/")
+            row = self.conn.execute(
+                f"SELECT {cols} FROM documents WHERE REPLACE(source_file, '\\', '/') = ? LIMIT 1",
+                (norm,),
+            ).fetchone()
+        if not row:
+            base = source_file.replace("\\", "/").rstrip("/").split("/")[-1]
+            if base:
+                row = self.conn.execute(
+                    f"SELECT {cols} FROM documents WHERE source_file LIKE ? LIMIT 1",
+                    ("%" + base,),
+                ).fetchone()
+        return dict(row) if row else None
+
     def rebuild(self):
         """Drop all data and recreate the schema."""
         cur = self.conn.cursor()
