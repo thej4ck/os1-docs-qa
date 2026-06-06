@@ -13,6 +13,10 @@ from app.search.fts import SearchIndex
 from app.search import query as query_module
 from app import db as app_db
 
+from fastmcp.utilities.lifespan import combine_lifespans
+from app.mcp.server import build_mcp
+from app.mcp.auth import build_mcp_auth
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -45,7 +49,66 @@ async def lifespan(app: FastAPI):
     index.close()
 
 
-app = FastAPI(title="OS1 Docs Q&A", lifespan=lifespan)
+def _client_ip(scope) -> str:
+    for k, v in scope.get("headers", []):
+        if k == b"x-forwarded-for":
+            return v.decode("latin-1").split(",")[0].strip()
+    client = scope.get("client")
+    return client[0] if client else "?"
+
+
+class _MCPMasterGate:
+    """Pure-ASGI gate for the MCP endpoints (`/mcp*`, `/mcp-login`):
+
+    1. Master switch — when the admin setting `mcp_enabled` is off, return 503
+       (LIVE, no restart). 2. Per-IP rate limit (DCR `/register` strict; login
+       moderate; tools generous). Plain pass-through otherwise — must NOT buffer
+       (the MCP transport streams)."""
+
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope.get("type") == "http":
+            path = scope.get("path", "")
+            if path == "/mcp" or path.startswith("/mcp/") or path.startswith("/mcp-login"):
+                from starlette.responses import JSONResponse as _JR
+                from app.models.settings import get_setting
+                if get_setting("mcp_enabled", "1" if settings.production else "0") != "1":
+                    await _JR({"error": "MCP non abilitato"}, status_code=503)(scope, receive, send)
+                    return
+                from app.util.ratelimit import allow
+                ip = _client_ip(scope)
+                if path.startswith("/mcp/register"):       # DCR — anti-flood
+                    ok = allow(f"mcp-reg:{ip}", 10, 3600)
+                elif path.startswith("/mcp-login"):         # OTP login page
+                    ok = allow(f"mcp-login:{ip}", 20, 60)
+                else:                                       # search/fetch/authorize/token
+                    ok = allow(f"mcp:{ip}", 120, 60)
+                if not ok:
+                    await _JR({"error": "Troppe richieste."}, status_code=429)(scope, receive, send)
+                    return
+        await self.app(scope, receive, send)
+
+
+# MCP server (retrieval-only). http_app(path="/") mounted under /mcp; its
+# session-manager lifespan is combined with the app lifespan so it initializes.
+mcp_auth = build_mcp_auth()  # OAuth provider (M3) | bearer verifier (M2) | None (dev)
+mcp = build_mcp(auth=mcp_auth)
+mcp_app = mcp.http_app(path="/")
+
+app = FastAPI(title="OS1 Docs Q&A", lifespan=combine_lifespans(lifespan, mcp_app.lifespan))
+app.mount("/mcp", mcp_app)  # Streamable HTTP endpoint at /mcp
+
+# OAuth discovery (.well-known) must live at the DOMAIN ROOT (RFC 8414/9728);
+# the /mcp mount can't host it. Mount the provider's well-known routes at root.
+from fastmcp.server.auth import OAuthProvider as _OAuthProvider  # noqa: E402
+if isinstance(mcp_auth, _OAuthProvider):
+    for _wk in mcp_auth.get_well_known_routes():
+        app.router.routes.insert(0, _wk)
+
+# Master switch (admin-toggleable at runtime) gating the MCP endpoints.
+app.add_middleware(_MCPMasterGate)
 
 # Static files
 static_dir = Path(__file__).parent.parent / "static"
@@ -69,11 +132,13 @@ from app.routes.chat_routes import router as chat_router
 from app.routes.auth_routes import router as auth_router
 from app.routes.admin_routes import router as admin_router
 from app.routes.signup_routes import router as signup_router
+from app.routes.mcp_auth_routes import router as mcp_auth_router
 
 app.include_router(auth_router)
 app.include_router(signup_router)
 app.include_router(chat_router)
 app.include_router(admin_router)
+app.include_router(mcp_auth_router)
 
 
 @app.get("/healthz")

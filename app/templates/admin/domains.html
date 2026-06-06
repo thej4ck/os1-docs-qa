@@ -82,6 +82,7 @@
                 <th>Richieste/mese</th>
                 <th>Token/mese</th>
                 <th>Attivo</th>
+                <th>MCP</th>
                 <th>Azioni</th>
             </tr>
         </thead>
@@ -113,6 +114,12 @@
                         <span class="toggle-slider"></span>
                     </label>
                 </td>
+                <td>
+                    <label class="toggle-switch" title="Abilita i connettori MCP per questo dominio">
+                        <input type="checkbox" name="mcp_enabled" {% if d.mcp_enabled %}checked{% endif %}>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </td>
                 <td style="display:flex;gap:4px;">
                     <button type="submit" class="btn-sm btn-save">Salva</button>
                 </form>
@@ -123,7 +130,7 @@
             </tr>
             {% endfor %}
             {% if not domains %}
-            <tr><td colspan="9" style="text-align:center;color:var(--c-text-tertiary);padding:var(--sp-8);">Nessun dominio configurato. Aggiungi il primo.</td></tr>
+            <tr><td colspan="10" style="text-align:center;color:var(--c-text-tertiary);padding:var(--sp-8);">Nessun dominio configurato. Aggiungi il primo.</td></tr>
             {% endif %}
         </tbody>
     </table>

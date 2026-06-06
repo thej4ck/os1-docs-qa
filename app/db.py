@@ -192,6 +192,64 @@ def _migrate():
                 f"ALTER TABLE allowed_domains ADD COLUMN {col_name} {col_type}"
             )
 
+    # Per-domain MCP gate (default abilitato): se 0, gli utenti del dominio
+    # non possono usare i connettori MCP anche con auth valida.
+    if "mcp_enabled" not in dom_existing:
+        _conn.execute(
+            "ALTER TABLE allowed_domains ADD COLUMN mcp_enabled INTEGER NOT NULL DEFAULT 1"
+        )
+
+    # ── MCP OAuth 2.1 (Authorization Server autonomo per i connettori MCP) ──
+    # Additivo. Token salvati come hash sha256 (mai in chiaro a riposo).
+    _conn.executescript("""
+        CREATE TABLE IF NOT EXISTS oauth_clients (
+            client_id     TEXT PRIMARY KEY,
+            client_secret TEXT,
+            redirect_uris TEXT NOT NULL,            -- json array
+            grant_types   TEXT,                     -- json array
+            token_endpoint_auth_method TEXT,
+            scope         TEXT,
+            client_name   TEXT,
+            metadata      TEXT,                      -- json: full OAuthClientInformationFull
+            created_at    TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now'))
+        );
+
+        CREATE TABLE IF NOT EXISTS oauth_login_tickets (
+            ticket         TEXT PRIMARY KEY,
+            client_id      TEXT NOT NULL,
+            redirect_uri   TEXT NOT NULL,
+            redirect_uri_provided_explicitly INTEGER NOT NULL DEFAULT 1,
+            code_challenge TEXT,
+            scopes         TEXT NOT NULL,            -- json array
+            state          TEXT,
+            expires_at     REAL NOT NULL
+        );
+
+        CREATE TABLE IF NOT EXISTS oauth_auth_codes (
+            code           TEXT PRIMARY KEY,
+            client_id      TEXT NOT NULL,
+            redirect_uri   TEXT NOT NULL,
+            redirect_uri_provided_explicitly INTEGER NOT NULL DEFAULT 1,
+            code_challenge TEXT,
+            scopes         TEXT NOT NULL,            -- json array
+            subject        TEXT NOT NULL,            -- email utente
+            expires_at     REAL NOT NULL,
+            used           INTEGER NOT NULL DEFAULT 0
+        );
+
+        CREATE TABLE IF NOT EXISTS oauth_tokens (
+            token_hash  TEXT PRIMARY KEY,            -- sha256(raw token)
+            kind        TEXT NOT NULL CHECK(kind IN ('access','refresh')),
+            client_id   TEXT NOT NULL,
+            subject     TEXT NOT NULL,
+            scopes      TEXT NOT NULL,               -- json array
+            expires_at  INTEGER,
+            revoked     INTEGER NOT NULL DEFAULT 0,
+            created_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now'))
+        );
+        CREATE INDEX IF NOT EXISTS idx_oauth_tokens_kind ON oauth_tokens(kind, expires_at);
+    """)
+
     # Migrate old model keys to new reasoning_effort variants
     _model_renames = {
         "openai/gpt-oss-120b": "openai/gpt-oss-120b:medium",

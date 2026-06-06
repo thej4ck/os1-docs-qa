@@ -8,7 +8,7 @@ Chat con **retrieval ibrido BM25 + semantico (model2vec)** e LLM (Groq), 4 esper
 auth OTP + access-token, **self-signup freemium con tier**, backoffice admin, tracking costi, dark/light theme.
 
 - `app/version.py` è single source of truth: `VERSION`, `BUILD`, `BUILD_DATE`, `PRODUCT_NAME = "OS1 Virgilio"`.
-- Stato attuale: VERSION `2.1.0`, BUILD `75`.
+- Stato attuale: VERSION `2.1.0`, BUILD `76`.
 - Stack web: FastAPI `0.135.1` + **Starlette `>=1.0.1,<2`** (pin floating; chiude **CVE-2026-48710** Host-header → path poisoning). NB: con Starlette 1.x `Jinja2Templates.TemplateResponse` vuole `request` come **primo** arg: `TemplateResponse(request, name, context)`.
 
 ## Comandi sviluppo
@@ -80,6 +80,24 @@ Strati:
 - `app/auth/email_sender.py` + `email_templates.py` — invio via Resend (console in dev), template welcome/trial/admin.
 - `app/db.py` — singleton app.db, schema + migrazioni additive.
 - `app/models/` — user, conversation, usage, **domain** (tier+trial, ~370), settings (KV).
+
+### Server MCP (`app/mcp/`) — retrieval-only
+Server **MCP remoto** (FastMCP, Streamable HTTP) montato su **`/mcp`** in [main.py](app/main.py) via
+`mcp.http_app(path="/")` + `combine_lifespans` (il session-manager FastMCP gira insieme al lifespan esistente,
+senza doppio-init). Espone **solo retrieval** (costo Groq zero), schema canonico ChatGPT Deep Research (digerito anche da Claude):
+- `search(query)` → `{"results":[{id,title,url}]}` — riusa `query.mcp_search()` (= `_hybrid_candidates`, **NO LLM/budget/rerank a pagamento**).
+- `fetch(id)` → `{id,title,text,url,metadata}` — `query.mcp_fetch()` → `SearchIndex.get_document()` (match slash-tolerant come `/api/doc`). `id` = `source_file`.
+- `app/mcp/tools.py` `_doc_url()` usa `settings.base_url` per URL citabili.
+- **Auth** — modalità **configurabile da admin** (`/admin/mcp`): setting `mcp_auth_mode` = `off|bearer|oauth` (precedenza **DB admin > env > default**: `oauth` in prod, `off` in dev). Letta all'avvio (route OAuth montate a import-time) → **il cambio modalità applica al RIAVVIO**. Logica in `resolve_mcp_auth_mode`/`build_mcp_auth` ([app/mcp/auth.py](app/mcp/auth.py)):
+  - `oauth` (env `MCP_OAUTH_ENABLED` come fallback) → **OAuth 2.1 AS autonomo** `OS1OAuthProvider` ([app/mcp/oauth.py](app/mcp/oauth.py)): DCR (RFC 7591) + PKCE S256 (verificata dal framework FastMCP) + authorization_code/refresh/revoke. Login = pagina dedicata **`/mcp-login`** ([routes/mcp_auth_routes.py](app/routes/mcp_auth_routes.py)) che riusa le primitive OTP (NON il login-cookie: completa con redirect al client). Token **sha256-hashed** in app.db (`oauth_clients`/`oauth_login_tickets`/`oauth_auth_codes`/`oauth_tokens` — [db.py](app/db.py) + [models/oauth.py](app/models/oauth.py)). Discovery `.well-known` montata a **root** dominio (sotto `/mcp` non basta). Scope `docs:read`. Sblocca **claude.ai + ChatGPT** (richiedono OAuth+PKCE). IdP esterni esclusi (prodotto venduto apertamente → IdP non prevedibile).
+  - `MCP_AUTH_ENABLED` (default `false`) → **Bearer = `access_token` utente** via `OS1TokenVerifier` → mappa a utente OS1. Solo dev/CLI: Claude **Code** (`--header`), Messages API, Inspector. NON le UI connettori.
+  - `off` → `/mcp` **no-auth** (solo dev/Inspector — NON per prod).
+- **Master switch (LIVE)**: setting `mcp_enabled` (admin `/admin/mcp`) → middleware ASGI `_MCPMasterGate` ([main.py](app/main.py)) fa rispondere **503** a `/mcp*`+`/mcp-login` se off. Effetto **immediato (no riavvio)**. Default **on in prod** (senza env), off in dev.
+- **Rate-limit per-IP** (stesso `_MCPMasterGate`, → 429): DCR `/mcp/register` 10/h, `/mcp-login` 20/min, tool/`authorize`/`token` 120/min. Sliding-window in `app/util/ratelimit.py` (`allow(key, max, window)`), condiviso anche da `/api/ask` ([chat_routes.py](app/routes/chat_routes.py)). In-memory single-process.
+- **Gate per-dominio**: `allowed_domains.mcp_enabled` (toggle in `/admin/domains`) → `is_mcp_enabled_for_email` ([models/domain.py](app/models/domain.py)) nega l'auth (verify_token + `/mcp-login`) agli utenti di un dominio con MCP off.
+- **Admin** `/admin/mcp`: stato/endpoint, master, modalità auth, lista **client OAuth** (revoca) e **token attivi** (revoca). Modello `app/models/oauth.py`.
+- **Endpoint**: reale `/mcp/`; `/mcp` fa 307→`/mcp/` (i client conformi httpx/Claude/ChatGPT preservano l'auth same-origin).
+- **Dep**: `fastmcp>=3.4,<4` (3.4.2; pulls mcp/authlib/cryptography/pyjwt). Richiede **`starlette>=1.0.1,<2`** (migrazione 1.x fatta su main, build 75; chiude **CVE-2026-48710**). `fastapi` resta `0.135.1`.
 
 ### Retrieval ibrido (`app/search/`)
 - `query.py` (~860) — **orchestratore**. `ask_stream()` async generator: disambigua → candidati ibridi → budget → context → streaming → cost. Contiene `ALLOWED_MODELS`, `CONTEXT_PRESETS`, prompt CORE, deep mode, remap citazioni, screenshot.
@@ -174,7 +192,8 @@ Risoluzione limite token utente: override `users.monthly_token_limit` → tier d
 - **Utenti**: lista con usage mensile, dettaglio + override limite
 - **Consumi/Costi**: breakdown per utente/dominio/modello/periodo, export CSV
 - **Conversazioni**: viewer completo
-- **Domini**: CRUD con tier, limiti, trial
+- **Domini**: CRUD con tier, limiti, trial, **toggle MCP per-dominio**
+- **MCP**: master switch (live), modalità auth (off/bearer/oauth, applica al riavvio), client OAuth + token (revoca)
 - **Feedback**: lista con filtri categoria/data
 - **Impostazioni**: modello standard/deep, suppress_reasoning, reranking_enabled, email mittente OTP, max domande/chat, banner annunci, trial days, notifiche admin
 

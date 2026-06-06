@@ -262,6 +262,27 @@ def get_domain_for_email(email: str) -> dict | None:
     return None
 
 
+def is_mcp_enabled_for_email(email: str) -> bool:
+    """True se i connettori MCP sono abilitati per il dominio dell'utente.
+
+    Nessun dominio specifico → True (l'accesso è già filtrato da is_email_allowed
+    al login). Un dominio con mcp_enabled=0 blocca MCP per tutti i suoi utenti.
+    """
+    d = get_domain_for_email(email)
+    if d is None:
+        return True
+    return bool(d.get("mcp_enabled", 1))
+
+
+def set_domain_mcp(domain_id: int, enabled: bool) -> None:
+    conn = get_conn()
+    conn.execute(
+        "UPDATE allowed_domains SET mcp_enabled = ? WHERE id = ?",
+        (1 if enabled else 0, domain_id),
+    )
+    conn.commit()
+
+
 def trial_days_left(expires_at: str | None) -> int | None:
     dt = parse_iso_utc(expires_at)
     if not dt:
