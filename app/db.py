@@ -192,6 +192,13 @@ def _migrate():
                 f"ALTER TABLE allowed_domains ADD COLUMN {col_name} {col_type}"
             )
 
+    # Per-domain MCP gate (default abilitato): se 0, gli utenti del dominio
+    # non possono usare i connettori MCP anche con auth valida.
+    if "mcp_enabled" not in dom_existing:
+        _conn.execute(
+            "ALTER TABLE allowed_domains ADD COLUMN mcp_enabled INTEGER NOT NULL DEFAULT 1"
+        )
+
     # ── MCP OAuth 2.1 (Authorization Server autonomo per i connettori MCP) ──
     # Additivo. Token salvati come hash sha256 (mai in chiaro a riposo).
     _conn.executescript("""

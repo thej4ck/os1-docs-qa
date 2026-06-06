@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block title %}MCP — Admin OS1 Virgilio{% endblock %}
+
+{% block nav_right %}
+<span class="header-email">{{ email }}</span>
+<a href="/chat" class="btn-logout">Chat</a>
+<a href="/logout" class="btn-logout">Esci</a>
+{% endblock %}
+
+{% block head %}
+<style>
+    .admin-wrap { padding: var(--sp-6) 0; }
+    .section-title { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; margin: var(--sp-6) 0 var(--sp-4); }
+    .card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md); padding: var(--sp-4) var(--sp-5); margin-bottom: var(--sp-5); }
+    .row { display: flex; align-items: center; gap: var(--sp-3); margin: var(--sp-3) 0; flex-wrap: wrap; }
+    .row label.lbl { font-size: 0.8125rem; font-weight: 600; color: var(--c-text-secondary); min-width: 150px; }
+    .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.8125rem; color: var(--c-brand); word-break: break-all; }
+    .pill { font-size: 0.7rem; font-weight: 600; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: .03em; }
+    .pill.on { background: var(--c-success-bg, #e6f6ec); color: var(--c-success, #1a7f37); }
+    .pill.off { background: var(--c-surface-alt); color: var(--c-text-tertiary); }
+    .note { font-size: 0.75rem; color: var(--c-text-tertiary); margin-top: 4px; }
+    select, .row select { padding: 6px 10px; font-size: 0.8125rem; border: 1px solid var(--c-border-input); border-radius: var(--r-sm); background: var(--c-surface); color: var(--c-text); }
+    .toggle-switch { position: relative; display: inline-block; width: 36px; height: 20px; }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider { position: absolute; cursor: pointer; inset: 0; background: var(--c-border); border-radius: 20px; transition: .2s; }
+    .toggle-slider:before { content: ""; position: absolute; height: 14px; width: 14px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: .2s; }
+    .toggle-switch input:checked + .toggle-slider { background: var(--c-brand); }
+    .toggle-switch input:checked + .toggle-slider:before { transform: translateX(16px); }
+    .btn-sm { font-size: 0.75rem; padding: 5px 12px; border-radius: var(--r-sm); cursor: pointer; font-weight: 600; border: none; }
+    .btn-save { background: var(--c-brand); color: #fff; }
+    .btn-save:hover { background: var(--c-brand-hover); }
+    .btn-del { background: none; color: var(--c-text-tertiary); border: 1px solid var(--c-border); }
+    .btn-del:hover { color: var(--c-error); border-color: var(--c-error); }
+    .admin-table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md); overflow: hidden; }
+    .admin-table th { text-align: left; padding: var(--sp-2) var(--sp-3); font-size: 0.7rem; font-weight: 600; color: var(--c-text-secondary); background: var(--c-surface-alt); border-bottom: 1px solid var(--c-border); text-transform: uppercase; }
+    .admin-table td { padding: var(--sp-2) var(--sp-3); border-bottom: 1px solid var(--c-border); vertical-align: middle; }
+    .admin-table tr:last-child td { border-bottom: none; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container admin-wrap">
+    {% include "admin/_nav.html" %}
+
+    <h3 class="section-title">Server MCP</h3>
+    <div class="card">
+        <div class="row">
+            <span class="lbl">Endpoint</span>
+            <span class="mono">{{ endpoint }}/</span>
+        </div>
+        <div class="row">
+            <span class="lbl">Stato attuale</span>
+            {% if mcp_enabled %}<span class="pill on">attivo</span>{% else %}<span class="pill off">disattivato</span>{% endif %}
+            <span class="pill {{ 'on' if auth_mode != 'off' else 'off' }}">auth: {{ auth_mode }}</span>
+            <span class="note">client OAuth registrati: {{ counts.clients }} · token attivi: {{ counts.active_tokens }}</span>
+        </div>
+
+        <form method="post" action="/admin/mcp">
+            <div class="row">
+                <span class="lbl">Master (risponde?)</span>
+                <label class="toggle-switch" title="Attiva/disattiva l'endpoint MCP a caldo">
+                    <input type="checkbox" name="mcp_enabled" {% if mcp_enabled %}checked{% endif %}>
+                    <span class="toggle-slider"></span>
+                </label>
+                <span class="note">effetto immediato (no riavvio)</span>
+            </div>
+            <div class="row">
+                <span class="lbl">Modalità auth</span>
+                <select name="auth_mode">
+                    <option value="off"    {% if auth_mode == 'off' %}selected{% endif %}>off — nessuna auth (solo dev)</option>
+                    <option value="bearer" {% if auth_mode == 'bearer' %}selected{% endif %}>bearer — access_token (Claude Code/API)</option>
+                    <option value="oauth"  {% if auth_mode == 'oauth' %}selected{% endif %}>oauth — OAuth 2.1 (claude.ai/ChatGPT)</option>
+                </select>
+                <span class="note">⚠️ applica al <strong>riavvio</strong> del servizio (route OAuth montate all'avvio)</span>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn-sm btn-save">Salva</button>
+            </div>
+        </form>
+        <div class="note">In produzione MCP è attivo di default senza variabili d'ambiente. Il gate per-dominio è in <a href="/admin/domains">Domini</a>.</div>
+    </div>
+
+    <h3 class="section-title">Client OAuth registrati (DCR)</h3>
+    <table class="admin-table">
+        <thead><tr><th>Client ID</th><th>Nome</th><th>Redirect URI</th><th>Creato</th><th></th></tr></thead>
+        <tbody>
+            {% for c in clients %}
+            <tr>
+                <td class="mono">{{ c.client_id[:18] }}…</td>
+                <td>{{ c.client_name or '—' }}</td>
+                <td class="mono" style="max-width:260px;">{{ c.redirect_uris | join(', ') }}</td>
+                <td>{{ c.created_at }}</td>
+                <td>
+                    <form method="post" action="/admin/mcp/clients/{{ c.client_id }}/delete" onsubmit="return confirm('Revocare il client e i suoi token?');">
+                        <button type="submit" class="btn-sm btn-del">Revoca</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            {% if not clients %}<tr><td colspan="5" style="text-align:center;color:var(--c-text-tertiary);padding:var(--sp-6);">Nessun client registrato.</td></tr>{% endif %}
+        </tbody>
+    </table>
+
+    <h3 class="section-title">Token attivi</h3>
+    <table class="admin-table">
+        <thead><tr><th>Tipo</th><th>Utente</th><th>Client</th><th>Creato</th><th></th></tr></thead>
+        <tbody>
+            {% for t in tokens %}
+            <tr>
+                <td>{{ t.kind }}</td>
+                <td>{{ t.subject }}</td>
+                <td class="mono">{{ t.client_id[:14] }}…</td>
+                <td>{{ t.created_at }}</td>
+                <td>
+                    <form method="post" action="/admin/mcp/tokens/{{ t.token_hash }}/revoke">
+                        <button type="submit" class="btn-sm btn-del">Revoca</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            {% if not tokens %}<tr><td colspan="5" style="text-align:center;color:var(--c-text-tertiary);padding:var(--sp-6);">Nessun token attivo.</td></tr>{% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -44,8 +44,12 @@ def _page(request: Request, ticket: str, stage: str, email: str = "", error=None
     )
 
 
-def _complete(ticket: str, t: dict, email: str) -> RedirectResponse:
+def _complete(ticket: str, t: dict, email: str):
     """Issue the authorization code and redirect back to the OAuth client."""
+    from app.models.domain import is_mcp_enabled_for_email
+    if not is_mcp_enabled_for_email(email):
+        store.delete_login_ticket(ticket)
+        return HTMLResponse("MCP non abilitato per il tuo dominio.", status_code=403)
     get_or_create_user(email)
     code = secrets.token_urlsafe(24)
     store.create_auth_code(

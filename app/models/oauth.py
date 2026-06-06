@@ -168,3 +168,50 @@ def purge_expired() -> None:
     c.execute("DELETE FROM oauth_login_tickets WHERE expires_at < ?", (now,))
     c.execute("DELETE FROM oauth_auth_codes WHERE expires_at < ? OR used = 1", (now,))
     c.commit()
+
+
+# ── Admin views (read/revoke) ──
+
+def list_clients() -> list[dict]:
+    rows = get_conn().execute(
+        "SELECT client_id, client_name, redirect_uris, created_at "
+        "FROM oauth_clients ORDER BY created_at DESC"
+    ).fetchall()
+    out = []
+    for r in rows:
+        d = dict(r)
+        try:
+            d["redirect_uris"] = json.loads(d["redirect_uris"])
+        except Exception:
+            d["redirect_uris"] = []
+        out.append(d)
+    return out
+
+
+def delete_client(client_id: str) -> None:
+    """Remove a registered client and revoke all its tokens."""
+    c = get_conn()
+    c.execute("DELETE FROM oauth_clients WHERE client_id = ?", (client_id,))
+    c.execute("UPDATE oauth_tokens SET revoked = 1 WHERE client_id = ?", (client_id,))
+    c.commit()
+
+
+def list_active_tokens() -> list[dict]:
+    rows = get_conn().execute(
+        "SELECT token_hash, kind, client_id, subject, expires_at, created_at "
+        "FROM oauth_tokens WHERE revoked = 0 ORDER BY created_at DESC LIMIT 200"
+    ).fetchall()
+    return [dict(r) for r in rows]
+
+
+def revoke_by_hash(token_hash: str) -> None:
+    c = get_conn()
+    c.execute("UPDATE oauth_tokens SET revoked = 1 WHERE token_hash = ?", (token_hash,))
+    c.commit()
+
+
+def counts() -> dict:
+    c = get_conn()
+    clients = c.execute("SELECT COUNT(*) FROM oauth_clients").fetchone()[0]
+    active = c.execute("SELECT COUNT(*) FROM oauth_tokens WHERE revoked = 0").fetchone()[0]
+    return {"clients": clients, "active_tokens": active}

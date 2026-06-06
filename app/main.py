@@ -49,6 +49,27 @@ async def lifespan(app: FastAPI):
     index.close()
 
 
+class _MCPMasterGate:
+    """Pure-ASGI master switch for MCP. When the admin setting `mcp_enabled` is
+    off, `/mcp*` and `/mcp-login` return 503 (LIVE, no restart needed). Plain
+    pass-through otherwise — must NOT buffer (the MCP transport streams)."""
+
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope.get("type") == "http":
+            path = scope.get("path", "")
+            if path == "/mcp" or path.startswith("/mcp/") or path.startswith("/mcp-login"):
+                from app.models.settings import get_setting
+                default = "1" if settings.production else "0"
+                if get_setting("mcp_enabled", default) != "1":
+                    from starlette.responses import JSONResponse as _JR
+                    await _JR({"error": "MCP non abilitato"}, status_code=503)(scope, receive, send)
+                    return
+        await self.app(scope, receive, send)
+
+
 # MCP server (retrieval-only). http_app(path="/") mounted under /mcp; its
 # session-manager lifespan is combined with the app lifespan so it initializes.
 mcp_auth = build_mcp_auth()  # OAuth provider (M3) | bearer verifier (M2) | None (dev)
@@ -64,6 +85,9 @@ from fastmcp.server.auth import OAuthProvider as _OAuthProvider  # noqa: E402
 if isinstance(mcp_auth, _OAuthProvider):
     for _wk in mcp_auth.get_well_known_routes():
         app.router.routes.insert(0, _wk)
+
+# Master switch (admin-toggleable at runtime) gating the MCP endpoints.
+app.add_middleware(_MCPMasterGate)
 
 # Static files
 static_dir = Path(__file__).parent.parent / "static"

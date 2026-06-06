@@ -299,6 +299,7 @@ async def update_domain_route(
     domain_id: int,
     tier: str = Form(...),
     enabled: str = Form(default=""),
+    mcp_enabled: str = Form(default=""),
     expires_date: str = Form(default=""),
 ):
     admin = _require_admin(request)
@@ -307,6 +308,8 @@ async def update_domain_route(
 
     apply_tier(domain_id, tier)  # apply_tier normalizes the tier
     set_domain_enabled(domain_id, enabled == "on")
+    from app.models.domain import set_domain_mcp
+    set_domain_mcp(domain_id, mcp_enabled == "on")
 
     # Admin can extend / clear trial expiry. Empty string clears it.
     expires_date = expires_date.strip()
@@ -332,6 +335,68 @@ async def delete_domain_route(request: Request, domain_id: int):
 
     delete_domain(domain_id)
     return RedirectResponse(url="/admin/domains", status_code=302)
+
+
+# ── MCP (connettori) ──
+
+@router.get("/mcp", response_class=HTMLResponse)
+async def mcp_admin_page(request: Request):
+    admin = _require_admin(request)
+    if not admin:
+        return RedirectResponse(url="/login", status_code=302)
+    from app.models import oauth as oauth_store
+    from app.models.settings import get_bool_setting
+    from app.mcp.auth import resolve_mcp_auth_mode
+    from app.config import settings as app_settings
+    base = (app_settings.base_url or str(request.base_url)).rstrip("/")
+    return _templates().TemplateResponse(request, "admin/mcp.html", {
+        "request": request,
+        "email": admin["email"],
+        "is_admin": True,
+        "mcp_enabled": get_bool_setting("mcp_enabled", app_settings.production),
+        "auth_mode": resolve_mcp_auth_mode(),
+        "endpoint": f"{base}/mcp",
+        "clients": oauth_store.list_clients(),
+        "tokens": oauth_store.list_active_tokens(),
+        "counts": oauth_store.counts(),
+        "production": app_settings.production,
+    })
+
+
+@router.post("/mcp")
+async def mcp_admin_save(
+    request: Request,
+    mcp_enabled: str = Form(default=""),
+    auth_mode: str = Form(default="off"),
+):
+    admin = _require_admin(request)
+    if not admin:
+        return RedirectResponse(url="/login", status_code=302)
+    from app.models.settings import set_setting
+    set_setting("mcp_enabled", "1" if mcp_enabled == "on" else "0")
+    if auth_mode in ("off", "bearer", "oauth"):
+        set_setting("mcp_auth_mode", auth_mode)
+    return RedirectResponse(url="/admin/mcp", status_code=302)
+
+
+@router.post("/mcp/clients/{client_id}/delete")
+async def mcp_admin_delete_client(request: Request, client_id: str):
+    admin = _require_admin(request)
+    if not admin:
+        return RedirectResponse(url="/login", status_code=302)
+    from app.models import oauth as oauth_store
+    oauth_store.delete_client(client_id)
+    return RedirectResponse(url="/admin/mcp", status_code=302)
+
+
+@router.post("/mcp/tokens/{token_hash}/revoke")
+async def mcp_admin_revoke_token(request: Request, token_hash: str):
+    admin = _require_admin(request)
+    if not admin:
+        return RedirectResponse(url="/login", status_code=302)
+    from app.models import oauth as oauth_store
+    oauth_store.revoke_by_hash(token_hash)
+    return RedirectResponse(url="/admin/mcp", status_code=302)
 
 
 # ── Feedback ──

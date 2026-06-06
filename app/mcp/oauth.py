@@ -122,7 +122,13 @@ class OS1OAuthProvider(OAuthProvider):
         )
 
     async def verify_token(self, token: str) -> AccessToken | None:
-        return await self.load_access_token(token)
+        at = await self.load_access_token(token)
+        if at is None:
+            return None
+        from app.models.domain import is_mcp_enabled_for_email
+        if at.subject and not is_mcp_enabled_for_email(at.subject):
+            return None  # MCP disabilitato per il dominio
+        return at
 
     async def revoke_token(self, token) -> None:
         store.revoke_token(token.token)

@@ -1,12 +1,16 @@
 """MCP authentication.
 
-M2 — bearer gate (dev/CLI): the Bearer token IS the user's existing
-passwordless `access_token`. Works for Claude Code (`--header`), the Messages
-API MCP connector, and MCP Inspector. It does NOT cover the claude.ai / ChatGPT
-connector UIs — those require full OAuth 2.1 + PKCE (M3).
+Auth mode is **admin-configurable** (app_settings `mcp_auth_mode` = off|bearer|oauth),
+read at startup because the auth provider — and the OAuth routes — are mounted at
+import time. Precedence: DB setting (admin) > env flags > default (oauth in prod, off in
+dev). Changing the mode applies at the next service restart.
 
-Enable with `MCP_AUTH_ENABLED=true`. When off, `/mcp` is unauthenticated
-(local dev / Inspector only — never expose unauthenticated in production).
+- `bearer` (M2, dev/CLI): the Bearer token IS the user's `access_token`. Covers Claude
+  Code (`--header`), Messages API, Inspector. NOT the claude.ai/ChatGPT connector UIs.
+- `oauth` (M3): autonomous OAuth 2.1 AS (see app/mcp/oauth.py) — claude.ai + ChatGPT.
+
+Both modes additionally honor the per-domain `mcp_enabled` flag (allowed_domains):
+a valid token whose user-domain has MCP disabled is rejected.
 """
 
 from fastmcp.server.auth import AccessToken, TokenVerifier
@@ -22,6 +26,9 @@ class OS1TokenVerifier(TokenVerifier):
         user = get_user_by_access_token(token)
         if not user:
             return None
+        from app.models.domain import is_mcp_enabled_for_email
+        if not is_mcp_enabled_for_email(user["email"]):
+            return None  # MCP disabilitato per il dominio
         return AccessToken(
             token=token,
             client_id=user["email"],
@@ -29,14 +36,25 @@ class OS1TokenVerifier(TokenVerifier):
         )
 
 
-def build_mcp_auth():
-    """Return the MCP auth provider for the current config, or None (no-auth).
-
-    Priority: OAuth 2.1 (M3, claude.ai/ChatGPT) > static bearer (M2, dev/CLI) > none.
-    """
+def resolve_mcp_auth_mode() -> str:
+    """Return 'off' | 'bearer' | 'oauth'. DB (admin) > env > default."""
+    from app.models.settings import read_setting_standalone
+    val = read_setting_standalone("mcp_auth_mode", "").strip().lower()
+    if val in ("off", "bearer", "oauth"):
+        return val
     if settings.mcp_oauth_enabled:
+        return "oauth"
+    if settings.mcp_auth_enabled:
+        return "bearer"
+    return "oauth" if settings.production else "off"
+
+
+def build_mcp_auth():
+    """Return the MCP auth provider for the resolved mode, or None (no-auth)."""
+    mode = resolve_mcp_auth_mode()
+    if mode == "oauth":
         from app.mcp.oauth import build_oauth_provider
         return build_oauth_provider()
-    if settings.mcp_auth_enabled:
+    if mode == "bearer":
         return OS1TokenVerifier(base_url=settings.base_url or None)
     return None
