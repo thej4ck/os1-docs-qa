@@ -10,7 +10,10 @@ JSON-encoded `content[]` block automatically. `id` is the document's
 source_file (stable key shared by both tools).
 """
 
+from typing import Annotated
 from urllib.parse import quote
+
+from pydantic import Field
 
 from app.config import settings
 from app.search import query as query_module
@@ -25,11 +28,19 @@ def _doc_url(source_file: str) -> str:
 
 def register_tools(mcp) -> None:
     @mcp.tool
-    async def search(query: str) -> dict:
-        """Cerca nella documentazione dell'ERP OS1.
+    async def search(
+        query: Annotated[str, Field(
+            description="Parole chiave o domanda breve in italiano sull'uso o la "
+                        "configurazione di OS1."
+        )],
+    ) -> dict:
+        """Cerca nella documentazione dell'ERP OS1 (OSItalia).
 
-        Restituisce i documenti più rilevanti (id, titolo, url). Usa poi
-        `fetch` con l'`id` per leggere il contenuto completo.
+        Usa questo strumento quando la domanda riguarda OS1: funzionalità, moduli,
+        tabelle del database, procedure/schede operative, messaggi di errore,
+        configurazioni. La documentazione è in ITALIANO → formula `query` in
+        italiano. Ritorna i documenti più rilevanti (id, titolo, url); poi chiama
+        `fetch` con l'`id` per leggere il contenuto completo e citare la fonte.
         """
         q = (query or "").strip()
         if not q:
@@ -47,9 +58,12 @@ def register_tools(mcp) -> None:
         }
 
     @mcp.tool
-    async def fetch(id: str) -> dict:
-        """Recupera il contenuto completo di un documento OS1 dato il suo `id`
-        (il source_file restituito da `search`)."""
+    async def fetch(
+        id: Annotated[str, Field(description="L'`id` del documento restituito da search.")],
+    ) -> dict:
+        """Recupera il testo integrale di un documento OS1 dato l'`id` restituito da
+        `search`. Usalo dopo `search` per leggere il contenuto completo e citarlo
+        (campo `url`)."""
         doc = query_module.mcp_fetch(id)
         if doc is None:
             raise ValueError(f"Document not found: {id}")
