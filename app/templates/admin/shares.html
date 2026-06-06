@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Condivisioni — Admin — OS1 Virgilio{% endblock %}
+
+{% block nav_right %}
+<span class="header-email">{{ email }}</span>
+<a href="/chat" class="btn-logout">Chat</a>
+<a href="/logout" class="btn-logout">Esci</a>
+{% endblock %}
+
+{% block head %}
+<style>
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--sp-4); margin-bottom: var(--sp-8); }
+    .kpi-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md); padding: var(--sp-5); box-shadow: var(--c-shadow-sm); }
+    .kpi-label { font-size: 0.75rem; font-weight: 600; color: var(--c-text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--sp-1); }
+    .kpi-value { font-family: 'DM Sans', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--c-text); }
+    .kpi-sub { font-size: 0.75rem; color: var(--c-text-tertiary); margin-top: 2px; }
+    .admin-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; background: var(--c-surface); border: 1px solid var(--c-border); border-radius: var(--r-md); overflow: hidden; }
+    .admin-table th { text-align: left; padding: var(--sp-3) var(--sp-4); font-size: 0.75rem; font-weight: 600; color: var(--c-text-secondary); background: var(--c-surface-alt); border-bottom: 1px solid var(--c-border); text-transform: uppercase; letter-spacing: 0.04em; }
+    .admin-table td { padding: var(--sp-3) var(--sp-4); border-bottom: 1px solid var(--c-border); color: var(--c-text); vertical-align: top; }
+    .admin-table tr:last-child td { border-bottom: none; }
+    .admin-table tr:hover td { background: var(--c-surface-alt); }
+    .section-title { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: var(--sp-4); color: var(--c-text); }
+    .admin-wrap { padding: var(--sp-6) 0; }
+    .badge { display: inline-block; font-size: 0.6875rem; padding: 2px 8px; border-radius: var(--r-full); font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; }
+    .badge-ok { background: var(--c-success-bg); color: var(--c-success); }
+    .badge-no { background: var(--c-surface-alt); color: var(--c-text-tertiary); border: 1px solid var(--c-border); }
+    .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.8125rem; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container admin-wrap">
+    {% include "admin/_nav.html" %}
+
+    {% set conv_rate = (funnel.converted * 100 // funnel.total) if funnel.total else 0 %}
+    <div class="kpi-grid">
+        <div class="kpi-card"><div class="kpi-label">Condivisioni</div><div class="kpi-value">{{ funnel.total }}</div></div>
+        <div class="kpi-card"><div class="kpi-label">Email aperte</div><div class="kpi-value">{{ funnel.opened }}</div></div>
+        <div class="kpi-card"><div class="kpi-label">Pagine viste</div><div class="kpi-value">{{ funnel.viewed }}</div></div>
+        <div class="kpi-card"><div class="kpi-label">Click CTA</div><div class="kpi-value">{{ funnel.clicked }}</div></div>
+        <div class="kpi-card"><div class="kpi-label">Conversioni</div><div class="kpi-value">{{ funnel.converted }}</div><div class="kpi-sub">{{ conv_rate }}% del totale</div></div>
+    </div>
+
+    <h3 class="section-title">Funnel: inviate → aperte → viste → click → trial</h3>
+
+    <h3 class="section-title">Condivisioni recenti ({{ shares|length }}{% if shares|length == 200 %}+{% endif %})</h3>
+    {% if shares %}
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Mittente</th>
+                <th>Destinatario</th>
+                <th>Aperture</th>
+                <th>Viste</th>
+                <th>Click</th>
+                <th>Trial</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in shares %}
+            <tr>
+                <td class="mono">{{ s.created_at[:16]|replace('T',' ') }}</td>
+                <td>{{ s.sender_email }}</td>
+                <td>{{ s.recipient_email }}{% if s.recipient_name %}<div class="kpi-sub">{{ s.recipient_name }}</div>{% endif %}</td>
+                <td>{{ s.open_count }}</td>
+                <td>{{ s.view_count }}</td>
+                <td>{{ s.cta_click_count }}</td>
+                <td>{% if s.converted %}<span class="badge badge-ok">sì</span>{% else %}<span class="badge badge-no">no</span>{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p style="color:var(--c-text-secondary);">Nessuna condivisione ancora.</p>
+    {% endif %}
+</div>
+{% endblock %}

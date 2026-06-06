@@ -8,7 +8,7 @@ Chat con **retrieval ibrido BM25 + semantico (model2vec)** e LLM (Groq), 4 esper
 auth OTP + access-token, **self-signup freemium con tier**, backoffice admin, tracking costi, dark/light theme.
 
 - `app/version.py` è single source of truth: `VERSION`, `BUILD`, `BUILD_DATE`, `PRODUCT_NAME = "OS1 Virgilio"`.
-- Stato attuale: VERSION `2.1.0`, BUILD `76`.
+- Stato attuale: VERSION `2.1.0`, BUILD `85`.
 - Stack web: FastAPI `0.135.1` + **Starlette `>=1.0.1,<2`** (pin floating; chiude **CVE-2026-48710** Host-header → path poisoning). NB: con Starlette 1.x `Jinja2Templates.TemplateResponse` vuole `request` come **primo** arg: `TemplateResponse(request, name, context)`.
 
 ## Comandi sviluppo
@@ -73,13 +73,22 @@ Strati:
 - `app/version.py` — VERSION/BUILD/BUILD_DATE/PRODUCT_NAME.
 - `app/routes/chat_routes.py` (~780) — chat, ask SSE, conversazioni CRUD/export, feedback, doc viewer, announcements, usage summary, onboarding, request-upgrade, `/api/debug/retrieve` (solo dev).
 - `app/routes/auth_routes.py` — login OTP, verify, logout, **access-token login** (`/login/token`, `/api/access-token[/regenerate]`).
-- `app/routes/signup_routes.py` — **self-signup freemium** (`/signup`, `/signup/verify`) con autoprovisioning TRIAL.
-- `app/routes/admin_routes.py` (~555) — dashboard, utenti, usage, costi, conversazioni, domini, feedback, settings, export CSV.
+- `app/routes/signup_routes.py` — **self-signup freemium** (`/signup`, `/signup/verify`) con autoprovisioning TRIAL. Accetta `ref`/`s` (share attribution): a fine signup chiama `mark_converted(share_token, domain_id)`.
+- `app/routes/public_routes.py` — **rotte pubbliche (no auth)** per la condivisione risposte (vedi sezione dedicata).
+- `app/routes/admin_routes.py` (~555) — dashboard, utenti, usage, costi, conversazioni, domini, **condivisioni** (`/admin/shares`, funnel), feedback, settings, export CSV.
 - `app/auth/otp.py` — OTP in-memory (TTL 300s, cooldown 10s, max 5 tentativi), sender e domini da DB.
 - `app/auth/session.py` — cookie firmato itsdangerous (24h, HTTPOnly, SameSite=lax, Secure in prod).
-- `app/auth/email_sender.py` + `email_templates.py` — invio via Resend (console in dev), template welcome/trial/admin.
+- `app/auth/email_sender.py` + `email_templates.py` — invio via Resend (console in dev), template welcome/trial/admin/**share_answer**.
+- `app/util/email_md.py` — `md_to_html`/`escape_html`: markdown→HTML email-safe (immagini assolute, `[Screenshot:…]`). Condiviso da email chat e landing share.
 - `app/db.py` — singleton app.db, schema + migrazioni additive.
-- `app/models/` — user, conversation, usage, **domain** (tier+trial, ~370), settings (KV).
+- `app/models/` — user, conversation (+`get_message_by_id` con ownership join), usage, **domain** (tier+trial, ~370), **share** (snapshot+tracking), settings (KV).
+
+### Condivisione risposte (share answer) — `public_routes.py` + `models/share.py`
+Permette a un utente di **condividere una singola risposta via email** con una persona ESTERNA (anche non utente). Doppio scopo: aiutare il destinatario + marketing (invito trial 30gg, tracking conversioni). **Approccio ibrido**: email con estratto + CTA verso **landing pubblica** branded che mostra risposta completa + immagini + pubblicità.
+- **Crea+invia**: `POST /api/messages/{id}/share` ([chat_routes.py](app/routes/chat_routes.py)) — auth + ownership (`get_message_by_id`) + **rate-limit doppio** (mittente 10/h, destinatario 3/giorno via `ratelimit.allow`). Modale minimale: solo email destinatario + nota opzionale. Snapshot del contenuto in `shares` (gli **screenshot arrivano dal client**: NON sono persistiti in `messages`). Estratto+CTA via `email_templates.share_answer` → `send_email`. Footer email mantiene GDPR + "perché ricevi questa email".
+- **Landing pubblica**: `GET /s/{token}` ([public_routes.py](app/routes/public_routes.py)) → `public_share.html` (standalone branded, `X-Robots-Tag: noindex`). Rate-limit per-IP. Risposta via `email_md.md_to_html`, immagini da `/help-files` (già pubblico). **Citazioni = chip statici** (titolo fonte, non cliccabili) + CTA "accedi/iscriviti per aprire i documenti" — protegge la knowledge base (`/api/doc` resta auth-gated).
+- **Tracking**: `GET /s/{token}/pixel.gif` (apertura email) + `GET /s/{token}/go` (click CTA → 302 `/signup?ref=share&s={token}`). Conversione attribuita allo share al signup (`mark_converted`). Dashboard `GET /admin/shares` (funnel inviate→aperte→viste→click→trial).
+- **Tabella `shares`** (app.db): `token` (PK, `secrets.token_urlsafe`), `message_id` (FK `ON DELETE SET NULL` → share autoportante), snapshot (`snap_content_md`/`snap_sources`/`snap_screenshots`/`snap_agent`/`snap_question`), `revoked` (soft-delete GDPR), contatori `open/view/cta_click_count`, `converted`/`converted_domain_id`.
 
 ### Server MCP (`app/mcp/`) — retrieval-only
 Server **MCP remoto** (FastMCP, Streamable HTTP) montato su **`/mcp`** in [main.py](app/main.py) via
@@ -153,6 +162,7 @@ Risoluzione limite token utente: override `users.monthly_token_limit` → tier d
 - `messages` — role, content, sources(json), prompt/completion/cached/rerank tokens, cost_usd, rerank_cost_usd, model, rerank_model, **agent**, created_at
 - `feedback` — message_id, rating(-1/1), category, comment, query, response_preview, chunks_used, model, search_scores
 - `allowed_domains` — pattern, tier, monthly_request/token_limit, daily_limit, enabled, expires_at, dati registrant trial
+- `shares` — token(PK), message_id(FK SET NULL), snapshot risposta (content/sources/screenshots/agent/question), sender/recipient, revoked, contatori open/view/cta_click, converted/converted_domain_id (share risposta → landing pubblica `/s/{token}`)
 - `app_settings` — KV admin-config (modello, suppress_reasoning, reranking_enabled, otp_sender_*, max_messages_per_conversation, announcement, admin_notification_email, trial_days…)
 - vista `monthly_usage` — aggregato per utente/mese
 
@@ -194,6 +204,7 @@ Risoluzione limite token utente: override `users.monthly_token_limit` → tier d
 - **Consumi/Costi**: breakdown per utente/dominio/modello/periodo, export CSV
 - **Conversazioni**: viewer completo
 - **Domini**: CRUD con tier, limiti, trial, **toggle MCP per-dominio**
+- **Condivisioni** (`/admin/shares`): funnel share risposte (inviate → aperte → viste → click → trial) + tabella recenti
 - **MCP**: master switch (live), modalità auth (off/bearer/oauth, applica al riavvio), client OAuth + token (revoca)
 - **Feedback**: lista con filtri categoria/data
 - **Impostazioni**: modello standard/deep, suppress_reasoning, reranking_enabled, email mittente OTP, max domande/chat, banner annunci, trial days, notifiche admin

@@ -6,7 +6,6 @@ import time
 from collections import defaultdict
 from datetime import datetime
 
-import markdown as md
 import resend
 
 from fastapi import APIRouter, BackgroundTasks, Request, Form, Query
@@ -21,10 +20,16 @@ from app.models.conversation import (
     create_conversation, list_conversations, get_conversation,
     get_messages, get_messages_for_llm, add_message, update_title,
     delete_conversation, count_user_messages, get_max_messages_setting,
-    get_conversation_agent,
+    get_conversation_agent, get_message_by_id, get_prev_user_message,
 )
 from app.models.usage import check_limit, get_monthly_usage, get_domain_usage, get_current_month
 from app.models.domain import get_domain_for_email, get_trial_banner_info
+from app.models.share import create_share
+from app.auth.email_sender import send_email, get_trial_duration_days
+from app.auth.email_templates import share_answer
+from app.util.email_md import md_to_html as _md_to_html, escape_html as _escape
+from app.util.ratelimit import allow
+from app.util.validation import EMAIL_RE
 from app.search import query as query_module
 from app.version import VERSION, BUILD, BUILD_DATE
 
@@ -621,36 +626,6 @@ def _get_sender() -> str:
     return f"{name} <{email_addr}>"
 
 
-def _md_to_html(text: str, base_url: str) -> str:
-    """Convert markdown content to email-safe HTML with absolute image URLs."""
-    # Convert [Screenshot: desc | url] markers to markdown images
-    text = re.sub(
-        r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]',
-        r'![\1](\2)',
-        text,
-    )
-    # Make relative image URLs absolute
-    text = re.sub(
-        r'!\[([^\]]*)\]\((/[^)]+)\)',
-        lambda m: f'![{m.group(1)}]({base_url}{m.group(2)})',
-        text,
-    )
-    html = md.markdown(text, extensions=["tables", "fenced_code", "nl2br"])
-    # Style images inline for email
-    html = html.replace(
-        "<img ",
-        '<img style="max-width:100%;height:auto;border-radius:8px;border:1px solid #E5E7EB;margin:8px 0;display:block;" ',
-    )
-    # Style tables inline
-    html = html.replace("<table>", '<table style="border-collapse:collapse;width:100%;margin:8px 0;font-size:14px;">')
-    html = html.replace("<th>", '<th style="border:1px solid #E5E7EB;padding:6px 10px;background:#F0F2F5;font-weight:600;text-align:left;">')
-    html = html.replace("<td>", '<td style="border:1px solid #E5E7EB;padding:6px 10px;text-align:left;">')
-    # Style code blocks
-    html = html.replace("<pre>", '<pre style="background:#1E293B;color:#E2E8F0;padding:12px 16px;border-radius:6px;overflow-x:auto;margin:8px 0;font-size:13px;">')
-    html = html.replace("<code>", '<code style="font-family:monospace;font-size:0.9em;">')
-    return html
-
-
 def _build_email_html(conv: dict, messages: list[dict], user_email: str) -> str:
     """Build a professional HTML email for the conversation."""
     base_url = settings.base_url.rstrip("/") if settings.base_url else "https://os1docs.ai.scao.it"
@@ -727,11 +702,6 @@ def _build_email_html(conv: dict, messages: list[dict], user_email: str) -> str:
 </html>'''
 
 
-def _escape(text: str) -> str:
-    """HTML-escape text."""
-    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
-
-
 @router.post("/api/conversations/{conv_id}/email")
 async def email_conversation(request: Request, conv_id: str):
     user = _get_user(request)
@@ -769,3 +739,86 @@ async def email_conversation(request: Request, conv_id: str):
         return JSONResponse({"error": "Errore nell'invio dell'email."}, status_code=500)
 
     return JSONResponse({"ok": True})
+
+
+# ── Share a single answer with an external recipient ──
+
+def _excerpt(markdown_text: str, max_chars: int) -> str:
+    """Plain-text preview of an answer for the email body (strips markdown/images)."""
+    t = re.sub(r'\[Screenshot:[^\]]*\]', '', markdown_text)
+    t = re.sub(r'!\[[^\]]*\]\([^)]*\)', '', t)
+    t = re.sub(r'[#*_`>\[\]]', '', t)
+    t = re.sub(r'\s+', ' ', t).strip()
+    if len(t) <= max_chars:
+        return t
+    return t[:max_chars].rsplit(' ', 1)[0] + '…'
+
+
+@router.post("/api/messages/{message_id}/share")
+async def share_answer_endpoint(
+    request: Request,
+    message_id: int,
+    recipient_email: str = Form(...),
+    note: str = Form(""),
+    screenshots: str = Form(""),
+):
+    """Share one assistant answer via email with an arbitrary external recipient.
+
+    Snapshots the answer into `shares` (screenshots come from the client, since
+    they are not persisted server-side) and emails an excerpt + CTA to the public
+    landing `/s/{token}`. Auth + ownership + double rate-limit guard against abuse.
+    """
+    user = _get_user(request)
+    if not user:
+        return JSONResponse({"error": "Non autenticato."}, status_code=401)
+
+    recipient_email = recipient_email.strip().lower()
+    if not EMAIL_RE.match(recipient_email):
+        return JSONResponse({"error": "Email destinatario non valida."}, status_code=400)
+
+    if not allow(f"share:from:{user['email']}", 10, 3600):
+        return JSONResponse({"error": "Hai condiviso troppe risposte. Riprova tra un'ora."}, status_code=429)
+    if not allow(f"share:to:{recipient_email}", 3, 86400):
+        return JSONResponse({"error": "Troppe condivisioni verso questo destinatario. Riprova domani."}, status_code=429)
+
+    msg = get_message_by_id(message_id, user["id"])
+    if not msg or msg["role"] != "assistant":
+        return JSONResponse({"error": "Risposta non trovata."}, status_code=404)
+
+    # Screenshots are sent by the client (not stored in `messages`)
+    try:
+        shots = json.loads(screenshots) if screenshots else []
+        if not isinstance(shots, list):
+            shots = []
+    except (ValueError, TypeError):
+        shots = []
+    sources = json.loads(msg["sources"]) if msg.get("sources") else None
+
+    token = create_share(
+        message_id=message_id,
+        conversation_id=msg["conversation_id"],
+        sender_user_id=user["id"],
+        sender_email=user["email"],
+        recipient_email=recipient_email,
+        snap_content_md=msg["content"],
+        snap_sources=sources,
+        snap_screenshots=shots,
+        snap_agent=msg.get("agent"),
+        snap_question=get_prev_user_message(msg["conversation_id"], message_id),
+    )
+
+    base_url = settings.base_url.rstrip("/") if settings.base_url else "https://os1docs.ai.scao.it"
+    share_url = f"{base_url}/s/{token}"
+    subject, html = share_answer(
+        sender_email=user["email"],
+        excerpt=_excerpt(msg["content"], 320),
+        note=note.strip()[:500],
+        share_url=share_url,
+        pixel_url=f"{share_url}/pixel.gif",
+        trial_days=get_trial_duration_days(),
+    )
+
+    if not send_email(recipient_email, subject, html):
+        return JSONResponse({"error": "Errore nell'invio dell'email."}, status_code=500)
+
+    return JSONResponse({"ok": True, "url": share_url, "dev": not settings.resend_api_key})

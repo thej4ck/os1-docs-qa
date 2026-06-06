@@ -25,6 +25,7 @@ from app.models.domain import (
     TIER_PRESETS,
     DEFAULT_TIER,
 )
+from app.models.share import list_shares_admin, get_share_funnel
 
 router = APIRouter(prefix="/admin")
 
@@ -67,6 +68,25 @@ async def dashboard(request: Request):
         "summary": summary,
         "total_users": len(users),
         "recent_questions": recent,
+    })
+
+
+# ── Shares (answer sharing funnel) ──
+
+@router.get("/shares", response_class=HTMLResponse)
+async def shares_page(request: Request):
+    admin = _require_admin(request)
+    if not admin:
+        return RedirectResponse(url="/login", status_code=302)
+
+    shares = list_shares_admin(200)
+    funnel = get_share_funnel()
+    return _templates().TemplateResponse(request, "admin/shares.html", {
+        "request": request,
+        "email": admin["email"],
+        "is_admin": True,
+        "shares": shares,
+        "funnel": funnel,
     })
 
 

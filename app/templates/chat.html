@@ -442,6 +442,56 @@ function completeOnboarding() {
     </div>
 </div>
 
+<!-- Share answer modal -->
+<div class="share-modal" id="share-modal" hidden onclick="if(event.target===this)closeShareModal()">
+    <div class="share-modal-card" role="dialog" aria-modal="true" aria-labelledby="share-modal-title">
+        <h3 id="share-modal-title">✉️ Condividi questa risposta</h3>
+        <p>Invia la soluzione via email a un collega o a un contatto, anche se non usa OS1 Virgilio. Riceverà la risposta e un link per consultarla online.</p>
+        <form id="share-form" onsubmit="return submitShare(event)">
+            <label class="share-field"><span>Email destinatario *</span>
+                <input type="email" id="share-email" required placeholder="nome@azienda.it"></label>
+            <label class="share-field"><span>Messaggio personale</span>
+                <textarea id="share-note" maxlength="500" rows="3" placeholder="(facoltativo)"></textarea></label>
+            <div class="access-modal-actions">
+                <button class="btn-logout" type="button" onclick="closeShareModal()">Annulla</button>
+                <button class="btn-primary" type="submit" id="share-submit">Invia</button>
+            </div>
+        </form>
+    </div>
+</div>
+<style>
+.share-modal { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,.5); padding: 20px; }
+.share-modal[hidden] { display: none; }
+.share-modal-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 14px; padding: 26px 28px; max-width: 480px; width: 100%; max-height: 88vh; overflow: auto; box-shadow: 0 24px 64px -16px rgba(0,0,0,.4); }
+.share-modal-card h3 { margin: 0 0 10px; font-family: 'DM Sans', sans-serif; font-size: 1.15rem; }
+.share-modal-card > p { margin: 0 0 18px; color: var(--c-text-secondary); font-size: .9375rem; line-height: 1.5; }
+.share-field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; font-size: .8125rem; font-weight: 600; color: var(--c-text-secondary); }
+.share-field input, .share-field textarea { font-family: inherit; font-size: .9375rem; font-weight: 400; padding: 9px 12px; border: 1px solid var(--c-border); border-radius: var(--r-sm); background: var(--c-surface-alt); color: var(--c-text); resize: vertical; }
+</style>
+<script>
+let _shareMsgId = null, _shareShots = [];
+function openShareModal(msgId, shots){ _shareMsgId = msgId; _shareShots = shots || []; document.getElementById('share-form').reset(); document.getElementById('share-modal').hidden = false; }
+function closeShareModal(){ document.getElementById('share-modal').hidden = true; }
+async function submitShare(ev){
+    ev.preventDefault();
+    const email = document.getElementById('share-email').value.trim();
+    if(!email){ showToast('Inserisci l\'email del destinatario', 'error'); return false; }
+    const btn = document.getElementById('share-submit'); btn.disabled = true;
+    const fd = new FormData();
+    fd.append('recipient_email', email);
+    fd.append('note', document.getElementById('share-note').value.trim());
+    fd.append('screenshots', JSON.stringify(_shareShots));
+    try {
+        const r = await fetch('/api/messages/' + _shareMsgId + '/share', { method: 'POST', body: fd });
+        const d = await r.json();
+        if(d.ok){ showToast('Risposta condivisa!', 'success'); closeShareModal(); }
+        else showToast(d.error || 'Errore nell\'invio', 'error');
+    } catch { showToast('Errore di connessione', 'error'); }
+    finally { btn.disabled = false; }
+    return false;
+}
+</script>
+
 {% if mcp_enabled %}
 <!-- MCP connect modal -->
 <div class="mcp-modal" id="mcp-modal" hidden onclick="if(event.target===this)closeMcpModal()">
@@ -1090,6 +1140,16 @@ function renderFinal(msgParts, text, sources, messageId, screenshots, wasDeep, t
         printBtn.onclick = () => window.print();
         actions.appendChild(copyBtn);
         actions.appendChild(printBtn);
+        // Share via email (needs the persisted message id; screenshots are sent
+        // from the client since they aren't stored server-side).
+        if (messageId) {
+            const shareBtn = document.createElement('button');
+            shareBtn.className = 'msg-action-btn';
+            shareBtn.type = 'button';
+            shareBtn.textContent = 'Condividi';
+            shareBtn.onclick = () => openShareModal(messageId, screenshots || []);
+            actions.appendChild(shareBtn);
+        }
         msgParts.body.appendChild(actions);
     }
 

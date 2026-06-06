@@ -263,6 +263,71 @@ def trial_downgraded(*, first_name: str, domain_pattern: str) -> tuple[str, str]
     return subject, wrap_customer("Prova gratuita terminata", body)
 
 
+def share_answer(
+    *,
+    sender_email: str,
+    excerpt: str,
+    note: str,
+    share_url: str,
+    pixel_url: str,
+    trial_days: int,
+) -> tuple[str, str]:
+    """Email sharing one answer with an external recipient: excerpt + CTA + trial invite."""
+    sender = escape(sender_email)
+    subject = f"{sender_email} ti ha condiviso una risposta da {_PRODUCT}"
+    greeting = "Ciao"
+
+    note_block = ""
+    if note:
+        note_block = f"""\
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="width:100%;margin:0 0 20px;">
+  <tr><td style="border-left:3px solid {_BRAND};background:{_BG};padding:12px 16px;border-radius:0 8px 8px 0;">
+    <div style="font-size:14px;line-height:1.6;color:{_TEXT};font-style:italic;">{escape(note)}</div>
+  </td></tr>
+</table>"""
+
+    body = f"""\
+<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">{greeting},</p>
+
+<p style="font-size:15px;line-height:1.6;margin:0 0 20px;">
+  <strong>{sender}</strong> ha condiviso con te una risposta di <strong>{_PRODUCT_HTML}</strong>,
+  l'assistente basato su intelligenza artificiale per la documentazione del gestionale OS1.
+</p>
+
+{note_block}
+
+<div style="background:{_BG};border:1px solid {_BORDER};border-radius:10px;padding:18px 20px;margin:0 0 24px;">
+  <div style="font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:{_MUTED};margin-bottom:8px;">Anteprima della risposta</div>
+  <div style="font-size:14px;line-height:1.65;color:{_TEXT};">{escape(excerpt)}</div>
+</div>
+
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 28px;">
+  <tr><td style="border-radius:8px;background:{_BRAND};">
+    <a href="{share_url}" style="display:inline-block;padding:13px 28px;font-size:15px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:8px;">Leggi la risposta completa &rarr;</a>
+  </td></tr>
+</table>
+
+<div style="border-top:1px solid {_BORDER};padding-top:20px;">
+  <p style="font-size:14px;line-height:1.6;margin:0 0 12px;color:{_TEXT};">
+    <strong>{_PRODUCT_HTML}</strong> risponde alle domande sulla documentazione OS1 citando le fonti ufficiali:
+    moduli, tabelle, procedure e messaggi di errore, in linguaggio naturale.
+  </p>
+  <p style="font-size:14px;line-height:1.6;margin:0;color:{_TEXT};">
+    Puoi provarlo <strong style="color:{_BRAND};">gratis per {trial_days} giorni</strong> con la tua email aziendale.
+    Attiva la prova dalla pagina della risposta o su
+    <a href="{share_url}" style="color:{_BRAND};text-decoration:none;">questo link</a>.
+  </p>
+</div>
+
+<img src="{pixel_url}" width="1" height="1" alt="" style="display:block;width:1px;height:1px;">
+
+<p style="font-size:12px;line-height:1.5;margin:24px 0 0;color:{_MUTED};">
+  Ricevi questa email perché <strong>{sender}</strong> ha scelto di condividere con te una risposta.
+  È un invio singolo: non sei stato iscritto ad alcuna lista o newsletter.
+</p>"""
+    return subject, wrap_customer("Una risposta condivisa con te", body)
+
+
 # ── Internal notifications (SCAO admin) ──────────────────────────────────
 
 def _safe(value) -> str:

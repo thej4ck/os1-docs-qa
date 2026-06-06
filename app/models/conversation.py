@@ -55,6 +55,27 @@ def get_conversation_agent(conv_id: str) -> str | None:
     return row["agent"] if row else None
 
 
+def get_message_by_id(message_id: int, user_id: int) -> dict | None:
+    """Get a single message with ownership check (joins through the conversation owner)."""
+    row = get_conn().execute(
+        "SELECT m.* FROM messages m JOIN conversations c ON c.id = m.conversation_id "
+        "WHERE m.id = ? AND c.user_id = ?",
+        (message_id, user_id),
+    ).fetchone()
+    return dict(row) if row else None
+
+
+def get_prev_user_message(conv_id: str, before_id: int) -> str:
+    """Content of the last user message preceding `before_id` (the question that
+    produced an answer). Empty string if none."""
+    row = get_conn().execute(
+        "SELECT content FROM messages WHERE conversation_id = ? AND role = 'user' "
+        "AND id < ? ORDER BY id DESC LIMIT 1",
+        (conv_id, before_id),
+    ).fetchone()
+    return row["content"] if row else ""
+
+
 def get_messages(conv_id: str, limit: int | None = None) -> list[dict]:
     if limit:
         rows = get_conn().execute(

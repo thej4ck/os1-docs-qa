@@ -133,12 +133,14 @@ from app.routes.auth_routes import router as auth_router
 from app.routes.admin_routes import router as admin_router
 from app.routes.signup_routes import router as signup_router
 from app.routes.mcp_auth_routes import router as mcp_auth_router
+from app.routes.public_routes import router as public_router
 
 app.include_router(auth_router)
 app.include_router(signup_router)
 app.include_router(chat_router)
 app.include_router(admin_router)
 app.include_router(mcp_auth_router)
+app.include_router(public_router)
 
 
 @app.get("/healthz")

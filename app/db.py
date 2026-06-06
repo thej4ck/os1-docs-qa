@@ -91,6 +91,36 @@ def _create_schema():
             created_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now'))
         );
 
+        -- Shared answers: immutable snapshot of one assistant reply, emailed to an
+        -- external recipient (the landing /s/{token} is public). message_id is a
+        -- weak ref (ON DELETE SET NULL) so the share survives chat deletion.
+        CREATE TABLE IF NOT EXISTS shares (
+            token            TEXT PRIMARY KEY,
+            message_id       INTEGER REFERENCES messages(id) ON DELETE SET NULL,
+            conversation_id  TEXT,
+            sender_user_id   INTEGER NOT NULL REFERENCES users(id),
+            sender_email     TEXT NOT NULL,
+            recipient_email  TEXT NOT NULL,
+            recipient_name   TEXT,
+            snap_content_md  TEXT NOT NULL,
+            snap_sources     TEXT,
+            snap_screenshots TEXT,
+            snap_agent       TEXT,
+            snap_question    TEXT,
+            created_at       TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ', 'now')),
+            expires_at       TEXT,
+            revoked          INTEGER NOT NULL DEFAULT 0,
+            open_count       INTEGER NOT NULL DEFAULT 0,
+            view_count       INTEGER NOT NULL DEFAULT 0,
+            cta_click_count  INTEGER NOT NULL DEFAULT 0,
+            converted        INTEGER NOT NULL DEFAULT 0,
+            converted_domain_id INTEGER,
+            first_viewed_at  TEXT,
+            converted_at     TEXT
+        );
+        CREATE INDEX IF NOT EXISTS idx_shares_sender ON shares(sender_user_id, created_at DESC);
+        CREATE INDEX IF NOT EXISTS idx_shares_recipient ON shares(recipient_email);
+
         CREATE VIEW IF NOT EXISTS monthly_usage AS
         SELECT
             u.id AS user_id,

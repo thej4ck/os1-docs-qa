@@ -1,7 +1,5 @@
 """Self-signup freemium flow: signup → OTP verify → autoprovision TRIAL."""
 
-import re
-
 from fastapi import APIRouter, BackgroundTasks, Form, Request
 from fastapi.responses import HTMLResponse
 
@@ -23,10 +21,10 @@ from app.models.domain import (
     is_personal_email_domain,
     mark_flag,
 )
+from app.models.share import mark_converted
+from app.util.validation import EMAIL_RE
 
 router = APIRouter()
-
-_EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
 
 def _templates():
@@ -42,20 +40,23 @@ def _render_signup(request: Request, **ctx):
         "last_name": "",
         "email": "",
         "company_name": "",
+        "ref": "",
+        "share_token": "",
     }
     base.update(ctx)
     return _templates().TemplateResponse(request, "signup.html", base)
 
 
 def _render_verify(request: Request, **ctx):
-    base = {"request": request, "error": None}
+    base = {"request": request, "error": None, "ref": "", "share_token": ""}
     base.update(ctx)
     return _templates().TemplateResponse(request, "signup_verify.html", base)
 
 
 @router.get("/signup", response_class=HTMLResponse)
-async def signup_page(request: Request):
-    return _render_signup(request)
+async def signup_page(request: Request, ref: str = "", s: str = ""):
+    # ref/s carry share attribution from the public landing CTA (/s/{token}/go).
+    return _render_signup(request, ref=ref, share_token=s)
 
 
 @router.post("/signup", response_class=HTMLResponse)
@@ -66,6 +67,8 @@ async def signup_submit(
     email: str = Form(...),
     company_name: str = Form(...),
     gdpr: str = Form(""),
+    ref: str = Form(""),
+    share_token: str = Form(""),
 ):
     first_name = first_name.strip()
     last_name = last_name.strip()
@@ -74,13 +77,13 @@ async def signup_submit(
 
     form_ctx = dict(
         first_name=first_name, last_name=last_name, email=email,
-        company_name=company_name,
+        company_name=company_name, ref=ref, share_token=share_token,
     )
 
     if not (first_name and last_name and email and company_name):
         return _render_signup(request, error="Compila tutti i campi.", **form_ctx)
 
-    if not _EMAIL_RE.match(email):
+    if not EMAIL_RE.match(email):
         return _render_signup(request, error="Email non valida.", **form_ctx)
 
     if gdpr != "on":
@@ -131,6 +134,8 @@ async def signup_verify(
     email: str = Form(...),
     company_name: str = Form(...),
     code: str = Form(...),
+    ref: str = Form(""),
+    share_token: str = Form(""),
 ):
     first_name = first_name.strip()
     last_name = last_name.strip()
@@ -140,7 +145,7 @@ async def signup_verify(
 
     form_ctx = dict(
         first_name=first_name, last_name=last_name, email=email,
-        company_name=company_name,
+        company_name=company_name, ref=ref, share_token=share_token,
     )
 
     wait = verify_cooldown_remaining(email)
@@ -190,6 +195,10 @@ async def signup_verify(
     if admin_to:
         notif_subject, notif_html = admin_new_signup(domain_row)
         background_tasks.add_task(send_email, admin_to, notif_subject, notif_html)
+
+    # Attribute this trial to the share that referred it (if any). Idempotent.
+    if share_token:
+        background_tasks.add_task(mark_converted, share_token, domain_id)
 
     return login_and_redirect(email)
 
