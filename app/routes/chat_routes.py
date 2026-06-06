@@ -110,8 +110,14 @@ async def chat_page(request: Request, c: str | None = None):
     # Conversazione attiva = ha già messaggi: l'esperto è bloccato (no picker).
     is_active_conversation = bool(messages)
 
+    from app.config import settings as _cfg
+    from app.models.settings import get_bool_setting
+    _mcp_base = _cfg.base_url.rstrip("/") if _cfg.base_url else str(request.base_url).rstrip("/")
+
     return _templates().TemplateResponse(request, "chat.html", {
         "request": request,
+        "mcp_enabled": get_bool_setting("mcp_enabled", _cfg.production),
+        "mcp_url": f"{_mcp_base}/mcp",
         "email": user["email"],
         "is_admin": bool(user["is_admin"]),
         "conversation_id": conversation_id,

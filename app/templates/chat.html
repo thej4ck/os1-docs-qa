@@ -22,6 +22,13 @@
     </svg>
     <span class="docs-badge" id="docs-badge">0</span>
 </button>
+{% if mcp_enabled %}
+<button class="docs-toggle-btn" id="mcp-connect-btn" aria-label="Collega ad AI" title="Collega OS1 a Claude / ChatGPT (MCP)" onclick="openMcpModal()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">
+        <path d="M9 2v6M15 2v6M7 8h10v3a5 5 0 0 1-10 0z"/><path d="M12 16v6"/>
+    </svg>
+</button>
+{% endif %}
 <div class="usage-meter" id="usage-meter" hidden title="">
     <div class="usage-meter-track"><div class="usage-meter-fill" id="usage-meter-fill"></div></div>
     <span class="usage-meter-label" id="usage-meter-label"></span>
@@ -434,6 +441,57 @@ function completeOnboarding() {
         </div>
     </div>
 </div>
+
+{% if mcp_enabled %}
+<!-- MCP connect modal -->
+<div class="mcp-modal" id="mcp-modal" hidden onclick="if(event.target===this)closeMcpModal()">
+    <div class="mcp-modal-card" role="dialog" aria-modal="true" aria-labelledby="mcp-modal-title">
+        <h3 id="mcp-modal-title">🔌 Collega OS1 a un assistente AI</h3>
+        <p>Usa la documentazione OS1 dentro <strong>Claude</strong>, <strong>ChatGPT</strong> o altri client compatibili <strong>MCP</strong>. Indirizzo del connettore:</p>
+        <div class="access-url-row">
+            <input class="access-url-input" id="mcp-url-input" readonly value="{{ mcp_url }}" onclick="this.select()">
+            <button class="btn-primary" type="button" onclick="copyMcpUrl()">Copia</button>
+        </div>
+        <div class="mcp-steps">
+            <h4>Claude (web o Desktop)</h4>
+            <ol>
+                <li>Impostazioni → <strong>Connettori</strong> → <strong>Aggiungi connettore personalizzato</strong>.</li>
+                <li>Incolla l'indirizzo qui sopra e conferma.</li>
+                <li>Accedi con la <strong>tua email OS1</strong> e il <strong>codice</strong> che ricevi via email.</li>
+            </ol>
+            <h4>ChatGPT</h4>
+            <ol>
+                <li>Impostazioni → <strong>Connettori</strong> (Developer mode, piani a pagamento) → <strong>Aggiungi</strong>.</li>
+                <li>Incolla l'indirizzo → stesso accesso via email + codice.</li>
+            </ol>
+            <h4>Altri client MCP</h4>
+            <p>Qualunque client che supporta server MCP remoti con OAuth: usa lo stesso indirizzo.</p>
+        </div>
+        <p class="mcp-hint">Poi chiedi all'assistente qualcosa su OS1 (in italiano): userà la documentazione ufficiale e citerà le fonti.</p>
+        <div class="access-modal-actions">
+            <button class="btn-logout" type="button" onclick="closeMcpModal()">Chiudi</button>
+        </div>
+    </div>
+</div>
+<style>
+.mcp-modal { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,.5); padding: 20px; }
+.mcp-modal[hidden] { display: none; }
+.mcp-modal-card { background: var(--c-surface); border: 1px solid var(--c-border); border-radius: 14px; padding: 26px 28px; max-width: 560px; width: 100%; max-height: 88vh; overflow: auto; box-shadow: 0 24px 64px -16px rgba(0,0,0,.4); }
+.mcp-modal-card h3 { margin: 0 0 10px; font-family: 'DM Sans', sans-serif; font-size: 1.15rem; }
+.mcp-modal-card > p { margin: 0 0 14px; color: var(--c-text-secondary); font-size: .9375rem; line-height: 1.5; }
+.mcp-steps { margin: 18px 0 6px; }
+.mcp-steps h4 { margin: 16px 0 6px; font-size: .9rem; font-family: 'DM Sans', sans-serif; color: var(--c-brand); }
+.mcp-steps ol { margin: 0; padding-left: 20px; }
+.mcp-steps li { font-size: .9rem; color: var(--c-text); line-height: 1.55; margin-bottom: 4px; }
+.mcp-steps p { font-size: .9rem; color: var(--c-text-secondary); margin: 0; }
+.mcp-hint { font-size: .85rem; color: var(--c-text-tertiary); margin: 14px 0 0; line-height: 1.5; }
+</style>
+<script>
+function openMcpModal(){ document.getElementById('mcp-modal').hidden = false; }
+function closeMcpModal(){ document.getElementById('mcp-modal').hidden = true; }
+function copyMcpUrl(){ var i=document.getElementById('mcp-url-input'); i.select(); if(navigator.clipboard){navigator.clipboard.writeText(i.value);} var b=event.target, t=b.textContent; b.textContent='Copiato'; setTimeout(function(){b.textContent=t;},1200); }
+</script>
+{% endif %}
 
 <script>
 // ── State ──

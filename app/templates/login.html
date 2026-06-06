@@ -159,6 +159,21 @@
         </div>
     </section>
 
+    {% if mcp_enabled %}
+    <!-- ══ MCP / connettori AI ══ -->
+    <section class="vg-section">
+        <div class="vg-section-head vg-reveal">
+            <span class="vg-kicker">Novità</span>
+            <h2 class="vg-h2">Portalo dentro Claude e ChatGPT</h2>
+            <p class="vg-sub">OS1 Virgilio è anche un <strong>connettore MCP</strong>: collega la documentazione ufficiale OS1 al tuo assistente AI e interrogala direttamente da lì.</p>
+        </div>
+        <div class="vg-mcp vg-reveal">
+            <code class="vg-mcp-url">{{ mcp_url }}</code>
+            <p class="vg-mcp-note">Funziona con <strong>Claude</strong>, <strong>ChatGPT</strong> e qualsiasi client compatibile <strong>MCP</strong>. Servono un account OS1 del tuo dominio e l'accesso via email. <strong>Le istruzioni passo-passo sono dentro l'app, dopo l'accesso.</strong></p>
+        </div>
+    </section>
+    {% endif %}
+
     <!-- ══ CTA FINALE ══ -->
     <section class="vg-cta vg-reveal">
         <span class="vg-kicker">Inizia ora</span>
@@ -507,6 +522,19 @@
     .vg-hero-inner { animation: none; }
     .vg-scroll-cue svg { animation: none; }
     .vg-reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ── MCP / connettori AI ── */
+.vg-mcp { max-width: 640px; margin: 0 auto; text-align: center; }
+.vg-mcp-url {
+    display: inline-block; font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem; color: var(--c-brand); background: var(--c-brand-light);
+    border: 1px solid var(--c-border); border-radius: 10px; padding: 12px 22px;
+    word-break: break-all;
+}
+.vg-mcp-note {
+    color: var(--c-text-secondary); font-size: 0.975rem; line-height: 1.6;
+    margin: 18px auto 0; max-width: 560px;
 }
 </style>
 
