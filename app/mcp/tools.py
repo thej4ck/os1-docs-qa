@@ -27,17 +27,30 @@ def _doc_url(source_file: str) -> str:
 
 
 def _track_request() -> None:
-    """Conta la richiesta MCP per l'utente autenticato (per la dashboard admin).
-    Best-effort: senza auth (dev/no-auth) o subject non risolvibile, no-op."""
+    """Conta la richiesta MCP (search/fetch) per l'utente autenticato.
+
+    Risoluzione robusta del subject (= email utente):
+    1. `at.subject` se presente (caso ideale);
+    2. altrimenti lookup nel NOSTRO store via token grezzo — `get_access_token()`
+       di FastMCP, convertendo i token dell'AS OAuth, SCARTA `subject`, e per
+       OAuth `client_id` è l'UUID del client DCR (non l'email);
+    3. fallback `client_id` (modalità bearer: client_id == email utente).
+    Best-effort: dev/no-auth o errore → no-op (logga solo l'errore)."""
     try:
         from fastmcp.server.dependencies import get_access_token
-        from app.mcp.auth import subject_of
         from app.models import oauth as oauth_store
-        subject = subject_of(get_access_token())
+        at = get_access_token()
+        if at is None:
+            return
+        subject = getattr(at, "subject", None)
+        if not subject:
+            raw = getattr(at, "token", None)
+            rec = oauth_store.get_token(raw, "access") if raw else None
+            subject = rec["subject"] if rec else getattr(at, "client_id", None)
         if subject:
             oauth_store.bump_mcp_usage(subject)
-    except Exception:
-        pass
+    except Exception as e:  # noqa: BLE001
+        print(f"[mcp usage] track failed: {e}", flush=True)
 
 
 def register_tools(mcp) -> None:
