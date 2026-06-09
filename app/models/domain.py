@@ -7,22 +7,93 @@ from app.models.settings import get_setting
 
 # Usage tier presets — single source of truth for the commercial model.
 # The contractual measure is monthly requests; the monthly token limit is a
-# cost-protection ceiling. daily_limit=0 means unlimited daily quota.
+# cost-protection ceiling. daily_limit=0 means unlimited daily quota (in QUESTIONS).
+# daily_chat_limit=0 means unlimited NEW conversations/day (FREE caps it to 1).
 TIER_TRIAL = "TRIAL"
 TIER_FREE = "FREE"
 TIER_BASE = "BASE"
 TIER_PLUS = "PLUS"
 TIER_POWER = "POWER"
+# Fasce a pagamento legate ai PDL OS1 (full-feature; cambiano solo i limiti d'uso).
+TIER_STARTER = "STARTER"
+TIER_TEAM = "TEAM"
+TIER_BUSINESS = "BUSINESS"
+TIER_PRO = "PRO"
+TIER_PREMIUM = "PREMIUM"
+TIER_ENTERPRISE = "ENTERPRISE"
 FREEMIUM_TIERS = (TIER_TRIAL, TIER_FREE)
 
+# Stato commerciale (colonna billing_status), separato dal tier applicato.
+BILLING_TRIAL = "trial"
+BILLING_FREE = "free"
+BILLING_PAID = "paid"
+BILLING_PAST_DUE = "past_due"
+
 TIER_PRESETS = {
-    TIER_TRIAL: {"monthly_request_limit": 100, "monthly_token_limit": 2_500_000, "daily_limit": 0},
-    TIER_FREE:  {"monthly_request_limit": 5,   "monthly_token_limit": 100_000,   "daily_limit": 2},
-    TIER_BASE:  {"monthly_request_limit": 100, "monthly_token_limit": 2_500_000, "daily_limit": 0},
-    TIER_PLUS:  {"monthly_request_limit": 300, "monthly_token_limit": 7_000_000, "daily_limit": 0},
-    TIER_POWER: {"monthly_request_limit": 800, "monthly_token_limit": 18_000_000,"daily_limit": 0},
+    TIER_TRIAL: {"monthly_request_limit": 100, "monthly_token_limit": 2_500_000, "daily_limit": 0, "daily_chat_limit": 0},
+    # FREE post-trial: 1 nuova chat al giorno (fino al max messaggi/chat), gancio retention.
+    TIER_FREE:  {"monthly_request_limit": 30,  "monthly_token_limit": 300_000,   "daily_limit": 0, "daily_chat_limit": 1},
+    TIER_BASE:  {"monthly_request_limit": 100, "monthly_token_limit": 2_500_000, "daily_limit": 0, "daily_chat_limit": 0},
+    TIER_PLUS:  {"monthly_request_limit": 300, "monthly_token_limit": 7_000_000, "daily_limit": 0, "daily_chat_limit": 0},
+    TIER_POWER: {"monthly_request_limit": 800, "monthly_token_limit": 18_000_000,"daily_limit": 0, "daily_chat_limit": 0},
+    # Fasce PDL — limiti generosi (fair-use), scalano coi PDL. COGS trascurabile.
+    TIER_STARTER:    {"monthly_request_limit": 300,  "monthly_token_limit": 7_000_000,  "daily_limit": 0, "daily_chat_limit": 0},
+    TIER_TEAM:       {"monthly_request_limit": 600,  "monthly_token_limit": 14_000_000, "daily_limit": 0, "daily_chat_limit": 0},
+    TIER_BUSINESS:   {"monthly_request_limit": 1_000,"monthly_token_limit": 24_000_000, "daily_limit": 0, "daily_chat_limit": 0},
+    TIER_PRO:        {"monthly_request_limit": 1_500,"monthly_token_limit": 36_000_000, "daily_limit": 0, "daily_chat_limit": 0},
+    TIER_PREMIUM:    {"monthly_request_limit": 2_000,"monthly_token_limit": 48_000_000, "daily_limit": 0, "daily_chat_limit": 0},
+    TIER_ENTERPRISE: {"monthly_request_limit": 3_000,"monthly_token_limit": 72_000_000, "daily_limit": 0, "daily_chat_limit": 0},
 }
 DEFAULT_TIER = TIER_BASE
+
+# Entitlement per tier: quali funzionalità sblocca. FREE = minimale (1 esperto,
+# niente deep/MCP/share); TRIAL e tutte le fasce a pagamento = tutto sbloccato.
+_FEAT_FULL = {"experts": True, "deep": True, "mcp": True, "share": True}
+_FEAT_MINIMAL = {"experts": False, "deep": False, "mcp": False, "share": False}
+# Solo FREE è minimale; ogni altro tier (TRIAL + fasce a pagamento + legacy)
+# eredita _FEAT_FULL dal default di domain_features() — niente da aggiornare
+# quando si aggiunge una fascia.
+TIER_FEATURES = {TIER_FREE: _FEAT_MINIMAL}
+
+# Listino fasce PDL (land-grab ~€5-7/PDL effettivo, scaglioni). Prezzi €/mese e
+# €/anno ex IVA, fatturazione annuale. Enterprise = a preventivo (price=None).
+PRICING_BANDS = [
+    {"band": TIER_STARTER,    "label": "Starter",    "pdl_min": 1,  "pdl_max": 3,    "price_month": 19,  "price_year": 228},
+    {"band": TIER_TEAM,       "label": "Team",       "pdl_min": 4,  "pdl_max": 6,    "price_month": 35,  "price_year": 420},
+    {"band": TIER_BUSINESS,   "label": "Business",   "pdl_min": 7,  "pdl_max": 10,   "price_month": 49,  "price_year": 588},
+    {"band": TIER_PRO,        "label": "Pro",        "pdl_min": 11, "pdl_max": 15,   "price_month": 75,  "price_year": 900},
+    {"band": TIER_PREMIUM,    "label": "Premium",    "pdl_min": 16, "pdl_max": 20,   "price_month": 89,  "price_year": 1068},
+    {"band": TIER_ENTERPRISE, "label": "Enterprise", "pdl_min": 21, "pdl_max": None, "price_month": None,"price_year": None},
+]
+
+
+def band_from_pdl(pdl: int | None) -> str | None:
+    """Fascia (tier) dai PDL OS1. None/<=0 → None (PDL non impostato)."""
+    if not pdl or pdl < 1:
+        return None
+    for b in PRICING_BANDS:
+        if pdl >= b["pdl_min"] and (b["pdl_max"] is None or pdl <= b["pdl_max"]):
+            return b["band"]
+    return TIER_ENTERPRISE
+
+
+def band_info(band: str | None) -> dict | None:
+    """Riga di listino per una fascia (label/range/prezzo), o None."""
+    if not band:
+        return None
+    return next((b for b in PRICING_BANDS if b["band"] == band), None)
+
+
+def domain_features(domain: dict | None) -> dict:
+    """Entitlement (experts/deep/mcp/share) per il dominio. Default full (legacy-safe)."""
+    if not domain:
+        return dict(_FEAT_FULL)
+    return dict(TIER_FEATURES.get(domain.get("tier"), _FEAT_FULL))
+
+
+def tier_daily_chat_limit(tier: str | None) -> int:
+    """Max nuove conversazioni/giorno per il tier (0 = illimitato)."""
+    return TIER_PRESETS.get(tier or "", {}).get("daily_chat_limit", 0)
 
 # Personal / free email providers — never accepted for self-signup.
 PERSONAL_EMAIL_DOMAINS = {
@@ -123,9 +194,13 @@ def add_domain_trial(
     contact_first_name: str,
     contact_last_name: str,
     contact_email: str,
-    duration_days: int = 30,
+    duration_days: int = 7,
 ) -> int:
-    """Insert a TRIAL domain with expiry and registrant data."""
+    """Insert a TRIAL domain (full-unlock) with expiry and registrant data.
+
+    Il trial dura 7 giorni e sblocca tutte le funzionalità; una drip email
+    giornaliera (scheduler) invita a provarle. billing_status='trial'.
+    """
     preset = TIER_PRESETS[TIER_TRIAL]
     expires_at = _to_iso_z(_now_utc() + timedelta(days=duration_days))
     conn = get_conn()
@@ -133,8 +208,8 @@ def add_domain_trial(
         "INSERT INTO allowed_domains "
         "(pattern, tier, monthly_request_limit, monthly_token_limit, daily_limit, "
         " expires_at, company_name, vat_number, contact_first_name, "
-        " contact_last_name, contact_email) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        " contact_last_name, contact_email, billing_status) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         (
             pattern.strip().lower(),
             TIER_TRIAL,
@@ -147,27 +222,28 @@ def add_domain_trial(
             contact_first_name.strip(),
             contact_last_name.strip(),
             contact_email.strip().lower(),
+            BILLING_TRIAL,
         ),
     )
     conn.commit()
     return cur.lastrowid
 
 
+def _tier_limits(tier: str) -> tuple[int, int, int]:
+    """(monthly_request, monthly_token, daily) per il preset del tier normalizzato."""
+    p = TIER_PRESETS[_normalize_tier(tier)]
+    return p["monthly_request_limit"], p["monthly_token_limit"], p["daily_limit"]
+
+
 def apply_tier(domain_id: int, tier: str):
     """Atomically apply a tier preset to an existing domain."""
     tier = _normalize_tier(tier)
-    preset = TIER_PRESETS[tier]
+    req, tok, daily = _tier_limits(tier)
     conn = get_conn()
     conn.execute(
         "UPDATE allowed_domains SET tier = ?, monthly_request_limit = ?, "
         "monthly_token_limit = ?, daily_limit = ? WHERE id = ?",
-        (
-            tier,
-            preset["monthly_request_limit"],
-            preset["monthly_token_limit"],
-            preset["daily_limit"],
-            domain_id,
-        ),
+        (tier, req, tok, daily, domain_id),
     )
     conn.commit()
 
@@ -271,7 +347,82 @@ def is_mcp_enabled_for_email(email: str) -> bool:
     d = get_domain_for_email(email)
     if d is None:
         return True
-    return bool(d.get("mcp_enabled", 1))
+    # Richiede sia il toggle admin per-dominio sia l'entitlement di tier
+    # (FREE non ha MCP anche con mcp_enabled=1).
+    return bool(d.get("mcp_enabled", 1)) and domain_features(d)["mcp"]
+
+
+def set_domain_pdl(domain_id: int, pdl: int | None) -> None:
+    """Registra il numero di PDL OS1 e la fascia derivata (senza attivare il pagamento)."""
+    band = band_from_pdl(pdl)
+    conn = get_conn()
+    conn.execute(
+        "UPDATE allowed_domains SET os1_pdl_count = ?, pricing_band = ? WHERE id = ?",
+        (pdl, band, domain_id),
+    )
+    conn.commit()
+
+
+def activate_paid(domain_id: int, pdl: int) -> str | None:
+    """Attiva un abbonamento a pagamento in un solo UPDATE: tier+limiti della
+    fascia (dai PDL), billing_status='paid', azzera la scadenza trial.
+    Ritorna la fascia applicata, o None se i PDL non mappano una fascia."""
+    band = band_from_pdl(pdl)
+    if not band:
+        return None
+    req, tok, daily = _tier_limits(band)
+    conn = get_conn()
+    conn.execute(
+        "UPDATE allowed_domains SET tier = ?, monthly_request_limit = ?, "
+        "monthly_token_limit = ?, daily_limit = ?, os1_pdl_count = ?, "
+        "pricing_band = ?, billing_status = ?, expires_at = NULL WHERE id = ?",
+        (band, req, tok, daily, pdl, band, BILLING_PAID, domain_id),
+    )
+    conn.commit()
+    return band
+
+
+def get_daily_conversation_count(user_id: int) -> int:
+    """Conta le conversazioni create oggi dall'utente (per il limite FREE 1 chat/giorno)."""
+    row = get_conn().execute(
+        "SELECT COUNT(*) AS cnt FROM conversations "
+        "WHERE user_id = ? AND date(created_at) = date('now')",
+        (user_id,),
+    ).fetchone()
+    return row["cnt"] if row else 0
+
+
+def list_active_trials() -> list[dict]:
+    """Domini abilitati in stato trial (per lo scheduler drip + downgrade)."""
+    rows = get_conn().execute(
+        "SELECT * FROM allowed_domains WHERE enabled = 1 AND billing_status = ?",
+        (BILLING_TRIAL,),
+    ).fetchall()
+    return [dict(r) for r in rows]
+
+
+def set_trial_drip_day(domain_id: int, day: int) -> None:
+    conn = get_conn()
+    conn.execute(
+        "UPDATE allowed_domains SET trial_drip_day = ? WHERE id = ?",
+        (int(day), domain_id),
+    )
+    conn.commit()
+
+
+_BILLING_STATES = {BILLING_TRIAL, BILLING_FREE, BILLING_PAID, BILLING_PAST_DUE}
+
+
+def set_billing_status(domain_id: int, status: str) -> None:
+    """Imposta lo stato commerciale (validato). No-op se sconosciuto."""
+    if status not in _BILLING_STATES:
+        return
+    conn = get_conn()
+    conn.execute(
+        "UPDATE allowed_domains SET billing_status = ? WHERE id = ?",
+        (status, domain_id),
+    )
+    conn.commit()
 
 
 def set_domain_mcp(domain_id: int, enabled: bool) -> None:
@@ -315,10 +466,12 @@ def check_and_downgrade_if_expired(domain: dict) -> dict:
         return domain
 
     apply_tier(domain["id"], TIER_FREE)
+    set_billing_status(domain["id"], BILLING_FREE)
     free_preset = TIER_PRESETS[TIER_FREE]
     downgraded = {
         **domain,
         "tier": TIER_FREE,
+        "billing_status": BILLING_FREE,
         "monthly_request_limit": free_preset["monthly_request_limit"],
         "monthly_token_limit": free_preset["monthly_token_limit"],
         "daily_limit": free_preset["daily_limit"],

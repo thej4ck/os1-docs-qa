@@ -5,10 +5,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Progetto
 **OS1 Virgilio** — servizio web Q&A per la documentazione OS1 (gestionale ERP di OSItalia).
 Chat con **retrieval ibrido BM25 + semantico (model2vec)** e LLM (Groq), 4 esperti specialisti,
-auth OTP + access-token, **self-signup freemium con tier**, backoffice admin, tracking costi, dark/light theme.
+auth OTP + access-token, **self-signup freemium con tier**, **pricing a scaglioni per PDL OS1**, backoffice admin, tracking costi, dark/light theme.
 
 - `app/version.py` è single source of truth: `VERSION`, `BUILD`, `BUILD_DATE`, `PRODUCT_NAME = "OS1 Virgilio"`.
-- Stato attuale: VERSION `2.1.0`, BUILD `85`.
+- Stato attuale: VERSION `2.2.0`, BUILD `87`.
 - Stack web: FastAPI `0.135.1` + **Starlette `>=1.0.1,<2`** (pin floating; chiude **CVE-2026-48710** Host-header → path poisoning). NB: con Starlette 1.x `Jinja2Templates.TemplateResponse` vuole `request` come **primo** arg: `TemplateResponse(request, name, context)`.
 
 ## Comandi sviluppo
@@ -73,8 +73,8 @@ Strati:
 - `app/version.py` — VERSION/BUILD/BUILD_DATE/PRODUCT_NAME.
 - `app/routes/chat_routes.py` (~780) — chat, ask SSE, conversazioni CRUD/export, feedback, doc viewer, announcements, usage summary, onboarding, request-upgrade, `/api/debug/retrieve` (solo dev).
 - `app/routes/auth_routes.py` — login OTP, verify, logout, **access-token login** (`/login/token`, `/api/access-token[/regenerate]`).
-- `app/routes/signup_routes.py` — **self-signup freemium** (`/signup`, `/signup/verify`) con autoprovisioning TRIAL. Accetta `ref`/`s` (share attribution): a fine signup chiama `mark_converted(share_token, domain_id)`.
-- `app/routes/public_routes.py` — **rotte pubbliche (no auth)** per la condivisione risposte (vedi sezione dedicata).
+- `app/routes/signup_routes.py` — **self-signup freemium** (`/signup`, `/signup/verify`) con autoprovisioning **TRIAL full-unlock 7gg** (`billing_status='trial'`). Accetta `ref`/`s` (share attribution): a fine signup chiama `mark_converted(share_token, domain_id)`.
+- `app/routes/public_routes.py` — **rotte pubbliche (no auth)**: condivisione risposte (vedi sezione dedicata) + **listino `/prezzi`** (`public_pricing.html`: fasce PDL + freemium + CTA prova/iscrizione).
 - `app/routes/admin_routes.py` (~555) — dashboard, utenti, usage, costi, conversazioni, domini, **condivisioni** (`/admin/shares`, funnel), feedback, settings, export CSV.
 - `app/auth/otp.py` — OTP in-memory (TTL 300s, cooldown 10s, max 5 tentativi), sender e domini da DB.
 - `app/auth/session.py` — cookie firmato itsdangerous (24h, HTTPOnly, SameSite=lax, Secure in prod).
@@ -143,25 +143,30 @@ Ordine pipeline: BM25 ∪ semantic → **RRF fuse** → **signals.rescore** → 
 
 Budget contesto in **parole** (`CONTEXT_PRESETS`: conservative 5k / normal 15k / aggressive 30k). Deep mode = `min(budget × 2.5, 60k)` + addendum "sii esaustivo" (saltato per esperti brief). Costo: `_calculate_cost` con sconto 50% sui cached token Groq. `reasoning_tokens` tracciati ma non fatturati. Rerank LLM contabilizzato a parte.
 
-### Usage tiers (`app/models/domain.py`)
-Tier applicati ai **domini** (`allowed_domains.tier`), risolti per email. `TIER_PRESETS`:
+### Usage tiers, pricing per PDL & funnel freemium (`app/models/domain.py`)
+Tier applicati ai **domini** (`allowed_domains.tier`), risolti per email. `TIER_PRESETS` (chiavi: `monthly_request_limit`, `monthly_token_limit`, `daily_limit` = domande/giorno, `daily_chat_limit` = nuove chat/giorno):
 
-| Tier | Req/mese | Token/mese | Daily | Note |
-|------|---------:|-----------:|------:|------|
-| TRIAL | 100 | 2.5M | 0 | auto-provisioning self-signup, `expires_at` |
-| FREE | 5 | 100k | 2 | freemium minimo |
-| BASE | 100 | 2.5M | 0 | default nuovi domini |
-| PLUS | 300 | 7M | 0 | |
-| POWER | 800 | 18M | 0 | |
+| Tier | Req/mese | Token/mese | Daily Q | Chat/g | Note |
+|------|---------:|-----------:|--------:|-------:|------|
+| TRIAL | 100 | 2.5M | 0 | 0 | **full-unlock 7gg** (auto-provisioning signup, `expires_at`) |
+| FREE | 30 | 300k | 0 | **1** | post-trial: 1 chat/giorno, 1 esperto (retention) |
+| BASE/PLUS/POWER | 100/300/800 | 2.5M/7M/18M | 0 | 0 | tier legacy |
+| **STARTER/TEAM/BUSINESS/PRO/PREMIUM/ENTERPRISE** | 300→3000 | 7M→72M | 0 | 0 | **fasce PDL a pagamento** (limiti fair-use scalati) |
 
-Risoluzione limite token utente: override `users.monthly_token_limit` → tier dominio → `DEFAULT_MONTHLY_TOKEN_LIMIT`. Downgrade lazy TRIAL→FREE alla scadenza. Email personali (gmail/yahoo/…) bloccate al signup.
+**Pricing legato ai PDL OS1** (asse non eludibile: noto e controllato dal venditore, ≠ per-utente). `PRICING_BANDS` (€/mese ex IVA, annuale): Starter 1-3 PDL €19 · **Team 4-6 €35** (moda) · Business 7-10 €49 · Pro 11-15 €75 · Premium 16-20 €89 · Enterprise 20+ a preventivo. `band_from_pdl(pdl)` → fascia.
+
+**Entitlement per tier** `TIER_FEATURES` → `{experts, deep, mcp, share}`: TRIAL + tutte le fasce a pagamento = full; **FREE = minimale** (1 esperto, no deep/MCP/share). `domain_features(domain)` letto nel flusso `/api/ask` (forza `virgilio`, disattiva deep), nel gate share e in `is_mcp_enabled_for_email` (richiede ANCHE l'entitlement, non solo il toggle `mcp_enabled`).
+
+**Funnel**: signup → **TRIAL 7gg full** (`add_domain_trial`, `billing_status='trial'`) → drip **1 email/giorno per 7gg** (1 feature/giorno, `app/auth/email_templates.py` `trial_drip`) → alla scadenza **downgrade FREE** + email. **Scheduler** ([app/util/trial_scheduler.py](app/util/trial_scheduler.py)) avviato nel lifespan: task asyncio (~ogni 6h) che invia la drip del giorno (idempotente via `trial_drip_day`, giorno = `now - created_at`) ed esegue il downgrade attivo (oltre al lazy `check_and_downgrade_if_expired` al login). `billing_status` ∈ `trial|free|paid|past_due`. `activate_paid(domain_id, pdl)` (admin) → fascia dai PDL + `paid` + azzera `expires_at`.
+
+Risoluzione limite token utente: override `users.monthly_token_limit` → tier dominio → `DEFAULT_MONTHLY_TOKEN_LIMIT`. Email personali (gmail/yahoo/…) bloccate al signup. Trial duration default **7gg** (`DEFAULT_TRIAL_DAYS`, setting `trial_duration_days`).
 
 ### app.db (schema principale)
 - `users` — email, is_admin, monthly_token_limit (override), `access_token` (passwordless), onboarding_completed, created_at, last_login
 - `conversations` — id (uuid), user_id, title, created/updated
 - `messages` — role, content, sources(json), prompt/completion/cached/rerank tokens, cost_usd, rerank_cost_usd, model, rerank_model, **agent**, created_at
 - `feedback` — message_id, rating(-1/1), category, comment, query, response_preview, chunks_used, model, search_scores
-- `allowed_domains` — pattern, tier, monthly_request/token_limit, daily_limit, enabled, expires_at, dati registrant trial
+- `allowed_domains` — pattern, tier, monthly_request/token_limit, daily_limit, enabled, expires_at, dati registrant trial, mcp_enabled, **os1_pdl_count, pricing_band, billing_status (trial|free|paid|past_due), trial_drip_day**
 - `shares` — token(PK), message_id(FK SET NULL), snapshot risposta (content/sources/screenshots/agent/question), sender/recipient, revoked, contatori open/view/cta_click, converted/converted_domain_id (share risposta → landing pubblica `/s/{token}`)
 - `app_settings` — KV admin-config (modello, suppress_reasoning, reranking_enabled, otp_sender_*, max_messages_per_conversation, announcement, admin_notification_email, trial_days…)
 - vista `monthly_usage` — aggregato per utente/mese
@@ -203,7 +208,7 @@ Risoluzione limite token utente: override `users.monthly_token_limit` → tier d
 - **Utenti**: lista con usage mensile, dettaglio + override limite
 - **Consumi/Costi**: breakdown per utente/dominio/modello/periodo, export CSV
 - **Conversazioni**: viewer completo
-- **Domini**: CRUD con tier, limiti, trial, **toggle MCP per-dominio**
+- **Domini**: CRUD con tier, limiti, trial, **toggle MCP per-dominio**, **PDL OS1 + fascia/prezzo calcolati + billing_status + "Attiva €" (activate_paid)**
 - **Condivisioni** (`/admin/shares`): funnel share risposte (inviate → aperte → viste → click → trial) + tabella recenti
 - **MCP**: master switch (live), modalità auth (off/bearer/oauth, applica al riavvio), client OAuth + token (revoca)
 - **Feedback**: lista con filtri categoria/data

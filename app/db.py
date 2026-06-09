@@ -229,6 +229,21 @@ def _migrate():
             "ALTER TABLE allowed_domains ADD COLUMN mcp_enabled INTEGER NOT NULL DEFAULT 1"
         )
 
+    # Modello commerciale legato ai PDL OS1 (additivo). L'asse di pricing è il
+    # numero di posti di lavoro OS1 (os1_pdl_count): non eludibile, noto al
+    # venditore. billing_status separa lo STATO commerciale dal tier applicato.
+    pricing_cols = [
+        ("os1_pdl_count", "INTEGER"),                          # n. PDL OS1 (asse di pricing)
+        ("pricing_band", "TEXT"),                              # fascia derivata (STARTER..ENTERPRISE)
+        ("billing_status", "TEXT NOT NULL DEFAULT 'free'"),    # trial|free|paid|past_due
+        ("trial_drip_day", "INTEGER NOT NULL DEFAULT 0"),      # ultimo giorno-email drip inviato (0-7)
+    ]
+    for col_name, col_type in pricing_cols:
+        if col_name not in dom_existing:
+            _conn.execute(
+                f"ALTER TABLE allowed_domains ADD COLUMN {col_name} {col_type}"
+            )
+
     # ── MCP OAuth 2.1 (Authorization Server autonomo per i connettori MCP) ──
     # Additivo. Token salvati come hash sha256 (mai in chiaro a riposo).
     _conn.executescript("""

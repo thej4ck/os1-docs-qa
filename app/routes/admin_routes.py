@@ -22,7 +22,13 @@ from app.models.domain import (
     apply_tier,
     set_domain_enabled,
     update_domain_metadata,
+    set_domain_pdl,
+    set_billing_status,
+    activate_paid,
+    band_info,
+    band_from_pdl,
     TIER_PRESETS,
+    PRICING_BANDS,
     DEFAULT_TIER,
 )
 from app.models.share import list_shares_admin, get_share_funnel
@@ -284,12 +290,16 @@ async def domains_page(request: Request):
         return RedirectResponse(url="/login", status_code=302)
 
     domains = list_domains()
+    # Arricchisce ogni dominio con la fascia/prezzo derivati dai PDL (display).
+    for d in domains:
+        d["band_calc"] = band_info(band_from_pdl(d.get("os1_pdl_count")))
     return _templates().TemplateResponse(request, "admin/domains.html", {
         "request": request,
         "email": admin["email"],
         "is_admin": True,
         "domains": domains,
         "tier_presets": TIER_PRESETS,
+        "pricing_bands": PRICING_BANDS,
         "default_tier": DEFAULT_TIER,
     })
 
@@ -321,6 +331,8 @@ async def update_domain_route(
     enabled: str = Form(default=""),
     mcp_enabled: str = Form(default=""),
     expires_date: str = Form(default=""),
+    pdl: str = Form(default=""),
+    billing_status: str = Form(default=""),
 ):
     admin = _require_admin(request)
     if not admin:
@@ -330,6 +342,16 @@ async def update_domain_route(
     set_domain_enabled(domain_id, enabled == "on")
     from app.models.domain import set_domain_mcp
     set_domain_mcp(domain_id, mcp_enabled == "on")
+
+    # PDL OS1 (asse di pricing): registra il numero e la fascia derivata.
+    pdl = pdl.strip()
+    if pdl:
+        try:
+            set_domain_pdl(domain_id, int(pdl))
+        except ValueError:
+            pass
+    if billing_status:
+        set_billing_status(domain_id, billing_status)
 
     # Admin can extend / clear trial expiry. Empty string clears it.
     expires_date = expires_date.strip()
@@ -344,6 +366,24 @@ async def update_domain_route(
             (domain_id,),
         )
         conn.commit()
+    return RedirectResponse(url="/admin/domains", status_code=302)
+
+
+@router.post("/domains/{domain_id}/activate-paid")
+async def activate_paid_route(
+    request: Request,
+    domain_id: int,
+    pdl: str = Form(...),
+):
+    """Attiva l'abbonamento a pagamento: fascia dai PDL, applica i limiti,
+    billing_status='paid', azzera la scadenza trial."""
+    admin = _require_admin(request)
+    if not admin:
+        return RedirectResponse(url="/login", status_code=302)
+    try:
+        activate_paid(domain_id, int(pdl.strip()))
+    except (ValueError, TypeError):
+        pass
     return RedirectResponse(url="/admin/domains", status_code=302)
 
 

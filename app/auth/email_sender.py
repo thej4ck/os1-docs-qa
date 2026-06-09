@@ -6,7 +6,7 @@ from app.config import settings
 from app.models.settings import get_int_setting, get_setting
 from app.version import PRODUCT_NAME
 
-DEFAULT_TRIAL_DAYS = 30
+DEFAULT_TRIAL_DAYS = 7  # trial full-unlock + drip giornaliera (7 email)
 MAX_TRIAL_DAYS = 365
 
 

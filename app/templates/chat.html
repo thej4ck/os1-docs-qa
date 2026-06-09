@@ -47,11 +47,11 @@
                     {% if trial_info.expires_at %}(scadenza {{ trial_info.expires_at }}){% endif %}
                 {% endif %}
             {% else %}
-                <strong>Piano FREE</strong> — limiti ridotti (5 domande/mese, max 2 al giorno)
+                <strong>Piano FREE</strong> — {{ daily_chat_limit }} chat al giorno, un solo esperto (deep, condivisione e uso in Claude/ChatGPT bloccati)
             {% endif %}
         </div>
         <div class="trial-banner-line2">
-            Licenza per azienda (tutto il dominio, nessun costo per utente) — <strong>pochi euro al mese</strong>, in promozione lancio fino al termine della Beta.
+            Licenza per azienda legata ai posti di lavoro OS1 (nessun costo per utente) — da <strong>€19/mese</strong>. <a href="/prezzi" target="_blank" style="color:inherit;text-decoration:underline;">Vedi i piani</a>.
         </div>
     </div>
     <button class="trial-banner-cta" onclick="requestUpgrade()">Richiedi attivazione abbonamento</button>

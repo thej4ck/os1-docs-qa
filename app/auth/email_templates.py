@@ -101,9 +101,10 @@ def _wrap_internal(title: str, body_html: str) -> str:
 
 def _free_limits_text() -> str:
     free = TIER_PRESETS[TIER_FREE]
+    chats = free.get("daily_chat_limit", 0)
     return (
-        f"{free['monthly_request_limit']} domande al mese, massimo "
-        f"{free['daily_limit']} al giorno"
+        f"{free['monthly_request_limit']} domande al mese, "
+        f"{chats} chat al giorno"
     )
 
 
@@ -246,7 +247,7 @@ def trial_downgraded(*, first_name: str, domain_pattern: str) -> tuple[str, str]
 </p>
 <div style="background:{_BG};border-radius:8px;padding:14px 20px;margin:0 0 20px;font-size:14px;">
   • {TIER_PRESETS[TIER_FREE]['monthly_request_limit']} domande al mese<br>
-  • massimo {TIER_PRESETS[TIER_FREE]['daily_limit']} domande al giorno
+  • {TIER_PRESETS[TIER_FREE].get('daily_chat_limit', 0)} chat al giorno
 </div>
 
 <p style="font-size:15px;line-height:1.6;margin:0 0 16px;">
@@ -326,6 +327,101 @@ def share_answer(
   È un invio singolo: non sei stato iscritto ad alcuna lista o newsletter.
 </p>"""
     return subject, wrap_customer("Una risposta condivisa con te", body)
+
+
+# ── Trial drip: 1 email/giorno per 7 giorni, una funzionalità per giorno ──
+
+# (titolo h1, intro, lista bullet [HTML-safe], testo del bottone CTA).
+_DRIP = {
+    1: (
+        "Inizia: fai la tua prima domanda",
+        "La tua prova di <strong>OS1 Virgilio</strong> è attiva e <strong>tutte le funzioni sono sbloccate</strong> per 7 giorni. Partiamo dalla cosa più semplice.",
+        ["Scrivi come parleresti a un collega esperto: <em>«come registro una fattura di acquisto?»</em>",
+         "Virgilio risponde in pochi secondi citando la documentazione ufficiale OS1.",
+         "Una domanda alla volta = risposte più puntuali."],
+        "Fai la tua prima domanda",
+    ),
+    2: (
+        "Devi seguire una procedura? Prova «Guidami»",
+        "Quando non ti serve sapere <em>cosa</em> ma <em>come si fa</em>, cambia esperto in alto e scegli <strong>Guidami</strong>.",
+        ["Ti dà i <strong>passi numerati</strong>, con il menu e i campi esatti da compilare.",
+         "Pensato per portare a termine l'operazione senza saltare passaggi.",
+         "Ideale per chi affianca o forma altri colleghi."],
+        "Prova Guidami",
+    ),
+    3: (
+        "Vai più a fondo con l'Approfondimento",
+        "Se una risposta ti sembra troppo sintetica, chiedi di più con un clic.",
+        ["Attiva la <strong>modalità Approfondimento</strong> sotto la risposta.",
+         "Il sistema rilegge più contesto e ti dà una risposta <strong>completa ed esaustiva</strong>.",
+         "Perfetto per casi complessi o configurazioni delicate."],
+        "Approfondisci una risposta",
+    ),
+    4: (
+        "Usa Virgilio dentro Claude o ChatGPT",
+        "La funzione che gli utenti amano di più: porti Virgilio <strong>dentro l'AI che già usi ogni giorno</strong>.",
+        ["Collega il <strong>connettore</strong> dalla chat (bottone «Collega ad AI»).",
+         "Fai domande su OS1 direttamente da Claude o ChatGPT.",
+         "Le risposte restano ancorate alla documentazione ufficiale OS1."],
+        "Collega ad AI",
+    ),
+    5: (
+        "Una risposta utile? Condividila con un collega",
+        "Hai ottenuto una risposta che serve anche ad altri? Inviala in un clic.",
+        ["Usa <strong>Condividi</strong> sotto la risposta: arriva via email al collega.",
+         "Il destinatario la apre <strong>senza dover accedere</strong>.",
+         "Ottimo per diffondere le buone pratiche in azienda."],
+        "Condividi una risposta",
+    ),
+    6: (
+        "Un problema da risolvere? Un nuovo arrivato da formare?",
+        "Ti restano due esperti da provare, ciascuno per una situazione precisa.",
+        ["<strong>Ho un problema</strong>: trova cause e soluzioni quando qualcosa non funziona.",
+         "<strong>Sono nuovo</strong>: spiega tutto da zero, senza acronimi, con analogie.",
+         "Cambia esperto in alto a seconda di cosa ti serve."],
+        "Prova gli altri esperti",
+    ),
+    7: (
+        "Il tuo trial sta per scadere — non perderlo",
+        "La prova completa di <strong>OS1 Virgilio</strong> termina a breve. Dopo, il servizio resta disponibile in versione <strong>Free</strong>, con limiti ridotti e un solo esperto.",
+        ["Per continuare con i <strong>4 esperti</strong>, l'<strong>approfondimento</strong> e l'uso dentro <strong>Claude/ChatGPT</strong>:",
+         "Attiva il piano per la tua azienda — il prezzo dipende dai tuoi posti di lavoro OS1, a partire da <strong>€19/mese</strong>.",
+         "Nessun conteggio per utente: un prezzo unico per azienda."],
+        "Sblocca tutto per la mia azienda",
+    ),
+}
+
+
+def trial_drip(*, day: int, first_name: str, app_url: str) -> tuple[str, str]:
+    """Email-drip del giorno `day` (1-7) durante il trial full-unlock."""
+    day = max(1, min(7, int(day)))
+    title, intro, bullets, cta = _DRIP[day]
+    greeting = f"Gentile {escape(first_name)}" if first_name else "Buongiorno"
+    safe_url = escape(app_url, quote=True)
+    subject = f"OS1 Virgilio · giorno {day}/7 — {title}"
+    bullets_html = "".join(
+        f'<li style="margin-bottom:8px;">{b}</li>' for b in bullets
+    )
+    body = f"""\
+<p style="font-size:15px;line-height:1.6;margin:0 0 16px;">{greeting},</p>
+
+<p style="font-size:15px;line-height:1.6;margin:0 0 20px;">{intro}</p>
+
+<ul style="padding-left:20px;line-height:1.7;font-size:14px;margin:0 0 24px;color:{_TEXT};">
+  {bullets_html}
+</ul>
+
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 8px;">
+  <tr><td style="border-radius:8px;background:{_BRAND};">
+    <a href="{safe_url}" style="display:inline-block;padding:13px 28px;font-size:15px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:8px;">{escape(cta)} &rarr;</a>
+  </td></tr>
+</table>
+
+<p style="font-size:12px;line-height:1.5;margin:20px 0 0;color:{_MUTED};">
+  Giorno {day} di 7 della tua prova gratuita. Ti scriviamo una volta al giorno per
+  aiutarti a sfruttare al meglio il servizio: gli invii si fermano alla fine della prova.
+</p>"""
+    return subject, wrap_customer(title, body)
 
 
 # ── Internal notifications (SCAO admin) ──────────────────────────────────

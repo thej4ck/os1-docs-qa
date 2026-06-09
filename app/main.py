@@ -43,8 +43,19 @@ async def lifespan(app: FastAPI):
     app_db.init(settings.app_db_path)
     print(f"App database loaded: {settings.app_db_path}")
 
+    # Trial freemium scheduler: drip email giornaliera + downgrade attivo.
+    import asyncio
+    from app.util.trial_scheduler import trial_scheduler_loop
+    trial_task = asyncio.create_task(trial_scheduler_loop())
+    print("Trial scheduler started")
+
     yield
 
+    trial_task.cancel()
+    try:
+        await trial_task
+    except asyncio.CancelledError:
+        pass
     app_db.close()
     index.close()
 

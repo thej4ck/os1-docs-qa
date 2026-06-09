@@ -45,6 +45,21 @@ def _client_ip(request: Request) -> str:
     return request.client.host if request.client else "?"
 
 
+@router.get("/prezzi", response_class=HTMLResponse)
+async def pricing_page(request: Request):
+    """Listino pubblico (no auth): fasce PDL + freemium + CTA prova/iscrizione."""
+    from app.models.domain import PRICING_BANDS, TIER_PRESETS, TIER_FREE
+    from app.auth.email_sender import get_trial_duration_days
+    return _templates().TemplateResponse(request, "public_pricing.html", {
+        "request": request,
+        "product_name": PRODUCT_NAME,
+        "bands": PRICING_BANDS,
+        "free_preset": TIER_PRESETS[TIER_FREE],
+        "trial_days": get_trial_duration_days(),
+        "base_url": _base_url(),
+    })
+
+
 @router.get("/s/{token}", response_class=HTMLResponse)
 async def view_share(request: Request, token: str):
     if not allow(f"share-view:{_client_ip(request)}", 120, 60):
