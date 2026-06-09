@@ -53,7 +53,7 @@
 
                 <div class="auth-alt">
                     <span>Non hai ancora un account?</span>
-                    <a href="/signup" class="auth-alt-link">Prova gratis 30 giorni →</a>
+                    <a href="/signup" class="auth-alt-link">Prova gratis {{ trial_days|default(7) }} giorni →</a>
                 </div>
             </div>
 
@@ -179,7 +179,7 @@
         <h2>Pronto a chiedere a Virgilio?</h2>
         <p>Attiva una prova gratuita per tutto il tuo dominio aziendale.</p>
         <div class="vg-cta-actions">
-            <a href="/signup" class="btn-primary">Prova gratis 30 giorni</a>
+            <a href="/signup" class="btn-primary">Prova gratis {{ trial_days|default(7) }} giorni</a>
             <a href="#email" class="vg-cta-login">Ho già un account → accedi</a>
         </div>
     </section>

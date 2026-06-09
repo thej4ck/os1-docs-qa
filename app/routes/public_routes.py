@@ -65,13 +65,15 @@ async def view_share(request: Request, token: str):
     if not allow(f"share-view:{_client_ip(request)}", 120, 60):
         return Response("Troppe richieste. Riprova tra poco.", status_code=429)
 
+    from app.auth.email_sender import get_trial_duration_days
+    trial_days = get_trial_duration_days()
     base_url = _base_url()
     share = get_share(token)
     if not share:
         return _templates().TemplateResponse(
             request,
             "public_share.html",
-            {"request": request, "not_found": True, "base_url": base_url, "product": PRODUCT_NAME},
+            {"request": request, "not_found": True, "base_url": base_url, "product": PRODUCT_NAME, "trial_days": trial_days},
             status_code=404,
         )
 
@@ -81,6 +83,7 @@ async def view_share(request: Request, token: str):
         "not_found": False,
         "base_url": base_url,
         "product": PRODUCT_NAME,
+        "trial_days": trial_days,
         "token": token,
         "answer_html": md_to_html(share["snap_content_md"], base_url),
         "sources": json.loads(share["snap_sources"]) if share["snap_sources"] else [],

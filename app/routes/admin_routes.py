@@ -575,7 +575,7 @@ def _get_all_settings() -> dict:
         "deep_addendum": _get_setting("deep_addendum", ""),
         "core_system_prompt": _get_setting("core_system_prompt", ""),
         "admin_notification_email": _get_setting("admin_notification_email", ""),
-        "trial_duration_days": _get_setting("trial_duration_days", "30"),
+        "trial_duration_days": _get_setting("trial_duration_days", "7"),
         "extra_blocked_email_domains": _get_setting("extra_blocked_email_domains", ""),
     }
     for aid in AGENT_ORDER:
@@ -665,7 +665,7 @@ async def save_settings(request: Request):
         "deep_addendum": str(form.get("deep_addendum", "")).strip(),
         "core_system_prompt": str(form.get("core_system_prompt", "")).strip(),
         "admin_notification_email": str(form.get("admin_notification_email", "")).strip(),
-        "trial_duration_days": str(max(1, min(int(form.get("trial_duration_days", 30) or 30), 365))),
+        "trial_duration_days": str(max(1, min(int(form.get("trial_duration_days", 7) or 7), 365))),
         "extra_blocked_email_domains": str(form.get("extra_blocked_email_domains", "")).strip(),
     }
 

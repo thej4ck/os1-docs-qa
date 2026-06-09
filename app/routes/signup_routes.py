@@ -42,6 +42,7 @@ def _render_signup(request: Request, **ctx):
         "company_name": "",
         "ref": "",
         "share_token": "",
+        "trial_days": get_trial_duration_days(),
     }
     base.update(ctx)
     return _templates().TemplateResponse(request, "signup.html", base)

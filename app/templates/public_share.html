@@ -126,12 +126,12 @@
   </div>
 
   <div class="promo">
-    <h2>Prova {{ product }}<span class="trial-pill">30 giorni gratis</span></h2>
+    <h2>Prova {{ product }}<span class="trial-pill">{{ trial_days|default(7) }} giorni gratis</span></h2>
     <p>
       Fai domande sulla documentazione OS1 — moduli, tabelle, procedure, errori — e ottieni risposte
       in italiano con le fonti citate. Attiva una prova gratuita con la tua email aziendale.
     </p>
-    <a class="cta" href="{{ base_url }}/s/{{ token }}/go">Prova gratis per 30 giorni →</a>
+    <a class="cta" href="{{ base_url }}/s/{{ token }}/go">Prova gratis per {{ trial_days|default(7) }} giorni →</a>
   </div>
 
   <div class="foot">
