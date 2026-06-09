@@ -74,6 +74,13 @@ def run_trial_maintenance() -> None:
                 print(f"[trial_scheduler] downgrade failed for "
                       f"{domain.get('pattern')}: {e}", flush=True)
 
+    # Pulizia token MCP scaduti/revocati: evita che le righe restino a lungo.
+    try:
+        from app.models.oauth import purge_expired_tokens
+        purge_expired_tokens()
+    except Exception as e:  # noqa: BLE001
+        print(f"[trial_scheduler] purge MCP tokens failed: {e}", flush=True)
+
 
 async def trial_scheduler_loop(interval_seconds: int = _DEFAULT_INTERVAL_S) -> None:
     """Loop infinito: maintenance + sleep. Cancellabile (lifespan shutdown)."""

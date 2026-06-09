@@ -293,6 +293,15 @@ def _migrate():
             created_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now'))
         );
         CREATE INDEX IF NOT EXISTS idx_oauth_tokens_kind ON oauth_tokens(kind, expires_at);
+        CREATE INDEX IF NOT EXISTS idx_oauth_tokens_subject ON oauth_tokens(subject, revoked);
+
+        -- Contatore richieste MCP per utente (subject = email). Alimentato dai
+        -- tool search/fetch; usato dalla dashboard admin (vista per-utente).
+        CREATE TABLE IF NOT EXISTS mcp_usage (
+            subject         TEXT PRIMARY KEY,
+            request_count   INTEGER NOT NULL DEFAULT 0,
+            last_request_at TEXT
+        );
     """)
 
     # Migrate old model keys to new reasoning_effort variants

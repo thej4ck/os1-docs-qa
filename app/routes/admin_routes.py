@@ -408,6 +408,7 @@ async def mcp_admin_page(request: Request):
     from app.models.settings import get_bool_setting
     from app.mcp.auth import resolve_mcp_auth_mode
     from app.config import settings as app_settings
+    oauth_store.purge_expired_tokens()  # tiene pulita la vista (scaduti/revocati)
     base = (app_settings.base_url or str(request.base_url)).rstrip("/")
     return _templates().TemplateResponse(request, "admin/mcp.html", {
         "request": request,
@@ -417,7 +418,7 @@ async def mcp_admin_page(request: Request):
         "auth_mode": resolve_mcp_auth_mode(),
         "endpoint": f"{base}/mcp",
         "clients": oauth_store.list_clients(),
-        "tokens": oauth_store.list_active_tokens(),
+        "mcp_users": oauth_store.list_mcp_users(),
         "counts": oauth_store.counts(),
         "production": app_settings.production,
     })
@@ -449,13 +450,16 @@ async def mcp_admin_delete_client(request: Request, client_id: str):
     return RedirectResponse(url="/admin/mcp", status_code=302)
 
 
-@router.post("/mcp/tokens/{token_hash}/revoke")
-async def mcp_admin_revoke_token(request: Request, token_hash: str):
+@router.post("/mcp/users/revoke")
+async def mcp_admin_revoke_user(request: Request, subject: str = Form(...)):
+    """Disconnette un utente da MCP: revoca TUTTI i suoi token (access+refresh)."""
     admin = _require_admin(request)
     if not admin:
         return RedirectResponse(url="/login", status_code=302)
     from app.models import oauth as oauth_store
-    oauth_store.revoke_by_hash(token_hash)
+    # Le righe revocate sono già escluse dalle viste (revoked=0) e ripulite
+    # dal purge on-load di /admin/mcp: niente purge esplicito qui.
+    oauth_store.revoke_by_subject(subject.strip())
     return RedirectResponse(url="/admin/mcp", status_code=302)
 
 
