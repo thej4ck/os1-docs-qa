@@ -18,7 +18,10 @@ from app.models.conversation import (
     get_conversation_agent, get_message_by_id, get_prev_user_message,
 )
 from app.models.usage import check_limit, get_monthly_usage, get_domain_usage, get_current_month
-from app.models.domain import get_domain_for_email, get_trial_banner_info
+from app.models.domain import (
+    get_domain_for_email, get_trial_banner_info, domain_features,
+    tier_daily_chat_limit, get_daily_conversation_count,
+)
 from app.models.share import create_share
 from app.auth.email_sender import send_email, get_trial_duration_days
 from app.auth.email_templates import share_answer
@@ -102,7 +105,10 @@ async def chat_page(request: Request, c: str | None = None):
 
     conversations = list_conversations(user["id"])
 
-    trial_info = get_trial_banner_info(get_domain_for_email(user["email"]))
+    domain_cfg = get_domain_for_email(user["email"])
+    trial_info = get_trial_banner_info(domain_cfg)
+    features = domain_features(domain_cfg)
+    daily_chat_limit = tier_daily_chat_limit(domain_cfg["tier"]) if domain_cfg else 0
 
     from app.search.agents import list_agents_public, get_agent_public
 
@@ -128,6 +134,9 @@ async def chat_page(request: Request, c: str | None = None):
         "app_version": f"v{VERSION} build {BUILD} ({BUILD_DATE})",
         "show_onboarding": not user.get("onboarding_completed", 0),
         "trial_info": trial_info,
+        "features": features,
+        "daily_chat_limit": daily_chat_limit,
+        "billing_status": domain_cfg.get("billing_status") if domain_cfg else None,
         "agents": list_agents_public(),
         "is_active_conversation": is_active_conversation,
         "active_agent": get_agent_public(active_agent_id),
@@ -192,12 +201,26 @@ async def ask(
     # Daily limit per domain (0 = unlimited)
     from app.models.domain import get_daily_question_count
     domain_config = get_domain_for_email(user["email"])
+    features = domain_features(domain_config)
     if domain_config and domain_config["daily_limit"] > 0:
         daily_count = get_daily_question_count(user["id"])
         if daily_count >= domain_config["daily_limit"]:
             return _sse_error(
                 f"Hai esaurito le domande di oggi ({daily_count}/{domain_config['daily_limit']} "
                 f"domande giornaliere). Il contatore si azzera a mezzanotte."
+            )
+
+    # Limite "1 chat al giorno" del piano FREE: blocca solo l'apertura di una
+    # NUOVA conversazione (le domande dentro la chat del giorno restano libere
+    # fino al max messaggi/chat).
+    if not conversation_id and domain_config:
+        chat_limit = tier_daily_chat_limit(domain_config["tier"])
+        if chat_limit > 0 and get_daily_conversation_count(user["id"]) >= chat_limit:
+            return _sse_error(
+                f"Con il piano gratuito puoi avviare {chat_limit} chat al giorno. "
+                f"Continua nella chat di oggi, oppure attiva un piano per la tua "
+                f"azienda per avere conversazioni illimitate.",
+                upgrade=True,
             )
 
     # Single monthly aggregate (monthly_usage view) — reused for both the
@@ -249,6 +272,9 @@ async def ask(
     from app.search.agents import get_agent
     selected_agent = get_agent(agent.strip())
     active_agent = selected_agent["id"] if selected_agent else None
+    # Gate esperti: il piano FREE ha un solo esperto (Virgilio "Il Manuale").
+    if not features["experts"]:
+        active_agent = "virgilio"
     user_role = "amministratore" if user.get("is_admin") else "utente"
 
     # Disambiguation check (only for first message in new conversations, no topic already selected)
@@ -279,7 +305,8 @@ async def ask(
         usage_data = None
         corrected_answer = None  # testo con citazioni [Dn] rimappate (canale meta)
 
-        is_deep = deep == "true"
+        # Deep mode è una feature premium: il piano FREE la ignora.
+        is_deep = deep == "true" and features["deep"]
         async for token, token_sources, token_meta in query_module.ask_stream(
             question, history=llm_history, deep=is_deep, topic_filter=topic_filter,
             agent_id=active_agent, user_role=user_role,
@@ -616,6 +643,13 @@ async def share_answer_endpoint(
     user = _get_user(request)
     if not user:
         return JSONResponse({"error": "Non autenticato."}, status_code=401)
+
+    # Gate condivisione: feature premium, non disponibile nel piano FREE.
+    if not domain_features(get_domain_for_email(user["email"]))["share"]:
+        return JSONResponse(
+            {"error": "La condivisione è disponibile con i piani a pagamento.", "upgrade": True},
+            status_code=403,
+        )
 
     recipient_email = recipient_email.strip().lower()
     if not EMAIL_RE.match(recipient_email):

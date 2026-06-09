@@ -20,15 +20,22 @@ from app.mcp import MCP_SCOPES
 from app.models.user import get_user_by_access_token
 
 
+def subject_of(at: AccessToken | None) -> str | None:
+    """Identità utente OS1 di un token MCP: `subject` (oauth) o `client_id` (bearer).
+    Punto unico di mapping token→utente, condiviso da gate e tracking."""
+    if at is None:
+        return None
+    return at.subject or at.client_id
+
+
 def gate_token_by_domain(at: AccessToken | None) -> AccessToken | None:
     """Single enforcement point for the per-domain MCP gate (bearer + oauth).
 
-    Rejects a resolved token whose user-domain has MCP disabled. The email is
-    `subject` (oauth) or `client_id` (bearer)."""
+    Rejects a resolved token whose user-domain has MCP disabled."""
     if at is None:
         return None
     from app.models.domain import is_mcp_enabled_for_email
-    email = at.subject or at.client_id
+    email = subject_of(at)
     return at if (email and is_mcp_enabled_for_email(email)) else None
 
 

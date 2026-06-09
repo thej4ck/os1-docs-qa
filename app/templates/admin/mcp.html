@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block title %}MCP — Admin OS1 Virgilio{% endblock %}
 
+{# Formatta un timestamp ISO 'YYYY-MM-DDTHH:MM:SSZ' -> 'YYYY-MM-DD HH:MM' (— se vuoto) #}
+{% macro dt(v) %}{{ (v[:16] | replace('T', ' ')) if v else '—' }}{% endmacro %}
+
 {% block nav_right %}
 <span class="header-email">{{ email }}</span>
 <a href="/chat" class="btn-logout">Chat</a>
@@ -52,7 +55,7 @@
             <span class="lbl">Stato attuale</span>
             {% if mcp_enabled %}<span class="pill on">attivo</span>{% else %}<span class="pill off">disattivato</span>{% endif %}
             <span class="pill {{ 'on' if auth_mode != 'off' else 'off' }}">auth: {{ auth_mode }}</span>
-            <span class="note">client OAuth registrati: {{ counts.clients }} · token attivi: {{ counts.active_tokens }}</span>
+            <span class="note">client OAuth: {{ counts.clients }} · utenti connessi: {{ counts.users }}</span>
         </div>
 
         <form method="post" action="/admin/mcp">
@@ -80,16 +83,38 @@
         <div class="note">In produzione MCP è attivo di default senza variabili d'ambiente. Il gate per-dominio è in <a href="/admin/domains">Domini</a>.</div>
     </div>
 
-    <h3 class="section-title">Client OAuth registrati (DCR)</h3>
+    <h3 class="section-title">Utenti connessi (MCP)</h3>
     <table class="admin-table">
-        <thead><tr><th>Client ID</th><th>Nome</th><th>Redirect URI</th><th>Creato</th><th></th></tr></thead>
+        <thead><tr><th>Utente</th><th>Richieste totali</th><th>Token attivi</th><th>Ultimo accesso</th><th></th></tr></thead>
+        <tbody>
+            {% for u in mcp_users %}
+            <tr>
+                <td>{{ u.subject }}</td>
+                <td><strong>{{ u.requests }}</strong></td>
+                <td>{{ u.tokens_active }}</td>
+                <td>{{ dt(u.last_seen) }}</td>
+                <td>
+                    <form method="post" action="/admin/mcp/users/revoke" onsubmit="return confirm('Disconnettere {{ u.subject }} da MCP? Verranno revocati tutti i suoi token.');">
+                        <input type="hidden" name="subject" value="{{ u.subject }}">
+                        <button type="submit" class="btn-sm btn-del">Revoca utente</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            {% if not mcp_users %}<tr><td colspan="5" style="text-align:center;color:var(--c-text-tertiary);padding:var(--sp-6);">Nessun utente connesso.</td></tr>{% endif %}
+        </tbody>
+    </table>
+    <div class="note">Le chiavi scadono da sole (access 1 ora, refresh 30 giorni); gli scaduti/revocati vengono ripuliti automaticamente. <strong>Revoca utente</strong> disconnette subito tutte le sue sessioni MCP.</div>
+
+    <h3 class="section-title">Client OAuth registrati (app collegate)</h3>
+    <table class="admin-table">
+        <thead><tr><th>Nome</th><th>Client ID</th><th>Creato</th><th></th></tr></thead>
         <tbody>
             {% for c in clients %}
             <tr>
-                <td class="mono">{{ c.client_id[:18] }}…</td>
                 <td>{{ c.client_name or '—' }}</td>
-                <td class="mono" style="max-width:260px;">{{ c.redirect_uris | join(', ') }}</td>
-                <td>{{ c.created_at }}</td>
+                <td class="mono">{{ c.client_id[:18] }}…</td>
+                <td>{{ dt(c.created_at) }}</td>
                 <td>
                     <form method="post" action="/admin/mcp/clients/{{ c.client_id }}/delete" onsubmit="return confirm('Revocare il client e i suoi token?');">
                         <button type="submit" class="btn-sm btn-del">Revoca</button>
@@ -97,28 +122,7 @@
                 </td>
             </tr>
             {% endfor %}
-            {% if not clients %}<tr><td colspan="5" style="text-align:center;color:var(--c-text-tertiary);padding:var(--sp-6);">Nessun client registrato.</td></tr>{% endif %}
-        </tbody>
-    </table>
-
-    <h3 class="section-title">Token attivi</h3>
-    <table class="admin-table">
-        <thead><tr><th>Tipo</th><th>Utente</th><th>Client</th><th>Creato</th><th></th></tr></thead>
-        <tbody>
-            {% for t in tokens %}
-            <tr>
-                <td>{{ t.kind }}</td>
-                <td>{{ t.subject }}</td>
-                <td class="mono">{{ t.client_id[:14] }}…</td>
-                <td>{{ t.created_at }}</td>
-                <td>
-                    <form method="post" action="/admin/mcp/tokens/{{ t.token_hash }}/revoke">
-                        <button type="submit" class="btn-sm btn-del">Revoca</button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-            {% if not tokens %}<tr><td colspan="5" style="text-align:center;color:var(--c-text-tertiary);padding:var(--sp-6);">Nessun token attivo.</td></tr>{% endif %}
+            {% if not clients %}<tr><td colspan="4" style="text-align:center;color:var(--c-text-tertiary);padding:var(--sp-6);">Nessun client registrato.</td></tr>{% endif %}
         </tbody>
     </table>
 </div>

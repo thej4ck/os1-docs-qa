@@ -79,6 +79,9 @@
                 <th>P.IVA</th>
                 <th>Livello</th>
                 <th>Scadenza</th>
+                <th title="Posti di lavoro OS1 — asse di pricing">PDL</th>
+                <th>Fascia</th>
+                <th>Billing</th>
                 <th>Richieste/mese</th>
                 <th>Token/mese</th>
                 <th>Attivo</th>
@@ -106,6 +109,19 @@
                 <td>
                     <input type="date" name="expires_date" value="{{ (d.expires_at[:10] if d.expires_at else '') }}" style="font-size:.75rem;padding:4px 6px;">
                 </td>
+                <td>
+                    <input type="number" name="pdl" min="0" value="{{ d.os1_pdl_count if d.os1_pdl_count is not none else '' }}" style="width:62px;" title="Posti di lavoro OS1">
+                </td>
+                <td class="num" style="white-space:nowrap;">
+                    {% if d.band_calc %}{{ d.band_calc.label }}{% if d.band_calc.price_month %} · €{{ d.band_calc.price_month }}/m{% else %} · preventivo{% endif %}{% else %}—{% endif %}
+                </td>
+                <td>
+                    <select name="billing_status" class="tier-select">
+                        {% for st in ['trial','free','paid','past_due'] %}
+                        <option value="{{ st }}" {% if st == d.billing_status %}selected{% endif %}>{{ st }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
                 <td><span class="limit-ro">{% if d.monthly_request_limit %}{{ d.monthly_request_limit }}{% else %}illimitato{% endif %}</span></td>
                 <td><span class="limit-ro">{% if d.monthly_token_limit %}{{ mtok(d.monthly_token_limit) }}{% else %}illimitato{% endif %}</span></td>
                 <td>
@@ -123,6 +139,12 @@
                 <td style="display:flex;gap:4px;">
                     <button type="submit" class="btn-sm btn-save">Salva</button>
                 </form>
+                    {% if d.os1_pdl_count %}
+                    <form method="post" action="/admin/domains/{{ d.id }}/activate-paid" onsubmit="return confirm('Attivare il piano a pagamento per {{ d.pattern }} ({{ d.os1_pdl_count }} PDL)?');" style="display:inline;">
+                        <input type="hidden" name="pdl" value="{{ d.os1_pdl_count }}">
+                        <button type="submit" class="btn-sm btn-save" title="Attiva piano a pagamento dai PDL salvati">Attiva €</button>
+                    </form>
+                    {% endif %}
                     <form method="post" action="/admin/domains/{{ d.id }}/delete" onsubmit="return confirm('Eliminare {{ d.pattern }}?');" style="display:inline;">
                         <button type="submit" class="btn-sm btn-del">Elimina</button>
                     </form>
@@ -130,7 +152,7 @@
             </tr>
             {% endfor %}
             {% if not domains %}
-            <tr><td colspan="10" style="text-align:center;color:var(--c-text-tertiary);padding:var(--sp-8);">Nessun dominio configurato. Aggiungi il primo.</td></tr>
+            <tr><td colspan="13" style="text-align:center;color:var(--c-text-tertiary);padding:var(--sp-8);">Nessun dominio configurato. Aggiungi il primo.</td></tr>
             {% endif %}
         </tbody>
     </table>

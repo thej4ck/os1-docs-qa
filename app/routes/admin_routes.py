@@ -22,7 +22,13 @@ from app.models.domain import (
     apply_tier,
     set_domain_enabled,
     update_domain_metadata,
+    set_domain_pdl,
+    set_billing_status,
+    activate_paid,
+    band_info,
+    band_from_pdl,
     TIER_PRESETS,
+    PRICING_BANDS,
     DEFAULT_TIER,
 )
 from app.models.share import list_shares_admin, get_share_funnel
@@ -284,12 +290,16 @@ async def domains_page(request: Request):
         return RedirectResponse(url="/login", status_code=302)
 
     domains = list_domains()
+    # Arricchisce ogni dominio con la fascia/prezzo derivati dai PDL (display).
+    for d in domains:
+        d["band_calc"] = band_info(band_from_pdl(d.get("os1_pdl_count")))
     return _templates().TemplateResponse(request, "admin/domains.html", {
         "request": request,
         "email": admin["email"],
         "is_admin": True,
         "domains": domains,
         "tier_presets": TIER_PRESETS,
+        "pricing_bands": PRICING_BANDS,
         "default_tier": DEFAULT_TIER,
     })
 
@@ -321,6 +331,8 @@ async def update_domain_route(
     enabled: str = Form(default=""),
     mcp_enabled: str = Form(default=""),
     expires_date: str = Form(default=""),
+    pdl: str = Form(default=""),
+    billing_status: str = Form(default=""),
 ):
     admin = _require_admin(request)
     if not admin:
@@ -330,6 +342,16 @@ async def update_domain_route(
     set_domain_enabled(domain_id, enabled == "on")
     from app.models.domain import set_domain_mcp
     set_domain_mcp(domain_id, mcp_enabled == "on")
+
+    # PDL OS1 (asse di pricing): registra il numero e la fascia derivata.
+    pdl = pdl.strip()
+    if pdl:
+        try:
+            set_domain_pdl(domain_id, int(pdl))
+        except ValueError:
+            pass
+    if billing_status:
+        set_billing_status(domain_id, billing_status)
 
     # Admin can extend / clear trial expiry. Empty string clears it.
     expires_date = expires_date.strip()
@@ -344,6 +366,24 @@ async def update_domain_route(
             (domain_id,),
         )
         conn.commit()
+    return RedirectResponse(url="/admin/domains", status_code=302)
+
+
+@router.post("/domains/{domain_id}/activate-paid")
+async def activate_paid_route(
+    request: Request,
+    domain_id: int,
+    pdl: str = Form(...),
+):
+    """Attiva l'abbonamento a pagamento: fascia dai PDL, applica i limiti,
+    billing_status='paid', azzera la scadenza trial."""
+    admin = _require_admin(request)
+    if not admin:
+        return RedirectResponse(url="/login", status_code=302)
+    try:
+        activate_paid(domain_id, int(pdl.strip()))
+    except (ValueError, TypeError):
+        pass
     return RedirectResponse(url="/admin/domains", status_code=302)
 
 
@@ -368,6 +408,7 @@ async def mcp_admin_page(request: Request):
     from app.models.settings import get_bool_setting
     from app.mcp.auth import resolve_mcp_auth_mode
     from app.config import settings as app_settings
+    oauth_store.purge_expired_tokens()  # tiene pulita la vista (scaduti/revocati)
     base = (app_settings.base_url or str(request.base_url)).rstrip("/")
     return _templates().TemplateResponse(request, "admin/mcp.html", {
         "request": request,
@@ -377,7 +418,7 @@ async def mcp_admin_page(request: Request):
         "auth_mode": resolve_mcp_auth_mode(),
         "endpoint": f"{base}/mcp",
         "clients": oauth_store.list_clients(),
-        "tokens": oauth_store.list_active_tokens(),
+        "mcp_users": oauth_store.list_mcp_users(),
         "counts": oauth_store.counts(),
         "production": app_settings.production,
     })
@@ -409,13 +450,16 @@ async def mcp_admin_delete_client(request: Request, client_id: str):
     return RedirectResponse(url="/admin/mcp", status_code=302)
 
 
-@router.post("/mcp/tokens/{token_hash}/revoke")
-async def mcp_admin_revoke_token(request: Request, token_hash: str):
+@router.post("/mcp/users/revoke")
+async def mcp_admin_revoke_user(request: Request, subject: str = Form(...)):
+    """Disconnette un utente da MCP: revoca TUTTI i suoi token (access+refresh)."""
     admin = _require_admin(request)
     if not admin:
         return RedirectResponse(url="/login", status_code=302)
     from app.models import oauth as oauth_store
-    oauth_store.revoke_by_hash(token_hash)
+    # Le righe revocate sono già escluse dalle viste (revoked=0) e ripulite
+    # dal purge on-load di /admin/mcp: niente purge esplicito qui.
+    oauth_store.revoke_by_subject(subject.strip())
     return RedirectResponse(url="/admin/mcp", status_code=302)
 
 

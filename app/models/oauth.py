@@ -170,6 +170,38 @@ def purge_expired() -> None:
     c.commit()
 
 
+def purge_expired_tokens() -> int:
+    """Cancella i token scaduti o revocati (access 1h, refresh 30g ruotati).
+    Evita che le righe restino a lungo. Ritorna quante righe eliminate."""
+    now = int(time.time())
+    c = get_conn()
+    cur = c.execute(
+        "DELETE FROM oauth_tokens "
+        "WHERE revoked = 1 OR (expires_at IS NOT NULL AND expires_at < ?)",
+        (now,),
+    )
+    c.commit()
+    return cur.rowcount
+
+
+# ── MCP usage (richieste per utente) ──
+
+def bump_mcp_usage(subject: str) -> None:
+    """Incrementa il contatore richieste MCP per l'utente (subject = email)."""
+    if not subject:
+        return
+    c = get_conn()
+    c.execute(
+        "INSERT INTO mcp_usage (subject, request_count, last_request_at) "
+        "VALUES (?, 1, strftime('%Y-%m-%dT%H:%M:%SZ','now')) "
+        "ON CONFLICT(subject) DO UPDATE SET "
+        "request_count = request_count + 1, "
+        "last_request_at = strftime('%Y-%m-%dT%H:%M:%SZ','now')",
+        (subject,),
+    )
+    c.commit()
+
+
 # ── Admin views (read/revoke) ──
 
 def list_clients() -> list[dict]:
@@ -196,25 +228,44 @@ def delete_client(client_id: str) -> None:
     c.commit()
 
 
-def list_active_tokens() -> list[dict]:
-    rows = get_conn().execute(
-        "SELECT token_hash, kind, client_id, subject, expires_at, created_at "
-        "FROM oauth_tokens WHERE revoked = 0 ORDER BY created_at DESC LIMIT 200"
-    ).fetchall()
-    return [dict(r) for r in rows]
-
-
-def revoke_by_hash(token_hash: str) -> None:
-    c = get_conn()
-    c.execute("UPDATE oauth_tokens SET revoked = 1 WHERE token_hash = ?", (token_hash,))
-    c.commit()
-
-
 def counts() -> dict:
+    now = int(time.time())
     c = get_conn()
     clients = c.execute("SELECT COUNT(*) FROM oauth_clients").fetchone()[0]
-    active = c.execute("SELECT COUNT(*) FROM oauth_tokens WHERE revoked = 0").fetchone()[0]
-    return {"clients": clients, "active_tokens": active}
+    users = c.execute(
+        "SELECT COUNT(DISTINCT subject) FROM oauth_tokens "
+        "WHERE revoked = 0 AND (expires_at IS NULL OR expires_at > ?)",
+        (now,),
+    ).fetchone()[0]
+    return {"clients": clients, "users": users}
+
+
+def list_mcp_users() -> list[dict]:
+    """Utenti con MCP attivo (almeno un token valido), con richieste totali.
+
+    Una sola query: aggrega per subject i token non revocati/non scaduti e
+    aggancia il contatore richieste (mcp_usage). last_seen = max(ultima
+    richiesta, ultimo token emesso)."""
+    now = int(time.time())
+    rows = get_conn().execute(
+        "SELECT t.subject AS subject, COUNT(*) AS tokens_active, "
+        "       MAX(t.created_at) AS last_token_at, "
+        "       COALESCE(u.request_count, 0) AS requests, "
+        "       u.last_request_at AS last_request_at "
+        "FROM oauth_tokens t "
+        "LEFT JOIN mcp_usage u ON u.subject = t.subject "
+        "WHERE t.revoked = 0 AND (t.expires_at IS NULL OR t.expires_at > ?) "
+        "GROUP BY t.subject "
+        "ORDER BY requests DESC, last_token_at DESC",
+        (now,),
+    ).fetchall()
+    out = []
+    for r in rows:
+        d = dict(r)
+        seen = [x for x in (d.get("last_request_at"), d.get("last_token_at")) if x]
+        d["last_seen"] = max(seen) if seen else None
+        out.append(d)
+    return out
 
 
 def revoke_by_subject(subject: str) -> int:

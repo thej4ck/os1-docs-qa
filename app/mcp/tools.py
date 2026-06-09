@@ -26,6 +26,20 @@ def _doc_url(source_file: str) -> str:
     return f"{base}/api/doc?file={quote(sf, safe='')}"
 
 
+def _track_request() -> None:
+    """Conta la richiesta MCP per l'utente autenticato (per la dashboard admin).
+    Best-effort: senza auth (dev/no-auth) o subject non risolvibile, no-op."""
+    try:
+        from fastmcp.server.dependencies import get_access_token
+        from app.mcp.auth import subject_of
+        from app.models import oauth as oauth_store
+        subject = subject_of(get_access_token())
+        if subject:
+            oauth_store.bump_mcp_usage(subject)
+    except Exception:
+        pass
+
+
 def register_tools(mcp) -> None:
     @mcp.tool
     async def search(
@@ -42,6 +56,7 @@ def register_tools(mcp) -> None:
         italiano. Ritorna i documenti più rilevanti (id, titolo, url); poi chiama
         `fetch` con l'`id` per leggere il contenuto completo e citare la fonte.
         """
+        _track_request()
         q = (query or "").strip()
         if not q:
             return {"results": []}
@@ -64,6 +79,7 @@ def register_tools(mcp) -> None:
         """Recupera il testo integrale di un documento OS1 dato l'`id` restituito da
         `search`. Usalo dopo `search` per leggere il contenuto completo e citarlo
         (campo `url`)."""
+        _track_request()
         doc = query_module.mcp_fetch(id)
         if doc is None:
             raise ValueError(f"Document not found: {id}")
