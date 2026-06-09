@@ -299,10 +299,12 @@ function completeOnboarding() {
                     <p class="center-hero-sub">Scegli un esperto, poi scrivi la tua domanda.</p>
                     <div class="agent-picker" id="agent-picker" role="radiogroup" aria-label="Scegli un esperto">
                         {% for a in agents %}
-                        <button type="button" class="agent-card" data-agent="{{ a.id }}"
+                        {% set locked = (not features.experts) and a.id != 'virgilio' %}
+                        <button type="button" class="agent-card{% if locked %} agent-card--locked{% endif %}" data-agent="{{ a.id }}"
                                 data-name="{{ a.display_name }}" data-avatar="{{ a.avatar }}"
-                                data-tagline="{{ a.tagline }}"
-                                role="radio" aria-checked="false" onclick="selectAgent('{{ a.id }}')">
+                                data-tagline="{{ a.tagline }}"{% if locked %} data-locked="1"{% endif %}
+                                role="radio" aria-checked="false" onclick="{% if locked %}upgradeFeature('esperti'){% else %}selectAgent('{{ a.id }}'){% endif %}">
+                            {% if locked %}<span class="feat-pro" title="Disponibile con i piani a pagamento">🔒 PRO</span>{% endif %}
                             <span class="agent-card-avatar">
                                 <img class="agent-card-img" src="{{ a.avatar }}" alt=""
                                      onerror="this.style.display='none';this.parentElement.querySelector('.agent-card-emoji').hidden=false">
@@ -315,7 +317,17 @@ function completeOnboarding() {
                     </div>
                 </div>
                 {% endif %}
+                <style>
+                    .agent-card { position: relative; }
+                    .agent-card--locked { opacity: .72; }
+                    .agent-card--locked:hover { opacity: 1; }
+                    .feat-pro { position: absolute; top: 6px; right: 6px; background: linear-gradient(90deg,#f5c542,#e0a800); color: #3a2d00; font-size: .62rem; font-weight: 700; letter-spacing: .03em; padding: 2px 7px; border-radius: 999px; line-height: 1.35; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+                </style>
                 <script>
+                    // Entitlement del tier corrente (FREE = minimale) — guida i badge 🔒 PRO lato client.
+                    window.OS1_FEATURES = {{ features|tojson }};
+                    // True se la feature è esplicitamente disabilitata dal tier (assente/undefined = sbloccata).
+                    function featureLocked(f){ return !!(window.OS1_FEATURES && window.OS1_FEATURES[f] === false); }
                     function selectAgent(id) {
                         if (id) { localStorage.setItem('os1-agent', id); }
                         else { localStorage.removeItem('os1-agent'); }
@@ -466,6 +478,18 @@ function completeOnboarding() {
 let _shareMsgId = null, _shareShots = [];
 function openShareModal(msgId, shots){ _shareMsgId = msgId; _shareShots = shots || []; document.getElementById('share-form').reset(); document.getElementById('share-modal').hidden = false; }
 function closeShareModal(){ document.getElementById('share-modal').hidden = true; }
+// CTA upgrade da una feature premium bloccata (badge 🔒 PRO): spiega + apre la
+// richiesta abbonamento (modale FREE/trial) o il listino pubblico come fallback.
+function upgradeFeature(feat){
+    var msgs = {
+        esperti: 'I 4 esperti sono inclusi nei piani a pagamento.',
+        deep: 'L\'approfondimento è incluso nei piani a pagamento.',
+        share: 'La condivisione è inclusa nei piani a pagamento.'
+    };
+    if (typeof showToast === 'function') showToast(msgs[feat] || 'Funzione disponibile con i piani a pagamento.', 'info');
+    if (typeof requestUpgrade === 'function') requestUpgrade();
+    else window.open('/prezzi', '_blank');
+}
 async function submitShare(ev){
     ev.preventDefault();
     const email = document.getElementById('share-email').value.trim();
@@ -680,6 +704,13 @@ function showDeepBanner(question) {
     const btn = document.getElementById('deep-banner-btn');
     const txt = banner.querySelector('.deep-banner-text');
     banner.style.display = '';
+    // Deep è feature premium: per il piano FREE mostra il lucchetto, non l'azione.
+    if (featureLocked('deep')) {
+        if (txt) txt.textContent = 'Vuoi una risposta più approfondita?';
+        btn.textContent = '🔒 Sblocca l\'approfondimento';
+        btn.onclick = () => upgradeFeature('deep');
+        return;
+    }
     if (txt) txt.textContent = 'La risposta non ti convince?';
     btn.onclick = () => {
         hideDeepBanner();
@@ -1101,12 +1132,13 @@ function renderFinal(msgParts, text, sources, messageId, screenshots, wasDeep, t
     // - Altrimenti: banner passivo sopra l'input ("La risposta non ti convince?").
     const notCovered = !!text && /non copre|documentazione[^.]{0,40}non (copre|contiene|riporta)|non (è|e) (coperto|trattato|present|sufficient)|informazioni (insufficient|non sufficient)/i.test(text);
     if (lastQuestion && !wasDeep && !truncated && notCovered) {
+        const deepLocked = featureLocked('deep');
         const box = document.createElement('div');
         box.className = 'deep-inline';
         box.innerHTML = '<span class="deep-inline-icon">💡</span>'
             + '<div class="deep-inline-body">'
             + '<div class="deep-inline-text">La documentazione disponibile potrebbe non bastare a questa domanda. È possibile chiedere un\'<strong>analisi approfondita</strong> per migliorare la risposta in caso di informazioni insufficienti.</div>'
-            + '<button type="button" class="deep-banner-btn deep-inline-btn" onclick="requestDeepAnalysis(this)">Cerca una risposta più approfondita</button>'
+            + '<button type="button" class="deep-banner-btn deep-inline-btn" onclick="' + (deepLocked ? 'upgradeFeature(\'deep\')' : 'requestDeepAnalysis(this)') + '">' + (deepLocked ? '🔒 Sblocca l\'approfondimento' : 'Cerca una risposta più approfondita') + '</button>'
             + '</div>';
         msgParts.body.appendChild(box);
         hideDeepBanner();
@@ -1135,11 +1167,12 @@ function renderFinal(msgParts, text, sources, messageId, screenshots, wasDeep, t
         // Share via email (needs the persisted message id; screenshots are sent
         // from the client since they aren't stored server-side).
         if (messageId) {
+            const shareLocked = featureLocked('share');
             const shareBtn = document.createElement('button');
             shareBtn.className = 'msg-action-btn';
             shareBtn.type = 'button';
-            shareBtn.textContent = '📧 Condividi via email a un amico';
-            shareBtn.onclick = () => openShareModal(messageId, screenshots || []);
+            shareBtn.textContent = shareLocked ? '🔒 Condividi via email (piani a pagamento)' : '📧 Condividi via email a un amico';
+            shareBtn.onclick = shareLocked ? (() => upgradeFeature('share')) : (() => openShareModal(messageId, screenshots || []));
             actions.appendChild(shareBtn);
         }
         msgParts.body.appendChild(actions);
