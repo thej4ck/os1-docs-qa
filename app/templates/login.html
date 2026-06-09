@@ -25,6 +25,11 @@
             <p class="vg-rotator" id="vg-rotator">La procedura che fai due volte l’anno te la ripetiamo identica, ogni volta.</p>
             <span class="vg-masthead-rule" aria-hidden="true"></span>
 
+            <p class="vg-free-line">
+                <strong>{{ trial_days|default(7) }} giorni di prova completa</strong>, poi
+                <strong>gratis per sempre</strong> a funzionalità ridotte. Non paghi nulla.
+            </p>
+
             <div class="auth-card vg-card">
                 {% if error %}
                 <div class="alert-error" role="alert">
@@ -178,6 +183,10 @@
         <span class="vg-kicker">Inizia ora</span>
         <h2>Pronto a chiedere a Virgilio?</h2>
         <p>Attiva una prova gratuita per tutto il tuo dominio aziendale.</p>
+        <p class="vg-free-line vg-free-line-cta">
+            <strong>{{ trial_days|default(7) }} giorni di prova completa</strong>, poi
+            <strong>gratis per sempre</strong> a funzionalità ridotte. Non paghi nulla.
+        </p>
         <div class="vg-cta-actions">
             <a href="/signup" class="btn-primary">Prova gratis {{ trial_days|default(7) }} giorni</a>
             <a href="#email" class="vg-cta-login">Ho già un account → accedi</a>
@@ -242,6 +251,16 @@
 }
 .vg-kicker-hero { padding-left: 0; margin-bottom: 20px; color: var(--c-text-tertiary); }
 .vg-kicker-hero::before { display: none; }
+
+/* Modello free: 7gg prova → gratis per sempre. Evidente in hero e CTA finale. */
+.vg-free-line {
+    max-width: 480px; margin: 4px auto 26px; padding: 11px 22px;
+    background: var(--c-brand-light, rgba(226,35,26,0.07));
+    border: 1px solid rgba(226,35,26,0.22); border-radius: 999px;
+    font-size: 0.95rem; line-height: 1.5; color: var(--c-text); text-align: center;
+}
+.vg-free-line strong { color: var(--c-brand); font-weight: 700; }
+.vg-free-line-cta { margin: -6px auto 30px; }
 
 /* ── HERO ── */
 .vg-hero {
