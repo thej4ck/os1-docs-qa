@@ -260,7 +260,8 @@
     font-size: 0.95rem; line-height: 1.5; color: var(--c-text); text-align: center;
 }
 .vg-free-line strong { color: var(--c-brand); font-weight: 700; }
-.vg-free-line-cta { margin: -6px auto 30px; }
+/* Specificita' >= .vg-cta p (che forza margin:0 ...): mantiene il badge centrato. */
+.vg-cta .vg-free-line-cta { max-width: 480px; margin: -6px auto 30px; font-size: 0.95rem; color: var(--c-text); }
 
 /* ── HERO ── */
 .vg-hero {
