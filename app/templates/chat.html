@@ -200,12 +200,12 @@ async function confirmUpgrade() {
         },
         {
             type: 'spotlight', target: '#agent-picker', title: 'Scegli il tuo assistente',
-            body: 'Quattro esperti, ognuno con un modo di rispondere diverso. Scegli quello giusto per ciò che ti serve:'
+            body: 'Quattro esperti, ognuno con un modo di rispondere diverso:'
                 + '<div class="ob-agents">'
-                + '<div class="ob-agent"><span class="em">📘</span><span><b>Il Manuale</b> — spiega concetti e processi, senza passo-passo.</span></div>'
-                + '<div class="ob-agent"><span class="em">🧭</span><span><b>Guidami</b> — ti accompagna con passi numerati e verifica finale.</span></div>'
-                + '<div class="ob-agent"><span class="em">🔧</span><span><b>Ho un problema</b> — cause, controlli e soluzioni quando qualcosa non va.</span></div>'
-                + '<div class="ob-agent"><span class="em">⭐</span><span><b>Sono nuovo</b> — zero tecnicismi, analogie e prossimo passo.</span></div>'
+                + '<div class="ob-agent"><span class="em">📘</span><span><b>Virgilio</b> — concetti e processi, spiegati con chiarezza.</span></div>'
+                + '<div class="ob-agent"><span class="em">🧭</span><span><b>Pilota</b> — ti guida passo-passo, con verifica finale.</span></div>'
+                + '<div class="ob-agent"><span class="em">🔧</span><span><b>Doc</b> — diagnosi: cause, controlli e soluzioni.</span></div>'
+                + '<div class="ob-agent"><span class="em">⭐</span><span><b>Stella</b> — per chi parte da zero, senza tecnicismi.</span></div>'
                 + '</div>'
         },
         {
@@ -262,16 +262,24 @@ async function confirmUpgrade() {
     }
     function hideSpot() { msk.hidden = true; rng.hidden = true; }
 
-    function positionTip(r, p) {
+    // Posiziona la tip sopra/sotto il target. Ritorna false se non c'è spazio
+    // verticale (→ il chiamante degrada a card centrata, niente sovrapposizioni).
+    function placeTip(r, p) {
         const pw = p.offsetWidth, ph = p.offsetHeight, gap = 14, m = 12;
         const vh = window.innerHeight, vw = window.innerWidth;
         let top;
         if (r.bottom + gap + ph <= vh - m) top = r.bottom + gap;          // sotto
         else if (r.top - gap - ph >= m) top = r.top - gap - ph;            // sopra
-        else top = Math.max(m, Math.min(vh - ph - m, r.top));              // a fianco / clamp
-        let left = r.left + r.width / 2 - pw / 2;
-        left = Math.max(m, Math.min(vw - pw - m, left));
+        else return false;                                                 // niente spazio
+        let left = Math.max(m, Math.min(vw - pw - m, r.left + r.width / 2 - pw / 2));
         p.style.top = top + 'px'; p.style.left = left + 'px';
+        return true;
+    }
+    function asCard(s) {   // modalità card centrata (anche fallback di uno spotlight senza spazio)
+        ov.classList.remove('ob-mode-spot'); hideSpot();
+        pnl.className = 'ob-panel ob-panel--card';
+        pnl.style.top = pnl.style.left = '';
+        if (s.onShow) cleanup = s.onShow(pnl);
     }
 
     function render() {
@@ -300,8 +308,6 @@ async function confirmUpgrade() {
             + '<button class="ob-btn-next" id="ob-next"' + (checkpoint ? ' disabled' : '') + '>'
             + (last ? (mode === 'replay' ? 'Chiudi' : 'Inizia') : 'Avanti →') + '</button>'
             + '</div>';
-        pnl.className = 'ob-panel ' + (asTip ? 'ob-panel--tip' : 'ob-panel--card');
-
         document.getElementById('ob-skip').onclick = function () { finish(mode === 'first'); };
         const back = document.getElementById('ob-back'); if (back) back.onclick = prev;
         const next = document.getElementById('ob-next');
@@ -311,9 +317,14 @@ async function confirmUpgrade() {
             cb.onchange = function () { next.disabled = !cb.checked; };
         }
 
-        ov.classList.toggle('ob-mode-spot', asTip);
-        if (asTip) { const r = target.getBoundingClientRect(); showSpot(r); positionTip(r, pnl); }
-        else { hideSpot(); if (s.onShow) cleanup = s.onShow(pnl); }
+        // Spotlight ancorato all'elemento reale; se non c'è spazio per la tip → card centrata.
+        if (asTip) {
+            pnl.className = 'ob-panel ob-panel--tip';
+            pnl.style.top = pnl.style.left = '';
+            const r = target.getBoundingClientRect();
+            if (placeTip(r, pnl)) { ov.classList.add('ob-mode-spot'); showSpot(r); return; }
+        }
+        asCard(s);
     }
 
     function go(i) { if (i < 0 || i >= STEPS.length) return; idx = i; render(); }
@@ -332,11 +343,8 @@ async function confirmUpgrade() {
     }
 
     function onResize() {
-        const s = STEPS[idx];
-        if (s.type !== 'spotlight') return;
-        const t = resolveTarget(s.target);
-        if (!t) { render(); return; }   // target sparito (es. rotazione/resize) → degrada a card
-        const r = t.getBoundingClientRect(); showSpot(r); positionTip(r, pnl);
+        // Ricalcola posizione/fit (riposiziona, degrada a card o ri-aggancia) solo per gli step spotlight.
+        if (STEPS[idx].type === 'spotlight') render();
     }
     function onKey(e) {
         if (e.key === 'Escape') finish(mode === 'first');
