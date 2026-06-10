@@ -176,6 +176,7 @@ Risoluzione limite token utente: override `users.monthly_token_limit` → tier d
 - Markdown via marked.js; citazioni `[Dn]` come chip apice; immagini in carousel.
 - Design system SCAO: rosso `#E2231A`, DM Sans + Source Sans 3 + JetBrains Mono. Dark/light con localStorage.
 - CTA "approfondimento" inline sotto la risposta → ri-chiama in deep mode.
+- **Onboarding tour (ibrido)** in [chat.html](app/templates/chat.html) (CSS `.ob-*` in [base.html](app/templates/base.html)): controller vanilla `startOnboarding(mode)` con ~9 step `card` (slide illustrate: layout, citazioni, deep, gallery) o `spotlight` (mask+ring+tooltip ancorati a `#agent-picker`/`#question`/`#docs-panel`; degrada a card se il target manca/è nascosto). Auto-open al primo login (`{% if show_onboarding %}`), riapribile dal bottone "?" in header (`startOnboarding('replay')`, **non** ri-salva il flag). Solo il primo run fa `POST /api/onboarding/complete`.
 
 ### Sicurezza
 - Tutti gli endpoint API richiedono sessione (401). Admin gated.

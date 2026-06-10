@@ -27,6 +27,11 @@
     <div class="usage-meter-track"><div class="usage-meter-fill" id="usage-meter-fill"></div></div>
     <span class="usage-meter-label" id="usage-meter-label"></span>
 </div>
+<button class="docs-toggle-btn" id="onboarding-replay-btn" aria-label="Rivedi l'introduzione" title="Rivedi l'introduzione" onclick="startOnboarding('replay')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">
+        <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+    </svg>
+</button>
 <span class="header-divider"></span>
 <button class="header-email header-email-btn" id="access-link-btn" title="Accesso rapido da OS1 — clicca per il link" onclick="openAccessModal()">{{ email }} <span aria-hidden="true">🔑</span></button>
 {% if is_admin %}<a href="/admin" class="btn-logout" style="border-color: var(--c-brand); color: var(--c-brand);">Admin</a>{% endif %}
@@ -150,53 +155,206 @@ async function confirmUpgrade() {
 </script>
 {% endif %}
 
-{% if show_onboarding %}
-<div class="onboarding-overlay" id="onboarding">
-    <div class="onboarding-card">
-        <button class="onboarding-skip" onclick="completeOnboarding()">Salta introduzione</button>
-
-        <div class="onboarding-step active" data-step="1">
-            <img src="/static/img/logo-lg.png" alt="SCAO" class="onboarding-logo">
-            <div class="onboarding-title">Benvenuta in OS1 Virgilio<span class="beta-badge-lg">Beta</span></div>
-            <div class="onboarding-subtitle">Fai una domanda sul gestionale OS1 e ricevi una risposta presa dal manuale ufficiale, con il documento di origine sempre indicato. È in versione Beta: ogni segnalazione ci aiuta a migliorarlo.</div>
-            <div class="onboarding-features">
-                <div class="onboarding-feature"><span class="onboarding-feature-icon">💬</span><div class="onboarding-feature-text"><strong>Scrivi come parli</strong> — fai la domanda con parole tue.</div></div>
-                <div class="onboarding-feature"><span class="onboarding-feature-icon">📄</span><div class="onboarding-feature-text"><strong>Risposte dal manuale</strong> — ogni risposta cita il documento OS1.</div></div>
-                <div class="onboarding-feature"><span class="onboarding-feature-icon">👍</span><div class="onboarding-feature-text"><strong>Dicci com'è andata</strong> — basta un clic su "Utile" / "Non utile".</div></div>
-            </div>
-            <div class="onboarding-dots"><span class="onboarding-dot active"></span><span class="onboarding-dot"></span></div>
-            <button class="onboarding-btn onboarding-btn-primary" onclick="onboardingNext()">Avanti →</button>
-        </div>
-
-        <div class="onboarding-step" data-step="2">
-            <div class="onboarding-title">Una nota prima di iniziare</div>
-            <div class="onboarding-warning">Le risposte sono generate da un'intelligenza artificiale a partire dal manuale OS1. Sono un valido aiuto, ma per operazioni delicate conviene sempre dare un'occhiata al documento citato. Non scrivere nelle domande dati personali o riservati.</div>
-            <label class="onboarding-checkbox"><input type="checkbox" id="onboarding-accept" onchange="document.getElementById('onboarding-start').disabled = !this.checked"> Ho capito, iniziamo</label>
-            <div class="onboarding-dots"><span class="onboarding-dot"></span><span class="onboarding-dot active"></span></div>
-            <button class="onboarding-btn onboarding-btn-primary" id="onboarding-start" disabled onclick="completeOnboarding()">Inizia</button>
-            <div class="onboarding-nav"><button class="onboarding-back" onclick="onboardingPrev()">← Indietro</button><span></span></div>
-        </div>
-    </div>
+<!-- Tour di onboarding (ibrido: spotlight su UI reale + slide illustrate). Sempre presente: auto-open al primo login, riapribile dal bottone "?" in header. -->
+<div class="onboarding-overlay" id="onboarding" hidden aria-hidden="true">
+    <div class="ob-mask" id="ob-mask" hidden></div>
+    <div class="ob-ring" id="ob-ring" hidden></div>
+    <div class="ob-panel" id="ob-panel" role="dialog" aria-modal="true" aria-label="Introduzione a OS1 Virgilio"></div>
 </div>
 <script>
-let onboardingStep = 1;
-function onboardingGo(step) {
-    onboardingStep = step;
-    document.querySelectorAll('.onboarding-step').forEach(s => s.classList.remove('active'));
-    document.querySelector(`.onboarding-step[data-step="${step}"]`).classList.add('active');
-}
-function onboardingNext() { if (onboardingStep < 2) onboardingGo(onboardingStep + 1); }
-function onboardingPrev() { if (onboardingStep > 1) onboardingGo(onboardingStep - 1); }
-function completeOnboarding() {
-    fetch('/api/onboarding/complete', { method: 'POST' }).then(() => {
-        const overlay = document.getElementById('onboarding');
-        overlay.style.opacity = '0';
-        overlay.style.transition = 'opacity 300ms';
-        setTimeout(() => overlay.remove(), 300);
-    });
-}
+(function () {
+    const LOGO = "/static/img/logo-lg.png";
+    let mode = 'first';   // 'first' = primo login (salva il flag) | 'replay' = ripasso (non salva)
+    let idx = 0;
+    let cleanup = null;   // teardown animazioni dello step corrente
+
+    // Elementi del tour: presenti nel markup sopra → cache-abili una volta.
+    const ov = document.getElementById('onboarding');
+    const pnl = document.getElementById('ob-panel');
+    const msk = document.getElementById('ob-mask');
+    const rng = document.getElementById('ob-ring');
+
+    const STEPS = [
+        {
+            type: 'card', title: 'Ti diamo il benvenuto in OS1 Virgilio',
+            body: 'Fai una domanda sul gestionale OS1 e ricevi una risposta presa dal manuale ufficiale, con il documento di origine sempre indicato. Ti mostriamo in un minuto come muoverti.',
+            illu: '<img src="' + LOGO + '" alt="SCAO" class="onboarding-logo" style="height:46px;margin:4px auto 2px;">'
+        },
+        {
+            type: 'card', title: 'Le tre aree dello schermo',
+            body: 'A sinistra le tue <b>conversazioni</b>, al centro la <b>chat</b> dove scrivi e leggi le risposte, a destra i <b>documenti</b> citati. Sugli schermi piccoli i lati si aprono con i pulsanti in alto.',
+            illu: '<div class="ob-illu"><div class="ob-mock-layout">'
+                + '<div class="ob-mock-pane s"><div class="bar" style="width:80%"></div><div class="bar" style="width:60%"></div><div class="bar" style="width:72%"></div></div>'
+                + '<div class="ob-mock-pane c"><div class="bar" style="width:90%"></div><div class="bar" style="width:75%"></div><div class="bar" style="width:85%"></div><div class="bar" style="width:50%"></div></div>'
+                + '<div class="ob-mock-pane d"><div class="bar" style="width:70%"></div><div class="bar" style="width:55%"></div></div>'
+                + '</div><div class="ob-mock-cap"><b>Conversazioni</b> · Chat · Documenti</div></div>',
+            onShow: function (p) {
+                const panes = p.querySelectorAll('.ob-mock-pane');
+                let i = 0; panes[0].classList.add('is-hi');
+                const t = setInterval(function () {
+                    panes.forEach(x => x.classList.remove('is-hi'));
+                    i = (i + 1) % panes.length; panes[i].classList.add('is-hi');
+                }, 950);
+                return function () { clearInterval(t); };
+            }
+        },
+        {
+            type: 'spotlight', target: '#agent-picker', title: 'Scegli il tuo assistente',
+            body: 'Quattro esperti, ognuno con un modo di rispondere diverso. Scegli quello giusto per ciò che ti serve:'
+                + '<div class="ob-agents">'
+                + '<div class="ob-agent"><span class="em">📘</span><span><b>Il Manuale</b> — spiega concetti e processi, senza passo-passo.</span></div>'
+                + '<div class="ob-agent"><span class="em">🧭</span><span><b>Guidami</b> — ti accompagna con passi numerati e verifica finale.</span></div>'
+                + '<div class="ob-agent"><span class="em">🔧</span><span><b>Ho un problema</b> — cause, controlli e soluzioni quando qualcosa non va.</span></div>'
+                + '<div class="ob-agent"><span class="em">⭐</span><span><b>Sono nuovo</b> — zero tecnicismi, analogie e prossimo passo.</span></div>'
+                + '</div>'
+        },
+        {
+            type: 'spotlight', target: '#question', title: 'Scrivi una buona domanda',
+            body: '<div class="ob-tips">'
+                + '<div class="ob-tip"><span class="ok">Sì</span> — frase naturale e specifica: «come registro una fattura di acquisto con ritenuta?»</div>'
+                + '<div class="ob-tip"><span class="ok">Sì</span> — un argomento per volta; usa i termini di OS1 (nomi di moduli e campi).</div>'
+                + '<div class="ob-tip"><span class="no">No</span> — domande troppo vaghe («aiuto») o più cose insieme.</div>'
+                + '<div class="ob-tip"><span class="no">No</span> — dati personali o riservati nelle domande.</div>'
+                + '</div>'
+        },
+        {
+            type: 'card', title: 'Naviga le risposte',
+            body: 'Ogni risposta cita il manuale OS1. I rimandi come <b>[D1]</b> sono cliccabili: aprono il documento di origine, così puoi verificare.',
+            illu: '<div class="ob-illu"><div class="ob-mock-answer">Per registrare la fattura apri il modulo Acquisti e crea un nuovo documento<span class="ob-chip">D1</span>. Compila testata e righe, poi conferma<span class="ob-chip">D2</span>.</div></div>'
+        },
+        {
+            type: 'card', title: 'Vuoi di più? Approfondisci',
+            body: 'Se una risposta ti sembra troppo sintetica, usa <b>Approfondisci</b>: rielabora la domanda in modo più esteso e dettagliato, pescando da più documentazione.',
+            illu: '<div class="ob-illu"><div class="ob-mock-deep"><span class="ico">💡</span><span class="txt">La risposta non ti basta?</span><span class="btn">Approfondisci</span></div></div>'
+        },
+        {
+            type: 'spotlight', target: '#docs-panel', title: 'I documenti citati',
+            body: 'Qui compaiono i documenti usati per la risposta. Clicca una citazione <b>[D1]</b> oppure una voce in questo pannello per aprire il documento completo, con testo e immagini.'
+        },
+        {
+            type: 'card', title: 'Sfoglia le immagini',
+            body: 'Quando una risposta include schermate, scorri con le frecce <b>‹ ›</b> o tocca le miniature per ingrandirle e vederle una a una.',
+            illu: '<div class="ob-illu"><div class="ob-mock-gallery"><div class="ob-mock-frame"><span class="ob-mock-arrow l">‹</span><span class="pic">🖼️</span><span class="ob-mock-arrow r">›</span></div><div class="ob-mock-thumbs"><span class="on"></span><span></span><span></span></div></div></div>'
+        },
+        {
+            type: 'final', title: 'Una nota prima di iniziare',
+            body: 'Le risposte sono generate da un\'intelligenza artificiale a partire dal manuale OS1. Sono un valido aiuto, ma per operazioni delicate conviene sempre controllare il documento citato. Non scrivere dati personali o riservati nelle domande.'
+        }
+    ];
+
+    function cancelCleanup() { if (cleanup) { try { cleanup(); } catch (e) {} cleanup = null; } }
+
+    function resolveTarget(sel) {
+        const t = document.querySelector(sel);
+        if (!t) return null;
+        const r = t.getBoundingClientRect();
+        if (r.width < 2 || r.height < 2 || r.bottom < 0 || r.top > window.innerHeight) return null;
+        return t;
+    }
+
+    function showSpot(r) {
+        const pad = 6;
+        [msk, rng].forEach(function (el) {
+            el.hidden = false;
+            el.style.top = (r.top - pad) + 'px'; el.style.left = (r.left - pad) + 'px';
+            el.style.width = (r.width + pad * 2) + 'px'; el.style.height = (r.height + pad * 2) + 'px';
+        });
+    }
+    function hideSpot() { msk.hidden = true; rng.hidden = true; }
+
+    function positionTip(r, p) {
+        const pw = p.offsetWidth, ph = p.offsetHeight, gap = 14, m = 12;
+        const vh = window.innerHeight, vw = window.innerWidth;
+        let top;
+        if (r.bottom + gap + ph <= vh - m) top = r.bottom + gap;          // sotto
+        else if (r.top - gap - ph >= m) top = r.top - gap - ph;            // sopra
+        else top = Math.max(m, Math.min(vh - ph - m, r.top));              // a fianco / clamp
+        let left = r.left + r.width / 2 - pw / 2;
+        left = Math.max(m, Math.min(vw - pw - m, left));
+        p.style.top = top + 'px'; p.style.left = left + 'px';
+    }
+
+    function render() {
+        cancelCleanup();
+        const s = STEPS[idx];
+        const total = STEPS.length;
+        const last = idx === total - 1;
+        const isFinal = s.type === 'final';
+        const checkpoint = isFinal && mode === 'first';   // step finale al primo login: consenso obbligatorio
+        const target = s.type === 'spotlight' ? resolveTarget(s.target) : null;
+        const asTip = !!target;
+
+        const dots = Array.from({ length: total }, (_, i) =>
+            '<span class="onboarding-dot' + (i === idx ? ' active' : '') + '"></span>').join('');
+
+        pnl.innerHTML =
+            '<button class="onboarding-skip" id="ob-skip">' + (mode === 'replay' ? 'Chiudi ✕' : 'Salta introduzione') + '</button>'
+            + '<div class="ob-step-count">Passo ' + (idx + 1) + ' di ' + total + '</div>'
+            + '<div class="onboarding-title">' + s.title + '</div>'
+            + (!asTip && s.illu ? s.illu : '')
+            + '<div class="ob-body' + (isFinal ? ' onboarding-warning' : '') + '">' + s.body + '</div>'
+            + (checkpoint ? '<label class="onboarding-checkbox"><input type="checkbox" id="ob-accept"> Ho capito, iniziamo</label>' : '')
+            + '<div class="onboarding-dots" style="margin:6px 0 2px;">' + dots + '</div>'
+            + '<div class="ob-foot">'
+            + (idx > 0 ? '<button class="ob-btn-back" id="ob-back">← Indietro</button>' : '<span></span>')
+            + '<button class="ob-btn-next" id="ob-next"' + (checkpoint ? ' disabled' : '') + '>'
+            + (last ? (mode === 'replay' ? 'Chiudi' : 'Inizia') : 'Avanti →') + '</button>'
+            + '</div>';
+        pnl.className = 'ob-panel ' + (asTip ? 'ob-panel--tip' : 'ob-panel--card');
+
+        document.getElementById('ob-skip').onclick = function () { finish(mode === 'first'); };
+        const back = document.getElementById('ob-back'); if (back) back.onclick = prev;
+        const next = document.getElementById('ob-next');
+        next.onclick = function () { if (last) finish(true); else go(idx + 1); };
+        if (checkpoint) {
+            const cb = document.getElementById('ob-accept');
+            cb.onchange = function () { next.disabled = !cb.checked; };
+        }
+
+        ov.classList.toggle('ob-mode-spot', asTip);
+        if (asTip) { const r = target.getBoundingClientRect(); showSpot(r); positionTip(r, pnl); }
+        else { hideSpot(); if (s.onShow) cleanup = s.onShow(pnl); }
+    }
+
+    function go(i) { if (i < 0 || i >= STEPS.length) return; idx = i; render(); }
+    function prev() { go(idx - 1); }
+
+    function finish(persist) {
+        cancelCleanup();
+        if (persist && mode === 'first') fetch('/api/onboarding/complete', { method: 'POST' }).catch(function () {});
+        ov.style.opacity = '0'; ov.style.transition = 'opacity 280ms';
+        setTimeout(function () {
+            ov.hidden = true; ov.setAttribute('aria-hidden', 'true');
+            ov.style.opacity = ''; ov.classList.remove('ob-mode-spot'); hideSpot();
+        }, 280);
+        document.removeEventListener('keydown', onKey);
+        window.removeEventListener('resize', onResize);
+    }
+
+    function onResize() {
+        const s = STEPS[idx];
+        if (s.type !== 'spotlight') return;
+        const t = resolveTarget(s.target);
+        if (!t) { render(); return; }   // target sparito (es. rotazione/resize) → degrada a card
+        const r = t.getBoundingClientRect(); showSpot(r); positionTip(r, pnl);
+    }
+    function onKey(e) {
+        if (e.key === 'Escape') finish(mode === 'first');
+        else if (e.key === 'ArrowRight' && idx < STEPS.length - 1) go(idx + 1);
+        else if (e.key === 'ArrowLeft' && idx > 0) go(idx - 1);
+    }
+
+    window.startOnboarding = function (m) {
+        mode = (m === 'replay') ? 'replay' : 'first';
+        idx = 0;
+        ov.hidden = false; ov.removeAttribute('aria-hidden'); ov.style.opacity = '';
+        document.addEventListener('keydown', onKey);
+        window.addEventListener('resize', onResize);
+        render();
+    };
+})();
 </script>
-{% endif %}
+{% if show_onboarding %}<script>window.addEventListener('load', function () { startOnboarding('first'); });</script>{% endif %}
 
 <div class="chat-layout">
     <!-- Left sidebar: conversations -->
