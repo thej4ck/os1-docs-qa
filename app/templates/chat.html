@@ -56,7 +56,7 @@
             {% endif %}
         </div>
         <div class="trial-banner-line2">
-            Licenza per azienda legata ai posti di lavoro OS1 (nessun costo per utente) — da <strong>€19/mese</strong>. <a href="/prezzi" target="_blank" style="color:inherit;text-decoration:underline;">Vedi i piani</a>.
+            Licenza per azienda legata ai posti di lavoro OS1 (nessun costo per utente) — da <strong>€19/mese</strong>.
         </div>
     </div>
     <button class="trial-banner-cta" onclick="requestUpgrade()">Richiedi attivazione abbonamento</button>
@@ -645,7 +645,7 @@ let _shareMsgId = null, _shareShots = [];
 function openShareModal(msgId, shots){ _shareMsgId = msgId; _shareShots = shots || []; document.getElementById('share-form').reset(); document.getElementById('share-modal').hidden = false; }
 function closeShareModal(){ document.getElementById('share-modal').hidden = true; }
 // CTA upgrade da una feature premium bloccata (badge 🔒 PRO): spiega + apre la
-// richiesta abbonamento (modale FREE/trial) o il listino pubblico come fallback.
+// richiesta abbonamento (modale FREE/trial).
 function upgradeFeature(feat){
     var msgs = {
         esperti: 'I 4 esperti sono inclusi nei piani a pagamento.',
@@ -654,7 +654,6 @@ function upgradeFeature(feat){
     };
     if (typeof showToast === 'function') showToast(msgs[feat] || 'Funzione disponibile con i piani a pagamento.', 'info');
     if (typeof requestUpgrade === 'function') requestUpgrade();
-    else window.open('/prezzi', '_blank');
 }
 async function submitShare(ev){
     ev.preventDefault();

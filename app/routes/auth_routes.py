@@ -40,12 +40,15 @@ async def login_page(request: Request):
     from app.config import settings as _cfg
     from app.models.settings import get_bool_setting
     from app.auth.email_sender import get_trial_duration_days
+    from app.models.domain import PRICING_BANDS, TIER_PRESETS, TIER_FREE
     _base = _cfg.base_url.rstrip("/") if _cfg.base_url else str(request.base_url).rstrip("/")
     return _templates().TemplateResponse(request, "login.html", {
         "request": request, "error": None,
         "mcp_enabled": get_bool_setting("mcp_enabled", _cfg.production),
         "mcp_url": f"{_base}/mcp",
         "trial_days": get_trial_duration_days(),
+        "bands": PRICING_BANDS,
+        "free_preset": TIER_PRESETS[TIER_FREE],
     })
 
 

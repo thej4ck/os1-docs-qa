@@ -164,6 +164,21 @@
         </div>
     </section>
 
+    <!-- ══ VIDEO DEMO ══ -->
+    <section class="vg-section">
+        <div class="vg-section-head vg-reveal">
+            <span class="vg-kicker">In azione</span>
+            <h2 class="vg-h2">Guardalo lavorare</h2>
+            <p class="vg-sub">Un minuto per vedere come risponde sulla documentazione OS1.</p>
+        </div>
+        <div class="vg-video vg-reveal">
+            <iframe id="vg-video" title="Demo OS1 Virgilio"
+                data-src="https://www.youtube-nocookie.com/embed/TmkWhaLidX4?rel=0&amp;modestbranding=1&amp;playsinline=1&amp;mute=1&amp;cc_load_policy=1"
+                allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            <span class="vg-video-hint" aria-hidden="true">🔊 tocca per l'audio</span>
+        </div>
+    </section>
+
     {% if mcp_enabled %}
     <!-- ══ MCP / connettori AI ══ -->
     <section class="vg-section">
@@ -177,6 +192,93 @@
         </div>
     </section>
     {% endif %}
+
+    <!-- ══ PREZZI ══ -->
+    <section class="vg-section vg-section-wide">
+        <div class="vg-section-head vg-reveal">
+            <span class="vg-kicker">Prezzi</span>
+            <h2 class="vg-h2">Un prezzo per azienda, non per utente</h2>
+            <p class="vg-sub">Legato ai posti di lavoro (PDL) della tua licenza OS1. Utenti illimitati, niente costi a sorpresa.</p>
+        </div>
+
+        <div class="vg-pricing vg-reveal">
+            <div class="vg-plan vg-plan-free">
+                <h3>Free</h3>
+                <div class="vg-plan-pdl">incluso con OS1</div>
+                <div class="vg-plan-price">€0</div>
+                <div class="vg-plan-year">sempre gratis</div>
+                <ul class="vg-plan-feats">
+                    <li>{{ free_preset.daily_chat_limit }} chat al giorno</li>
+                    <li>1 esperto (Il Manuale)</li>
+                    <li>Risposte con fonti ufficiali</li>
+                </ul>
+                <a class="vg-price-cta" href="/signup">Inizia gratis</a>
+            </div>
+
+            {% for b in bands if b.band in ['STARTER', 'TEAM', 'BUSINESS'] %}
+            <div class="vg-plan{% if b.band == 'TEAM' %} vg-plan-feat{% endif %}">
+                {% if b.band == 'TEAM' %}<span class="vg-plan-tag">più scelto</span>{% endif %}
+                <h3>{{ b.label }}</h3>
+                <div class="vg-plan-pdl">{{ b.pdl_min }}–{{ b.pdl_max }} PDL OS1</div>
+                <div class="vg-plan-price">€{{ b.price_month }}<small>/mese</small></div>
+                <div class="vg-plan-year">fatturato annualmente · €{{ b.price_year }}/anno</div>
+                <ul class="vg-plan-feats">
+                    <li>4 esperti specialisti</li>
+                    <li>Approfondimento e condivisione</li>
+                    <li>Uso in Claude / ChatGPT</li>
+                    <li>Limiti pieni</li>
+                </ul>
+                <a class="vg-price-cta ghost" href="mailto:commerciali@scao.it?subject=Richiesta%20attivazione%20OS1%20Virgilio%20-%20Piano%20{{ b.label }}&amp;body=Salve,%20sono%20interessato%20all'attivazione%20del%20piano%20{{ b.label }}%20di%20OS1%20Virgilio.%0D%0A%0D%0AAzienda:%20%0D%0APDL%20OS1:%20%0D%0ATelefono:%20">Richiedi attivazione</a>
+            </div>
+            {% endfor %}
+
+            <div class="vg-plan">
+                <h3>Enterprise</h3>
+                <div class="vg-plan-pdl">oltre 10 PDL OS1</div>
+                <div class="vg-plan-price vg-plan-quote">Su misura</div>
+                <div class="vg-plan-year">preventivo dedicato</div>
+                <ul class="vg-plan-feats">
+                    <li>Tutto di Business</li>
+                    <li>Limiti su misura</li>
+                    <li>Supporto prioritario</li>
+                </ul>
+                <a class="vg-price-cta ghost" href="mailto:commerciali@scao.it?subject=Richiesta%20preventivo%20OS1%20Virgilio%20-%20Enterprise&amp;body=Salve,%20vorrei%20un%20preventivo%20per%20OS1%20Virgilio%20(oltre%2010%20PDL).%0D%0A%0D%0AAzienda:%20%0D%0APDL%20OS1:%20%0D%0ATelefono:%20">Richiedi preventivo</a>
+            </div>
+        </div>
+
+        <div class="vg-pricing-trial vg-reveal">
+            <a href="/signup" class="btn-primary vg-pricing-trial-btn">Provalo gratis {{ trial_days|default(7) }} giorni →</a>
+            <p class="vg-pricing-trial-note">Tutto sbloccato · nessuna carta di credito · poi gratis per sempre</p>
+        </div>
+
+        <ul class="vg-trust vg-reveal">
+            <li>Azienda italiana dal 1977</li>
+            <li>Assistenza inclusa</li>
+            <li>Nessun costo per utente</li>
+            <li>Fattura elettronica</li>
+        </ul>
+
+        <p class="vg-pricing-note vg-reveal">Prezzi IVA esclusa · fatturazione annuale · soggetti a variazioni.</p>
+
+        <div class="vg-faq vg-reveal">
+            <details>
+                <summary>Come funziona il pagamento?</summary>
+                <p>Fatturazione annuale con fattura elettronica, prezzi IVA esclusa. Un unico canone per l'azienda, in base ai PDL della tua licenza OS1.</p>
+            </details>
+            <details>
+                <summary>Cosa succede dopo i {{ trial_days|default(7) }} giorni di prova?</summary>
+                <p>Nessun addebito automatico: al termine il piano diventa <strong>Free</strong> (funzioni ridotte, gratis per sempre). Passi a un piano a pagamento solo se lo richiedi tu.</p>
+            </details>
+            <details>
+                <summary>Il prezzo dipende dal numero di utenti?</summary>
+                <p>No. Dipende solo dai posti di lavoro (PDL) della licenza OS1: gli utenti del tuo dominio aziendale sono illimitati.</p>
+            </details>
+            <details>
+                <summary>Posso cambiare piano?</summary>
+                <p>Sì, il piano si adegua ai PDL della tua licenza. Scrivici a commerciali@scao.it e lo aggiorniamo.</p>
+            </details>
+        </div>
+    </section>
 
     <!-- ══ CTA FINALE ══ -->
     <section class="vg-cta vg-reveal">
@@ -485,7 +587,8 @@
 }
 .vg-cta p { color: var(--c-text-secondary); font-size: 1.08rem; margin: 0 0 32px; }
 .vg-cta-actions { display: flex; flex-direction: column; align-items: center; gap: 18px; }
-.vg-cta .btn-primary {
+.vg-cta .btn-primary,
+.vg-pricing-trial-btn {
     display: inline-block; width: auto; padding: 15px 40px; text-decoration: none;
     font-size: 1rem; border-radius: var(--vg-r);
     box-shadow: 0 14px 30px -10px rgba(226,35,26,0.5);
@@ -555,6 +658,104 @@
     color: var(--c-text-secondary); font-size: 0.975rem; line-height: 1.6;
     margin: 18px auto 0; max-width: 560px;
 }
+
+/* ── Video demo ── */
+.vg-video {
+    position: relative; max-width: 900px; margin: 0 auto;
+    aspect-ratio: 16 / 9; border-radius: var(--vg-r); overflow: hidden;
+    box-shadow: var(--vg-lift); background: #000;
+}
+.vg-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.vg-video-hint {
+    position: absolute; right: 14px; bottom: 14px; z-index: 2; pointer-events: none;
+    font-family: var(--font-sans); font-size: 0.8rem; font-weight: 600;
+    color: var(--c-text); background: var(--c-surface);
+    border: 1px solid var(--c-border); border-radius: 999px;
+    padding: 6px 14px; box-shadow: var(--vg-lift); opacity: 0.92;
+}
+
+/* ── Prezzi ── */
+.vg-section-wide { max-width: 1340px; }
+.vg-pricing {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 16px; align-items: stretch;
+}
+.vg-plan {
+    position: relative; display: flex; flex-direction: column;
+    background: var(--c-surface); border: 1px solid var(--c-border);
+    border-radius: var(--vg-r); padding: 26px 24px 24px; box-shadow: var(--vg-lift);
+}
+.vg-plan-free { border-style: dashed; }
+.vg-plan-feat { border-color: var(--c-brand); box-shadow: var(--vg-lift-hi); }
+.vg-plan-tag {
+    position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+    background: var(--c-brand); color: #fff;
+    font-family: var(--font-sans); font-size: 0.625rem; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 999px; white-space: nowrap;
+}
+.vg-plan h3 {
+    font-family: var(--font-display); font-optical-sizing: auto;
+    font-size: 1.3rem; font-weight: 600; margin: 0 0 2px; color: var(--c-text);
+}
+.vg-plan-pdl { font-size: 0.82rem; color: var(--c-text-tertiary); margin-bottom: 14px; }
+.vg-plan-price {
+    font-family: var(--font-display); font-size: 2rem; font-weight: 600;
+    line-height: 1; color: var(--c-text);
+}
+.vg-plan-price small { font-size: 0.9rem; font-weight: 500; color: var(--c-text-secondary); }
+.vg-plan-quote { font-size: 1.5rem; }
+.vg-plan-year { font-size: 0.8rem; color: var(--c-text-tertiary); margin-top: 4px; min-height: 18px; }
+.vg-plan-feats { list-style: none; padding: 0; margin: 16px 0 20px; font-size: 0.9rem; flex: 1; }
+.vg-plan-feats li { padding: 5px 0 5px 22px; position: relative; color: var(--c-text-secondary); line-height: 1.45; }
+.vg-plan-feats li::before { content: "✓"; position: absolute; left: 0; color: var(--c-success); font-weight: 700; }
+.vg-price-cta {
+    display: block; text-align: center; text-decoration: none;
+    font-family: var(--font-sans); font-weight: 600; font-size: 0.95rem;
+    padding: 12px 18px; border-radius: 12px;
+    background: var(--c-brand); color: #fff; border: 1px solid var(--c-brand);
+    transition: background .2s ease;
+}
+.vg-price-cta:hover { background: var(--c-brand-hover); }
+.vg-price-cta.ghost { background: transparent; color: var(--c-brand); }
+.vg-price-cta.ghost:hover { background: var(--c-brand-light); }
+
+.vg-pricing-trial { text-align: center; margin-top: 42px; }
+.vg-pricing-trial-note { margin: 14px 0 0; font-size: 0.9rem; color: var(--c-text-tertiary); }
+
+.vg-trust {
+    list-style: none; padding: 0; margin: 34px auto 0; max-width: 720px;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 14px;
+}
+.vg-trust li {
+    font-family: var(--font-sans); font-size: 0.82rem; font-weight: 600;
+    color: var(--c-text-secondary); background: var(--c-surface);
+    border: 1px solid var(--c-border); border-radius: 999px; padding: 7px 16px;
+}
+.vg-trust li::before { content: "●"; color: var(--c-brand); margin-right: 8px; font-size: 0.6em; vertical-align: middle; }
+.vg-pricing-note { text-align: center; color: var(--c-text-tertiary); font-size: 0.85rem; margin: 22px auto 0; }
+
+.vg-faq { max-width: 720px; margin: 40px auto 0; }
+.vg-faq details {
+    border: 1px solid var(--c-border); border-radius: 12px;
+    background: var(--c-surface); padding: 0 20px; margin-bottom: 10px;
+}
+.vg-faq summary {
+    cursor: pointer; list-style: none; padding: 16px 0; padding-right: 28px; position: relative;
+    font-family: var(--font-sans); font-weight: 600; font-size: 0.98rem; color: var(--c-text);
+}
+.vg-faq summary::-webkit-details-marker { display: none; }
+.vg-faq summary::after {
+    content: "+"; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+    color: var(--c-brand); font-size: 1.3rem; font-weight: 400;
+}
+.vg-faq details[open] summary::after { content: "−"; }
+.vg-faq p { margin: 0 0 16px; color: var(--c-text-secondary); font-size: 0.92rem; line-height: 1.6; }
+
+/* prezzi responsive (dopo la regola base a 5 colonne, così vince nel cascade) */
+@media (max-width: 1180px) { .vg-pricing { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 720px)  { .vg-pricing { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 440px)  { .vg-pricing { grid-template-columns: 1fr; } }
 </style>
 
 <script>
@@ -612,6 +813,22 @@
         });
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     els.forEach(function (e) { io.observe(e); });
+})();
+
+/* ── autoplay muto del video demo allo scroll ── */
+(function () {
+    var frame = document.getElementById('vg-video');
+    if (!frame || !frame.dataset.src) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var load = function (autoplay) {
+        frame.src = frame.dataset.src + (autoplay ? '&autoplay=1' : '');
+        frame.removeAttribute('data-src');
+    };
+    if (reduce || !('IntersectionObserver' in window)) { load(false); return; }
+    var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { load(true); io.disconnect(); }
+    }, { threshold: 0.4 });
+    io.observe(frame);
 })();
 </script>
 

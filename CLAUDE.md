@@ -8,7 +8,7 @@ Chat con **retrieval ibrido BM25 + semantico (model2vec)** e LLM (Groq), 4 esper
 auth OTP + access-token, **self-signup freemium con tier**, **pricing a scaglioni per PDL OS1**, backoffice admin, tracking costi, dark/light theme.
 
 - `app/version.py` è single source of truth: `VERSION`, `BUILD`, `BUILD_DATE`, `PRODUCT_NAME = "OS1 Virgilio"`.
-- Stato attuale: VERSION `2.2.0`, BUILD `87`.
+- Stato attuale: VERSION `2.2.0`, BUILD `96`.
 - Stack web: FastAPI `0.135.1` + **Starlette `>=1.0.1,<2`** (pin floating; chiude **CVE-2026-48710** Host-header → path poisoning). NB: con Starlette 1.x `Jinja2Templates.TemplateResponse` vuole `request` come **primo** arg: `TemplateResponse(request, name, context)`.
 
 ## Comandi sviluppo
@@ -74,7 +74,7 @@ Strati:
 - `app/routes/chat_routes.py` (~780) — chat, ask SSE, conversazioni CRUD/export, feedback, doc viewer, announcements, usage summary, onboarding, request-upgrade, `/api/debug/retrieve` (solo dev).
 - `app/routes/auth_routes.py` — login OTP, verify, logout, **access-token login** (`/login/token`, `/api/access-token[/regenerate]`).
 - `app/routes/signup_routes.py` — **self-signup freemium** (`/signup`, `/signup/verify`) con autoprovisioning **TRIAL full-unlock 7gg** (`billing_status='trial'`). Accetta `ref`/`s` (share attribution): a fine signup chiama `mark_converted(share_token, domain_id)`.
-- `app/routes/public_routes.py` — **rotte pubbliche (no auth)**: condivisione risposte (vedi sezione dedicata) + **listino `/prezzi`** (`public_pricing.html`: fasce PDL + freemium + CTA prova/iscrizione).
+- `app/routes/public_routes.py` — **rotte pubbliche (no auth)**: condivisione risposte (vedi sezione dedicata). NB: il listino `/prezzi` (`public_pricing.html`) è stato **rimosso** (build 96): i prezzi vivono ora solo nella splash `login.html`.
 - `app/routes/admin_routes.py` (~555) — dashboard, utenti, usage, costi, conversazioni, domini, **condivisioni** (`/admin/shares`, funnel), feedback, settings, export CSV.
 - `app/auth/otp.py` — OTP in-memory (TTL 300s, cooldown 10s, max 5 tentativi), sender e domini da DB.
 - `app/auth/session.py` — cookie firmato itsdangerous (24h, HTTPOnly, SameSite=lax, Secure in prod).
@@ -173,6 +173,7 @@ Risoluzione limite token utente: override `users.monthly_token_limit` → tier d
 
 ### Frontend (Jinja2 + vanilla JS)
 - Layout 3 pannelli: conversazioni (sx) + chat (centro) + documenti (dx). Landing "Virgilio & Co." + login.
+- **Splash pre-login** ([login.html](app/templates/login.html), CSS/JS inline): hero → claim → quando serve → 4 esperti → **video demo YouTube** (autoplay muto on-scroll via IntersectionObserver, `youtube-nocookie`) → [MCP] → **sezione prezzi** (card Free + Starter/Team/Business + Enterprise condensata; prezzi da `PRICING_BANDS` passati da `login_page`; CTA per-piano `mailto:commerciali@scao.it`; trial CTA dominante `/signup`; trust chip + FAQ `<details>`) → CTA finale → disclaimer AI Act.
 - Markdown via marked.js; citazioni `[Dn]` come chip apice; immagini in carousel.
 - Design system SCAO: rosso `#E2231A`, DM Sans + Source Sans 3 + JetBrains Mono. Dark/light con localStorage.
 - CTA "approfondimento" inline sotto la risposta → ri-chiama in deep mode.
