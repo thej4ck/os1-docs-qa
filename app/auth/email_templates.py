@@ -445,6 +445,21 @@ def admin_new_signup(domain: dict) -> tuple[str, str]:
     return subject, _wrap_internal("Nuova iscrizione TRIAL", body)
 
 
+def admin_signup_attempt(form: dict, error: str | None) -> tuple[str, str]:
+    """Notifica immediata ad ogni submit del form di signup, riuscito o meno."""
+    company = form.get("company_name") or form.get("email") or "?"
+    referente = f"{form.get('first_name') or ''} {form.get('last_name') or ''}".strip()
+    esito = "OK — codice OTP inviato" if not error else f"BLOCCATO: {error}"
+    subject = f"[{_PRODUCT}] Tentativo iscrizione TRIAL: {company}"
+    body = _kv_table([
+        ("Azienda", f"<strong>{_safe(form.get('company_name'))}</strong>"),
+        ("Referente", _safe(referente)),
+        ("Email", _safe(form.get("email"))),
+        ("Esito", _safe(esito)),
+    ])
+    return subject, _wrap_internal("Tentativo di iscrizione TRIAL", body)
+
+
 def admin_upgrade_request(
     *, user_email: str, domain: dict, current_tier: str
 ) -> tuple[str, str]:

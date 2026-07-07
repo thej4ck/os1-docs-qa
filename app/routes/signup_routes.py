@@ -8,7 +8,7 @@ from app.auth.email_sender import (
     get_trial_duration_days,
     send_email,
 )
-from app.auth.email_templates import admin_new_signup, welcome_trial
+from app.auth.email_templates import admin_new_signup, admin_signup_attempt, welcome_trial
 from app.auth.otp import generate_otp, send_otp_email, verify_cooldown_remaining, verify_otp
 from app.auth.session import login_and_redirect
 from app.models.domain import (
@@ -63,6 +63,7 @@ async def signup_page(request: Request, ref: str = "", s: str = ""):
 @router.post("/signup", response_class=HTMLResponse)
 async def signup_submit(
     request: Request,
+    background_tasks: BackgroundTasks,
     first_name: str = Form(...),
     last_name: str = Form(...),
     email: str = Form(...),
@@ -81,47 +82,33 @@ async def signup_submit(
         company_name=company_name, ref=ref, share_token=share_token,
     )
 
+    error = None
     if not (first_name and last_name and email and company_name):
-        return _render_signup(request, error="Compila tutti i campi.", **form_ctx)
-
-    if not EMAIL_RE.match(email):
-        return _render_signup(request, error="Email non valida.", **form_ctx)
-
-    if gdpr != "on":
-        return _render_signup(
-            request,
-            error="Devi accettare l'informativa privacy per proseguire.",
-            **form_ctx,
+        error = "Compila tutti i campi."
+    elif not EMAIL_RE.match(email):
+        error = "Email non valida."
+    elif gdpr != "on":
+        error = "Devi accettare l'informativa privacy per proseguire."
+    elif is_personal_email_domain(email):
+        error = (
+            "Le email personali (gmail, yahoo, hotmail, outlook, libero, ...) "
+            "non sono accettate. Usa un'email aziendale. Eventuali iscrizioni "
+            "con email personali saranno disabilitate."
         )
+    elif get_domain_by_pattern(f"*@{extract_email_domain(email)}"):
+        error = "Il dominio è già registrato. Usa il login standard."
+    elif not send_otp_email(email, generate_otp(email)):
+        error = "Errore nell'invio dell'email. Riprova tra qualche istante."
 
-    if is_personal_email_domain(email):
-        return _render_signup(
-            request,
-            error=(
-                "Le email personali (gmail, yahoo, hotmail, outlook, libero, ...) "
-                "non sono accettate. Usa un'email aziendale. Eventuali iscrizioni "
-                "con email personali saranno disabilitate."
-            ),
-            **form_ctx,
-        )
+    # Notifica immediata all'admin per OGNI tentativo di iscrizione, incluso
+    # il fallimento (email personale, dominio già registrato, invio OTP KO, ...).
+    admin_to = get_admin_notification_email()
+    if admin_to:
+        subject, html = admin_signup_attempt(form_ctx, error)
+        background_tasks.add_task(send_email, admin_to, subject, html)
 
-    domain = extract_email_domain(email)
-    pattern = f"*@{domain}"
-
-    if get_domain_by_pattern(pattern):
-        return _render_signup(
-            request,
-            error="Il dominio è già registrato. Usa il login standard.",
-            **form_ctx,
-        )
-
-    code = generate_otp(email)
-    if not send_otp_email(email, code):
-        return _render_signup(
-            request,
-            error="Errore nell'invio dell'email. Riprova tra qualche istante.",
-            **form_ctx,
-        )
+    if error:
+        return _render_signup(request, error=error, **form_ctx)
 
     return _render_verify(request, **form_ctx)
 
