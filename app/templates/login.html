@@ -198,7 +198,7 @@
         <div class="vg-section-head vg-reveal">
             <span class="vg-kicker">Prezzi</span>
             <h2 class="vg-h2">Un prezzo per azienda, non per utente</h2>
-            <p class="vg-sub">Legato ai posti di lavoro (PDL) della tua licenza OS1. Utenti illimitati, niente costi a sorpresa.</p>
+            <p class="vg-sub">Un unico canone per tutta l'azienda, <strong>non a postazione</strong>. La fascia dipende dai PDL della tua licenza OS1; gli utenti restano illimitati.</p>
         </div>
 
         <div class="vg-pricing vg-reveal">
@@ -219,8 +219,9 @@
             <div class="vg-plan{% if b.band == 'TEAM' %} vg-plan-feat{% endif %}">
                 {% if b.band == 'TEAM' %}<span class="vg-plan-tag">più scelto</span>{% endif %}
                 <h3>{{ b.label }}</h3>
-                <div class="vg-plan-pdl">{{ b.pdl_min }}–{{ b.pdl_max }} PDL OS1</div>
+                <div class="vg-plan-pdl">Licenza OS1 da {{ b.pdl_min }}–{{ b.pdl_max }} PDL</div>
                 <div class="vg-plan-price">€{{ b.price_month }}<small>/mese</small></div>
+                <div class="vg-plan-whole">canone unico per tutta l'azienda</div>
                 <div class="vg-plan-year">fatturato annualmente · €{{ b.price_year }}/anno</div>
                 <ul class="vg-plan-feats">
                     <li>4 esperti specialisti</li>
@@ -706,6 +707,7 @@
 .vg-plan-price small { font-size: 0.9rem; font-weight: 500; color: var(--c-text-secondary); }
 .vg-plan-quote { font-size: 1.5rem; }
 .vg-plan-year { font-size: 0.8rem; color: var(--c-text-tertiary); margin-top: 4px; min-height: 18px; }
+.vg-plan-whole { font-size: 0.8rem; font-weight: 700; color: var(--c-brand); margin-top: 6px; }
 .vg-plan-feats { list-style: none; padding: 0; margin: 16px 0 20px; font-size: 0.9rem; flex: 1; }
 .vg-plan-feats li { padding: 5px 0 5px 22px; position: relative; color: var(--c-text-secondary); line-height: 1.45; }
 .vg-plan-feats li::before { content: "✓"; position: absolute; left: 0; color: var(--c-success); font-weight: 700; }
