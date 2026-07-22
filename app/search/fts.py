@@ -333,6 +333,102 @@ class SearchIndex:
                 ).fetchone()
         return dict(row) if row else None
 
+    # ── Image descriptions (VLM) — populated by scripts/describe_images.py ──
+
+    def images_available(self) -> bool:
+        """True if the image_descriptions table exists (new build). Else callers
+        fall back to the legacy marker behavior."""
+        try:
+            self.conn.execute("SELECT 1 FROM image_descriptions LIMIT 1")
+            return True
+        except sqlite3.OperationalError:
+            return False
+
+    def search_images_fts(self, query: str, limit: int = 60) -> list[str]:
+        """BM25 over image caption+ocr_text → owning source_files (deduped, ranked).
+
+        Powers recall on ON-SCREEN text (labels/titles present only in a
+        screenshot). Returns [] if image_fts is absent (old build).
+        """
+        tokens = self._clean_tokens(query)
+        if not tokens:
+            return []
+
+        def _run(fts_query: str):
+            try:
+                return self.conn.execute(
+                    "SELECT source_file FROM image_fts WHERE image_fts MATCH ? "
+                    "ORDER BY bm25(image_fts) LIMIT ?",
+                    (fts_query, limit),
+                ).fetchall()
+            except sqlite3.OperationalError:
+                return None
+
+        rows = _run(" AND ".join(tokens))
+        if rows is None:
+            return []  # table missing
+        if len(rows) < _MIN_AND_RESULTS and len(tokens) > 1:
+            alt = _run(" OR ".join(tokens))
+            if alt:
+                rows = alt
+
+        seen: set[str] = set()
+        out: list[str] = []
+        for row in rows:
+            sf = row["source_file"]
+            if sf and sf not in seen:
+                seen.add(sf)
+                out.append(sf)
+        return out
+
+    def doc_ids_for_source_files(self, source_files: list[str]) -> list[int]:
+        """Map source_files → doc ids, preserving order, deduped."""
+        if not source_files:
+            return []
+        ph = ",".join("?" * len(source_files))
+        rows = self.conn.execute(
+            f"SELECT id, source_file FROM documents WHERE source_file IN ({ph})",
+            source_files,
+        ).fetchall()
+        by_sf = {r["source_file"]: r["id"] for r in rows}
+        seen: set[int] = set()
+        out: list[int] = []
+        for sf in source_files:
+            i = by_sf.get(sf)
+            if i is not None and i not in seen:
+                seen.add(i)
+                out.append(i)
+        return out
+
+    def get_content_images(self, source_files: list[str]) -> list[dict]:
+        """Content images (vec NOT NULL → excludes icons/decorations) for the given
+        source_files. Returns url, source_file, caption, kind, vec (bytes). [] if absent."""
+        if not source_files:
+            return []
+        ph = ",".join("?" * len(source_files))
+        try:
+            rows = self.conn.execute(
+                f"SELECT url, source_file, caption, kind, vec FROM image_descriptions "
+                f"WHERE source_file IN ({ph}) AND vec IS NOT NULL",
+                source_files,
+            ).fetchall()
+        except sqlite3.OperationalError:
+            return []
+        return [dict(r) for r in rows]
+
+    def get_doc_images_for_fetch(self, source_file: str) -> list[dict]:
+        """All content images (url, caption) of a doc, for MCP fetch injection.
+        Excludes icons/decorations (vec NULL). [] if absent."""
+        try:
+            rows = self.conn.execute(
+                "SELECT url, caption FROM image_descriptions "
+                "WHERE source_file = ? AND vec IS NOT NULL ORDER BY url",
+                (source_file,),
+            ).fetchall()
+        except sqlite3.OperationalError:
+            return []
+        return [dict(r) for r in rows]
+
     def rebuild(self):
         """Drop all data and recreate the schema."""
         cur = self.conn.cursor()

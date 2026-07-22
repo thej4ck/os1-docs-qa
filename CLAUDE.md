@@ -8,7 +8,7 @@ Chat con **retrieval ibrido BM25 + semantico (model2vec)** e LLM (Groq), 4 esper
 auth OTP + access-token, **self-signup freemium con tier**, **pricing a scaglioni per PDL OS1**, backoffice admin, tracking costi, dark/light theme.
 
 - `app/version.py` è single source of truth: `VERSION`, `BUILD`, `BUILD_DATE`, `PRODUCT_NAME = "OS1 Virgilio"`.
-- Stato attuale: VERSION `2.2.0`, BUILD `100`.
+- Stato attuale: VERSION `2.2.0`, BUILD `101`.
 - Stack web: FastAPI `0.135.1` + **Starlette `>=1.0.1,<2`** (pin floating; chiude **CVE-2026-48710** Host-header → path poisoning). NB: con Starlette 1.x `Jinja2Templates.TemplateResponse` vuole `request` come **primo** arg: `TemplateResponse(request, name, context)`.
 
 ## Comandi sviluppo
@@ -56,6 +56,7 @@ Volumi: `app-data` (app.db), `caddy-data`/`caddy-config` (certs). Variabile `DOM
   - CLI: `--repo`, `--db`, `--static-model`, `--skip-embeddings`, `--embeddings-only`.
 - **`distill_model.py`** — distilla `paraphrase-multilingual-MiniLM-L12-v2` → model2vec static in `searchdata/static_model/`. **Solo locale pre-push** (serve `pip install "model2vec[distill]"` = torch/transformers, MAI su Railway).
 - **`optimize_images.py`** — ridimensiona le immagini avatar esperti (master in `static/img/originals/`).
+- **`describe_images.py`** — **passata VLM one-time** sulle immagini della doc → tabella `image_descriptions` (+ `image_fts`). Pre-filtro gratuito che scarta icone/spacer (`b_*`/`sfondo`/`loading`/`<200px`/`<2KB`), poi VLM via **OpenRouter** (`AsyncOpenAI`, default `anthropic/claude-sonnet-5`) → `{kind, caption, ocr_text}` con contesto testuale del doc, poi embed model2vec. **Idempotente/incrementale** (chiave url + guardia `sha1`: ridescrive solo immagini nuove/cambiate; `--force`/`--prune`/`--limit`/`--module`). **Solo locale pre-push** (serve `OPENROUTER_API_KEY` in `.env`, MAI su Railway). CLI: `python scripts/describe_images.py [--model … --module … --limit … --force --prune --dry-run]`.
 - **`prepare_deploy.sh`** — build index + copia `help-files/` dal repo docs.
 
 ### search.db (schema)
@@ -63,6 +64,8 @@ Volumi: `app-data` (app.db), `caddy-data`/`caddy-config` (certs). Variabile `DOM
 - `docs_fts` — FTS5 esterna (title, content), `unicode61 remove_diacritics`, trigger auto-sync, stopwords IT
 - `embeddings` — doc_id, vec (BLOB float32 L2-norm)
 - `embedding_meta` — model, dim (256), count, built_at
+- `image_descriptions` — **descrizioni VLM delle immagini** (una per URL, generate offline da `describe_images.py`): `url` (PK), `source_file` (doc proprietario), `doc_type`, `width`/`height`, `kind` (screenshot/report/dialog/form/diagram/**icon/decoration**), `caption`, `ocr_text` (testo a schermo), `vec` (embedding model2vec di caption+ocr, **NULL per icone/decorazioni** → escluse), `sha1` (rileva immagini cambiate → incrementale), `model`, `built_at`. Committata; sopravvive ai rebuild (chiave = url stabile).
+- `image_fts` — FTS5 su `caption`+`ocr_text` (derivata da `image_descriptions`, ricostruita dallo script). Abilita il **recall sul testo a schermo** (label/titoli visibili solo negli screenshot).
 
 ### Servizio web (FastAPI)
 Flusso `POST /api/ask`: auth → rate limit (10/min) → limiti tier (daily/monthly request + token) → **disambiguazione opzionale** → **retrieval ibrido** → budget contesto → streaming Groq (SSE) → **remap citazioni** → salva in DB.
@@ -95,7 +98,7 @@ Server **MCP remoto** (FastMCP, Streamable HTTP) montato su **`/mcp`** in [main.
 `mcp.http_app(path="/")` + `combine_lifespans` (il session-manager FastMCP gira insieme al lifespan esistente,
 senza doppio-init). Espone **solo retrieval** (costo Groq zero), schema canonico ChatGPT Deep Research (digerito anche da Claude):
 - `search(query)` → `{"results":[{id,title,url}]}` — riusa `query.mcp_search()` (= `_hybrid_candidates`, **NO LLM/budget/rerank a pagamento**).
-- `fetch(id)` → `{id,title,text,url,metadata}` — `query.mcp_fetch()` → `SearchIndex.get_document()` (match slash-tolerant come `/api/doc`). `id` = `source_file`. **`text`**: i marcatori `[Screenshot: cap | /help-files/…]` sono riscritti in markdown con URL **assoluti pubblici** (`_absolutize_screenshots`, usa `base_url`; logo saltati via `_is_logo`) → link immagine cliccabili dai client MCP (`/help-files` è pubblico). Immagini come content-block MCP nativi (ingerite da Claude multimodale) NON implementate.
+- `fetch(id)` → `{id,title,text,url,metadata}` — `query.mcp_fetch()` → `SearchIndex.get_document()` (match slash-tolerant come `/api/doc`). `id` = `source_file`. **`text`**: i marcatori `[Screenshot: cap | /help-files/…]` sono riscritti in markdown con URL **assoluti pubblici** (`_absolutize_screenshots`, usa `base_url`; logo saltati via `_is_logo`) → link immagine cliccabili dai client MCP (`/help-files` è pubblico). **Arricchimento VLM (build 101)**: se `image_descriptions` è popolata, l'alt-text markdown diventa la **caption VLM** (non l'heading), e le immagini di contenuto dei doc **help** (senza marcatori) vengono **iniettate** come `![caption](url)` via `SearchIndex.get_doc_images_for_fetch` (icone escluse) → l'AI esterna capisce gli screenshot senza vederli. **`metadata.images[]`**: array `{url assoluto, caption}` nell'ordine di apparizione nel `text` (per client che vogliono i riferimenti immagine strutturati, non solo il markdown inline). Immagini come content-block MCP nativi (ingerite da Claude multimodale) NON implementate.
 - `app/mcp/tools.py` `_doc_url()` usa `settings.base_url` per URL citabili.
 - **Auth** — modalità **configurabile da admin** (`/admin/mcp`): setting `mcp_auth_mode` = `off|bearer|oauth` (precedenza **DB admin > env > default**: `oauth` in prod, `off` in dev). Letta all'avvio (route OAuth montate a import-time) → **il cambio modalità applica al RIAVVIO**. Logica in `resolve_mcp_auth_mode`/`build_mcp_auth` ([app/mcp/auth.py](app/mcp/auth.py)):
   - `oauth` (env `MCP_OAUTH_ENABLED` come fallback) → **OAuth 2.1 AS autonomo** `OS1OAuthProvider` ([app/mcp/oauth.py](app/mcp/oauth.py)): DCR (RFC 7591) + PKCE S256 (verificata dal framework FastMCP) + authorization_code/refresh/revoke. Login = pagina dedicata **`/mcp-login`** ([routes/mcp_auth_routes.py](app/routes/mcp_auth_routes.py)) che riusa le primitive OTP (NON il login-cookie: completa con redirect al client). Token **sha256-hashed** in app.db (`oauth_clients`/`oauth_login_tickets`/`oauth_auth_codes`/`oauth_tokens` — [db.py](app/db.py) + [models/oauth.py](app/models/oauth.py)). Discovery `.well-known` montata a **root** dominio (sotto `/mcp` non basta). Scope `docs:read`. Sblocca **claude.ai + ChatGPT** (richiedono OAuth+PKCE). IdP esterni esclusi (prodotto venduto apertamente → IdP non prevedibile).
@@ -119,7 +122,11 @@ senza doppio-init). Espone **solo retrieval** (costo Groq zero), schema canonico
 - `disambiguate.py` — solo 1° messaggio, query ≤3 token, ≥3 topic non-dominanti, no discriminator → domanda di chiarimento LLM (`llama-3.1-8b-instant`, JSON options).
 - `rerank.py` — re-rank LLM (`llama-3.1-8b-instant`, score 0–10). **OFF di default** (admin setting `reranking_enabled`), attivo solo se >5 candidati. Token/costo contabilizzati separatamente (`rerank_*`).
 
-Ordine pipeline: BM25 ∪ semantic → **RRF fuse** → **signals.rescore** → (opz. LLM rerank) → **budget trim in PAROLE**.
+Ordine pipeline: BM25 ∪ semantic (**∪ image-hit**) → **RRF fuse** → **signals.rescore** → (opz. LLM rerank) → **budget trim in PAROLE**.
+
+**Immagini viste dal VLM (build 101)** — le immagini non sono più allegate "a priori":
+- **Screenshot pertinenti (chatbot)**: `_select_screenshots()` in [query.py](app/search/query.py) sceglie le immagini del carousel per **cosine(query, embedding descrizione VLM)** con soglia (`image_relevance_threshold`, def 0.30) + cap (`max_screenshots`, def 6). Icone/decorazioni escluse (vec NULL). **Fallback** ai marker `[Screenshot:]` a-priori se `image_descriptions` assente (build vecchio).
+- **Recall (chat + MCP)**: `_hybrid_candidates` aggiunge una terza lista RRF dagli **image-hit** (`SearchIndex.search_images_fts` = BM25 su `image_fts`, peso `w_lex*0.5`) mappati al doc proprietario → docs che matchano solo per testo a schermo emergono. Vale anche per MCP (`mcp_search()` = `_hybrid_candidates`).
 
 ### Esperti specialisti (`agents.py`)
 4 personas, **selezione manuale dall'UI** (param `agent`/`agent_id`), nessun router LLM. System prompt = CORE (grounding invariante) + stile esperto. L'esperto scelto è bloccato sulla conversazione (`get_conversation_agent`).
@@ -168,7 +175,7 @@ Risoluzione limite token utente: override `users.monthly_token_limit` → tier d
 - `feedback` — message_id, rating(-1/1), category, comment, query, response_preview, chunks_used, model, search_scores
 - `allowed_domains` — pattern, tier, monthly_request/token_limit, daily_limit, enabled, expires_at, dati registrant trial, mcp_enabled, **os1_pdl_count, pricing_band, billing_status (trial|free|paid|past_due), trial_drip_day**
 - `shares` — token(PK), message_id(FK SET NULL), snapshot risposta (content/sources/screenshots/agent/question), sender/recipient, revoked, contatori open/view/cta_click, converted/converted_domain_id (share risposta → landing pubblica `/s/{token}`)
-- `app_settings` — KV admin-config (modello, suppress_reasoning, reranking_enabled, otp_sender_*, max_messages_per_conversation, announcement, admin_notification_email, trial_days…)
+- `app_settings` — KV admin-config (modello, suppress_reasoning, reranking_enabled, **image_relevance_threshold**, **max_screenshots**, otp_sender_*, max_messages_per_conversation, announcement, admin_notification_email, trial_days…)
 - vista `monthly_usage` — aggregato per utente/mese
 
 ### Frontend (Jinja2 + vanilla JS)
@@ -199,6 +206,7 @@ Risoluzione limite token utente: override `users.monthly_token_limit` → tier d
 | `APP_DB_PATH` | No | `data/app.db` | App database |
 | `DOCS_REPO_PATH` | No | `../os1-documentation/...` | Repo docs (solo dev/build) |
 | `STATIC_MODEL_PATH` | No | `searchdata/static_model` | Dir model2vec distillato |
+| `OPENROUTER_API_KEY` | No | — | **Solo build-time locale** (`describe_images.py`). MAI in prod/Railway |
 | `HYBRID_ENABLED` | No | `true` | BM25+semantic; `false` = BM25-only |
 | `DEFAULT_MONTHLY_TOKEN_LIMIT` | No | `500000` | Fallback limite token/mese |
 | `DEFAULT_MAX_MESSAGES_PER_CONVERSATION` | No | `20` | Limite domande/chat default |

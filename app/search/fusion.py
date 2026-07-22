@@ -16,10 +16,15 @@ def rrf_fuse(
     limit: int = 50,
     w_lexical: float = 1.0,
     w_semantic: float = 1.0,
+    image_ids: list[int] | None = None,
+    w_image: float = 0.0,
 ) -> list[int]:
-    """Fuse two ranked id lists into one ordered id list (best first).
+    """Fuse ranked id lists into one ordered id list (best first).
 
     bm25_ids / dense_ids: doc ids ordered best→worst from each retriever.
+    image_ids (optional): doc ids ranked by how well their SCREENSHOTS' text
+    (caption+OCR) matched the query — surfaces docs whose only match is on-screen
+    text. Contributes with weight `w_image` (0 disables).
     Returns up to `limit` unique doc ids, highest fused score first.
     """
     scores: dict[int, float] = {}
@@ -29,6 +34,10 @@ def rrf_fuse(
 
     for rank, doc_id in enumerate(dense_ids):
         scores[doc_id] = scores.get(doc_id, 0.0) + w_semantic / (k + rank + 1)
+
+    if image_ids and w_image:
+        for rank, doc_id in enumerate(image_ids):
+            scores[doc_id] = scores.get(doc_id, 0.0) + w_image / (k + rank + 1)
 
     ordered = sorted(scores.items(), key=lambda kv: kv[1], reverse=True)
     return [doc_id for doc_id, _ in ordered[:limit]]

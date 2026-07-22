@@ -315,13 +315,15 @@ async def _hybrid_candidates(
 
     hybrid = embeddings_ready()
     if hybrid:
-        bm25_ids, dense = await asyncio.gather(
+        bm25_ids, dense, image_sf = await asyncio.gather(
             asyncio.to_thread(_index.search_ids, question, 80, topic_filter, expansion),
             _safe_dense(question, 80),
+            asyncio.to_thread(_index.search_images_fts, question, 60),
         )
     else:
         bm25_ids = await asyncio.to_thread(_index.search_ids, question, 80, topic_filter, expansion)
         dense = None
+        image_sf = []
 
     if topic_filter and len(bm25_ids) < 3:
         bm25_ids = await asyncio.to_thread(_index.search_ids, question, 80, None, expansion)
@@ -344,10 +346,16 @@ async def _hybrid_candidates(
 
     dense_ids = [doc_id for doc_id, _ in dense]
     w_lex, w_sem = signals.adaptive_weights(question)
+    # Recall (Fase C2): docs whose SCREENSHOT text (caption+OCR) matched the query.
+    # On-screen text is lexical in nature → scale the weight with the lexical weight.
+    image_doc_ids = _index.doc_ids_for_source_files(image_sf) if image_sf else []
     fused_ids = rrf_fuse(
         bm25_ids, dense_ids, k=60, limit=50,
         w_lexical=w_lex, w_semantic=w_sem,
+        image_ids=image_doc_ids, w_image=w_lex * 0.5,
     )
+    if trace is not None and image_doc_ids:
+        trace["image_hits"] = _snap(_index.get_documents_by_ids(image_doc_ids[:20]))
 
     if trace is not None:
         trace["mode"] = "hybrid"
@@ -546,6 +554,79 @@ def build_context(docs: list[dict]) -> str:
     return ctx
 
 
+def _legacy_screenshots(docs: list[dict], cap: int) -> list[dict]:
+    """Old behavior: every [Screenshot:] marker in doc-rank order, deduped, capped.
+    Used when image_descriptions/semantic aren't available (old build)."""
+    import re as _re
+    out: list[dict] = []
+    seen: set[str] = set()
+    for doc in docs:
+        for m in _re.finditer(r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]', doc["content"]):
+            url = m.group(2)
+            if _is_logo(url) or url in seen:
+                continue
+            seen.add(url)
+            out.append({"desc": m.group(1), "url": url,
+                        "source_file": doc["source_file"], "title": doc["title"]})
+            if len(out) >= cap:
+                return out
+    return out
+
+
+def _select_screenshots(question: str, docs: list[dict]) -> list[dict]:
+    """Screenshots for the carousel, RANKED BY RELEVANCE to the question.
+
+    New path (image_descriptions present + semantic ready): cosine(query_vec,
+    image caption+ocr embedding), threshold + cap; icons/decorations already
+    excluded (their vec is NULL, get_content_images filters vec IS NOT NULL).
+    Fallback: legacy marker extraction (a-priori, doc-order) for old builds.
+    """
+    from app.models.settings import get_int_setting, get_setting
+    cap = get_int_setting("max_screenshots", 6, lo=1, hi=20)
+
+    if (_index is None or not _index.images_available()
+            or _emb is None or not _emb.ready):
+        return _legacy_screenshots(docs, cap)
+
+    qvec = _emb.encode_query(question)
+    if qvec is None:
+        return _legacy_screenshots(docs, cap)
+
+    import numpy as np
+    try:
+        threshold = float(get_setting("image_relevance_threshold", "0.30"))
+    except (TypeError, ValueError):
+        threshold = 0.30
+
+    title_by_sf = {d["source_file"]: d["title"] for d in docs}
+    rank_by_sf = {d["source_file"]: i for i, d in enumerate(docs)}
+    imgs = _index.get_content_images([d["source_file"] for d in docs])
+
+    scored: list[dict] = []
+    seen: set[str] = set()
+    for im in imgs:
+        url = im["url"]
+        if url in seen or im.get("vec") is None:
+            continue
+        seen.add(url)
+        score = float(qvec @ np.frombuffer(im["vec"], dtype=np.float32))
+        if score < threshold:
+            continue
+        sf = im["source_file"]
+        scored.append({
+            "desc": im["caption"] or "",
+            "url": url,
+            "source_file": sf,
+            "title": title_by_sf.get(sf, ""),
+            "score": round(score, 3),
+            "_rank": rank_by_sf.get(sf, 10_000),
+        })
+    scored.sort(key=lambda s: (-s["score"], s["_rank"]))
+    for s in scored:
+        s.pop("_rank", None)
+    return scored[:cap]
+
+
 # ── Citation remap (fix misattribuzione [Dn] dell'LLM) ──
 # Con molti chunk in contesto (modalità deep) il modello aggancia il fatto giusto
 # ma può sbagliare l'indice [Dn], puntando a un documento che non regge la frase.
@@ -742,33 +823,12 @@ async def ask_stream(
         yield "Errore: servizio non configurato.", [], None
         return
 
-    import re as _re
-
     docs, rerank_usage = await retrieve_with_budget(question, deep=deep, topic_filter=topic_filter)
     sources = [{"title": d["title"], "source_file": d["source_file"]} for d in docs]
 
-    # Extract screenshots from retrieved docs (avoids a second retrieval call, skip logo).
-    # Ordered by doc relevance (docs already ranked), deduped by url; each screenshot
-    # carries its source doc so the UI can open it like a sidebar doc click.
-    MAX_SCREENSHOTS = 12
-    screenshots = []
-    _seen_urls = set()
-    for doc in docs:
-        for m in _re.finditer(r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]', doc["content"]):
-            url = m.group(2)
-            if _is_logo(url) or url in _seen_urls:
-                continue
-            _seen_urls.add(url)
-            screenshots.append({
-                "desc": m.group(1),
-                "url": url,
-                "source_file": doc["source_file"],
-                "title": doc["title"],
-            })
-            if len(screenshots) >= MAX_SCREENSHOTS:
-                break
-        if len(screenshots) >= MAX_SCREENSHOTS:
-            break
+    # Screenshots for the carousel: ranked by relevance to the question when the
+    # VLM image index is available (else legacy a-priori marker extraction).
+    screenshots = _select_screenshots(question, docs)
 
     context = build_context(docs)
 

@@ -149,6 +149,22 @@
                 </div>
             </div>
             <div class="setting-row">
+                <label class="setting-label" for="image_relevance_threshold">Pertinenza immagini</label>
+                <div style="flex:1;">
+                    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+                        <label style="display:flex;align-items:center;gap:.4rem;">Soglia cosine
+                            <input type="number" id="image_relevance_threshold" name="image_relevance_threshold"
+                                   class="setting-input" style="width:80px;" step="0.01" min="0" max="1"
+                                   value="{{ settings.image_relevance_threshold }}"></label>
+                        <label style="display:flex;align-items:center;gap:.4rem;">Max screenshot
+                            <input type="number" id="max_screenshots" name="max_screenshots"
+                                   class="setting-input" style="width:70px;" min="1" max="20"
+                                   value="{{ settings.max_screenshots }}"></label>
+                    </div>
+                    <div class="setting-hint">Gli screenshot sotto la risposta vengono scelti per <strong>pertinenza semantica</strong> alla domanda (descrizioni VLM in <code>image_descriptions</code>). Solo quelli con similarità ≥ soglia entrano nel carousel, fino al massimo indicato. Soglia più alta = meno immagini ma più mirate (default 0.30, 6 immagini). Richiede l'indice immagini (<code>scripts/describe_images.py</code>); senza, fallback al comportamento a-priori.</div>
+                </div>
+            </div>
+            <div class="setting-row">
                 <label class="setting-label" for="suppress_reasoning">Sopprimi reasoning (legacy)</label>
                 <div style="flex:1;">
                     <label style="display:flex;align-items:center;gap:.5rem;cursor:pointer;">

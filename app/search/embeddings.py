@@ -79,6 +79,16 @@ class EmbeddingIndex:
             vec = vec / n
         return vec
 
+    def encode_query(self, text: str):
+        """Public: normalized query vector (np.float32) or None if not ready.
+
+        Used to score image descriptions (Fase B carousel) against the question
+        with the same static model as the doc corpus.
+        """
+        if not self.ready or not text.strip():
+            return None
+        return self._encode_query(text)
+
     def search(self, query: str, limit: int = 50) -> list[tuple[int, float]]:
         """Return [(doc_id, cosine_score)] sorted by score desc.
 
