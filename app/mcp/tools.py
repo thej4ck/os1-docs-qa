@@ -10,6 +10,7 @@ JSON-encoded `content[]` block automatically. `id` is the document's
 source_file (stable key shared by both tools).
 """
 
+import re
 from typing import Annotated
 from urllib.parse import quote
 
@@ -24,6 +25,25 @@ def _doc_url(source_file: str) -> str:
     sf = (source_file or "").replace("\\", "/")
     base = settings.base_url.rstrip("/") if settings.base_url else ""
     return f"{base}/api/doc?file={quote(sf, safe='')}"
+
+
+_SCREENSHOT_RE = re.compile(r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]')
+
+
+def _absolutize_screenshots(text: str) -> str:
+    """Riscrive i marcatori `[Screenshot: cap | /help-files/...]` in markdown
+    con URL assoluti pubblici (`![cap](https://host/help-files/...)`), saltando
+    i logo. `/help-files` è servito pubblicamente → link cliccabili dai client MCP."""
+    base = settings.base_url.rstrip("/") if settings.base_url else ""
+
+    def _sub(m: re.Match) -> str:
+        cap, url = m.group(1), m.group(2)
+        if query_module._is_logo(url):
+            return ""
+        abs_url = f"{base}{url}" if url.startswith("/") else url
+        return f"![{cap}]({abs_url})"
+
+    return _SCREENSHOT_RE.sub(_sub, text)
 
 
 def _track_request() -> None:
@@ -100,7 +120,7 @@ def register_tools(mcp) -> None:
         return {
             "id": sf,
             "title": doc.get("title") or sf,
-            "text": doc.get("content") or "",
+            "text": _absolutize_screenshots(doc.get("content") or ""),
             "url": _doc_url(sf),
             "metadata": {
                 "module": doc.get("module"),

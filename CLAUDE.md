@@ -8,7 +8,7 @@ Chat con **retrieval ibrido BM25 + semantico (model2vec)** e LLM (Groq), 4 esper
 auth OTP + access-token, **self-signup freemium con tier**, **pricing a scaglioni per PDL OS1**, backoffice admin, tracking costi, dark/light theme.
 
 - `app/version.py` è single source of truth: `VERSION`, `BUILD`, `BUILD_DATE`, `PRODUCT_NAME = "OS1 Virgilio"`.
-- Stato attuale: VERSION `2.2.0`, BUILD `96`.
+- Stato attuale: VERSION `2.2.0`, BUILD `100`.
 - Stack web: FastAPI `0.135.1` + **Starlette `>=1.0.1,<2`** (pin floating; chiude **CVE-2026-48710** Host-header → path poisoning). NB: con Starlette 1.x `Jinja2Templates.TemplateResponse` vuole `request` come **primo** arg: `TemplateResponse(request, name, context)`.
 
 ## Comandi sviluppo
@@ -95,7 +95,7 @@ Server **MCP remoto** (FastMCP, Streamable HTTP) montato su **`/mcp`** in [main.
 `mcp.http_app(path="/")` + `combine_lifespans` (il session-manager FastMCP gira insieme al lifespan esistente,
 senza doppio-init). Espone **solo retrieval** (costo Groq zero), schema canonico ChatGPT Deep Research (digerito anche da Claude):
 - `search(query)` → `{"results":[{id,title,url}]}` — riusa `query.mcp_search()` (= `_hybrid_candidates`, **NO LLM/budget/rerank a pagamento**).
-- `fetch(id)` → `{id,title,text,url,metadata}` — `query.mcp_fetch()` → `SearchIndex.get_document()` (match slash-tolerant come `/api/doc`). `id` = `source_file`.
+- `fetch(id)` → `{id,title,text,url,metadata}` — `query.mcp_fetch()` → `SearchIndex.get_document()` (match slash-tolerant come `/api/doc`). `id` = `source_file`. **`text`**: i marcatori `[Screenshot: cap | /help-files/…]` sono riscritti in markdown con URL **assoluti pubblici** (`_absolutize_screenshots`, usa `base_url`; logo saltati via `_is_logo`) → link immagine cliccabili dai client MCP (`/help-files` è pubblico). Immagini come content-block MCP nativi (ingerite da Claude multimodale) NON implementate.
 - `app/mcp/tools.py` `_doc_url()` usa `settings.base_url` per URL citabili.
 - **Auth** — modalità **configurabile da admin** (`/admin/mcp`): setting `mcp_auth_mode` = `off|bearer|oauth` (precedenza **DB admin > env > default**: `oauth` in prod, `off` in dev). Letta all'avvio (route OAuth montate a import-time) → **il cambio modalità applica al RIAVVIO**. Logica in `resolve_mcp_auth_mode`/`build_mcp_auth` ([app/mcp/auth.py](app/mcp/auth.py)):
   - `oauth` (env `MCP_OAUTH_ENABLED` come fallback) → **OAuth 2.1 AS autonomo** `OS1OAuthProvider` ([app/mcp/oauth.py](app/mcp/oauth.py)): DCR (RFC 7591) + PKCE S256 (verificata dal framework FastMCP) + authorization_code/refresh/revoke. Login = pagina dedicata **`/mcp-login`** ([routes/mcp_auth_routes.py](app/routes/mcp_auth_routes.py)) che riusa le primitive OTP (NON il login-cookie: completa con redirect al client). Token **sha256-hashed** in app.db (`oauth_clients`/`oauth_login_tickets`/`oauth_auth_codes`/`oauth_tokens` — [db.py](app/db.py) + [models/oauth.py](app/models/oauth.py)). Discovery `.well-known` montata a **root** dominio (sotto `/mcp` non basta). Scope `docs:read`. Sblocca **claude.ai + ChatGPT** (richiedono OAuth+PKCE). IdP esterni esclusi (prodotto venduto apertamente → IdP non prevedibile).
