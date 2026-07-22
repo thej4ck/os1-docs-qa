@@ -337,12 +337,17 @@ class SearchIndex:
 
     def images_available(self) -> bool:
         """True if the image_descriptions table exists (new build). Else callers
-        fall back to the legacy marker behavior."""
-        try:
-            self.conn.execute("SELECT 1 FROM image_descriptions LIMIT 1")
-            return True
-        except sqlite3.OperationalError:
-            return False
+        fall back to the legacy marker behavior. Cached: la presenza è invariante
+        per-processo (search.db è read-only, baked)."""
+        cached = getattr(self, "_images_available", None)
+        if cached is None:
+            try:
+                self.conn.execute("SELECT 1 FROM image_descriptions LIMIT 1")
+                cached = True
+            except sqlite3.OperationalError:
+                cached = False
+            self._images_available = cached
+        return cached
 
     def search_images_fts(self, query: str, limit: int = 60) -> list[str]:
         """BM25 over image caption+ocr_text → owning source_files (deduped, ranked).
@@ -417,17 +422,11 @@ class SearchIndex:
         return [dict(r) for r in rows]
 
     def get_doc_images_for_fetch(self, source_file: str) -> list[dict]:
-        """All content images (url, caption) of a doc, for MCP fetch injection.
-        Excludes icons/decorations (vec NULL). [] if absent."""
-        try:
-            rows = self.conn.execute(
-                "SELECT url, caption FROM image_descriptions "
-                "WHERE source_file = ? AND vec IS NOT NULL ORDER BY url",
-                (source_file,),
-            ).fetchall()
-        except sqlite3.OperationalError:
-            return []
-        return [dict(r) for r in rows]
+        """Content images (url, caption) di un doc per l'injection in MCP fetch,
+        ordinati per url. Proiezione di get_content_images (stesso filtro vec NOT NULL
+        → icone/decorazioni escluse). [] se la tabella è assente."""
+        imgs = sorted(self.get_content_images([source_file]), key=lambda r: r["url"])
+        return [{"url": r["url"], "caption": r["caption"]} for r in imgs]
 
     def rebuild(self):
         """Drop all data and recreate the schema."""

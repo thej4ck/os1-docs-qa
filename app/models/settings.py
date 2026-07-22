@@ -28,6 +28,19 @@ def get_int_setting(key: str, default: int, *, lo: int | None = None, hi: int | 
     return value
 
 
+def get_float_setting(key: str, default: float, *, lo: float | None = None, hi: float | None = None) -> float:
+    raw = get_setting(key, str(default))
+    try:
+        value = float(raw)
+    except (TypeError, ValueError):
+        value = default
+    if lo is not None:
+        value = max(lo, value)
+    if hi is not None:
+        value = min(hi, value)
+    return value
+
+
 def get_bool_setting(key: str, default: bool) -> bool:
     return get_setting(key, "1" if default else "0") == "1"
 

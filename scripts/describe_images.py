@@ -142,10 +142,6 @@ def _disk_path(url: str) -> Path:
     return ROOT / url.lstrip("/")
 
 
-def _sha1(path: Path) -> str:
-    return hashlib.sha1(path.read_bytes()).hexdigest()
-
-
 # ── VLM (OpenRouter) ─────────────────────────────────────────────────────────
 
 async def describe_one(client, model: str, path: Path, context: str, sem) -> dict | None:
@@ -181,9 +177,8 @@ async def describe_one(client, model: str, path: Path, context: str, sem) -> dic
 
 
 def _parse_json(text: str) -> dict | None:
+    # L'estrazione {…} sussume qualunque fence ```json```: prende dal primo { all'ultimo }.
     s = (text or "").strip()
-    if "```" in s:
-        s = s[s.find("{"):s.rfind("}") + 1]
     i, j = s.find("{"), s.rfind("}")
     if i < 0 or j < 0:
         return None
@@ -283,23 +278,31 @@ def main() -> None:
     described: list[dict] = []         # need VLM
     missing = skipped = 0
 
+    import io
+    from PIL import Image
     for url, meta in inv.items():
         path = _disk_path(url)
         if not path.exists():
             missing += 1
             continue
-        nbytes = path.stat().st_size
+        # Leggi i byte UNA volta (sha1 + dimensioni). Sha1 prima dello skip così un
+        # re-run no-op non apre neppure le immagini invariate.
         try:
-            from PIL import Image
-            with Image.open(path) as im:
-                w, h = im.size
-        except Exception:
-            w = h = None
-        sha1 = _sha1(path)
-
+            data = path.read_bytes()
+        except OSError:
+            missing += 1
+            continue
+        sha1 = hashlib.sha1(data).hexdigest()
         if not args.force and existing.get(url) == sha1:
             skipped += 1
             continue
+
+        nbytes = len(data)
+        try:
+            with Image.open(io.BytesIO(data)) as im:
+                w, h = im.size
+        except Exception:
+            w = h = None
 
         kind = classify_prefilter(path.name, w, h, nbytes)
         if kind:  # chrome/decoration → store without VLM, no vec
@@ -349,12 +352,12 @@ def main() -> None:
             vecs = _embed(model2vec, [f"{r['caption']} {r['ocr_text']}".strip() for _, r in ok])
             rows = []
             for (it, res), vec in zip(ok, vecs):
-                has_content = res["kind"] not in ("icon", "decoration")
+                # vec solo per il contenuto: NULL per icone/decorazioni (le esclude ovunque)
+                vec_blob = vec.tobytes() if res["kind"] not in ("icon", "decoration") else None
                 rows.append((
                     it["url"], it["meta"]["source_file"], it["meta"]["doc_type"],
                     it["w"], it["h"], res["kind"], res["caption"], res["ocr_text"],
-                    vec.tobytes() if has_content else None,
-                    it["sha1"], args.model, _now()))
+                    vec_blob, it["sha1"], args.model, _now()))
             _upsert(conn, rows)  # commit del blocco
             total_ok += len(ok)
             print(f"  blocco {start // CHUNK + 1}: {len(ok)}/{len(batch)} ok "

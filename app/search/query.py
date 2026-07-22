@@ -295,6 +295,18 @@ async def _safe_dense(question: str, limit: int):
         return e
 
 
+# Peso RRF della leg image-hit, come frazione del peso lessicale (il testo a schermo
+# è lessicale per natura). Terzo peso della fusione; gli altri due vengono da adaptive_weights.
+_W_IMAGE_FRAC = 0.5
+
+
+def _image_doc_ids(question: str) -> list[int]:
+    """BM25 su image_fts → doc_id proprietari. Le due query sqlite girano insieme
+    in un solo to_thread (nessun I/O sincrono nell'event loop)."""
+    sf = _index.search_images_fts(question, 60)
+    return _index.doc_ids_for_source_files(sf) if sf else []
+
+
 async def _hybrid_candidates(
     question: str, topic_filter: str | None, trace: dict | None = None,
 ) -> list[dict]:
@@ -314,16 +326,21 @@ async def _hybrid_candidates(
         trace["expanded_terms"] = expansion
 
     hybrid = embeddings_ready()
+    want_images = _index.images_available()
     if hybrid:
-        bm25_ids, dense, image_sf = await asyncio.gather(
+        legs = [
             asyncio.to_thread(_index.search_ids, question, 80, topic_filter, expansion),
             _safe_dense(question, 80),
-            asyncio.to_thread(_index.search_images_fts, question, 60),
-        )
+        ]
+        if want_images:  # niente leg immagini (né la sua query) sui build vecchi
+            legs.append(asyncio.to_thread(_image_doc_ids, question))
+        results = await asyncio.gather(*legs)
+        bm25_ids, dense = results[0], results[1]
+        image_doc_ids = results[2] if want_images else []
     else:
         bm25_ids = await asyncio.to_thread(_index.search_ids, question, 80, topic_filter, expansion)
         dense = None
-        image_sf = []
+        image_doc_ids = []
 
     if topic_filter and len(bm25_ids) < 3:
         bm25_ids = await asyncio.to_thread(_index.search_ids, question, 80, None, expansion)
@@ -347,12 +364,11 @@ async def _hybrid_candidates(
     dense_ids = [doc_id for doc_id, _ in dense]
     w_lex, w_sem = signals.adaptive_weights(question)
     # Recall (Fase C2): docs whose SCREENSHOT text (caption+OCR) matched the query.
-    # On-screen text is lexical in nature → scale the weight with the lexical weight.
-    image_doc_ids = _index.doc_ids_for_source_files(image_sf) if image_sf else []
+    # image_doc_ids è già stato calcolato nella leg concorrente (o [] su build vecchi).
     fused_ids = rrf_fuse(
         bm25_ids, dense_ids, k=60, limit=50,
         w_lexical=w_lex, w_semantic=w_sem,
-        image_ids=image_doc_ids, w_image=w_lex * 0.5,
+        image_ids=image_doc_ids, w_image=w_lex * _W_IMAGE_FRAC,
     )
     if trace is not None and image_doc_ids:
         trace["image_hits"] = _snap(_index.get_documents_by_ids(image_doc_ids[:20]))
@@ -360,7 +376,8 @@ async def _hybrid_candidates(
     if trace is not None:
         trace["mode"] = "hybrid"
         trace["technical_query"] = signals.is_technical_query(question)
-        trace["weights"] = {"lexical": w_lex, "semantic": w_sem}
+        trace["weights"] = {"lexical": w_lex, "semantic": w_sem,
+                            "image": round(w_lex * _W_IMAGE_FRAC, 3) if image_doc_ids else 0}
         trace["query_stems"] = sorted(signals.identifier_stems(question))
         dense_score = {doc_id: sc for doc_id, sc in dense}
         trace["semantic"] = _snap(
@@ -532,9 +549,12 @@ def _is_logo(url: str) -> bool:
     return result
 
 
+# Formato marcatore screenshot emesso da build_index (contratto condiviso in questo modulo).
+_SCREENSHOT_RE = re.compile(r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]')
+
+
 def build_context(docs: list[dict]) -> str:
     """Build a context string from retrieved documents."""
-    import re
     parts = []
     screenshots = []
     for i, doc in enumerate(docs, 1):
@@ -544,7 +564,7 @@ def build_context(docs: list[dict]) -> str:
         # L'ordine corrisponde a `sources` → il frontend traduce [Dn] -> sources[n-1].
         parts.append(f"[D{i}] {title}\n{content}")
         # Collect screenshots (skip logo)
-        for m in re.finditer(r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]', content):
+        for m in _SCREENSHOT_RE.finditer(content):
             if not _is_logo(m.group(2)):
                 screenshots.append(f"- ![{m.group(1)}]({m.group(2)}) (da [D{i}])")
     ctx = "\n\n".join(parts)
@@ -557,11 +577,10 @@ def build_context(docs: list[dict]) -> str:
 def _legacy_screenshots(docs: list[dict], cap: int) -> list[dict]:
     """Old behavior: every [Screenshot:] marker in doc-rank order, deduped, capped.
     Used when image_descriptions/semantic aren't available (old build)."""
-    import re as _re
     out: list[dict] = []
     seen: set[str] = set()
     for doc in docs:
-        for m in _re.finditer(r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]', doc["content"]):
+        for m in _SCREENSHOT_RE.finditer(doc["content"]):
             url = m.group(2)
             if _is_logo(url) or url in seen:
                 continue
@@ -581,7 +600,7 @@ def _select_screenshots(question: str, docs: list[dict]) -> list[dict]:
     excluded (their vec is NULL, get_content_images filters vec IS NOT NULL).
     Fallback: legacy marker extraction (a-priori, doc-order) for old builds.
     """
-    from app.models.settings import get_int_setting, get_setting
+    from app.models.settings import get_int_setting, get_float_setting
     cap = get_int_setting("max_screenshots", 6, lo=1, hi=20)
 
     if (_index is None or not _index.images_available()
@@ -593,37 +612,27 @@ def _select_screenshots(question: str, docs: list[dict]) -> list[dict]:
         return _legacy_screenshots(docs, cap)
 
     import numpy as np
-    try:
-        threshold = float(get_setting("image_relevance_threshold", "0.30"))
-    except (TypeError, ValueError):
-        threshold = 0.30
+    threshold = get_float_setting("image_relevance_threshold", 0.30, lo=0.0, hi=1.0)
 
     title_by_sf = {d["source_file"]: d["title"] for d in docs}
     rank_by_sf = {d["source_file"]: i for i, d in enumerate(docs)}
-    imgs = _index.get_content_images([d["source_file"] for d in docs])
 
+    # get_content_images restituisce solo righe con vec IS NOT NULL e url è PK
+    # (già unici): niente guardie su None/duplicati necessarie.
     scored: list[dict] = []
-    seen: set[str] = set()
-    for im in imgs:
-        url = im["url"]
-        if url in seen or im.get("vec") is None:
-            continue
-        seen.add(url)
+    for im in _index.get_content_images([d["source_file"] for d in docs]):
         score = float(qvec @ np.frombuffer(im["vec"], dtype=np.float32))
         if score < threshold:
             continue
         sf = im["source_file"]
         scored.append({
             "desc": im["caption"] or "",
-            "url": url,
+            "url": im["url"],
             "source_file": sf,
             "title": title_by_sf.get(sf, ""),
             "score": round(score, 3),
-            "_rank": rank_by_sf.get(sf, 10_000),
         })
-    scored.sort(key=lambda s: (-s["score"], s["_rank"]))
-    for s in scored:
-        s.pop("_rank", None)
+    scored.sort(key=lambda s: (-s["score"], rank_by_sf.get(s["source_file"], 10_000)))
     return scored[:cap]
 
 
@@ -828,7 +837,8 @@ async def ask_stream(
 
     # Screenshots for the carousel: ranked by relevance to the question when the
     # VLM image index is available (else legacy a-priori marker extraction).
-    screenshots = _select_screenshots(question, docs)
+    # Off the event loop: fa query sqlite + scoring numpy (bloccanti).
+    screenshots = await asyncio.to_thread(_select_screenshots, question, docs)
 
     context = build_context(docs)
 

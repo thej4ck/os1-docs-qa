@@ -30,19 +30,23 @@ def _doc_url(source_file: str) -> str:
 _SCREENSHOT_RE = re.compile(r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]')
 
 
-def _absolutize_screenshots(text: str, source_file: str | None = None) -> str:
+def _absolutize_screenshots(text: str, source_file: str | None = None) -> tuple[str, list[dict]]:
     """Riscrive i marcatori `[Screenshot: cap | /help-files/...]` in markdown con
     URL assoluti pubblici (`![cap](https://host/help-files/...)`), saltando i logo.
 
     Arricchimento VLM (se `image_descriptions` è popolata): l'alt-text diventa la
     **caption VLM** (non più l'heading povero) e le immagini di contenuto dei doc
     **help** (che NON hanno marcatori nel testo) vengono **iniettate** come link
-    markdown. Le icone/decorazioni (vec NULL) restano escluse."""
+    markdown. Le icone/decorazioni (vec NULL) restano escluse.
+
+    Ritorna `(text, images)` dove `images` = `[{url assoluto, caption}]` nell'ordine
+    di emissione — così il chiamante non deve re-parsare il markdown appena generato."""
     base = settings.base_url.rstrip("/") if settings.base_url else ""
     idx = query_module._index
     imgs = idx.get_doc_images_for_fetch(source_file) if (idx and source_file) else []
     cap_by_url = {im["url"]: im["caption"] for im in imgs}
     used: set[str] = set()
+    images: list[dict] = []  # {url, caption} in ordine di apparizione nel testo
 
     def _abs(url: str) -> str:
         return f"{base}{url}" if url.startswith("/") else url
@@ -53,16 +57,23 @@ def _absolutize_screenshots(text: str, source_file: str | None = None) -> str:
             return ""
         used.add(url)
         alt = cap_by_url.get(url) or cap  # caption VLM se disponibile, altrimenti heading
-        return f"![{alt}]({_abs(url)})"
+        abs_url = _abs(url)
+        images.append({"url": abs_url, "caption": alt})
+        return f"![{alt}]({abs_url})"
 
     out = _SCREENSHOT_RE.sub(_sub, text)
 
     # Inietta le immagini di contenuto del doc non già presenti (tipico dei doc help).
-    extra = [f"![{im['caption']}]({_abs(im['url'])})"
-             for im in imgs if im["url"] not in used]
+    extra = []
+    for im in imgs:
+        if im["url"] in used:
+            continue
+        abs_url = _abs(im["url"])
+        images.append({"url": abs_url, "caption": im["caption"]})
+        extra.append(f"![{im['caption']}]({abs_url})")
     if extra:
         out = f"{out}\n\n{chr(10).join(extra)}"
-    return out
+    return out, images
 
 
 def _track_request() -> None:
@@ -137,12 +148,9 @@ def register_tools(mcp) -> None:
             raise ValueError(f"Document not found: {id}")
         raw_sf = doc.get("source_file") or id
         sf = raw_sf.replace("\\", "/")
-        text = _absolutize_screenshots(doc.get("content") or "", raw_sf)
-        # metadata.images: riferimenti immagine {url assoluto, caption} nell'ordine in
-        # cui compaiono nel `text` (per costruzione = ordine del markdown) — richiesta (1)
-        # dei client MCP, machine-readable e complementare ai link inline.
-        images = [{"url": u, "caption": alt}
-                  for alt, u in re.findall(r"!\[(.*?)\]\(([^)]+)\)", text)]
+        # text arricchito + `images` strutturato ({url assoluto, caption} in ordine di
+        # apparizione) costruiti in un colpo solo — richiesta (1) dei client MCP.
+        text, images = _absolutize_screenshots(doc.get("content") or "", raw_sf)
         return {
             "id": sf,
             "title": doc.get("title") or sf,
