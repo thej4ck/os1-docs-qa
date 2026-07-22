@@ -10,6 +10,7 @@ from openai import AsyncOpenAI
 
 from app.config import settings
 from app.search.fts import SearchIndex, ITALIAN_STOPWORDS
+from app.util.markers import SCREENSHOT_RE
 
 # ── Prompt a due livelli ──
 # CORE = solo grounding (condiviso, invariante). NON deve contenere regole di
@@ -549,10 +550,6 @@ def _is_logo(url: str) -> bool:
     return result
 
 
-# Formato marcatore screenshot emesso da build_index (contratto condiviso in questo modulo).
-_SCREENSHOT_RE = re.compile(r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]')
-
-
 def build_context(docs: list[dict]) -> str:
     """Build a context string from retrieved documents."""
     parts = []
@@ -564,7 +561,7 @@ def build_context(docs: list[dict]) -> str:
         # L'ordine corrisponde a `sources` → il frontend traduce [Dn] -> sources[n-1].
         parts.append(f"[D{i}] {title}\n{content}")
         # Collect screenshots (skip logo)
-        for m in _SCREENSHOT_RE.finditer(content):
+        for m in SCREENSHOT_RE.finditer(content):
             if not _is_logo(m.group(2)):
                 screenshots.append(f"- ![{m.group(1)}]({m.group(2)}) (da [D{i}])")
     ctx = "\n\n".join(parts)
@@ -580,7 +577,7 @@ def _legacy_screenshots(docs: list[dict], cap: int) -> list[dict]:
     out: list[dict] = []
     seen: set[str] = set()
     for doc in docs:
-        for m in _SCREENSHOT_RE.finditer(doc["content"]):
+        for m in SCREENSHOT_RE.finditer(doc["content"]):
             url = m.group(2)
             if _is_logo(url) or url in seen:
                 continue

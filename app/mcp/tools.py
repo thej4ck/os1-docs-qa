@@ -18,6 +18,7 @@ from pydantic import Field
 
 from app.config import settings
 from app.search import query as query_module
+from app.util.markers import SCREENSHOT_RE
 
 
 def _doc_url(source_file: str) -> str:
@@ -25,9 +26,6 @@ def _doc_url(source_file: str) -> str:
     sf = (source_file or "").replace("\\", "/")
     base = settings.base_url.rstrip("/") if settings.base_url else ""
     return f"{base}/api/doc?file={quote(sf, safe='')}"
-
-
-_SCREENSHOT_RE = re.compile(r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]')
 
 
 def _absolutize_screenshots(text: str, source_file: str | None = None) -> tuple[str, list[dict]]:
@@ -61,7 +59,7 @@ def _absolutize_screenshots(text: str, source_file: str | None = None) -> tuple[
         images.append({"url": abs_url, "caption": alt})
         return f"![{alt}]({abs_url})"
 
-    out = _SCREENSHOT_RE.sub(_sub, text)
+    out = SCREENSHOT_RE.sub(_sub, text)
 
     # Inietta le immagini di contenuto del doc non già presenti (tipico dei doc help).
     extra = []

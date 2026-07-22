@@ -10,6 +10,8 @@ import re
 
 import markdown as md
 
+from app.util.markers import SCREENSHOT_RE
+
 
 def escape_html(text: str) -> str:
     """HTML-escape text."""
@@ -24,11 +26,7 @@ def escape_html(text: str) -> str:
 def md_to_html(text: str, base_url: str) -> str:
     """Convert markdown content to email-safe HTML with absolute image URLs."""
     # Convert [Screenshot: desc | url] markers to markdown images
-    text = re.sub(
-        r'\[Screenshot:\s*(.+?)\s*\|\s*(.+?)\s*\]',
-        r'![\1](\2)',
-        text,
-    )
+    text = SCREENSHOT_RE.sub(r'![\1](\2)', text)
     # Make relative image URLs absolute
     text = re.sub(
         r'!\[([^\]]*)\]\((/[^)]+)\)',
