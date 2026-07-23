@@ -428,6 +428,29 @@ class SearchIndex:
         imgs = sorted(self.get_content_images([source_file]), key=lambda r: r["url"])
         return [{"url": r["url"], "caption": r["caption"]} for r in imgs]
 
+    def resolve_image(self, url: str) -> dict | None:
+        """Whitelist + risoluzione su disco di una URL immagine di CONTENUTO.
+
+        Ritorna `{"path": Path, "caption": str}` solo se `url` è in `image_descriptions`
+        con `vec IS NOT NULL` (immagine reale, non icona/decorazione) E il file esiste.
+        Altrimenti None. La whitelist DB è la protezione anti-path-traversal: URL
+        arbitrari (o `..`) non sono nella tabella → None."""
+        try:
+            row = self.conn.execute(
+                "SELECT caption FROM image_descriptions WHERE url = ? AND vec IS NOT NULL LIMIT 1",
+                (url,),
+            ).fetchone()
+        except sqlite3.OperationalError:
+            return None
+        if not row:
+            return None
+        rel = url.lstrip("/")
+        for base in (Path(__file__).resolve().parents[2], Path("/app")):  # dev root, prod /app
+            p = base / rel
+            if p.is_file():
+                return {"path": p, "caption": row["caption"] or ""}
+        return None
+
     def rebuild(self):
         """Drop all data and recreate the schema."""
         cur = self.conn.cursor()

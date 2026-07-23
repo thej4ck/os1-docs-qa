@@ -14,11 +14,14 @@ import re
 from typing import Annotated
 from urllib.parse import quote
 
+from fastmcp.utilities.types import Image
 from pydantic import Field
 
 from app.config import settings
 from app.search import query as query_module
 from app.util.markers import SCREENSHOT_RE
+
+MAX_VIEW_IMAGES = 2  # "un paio": cap per chiamata (base64 gonfia ~33% il payload)
 
 
 def _doc_url(source_file: str) -> str:
@@ -160,3 +163,47 @@ def register_tools(mcp) -> None:
                 "images": images,
             },
         }
+
+    @mcp.tool
+    async def view_images(
+        urls: Annotated[list[str], Field(
+            description="Uno o due URL immagine presi dal campo `metadata.images` di `fetch`. "
+                        "Scegli SOLO gli screenshot pertinenti alla domanda; max 2 per chiamata."
+        )],
+    ):
+        """Mostra gli SCREENSHOT indicati come IMMAGINI VERE (base64), non solo come link,
+        così puoi vederli e descriverne il contenuto. Passa gli URL presi da
+        `metadata.images` di `fetch` (al massimo 2). Utile quando la domanda riguarda cosa
+        si vede a schermo: campi, pulsanti, colonne, layout di una finestra."""
+        _track_request()
+        base = settings.base_url.rstrip("/") if settings.base_url else ""
+        idx = query_module._index
+        out: list = []
+        seen: set[str] = set()
+        n = 0
+        for u in (urls or []):
+            if n >= MAX_VIEW_IMAGES:
+                break
+            rel = (u or "").strip()
+            if not rel:
+                continue
+            # normalizza a chiave relativa /help-files/... (metadata.images dà URL assoluti)
+            if base and rel.startswith(base):
+                rel = rel[len(base):]
+            i = rel.find("/help-files/")
+            if i > 0:
+                rel = rel[i:]
+            if rel in seen:
+                continue
+            seen.add(rel)
+            hit = idx.resolve_image(rel) if idx is not None else None  # whitelist + file su disco
+            if hit is None:
+                continue  # URL non in whitelist / file assente → scartato (no traversal)
+            cap = hit["caption"]
+            out.append(f"Screenshot: {cap} ({rel})" if cap else f"Screenshot ({rel})")
+            out.append(Image(path=str(hit["path"])))  # → ImageContent base64 (mime webp)
+            n += 1
+        if not out:
+            return ["Nessuna immagine valida tra gli URL forniti. Usa gli URL esatti dal "
+                    "campo `metadata.images` restituito da `fetch`."]
+        return out
