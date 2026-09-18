@@ -1,5 +1,7 @@
 """Authentication routes: login, OTP verification, logout."""
 
+from urllib.parse import quote
+
 from fastapi import APIRouter, Request, Form
 from fastapi.responses import HTMLResponse, RedirectResponse, JSONResponse
 
@@ -32,24 +34,27 @@ def _templates():
     return templates
 
 
+def _login_ctx(request: Request, error: str | None = None) -> dict:
+    """Contesto completo per login.html (splash + prezzi). Unico punto: ogni render lo usa."""
+    from app.models.settings import get_bool_setting
+    from app.auth.email_sender import get_trial_duration_days
+    from app.models.domain import PRICING_BANDS, TIER_PRESETS, TIER_FREE
+    return {
+        "request": request, "error": error,
+        "mcp_enabled": get_bool_setting("mcp_enabled", settings.production),
+        "mcp_url": f"{_public_base(request)}/mcp",
+        "trial_days": get_trial_duration_days(),
+        "bands": PRICING_BANDS,
+        "free_preset": TIER_PRESETS[TIER_FREE],
+    }
+
+
 @router.get("/login", response_class=HTMLResponse)
 async def login_page(request: Request):
     email = get_session_email(request)
     if email:
         return RedirectResponse(url="/chat", status_code=302)
-    from app.config import settings as _cfg
-    from app.models.settings import get_bool_setting
-    from app.auth.email_sender import get_trial_duration_days
-    from app.models.domain import PRICING_BANDS, TIER_PRESETS, TIER_FREE
-    _base = _cfg.base_url.rstrip("/") if _cfg.base_url else str(request.base_url).rstrip("/")
-    return _templates().TemplateResponse(request, "login.html", {
-        "request": request, "error": None,
-        "mcp_enabled": get_bool_setting("mcp_enabled", _cfg.production),
-        "mcp_url": f"{_base}/mcp",
-        "trial_days": get_trial_duration_days(),
-        "bands": PRICING_BANDS,
-        "free_preset": TIER_PRESETS[TIER_FREE],
-    })
+    return _templates().TemplateResponse(request, "login.html", _login_ctx(request))
 
 
 @router.post("/login", response_class=HTMLResponse)
@@ -62,15 +67,21 @@ async def login_submit(request: Request, email: str = Form(...)):
         return login_and_redirect(email)
 
     if not is_email_allowed(email):
-        return _templates().TemplateResponse(
-            request, "login.html", {"request": request, "error": "Email non autorizzata."}
-        )
+        from app.models.domain import get_domain_by_pattern, extract_email_domain
+        if get_domain_by_pattern(f"*@{extract_email_domain(email)}"):
+            # Dominio noto ma disabilitato: signup lo rifiuterebbe ("già registrato") -> niente ping-pong.
+            return _templates().TemplateResponse(
+                request, "login.html",
+                _login_ctx(request, "Accesso sospeso per il tuo dominio. Scrivi a amministrazione@scao.it"),
+            )
+        # Dominio sconosciuto -> proponi il trial invece di un muro.
+        return RedirectResponse(url=f"/signup?email={quote(email)}", status_code=303)
 
     code = generate_otp(email)
     success = send_otp_email(email, code)
     if not success:
         return _templates().TemplateResponse(
-            request, "login.html", {"request": request, "error": "Errore nell'invio dell'email. Riprova."}
+            request, "login.html", _login_ctx(request, "Errore nell'invio dell'email. Riprova.")
         )
 
     return _templates().TemplateResponse(

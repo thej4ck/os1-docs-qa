@@ -75,7 +75,7 @@ Strati:
 - `app/config.py` — Settings pydantic (`.env`). **Il pricing NON è più qui**: è dinamico in `query.py`.
 - `app/version.py` — VERSION/BUILD/BUILD_DATE/PRODUCT_NAME.
 - `app/routes/chat_routes.py` (~780) — chat, ask SSE, conversazioni CRUD/export, feedback, doc viewer, announcements, usage summary, onboarding, request-upgrade, `/api/debug/retrieve` (solo dev).
-- `app/routes/auth_routes.py` — login OTP, verify, logout, **access-token login** (`/login/token`, `/api/access-token[/regenerate]`).
+- `app/routes/auth_routes.py` — login OTP, verify, logout, **access-token login** (`/login/token`, `/api/access-token[/regenerate]`). `POST /login` con **email di dominio sconosciuto → 303 `/signup?email=…`** (prefill + avviso "non è ancora registrata"); dominio noto ma **disabilitato → errore "Accesso sospeso"** (evita ping-pong con signup che rifiuta i domini già registrati). Ogni render di `login.html` passa da `_login_ctx()` (splash prezzi: `bands`/`free_preset`/`trial_days`/`mcp_*` — un contesto parziale = 500 Jinja, build 105).
 - `app/routes/signup_routes.py` — **self-signup freemium** (`/signup`, `/signup/verify`) con autoprovisioning **TRIAL full-unlock 7gg** (`billing_status='trial'`). Accetta `ref`/`s` (share attribution): a fine signup chiama `mark_converted(share_token, domain_id)`.
 - `app/routes/public_routes.py` — **rotte pubbliche (no auth)**: condivisione risposte (vedi sezione dedicata). NB: il listino `/prezzi` (`public_pricing.html`) è stato **rimosso** (build 96): i prezzi vivono ora solo nella splash `login.html`.
 - `app/routes/admin_routes.py` (~555) — dashboard, utenti, usage, costi, conversazioni, domini, **condivisioni** (`/admin/shares`, funnel), feedback, settings, export CSV.

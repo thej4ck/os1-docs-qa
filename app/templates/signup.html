@@ -7,7 +7,7 @@
         <div class="auth-header">
             <img src="/static/img/logo-lg.png" alt="SCAO" class="auth-logo">
             <h1>Prova OS1 Virgilio<span class="beta-badge-lg">{{ trial_days|default(7) }} giorni</span></h1>
-            <p>Compila il modulo: attiveremo subito una prova gratuita per tutto il tuo dominio aziendale.</p>
+            <p>{% if from_login %}<strong>{{ email }}</strong> non è ancora registrata. {% endif %}Compila il modulo: attiveremo subito una prova gratuita per tutto il tuo dominio aziendale.</p>
         </div>
 
         {% if error %}

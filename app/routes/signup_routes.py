@@ -42,6 +42,7 @@ def _render_signup(request: Request, **ctx):
         "company_name": "",
         "ref": "",
         "share_token": "",
+        "from_login": False,
         "trial_days": get_trial_duration_days(),
     }
     base.update(ctx)
@@ -49,15 +50,21 @@ def _render_signup(request: Request, **ctx):
 
 
 def _render_verify(request: Request, **ctx):
-    base = {"request": request, "error": None, "ref": "", "share_token": ""}
+    base = {
+        "request": request, "error": None,
+        "first_name": "", "last_name": "", "email": "", "company_name": "",
+        "ref": "", "share_token": "",
+    }
     base.update(ctx)
     return _templates().TemplateResponse(request, "signup_verify.html", base)
 
 
 @router.get("/signup", response_class=HTMLResponse)
-async def signup_page(request: Request, ref: str = "", s: str = ""):
+async def signup_page(request: Request, ref: str = "", s: str = "", email: str = ""):
     # ref/s carry share attribution from the public landing CTA (/s/{token}/go).
-    return _render_signup(request, ref=ref, share_token=s)
+    # email arrives from POST /login when the address is not registered yet.
+    email = email.strip().lower()
+    return _render_signup(request, ref=ref, share_token=s, email=email, from_login=bool(email))
 
 
 @router.post("/signup", response_class=HTMLResponse)
