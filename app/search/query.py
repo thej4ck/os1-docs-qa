@@ -142,19 +142,8 @@ def embeddings_ready() -> bool:
 
 
 # ── Allowed models with pricing ($/M tokens) ──
+# I Llama (3.1-8b-instant, 3.3-70b-versatile) non sono più serviti da Groq (404 model_not_found).
 ALLOWED_MODELS = {
-    "llama-3.1-8b-instant": {
-        "label": "Llama 3.1 8B Instant",
-        "input_price": 0.05,
-        "output_price": 0.08,
-        "context_window": 131_072,
-    },
-    "llama-3.3-70b-versatile": {
-        "label": "Llama 3.3 70B Versatile",
-        "input_price": 0.59,
-        "output_price": 0.79,
-        "context_window": 131_072,
-    },
     "openai/gpt-oss-120b:low": {
         "label": "GPT-OSS 120B (Low Effort)",
         "model_id": "openai/gpt-oss-120b",
@@ -205,6 +194,10 @@ ALLOWED_MODELS = {
     },
 }
 
+# Fallback se il setting admin manca o punta a un modello non più in ALLOWED_MODELS.
+DEFAULT_MODEL = "openai/gpt-oss-20b:medium"
+DEFAULT_DEEP_MODEL = "openai/gpt-oss-120b:medium"
+
 CONTEXT_PRESETS = {
     "conservative": 5_000,
     "normal": 15_000,
@@ -252,7 +245,8 @@ async def check_disambiguation(
 
     # Use LLM to generate natural disambiguation question
     if _client:
-        llm_result = await ask_disambiguation(question, result["areas"], _client)
+        model_id, effort = _get_model()
+        llm_result = await ask_disambiguation(question, result["areas"], _client, model_id, effort)
         if llm_result:
             return llm_result
 
@@ -318,10 +312,10 @@ async def _hybrid_candidates(
     """
     from app.search import signals
     from app.search.fusion import rrf_fuse
-    from app.search.expand import expand_terms
+    from app.search.expand import expand_terms, with_equivalents
 
     # Espansione terminologica deterministica (usata solo nel ramo OR-fallback
-    # di BM25). La leg dense resta sulla query originale: assorbe già le parafrasi.
+    # di BM25). La leg dense riceve solo gli equivalenti stretti (duplicare→copiare).
     expansion = expand_terms(question)
     if trace is not None and expansion:
         trace["expanded_terms"] = expansion
@@ -331,7 +325,7 @@ async def _hybrid_candidates(
     if hybrid:
         legs = [
             asyncio.to_thread(_index.search_ids, question, 80, topic_filter, expansion),
-            _safe_dense(question, 80),
+            _safe_dense(with_equivalents(question), 80),
         ]
         if want_images:  # niente leg immagini (né la sua query) sui build vecchi
             legs.append(asyncio.to_thread(_image_doc_ids, question))
@@ -763,8 +757,6 @@ def _get_model(deep: bool = False) -> tuple[str, str | None]:
     The config key (e.g. "openai/gpt-oss-120b:high") may differ from the
     actual API model id ("openai/gpt-oss-120b").
     """
-    default = "llama-3.1-8b-instant"
-    config_key = default
     try:
         from app.db import get_conn
         if deep:
@@ -780,7 +772,8 @@ def _get_model(deep: bool = False) -> tuple[str, str | None]:
             return info.get("model_id", config_key), info.get("reasoning_effort")
     except Exception:
         pass
-    return default, None
+    info = ALLOWED_MODELS[DEFAULT_MODEL]
+    return info["model_id"], info["reasoning_effort"]
 
 
 def _get_token_limit(key: str, default: int) -> int:
@@ -803,7 +796,7 @@ def _calculate_cost(prompt_tokens: int, completion_tokens: int, config_key: str,
 
     Cached tokens get a 50% discount on input price (Groq prompt caching).
     """
-    model_info = ALLOWED_MODELS.get(config_key, ALLOWED_MODELS["llama-3.1-8b-instant"])
+    model_info = ALLOWED_MODELS.get(config_key, ALLOWED_MODELS[DEFAULT_MODEL])
     input_price = model_info["input_price"] / 1_000_000
     non_cached = prompt_tokens - cached_tokens
     input_cost = (non_cached * input_price) + (cached_tokens * input_price * 0.5)

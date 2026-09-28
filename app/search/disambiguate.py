@@ -179,8 +179,10 @@ async def ask_disambiguation(
     query: str,
     areas: list[dict],
     client,
+    model: str,
+    reasoning_effort: str | None = None,
 ) -> dict | None:
-    """Call fast LLM to generate a natural disambiguation question.
+    """Call the configured chat model to generate a natural disambiguation question.
 
     Returns {question: str, options: [{label, topic, keywords}]} or None on failure.
     """
@@ -208,12 +210,17 @@ Regole:
 
     try:
         import asyncio
+        # Reasoning model (gpt-oss): effort sempre "low" (1 riga di chiarimento, timeout
+        # 5s) e margine di token, perché il reasoning consuma lo stesso budget di max_tokens.
+        extra = {"reasoning_effort": "low"} if reasoning_effort else {}
         response = await asyncio.wait_for(
             client.chat.completions.create(
-                model="llama-3.1-8b-instant",
+                model=model,
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.1,
-                max_tokens=300,
+                max_tokens=1000,
+                response_format={"type": "json_object"},
+                **extra,
             ),
             timeout=5.0,
         )

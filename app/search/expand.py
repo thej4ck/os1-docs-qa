@@ -59,11 +59,24 @@ ERP_SYNONYMS: dict[str, list[str]] = {
 }
 
 
-def _build_stemmed_map() -> dict[str, list[str]]:
+# Equivalenti STRETTI: stessa azione, parole diverse fra utente e docs. A differenza
+# di ERP_SYNONYMS entrano nella query principale (AND di BM25 e leg semantica), ma
+# sempre in OR col termine originale, mai in sostituzione: "Duplica" esiste davvero
+# in OS1 (causali, articoli), mentre la copia di un documento i docs la chiamano "Copia".
+QUERY_EQUIVALENTS: dict[str, list[str]] = {
+    "duplicare": ["copiare"],
+    "clonare": ["copiare"],
+}
+
+# Sotto questa lunghezza il prefisso-stem è troppo generico ("cop"* ≈ copie/coperture).
+_MIN_PREFIX_STEM = 5
+
+
+def _build_stemmed_map(source: dict[str, list[str]] = ERP_SYNONYMS) -> dict[str, list[str]]:
     """Pre-stemma le chiavi una volta sola (lazy, a import-time)."""
     stemmer = _get_stemmer()
     out: dict[str, list[str]] = {}
-    for key, syns in ERP_SYNONYMS.items():
+    for key, syns in source.items():
         stem = stemmer.stemWord(key) if stemmer else key
         # Più chiavi possono collassare sullo stesso stem: uniscile.
         out.setdefault(stem, [])
@@ -74,6 +87,38 @@ def _build_stemmed_map() -> dict[str, list[str]]:
 
 
 _STEMMED_MAP = _build_stemmed_map()
+_STEMMED_EQUIV = _build_stemmed_map(QUERY_EQUIVALENTS)
+
+
+def fts_term(word: str) -> str:
+    """Espressione FTS5 per una parola della query (già pulita e minuscola).
+
+    BM25 fa match letterale (unicode61, niente stemming): "annullo" non trova
+    "annullamento", "duplico" non trova "duplica". Il termine resta, e in OR
+    si aggiungono il prefisso-stem e gli equivalenti stretti:
+    "annullo" → ("annullo" OR "annull"*). Parole senza varianti restano "parola".
+    """
+    stemmer = _get_stemmer()
+    stem = stemmer.stemWord(word) if stemmer else word
+    alts = [f'"{word}"']
+    equiv = _STEMMED_EQUIV.get(stem, [])
+    if stem != word and (len(stem) >= _MIN_PREFIX_STEM or equiv):
+        alts.append(f'"{stem}"*')
+    alts += [f'"{e}"' for e in equiv]
+    return alts[0] if len(alts) == 1 else "(" + " OR ".join(alts) + ")"
+
+
+def with_equivalents(query: str) -> str:
+    """Query + equivalenti stretti in coda, per la leg semantica (model2vec non
+    lega "duplicare" a "copiare": cos 0.25). Invariata se non ce ne sono."""
+    stemmer = _get_stemmer()
+    extra: list[str] = []
+    for tok in _tokens(query):
+        low = tok.lower()
+        for e in _STEMMED_EQUIV.get(stemmer.stemWord(low) if stemmer else low, ()):
+            if e not in extra:
+                extra.append(e)
+    return f"{query} {' '.join(extra)}" if extra else query
 
 
 def expand_terms(query: str) -> list[str]:

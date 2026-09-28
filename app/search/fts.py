@@ -205,7 +205,13 @@ class SearchIndex:
         return [dict(row) for row in rows]
 
     def _clean_tokens(self, query: str) -> list[str]:
-        """Tokenize query, remove stopwords, quote for FTS5 safety."""
+        """Tokenize query, remove stopwords, quote for FTS5 safety.
+
+        Each word becomes an FTS term with its stem-prefix/equivalents ORed in
+        (expand.fts_term), so AND/OR queries match inflected forms.
+        """
+        from app.search.expand import fts_term  # lazy: expand imports this module
+
         raw_tokens = query.strip().split()
         if not raw_tokens:
             return []
@@ -214,7 +220,7 @@ class SearchIndex:
         for t in raw_tokens:
             cleaned = t.strip('"\'(){}[]<>*^~?!.,;:').lower()
             if cleaned and cleaned not in ITALIAN_STOPWORDS:
-                safe.append(f'"{cleaned}"')
+                safe.append(fts_term(cleaned))
 
         # If all tokens were stopwords, fall back to original tokens
         if not safe:

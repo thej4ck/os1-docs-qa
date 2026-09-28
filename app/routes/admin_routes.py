@@ -557,9 +557,10 @@ def _get_all_settings() -> dict:
     from app.models.conversation import get_max_messages_setting
     from app.config import settings as app_settings
     from app.search.agents import AGENT_ORDER
+    from app.search.query import DEFAULT_MODEL, DEFAULT_DEEP_MODEL
     data = {
-        "groq_model": _get_setting("groq_model", "llama-3.1-8b-instant"),
-        "groq_deep_model": _get_setting("groq_deep_model", "llama-3.3-70b-versatile"),
+        "groq_model": _get_setting("groq_model", DEFAULT_MODEL),
+        "groq_deep_model": _get_setting("groq_deep_model", DEFAULT_DEEP_MODEL),
         "otp_sender_name": _get_setting("otp_sender_name", PRODUCT_NAME),
         "otp_sender_email": _get_setting("otp_sender_email", "noreply@ai.scao.it"),
         "allowed_emails": _get_setting("allowed_emails", app_settings.allowed_emails),
@@ -638,13 +639,13 @@ async def save_settings(request: Request):
     if preset not in ("conservative", "normal", "aggressive"):
         preset = "normal"
 
-    from app.search.query import ALLOWED_MODELS
+    from app.search.query import ALLOWED_MODELS, DEFAULT_MODEL, DEFAULT_DEEP_MODEL
     groq_model = str(form.get("groq_model", "")).strip()
     groq_deep_model = str(form.get("groq_deep_model", "")).strip()
     if groq_model not in ALLOWED_MODELS:
-        groq_model = "llama-3.1-8b-instant"
+        groq_model = DEFAULT_MODEL
     if groq_deep_model not in ALLOWED_MODELS:
-        groq_deep_model = "llama-3.3-70b-versatile"
+        groq_deep_model = DEFAULT_DEEP_MODEL
 
     max_output_tokens = str(max(256, min(int(form.get("max_output_tokens", 2048)), 8192)))
     max_completion_tokens = str(max(256, min(int(form.get("max_completion_tokens", 4096)), 16384)))

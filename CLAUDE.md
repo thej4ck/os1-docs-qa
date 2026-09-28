@@ -8,7 +8,7 @@ Chat con **retrieval ibrido BM25 + semantico (model2vec)** e LLM (Groq), 4 esper
 auth OTP + access-token, **self-signup freemium con tier**, **pricing a scaglioni per PDL OS1**, backoffice admin, tracking costi, dark/light theme.
 
 - `app/version.py` è single source of truth: `VERSION`, `BUILD`, `BUILD_DATE`, `PRODUCT_NAME = "OS1 Virgilio"`.
-- Stato attuale: VERSION `2.2.0`, BUILD `106`.
+- Stato attuale: VERSION `2.2.0`, BUILD `107`.
 - Stack web: FastAPI `0.135.1` + **Starlette `>=1.0.1,<2`** (pin floating; chiude **CVE-2026-48710** Host-header → path poisoning). NB: con Starlette 1.x `Jinja2Templates.TemplateResponse` vuole `request` come **primo** arg: `TemplateResponse(request, name, context)`.
 
 ## Comandi sviluppo
@@ -115,13 +115,15 @@ senza doppio-init). Espone **solo retrieval** (costo Groq zero), schema canonico
 
 ### Retrieval ibrido (`app/search/`)
 - `query.py` (~860) — **orchestratore**. `ask_stream()` async generator: disambigua → candidati ibridi → budget → context → streaming → cost. Contiene `ALLOWED_MODELS`, `CONTEXT_PRESETS`, prompt CORE, deep mode, remap citazioni, screenshot.
-- `fts.py` — wrapper FTS5/BM25. AND sui termini originali; fallback OR con expansion se <3 risultati.
+- `fts.py` — wrapper FTS5/BM25. AND sui termini originali; fallback OR con expansion se <3 risultati. Il tokenizer FTS (`unicode61`) NON fa stemming → ogni parola diventa `expand.fts_term`: letterale **in OR** con prefisso-stem e equivalenti (`"annullo"` → `("annullo" OR "annull"*)`), così i verbi coniugati ("annullo", "duplico", "consuntivo") trovano "annullamento", "duplica", "consuntivazione" (build 107). Stesso `_clean_tokens` per docs, `image_fts` e disambiguazione.
 - `embeddings.py` — model2vec static. Carica corpus L2-norm da search.db, query embed CPU (mean-pool) → cosine. Degrada a BM25-only se non pronto.
 - `fusion.py` — **RRF** (`rrf_fuse`, k=60, Cormack 2009) con pesi adattivi (lexical/semantic).
 - `signals.py` — re-rank a segnali ERP CPU-side (`rescore`): definition boost (table-def/schema), overlap stem identifier, coerenza file/modulo, noise penalty; + `adaptive_weights` (query tecnica CamelCase/ALLCAPS/_ → pesa BM25, naturale → pesa semantico).
-- `expand.py` — query expansion deterministica (mappa lemma ERP→sinonimi, stemming IT). Solo nel ramo OR-fallback di BM25, mai sulla query densa (anti-drift).
-- `disambiguate.py` — solo 1° messaggio, query ≤3 token, ≥3 topic non-dominanti, no discriminator → domanda di chiarimento LLM (`llama-3.1-8b-instant`, JSON options).
-- `rerank.py` — re-rank LLM (`llama-3.1-8b-instant`, score 0–10). **OFF di default** (admin setting `reranking_enabled`), attivo solo se >5 candidati. Token/costo contabilizzati separatamente (`rerank_*`).
+- `expand.py` — query expansion deterministica. `ERP_SYNONYMS` (lemma ERP→termini correlati): solo nel ramo OR-fallback di BM25 (anti-drift). `QUERY_EQUIVALENTS` (equivalenti STRETTI, es. `duplicare`/`clonare`→`copiare`: i docs chiamano "Copia" la copia di un documento): entrano nella query principale (AND BM25 + leg semantica via `with_equivalents`) ma **sempre in OR, mai in sostituzione** ("Duplica" esiste davvero in causali/articoli). model2vec non lega duplicare↔copiare (cos 0.25).
+- `disambiguate.py` — solo 1° messaggio, query ≤3 token, ≥3 topic non-dominanti, no discriminator → domanda di chiarimento LLM col **modello da settings** (`groq_model`, reasoning `low`, `response_format` JSON, timeout 5s). Fino a build 106 usava `llama-3.1-8b-instant` hardcoded → 404 → sempre il fallback statico "Ho trovato risultati in diverse aree".
+- `rerank.py` — re-rank LLM (score 0–10). **OFF** (admin setting `reranking_enabled`). ⚠️ `RERANK_MODEL` è ancora `llama-3.1-8b-instant` (non più servito da Groq): se riattivato fallisce e, sul fallimento, il contesto resta troncato ai 20 candidati passati.
+
+**Valutazione retrieval**: `python scripts/eval_retrieval.py` → gira `trace_retrieve` (zero LLM, zero costo) sui casi di `scripts/eval_queries.json` (query + sottostringhe attese su titolo/source_file) → `hit@context` + MRR. Lanciarlo prima/dopo ogni modifica al retrieval e diffare l'output. Build 107: 24/32 → 30/32, MRR 0.633 → 0.778.
 
 Ordine pipeline: BM25 ∪ semantic (**∪ image-hit**) → **RRF fuse** → **signals.rescore** → (opz. LLM rerank) → **budget trim in PAROLE**.
 
@@ -141,12 +143,10 @@ Ordine pipeline: BM25 ∪ semantic (**∪ image-hit**) → **RRF fuse** → **si
 | `stella` | Sono nuovo | zero acronimi, analogie, next step | onboarding/tutor |
 
 ### Modelli & pricing (dinamico)
-`ALLOWED_MODELS` in [query.py](app/search/query.py) (NON più env var). Modello standard e "deep" scelti da settings DB (`groq_model` / `groq_deep_model`); default `llama-3.1-8b-instant`. Reasoning effort per i gpt-oss.
+`ALLOWED_MODELS` in [query.py](app/search/query.py) (NON più env var). Modello standard e "deep" scelti da settings DB (`groq_model` / `groq_deep_model`); fallback se il setting manca o non è in lista: `DEFAULT_MODEL` = `openai/gpt-oss-20b:medium`, `DEFAULT_DEEP_MODEL` = `openai/gpt-oss-120b:medium`. Reasoning effort per i gpt-oss. I Llama (3.1-8b-instant, 3.3-70b-versatile) sono stati **rimossi** (build 107): Groq non li serve più (404 `model_not_found`).
 
 | config key | model_id | input $/M | output $/M |
 |---|---|---|---|
-| `llama-3.1-8b-instant` | llama-3.1-8b-instant | 0.05 | 0.08 |
-| `llama-3.3-70b-versatile` | llama-3.3-70b-versatile | 0.59 | 0.79 |
 | `openai/gpt-oss-120b:{low,medium,high}` | openai/gpt-oss-120b | 0.15 | 0.60 |
 | `openai/gpt-oss-20b:{low,medium,high}` | openai/gpt-oss-20b | 0.075 | 0.30 |
 
