@@ -356,6 +356,8 @@ async def ask(
             "conversation_id": conv_id,
             "msg_count": new_count,
             "max_messages": max_msgs,
+            # Esperto effettivo (FREE forza virgilio): guida il riquadro handoff lato UI.
+            "agent": active_agent,
         }
         if msg_id:
             done_data["message_id"] = msg_id

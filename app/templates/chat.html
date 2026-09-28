@@ -492,6 +492,8 @@ async function confirmUpgrade() {
                 <script>
                     // Entitlement del tier corrente (FREE = minimale) — guida i badge 🔒 PRO lato client.
                     window.OS1_FEATURES = {{ features|tojson }};
+                    // Metadati pubblici esperti: il picker non è nel DOM a chat attiva (riquadro handoff Virgilio).
+                    window.OS1_AGENTS = {{ agents|tojson }};
                     // True se la feature è esplicitamente disabilitata dal tier (assente/undefined = sbloccata).
                     function featureLocked(f){ return !!(window.OS1_FEATURES && window.OS1_FEATURES[f] === false); }
                     function selectAgent(id) {
@@ -1113,7 +1115,7 @@ function handleSubmit(e) {
                                 // Citazioni [Dn] rimappate lato server: ri-renderizza
                                 // dal testo corretto così i chip puntano al doc giusto.
                                 if (data.corrected_text) fullText = data.corrected_text;
-                                renderFinal(assistantMsg, fullText, sources, data.message_id || null, pendingScreenshots, isDeep, !!(data.usage && data.usage.truncated));
+                                renderFinal(assistantMsg, fullText, sources, data.message_id || null, pendingScreenshots, isDeep, !!(data.usage && data.usage.truncated), data.agent);
                                 return;
                             }
                         } catch (e) {}
@@ -1190,7 +1192,7 @@ function linkFonteParagraphs(contentEl, sources) {
     });
 }
 
-function renderFinal(msgParts, text, sources, messageId, screenshots, wasDeep, truncated) {
+function renderFinal(msgParts, text, sources, messageId, screenshots, wasDeep, truncated, agent) {
     if (text) msgParts.content.innerHTML = marked.parse(preprocessAnswer(text));
 
     // Resolve citations: [Dn] markers (primary, deterministic) + legacy "Fonte:" text (fallback)
@@ -1313,6 +1315,12 @@ function renderFinal(msgParts, text, sources, messageId, screenshots, wasDeep, t
         hideDeepBanner();
     }
 
+    // Virgilio è sintetico: invita a chiedere agli altri esperti (solo sull'ultima risposta).
+    if (agent === 'virgilio' && text && !truncated) {
+        document.querySelectorAll('.expert-handoff').forEach(el => el.remove());
+        msgParts.body.appendChild(buildExpertHandoff());
+    }
+
     // Copy / print actions (only when there is an answer)
     if (text) {
         const actions = document.createElement('div');
@@ -1394,6 +1402,43 @@ function requestDeepAnalysis(btn) {
     questionEl.value = q;
     questionEl.dataset.deep = 'true';
     handleSubmit(new Event('submit'));
+}
+
+// ── Handoff da Virgilio agli altri esperti ──
+function buildExpertHandoff() {
+    const locked = featureLocked('experts');
+    const box = document.createElement('div');
+    box.className = 'deep-inline expert-handoff';
+    box.innerHTML = '<span class="deep-inline-icon">📖</span>'
+        + '<div class="deep-inline-body">'
+        + '<div class="deep-inline-text"><strong>Virgilio è un professionista di poche parole, ma di valore</strong>: ti dà una sintesi leggibile in poco tempo. Se ti servono spiegazioni più approfondite, chiedi a uno dei suoi colleghi in base alle tue esigenze:</div>'
+        + '<div class="expert-handoff-list"></div>'
+        + '</div>';
+    const list = box.querySelector('.expert-handoff-list');
+    (window.OS1_AGENTS || []).filter(a => a.id !== 'virgilio').forEach(a => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'suggestion-chip';
+        const img = document.createElement('img');
+        img.className = 'agent-badge-avatar';
+        img.src = a.avatar; img.alt = '';
+        img.onerror = () => img.remove();
+        btn.appendChild(img);
+        btn.appendChild(document.createTextNode((locked ? '🔒 ' : '') + a.display_name + ' — ' + a.label));
+        btn.onclick = locked ? (() => upgradeFeature('esperti')) : (() => askOtherExpert(a.id));
+        list.appendChild(btn);
+    });
+    return box;
+}
+
+// Nuova chat con l'esperto scelto; la domanda viene rinviata al load (sessionStorage).
+// ponytail: rinvia solo l'ultima domanda — un follow-up ellittico perde il contesto; passare la history se serve.
+function askOtherExpert(id) {
+    const q = questionEl.dataset.lastQuestion;
+    if (!q) return;
+    selectAgent(id);
+    try { sessionStorage.setItem('os1-pending-question', q); } catch (e) {}
+    newChat();
 }
 
 // ── Copy answer ──
@@ -1743,5 +1788,14 @@ updateDocsPanel({{ last_sources | tojson }});
 {% endif %}
 
 {% if messages %}scrollToBottom();{% endif %}
+
+{% if not is_active_conversation %}
+// Domanda rinviata da askOtherExpert (handoff Virgilio → altro esperto).
+(function () {
+    let q = null;
+    try { q = sessionStorage.getItem('os1-pending-question'); sessionStorage.removeItem('os1-pending-question'); } catch (e) {}
+    if (q) { questionEl.value = q; handleSubmit(new Event('submit')); }
+})();
+{% endif %}
 </script>
 {% endblock %}

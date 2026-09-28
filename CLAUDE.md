@@ -8,7 +8,7 @@ Chat con **retrieval ibrido BM25 + semantico (model2vec)** e LLM (Groq), 4 esper
 auth OTP + access-token, **self-signup freemium con tier**, **pricing a scaglioni per PDL OS1**, backoffice admin, tracking costi, dark/light theme.
 
 - `app/version.py` è single source of truth: `VERSION`, `BUILD`, `BUILD_DATE`, `PRODUCT_NAME = "OS1 Virgilio"`.
-- Stato attuale: VERSION `2.2.0`, BUILD `104`.
+- Stato attuale: VERSION `2.2.0`, BUILD `106`.
 - Stack web: FastAPI `0.135.1` + **Starlette `>=1.0.1,<2`** (pin floating; chiude **CVE-2026-48710** Host-header → path poisoning). NB: con Starlette 1.x `Jinja2Templates.TemplateResponse` vuole `request` come **primo** arg: `TemplateResponse(request, name, context)`.
 
 ## Comandi sviluppo
@@ -131,6 +131,7 @@ Ordine pipeline: BM25 ∪ semantic (**∪ image-hit**) → **RRF fuse** → **si
 
 ### Esperti specialisti (`agents.py`)
 4 personas, **selezione manuale dall'UI** (param `agent`/`agent_id`), nessun router LLM. System prompt = CORE (grounding invariante) + stile esperto. L'esperto scelto è bloccato sulla conversazione (`get_conversation_agent`).
+**Handoff Virgilio (build 106)**: sotto l'ultima risposta di Virgilio (brief) un riquadro UI fisso (`buildExpertHandoff` in [chat.html](app/templates/chat.html), NON testo LLM → zero token, non persistito/condiviso) propone Pilota/Doc/Stella; click → nuova chat con quell'esperto + stessa domanda rinviata (`sessionStorage['os1-pending-question']`). L'esperto effettivo arriva nell'evento SSE `done.agent` (FREE forza virgilio → bottoni 🔒 = upsell).
 
 | id | Label UI | Persona | Stile |
 |----|----------|---------|-------|
