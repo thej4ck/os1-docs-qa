@@ -230,7 +230,7 @@ async def api_sessions(request: Request, since: str | None = None):
         return JSONResponse({"error": "unauthorized"}, status_code=401)
     from app.search.agents import AGENTS, _get_prompt_settings
     cfg = _get_all_settings()
-    config = {k: cfg[k] for k in ("context_preset", "groq_model", "groq_deep_model", "reranking_enabled")}
+    config = {k: cfg[k] for k in ("context_preset", "groq_model", "groq_deep_model", "reranking_enabled", "query_expansion_enabled")}
     # Admin prompt overrides (empty = repo defaults in query.py/agents.py): needed to replay faithfully.
     config["prompt_overrides"] = _get_prompt_settings(
         ["core_system_prompt", "system_prompt"] + [f"agent_prompt_{a}" for a in AGENTS])
@@ -594,6 +594,7 @@ def _get_all_settings() -> dict:
         "max_completion_tokens": _get_setting("max_completion_tokens", "4096"),
         "context_preset": _get_setting("context_preset", "normal"),
         "reranking_enabled": _get_setting("reranking_enabled", "1"),
+        "query_expansion_enabled": _get_setting("query_expansion_enabled", "1"),
         "suppress_reasoning": _get_setting("suppress_reasoning", "0"),
         "image_relevance_threshold": _get_setting("image_relevance_threshold", "0.30"),
         "max_screenshots": _get_setting("max_screenshots", "6"),
@@ -686,6 +687,7 @@ async def save_settings(request: Request):
         "allowed_emails": str(form.get("allowed_emails", "")).strip(),
         "context_preset": preset,
         "reranking_enabled": "1" if form.get("reranking_enabled") else "0",
+        "query_expansion_enabled": "1" if form.get("query_expansion_enabled") else "0",
         "suppress_reasoning": "1" if form.get("suppress_reasoning") else "0",
         "image_relevance_threshold": f"{max(0.0, min(float(form.get('image_relevance_threshold', 0.30) or 0.30), 1.0)):.2f}",
         "max_screenshots": str(max(1, min(int(form.get("max_screenshots", 6) or 6), 20))),

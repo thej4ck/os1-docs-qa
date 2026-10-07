@@ -212,7 +212,9 @@ class SearchIndex:
         """
         from app.search.expand import fts_term  # lazy: expand imports this module
 
-        raw_tokens = query.strip().split()
+        # `"` is FTS5's string delimiter: one inside a word (e.g. `24"`) left an
+        # unterminated string → OperationalError. Treat it as a separator.
+        raw_tokens = query.replace('"', " ").split()
         if not raw_tokens:
             return []
 

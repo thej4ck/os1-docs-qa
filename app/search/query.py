@@ -409,18 +409,93 @@ def _trim_to_budget(candidates: list[dict], max_words: int) -> tuple[list[dict],
     return selected, word_count
 
 
+# ── Corpus-steered query expansion (CSQE, Lei et al. EACL 2024) ──
+# Users and docs name things differently ("prebolla" vs "packing list", "duplicare"
+# vs "Copia"). The LLM can't know OS1 jargon a priori, so it reads the titles/snippets
+# of the FIRST retrieval pass and rewrites the question in the docs' own vocabulary;
+# a second pass on the rewrite is RRF-fused with the first. Measured on
+# eval_queries.json (build 110): 39/60 → 43/60, MRR 0.480 → 0.504.
+_EXPAND_CONFIG_KEY = "openai/gpt-oss-20b:low"
+_EXPAND_K = 12
+_EXPAND_TIMEOUT_S = 3.0
+_EXPAND_PROMPT = """\
+Sei un esperto del gestionale ERP OS1. Un utente ha fatto una domanda; sotto trovi titoli ed \
+estratti di documenti della documentazione OS1 recuperati da una prima ricerca (alcuni pertinenti, altri no).
+
+Obiettivo: riformulare la domanda con la TERMINOLOGIA USATA DALLA DOCUMENTAZIONE, così una seconda ricerca \
+trova i documenti giusti. Gli utenti usano spesso parole diverse dai manuali (es. "duplicare" vs "copia", \
+"bolla" vs "documento di trasporto").
+
+1. Individua nei documenti i termini, nomi di funzioni, menu, pulsanti, tabelle o campi pertinenti alla domanda.
+2. Aggiungi sinonimi o nomi alternativi che un gestionale ERP italiano userebbe per lo stesso concetto.
+3. Non inventare funzioni: se non sei sicuro, preferisci termini presi dagli estratti.
+
+Rispondi SOLO con JSON: {{"keywords": [max 8 termini brevi], "rewrite": "domanda riformulata in gergo OS1"}}
+
+DOMANDA: {question}
+
+DOCUMENTI:
+{docs}"""
+
+
+def _is_query_expansion_enabled() -> bool:
+    from app.models.settings import get_bool_setting
+    return get_bool_setting("query_expansion_enabled", True)
+
+
+async def _expand_query(question: str, docs: list[dict]) -> tuple[str | None, dict | None]:
+    """CSQE rewrite from the first-pass docs. Returns (expanded_query, usage) or
+    (None, None) on any failure/timeout — the caller then keeps the first pass."""
+    import json
+    info = ALLOWED_MODELS[_EXPAND_CONFIG_KEY]
+    ctx = "\n".join(f"- {d['title']}: {' '.join(d['content'].split()[:40])}" for d in docs[:_EXPAND_K])
+    try:
+        r = await asyncio.wait_for(_client.chat.completions.create(
+            model=info["model_id"], reasoning_effort=info["reasoning_effort"],
+            response_format={"type": "json_object"}, max_completion_tokens=1024,
+            messages=[{"role": "user", "content": _EXPAND_PROMPT.format(question=question, docs=ctx)}],
+        ), _EXPAND_TIMEOUT_S)
+        data = json.loads(r.choices[0].message.content)
+        rewrite = data.get("rewrite") if isinstance(data.get("rewrite"), str) else ""
+        kws = data.get("keywords") if isinstance(data.get("keywords"), list) else []
+        expanded = " ".join([rewrite, *map(str, kws)]).strip()
+        usage = {
+            "expansion_tokens": r.usage.prompt_tokens + r.usage.completion_tokens,
+            "expansion_cost_usd": _calculate_cost(r.usage.prompt_tokens, r.usage.completion_tokens, _EXPAND_CONFIG_KEY),
+        }
+        return expanded or None, usage
+    except Exception as e:  # never block the answer on the expansion
+        print(f"[expand] skipped: {type(e).__name__}: {str(e)[:120]}", flush=True)
+        return None, None
+
+
 async def _run_pipeline(
     question: str, deep: bool, topic_filter: str | None, trace: dict | None = None,
+    expand: bool = False,
 ) -> tuple[list[dict], dict | None]:
-    """Shared retrieve path: candidates → optional LLM rerank → budget trim.
+    """Shared retrieve path: candidates → optional CSQE expansion → optional LLM
+    rerank → budget trim.
 
     Used by both retrieve_with_budget (prod) and trace_retrieve (debug); the
     optional `trace` records each stage without forking the pipeline.
+    Returns (selected_docs, extra_usage) — extra_usage merges rerank + expansion spend.
     """
     if _index is None:
         return [], None
     max_words = _get_context_budget(deep)
     candidates = await _hybrid_candidates(question, topic_filter, trace=trace)
+
+    expansion_usage = None
+    if expand and _client and candidates:
+        expanded, expansion_usage = await _expand_query(question, candidates)
+        if expanded:
+            from app.search.fusion import rrf_fuse
+            second = await _hybrid_candidates(expanded, topic_filter)
+            by_id = {d["id"]: d for d in second + candidates}
+            candidates = [by_id[i] for i in rrf_fuse(
+                [d["id"] for d in candidates], [d["id"] for d in second], limit=len(by_id))]
+        if trace is not None:
+            trace["expansion"] = {"query": expanded, "usage": expansion_usage}
 
     rerank_usage = None
     rerank_applied = False
@@ -446,24 +521,27 @@ async def _run_pipeline(
         ]
         trace["selected_count"] = len(selected)
         trace["selected_words"] = word_count
-    return selected, rerank_usage
+    extra_usage = {**(rerank_usage or {}), **(expansion_usage or {})}
+    return selected, extra_usage or None
 
 
 async def retrieve_with_budget(
     question: str, deep: bool = False, topic_filter: str | None = None,
 ) -> tuple[list[dict], dict | None]:
-    """Hybrid retrieve (BM25 ∪ semantic, RRF, signal rerank), optional LLM
-    rerank, then trim to the word budget.
+    """Hybrid retrieve (BM25 ∪ semantic, RRF, signal rerank), optional CSQE
+    expansion and LLM rerank, then trim to the word budget.
 
-    Returns (selected_docs, rerank_usage_or_None).
+    Returns (selected_docs, extra_usage_or_None) — rerank/expansion spend.
     """
-    return await _run_pipeline(question, deep, topic_filter)
+    return await _run_pipeline(question, deep, topic_filter, expand=_is_query_expansion_enabled())
 
 
 async def trace_retrieve(
     question: str, deep: bool = False, topic_filter: str | None = None,
+    expand: bool = False,
 ) -> dict:
-    """Run the full retrieve pipeline and return a structured trace (debug)."""
+    """Run the full retrieve pipeline and return a structured trace (debug).
+    `expand=True` also runs the (paid, ~$0.0003) CSQE expansion — eval only."""
     trace: dict = {
         "query": question,
         "deep": deep,
@@ -475,7 +553,7 @@ async def trace_retrieve(
     if _index is None:
         trace["error"] = "index not initialized"
         return trace
-    await _run_pipeline(question, deep, topic_filter, trace=trace)
+    await _run_pipeline(question, deep, topic_filter, trace=trace, expand=expand)
     return trace
 
 
@@ -942,10 +1020,10 @@ async def ask_stream(
                 else:
                     yield delta.content, [], None
 
-        # Merge rerank usage into final usage data
+        # Merge rerank + query-expansion usage into final usage data
         if usage_data and rerank_usage:
             usage_data.update(rerank_usage)
-            usage_data["cost_usd"] += rerank_usage.get("rerank_cost_usd", 0)
+            usage_data["cost_usd"] += rerank_usage.get("rerank_cost_usd", 0) + rerank_usage.get("expansion_cost_usd", 0)
 
         # True solo su finish_reason=="length" (cap token raggiunto) → la UI offre
         # "Continua". Raro dopo build 65: gpt-oss ora chiude con finish=stop, non

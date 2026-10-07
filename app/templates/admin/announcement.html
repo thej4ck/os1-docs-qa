@@ -149,6 +149,17 @@
                 </div>
             </div>
             <div class="setting-row">
+                <label class="setting-label" for="query_expansion_enabled">Espansione query</label>
+                <div style="flex:1;">
+                    <label style="display:flex;align-items:center;gap:.5rem;cursor:pointer;">
+                        <input type="checkbox" id="query_expansion_enabled" name="query_expansion_enabled" value="on"
+                               {% if settings.query_expansion_enabled == '1' %}checked{% endif %}>
+                        Riformula la domanda nel gergo della documentazione (CSQE)
+                    </label>
+                    <div class="setting-hint">Dopo una prima ricerca, GPT-OSS 20B legge titoli ed estratti dei documenti trovati e riscrive la domanda con i termini dei manuali (es. "prebolla" → "packing list"); una seconda ricerca viene fusa con la prima. Recupera documenti che l'utente descrive con parole sue. Costo ~$0.0003/domanda, ~1s in più; su errore o timeout (3s) si usa la sola ricerca normale.</div>
+                </div>
+            </div>
+            <div class="setting-row">
                 <label class="setting-label" for="image_relevance_threshold">Pertinenza immagini</label>
                 <div style="flex:1;">
                     <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">

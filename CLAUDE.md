@@ -8,7 +8,7 @@ Chat con **retrieval ibrido BM25 + semantico (model2vec)** e LLM (Groq), 4 esper
 auth OTP + access-token, **self-signup freemium con tier**, **pricing a scaglioni per PDL OS1**, backoffice admin, tracking costi, dark/light theme.
 
 - `app/version.py` è single source of truth: `VERSION`, `BUILD`, `BUILD_DATE`, `PRODUCT_NAME = "OS1 Virgilio"`.
-- Stato attuale: VERSION `2.2.0`, BUILD `109`.
+- Stato attuale: VERSION `2.2.0`, BUILD `110`.
 - Stack web: FastAPI `0.135.1` + **Starlette `>=1.0.1,<2`** (pin floating; chiude **CVE-2026-48710** Host-header → path poisoning). NB: con Starlette 1.x `Jinja2Templates.TemplateResponse` vuole `request` come **primo** arg: `TemplateResponse(request, name, context)`.
 
 ## Comandi sviluppo
@@ -130,7 +130,11 @@ senza doppio-init). Espone **solo retrieval** (costo Groq zero), schema canonico
 - `python scripts/sessions.py pull|report|replay` → `outputs/sessions/` (gitignored): `pull` scarica da prod (`--base`, default `https://os1.ai.scao.it`); `report` = metriche (volumi, esperti, modelli, costi, feedback) + flag per coppia domanda→risposta (`negative_feedback`, `no_answer` = errore stream, `truncated` = finish_reason length, `refusal` = frase canonica CORE, `bad_citation`, `no_sources`, `uncited`, `repeat`, `short_answer`) → `review.md` con le coppie flaggate da leggere; `replay [--flagged-only]` = `trace_retrieve` sulle domande reali col preset di prod, overlap fonti prod vs ora → `replay.json`. `report --selftest` = assert sui flag.
 - Non persistiti (limiti dell'analisi): testo/score del contesto, flag deep/topic, `truncated`, domanda di disambiguazione (conversazione vuota = chiarimento abbandonato). `source_file` storici mescolano `\` e `/` (il replay normalizza). Risposte pre-schema `[Dn]` (citavano "📄 Fonte: [Titolo]") risultano `uncited`.
 
-Ordine pipeline: BM25 ∪ semantic (**∪ image-hit**) → **RRF fuse** → **signals.rescore** → (opz. LLM rerank) → **budget trim in PAROLE**.
+Ordine pipeline: BM25 ∪ semantic (**∪ image-hit**) → **RRF fuse** → **signals.rescore** → (**CSQE**) → (opz. LLM rerank) → **budget trim in PAROLE**.
+
+**CSQE — espansione query guidata dal corpus (build 110)** ([query.py](app/search/query.py) `_expand_query`/`_run_pipeline`; Lei et al., EACL 2024): utenti e docs chiamano le cose diversamente ("prebolla" vs "packing list", "duplicare" vs "Copia") e l'LLM non conosce il gergo OS1 a priori → **gpt-oss-20b:low** legge titoli+estratti dei **top-12 candidati del 1° giro** e riscrive la domanda con la terminologia dei docs (+ keywords); un **2° giro** `_hybrid_candidates(riscrittura)` viene fuso RRF col primo, poi budget trim. Setting admin **`query_expansion_enabled`** (default **ON**). Timeout 3s / qualsiasi errore → solo 1° giro (`[expand] skipped` nei log). Costo ~$0.0003/domanda, sommato in `cost_usd` via il canale usage del rerank (`expansion_cost_usd`). Latenza +~0.65s p50 (+1.2s p90). **Solo chat**: MCP `search` resta senza LLM. Eval: `eval_retrieval.py --expand` → 39/60 → **41/60, MRR 0.480 → 0.527**. Scartati con misura: stopword riempitivi (0 effetto), fusione >50 candidati (peggiora), potion-multilingual-128M (peggio del distillato, 512MB), doc2query offline (+hit ma MRR 0.40, non additivo con CSQE).
+
+`fts._clean_tokens` tratta `"` come separatore (build 110): un apice dentro una parola (`24"`) dava `OperationalError: unterminated string` FTS5.
 
 **Immagini viste dal VLM (build 101)** — le immagini non sono più allegate "a priori":
 - **Screenshot pertinenti (chatbot)**: `_select_screenshots()` in [query.py](app/search/query.py) sceglie le immagini del carousel per **cosine(query, embedding descrizione VLM)** con soglia (`image_relevance_threshold`, def 0.30) + cap (`max_screenshots`, def 6). Icone/decorazioni escluse (vec NULL). **Fallback** ai marker `[Screenshot:]` a-priori se `image_descriptions` assente (build vecchio).
@@ -182,7 +186,7 @@ Risoluzione limite token utente: override `users.monthly_token_limit` → tier d
 - `feedback` — message_id, rating(-1/1), category, comment, query, response_preview, chunks_used, model, search_scores
 - `allowed_domains` — pattern, tier, monthly_request/token_limit, daily_limit, enabled, expires_at, dati registrant trial, mcp_enabled, **os1_pdl_count, pricing_band, billing_status (trial|free|paid|past_due), trial_drip_day**
 - `shares` — token(PK), message_id(FK SET NULL), snapshot risposta (content/sources/screenshots/agent/question), sender/recipient, revoked, contatori open/view/cta_click, converted/converted_domain_id (share risposta → landing pubblica `/s/{token}`)
-- `app_settings` — KV admin-config (modello, suppress_reasoning, reranking_enabled, **image_relevance_threshold**, **max_screenshots**, otp_sender_*, max_messages_per_conversation, announcement, admin_notification_email, trial_days…)
+- `app_settings` — KV admin-config (modello, suppress_reasoning, reranking_enabled, **query_expansion_enabled**, **image_relevance_threshold**, **max_screenshots**, otp_sender_*, max_messages_per_conversation, announcement, admin_notification_email, trial_days…)
 - vista `monthly_usage` — aggregato per utente/mese
 
 ### Frontend (Jinja2 + vanilla JS)
@@ -230,7 +234,7 @@ Risoluzione limite token utente: override `users.monthly_token_limit` → tier d
 - **Condivisioni** (`/admin/shares`): funnel share risposte (inviate → aperte → viste → click → trial) + tabella recenti
 - **MCP**: master switch (live), modalità auth (off/bearer/oauth, applica al riavvio), **utenti connessi (richieste totali, revoca per-utente)** + client OAuth (revoca)
 - **Feedback**: lista con filtri categoria/data
-- **Impostazioni**: modello standard/deep, suppress_reasoning, reranking_enabled, email mittente OTP, max domande/chat, banner annunci, trial days, notifiche admin
+- **Impostazioni**: modello standard/deep, suppress_reasoning, reranking_enabled, espansione query (CSQE), email mittente OTP, max domande/chat, banner annunci, trial days, notifiche admin
 
 ## Convenzioni
 - Codice in inglese, UI in italiano

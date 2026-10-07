@@ -5,7 +5,7 @@ signals → budget trim) over scripts/eval_queries.json. No LLM calls, no cost.
 A case hits when any `expect` substring matches (case-insensitive) the title or
 source_file of a doc in the final selected context.
 
-    python scripts/eval_retrieval.py [--cases scripts/eval_queries.json]
+    python scripts/eval_retrieval.py [--cases scripts/eval_queries.json] [--expand]
 
 Run before and after a retrieval change and diff the output.
 """
@@ -40,7 +40,7 @@ def first_hit(rows: list[dict], expect: list[str]) -> int | None:
     return None
 
 
-async def main(cases_path: str) -> int:
+async def main(cases_path: str, expand: bool = False) -> int:
     idx = SearchIndex(settings.db_path, read_only=True)
     q.init(idx)
     if settings.hybrid_enabled:
@@ -49,7 +49,7 @@ async def main(cases_path: str) -> int:
 
     hits, rr = 0, 0.0
     for c in cases:
-        tr = await q.trace_retrieve(c["q"], topic_filter=c.get("topic"))
+        tr = await q.trace_retrieve(c["q"], topic_filter=c.get("topic"), expand=expand)
         rank = first_hit(tr.get("selected", []), c["expect"])
         hits += rank is not None
         rr += 1 / rank if rank else 0
@@ -62,4 +62,6 @@ async def main(cases_path: str) -> int:
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--cases", default=str(Path(__file__).with_name("eval_queries.json")))
-    sys.exit(asyncio.run(main(ap.parse_args().cases)))
+    ap.add_argument("--expand", action="store_true", help="also run CSQE query expansion (Groq, ~$0.02 per run)")
+    a = ap.parse_args()
+    sys.exit(asyncio.run(main(a.cases, a.expand)))
