@@ -953,6 +953,8 @@ async def ask_stream(
         # completa in CLAUDE.md → Troubleshooting.
         if usage_data is not None:
             usage_data["truncated"] = (finish_reason == "length")
+            usage_data["finish_reason"] = finish_reason
+            usage_data["effort"] = reasoning_effort
 
         # Citation remap: corregge i marcatori [Dn] mal attribuiti dall'LLM
         # confrontando ogni frase citata col contenuto dei chunk recuperati.

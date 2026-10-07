@@ -228,10 +228,15 @@ async def api_sessions(request: Request, since: str | None = None):
         auth, f"Bearer {settings.export_token}".encode())
     if not token_ok and not _require_admin(request):
         return JSONResponse({"error": "unauthorized"}, status_code=401)
+    from app.search.agents import AGENTS, _get_prompt_settings
     cfg = _get_all_settings()
+    config = {k: cfg[k] for k in ("context_preset", "groq_model", "groq_deep_model", "reranking_enabled")}
+    # Admin prompt overrides (empty = repo defaults in query.py/agents.py): needed to replay faithfully.
+    config["prompt_overrides"] = _get_prompt_settings(
+        ["core_system_prompt", "system_prompt"] + [f"agent_prompt_{a}" for a in AGENTS])
     return JSONResponse({
         "exported_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "config": {k: cfg[k] for k in ("context_preset", "groq_model", "groq_deep_model", "reranking_enabled")},
+        "config": config,
         "conversations": export_sessions(since),
     })
 

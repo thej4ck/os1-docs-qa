@@ -347,6 +347,11 @@ async def ask(
                 rerank_cost_usd=usage_data.get("rerank_cost_usd") if usage_data else None,
                 rerank_model=usage_data.get("rerank_model") if usage_data else None,
                 agent=active_agent,
+                deep=is_deep,
+                topic=topic_filter,
+                finish_reason=usage_data.get("finish_reason") if usage_data else None,
+                effort=usage_data.get("effort") if usage_data else None,
+                reasoning_tokens=usage_data.get("reasoning_tokens") if usage_data else None,
             )
 
         # Signal completion with metadata

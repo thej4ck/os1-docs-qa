@@ -152,6 +152,12 @@ def _migrate():
         ("rerank_cost_usd", "REAL"),
         ("rerank_model", "TEXT"),
         ("agent", "TEXT"),  # esperto che ha risposto (NULL = default generico)
+        # Telemetria per la revisione qualità (scripts/sessions.py), build 109
+        ("deep", "INTEGER"),
+        ("topic", "TEXT"),
+        ("finish_reason", "TEXT"),
+        ("effort", "TEXT"),
+        ("reasoning_tokens", "INTEGER"),
     ]
     for col_name, col_type in new_columns:
         if col_name not in existing:

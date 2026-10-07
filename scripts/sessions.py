@@ -34,7 +34,7 @@ from app.search.query import _CITE_MARKER_RE  # noqa: E402
 OUT = ROOT / "outputs" / "sessions"
 DATA = OUT / "sessions.json"
 REFUSAL = "la documentazione disponibile non copre questo aspetto"  # CORE prompt, query.py
-FLAG_ORDER = ["negative_feedback", "no_answer", "refusal", "bad_citation", "no_sources",
+FLAG_ORDER = ["negative_feedback", "no_answer", "truncated", "refusal", "bad_citation", "no_sources",
               "uncited", "repeat", "short_answer"]
 
 
@@ -48,6 +48,8 @@ def flags_for(q: dict, a: dict | None, prev_q: str | None) -> list[str]:
         return ["no_answer"] + f
     text, src = a["content"], a["sources"]
     cites = {int(n) for n in _CITE_MARKER_RE.findall(text)}
+    if a.get("finish_reason") == "length":  # persisted from build 109
+        f.append("truncated")
     if a["feedback"] and a["feedback"]["rating"] < 0:
         f.append("negative_feedback")
     if REFUSAL in _norm(text):
@@ -108,7 +110,8 @@ def analyze(data: dict) -> tuple[list[str], list[tuple]]:
 
     out = [
         f"Periodo: {dates[0] if dates else '-'} → {dates[-1] if dates else '-'}   export {data.get('exported_at', '?')}",
-        f"Config prod: {data.get('config')}",
+        f"Config prod: { {k: v for k, v in data.get('config', {}).items() if k != 'prompt_overrides'} }"
+        f"   prompt sovrascritti da admin: {sorted(data.get('config', {}).get('prompt_overrides', {})) or 'nessuno'}",
         f"Conversazioni: {len(convs)}  (vuote/disambiguazione abbandonata: "
         f"{sum(1 for c in convs if not c['messages'])})   utenti: {len({c['user'] for c in convs})}",
         f"Domande: {len(rows)}   risposte: {len(answers)}   costo totale ${cost:.3f}"

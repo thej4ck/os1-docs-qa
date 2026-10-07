@@ -111,17 +111,24 @@ def add_message(
     rerank_cost_usd: float | None = None,
     rerank_model: str | None = None,
     agent: str | None = None,
+    deep: bool | None = None,
+    topic: str | None = None,
+    finish_reason: str | None = None,
+    effort: str | None = None,
+    reasoning_tokens: int | None = None,
 ) -> int:
     """Add a message and update conversation timestamp. Returns message ID."""
     conn = get_conn()
     cur = conn.execute(
         "INSERT INTO messages (conversation_id, role, content, sources, "
         "prompt_tokens, completion_tokens, cost_usd, model, cached_tokens, "
-        "rerank_tokens, rerank_cost_usd, rerank_model, agent) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "rerank_tokens, rerank_cost_usd, rerank_model, agent, "
+        "deep, topic, finish_reason, effort, reasoning_tokens) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         (conv_id, role, content, json.dumps(sources) if sources else None,
          prompt_tokens, completion_tokens, cost_usd, model, cached_tokens,
-         rerank_tokens, rerank_cost_usd, rerank_model, agent),
+         rerank_tokens, rerank_cost_usd, rerank_model, agent,
+         None if deep is None else int(deep), topic, finish_reason, effort, reasoning_tokens),
     )
     conn.execute(
         "UPDATE conversations SET updated_at = strftime('%Y-%m-%dT%H:%M:%SZ', 'now') WHERE id = ?",
@@ -185,6 +192,7 @@ def export_sessions(since: str | None = None) -> list[dict]:
     for r in conn.execute(
         "SELECT m.id, m.conversation_id, m.role, m.content, m.sources, m.model, m.agent, "
         "m.prompt_tokens, m.completion_tokens, m.cached_tokens, m.cost_usd, m.created_at, "
+        "m.deep, m.topic, m.finish_reason, m.effort, m.reasoning_tokens, "
         "f.rating, f.category, f.comment FROM messages m "
         "JOIN conversations c ON c.id = m.conversation_id "
         f"LEFT JOIN feedback f ON f.message_id = m.id {where} ORDER BY m.id", args,

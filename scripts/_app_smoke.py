@@ -66,7 +66,8 @@ with TestClient(app) as client:  # __enter__ runs the startup lifespan
     # >= max_messages user turns so POST /api/ask hits the per-conversation gate (no Groq).
     for i in range(21):
         add_message(conv_id, "user", f"domanda smoke {i}")
-    add_message(conv_id, "assistant", "risposta smoke", sources=[{"id": "doc/x", "title": "Doc X"}])
+    add_message(conv_id, "assistant", "risposta smoke", sources=[{"id": "doc/x", "title": "Doc X"}],
+                deep=True, finish_reason="stop")
 
     # ── Phase A: anonymous renders (no session cookie) ──
     print("Phase A — anonymous pages:")
@@ -116,8 +117,10 @@ with TestClient(app) as client:  # __enter__ runs the startup lifespan
         convs = exp.json()["conversations"]
         c = next((c for c in convs if c["id"] == conv_id), None)
         ok = (c is not None and "@" not in c["user"] and c["domain"] == "scao.it"
-              and c["messages"][-1]["sources"] == [{"id": "doc/x", "title": "Doc X"}])
-        print(f"  [{'ok ' if ok else 'FAIL'}] export pseudonymized + sources decoded")
+              and c["messages"][-1]["sources"] == [{"id": "doc/x", "title": "Doc X"}]
+              and c["messages"][-1]["deep"] == 1 and c["messages"][-1]["finish_reason"] == "stop"
+              and "prompt_overrides" in exp.json()["config"])
+        print(f"  [{'ok ' if ok else 'FAIL'}] export pseudonymized + sources decoded + telemetry")
         if not ok:
             failures.append(f"/admin/api/sessions payload unexpected: {str(c)[:300]}")
 
