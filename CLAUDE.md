@@ -8,7 +8,7 @@ Chat con **retrieval ibrido BM25 + semantico (model2vec)** e LLM (Groq), 4 esper
 auth OTP + access-token, **self-signup freemium con tier**, **pricing a scaglioni per PDL OS1**, backoffice admin, tracking costi, dark/light theme.
 
 - `app/version.py` è single source of truth: `VERSION`, `BUILD`, `BUILD_DATE`, `PRODUCT_NAME = "OS1 Virgilio"`.
-- Stato attuale: VERSION `2.2.0`, BUILD `107`.
+- Stato attuale: VERSION `2.2.0`, BUILD `108`.
 - Stack web: FastAPI `0.135.1` + **Starlette `>=1.0.1,<2`** (pin floating; chiude **CVE-2026-48710** Host-header → path poisoning). NB: con Starlette 1.x `Jinja2Templates.TemplateResponse` vuole `request` come **primo** arg: `TemplateResponse(request, name, context)`.
 
 ## Comandi sviluppo
@@ -78,7 +78,7 @@ Strati:
 - `app/routes/auth_routes.py` — login OTP, verify, logout, **access-token login** (`/login/token`, `/api/access-token[/regenerate]`). `POST /login` con **email di dominio sconosciuto → 303 `/signup?email=…`** (prefill + avviso "non è ancora registrata"); dominio noto ma **disabilitato → errore "Accesso sospeso"** (evita ping-pong con signup che rifiuta i domini già registrati). Ogni render di `login.html` passa da `_login_ctx()` (splash prezzi: `bands`/`free_preset`/`trial_days`/`mcp_*` — un contesto parziale = 500 Jinja, build 105).
 - `app/routes/signup_routes.py` — **self-signup freemium** (`/signup`, `/signup/verify`) con autoprovisioning **TRIAL full-unlock 7gg** (`billing_status='trial'`). Accetta `ref`/`s` (share attribution): a fine signup chiama `mark_converted(share_token, domain_id)`.
 - `app/routes/public_routes.py` — **rotte pubbliche (no auth)**: condivisione risposte (vedi sezione dedicata). NB: il listino `/prezzi` (`public_pricing.html`) è stato **rimosso** (build 96): i prezzi vivono ora solo nella splash `login.html`.
-- `app/routes/admin_routes.py` (~555) — dashboard, utenti, usage, costi, conversazioni, domini, **condivisioni** (`/admin/shares`, funnel), feedback, settings, export CSV.
+- `app/routes/admin_routes.py` (~555) — dashboard, utenti, usage, costi, conversazioni, domini, **condivisioni** (`/admin/shares`, funnel), feedback, settings, export CSV, **export sessioni JSON** (`GET /admin/api/sessions`, vedi *Revisione sessioni di produzione*).
 - `app/auth/otp.py` — OTP in-memory (TTL 300s, cooldown 10s, max 5 tentativi), sender e domini da DB.
 - `app/auth/session.py` — cookie firmato itsdangerous (24h, HTTPOnly, SameSite=lax, Secure in prod).
 - `app/auth/email_sender.py` + `email_templates.py` — invio via Resend (console in dev), template welcome/trial/admin/**share_answer**.
@@ -124,6 +124,11 @@ senza doppio-init). Espone **solo retrieval** (costo Groq zero), schema canonico
 - `rerank.py` — re-rank LLM (score 0–10). **OFF** (admin setting `reranking_enabled`). ⚠️ `RERANK_MODEL` è ancora `llama-3.1-8b-instant` (non più servito da Groq): se riattivato fallisce e, sul fallimento, il contesto resta troncato ai 20 candidati passati.
 
 **Valutazione retrieval**: `python scripts/eval_retrieval.py` → gira `trace_retrieve` (zero LLM, zero costo) sui casi di `scripts/eval_queries.json` (query + sottostringhe attese su titolo/source_file) → `hit@context` + MRR. Lanciarlo prima/dopo ogni modifica al retrieval e diffare l'output. Build 107: 24/32 → 30/32, MRR 0.633 → 0.778.
+
+**Revisione sessioni di produzione (build 108)** — lettura **read-only** delle conversazioni reali per valutare la qualità:
+- `GET /admin/api/sessions[?since=YYYY-MM-DD]` ([admin_routes.py](app/routes/admin_routes.py) → `export_sessions` in [models/conversation.py](app/models/conversation.py)): solo SELECT, conversazioni + messaggi + feedback annidato + `config` prod (`context_preset`, modelli, rerank). Utenti **pseudonimizzati lato server** (HMAC email con `SECRET_KEY`, resta solo il dominio). Auth: sessione admin **oppure** `Authorization: Bearer $EXPORT_TOKEN` (il token sblocca SOLO questo GET). Nessuna paginazione (app.db piccolo).
+- `python scripts/sessions.py pull|report|replay` → `outputs/sessions/` (gitignored): `pull` scarica da prod (`--base`, default `https://os1.ai.scao.it`); `report` = metriche (volumi, esperti, modelli, costi, feedback) + flag per coppia domanda→risposta (`negative_feedback`, `no_answer` = errore stream, `refusal` = frase canonica CORE, `bad_citation`, `no_sources`, `uncited`, `repeat`, `short_answer`) → `review.md` con le coppie flaggate da leggere; `replay [--flagged-only]` = `trace_retrieve` sulle domande reali col preset di prod, overlap fonti prod vs ora → `replay.json`. `report --selftest` = assert sui flag.
+- Non persistiti (limiti dell'analisi): testo/score del contesto, flag deep/topic, `truncated`, domanda di disambiguazione (conversazione vuota = chiarimento abbandonato). `source_file` storici mescolano `\` e `/` (il replay normalizza). Risposte pre-schema `[Dn]` (citavano "📄 Fonte: [Titolo]") risultano `uncited`.
 
 Ordine pipeline: BM25 ∪ semantic (**∪ image-hit**) → **RRF fuse** → **signals.rescore** → (opz. LLM rerank) → **budget trim in PAROLE**.
 
@@ -210,6 +215,7 @@ Risoluzione limite token utente: override `users.monthly_token_limit` → tier d
 | `STATIC_MODEL_PATH` | No | `searchdata/static_model` | Dir model2vec distillato |
 | `OPENROUTER_API_KEY` | No | — | **Solo build-time locale** (`describe_images.py`). MAI in prod/Railway |
 | `HYBRID_ENABLED` | No | `true` | BM25+semantic; `false` = BM25-only |
+| `EXPORT_TOKEN` | No | — | Bearer per `GET /admin/api/sessions` (stesso valore in `.env` locale per `scripts/sessions.py pull`). Vuoto = solo sessione admin |
 | `DEFAULT_MONTHLY_TOKEN_LIMIT` | No | `500000` | Fallback limite token/mese |
 | `DEFAULT_MAX_MESSAGES_PER_CONVERSATION` | No | `20` | Limite domande/chat default |
 

@@ -21,6 +21,7 @@ os.environ["GROQ_API_KEY"] = "test-dummy"
 os.environ["APP_DB_PATH"] = _tmp_db
 os.environ["SECRET_KEY"] = "smoke-secret"
 os.environ["ADMIN_EMAILS"] = "*@scao.it"   # seeded user becomes admin on creation
+os.environ["EXPORT_TOKEN"] = "smoke-export-token"
 os.environ.pop("PRODUCTION", None)         # dev: http cookies, no Secure flag
 
 import starlette
@@ -81,6 +82,10 @@ with TestClient(app) as client:  # __enter__ runs the startup lifespan
           data={"first_name": "Test", "last_name": "User", "email": "tester@corp-smoke.it",
                 "company_name": "Corp", "code": "000000"})
     check(client, "GET", "/", {302})                 # -> /login when anonymous
+    check(client, "GET", "/admin/api/sessions", {401})                               # no auth
+    check(client, "GET", "/admin/api/sessions", {401}, headers={"Authorization": "Bearer nope"})
+    check(client, "GET", "/admin/api/sessions", {200},
+          headers={"Authorization": "Bearer smoke-export-token"})                    # export token
 
     # static asset is served by StaticFiles under 1.x
     static_root = Path(__file__).resolve().parent.parent / "static"
@@ -106,6 +111,15 @@ with TestClient(app) as client:  # __enter__ runs the startup lifespan
     check(client, "GET", "/admin/domains", {200})                     # domains.html
     check(client, "GET", "/admin/feedback", {200})                    # feedback.html
     check(client, "GET", "/admin/announcement", {200})                # announcement.html
+    exp = check(client, "GET", "/admin/api/sessions", {200})          # session export (admin cookie)
+    if exp is not None and exp.status_code == 200:
+        convs = exp.json()["conversations"]
+        c = next((c for c in convs if c["id"] == conv_id), None)
+        ok = (c is not None and "@" not in c["user"] and c["domain"] == "scao.it"
+              and c["messages"][-1]["sources"] == [{"id": "doc/x", "title": "Doc X"}])
+        print(f"  [{'ok ' if ok else 'FAIL'}] export pseudonymized + sources decoded")
+        if not ok:
+            failures.append(f"/admin/api/sessions payload unexpected: {str(c)[:300]}")
 
     # ── SSE: EventSourceResponse (sse-starlette) under Starlette 1.x, no Groq ──
     print("Phase C — SSE gate (no Groq):")

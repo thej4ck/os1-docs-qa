@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     hybrid_enabled: bool = True        # BM25 + semantic fusion; False = BM25-only fallback
     mcp_auth_enabled: bool = False     # True = /mcp richiede Bearer = access_token utente (M2, gate dev/CLI). claude.ai/ChatGPT richiedono OAuth (M3)
     mcp_oauth_enabled: bool = False    # True = /mcp protetto da OAuth 2.1 AS autonomo (M3, claude.ai/ChatGPT). Ha priorità su mcp_auth_enabled
+    export_token: str = ""             # Bearer per GET /admin/api/sessions (solo quell'endpoint, read-only). Vuoto = solo sessione admin
     # Pricing is now driven dynamically by ALLOWED_MODELS in app/search/query.py
 
     model_config = {"env_file": ".env", "env_file_encoding": "utf-8"}

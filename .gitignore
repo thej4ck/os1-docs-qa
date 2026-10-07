@@ -8,3 +8,6 @@ data/
 # help-files/ included for Railway deploy (images for overlay)
 .venv/
 SCAO_allAdv_original.png
+
+# Production session exports (scripts/sessions.py) — pseudonymized but still user content
+outputs/sessions/

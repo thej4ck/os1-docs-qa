@@ -1,5 +1,6 @@
 """Conversation and message CRUD operations."""
 
+import hmac
 import json
 import uuid
 
@@ -156,6 +157,47 @@ def get_max_messages_setting() -> int:
         except (ValueError, TypeError):
             pass
     return settings.default_max_messages_per_conversation
+
+
+def export_sessions(since: str | None = None) -> list[dict]:
+    """Read-only dump of conversations + messages + feedback for offline quality review
+    (GET /admin/api/sessions → scripts/sessions.py). Users are pseudonymized here
+    (HMAC of the email with SECRET_KEY): emails never leave prod, only the domain does.
+    `since` filters on conversations.updated_at (ISO prefix, e.g. 2026-10-01)."""
+    # ponytail: no pagination — app.db is tiny; add a cursor if the export grows past a few MB.
+    from app.config import settings
+    key = settings.secret_key.encode()
+    where, args = ("WHERE c.updated_at >= ?", (since,)) if since else ("", ())
+    conn = get_conn()
+    convs = {}
+    for r in conn.execute(
+        "SELECT c.id, c.title, c.created_at, c.updated_at, u.email FROM conversations c "
+        f"JOIN users u ON u.id = c.user_id {where} ORDER BY c.updated_at", args,
+    ):
+        email = (r["email"] or "").lower()
+        convs[r["id"]] = {
+            "id": r["id"], "title": r["title"],
+            "created_at": r["created_at"], "updated_at": r["updated_at"],
+            "user": hmac.new(key, email.encode(), "sha256").hexdigest()[:10],
+            "domain": email.rpartition("@")[2],
+            "messages": [],
+        }
+    for r in conn.execute(
+        "SELECT m.id, m.conversation_id, m.role, m.content, m.sources, m.model, m.agent, "
+        "m.prompt_tokens, m.completion_tokens, m.cached_tokens, m.cost_usd, m.created_at, "
+        "f.rating, f.category, f.comment FROM messages m "
+        "JOIN conversations c ON c.id = m.conversation_id "
+        f"LEFT JOIN feedback f ON f.message_id = m.id {where} ORDER BY m.id", args,
+    ):
+        m = dict(r)
+        conv = convs.get(m.pop("conversation_id"))
+        if conv is None:  # conversation touched between the two queries
+            continue
+        fb = {k: m.pop(k) for k in ("rating", "category", "comment")}
+        m["feedback"] = fb if fb["rating"] is not None else None
+        m["sources"] = json.loads(m["sources"]) if m["sources"] else []
+        conv["messages"].append(m)
+    return list(convs.values())
 
 
 def delete_conversation(conv_id: str, user_id: int) -> bool:

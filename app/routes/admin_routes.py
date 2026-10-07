@@ -1,15 +1,18 @@
 """Admin backoffice routes."""
 
 import csv
+import hmac
 import io
+from datetime import datetime, timezone
 
 from fastapi import APIRouter, Request, Form
 from fastapi.responses import HTMLResponse, RedirectResponse, StreamingResponse, JSONResponse
 
 from app.auth.session import get_session_email
+from app.config import settings
 from app.version import PRODUCT_NAME
 from app.models.user import get_user_by_email, is_admin, list_users, set_user_limit
-from app.models.conversation import list_conversations, get_conversation_any, get_messages
+from app.models.conversation import list_conversations, get_conversation_any, get_messages, export_sessions
 from app.models.usage import (
     get_all_usage, get_usage_summary, get_monthly_usage,
     get_domain_usage, get_recent_questions, get_current_month,
@@ -213,6 +216,24 @@ async def export_usage(request: Request, month: str | None = None):
         media_type="text/csv",
         headers={"Content-Disposition": f'attachment; filename="usage-{month}.csv"'},
     )
+
+
+@router.get("/api/sessions")
+async def api_sessions(request: Request, since: str | None = None):
+    """Read-only JSON export of sessions for offline quality review (scripts/sessions.py).
+    Auth: admin session, or `Authorization: Bearer <EXPORT_TOKEN>` — the token unlocks
+    only this GET (no admin rights, no writes). Users arrive pseudonymized."""
+    auth = request.headers.get("authorization", "").encode()
+    token_ok = bool(settings.export_token) and hmac.compare_digest(
+        auth, f"Bearer {settings.export_token}".encode())
+    if not token_ok and not _require_admin(request):
+        return JSONResponse({"error": "unauthorized"}, status_code=401)
+    cfg = _get_all_settings()
+    return JSONResponse({
+        "exported_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "config": {k: cfg[k] for k in ("context_preset", "groq_model", "groq_deep_model", "reranking_enabled")},
+        "conversations": export_sessions(since),
+    })
 
 
 # ── Costs ──
