@@ -1083,16 +1083,11 @@
         .deep-inline-icon { flex-shrink: 0; font-size: 1.1rem; line-height: 1.45; }
         .deep-inline-body { display: flex; flex-direction: column; gap: 10px; }
         .deep-inline-text { color: var(--c-text); font-size: 0.85rem; line-height: 1.5; }
-        .deep-inline-btn { align-self: flex-start; animation: deepPulse 1.5s ease-in-out 3; }
         /* Variante sobria: handoff Virgilio → altri esperti (appare a ogni risposta di Virgilio) */
         .expert-handoff { background: var(--c-surface-alt); border-color: var(--c-border); box-shadow: none; }
         .expert-handoff-list { display: flex; flex-wrap: wrap; gap: 6px; }
         .expert-handoff .suggestion-chip { font-size: 0.8125rem; padding: 6px 12px; align-items: center; }
         .expert-handoff .suggestion-chip:hover { background: var(--c-surface-raised); }
-        @keyframes deepPulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(226,35,26,0.45); }
-            50%      { box-shadow: 0 0 0 7px rgba(226,35,26,0); }
-        }
         @media (max-width: 640px) {
             .deep-banner-content { flex-wrap: wrap; }
             .deep-banner-text { width: 100%; }

@@ -1293,23 +1293,12 @@ function renderFinal(msgParts, text, sources, messageId, screenshots, wasDeep, t
         msgParts.body.appendChild(warn);
     }
 
-    // CTA "Approfondisci".
-    // - Se la documentazione risulta insufficiente: riquadro EVIDENTE subito
-    //   SOTTO la risposta (inline), con testo che giustifica l'approfondimento.
-    // - Altrimenti: banner passivo sopra l'input ("La risposta non ti convince?").
+    // CTA "Approfondisci": banner passivo sopra l'input ("La risposta non ti convince?").
+    // NON sotto un rifiuto: misurato (build 112, 23 rifiuti reali) deep aiuta 10 utenti ma
+    // ne fuorvia 6 con procedure inventate (contesto ×2.5 → pezzi scollegati cuciti insieme).
+    // Lì restano i "Documenti più vicini" qui sotto.
     const notCovered = !!text && /non copre|documentazione[^.]{0,40}non (copre|contiene|riporta)|non (è|e) (coperto|trattato|present|sufficient)|informazioni (insufficient|non sufficient)/i.test(text);
-    if (lastQuestion && !wasDeep && !truncated && notCovered) {
-        const deepLocked = featureLocked('deep');
-        const box = document.createElement('div');
-        box.className = 'deep-inline';
-        box.innerHTML = '<span class="deep-inline-icon">💡</span>'
-            + '<div class="deep-inline-body">'
-            + '<div class="deep-inline-text">La documentazione disponibile potrebbe non bastare a questa domanda. È possibile chiedere un\'<strong>analisi approfondita</strong> per migliorare la risposta in caso di informazioni insufficienti.</div>'
-            + '<button type="button" class="deep-banner-btn deep-inline-btn" onclick="' + (deepLocked ? 'upgradeFeature(\'deep\')' : 'requestDeepAnalysis(this)') + '">' + (deepLocked ? '🔒 Sblocca l\'approfondimento' : 'Cerca una risposta più approfondita') + '</button>'
-            + '</div>';
-        msgParts.body.appendChild(box);
-        hideDeepBanner();
-    } else if (lastQuestion && !wasDeep && !truncated) {
+    if (lastQuestion && !wasDeep && !truncated && !notCovered) {
         showDeepBanner(lastQuestion);
     } else {
         hideDeepBanner();
@@ -1414,18 +1403,6 @@ function continueTruncated(btn) {
     if (msgCount >= maxMessages) return;
     btn.disabled = true;
     questionEl.value = 'Prosegui la risposta precedente esattamente da dove si è interrotta, senza ripetere quanto già scritto.';
-    handleSubmit(new Event('submit'));
-}
-
-// ── Richiedi analisi approfondita (dal riquadro inline "doc insufficiente") ──
-// Ripropone la stessa domanda in modalità deep (più contesto + modello capace).
-function requestDeepAnalysis(btn) {
-    if (msgCount >= maxMessages) return;
-    const q = questionEl.dataset.lastQuestion;
-    if (!q) return;
-    btn.disabled = true;
-    questionEl.value = q;
-    questionEl.dataset.deep = 'true';
     handleSubmit(new Event('submit'));
 }
 
