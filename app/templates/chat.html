@@ -1315,6 +1315,31 @@ function renderFinal(msgParts, text, sources, messageId, screenshots, wasDeep, t
         hideDeepBanner();
     }
 
+    // Rifiuto: i documenti più vicini restano raggiungibili (spesso la risposta c'è
+    // ma l'utente la descrive con parole diverse). Sources = contesto in ordine di rilevanza.
+    if (notCovered && sources && sources.length) {
+        const near = document.createElement('div');
+        near.className = 'near-docs';
+        near.style.cssText = 'margin-top:12px;';
+        const label = document.createElement('div');
+        label.textContent = 'Documenti più vicini alla tua domanda:';
+        label.style.cssText = 'font-size:0.8125rem;color:var(--c-text-secondary);font-weight:600;margin-bottom:6px;';
+        near.appendChild(label);
+        const chips = document.createElement('div');
+        chips.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;';
+        sources.slice(0, 3).forEach(s => {
+            const chip = document.createElement('button');
+            chip.type = 'button';
+            chip.className = 'suggestion-chip';
+            chip.style.cssText = 'font-size:0.75rem;';
+            chip.textContent = '📄 ' + (s.title || s.source_file);
+            chip.onclick = () => openDocOverlay(s.source_file, s.title);
+            chips.appendChild(chip);
+        });
+        near.appendChild(chips);
+        msgParts.body.appendChild(near);
+    }
+
     // Virgilio è sintetico: invita a chiedere agli altri esperti (solo sull'ultima risposta).
     if (agent === 'virgilio' && text && !truncated) {
         document.querySelectorAll('.expert-handoff').forEach(el => el.remove());

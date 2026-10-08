@@ -8,7 +8,7 @@ Chat con **retrieval ibrido BM25 + semantico (model2vec)** e LLM (Groq), 4 esper
 auth OTP + access-token, **self-signup freemium con tier**, **pricing a scaglioni per PDL OS1**, backoffice admin, tracking costi, dark/light theme.
 
 - `app/version.py` è single source of truth: `VERSION`, `BUILD`, `BUILD_DATE`, `PRODUCT_NAME = "OS1 Virgilio"`.
-- Stato attuale: VERSION `2.2.0`, BUILD `110`.
+- Stato attuale: VERSION `2.2.0`, BUILD `111`.
 - Stack web: FastAPI `0.135.1` + **Starlette `>=1.0.1,<2`** (pin floating; chiude **CVE-2026-48710** Host-header → path poisoning). NB: con Starlette 1.x `Jinja2Templates.TemplateResponse` vuole `request` come **primo** arg: `TemplateResponse(request, name, context)`.
 
 ## Comandi sviluppo
@@ -133,6 +133,8 @@ senza doppio-init). Espone **solo retrieval** (costo Groq zero), schema canonico
 Ordine pipeline: BM25 ∪ semantic (**∪ image-hit**) → **RRF fuse** → **signals.rescore** → (**CSQE**) → (opz. LLM rerank) → **budget trim in PAROLE**.
 
 **CSQE — espansione query guidata dal corpus (build 110)** ([query.py](app/search/query.py) `_expand_query`/`_run_pipeline`; Lei et al., EACL 2024): utenti e docs chiamano le cose diversamente ("prebolla" vs "packing list", "duplicare" vs "Copia") e l'LLM non conosce il gergo OS1 a priori → **gpt-oss-20b:low** legge titoli+estratti dei **top-12 candidati del 1° giro** e riscrive la domanda con la terminologia dei docs (+ keywords); un **2° giro** `_hybrid_candidates(riscrittura)` viene fuso RRF col primo, poi budget trim. Setting admin **`query_expansion_enabled`** (default **ON**). Timeout 3s / qualsiasi errore → solo 1° giro (`[expand] skipped` nei log). Costo ~$0.0003/domanda, sommato in `cost_usd` via il canale usage del rerank (`expansion_cost_usd`). Latenza +~0.65s p50 (+1.2s p90). **Solo chat**: MCP `search` resta senza LLM. Eval: `eval_retrieval.py --expand` → 39/60 → **41/60, MRR 0.480 → 0.527**. Scartati con misura: stopword riempitivi (0 effetto), fusione >50 candidati (peggiora), potion-multilingual-128M (peggio del distillato, 512MB), doc2query offline (+hit ma MRR 0.40, non additivo con CSQE).
+
+**Qualità risposte (build 111)** — valutata con **giudizio di correttezza** (utili vs dannose, verifica su search.db), NON con "risposte con citazione": per un ERP una risposta inventata è peggio di un rifiuto. Sui 34 rifiuti reali di prod: forzare la risposta (retry deep/high, select+retry, agentico con tool o loop JSON su Groq gpt-oss) **aumenta le dannose da 4 a 10-12** → scartato. Interventi sicuri adottati: (1) `build_context` marca i 203 doc `module='Altri software'` con `[Software: X — NON è il gestionale OS1]` (`_other_product`: sottocartella o nome file per `Altro/`, es. Portale Servizi Digitali) + regola CORE "Altri software" — le funzioni del Portale ("Duplica documento") venivano attribuite a OS1; (2) regola CORE "Niente dettagli non scritti" (tabelle/campi/SQL/scorciatoie/menu/errori assenti dal contesto); (3) glossario `QUERY_EQUIVALENTS` da domande reali (prebolla→packing list/liste di prelievo, webinar→pagina informativa: termini con 0 match nei docs); (4) UI: sotto un rifiuto (`notCovered`) chip "Documenti più vicini" (top-3 sources, aprono il doc). Risultato: utili 11→12, **dannose 4→1, inventate 3→0**, Portale→OS1 0. Eval retrieval con CSQE 41→44/60, MRR 0.543. Prod: 120b **medium** dal 2026-10-07.
 
 `fts._clean_tokens` tratta `"` come separatore (build 110): un apice dentro una parola (`24"`) dava `OperationalError: unterminated string` FTS5.
 

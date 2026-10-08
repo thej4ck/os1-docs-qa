@@ -66,6 +66,11 @@ ERP_SYNONYMS: dict[str, list[str]] = {
 QUERY_EQUIVALENTS: dict[str, list[str]] = {
     "duplicare": ["copiare"],
     "clonare": ["copiare"],
+    # Glossario da domande reali di prod (scripts/sessions.py, 2026-10): termini
+    # degli utenti che nei docs non compaiono MAI (0 match FTS) → equivalente OS1.
+    "prebolla": ["packing list", "liste di prelievo"],
+    "pre-bolla": ["packing list", "liste di prelievo"],
+    "webinar": ["pagina informativa"],  # la home OS1 mostra i webinar nella pagina informativa
 }
 
 # Sotto questa lunghezza il prefisso-stem è troppo generico ("cop"* ≈ copie/coperture).

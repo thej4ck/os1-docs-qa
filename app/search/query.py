@@ -24,6 +24,8 @@ Rispondi SOLO in base al contesto documentale fornito, in italiano.
 
 - **NON inventare**: se il contesto non contiene la risposta, dillo. Meglio breve e onesto che lungo e inventato.
 - **Cita la fonte**: alla fine della frase che usa un documento, scrivi il suo codice tra parentesi quadre ASCII, es. `[D2]`. Usa SOLO i codici `[Dn]` presenti nel contesto. NON scrivere una riga "Fonte:", né percorsi o nomi file.
+- **Niente dettagli non scritti**: non indicare nomi di tabelle o campi, query SQL, scorciatoie da tastiera, voci di menu o messaggi di errore che non compaiono nel contesto.
+- **Altri software**: i documenti marcati "Software: …" descrivono ALTRI programmi di OSItalia (es. Portale Servizi Digitali, OS1Box), non il gestionale OS1. Non attribuire le loro funzioni a OS1: usali solo se la domanda riguarda quel software, nominandolo.
 - Non iniziare con "Certo!" e non ripetere la domanda dell'utente.
 
 # Screenshot
@@ -622,6 +624,19 @@ def _is_logo(url: str) -> bool:
     return result
 
 
+def _other_product(doc: dict) -> str | None:
+    """Nome del software se il doc NON descrive il gestionale OS1 (schede 'Altri software':
+    Portale Servizi Digitali, OS1Box*, Open Banking…), altrimenti None."""
+    if doc.get("module") != "Altri software":
+        return None
+    parts = re.split(r"[\\/]", doc.get("source_file") or "")
+    i = parts.index("Altri software") if "Altri software" in parts else -1
+    sub = parts[i + 1] if 0 <= i < len(parts) - 2 else ""
+    if sub in ("", "Altro"):  # file named after the product: "Portale Servizi Digitali - X.pdf"
+        sub = re.split(r" - |\.pdf", parts[-1])[0]
+    return sub or "altro software"
+
+
 def build_context(docs: list[dict]) -> str:
     """Build a context string from retrieved documents."""
     parts = []
@@ -629,6 +644,11 @@ def build_context(docs: list[dict]) -> str:
     for i, doc in enumerate(docs, 1):
         title = doc["title"] or "Senza titolo"
         content = doc["content"]
+        # Docs of OTHER OSItalia software were read as OS1 features (e.g. the Portale's
+        # "Duplica documento" offered for OS1 invoices): label them in the header.
+        product = _other_product(doc)
+        if product:
+            title = f"[Software: {product} — NON è il gestionale OS1] {title}"
         # [Dn] = codice opaco del documento (token-cheap, no path esposto all'LLM).
         # L'ordine corrisponde a `sources` → il frontend traduce [Dn] -> sources[n-1].
         parts.append(f"[D{i}] {title}\n{content}")
