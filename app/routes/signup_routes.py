@@ -22,6 +22,7 @@ from app.models.domain import (
     mark_flag,
 )
 from app.models.share import mark_converted
+from app.util.geo import is_italian_ip
 from app.util.validation import EMAIL_RE
 
 router = APIRouter()
@@ -88,6 +89,21 @@ async def signup_submit(
         first_name=first_name, last_name=last_name, email=email,
         company_name=company_name, ref=ref, share_token=share_token,
     )
+
+    # Geofence: clienti solo italiani. I bot che sondano il form arrivano da
+    # datacenter esteri (TR/US) → niente notifica admin, solo log.
+    # ponytail: se il bot passa a proxy italiani, aggiungere un campo honeypot.
+    ip = request.client.host if request.client else ""
+    if not is_italian_ip(ip):
+        print(f"[signup] geo-blocked ip={ip} email={email}", flush=True)
+        return _render_signup(
+            request,
+            error=(
+                "L'iscrizione online è disponibile solo dall'Italia. Se sei "
+                "all'estero o usi una VPN, scrivi a commerciali@scao.it."
+            ),
+            **form_ctx,
+        )
 
     error = None
     if not (first_name and last_name and email and company_name):

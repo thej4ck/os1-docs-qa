@@ -8,7 +8,7 @@ Chat con **retrieval ibrido BM25 + semantico (model2vec)** e LLM (Groq), 4 esper
 auth OTP + access-token, **self-signup freemium con tier**, **pricing a scaglioni per PDL OS1**, backoffice admin, tracking costi, dark/light theme.
 
 - `app/version.py` è single source of truth: `VERSION`, `BUILD`, `BUILD_DATE`, `PRODUCT_NAME = "OS1 Virgilio"`.
-- Stato attuale: VERSION `2.2.0`, BUILD `112`.
+- Stato attuale: VERSION `2.2.0`, BUILD `113`.
 - Stack web: FastAPI `0.135.1` + **Starlette `>=1.0.1,<2`** (pin floating; chiude **CVE-2026-48710** Host-header → path poisoning). NB: con Starlette 1.x `Jinja2Templates.TemplateResponse` vuole `request` come **primo** arg: `TemplateResponse(request, name, context)`.
 
 ## Comandi sviluppo
@@ -76,7 +76,7 @@ Strati:
 - `app/version.py` — VERSION/BUILD/BUILD_DATE/PRODUCT_NAME.
 - `app/routes/chat_routes.py` (~780) — chat, ask SSE, conversazioni CRUD/export, feedback, doc viewer, announcements, usage summary, onboarding, request-upgrade, `/api/debug/retrieve` (solo dev).
 - `app/routes/auth_routes.py` — login OTP, verify, logout, **access-token login** (`/login/token`, `/api/access-token[/regenerate]`). `POST /login` con **email di dominio sconosciuto → 303 `/signup?email=…`** (prefill + avviso "non è ancora registrata"); dominio noto ma **disabilitato → errore "Accesso sospeso"** (evita ping-pong con signup che rifiuta i domini già registrati). Ogni render di `login.html` passa da `_login_ctx()` (splash prezzi: `bands`/`free_preset`/`trial_days`/`mcp_*` — un contesto parziale = 500 Jinja, build 105).
-- `app/routes/signup_routes.py` — **self-signup freemium** (`/signup`, `/signup/verify`) con autoprovisioning **TRIAL full-unlock 7gg** (`billing_status='trial'`). Accetta `ref`/`s` (share attribution): a fine signup chiama `mark_converted(share_token, domain_id)`.
+- `app/routes/signup_routes.py` — **self-signup freemium** (`/signup`, `/signup/verify`) con autoprovisioning **TRIAL full-unlock 7gg** (`billing_status='trial'`). Accetta `ref`/`s` (share attribution): a fine signup chiama `mark_converted(share_token, domain_id)`. **Geofence IT (build 113)**: `POST /signup` da IP non italiano → messaggio "solo dall'Italia, scrivi a commerciali@scao.it", **nessuna notifica admin** (solo log `[signup] geo-blocked`). Motivo: bot da datacenter TR/US sondavano il form ogni ora. Check in [app/util/geo.py](app/util/geo.py) (stdlib, bisect) su `app/util/it_ranges.txt` = blocchi RIPE con country IT (committato, ~4400 reti). **Refresh periodico** (nuove allocazioni IT): `python -m app.util.geo` (scarica + self-check). Fail-open (IP privati/file assente → consentito). SOLO signup: login, `/mcp` (server Claude/ChatGPT in USA) e `/s/` restano globali. Railway sovrascrive `X-Forwarded-For` → IP non falsificabile dal client (verificato).
 - `app/routes/public_routes.py` — **rotte pubbliche (no auth)**: condivisione risposte (vedi sezione dedicata). NB: il listino `/prezzi` (`public_pricing.html`) è stato **rimosso** (build 96): i prezzi vivono ora solo nella splash `login.html`.
 - `app/routes/admin_routes.py` (~555) — dashboard, utenti, usage, costi, conversazioni, domini, **condivisioni** (`/admin/shares`, funnel), feedback, settings, export CSV, **export sessioni JSON** (`GET /admin/api/sessions`, vedi *Revisione sessioni di produzione*).
 - `app/auth/otp.py` — OTP in-memory (TTL 300s, cooldown 10s, max 5 tentativi), sender e domini da DB.
