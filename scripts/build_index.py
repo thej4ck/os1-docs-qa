@@ -347,16 +347,18 @@ def extract_pdf_images(doc, output_dir: Path, skip_xrefs: set) -> dict:
 
 
 def build_pdf_content(doc, skip_xrefs: set, xref_map: dict, img_base_url: str,
-                      start_page: int = 0) -> tuple[str, str]:
+                      start_page: int = 0, skip_meta_area: bool = True) -> tuple[str, str]:
     """Process PDF pages into (plain_text, html_fragment).
 
     Returns plain text for FTS and HTML for overlay viewer.
     Images >= 200px get [Screenshot: ...] markers in the text.
+    skip_meta_area=False keeps page-0 text before the first heading
+    (one-page schede without a bold 18pt+ heading would otherwise be empty).
     """
     text_parts = []
     html_parts = []
     current_heading = ""
-    found_first_heading = False
+    found_first_heading = not skip_meta_area
 
     for page_num in range(start_page, doc.page_count):
         page = doc[page_num]
@@ -894,6 +896,11 @@ def ingest_pdf_schede(index: SearchIndex, schede_dir: Path, repo: Path, images_o
         # 4. Build text + HTML
         img_base_url = f"/help-files/schede-operative/{sanitize_dirname(pdf_file.name)}"
         full_text, full_html = build_pdf_content(doc, logo_xrefs, xref_map, img_base_url)
+        if len(full_text.strip()) < 50:
+            # One-page scheda with no 18pt heading: keep the metadata-area text
+            full_text, full_html = build_pdf_content(
+                doc, logo_xrefs, xref_map, img_base_url, skip_meta_area=False
+            )
 
         if len(full_text.strip()) < 50:
             doc.close()

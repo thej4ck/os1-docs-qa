@@ -8,7 +8,7 @@ Chat con **retrieval ibrido BM25 + semantico (model2vec)** e LLM (Groq), 4 esper
 auth OTP + access-token, **self-signup freemium con tier**, **pricing a scaglioni per PDL OS1**, backoffice admin, tracking costi, dark/light theme.
 
 - `app/version.py` è single source of truth: `VERSION`, `BUILD`, `BUILD_DATE`, `PRODUCT_NAME = "OS1 Virgilio"`.
-- Stato attuale: VERSION `2.2.0`, BUILD `113`.
+- Stato attuale: VERSION `2.2.0`, BUILD `114`.
 - Stack web: FastAPI `0.135.1` + **Starlette `>=1.0.1,<2`** (pin floating; chiude **CVE-2026-48710** Host-header → path poisoning). NB: con Starlette 1.x `Jinja2Templates.TemplateResponse` vuole `request` come **primo** arg: `TemplateResponse(request, name, context)`.
 
 ## Comandi sviluppo
@@ -51,13 +51,14 @@ Volumi: `app-data` (app.db), `caddy-data`/`caddy-config` (certs). Variabile `DOM
   - **functional**: docs funzionali (split per `##`)
   - **schema**: censimento tabelle per modulo
   - **help**: `.htm` RoboHelp → HTML semantico preprocessato (BeautifulSoup) in `html_content`
-  - **pdf** (schede operative): PyMuPDF/`fitz`, parse metadata + estrazione immagini → WebP
+  - **pdf** (schede operative): PyMuPDF/`fitz`, parse metadata + estrazione immagini → WebP. A pagina 0 `build_pdf_content` salta l'area metadati fino al primo titolo 18pt bold; se il testo resta vuoto (schede di 1 pagina senza quel titolo, es. OS1InWeb, RinnovoLicenzaXODT) rilancia con `skip_meta_area=False` (build 114, prima erano scartate in silenzio). **Check copertura**: `rglob('*.pdf')` del repo docs vs `documents.source_file` (split `#`, `\`→`/`, NFC).
   - Poi `add_embeddings()`: vettori model2vec L2-norm nella tabella `embeddings`.
   - CLI: `--repo`, `--db`, `--static-model`, `--skip-embeddings`, `--embeddings-only`.
 - **`distill_model.py`** — distilla `paraphrase-multilingual-MiniLM-L12-v2` → model2vec static in `searchdata/static_model/`. **Solo locale pre-push** (serve `pip install "model2vec[distill]"` = torch/transformers, MAI su Railway).
 - **`optimize_images.py`** — ridimensiona le immagini avatar esperti (master in `static/img/originals/`).
 - **`describe_images.py`** — **passata VLM one-time** sulle immagini della doc → tabella `image_descriptions` (+ `image_fts`). Pre-filtro gratuito che scarta icone/spacer (`b_*`/`sfondo`/`loading`/`<200px`/`<2KB`), poi VLM via **OpenRouter** (`AsyncOpenAI`, default `anthropic/claude-sonnet-5`) → `{kind, caption, ocr_text}` con contesto testuale del doc, poi embed model2vec. **Idempotente/incrementale** (chiave url + guardia `sha1`: ridescrive solo immagini nuove/cambiate; `--force`/`--prune`/`--limit`/`--module`). **Solo locale pre-push** (serve `OPENROUTER_API_KEY` in `.env`, MAI su Railway). CLI: `python scripts/describe_images.py [--model … --module … --limit … --force --prune --dry-run]`.
-- **`prepare_deploy.sh`** — build index + copia `help-files/` dal repo docs.
+- **`prepare_deploy.sh`** — wrapper di `build_index.py` (che aggiorna da solo `searchdata/search.db` e `help-files/`, incluse le immagini delle schede). Fino a build 113 scriveva in `data/search.db` e faceva `rm -rf help-files` + copia di `sources/help`, cancellando le immagini delle schede.
+- **Descrizioni immagini senza OpenRouter** (build 114): `OPENROUTER_API_KEY` non è più in `.env` e Groq non serve modelli vision → per poche immagini nuove Claude Code le guarda con `Read` e scrive le righe `image_descriptions` riusando `describe_images._upsert/_embed/rebuild_image_fts` (es. le 9 di "Testo Unico Iva.pdf", `model='claude-fable-5-1 (claude-code vision)'`).
 
 ### search.db (schema)
 - `documents` — id, source_file, module, doc_type, title, content, `html_content`, indexed_at
@@ -123,7 +124,7 @@ senza doppio-init). Espone **solo retrieval** (costo Groq zero), schema canonico
 - `disambiguate.py` — solo 1° messaggio, query ≤3 token, ≥3 topic non-dominanti, no discriminator → domanda di chiarimento LLM col **modello da settings** (`groq_model`, reasoning `low`, `response_format` JSON, timeout 5s). Fino a build 106 usava `llama-3.1-8b-instant` hardcoded → 404 → sempre il fallback statico "Ho trovato risultati in diverse aree".
 - `rerank.py` — re-rank LLM (score 0–10). **OFF** (admin setting `reranking_enabled`). ⚠️ `RERANK_MODEL` è ancora `llama-3.1-8b-instant` (non più servito da Groq): se riattivato fallisce e, sul fallimento, il contesto resta troncato ai 20 candidati passati.
 
-**Valutazione retrieval**: `python scripts/eval_retrieval.py` → gira `trace_retrieve` (zero LLM, zero costo) sui casi di `scripts/eval_queries.json` (query + sottostringhe attese su titolo/source_file) → `hit@context` + MRR. Lanciarlo prima/dopo ogni modifica al retrieval e diffare l'output. Build 107: 24/32 → 30/32, MRR 0.633 → 0.778. **Build 109**: aggiunti 28 casi reali da prod (domande rifiutate ma coperte dai docs, `note` "prod 2026", expect = doc esatto) → baseline **39/60, MRR 0.480** (curati 30/32, reali 9/28). I casi reali sono il bersaglio onesto: l'eval curato sovrastimava (expect larghi).
+**Valutazione retrieval**: `python scripts/eval_retrieval.py` → gira `trace_retrieve` (zero LLM, zero costo) sui casi di `scripts/eval_queries.json` (query + sottostringhe attese su titolo/source_file) → `hit@context` + MRR. Lanciarlo prima/dopo ogni modifica al retrieval e diffare l'output. Build 107: 24/32 → 30/32, MRR 0.633 → 0.778. **Build 109**: aggiunti 28 casi reali da prod (domande rifiutate ma coperte dai docs, `note` "prod 2026", expect = doc esatto) → baseline **39/60, MRR 0.480** (curati 30/32, reali 9/28). I casi reali sono il bersaglio onesto: l'eval curato sovrastimava (expect larghi). **Build 114**: +2 casi "Testo Unico IVA" → `--expand` **46/62, MRR 0.585** (prima 44/60, 0.554). Con `--expand` l'esito di 1-2 casi oscilla tra run (CSQE è LLM): confrontare i totali, non il singolo flip.
 
 **Revisione sessioni di produzione (build 108)** — lettura **read-only** delle conversazioni reali per valutare la qualità:
 - `GET /admin/api/sessions[?since=YYYY-MM-DD]` ([admin_routes.py](app/routes/admin_routes.py) → `export_sessions` in [models/conversation.py](app/models/conversation.py)): solo SELECT, conversazioni + messaggi (con telemetria deep/topic/finish_reason/effort dalla build 109) + feedback annidato + `config` prod (`context_preset`, modelli, rerank, **`prompt_overrides`** = prompt CORE/stile sovrascritti da admin, vuoto = default repo). Utenti **pseudonimizzati lato server** (HMAC email con `SECRET_KEY`, resta solo il dominio). Auth: sessione admin **oppure** `Authorization: Bearer $EXPORT_TOKEN` (il token sblocca SOLO questo GET). Nessuna paginazione (app.db piccolo).

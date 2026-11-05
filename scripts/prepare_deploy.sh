@@ -1,7 +1,7 @@
 #!/bin/bash
-# Prepare the app for deployment:
-# 1. Builds search.db from the docs repo
-# 2. Copies help images into the project
+# Prepare the app for deployment: builds searchdata/search.db from the docs repo.
+# build_index.py also refreshes help-files/ (help HTML + WebP images + schede images),
+# so nothing else is needed here.
 #
 # Usage: ./scripts/prepare_deploy.sh [DOCS_REPO_PATH]
 # Default: ../os1-documentation/Claude Code Playground
@@ -12,25 +12,17 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 DOCS_REPO="${1:-$PROJECT_DIR/../os1-documentation/Claude Code Playground}"
 
-echo "=== OS1 Docs Q&A — Deploy Preparation ==="
-echo "Project:  $PROJECT_DIR"
+echo "=== OS1 Virgilio — Deploy Preparation ==="
+echo "Project:   $PROJECT_DIR"
 echo "Docs repo: $DOCS_REPO"
 echo
 
-# 1. Build search index
-echo "Building search index..."
 cd "$PROJECT_DIR"
-python scripts/build_index.py --repo "$DOCS_REPO" --db data/search.db
-echo
+PYTHONIOENCODING=utf-8 python scripts/build_index.py --repo "$DOCS_REPO"
 
-# 2. Copy help images
-echo "Copying help files (images)..."
-rm -rf "$PROJECT_DIR/help-files"
-cp -r "$DOCS_REPO/sources/help" "$PROJECT_DIR/help-files"
-echo "Help files copied: $(find "$PROJECT_DIR/help-files" -type f | wc -l) files"
 echo
-
-echo "=== Done! Ready to deploy. ==="
-echo "  data/search.db  — search index (baked into image)"
-echo "  help-files/      — HTML help + images (baked into image)"
-echo "  data/app.db      — user data (persistent volume, NOT in image)"
+echo "=== Done! ==="
+echo "  searchdata/search.db — search index (committed, baked into image)"
+echo "  help-files/          — HTML help + images (committed, baked into image)"
+echo "  data/app.db          — user data (persistent volume, NOT in image)"
+echo "If the docs gained new images: python scripts/describe_images.py (needs OPENROUTER_API_KEY)"

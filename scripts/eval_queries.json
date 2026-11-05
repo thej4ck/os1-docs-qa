@@ -58,5 +58,7 @@
   {"q": "pre-bolla", "expect": ["sven0001f_005", "packing list", "liste di prelievo", "lista di prelievo"], "note": "prod 2026: rifiutata"},
   {"q": "da una scadenza, come posso risalire in modo univoco al documento che l'ha generata all'interno del database?", "expect": ["/scadenze.md"], "note": "prod 2026: rifiutata; Scadenze.KMovCon -> FattureCliTeste.KMovconDoc"},
   {"q": "Come faccio a registrare una fattura italia con totale fattura zero", "expect": ["omaggi e cessioni gratuite"], "note": "prod 2026: rifiutata; doc parziale"},
-  {"q": "fattura a zero", "expect": ["omaggi e cessioni gratuite"], "note": "prod 2026: rifiutata; doc parziale"}
+  {"q": "fattura a zero", "expect": ["omaggi e cessioni gratuite"], "note": "prod 2026: rifiutata; doc parziale"},
+  {"q": "testo unico iva", "expect": ["Testo Unico Iva"], "note": "scheda 2026-10-15: D.Lgs 10/2026, data attivazione 01/01/2027"},
+  {"q": "dove imposto la data di inizio applicazione del testo unico iva", "expect": ["Testo Unico Iva"], "note": "OS1Config > Parametri Generali"}
 ]
