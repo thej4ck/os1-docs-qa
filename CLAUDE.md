@@ -8,7 +8,7 @@ Chat con **retrieval ibrido BM25 + semantico (model2vec)** e LLM (Groq), 4 esper
 auth OTP + access-token, **self-signup freemium con tier**, **pricing a scaglioni per PDL OS1**, backoffice admin, tracking costi, dark/light theme.
 
 - `app/version.py` è single source of truth: `VERSION`, `BUILD`, `BUILD_DATE`, `PRODUCT_NAME = "OS1 Virgilio"`.
-- Stato attuale: VERSION `2.2.0`, BUILD `114`.
+- Stato attuale: VERSION `2.2.0`, BUILD `115`.
 - Stack web: FastAPI `0.135.1` + **Starlette `>=1.0.1,<2`** (pin floating; chiude **CVE-2026-48710** Host-header → path poisoning). NB: con Starlette 1.x `Jinja2Templates.TemplateResponse` vuole `request` come **primo** arg: `TemplateResponse(request, name, context)`.
 
 ## Comandi sviluppo
@@ -51,7 +51,7 @@ Volumi: `app-data` (app.db), `caddy-data`/`caddy-config` (certs). Variabile `DOM
   - **functional**: docs funzionali (split per `##`)
   - **schema**: censimento tabelle per modulo
   - **help**: `.htm` RoboHelp → HTML semantico preprocessato (BeautifulSoup) in `html_content`
-  - **pdf** (schede operative): PyMuPDF/`fitz`, parse metadata + estrazione immagini → WebP. A pagina 0 `build_pdf_content` salta l'area metadati fino al primo titolo 18pt bold; se il testo resta vuoto (schede di 1 pagina senza quel titolo, es. OS1InWeb, RinnovoLicenzaXODT) rilancia con `skip_meta_area=False` (build 114, prima erano scartate in silenzio). **Check copertura**: `rglob('*.pdf')` del repo docs vs `documents.source_file` (split `#`, `\`→`/`, NFC).
+  - **pdf** (schede operative): PyMuPDF/`fitz`, parse metadata + estrazione immagini → WebP. A pagina 0 `build_pdf_content` salta l'area metadati fino al primo titolo 18pt bold; se il testo resta vuoto (schede di 1 pagina senza quel titolo, es. OS1InWeb, RinnovoLicenzaXODT) rilancia con `skip_meta_area=False` (build 114, prima erano scartate in silenzio). **Marker `[Screenshot:]` (build 115)**: i blocchi immagine di `get_text("dict")` non hanno `xref` → `_xref_for_block` li associa all'immagine estratta per sovrapposizione bbox (`page.get_image_rects`); fino a build 114 ogni blocco prendeva la *prima* immagine della pagina (2302 immagini distinte su 4490 → ora 4460). Il filtro header/footer (`y<100`) vale solo per i blocchi testo: le tabelle-immagine iniziano spesso a y≈88. **Check copertura**: `rglob('*.pdf')` del repo docs vs `documents.source_file` (split `#`, `\`→`/`, NFC).
   - Poi `add_embeddings()`: vettori model2vec L2-norm nella tabella `embeddings`.
   - CLI: `--repo`, `--db`, `--static-model`, `--skip-embeddings`, `--embeddings-only`.
 - **`distill_model.py`** — distilla `paraphrase-multilingual-MiniLM-L12-v2` → model2vec static in `searchdata/static_model/`. **Solo locale pre-push** (serve `pip install "model2vec[distill]"` = torch/transformers, MAI su Railway).

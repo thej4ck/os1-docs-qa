@@ -346,6 +346,19 @@ def extract_pdf_images(doc, output_dir: Path, skip_xrefs: set) -> dict:
     return xref_map
 
 
+def _xref_for_block(page, bbox, xref_map: dict):
+    """xref of the extracted image drawn at `bbox` (largest overlap), or None."""
+    import fitz
+    block_rect = fitz.Rect(bbox)
+    best, best_area = None, 0.0
+    for xref in xref_map:
+        for rect in page.get_image_rects(xref):
+            area = (rect & block_rect).get_area()
+            if area > best_area:
+                best, best_area = xref, area
+    return best
+
+
 def build_pdf_content(doc, skip_xrefs: set, xref_map: dict, img_base_url: str,
                       start_page: int = 0, skip_meta_area: bool = True) -> tuple[str, str]:
     """Process PDF pages into (plain_text, html_fragment).
@@ -369,8 +382,10 @@ def build_pdf_content(doc, skip_xrefs: set, xref_map: dict, img_base_url: str,
 
         for b in blocks:
             y = b["bbox"][1]
-            # Skip header/footer regions (logo + copyright + page numbers)
-            if y < 100 or y > page_height - 60:
+            # Skip header/footer regions (copyright + page numbers). Image blocks
+            # are exempt: the logo is excluded via xref_map and content tables
+            # often start right under the header (y≈88).
+            if b["type"] != 1 and (y < 100 or y > page_height - 60):
                 continue
 
             # Skip copyright/page-number lines on all pages
@@ -400,31 +415,28 @@ def build_pdf_content(doc, skip_xrefs: set, xref_map: dict, img_base_url: str,
                     continue  # skip images in metadata area too
 
             if b["type"] == 1:
-                # Image block
-                xref = b.get("xref", 0)
-                # Try to find matching xref from page images
-                for img_info in page.get_images(full=True):
-                    img_xref = img_info[0]
-                    if img_xref in xref_map:
-                        fname, w, h = xref_map[img_xref]
-                        url = f"{img_base_url}/{fname}"
-                        if w >= 200:
-                            # Large screenshot — add marker for LLM and HTML
-                            desc = current_heading or "Schermata"
-                            text_parts.append(f"[Screenshot: {desc} | {url}]")
-                            html_parts.append(
-                                f'<div class="doc-screenshot">'
-                                f'<img src="{url}" style="max-width: {w}px; width: 100%; height: auto;">'
-                                f'</div>'
-                            )
-                        else:
-                            # Small icon — only in HTML
-                            html_parts.append(
-                                f'<img class="doc-icon" src="{url}" '
-                                f'style="max-width: {w}px; height: auto;">'
-                            )
-                        # Only emit once per block
-                        break
+                # Image block: dict blocks carry no xref → match by bbox overlap
+                # (the old "first page image" lookup emitted the same image for
+                # every block of the page)
+                img_xref = _xref_for_block(page, b["bbox"], xref_map)
+                if img_xref is not None:
+                    fname, w, h = xref_map[img_xref]
+                    url = f"{img_base_url}/{fname}"
+                    if w >= 200:
+                        # Large screenshot — add marker for LLM and HTML
+                        desc = current_heading or "Schermata"
+                        text_parts.append(f"[Screenshot: {desc} | {url}]")
+                        html_parts.append(
+                            f'<div class="doc-screenshot">'
+                            f'<img src="{url}" style="max-width: {w}px; width: 100%; height: auto;">'
+                            f'</div>'
+                        )
+                    else:
+                        # Small icon — only in HTML
+                        html_parts.append(
+                            f'<img class="doc-icon" src="{url}" '
+                            f'style="max-width: {w}px; height: auto;">'
+                        )
                 continue
 
             if "lines" not in b:
